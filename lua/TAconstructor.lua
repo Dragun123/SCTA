@@ -71,7 +71,6 @@ TAconstructor = Class(TAunit) {
 							end
 
 							if (self.isBuilding == true) then
-								self.currentTarget:HideFlares()
 								self:SetBuildRate(self:GetBlueprint().Economy.BuildRate)
 								TAunit.OnStartBuild(self, self.currentTarget, self.order)
 							end
