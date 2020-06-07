@@ -75,7 +75,7 @@ TAconstructor = Class(TAunit) {
 								TAunit.OnStartBuild(self, self.currentTarget, self.order)
 							end
 							if (self.isReclaiming == true) then
-								self:SetReclaimTimeMultiplier(20)
+								self:SetReclaimTimeMultiplier(1)
 							end
 							ForkThread(self.Nano, self, self.currentTarget)
 						end
@@ -168,7 +168,7 @@ TAconstructor = Class(TAunit) {
 
 
 	OnStartReclaim = function(self, target)
-		self:SetReclaimTimeMultiplier(99999)
+		self:SetReclaimTimeMultiplier(20)
 		self:SetBuildRate(self:GetBlueprint().Economy.BuildRate)
 		TAunit.OnStartReclaim(self, target)
 		self.desiredTarget = target
