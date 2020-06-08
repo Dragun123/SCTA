@@ -1,5 +1,5 @@
-#ARM Anaconda - Hovertank
-#ARMANAC
+#COR Anaconda - Hovertank
+#CORANAC
 #
 #Blueprint created by Raevn
 
@@ -39,7 +39,7 @@ UnitBlueprint {
         'LAND',
 
 	--TA Categories
-        'ARM',
+        'COR',
         'HOVER',
 	'WEAPON',
 	'LEVEL1',
@@ -48,14 +48,14 @@ UnitBlueprint {
 	'CTRL_W',
     },
     Defense = {
-        ArmorType = 'Normal',
+        CororType = 'Normal',
         Health = 880,
         MaxHealth = 880,
     },
     Description = 'Hovertank',
     Display = {
 	DestructionEffects = {
-		DefaultProjectileCategories = {'MetalBarrel','ArmHover'},
+		DefaultProjectileCategories = {'MetalBarrel','CorHover'},
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
@@ -111,7 +111,7 @@ UnitBlueprint {
             RULEUCC_RetaliateToggle = true,
             RULEUCC_Stop = true,
         },
-        FactionName = 'ARM',
+        FactionName = 'COR',
         TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Anaconda',
     },
@@ -162,18 +162,18 @@ UnitBlueprint {
             AlternateDamageRadius = 0.5,
             FiringRandomness = 0,
             DamageType = 'Normal',
-            DisplayName = 'ARMANAC_WEAPON',
+            DisplayName = 'CORANAC_WEAPON',
             FireTargetLayerCapsTable = {
                 Land = 'Land|Water|Seabed',
                 Water = 'Land|Water|Seabed',
             },
 	    RangeCategory = 'UWRC_DirectFire',
-            Label = 'ARMANAC_WEAPON',
+            Label = 'CORANAC_WEAPON',
             MaxRadius = 18.75,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 21.875,
-            ProjectileId = '/mods/SCTA/projectiles/ARMANAC_WEAPON/ARMANAC_WEAPON_proj.bp',
+            ProjectileId = '/mods/SCTA/projectiles/CORANAC_WEAPON/CORANAC_WEAPON_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
@@ -223,7 +223,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA/units/ARMANAC/ARMANAC_dead_prop.bp',
+        Blueprint = '/mods/SCTA/units/CORANAC/CORANAC_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Water = true,

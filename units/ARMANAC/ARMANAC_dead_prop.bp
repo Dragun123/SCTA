@@ -15,7 +15,7 @@ PropBlueprint {
 		    NormalName = '/mods/SCTA/meshes/wrecks/Wreck_NormalsTS.dds',
 		    SpecularName = '/mods/SCTA/meshes/wrecks/Wreck_SpecTeam.dds',
 		    AlbedoName = '/mods/SCTA/meshes/wrecks/Wreck_Albedo.dds',
-		    MeshName = 'ARMANAC_dead_lod0.scm',
+		    MeshName = 'CORANAC_dead_lod0.scm',
                     ShaderName = 'Unit',
                 },
             },

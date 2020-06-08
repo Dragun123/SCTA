@@ -1,5 +1,5 @@
-#ARM Construction Hovercraft - Tech Level 1
-#ARMCH
+#COR Construction Hovercraft - Tech Level 1
+#CORCH
 #
 #Blueprint created by Raevn
 
@@ -59,7 +59,7 @@ UnitBlueprint {
         'LAND',
 
 	--TA Categories
-        'ARM',
+        'COR',
         'HOVER',
 	'LEVEL1',
 	'CONSTR',
@@ -69,7 +69,7 @@ UnitBlueprint {
 	'CTRL_B',
     },
     Defense = {
-        ArmorType = 'Normal',
+        CororType = 'Normal',
         Health = 723,
         MaxHealth = 723,
     },
@@ -79,7 +79,7 @@ UnitBlueprint {
             'Construction Unit',
         },
 	DestructionEffects = {
-		DefaultProjectileCategories = {'Construction','ArmCockpit','ArmHover','BuildMuzzle'},
+		DefaultProjectileCategories = {'Construction','CorCockpit','CorHover','BuildMuzzle'},
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
@@ -126,7 +126,7 @@ UnitBlueprint {
         BuildRate = 80,
         BuildTime = 10494,
         BuildableCategory = {
-            'BUILTBYT1HOVER ARM',
+            'BUILTBYT1HOVER COR',
         },
         MaxBuildDistance = 4.375,
         StorageEnergy = 80,
@@ -156,7 +156,7 @@ UnitBlueprint {
         },
         ConstructionBar = true,
         SelectionPriority = 3,
-        FactionName = 'ARM',
+        FactionName = 'COR',
         TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Construction Hovercraft',
     },
@@ -209,7 +209,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA/units/ARMCH/ARMCH_dead_prop.bp',
+        Blueprint = '/mods/SCTA/units/CORCH/CORCH_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Water = true,

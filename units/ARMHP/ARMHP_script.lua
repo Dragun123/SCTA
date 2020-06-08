@@ -1,11 +1,11 @@
-#ARM Hovercraft Platform - Builds Hovercraft
-#ARMHP
+#COR Hovercraft Platform - Builds Hovercraft
+#CORHP
 #
 #Script created by Raevn
 
 local TAconstructor = import('/mods/SCTA/lua/TAconstructor.lua').TAconstructor
 
-ARMVP = Class(TAconstructor) {
+CORVP = Class(TAconstructor) {
 	pauseTime = 5,
 	hideUnit = true,
 	isFactory = true,
@@ -185,4 +185,4 @@ ARMVP = Class(TAconstructor) {
 	end,
 }
 
-TypeClass = ARMVP
+TypeClass = CORVP

@@ -1,17 +1,17 @@
-#ARM Wombat - Hovercraft Rocket Launcher
-#ARMMH
+#COR Wombat - Hovercraft Rocket Launcher
+#CORMH
 #
 #Script created by Raevn
 
 local TAunit = import('/mods/SCTA/lua/TAunit.lua').TAunit
 local TAweapon = import('/mods/SCTA/lua/TAweapon.lua').TAweapon
 
-ARMMH = Class(TAunit) {
+CORMH = Class(TAunit) {
 	OnCreate = function(self)
 		TAunit.OnCreate(self)
 		self.Spinners = {
 			box = CreateRotator(self, 'box', 'x', nil, 0, 0, 0),
-			base = CreateRotator(self, 'ARMMH', 'x', nil, 0, 0, 0),
+			base = CreateRotator(self, 'CORMH', 'x', nil, 0, 0, 0),
 		}
 		for k, v in self.Spinners do
 			self.Trash:Add(v)
@@ -19,7 +19,7 @@ ARMMH = Class(TAunit) {
 	end,
 
 	Weapons = {
-		ARMMH_WEAPON = Class(TAweapon) {
+		CORMH_WEAPON = Class(TAweapon) {
 
 			PlayFxWeaponUnpackSequence = function(self)
 
@@ -132,4 +132,4 @@ ARMMH = Class(TAunit) {
 	},
 }
 
-TypeClass = ARMMH
+TypeClass = CORMH

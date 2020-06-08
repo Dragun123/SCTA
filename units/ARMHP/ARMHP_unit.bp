@@ -1,5 +1,5 @@
-#ARM Hovercraft Platform - Builds Hovercraft
-#ARMHP
+#COR Hovercraft Platform - Builds Hovercraft
+#CORHP
 #
 #Blueprint created by Raevn
 
@@ -46,7 +46,7 @@ UnitBlueprint {
 	'CONSTRUCTION',
 
 	--TA Categories
-	'ARM',
+	'COR',
 	'PLANT',
 	'LEVEL2',
 	'NOWEAPON',
@@ -55,7 +55,7 @@ UnitBlueprint {
 	'CTRL_F',
     },
     Defense = {
-        ArmorType = 'Normal',
+        CororType = 'Normal',
         Health = 3005,
         MaxHealth = 3005,
     },
@@ -100,7 +100,7 @@ UnitBlueprint {
         BuildTime = 18520,
 	BuildRate = 200,
         BuildableCategory = {
-            'HOVER LEVEL1 ARM',
+            'HOVER LEVEL1 COR',
         },
 	InitialRallyX = 0,
 	InitialRallyZ = 7.5,
@@ -125,7 +125,7 @@ UnitBlueprint {
         },
         SelectionPriority = 5,
         ConstructionBar = true,
-        FactionName = 'ARM',
+        FactionName = 'COR',
         TechLevel = 'RULEUTL_Advanced',
 	UnitName = 'Hovercraft Platform',
     },
@@ -187,7 +187,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA/units/ARMHP/ARMHP_dead_prop.bp',
+        Blueprint = '/mods/SCTA/units/CORHP/CORHP_dead_prop.bp',
         WreckageLayers = {
             Land = true,
         },

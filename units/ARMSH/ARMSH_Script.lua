@@ -1,14 +1,14 @@
-#ARM Skimmer - Scout Hovercraft
-#ARMSH
+#COR Skimmer - Scout Hovercraft
+#CORSH
 #
 #Script created by Raevn
 
 local TAunit = import('/mods/SCTA/lua/TAunit.lua').TAunit
 local TAweapon = import('/mods/SCTA/lua/TAweapon.lua').TAweapon
 
-ARMSH = Class(TAunit) {
+CORSH = Class(TAunit) {
 	Weapons = {
-		ARMSH_WEAPON = Class(TAweapon) {
+		CORSH_WEAPON = Class(TAweapon) {
 			OnWeaponFired = function(self)
 				TAweapon.OnWeaponFired(self)
 				TAunit.ShowMuzzleFlare(self, 0.15)
@@ -17,4 +17,4 @@ ARMSH = Class(TAunit) {
 	},
 }
 
-TypeClass = ARMSH
+TypeClass = CORSH

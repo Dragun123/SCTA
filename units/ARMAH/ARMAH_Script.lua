@@ -1,12 +1,12 @@
-#ARM Swatter - Anti-Air Hovercraft
-#ARMAH
+#COR Swatter - Anti-Air Hovercraft
+#CORAH
 #
 #Script created by Raevn
 
 local TAunit = import('/mods/SCTA/lua/TAunit.lua').TAunit
 local TAweapon = import('/mods/SCTA/lua/TAweapon.lua').TAweapon
 
-ARMAH = Class(TAunit) {
+CORAH = Class(TAunit) {
 	OnCreate = function(self)
 		TAunit.OnCreate(self)
 		self.Sliders = {
@@ -14,7 +14,7 @@ ARMAH = Class(TAunit) {
 		}
 		self.Spinners = {
 			box = CreateRotator(self, 'box', 'x', nil, 0, 0, 0),
-			base = CreateRotator(self, 'ARMAH', 'x', nil, 0, 0, 0),
+			base = CreateRotator(self, 'CORAH', 'x', nil, 0, 0, 0),
 		}
 		for k, v in self.Sliders do
 			self.Trash:Add(v)
@@ -25,7 +25,7 @@ ARMAH = Class(TAunit) {
 	end,
 
 	Weapons = {
-		ARMAH_WEAPON = Class(TAweapon) {
+		CORAH_WEAPON = Class(TAweapon) {
 
 			PlayFxWeaponUnpackSequence = function(self)
 
@@ -115,4 +115,4 @@ ARMAH = Class(TAunit) {
 	},
 }
 
-TypeClass = ARMAH
+TypeClass = CORAH

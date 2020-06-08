@@ -1,5 +1,5 @@
-#ARM Swatter - Anti-Air Hovercraft
-#ARMAH
+#COR Swatter - Anti-Air Hovercraft
+#CORAH
 #
 #Blueprint created by Raevn
 
@@ -41,7 +41,7 @@ UnitBlueprint {
         'LAND',
 
 	--TA Categories
-        'ARM',
+        'COR',
         'HOVER',
 	'WEAPON',
 	'LEVEL1',
@@ -50,14 +50,14 @@ UnitBlueprint {
 	'CTRL_W',
     },
     Defense = {
-        ArmorType = 'Normal',
+        CororType = 'Normal',
         Health = 375,
         MaxHealth = 375,
     },
     Description = 'Anti-Air Hovercraft',
     Display = {
 	DestructionEffects = {
-		DefaultProjectileCategories = {'ArmCockpit','ArmHover'},
+		DefaultProjectileCategories = {'CorCockpit','CorHover'},
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
@@ -113,7 +113,7 @@ UnitBlueprint {
             RULEUCC_RetaliateToggle = true,
             RULEUCC_Stop = true,
         },
-        FactionName = 'ARM',
+        FactionName = 'COR',
         TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Swatter',
     },
@@ -164,19 +164,19 @@ UnitBlueprint {
             AlternateDamageRadius = 1.5,
             FiringRandomness = 0,
             DamageType = 'Normal',
-            DisplayName = 'ARMAH_WEAPON',
+            DisplayName = 'CORAH_WEAPON',
             FireTargetLayerCapsTable = {
                 Land = 'Land|Water|Air|Seabed',
                 Water = 'Land|Water|Air|Seabed',
             },
 	    RangeCategory = 'UWRC_DirectFire',
 	    FiringTolerance = 55,
-            Label = 'ARMAH_WEAPON',
+            Label = 'CORAH_WEAPON',
             MaxRadius = 40.625,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 28.125,
-            ProjectileId = '/mods/SCTA/projectiles/ARMAH_WEAPON/ARMAH_WEAPON_proj.bp',
+            ProjectileId = '/mods/SCTA/projectiles/CORAH_WEAPON/CORAH_WEAPON_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
@@ -250,7 +250,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA/units/ARMAH/ARMAH_dead_prop.bp',
+        Blueprint = '/mods/SCTA/units/CORAH/CORAH_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Water = true,

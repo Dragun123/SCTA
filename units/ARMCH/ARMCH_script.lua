@@ -1,12 +1,12 @@
-#ARM Construction Hovercraft - Tech Level 1
-#ARMCH
+#COR Construction Hovercraft - Tech Level 1
+#CORCH
 #
 #Script created by Raevn
 
 local TAconstructor = import('/mods/SCTA/lua/TAconstructor.lua').TAconstructor
 local TAutils = import('/mods/SCTA/lua/TAutils.lua')
 
-ARMCH = Class(TAconstructor) {
+CORCH = Class(TAconstructor) {
 
 	OnCreate = function(self)
 		self.Spinners = {
@@ -142,4 +142,4 @@ ARMCH = Class(TAconstructor) {
 	end,
 }
 
-TypeClass = ARMCH
+TypeClass = CORCH

@@ -1,5 +1,5 @@
-#ARM Skimmer - Scout Hovercraft
-#ARMSH
+#COR Skimmer - Scout Hovercraft
+#CORSH
 #
 #Blueprint created by Raevn
 
@@ -40,7 +40,7 @@ UnitBlueprint {
         'LAND',
 
 	--TA Categories
-        'ARM',
+        'COR',
         'HOVER',
 	'LEVEL1',
 	'NOTAIR',
@@ -48,14 +48,14 @@ UnitBlueprint {
 	'CTRL_W',
     },
     Defense = {
-        ArmorType = 'Normal',
+        CororType = 'Normal',
         Health = 200,
         MaxHealth = 200,
     },
     Description = 'Scout Hovercraft',
     Display = {
 	DestructionEffects = {
-		DefaultProjectileCategories = {'ArmCockpit','ArmHover'},
+		DefaultProjectileCategories = {'CorCockpit','CorHover'},
 		DestructionEmitters = {
 			{
 				EmitterBone = {'Turret'},
@@ -111,7 +111,7 @@ UnitBlueprint {
             RULEUCC_RetaliateToggle = true,
             RULEUCC_Stop = true,
         },
-        FactionName = 'ARM',
+        FactionName = 'COR',
         TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Skimmer',
     },
@@ -162,18 +162,18 @@ UnitBlueprint {
             AlternateDamageRadius = 0.25,
             FiringRandomness = 0,
             DamageType = 'Normal',
-            DisplayName = 'ARMSH_WEAPON',
+            DisplayName = 'CORSH_WEAPON',
             FireTargetLayerCapsTable = {
                 Land = 'Land|Water|Seabed',
                 Water = 'Land|Water|Seabed',
             },
 	    RangeCategory = 'UWRC_DirectFire',
-            Label = 'ARMSH_WEAPON',
+            Label = 'CORSH_WEAPON',
             MaxRadius = 13.125,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 28.125,
-            ProjectileId = '/mods/SCTA/projectiles/ARMSH_WEAPON/ARMSH_WEAPON_proj.bp',
+            ProjectileId = '/mods/SCTA/projectiles/CORSH_WEAPON/CORSH_WEAPON_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
@@ -223,7 +223,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA/units/ARMSH/ARMSH_dead_prop.bp',
+        Blueprint = '/mods/SCTA/units/CORSH/CORSH_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Water = true,
