@@ -7,7 +7,7 @@ UnitBlueprint {
     Audio = {
         UISelection = Sound {
             Bank = 'TA_Sound',
-            Cue = 'SRVLRG3',
+            Cue = 'SERVLRG3',
             LodCutoff = 'UnitMove_LodCutoff',
         },
 	Destroyed = Sound {
