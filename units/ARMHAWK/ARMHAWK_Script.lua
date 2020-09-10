@@ -3,8 +3,8 @@
 #
 #Script created by Raevn
 
-local TAair = import('/mods/SCTA-master/lua/TAair.lua').TAair
-local TAweapon = import('/mods/SCTA-master/lua/TAweapon.lua').TAweapon
+local TAair = import('/mods/SCTA/lua/TAair.lua').TAair
+local TAweapon = import('/mods/SCTA/lua/TAweapon.lua').TAweapon
 
 ARMHAWK = Class(TAair) {
 

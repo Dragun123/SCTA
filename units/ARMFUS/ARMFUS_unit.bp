@@ -54,7 +54,7 @@ UnitBlueprint {
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
-				EmitterBlueprint = {'/mods/SCTA-master/effects/emitters/napalm_fire_emit.bp'},
+				EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
 		},
@@ -65,7 +65,7 @@ UnitBlueprint {
                 {
                     LODCutoff = 300,
                     ShaderName = 'Unit', 
-		    NormalsName = '/mods/SCTA-master/textures/common/normalsTS.dds'
+		    NormalsName = '/mods/SCTA/textures/common/normalsTS.dds'
                 },
             },
         },
@@ -138,7 +138,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/ARMFUS/ARMFUS_dead_prop.bp',
+        Blueprint = '/mods/SCTA/units/ARMFUS/ARMFUS_dead_prop.bp',
         WreckageLayers = {
             Land = true,
         },

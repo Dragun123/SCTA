@@ -1,4 +1,4 @@
-local TADebris = import('/mods/SCTA-master/lua/TADebris.lua').TADebris
+local TADebris = import('/mods/SCTA/lua/TADebris.lua').TADebris
 
 Circuits01 = Class(TADebris) {
 }

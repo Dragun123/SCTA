@@ -65,7 +65,7 @@ UnitBlueprint {
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
-				EmitterBlueprint = {'/mods/SCTA-master/effects/emitters/napalm_fire_emit.bp'},
+				EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
 		},
@@ -80,12 +80,12 @@ UnitBlueprint {
             },
         },
 	IdleEffects = {
-		Emitter = '/mods/SCTA-master/effects/emitters/hover_wake_emit.bp',
+		Emitter = '/mods/SCTA/effects/emitters/hover_wake_emit.bp',
 		Scale = 0.5,
 		Bones = {'Wake_01','Wake_02','Wake_03','Wake_04'},
 	},
 	MovementEffects = {
-		Emitter = '/mods/SCTA-master/effects/emitters/hover_wake_emit.bp',
+		Emitter = '/mods/SCTA/effects/emitters/hover_wake_emit.bp',
 		Scale = 0.5,
 		Bones = {'Wake_01','Wake_02','Wake_03','Wake_04'},
 	},
@@ -178,7 +178,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 40,
-            ProjectileId = '/mods/SCTA-master/projectiles/ARMAH_WEAPON/ARMAH_WEAPON_proj.bp',
+            ProjectileId = '/mods/SCTA/projectiles/ARMAH_WEAPON/ARMAH_WEAPON_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
@@ -224,7 +224,7 @@ UnitBlueprint {
             Turreted = true,
 			WeaponUnpacks = true,
 			WeaponRepackTimeout = 3,
-			WeaponUnpackAnimation = '/mods/SCTA-master/units/CORAH/CORAH_lod0_Bunpack.sca',
+			WeaponUnpackAnimation = '/mods/SCTA/units/CORAH/CORAH_lod0_Bunpack.sca',
             WeaponUnpackAnimationRate = 3,
 			WeaponUnpackLocksMotion = false,
         },
@@ -247,7 +247,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/CORAH/CORAH_dead_prop.bp',
+        Blueprint = '/mods/SCTA/units/CORAH/CORAH_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Water = true,

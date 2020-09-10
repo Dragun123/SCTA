@@ -50,22 +50,22 @@ UnitBlueprint {
 		DefaultProjectileCategories = {'CamoflageC'},
 		DestructionProjectiles = {
 			{
-				ProjectileBlueprint = '/mods/SCTA-master/effects/entities/Debris/Pieces/ARMWIN_debris01_proj.bp',
+				ProjectileBlueprint = '/mods/SCTA/effects/entities/Debris/Pieces/ARMWIN_debris01_proj.bp',
 				Bone = 'Blades',
 			},
 		},
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
-				EmitterBlueprint = {'/mods/SCTA-master/effects/emitters/napalm_fire_emit.bp'},
+				EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
 			{
 				EmitterBone = {'Blades','Turret'},
 				EmitterBlueprint = {
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-			    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    					'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
+			    		'/mods/SCTA/effects/emitters/terran_missile_hit_03_emit.bp',
+    					'/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp',
 				},
 				EmitterSize = 0.35,
 			},
@@ -77,7 +77,7 @@ UnitBlueprint {
                 {
                     LODCutoff = 230,
                     ShaderName = 'Unit',
-		    NormalsName = '/mods/SCTA-master/textures/common/normalsTS.dds'
+		    NormalsName = '/mods/SCTA/textures/common/normalsTS.dds'
                 },
             },
         },
@@ -151,7 +151,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/ARMWIN/ARMWIN_dead_prop.bp',
+        Blueprint = '/mods/SCTA/units/ARMWIN/ARMWIN_dead_prop.bp',
         WreckageLayers = {
             Land = true,
         },

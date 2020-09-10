@@ -1,11 +1,11 @@
 local Unit = import('/lua/sim/Unit.lua').Unit
 local explosion = import('/lua/defaultexplosions.lua')
 local scenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
-local TAutils = import('/mods/SCTA-master/lua/TAutils.lua')
+local TAutils = import('/mods/SCTA/lua/TAutils.lua')
 local Game = import('/lua/game.lua')
-local TAunit = import('/mods/SCTA-master/lua/TAunit.lua').TAunit
+local TAunit = import('/mods/SCTA/lua/TAunit.lua').TAunit
 local util = import('/lua/utilities.lua')
-local debrisCat = import('/mods/SCTA-master/lua/TAdebrisCategories.lua')
+local debrisCat = import('/mods/SCTA/lua/TAdebrisCategories.lua')
 
 local SyncroniseThread = function(self, interval, event, data)
     local time = GetGameTick()

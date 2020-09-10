@@ -44,7 +44,7 @@ ProjectileBlueprint {
         MaxHealth = 25,
     },
     Display = {
-        MeshBlueprint = '/mods/SCTA-master/meshes/projectiles/crblmssl_mesh.bp',
+        MeshBlueprint = '/mods/SCTA/meshes/projectiles/crblmssl_mesh.bp',
         StrategicIconSize = 1,
         UniformScale = 0.16,
     },

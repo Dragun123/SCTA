@@ -1,6 +1,6 @@
 
 
-local TAMissileProjectile = import('/mods/SCTA-master/lua/TAProjectiles.lua').TAMissileProjectile
+local TAMissileProjectile = import('/mods/SCTA/lua/TAProjectiles.lua').TAMissileProjectile
 
 CORMABM_WEAPON = Class(TAMissileProjectile) 
 {

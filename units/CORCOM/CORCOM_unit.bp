@@ -102,7 +102,7 @@ UnitBlueprint {
     },
     Description = 'Commander',
     Display = {
-			AnimationWalk = '/mods/SCTA-master/units/CORCOM/CORCOM_lod0_Awalk.sca',
+			AnimationWalk = '/mods/SCTA/units/CORCOM/CORCOM_lod0_Awalk.sca',
 			AnimationWalkRate = 1,
         Abilities = {
             '<LOC ability_amphibious>Amphibious',
@@ -124,7 +124,7 @@ UnitBlueprint {
 			{
 				EmitterBone = {'CORCOM'},
 				EmitterBlueprint = {
-					'/mods/SCTA-master/effects/emitters/COMBOOM_emit.bp',
+					'/mods/SCTA/effects/emitters/COMBOOM_emit.bp',
 				},
 				EmitterSize = 15,
 			},
@@ -136,8 +136,8 @@ UnitBlueprint {
         LODs = {
             {
                 LODCutoff = 230,
-        SpecularName = '/mods/SCTA-master/units/CORCOM/CORCOM_SpecTeam.dds',
-        AlbedoName = '/mods/SCTA-master/units/CORCOM/CORCOM_Albedo.dds',
+        SpecularName = '/mods/SCTA/units/CORCOM/CORCOM_SpecTeam.dds',
+        AlbedoName = '/mods/SCTA/units/CORCOM/CORCOM_Albedo.dds',
                 ShaderName = 'Unit', 
             },
         },
@@ -275,7 +275,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 25,
-            ProjectileId = '/mods/SCTA-master/projectiles/CORCOMLASER/CORCOMLASER_proj.bp',
+            ProjectileId = '/mods/SCTA/projectiles/CORCOMLASER/CORCOMLASER_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
@@ -336,7 +336,7 @@ UnitBlueprint {
             EnergyChargeForFirstShot = false,
             EnergyRequired = 1000,
             EnergyDrainPerSecond = 1000,
-            ProjectileId = '/mods/SCTA-master/projectiles/CORE_DISINTEGRATOR/CORE_DISINTEGRATOR_proj.bp',
+            ProjectileId = '/mods/SCTA/projectiles/CORE_DISINTEGRATOR/CORE_DISINTEGRATOR_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {

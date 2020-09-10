@@ -1,6 +1,6 @@
 local Prop = import('/lua/sim/Prop.lua').Prop
 
-local TAutils = import('/mods/SCTA-master/lua/TAutils.lua')
+local TAutils = import('/mods/SCTA/lua/TAutils.lua')
 
 TAWreckage = Class(Prop) {
 	smokeEmitter = nil,

@@ -3,9 +3,9 @@
 #
 #Script created by Raevn
 
-local TAnoassistbuild = import('/mods/SCTA-master/lua/TAnoassistbuild.lua').TAnoassistbuild
-local TAweapon = import('/mods/SCTA-master/lua/TAweapon.lua').TAweapon
-local TAutils = import('/mods/SCTA-master/lua/TAutils.lua')
+local TAnoassistbuild = import('/mods/SCTA/lua/TAnoassistbuild.lua').TAnoassistbuild
+local TAweapon = import('/mods/SCTA/lua/TAweapon.lua').TAweapon
+local TAutils = import('/mods/SCTA/lua/TAutils.lua')
 
 ARMEMP = Class(TAnoassistbuild) {
 	OnCreate = function(self)

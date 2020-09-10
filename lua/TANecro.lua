@@ -1,6 +1,6 @@
-local TAConstructor = import('/mods/SCTA-master/lua/TAconstructor.lua').TAconstructor
+local TAConstructor = import('/mods/SCTA/lua/TAconstructor.lua').TAconstructor
 local Unit = import('/lua/sim/Unit.lua').Unit
-local TAutils = import('/mods/SCTA-master/lua/TAutils.lua')
+local TAutils = import('/mods/SCTA/lua/TAutils.lua')
 local oldPosition={1,1,1}
 
 TANecro = Class(TAConstructor) {

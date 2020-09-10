@@ -3,10 +3,10 @@
 #
 #Script created by Raevn
 
-local TAconstructor = import('/mods/SCTA-master/lua/TAconstructor.lua').TAconstructor
-local TAweapon = import('/mods/SCTA-master/lua/TAweapon.lua').TAweapon
-local TAutils = import('/mods/SCTA-master/lua/TAutils.lua')
-local TACommanderDeathWeapon = import('/mods/SCTA-master/lua/TAweapon.lua').TACommanderDeathWeapon
+local TAconstructor = import('/mods/SCTA/lua/TAconstructor.lua').TAconstructor
+local TAweapon = import('/mods/SCTA/lua/TAweapon.lua').TAweapon
+local TAutils = import('/mods/SCTA/lua/TAutils.lua')
+local TACommanderDeathWeapon = import('/mods/SCTA/lua/TAweapon.lua').TACommanderDeathWeapon
 
 CORCOM = Class(TAconstructor) {
 	motion = 'Stopped',
@@ -90,7 +90,7 @@ CORCOM = Class(TAconstructor) {
 				if self.cloakSet == true then
 					self.cloakOn = true
 					self:EnableIntel('Cloak')
-					self:SetMesh('/mods/SCTA-master/units/CORCOM/CORCOM_cloak_mesh', true)
+					self:SetMesh('/mods/SCTA/units/CORCOM/CORCOM_cloak_mesh', true)
 				end
 			end
 		end
@@ -152,7 +152,7 @@ CORCOM = Class(TAconstructor) {
 		self.cloakOn = true
 		self.cloakSet = true
         	self:PlayUnitSound('Cloak')
-		self:SetMesh('/mods/SCTA-master/units/CORCOM/CORCOM_cloak_mesh', true)
+		self:SetMesh('/mods/SCTA/units/CORCOM/CORCOM_cloak_mesh', true)
 	end,
 
 

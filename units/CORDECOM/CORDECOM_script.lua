@@ -1,7 +1,7 @@
 
-local TAconstructor = import('/mods/SCTA-master/lua/TAconstructor.lua').TAconstructor
-local TAweapon = import('/mods/SCTA-master/lua/TAweapon.lua').TAweapon
-local TAutils = import('/mods/SCTA-master/lua/TAutils.lua')
+local TAconstructor = import('/mods/SCTA/lua/TAconstructor.lua').TAconstructor
+local TAweapon = import('/mods/SCTA/lua/TAweapon.lua').TAweapon
+local TAutils = import('/mods/SCTA/lua/TAutils.lua')
 
 CORDECOM = Class(TAconstructor) {
 

@@ -3,8 +3,8 @@
 #
 #Blueprint created by Raevn
 
-local TATreads = import('/mods/SCTA-master/lua/TATread.lua').TATreads
-local TAweapon = import('/mods/SCTA-master/lua/TAweapon.lua').TAweapon
+local TATreads = import('/mods/SCTA/lua/TATread.lua').TATreads
+local TAweapon = import('/mods/SCTA/lua/TAweapon.lua').TAweapon
 
 ARMFAV = Class(TATreads) {
 

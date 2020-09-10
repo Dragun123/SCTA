@@ -71,7 +71,7 @@ UnitBlueprint {
 		DestructionEmitters = {
 			{
 				EmitterBone = {0, 'dish'},
-				EmitterBlueprint = {'/mods/SCTA-master/effects/emitters/napalm_fire_emit.bp'},
+				EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
 		},
@@ -172,7 +172,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/CORRAD/CORRAD_dead_prop.bp',
+        Blueprint = '/mods/SCTA/units/CORRAD/CORRAD_dead_prop.bp',
         WreckageLayers = {
             Land = true,
         },

@@ -13,10 +13,10 @@ PropBlueprint {
             LODs = {
                 {
                     LODCutoff = 230,
-		    NormalName = '/mods/SCTA-master/units/ARMDRAG/ARMDRAG_dead_NormalsTS.dds',
-		    SpecularName = '/mods/SCTA-master/units/ARMDRAG/ARMDRAG_dead_SpecTeam.dds',
-		    AlbedoName = '/mods/SCTA-master/units/ARMDRAG/ARMDRAG_dead_Albedo.dds',
-		    MeshName = '/mods/SCTA-master/units/ARMDRAG/ARMDRAG_dead_lod0.scm',
+		    NormalName = '/mods/SCTA/units/ARMDRAG/ARMDRAG_dead_NormalsTS.dds',
+		    SpecularName = '/mods/SCTA/units/ARMDRAG/ARMDRAG_dead_SpecTeam.dds',
+		    AlbedoName = '/mods/SCTA/units/ARMDRAG/ARMDRAG_dead_Albedo.dds',
+		    MeshName = '/mods/SCTA/units/ARMDRAG/ARMDRAG_dead_lod0.scm',
                     ShaderName = 'TMeshNoLighting',
                 },
             },
@@ -40,7 +40,7 @@ PropBlueprint {
         BlockPath = false, 
     },
     ScriptClass = 'TAWreckage',
-    ScriptModule = '/mods/SCTA-master/lua/TAWreckage.lua',
+    ScriptModule = '/mods/SCTA/lua/TAWreckage.lua',
     SizeX = 2,
     SizeY = 0.5,
     SizeZ = 2,

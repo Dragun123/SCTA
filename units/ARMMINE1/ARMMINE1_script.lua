@@ -3,7 +3,7 @@
 #
 #Script created by Raevn
 
-local TAunit = import('/mods/SCTA-master/lua/TAunit.lua').TAunit
+local TAunit = import('/mods/SCTA/lua/TAunit.lua').TAunit
 local Projectile = import('/lua/sim/DefaultWeapons.lua').DefaultProjectileWeapon
 
 ARMMINE1 = Class(TAunit) {
@@ -37,7 +37,7 @@ ARMMINE1 = Class(TAunit) {
 	end,
 
 	OnIntelEnabled = function(self)
-		self:SetMesh('/mods/SCTA-master/units/ARMMINE1/ARMMINE1_cloak_mesh', true)
+		self:SetMesh('/mods/SCTA/units/ARMMINE1/ARMMINE1_cloak_mesh', true)
 	end,
 }
 TypeClass = ARMMINE1

@@ -8,9 +8,9 @@ ProjectileBlueprint {
 		LODs = {
 			{
 				ShaderName = 'TMeshNoLighting',
-				AlbedoName = '/mods/SCTA-master/units/ARMMEX/ARMMEX_Albedo.dds',
-				SpecularName = '/mods/SCTA-master/units/ARMMEX/ARMMEX_SpecTeam.dds',
-				MeshName = '/mods/SCTA-master/meshes/projectiles/Debris/ARMMEX_debris01_lod0.scm',
+				AlbedoName = '/mods/SCTA/units/ARMMEX/ARMMEX_Albedo.dds',
+				SpecularName = '/mods/SCTA/units/ARMMEX/ARMMEX_SpecTeam.dds',
+				MeshName = '/mods/SCTA/meshes/projectiles/Debris/ARMMEX_debris01_lod0.scm',
 				LODCutoff = 100,
 			},
 		},

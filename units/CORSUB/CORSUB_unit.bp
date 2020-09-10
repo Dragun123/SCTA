@@ -72,7 +72,7 @@ UnitBlueprint {
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
-				EmitterBlueprint = {'/mods/SCTA-master/effects/emitters/napalm_fire_emit.bp'},
+				EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
 		},
@@ -83,12 +83,12 @@ UnitBlueprint {
                 {
                     LODCutoff = 230,
                     ShaderName = 'Unit', 
-		    NormalsName = '/mods/SCTA-master/textures/common/normalsTS.dds'
+		    NormalsName = '/mods/SCTA/textures/common/normalsTS.dds'
                 },
             },
         },
 	MovementEffects = {
-		Emitter = '/mods/SCTA-master/effects/emitters/sub_wake_emit.bp',
+		Emitter = '/mods/SCTA/effects/emitters/sub_wake_emit.bp',
 		Scale = 0.5,
 		Bones = {'wake'},
 	},
@@ -180,7 +180,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 6.25,
-            ProjectileId = '/mods/SCTA-master/projectiles/CORE_TORPEDO/CORE_TORPEDO_proj.bp',
+            ProjectileId = '/mods/SCTA/projectiles/CORE_TORPEDO/CORE_TORPEDO_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
@@ -234,7 +234,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/CORSUB/CORSUB_dead_prop.bp',
+        Blueprint = '/mods/SCTA/units/CORSUB/CORSUB_dead_prop.bp',
         WreckageLayers = {
             Water = true,
 	    Sub = true,

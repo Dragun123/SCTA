@@ -1,4 +1,4 @@
-local TAHeavyCannonProjectile = import('/mods/SCTA-master/lua/TAProjectiles.lua').TAHeavyCannonProjectile
+local TAHeavyCannonProjectile = import('/mods/SCTA/lua/TAProjectiles.lua').TAHeavyCannonProjectile
 
 CORBUZZ_WEAPON = Class(TAHeavyCannonProjectile) {
 }

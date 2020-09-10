@@ -1,5 +1,5 @@
 # SCTA
-SCTA reworked version by dragun123
+SCTA reworked version by Dragun101
 original creator is Raevn, whose work was imported to faf from Axel
 
 # Installation:

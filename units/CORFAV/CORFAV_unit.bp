@@ -81,7 +81,7 @@ UnitBlueprint {
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
-				EmitterBlueprint = {'/mods/SCTA-master/effects/emitters/napalm_fire_emit.bp'},
+				EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
 		},
@@ -97,7 +97,7 @@ UnitBlueprint {
                 {
                     LODCutoff = 230,
                     ShaderName = 'Unit', 
-		    NormalsName = '/mods/SCTA-master/textures/common/normalsTS.dds'
+		    NormalsName = '/mods/SCTA/textures/common/normalsTS.dds'
                 },
             },
         },
@@ -184,7 +184,7 @@ UnitBlueprint {
             MuzzleSalvoSize = 1,
 	    MuzzleSalvoDelay = 0,
 	    MuzzleVelocity = 25,
-            ProjectileId = '/mods/SCTA-master/projectiles/CORE_LASER/CORE_LASER_proj.bp',
+            ProjectileId = '/mods/SCTA/projectiles/CORE_LASER/CORE_LASER_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
@@ -234,7 +234,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/CORFAV/CORFAV_dead_prop.bp',
+        Blueprint = '/mods/SCTA/units/CORFAV/CORFAV_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Seabed = true,

@@ -88,7 +88,7 @@ UnitBlueprint {
 		DestructionEmitters = {
 			{
 				EmitterBone = {'Turret'},
-				EmitterBlueprint = {'/mods/SCTA-master/effects/emitters/napalm_fire_emit.bp'},
+				EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
 		},
@@ -104,7 +104,7 @@ UnitBlueprint {
                 {
                     LODCutoff = 230,
                     ShaderName = 'Unit', 
-		            NormalsName = '/mods/SCTA-master/textures/common/normalsTS.dds'
+		            NormalsName = '/mods/SCTA/textures/common/normalsTS.dds'
                 },
             },
         },
@@ -194,7 +194,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
 	    MuzzleVelocity = 23,
-            ProjectileId = '/mods/SCTA-master/projectiles/ARM_LIGHTCANNON/ARM_LIGHTCANNON_proj.bp',
+            ProjectileId = '/mods/SCTA/projectiles/ARM_LIGHTCANNON/ARM_LIGHTCANNON_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
@@ -247,7 +247,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/ARMSTUMP/ARMSTUMP_dead_prop.bp',
+        Blueprint = '/mods/SCTA/units/ARMSTUMP/ARMSTUMP_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Seabed = true,

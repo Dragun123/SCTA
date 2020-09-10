@@ -3,8 +3,8 @@
 #
 #Script created by Raevn
 
-local TAunit = import('/mods/SCTA-master/lua/TAunit.lua').TAunit
-local TAutils = import('/mods/SCTA-master/lua/TAutils.lua')
+local TAunit = import('/mods/SCTA/lua/TAunit.lua').TAunit
+local TAutils = import('/mods/SCTA/lua/TAutils.lua')
 
 CORTARG = Class(TAunit) {
 	damageReduction = 1,

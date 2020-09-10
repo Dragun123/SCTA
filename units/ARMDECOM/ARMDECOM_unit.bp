@@ -79,7 +79,7 @@ UnitBlueprint {
     },
     Description = 'Commander',
     Display = {
-        AnimationWalk = '/mods/SCTA-master/units/ARMCOM/ARMCOM_lod0_Awalk.sca',
+        AnimationWalk = '/mods/SCTA/units/ARMCOM/ARMCOM_lod0_Awalk.sca',
         AnimationWalkRate = 1,
         Abilities = {
             'Decoy',
@@ -94,14 +94,14 @@ UnitBlueprint {
 			{
 				EmitterBone = {0},
 				EmitterBlueprint = {
-					'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
+					'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
 				},
 				EmitterSize = 15,
 			},
 			{
 				EmitterBone = {0},
 				EmitterBlueprint = {
-					'/mods/SCTA-master/effects/emitters/COMBOOM_emit.bp',
+					'/mods/SCTA/effects/emitters/COMBOOM_emit.bp',
 				},
 				EmitterSize = 1.35,
 			},
@@ -113,9 +113,9 @@ UnitBlueprint {
             LODs = {
                 {
                     LODCutoff = 230,
-		    NormalName = '/mods/SCTA-master/units/ARMCOM/ARMCOM_normalsTS.dds',
-		    SpecularName = '/mods/SCTA-master/units/ARMCOM/ARMCOM_SpecTeam.dds',
-		    AlbedoName = '/mods/SCTA-master/units/ARMCOM/ARMCOM_Albedo.dds',
+		    NormalName = '/mods/SCTA/units/ARMCOM/ARMCOM_normalsTS.dds',
+		    SpecularName = '/mods/SCTA/units/ARMCOM/ARMCOM_SpecTeam.dds',
+		    AlbedoName = '/mods/SCTA/units/ARMCOM/ARMCOM_Albedo.dds',
                     ShaderName = 'Unit', 
                 },
             },
@@ -212,7 +212,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 25,
-            ProjectileId = '/mods/SCTA-master/projectiles/ARMCOMLASER/ARMCOMLASER_proj.bp',
+            ProjectileId = '/mods/SCTA/projectiles/ARMCOMLASER/ARMCOMLASER_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {

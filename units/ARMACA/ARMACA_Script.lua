@@ -3,8 +3,8 @@
 #
 #Script created by Raevn
 
-local TAAirConstructor = import('/mods/SCTA-master/lua/TAAirConstructor.lua').TAAirConstructor
-local TAutils = import('/mods/SCTA-master/lua/TAutils.lua')
+local TAAirConstructor = import('/mods/SCTA/lua/TAAirConstructor.lua').TAAirConstructor
+local TAutils = import('/mods/SCTA/lua/TAutils.lua')
 
 ARMACA = Class(TAAirConstructor) {
 

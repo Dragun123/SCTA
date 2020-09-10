@@ -1,0 +1,199 @@
+#ARM Aircraft Plant - Produces Aircraft
+#ARMDAP
+#
+#Blueprint created by Raevn
+
+UnitBlueprint {
+    Audio = {
+        UISelection = Sound {
+            Bank = 'TA_Sound',
+            Cue = 'PAIRACTV',
+            LodCutoff = 'UnitMove_LodCutoff',
+        },
+	Construct = Sound {
+            Bank = 'TA_Sound',
+            Cue = 'PLABWORK',
+            LodCutoff = 'UnitMove_LodCutoff',
+	},
+	ConstructStop = Sound {
+            Bank = 'TA_Sound',
+            Cue = 'UNITDONE',
+            LodCutoff = 'UnitMove_LodCutoff',
+	},
+	Destroyed = Sound {
+            Bank = 'TA_Sound',
+            Cue = 'XPLOLRG4',
+            LodCutoff = 'UnitMove_LodCutoff',
+	},
+    },
+    BuildIconSortPriority = 0,
+    Categories = {
+        'SELECTABLE',
+        'DRAGBUILD',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'TECH2',
+	'FACTORY',
+        'RALLYPOINT',
+        'SHOWQUEUE',
+	'STRUCTURE',
+	'CONSTRUCTION',
+	'TEXTUREANIM',
+        'OVERLAYRADAR',
+        'AIR',
+        'CONSTRUCTIONSORTDOWN',
+	'ARM',
+		'PLANT',
+	'SORTCONSTRUCTION',
+	
+	'LEVEL3',
+	
+	
+	
+    },
+    Defense = {
+        ArmorType = 'Structure',
+        Health = 3400,
+        MaxHealth = 3400,
+        AirThreatLevel = 0,
+        EconomyThreatLevel = 3,
+        SubThreatLevel = 0,
+        SurfaceThreatLevel = 0,
+    },
+    Description = 'Produces Aircraft',
+    Display = {
+        Abilities = {
+            '<LOC ability_radar>Radar',
+        },
+	DestructionEffects = {
+		DefaultProjectileCategories = {'Construction','BuildMuzzle','BuildPlate','Runway'},
+		DestructionEmitters = {
+			{
+				EmitterBone = {'BasePlate', 0},
+				EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
+				EmitterSize = 1.25,
+			},
+			{
+				EmitterBone = {'Post_01','Post_02'},
+				EmitterBlueprint = {
+	    				'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
+			    		'/mods/SCTA/effects/emitters/terran_missile_hit_03_emit.bp',
+    					'/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp',
+				},
+				EmitterSize = 0.35,
+			},
+			{
+				EmitterBone = {'Radar'},
+				EmitterBlueprint = {
+		    			'/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp',
+				},
+				EmitterSize = 0.25,
+			},
+		},
+	},
+	BuildBones = {'Nozzle_01','Nozzle_02'},
+	BuildAttachBone = 'BasePlate',
+	TextureAnimationFrames = 6,
+        Mesh = {
+            IconFadeInZoom = 130,
+            LODs = {
+                {
+                    LODCutoff = 400,
+                    ShaderName = 'Unit', 
+		    NormalsName = '/mods/SCTA/textures/common/normalsTS.dds'
+                },
+            },
+        },
+        UniformScale = 0.32,
+    },
+    Economy = {
+        BuildCostEnergy = 10200,
+        BuildCostMass = 2210, 
+        BuildTime = 17376,
+    BuildRate = 180,
+    DifferentialUpgradeCostCalculation = true,
+    BuildableCategory = {
+        'AIR LEVEL2 ARM',
+	    'AIR LEVEL1 ARM', 
+        },
+	InitialRallyX = 1,
+	InitialRallyZ = 1,
+    StorageMass = 200,
+    StorageEnergy = 200,
+    },
+    Footprint = {
+	MaxSlope = 0.625,
+        SizeX = 7,
+        SizeZ = 6,
+    },
+    General = {
+        Category = 'Factory',
+        Classification = 'RULEUC_Factory',
+        CommandCaps = {
+            RULEUCC_Guard = true,
+            RULEUCC_Move = true,
+            RULEUCC_Patrol = true,
+            RULEUCC_Pause = true,
+            RULEUCC_RetaliateToggle = true,
+            RULEUCC_Stop = true,
+        },
+        ConstructionBar = true,
+        SelectionPriority = 5,
+        FactionName = 'ARM',
+        TechLevel = 'RULEUTL_Advanced',
+        UpgradesFrom = 'armap',
+	UnitName = 'Aircraft Development Plant',
+    },
+    Intel = {
+        VisionRadius = 10,
+	RadarRadius = 31,
+	FreeIntel = true,
+    },
+    Interface = {
+        HelpText = 'Produces Aircraft',
+    },
+    LifeBarHeight = 0.25,
+    LifeBarOffset = 0.5,
+    LifeBarSize = 8,
+    Physics = {
+        BuildOnLayerCaps = {
+            LAYER_Land = true,
+        },
+        FlattenSkirt = true,
+        SkirtSizeX = 7,
+        SkirtSizeZ = 6,
+    },
+    SelectionSizeX = 9.9,
+    SelectionSizeZ = 6.8,
+    SelectionThickness = 0.25,
+    SizeX = 12,
+    SizeY = 5,
+    SizeZ = 12,
+    StrategicIconName = 'icon_factory2_air',
+    StrategicIconSortPriority = 0,
+    Weapon = {
+        { #LARGE_BUILDINGEX
+            Damage = 20,
+            DamageFriendly = true,
+            DamageRadius = 1,
+            DamageType = 'Normal',
+            DummyWeapon = true,
+            Label = 'DeathWeapon',
+        },
+        { #LARGE_BUILDING
+            Damage = 50,
+            DamageFriendly = true,
+            DamageRadius = 1,
+            DummyWeapon = true,
+            DamageType = 'Normal',
+            Label = 'SuicideWeapon',
+        },
+    },
+    Wreckage = {
+	UseCustomMesh = true,
+        Blueprint = '/mods/SCTABalance/units/ARMDAP/ARMDAP_dead_prop.bp',
+        WreckageLayers = {
+            Land = true,
+        },
+    },
+}

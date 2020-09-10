@@ -62,12 +62,12 @@ UnitBlueprint {
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
-				EmitterBlueprint = {'/mods/SCTA-master/effects/emitters/napalm_fire_emit.bp'},
+				EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
 		},
     },
-    AnimationWalk = '/mods/SCTA-master/units/ARMSCAB/ARMSCAB_lod0_WALK.sca',
+    AnimationWalk = '/mods/SCTA/units/ARMSCAB/ARMSCAB_lod0_WALK.sca',
     AnimationWalkRate = 1,
         Mesh = {
             IconFadeInZoom = 130,
@@ -161,7 +161,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0, 
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 20,
-            ProjectileId = '/mods/SCTA-master/projectiles/ARMAMIS_WEAPON/ARMAMIS_WEAPON_proj.bp',
+            ProjectileId = '/mods/SCTA/projectiles/ARMAMIS_WEAPON/ARMAMIS_WEAPON_proj.bp',
             ProjectileLifetimeUsesMultiplier = 1.1,
             ProjectilesPerOnFire = 2,
             RackBones = {
@@ -199,7 +199,7 @@ UnitBlueprint {
             TurretYawSpeed = 0,
             Turreted = false,
             WeaponUnpackLocksMotion = true,
-            WeaponUnpackAnimation = '/mods/SCTA-master/units/ARMSCAB/ARMSCAB_lod0_unpack.sca',
+            WeaponUnpackAnimation = '/mods/SCTA/units/ARMSCAB/ARMSCAB_lod0_unpack.sca',
             WeaponUnpackAnimationRate = 1,
             WeaponRepackTimeout = 0.5,
             WeaponUnpacks = true,
@@ -223,7 +223,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/ARMSCAB/ARMSCAB_dead_prop.bp',
+        Blueprint = '/mods/SCTA/units/ARMSCAB/ARMSCAB_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Seabed = true,

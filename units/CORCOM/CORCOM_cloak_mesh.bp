@@ -4,7 +4,7 @@ MeshBlueprint {
         {
             MeshName = 'CORCOM_lod0.scm',
             AlbedoName = 'CORCOM_Albedo.dds',
-            NormalsName = '/mods/SCTA-master/textures/common/normalsTS.dds',
+            NormalsName = '/mods/SCTA/textures/common/normalsTS.dds',
             SpecularName = 'CORCOM_Specteam.dds',
             ShaderName = 'CommandFeedback', -- TACloak
             LODCutoff = 230,

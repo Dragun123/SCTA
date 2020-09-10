@@ -1,6 +1,6 @@
 
 
-local TAunit = import('/mods/SCTA-master/lua/TAunit.lua').TAunit
+local TAunit = import('/mods/SCTA/lua/TAunit.lua').TAunit
 
 CORMMKR = Class(TAunit) {
 	closeDueToDamage = false,

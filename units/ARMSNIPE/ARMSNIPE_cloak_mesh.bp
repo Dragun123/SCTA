@@ -4,7 +4,7 @@ MeshBlueprint {
         {
             MeshName = 'ARMSNIPE_lod0.scm',
             AlbedoName = 'ARMSNIPE_Albedo.dds',
-            NormalsName = '/mods/SCTA-master/textures/common/normalsTS.dds',
+            NormalsName = '/mods/SCTA/textures/common/normalsTS.dds',
             SpecularName = 'ARMSNIPE_SpecTeam.dds',
             ShaderName = 'CommandFeedback', -- TACloak
             LODCutoff = 230,

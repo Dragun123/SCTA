@@ -1,7 +1,7 @@
 local WeaponFile = import('/lua/sim/DefaultWeapons.lua')
 local DefaultWeapon = WeaponFile.DefaultProjectileWeapon
 local BareBonesWeapon = WeaponFile.BareBonesWeapon
-local TAutils = import('/mods/SCTA-master/lua/TAutils.lua')
+local TAutils = import('/mods/SCTA/lua/TAutils.lua')
 
 
 TAweapon = Class(DefaultWeapon) {

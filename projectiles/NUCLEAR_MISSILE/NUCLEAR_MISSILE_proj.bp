@@ -46,7 +46,7 @@ ProjectileBlueprint {
     Display = {
         CameraFollowTimeout = 5,
         CameraFollowsProjectile = true,
-        MeshBlueprint = '/mods/SCTA-master/meshes/projectiles/ballmiss_mesh.bp',
+        MeshBlueprint = '/mods/SCTA/meshes/projectiles/ballmiss_mesh.bp',
         StrategicIconSize = 1,
         UniformScale = 0.16,
     },

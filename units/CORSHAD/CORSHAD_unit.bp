@@ -101,7 +101,7 @@ UnitBlueprint {
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
-				EmitterBlueprint = {'/mods/SCTA-master/effects/emitters/napalm_fire_emit.bp'},
+				EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
 		},
@@ -204,7 +204,7 @@ UnitBlueprint {
             MuzzleSalvoSize = 7,
             MuzzleVelocity = 0,
             NeedToComputeBombDrop = true,
-            ProjectileId = '/mods/SCTA-master/projectiles/CORBOMB/CORBOMB_proj.bp',
+            ProjectileId = '/mods/SCTA/projectiles/CORBOMB/CORBOMB_proj.bp',
             ProjectilesPerOnFire = 5,
             RackBones = {
                 {

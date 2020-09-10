@@ -83,7 +83,7 @@ UnitBlueprint {
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
-				EmitterBlueprint = {'/mods/SCTA-master/effects/emitters/napalm_fire_emit.bp'},
+				EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
 		},
@@ -189,7 +189,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0, 
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 20,
-            ProjectileId = '/mods/SCTA-master/projectiles/CORMABM_WEAPON/CORMABM_WEAPON_proj.bp',
+            ProjectileId = '/mods/SCTA/projectiles/CORMABM_WEAPON/CORMABM_WEAPON_proj.bp',
             ProjectileLifetimeUsesMultiplier = 1.1,
             ProjectilesPerOnFire = 3,
             RackBones = {
@@ -225,7 +225,7 @@ UnitBlueprint {
             TurretYawRange = 0,
             TurretYawSpeed = 0,
             Turreted = true,
-            WeaponUnpackAnimation = '/mods/SCTA-master/units/CORMABM/CORMABM_lod0_Aunpack.sca',
+            WeaponUnpackAnimation = '/mods/SCTA/units/CORMABM/CORMABM_lod0_Aunpack.sca',
             WeaponUnpackAnimationRate = 2,
             WeaponCategory = 'Defense',
             WeaponRepackTimeout = 1,
@@ -250,7 +250,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/CORMABM/CORMABM_dead_prop.bp',
+        Blueprint = '/mods/SCTA/units/CORMABM/CORMABM_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Seabed = true,

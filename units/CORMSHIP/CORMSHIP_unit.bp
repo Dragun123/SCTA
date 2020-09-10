@@ -71,15 +71,15 @@ UnitBlueprint {
 		DestructionEmitters = {
 			{
 				EmitterBone = {'stand','gun','CORMSHIP'},
-				EmitterBlueprint = {'/mods/SCTA-master/effects/emitters/napalm_fire_emit.bp'},
+				EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
 			{
 				EmitterBone = {'dish','door1a', 'door2b'},
 				EmitterBlueprint = {
-	    				'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-			    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+	    				'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
+			    		'/mods/SCTA/effects/emitters/terran_missile_hit_03_emit.bp',
+    					'/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp',
 				},
 				EmitterSize = 0.35,
 			},
@@ -95,7 +95,7 @@ UnitBlueprint {
             },
         },
 	MovementEffects = {
-		Emitter = '/mods/SCTA-master/effects/emitters/wake_emit.bp',
+		Emitter = '/mods/SCTA/effects/emitters/wake_emit.bp',
 		Scale = 0.5,
 		Bones = {'wake1','wake2'},
 	},
@@ -183,7 +183,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 0,
-            ProjectileId = '/mods/SCTA-master/projectiles/CORMSHIP_ROCKET/CORMSHIP_ROCKET_proj.bp',
+            ProjectileId = '/mods/SCTA/projectiles/CORMSHIP_ROCKET/CORMSHIP_ROCKET_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
@@ -245,7 +245,7 @@ UnitBlueprint {
             TargetRestrictDisallow = 'UNTARGETABLE, UNDERWATER',
 	    WeaponUnpacks = true,
             WeaponRepackTimeout = 3,
-            WeaponUnpackAnimation = '/mods/SCTA-master/units/CORMSHIP/CORMSHIP_lod0_runpack.sca',
+            WeaponUnpackAnimation = '/mods/SCTA/units/CORMSHIP/CORMSHIP_lod0_runpack.sca',
             WeaponUnpackAnimationRate = 1,
             WeaponUnpackTimeout = 1,
         },
@@ -275,7 +275,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 35,
-            ProjectileId = '/mods/SCTA-master/projectiles/CORSHIP_MISSILE/CORSHIP_MISSILE_proj.bp',
+            ProjectileId = '/mods/SCTA/projectiles/CORSHIP_MISSILE/CORSHIP_MISSILE_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
@@ -322,7 +322,7 @@ UnitBlueprint {
             Turreted = true,
             WeaponUnpacks = true,
             WeaponRepackTimeout = 1,
-            WeaponUnpackAnimation = '/mods/SCTA-master/units/CORMSHIP/CORMSHIP_lod0_aunpack.sca',
+            WeaponUnpackAnimation = '/mods/SCTA/units/CORMSHIP/CORMSHIP_lod0_aunpack.sca',
             WeaponUnpackAnimationRate = 1,
             WeaponUnpackTimeout = 1,
         },
@@ -345,7 +345,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/CORMSHIP/CORMSHIP_dead_prop.bp',
+        Blueprint = '/mods/SCTA/units/CORMSHIP/CORMSHIP_dead_prop.bp',
         WreckageLayers = {
             Water = true,
 	    Sub = true,

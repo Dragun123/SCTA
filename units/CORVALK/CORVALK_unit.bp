@@ -102,7 +102,7 @@ UnitBlueprint {
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
-				EmitterBlueprint = {'/mods/SCTA-master/effects/emitters/napalm_fire_emit.bp'},
+				EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
 		},
@@ -117,7 +117,7 @@ UnitBlueprint {
             },
         },
 	MovementEffects = {
-		Emitter = '/mods/SCTA-master/effects/emitters/fire_smoke_emit.bp',
+		Emitter = '/mods/SCTA/effects/emitters/fire_smoke_emit.bp',
 		Scale = 1,
 		Bones = {'firepoint1','firepoint2','firepoint3','firepoint4'},
 	},

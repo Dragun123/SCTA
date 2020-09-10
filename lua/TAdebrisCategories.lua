@@ -1,4 +1,4 @@
-local DebrisPath = '/mods/SCTA-master/effects/entities/Debris/Default'
+local DebrisPath = '/mods/SCTA/effects/entities/Debris/Default'
 
 RULEDPC = {
 	Generic = {},

@@ -3,8 +3,8 @@
 #
 #Script created by Raevn
 
-local TAFactory = import('/mods/SCTA-master/lua/TAFactory.lua').TAFactory
-local TAutils = import('/mods/SCTA-master/lua/TAutils.lua')
+local TAFactory = import('/mods/SCTA/lua/TAFactory.lua').TAFactory
+local TAutils = import('/mods/SCTA/lua/TAutils.lua')
 
 CORAAP = Class(TAFactory) {
 	pauseTime = 5,

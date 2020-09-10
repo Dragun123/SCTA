@@ -106,7 +106,7 @@ UnitBlueprint {
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
-				EmitterBlueprint = {'/mods/SCTA-master/effects/emitters/napalm_fire_emit.bp'},
+				EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
 		},
@@ -117,7 +117,7 @@ UnitBlueprint {
                 {
                     LODCutoff = 230,
                     ShaderName = 'Unit', 
-		    NormalsName = '/mods/SCTA-master/textures/common/normalsTS.dds'
+		    NormalsName = '/mods/SCTA/textures/common/normalsTS.dds'
                 },
             },
         },
@@ -216,7 +216,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 100,
-            ProjectileId = '/mods/SCTA-master/projectiles/ARMVTOL_ADVMISSILE/ARMVTOL_ADVMISSILE_proj.bp',
+            ProjectileId = '/mods/SCTA/projectiles/ARMVTOL_ADVMISSILE/ARMVTOL_ADVMISSILE_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
@@ -276,7 +276,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 100,
-            ProjectileId = '/mods/SCTA-master/projectiles/ARMVTOL_ADVMISSILE2/ARMVTOL_ADVMISSILE2_proj.bp',
+            ProjectileId = '/mods/SCTA/projectiles/ARMVTOL_ADVMISSILE2/ARMVTOL_ADVMISSILE2_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
