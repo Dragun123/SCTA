@@ -3,8 +3,8 @@
 #
 #Script created by Raevn
 
-local TANecro = import('/mods/SCTA/lua/TANecro.lua').TANecro
-local TAutils = import('/mods/SCTA/lua/TAutils.lua')
+local TANecro = import('/mods/SCTAFix/lua/TANecro.lua').TANecro
+local TAutils = import('/mods/SCTAFix/lua/TAutils.lua')
 
 CORNECRO = Class(TANecro) {
 

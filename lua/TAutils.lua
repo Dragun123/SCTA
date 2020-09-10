@@ -309,7 +309,7 @@ end
 
 
 function CreateWreckage(self,overkillRatio, bp, completed, pos, orientation, health)
-	local TAWreckage = import('/mods/SCTA/lua/TAWreckage.lua').TAWreckage
+	local TAWreckage = import('/mods/SCTAFix/lua/TAWreckage.lua').TAWreckage
 	while not IsDestroyed(self) do
 		WaitSeconds(0.4)
 	end

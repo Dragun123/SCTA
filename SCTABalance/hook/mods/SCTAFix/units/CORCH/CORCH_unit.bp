@@ -1,0 +1,58 @@
+UnitBlueprint {
+    Merge = true,
+    Categories = {
+        'SELECTABLE',
+        'TECH3',
+        'ENGINEER',
+        'REPAIR',
+        'RECLAIM',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'PATROLHELPER',
+        'SHOWQUEUE',
+        'MOBILE',
+        'SELECTION',
+	'CONSTRUCTION',
+        'LAND',
+        'CORE',
+        'HOVER',
+	'LEVEL1',
+	
+	
+	
+	
+	
+    },
+    Description = 'Tech Level 3',
+    Defense = {
+        Health = 2080,
+        MaxHealth = 2080,
+        },
+    Physics = {
+        TurnRate = 51,
+        MaxSteerForce = 100,
+	RotateOnSpot = true,
+	TurnFacingRate = 51,
+    },
+    Economy = {
+        BuildCostEnergy = 3200,
+        BuildTime = 6000,
+        BuildRate = 240,
+        ProductionPerSecondEnergy = 4,
+        MaxBuildDistance = 7,
+        BuildableCategory = {
+            'BUILTBYT1HOVER CORE',
+            'BUILTBYT1SHIP CORE',
+            'BUILTBYT2SUB CORE',
+            'BUILTBYT1VEHICLE CORE',
+            'BUILTBYT2VEHICLE CORE',
+            'coralab', 
+            'corgant',
+        },
+    },
+    Intel = {
+        VisionRadius = 8,
+        WaterVisionRadius = 4, 
+    },
+    StrategicIconName = 'icon_land3_engineer',
+}

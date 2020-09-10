@@ -1,0 +1,53 @@
+UnitBlueprint {
+    Merge = true,
+    Categories = {
+        'BUILTBYT1AIR',
+        'SELECTABLE',
+        'DRAGBUILD',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'TECH2',
+	'FACTORY',
+        'RALLYPOINT',
+        'SHOWQUEUE',
+	'STRUCTURE',
+	'CONSTRUCTION',
+	'TEXTUREANIM',
+        'OVERLAYRADAR',
+        'AIR', 
+        'CONSTRUCTIONSORTDOWN',
+	'CORE',
+		'PLANT',
+	'SORTCONSTRUCTION',
+	
+	'LEVEL3',
+	
+	
+	
+    },
+    Defense = {
+        Health = 4000,
+        MaxHealth = 4000,
+    },
+        Display = {
+        UniformScale = 0.32,
+    },
+    Economy = {
+        BuildCostEnergy = 11000,
+        BuildableCategory = {
+            'AIR LEVEL1 CORE', 
+            'AIR LEVEL2 CORE',
+        },
+    },
+    LifeBarSize = 8,
+    Intel = {
+        VisionRadius = 10,
+        RadarRadius = 30,
+        FreeIntel = true,
+    },
+    SelectionSizeX = 9.9,
+    SelectionSizeZ = 6.8,
+    SizeX = 12,
+    SizeY = 5,
+    SizeZ = 12,
+}

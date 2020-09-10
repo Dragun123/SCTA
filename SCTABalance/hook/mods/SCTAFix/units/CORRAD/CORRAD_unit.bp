@@ -1,0 +1,24 @@
+UnitBlueprint {
+    Merge = true,
+    Display = {
+         Abilities = {
+      '<LOC ability_radar>Radar',
+      '<LOC ability_upgradable>Upgradeable',
+  },
+}, 
+    Economy = {
+        BuildRate = 80, 
+        MaintenanceConsumptionPerSecondEnergy = 10,
+        ProductionPerSecondEnergy = 0,
+        BuildableCategory = {
+            'corarad',
+      },
+    },
+    General = {
+	UpgradesTo = 'corarad', 
+  },
+  Intel = {
+    FreeIntel = false,
+  }, 
+  SizeY = 6,
+}

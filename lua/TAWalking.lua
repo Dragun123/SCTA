@@ -1,10 +1,10 @@
 local explosion = import('/lua/defaultexplosions.lua')
 local scenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
-local TAutils = import('/mods/SCTA/lua/TAutils.lua')
+local TAutils = import('/mods/SCTAFix/lua/TAutils.lua')
 local Game = import('/lua/game.lua')
-local TATreads = import('/mods/SCTA/lua/TATread.lua').TATreads
+local TATreads = import('/mods/SCTAFix/lua/TATread.lua').TATreads
 local util = import('/lua/utilities.lua')
-local debrisCat = import('/mods/SCTA/lua/TAdebrisCategories.lua')
+local debrisCat = import('/mods/SCTAFix/lua/TAdebrisCategories.lua')
 
 
 TAWalking = Class(TATreads) 

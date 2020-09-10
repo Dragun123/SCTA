@@ -62,7 +62,7 @@ UnitBlueprint {
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
-				EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
+				EmitterBlueprint = {'/mods/SCTAFix/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
 		},
@@ -77,12 +77,12 @@ UnitBlueprint {
             },
         },
 	IdleEffects = {
-		Emitter = '/mods/SCTA/effects/emitters/hover_wake_emit.bp',
+		Emitter = '/mods/SCTAFix/effects/emitters/hover_wake_emit.bp',
 		Scale = 0.5,
 		Bones = {'Wake_01','Wake_02','Wake_03','Wake_04'},
 	},
 	MovementEffects = {
-		Emitter = '/mods/SCTA/effects/emitters/hover_wake_emit.bp',
+		Emitter = '/mods/SCTAFix/effects/emitters/hover_wake_emit.bp',
 		Scale = 0.5,
 		Bones = {'Wake_01','Wake_02','Wake_03','Wake_04'},
 	},
@@ -174,7 +174,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 21.875,
-            ProjectileId = '/mods/SCTA/projectiles/ARMANAC_WEAPON/ARMANAC_WEAPON_proj.bp',
+            ProjectileId = '/mods/SCTAFix/projectiles/ARMANAC_WEAPON/ARMANAC_WEAPON_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
@@ -226,7 +226,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA/units/CORSNAP/CORSNAP_dead_prop.bp',
+        Blueprint = '/mods/SCTAFix/units/CORSNAP/CORSNAP_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Water = true,

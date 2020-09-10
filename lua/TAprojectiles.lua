@@ -1,10 +1,10 @@
 local SinglePolyTrailProjectile = import('/lua/sim/Defaultprojectiles.lua').SinglePolyTrailProjectile
-local TAutils = import('/mods/SCTA/lua/TAutils.lua')
+local TAutils = import('/mods/SCTAFix/lua/TAutils.lua')
 
 TAProjectile = Class(SinglePolyTrailProjectile) {
 	Smoke = false,
 
-	FxSmoke = '/mods/SCTA/effects/emitters/smoke_emit.bp',
+	FxSmoke = '/mods/SCTAFix/effects/emitters/smoke_emit.bp',
 	FxSmokeScale = 1,
 
 	PolyTrail =  '/effects/emitters/aeon_laser_trail_02_emit.bp',
@@ -96,23 +96,23 @@ TAProjectile = Class(SinglePolyTrailProjectile) {
 TANuclearProjectile = Class(TAProjectile) {
 	Smoke = true,
 	FxImpactAirUnit = {
-		'/mods/SCTA/effects/emitters/COMBOOM_emit.bp',
+		'/mods/SCTAFix/effects/emitters/COMBOOM_emit.bp',
 	},
 	FxAirUnitHitScale = 15,
 	FxImpactShield = {
-		'/mods/SCTA/effects/emitters/COMBOOM_emit.bp',
+		'/mods/SCTAFix/effects/emitters/COMBOOM_emit.bp',
 	},
 	FxShieldHitScale = 15,
 	FxImpactUnit = {
-		'/mods/SCTA/effects/emitters/COMBOOM_emit.bp',
+		'/mods/SCTAFix/effects/emitters/COMBOOM_emit.bp',
 	},
 	FxUnitHitScale = 15,
 	FxImpactProp = {
-		'/mods/SCTA/effects/emitters/COMBOOM_emit.bp',
+		'/mods/SCTAFix/effects/emitters/COMBOOM_emit.bp',
 	},
 	FxPropHitScale = 15,
 	FxImpactLand = {
-		'/mods/SCTA/effects/emitters/COMBOOM_emit.bp',
+		'/mods/SCTAFix/effects/emitters/COMBOOM_emit.bp',
 	},
 	FxLandHitScale = 15,
 	FxImpactWater = {
@@ -122,9 +122,9 @@ TANuclearProjectile = Class(TAProjectile) {
 	},
     	FxWaterHitScale = 15,
 	    FxImpactProjectile = {
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_03_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_03_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_04_emit.bp',
 	},
 	FxProjectileHitScale = 1.5,
     
@@ -135,23 +135,23 @@ TANuclearProjectile = Class(TAProjectile) {
 TAEMPNuclearProjectile = Class(TAProjectile) {
 	Smoke = true,
 	FxImpactAirUnit = {
-		'/mods/SCTA/effects/emitters/EMPBOOM_emit.bp',
+		'/mods/SCTAFix/effects/emitters/EMPBOOM_emit.bp',
 	},
 	FxAirUnitHitScale = 15,
 	FxImpactShield = {
-		'/mods/SCTA/effects/emitters/EMPBOOM_emit.bp',
+		'/mods/SCTAFix/effects/emitters/EMPBOOM_emit.bp',
 	},
 	FxShieldHitScale = 15,
 	FxImpactUnit = {
-		'/mods/SCTA/effects/emitters/EMPBOOM_emit.bp',
+		'/mods/SCTAFix/effects/emitters/EMPBOOM_emit.bp',
 	},
 	FxUnitHitScale = 15,
 	FxImpactProp = {
-		'/mods/SCTA/effects/emitters/EMPBOOM_emit.bp',
+		'/mods/SCTAFix/effects/emitters/EMPBOOM_emit.bp',
 	},
 	FxPropHitScale = 15,
 	FxImpactLand = {
-		'/mods/SCTA/effects/emitters/EMPBOOM_emit.bp',
+		'/mods/SCTAFix/effects/emitters/EMPBOOM_emit.bp',
 	},
 	FxLandHitScale = 15,
 	FxImpactWater = {
@@ -161,9 +161,9 @@ TAEMPNuclearProjectile = Class(TAProjectile) {
 	},
     	FxWaterHitScale = 15,
 	    FxImpactProjectile = {
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_03_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_03_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_04_emit.bp',
 	},
 	FxProjectileHitScale = 1.5,
     
@@ -173,43 +173,43 @@ TAEMPNuclearProjectile = Class(TAProjectile) {
 
 TAHeavyCannonProjectile = Class(TAProjectile) {
 	FxImpactAirUnit = {
-		'/mods/SCTA/effects/emitters/napalm_fire_emit.bp',
-		'/mods/SCTA/effects/emitters/napalm_03_emit.bp',
-		'/mods/SCTA/effects/emitters/napalm_03_emit.bp',
-		'/mods/SCTA/effects/emitters/napalm_03_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_fire_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_03_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_03_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_03_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
 	},
 	FxAirUnitHitScale = 2,
 	FxImpactShield = {
-		'/mods/SCTA/effects/emitters/napalm_fire_emit.bp',
-		'/mods/SCTA/effects/emitters/napalm_03_emit.bp',
-		'/mods/SCTA/effects/emitters/napalm_03_emit.bp',
-		'/mods/SCTA/effects/emitters/napalm_03_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_fire_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_03_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_03_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_03_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
 	},
 	FxShieldHitScale = 2,
 	FxImpactUnit = {
-		'/mods/SCTA/effects/emitters/napalm_fire_emit.bp',
-		'/mods/SCTA/effects/emitters/napalm_03_emit.bp',
-		'/mods/SCTA/effects/emitters/napalm_03_emit.bp',
-		'/mods/SCTA/effects/emitters/napalm_03_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_fire_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_03_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_03_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_03_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
 	},
 	FxUnitHitScale = 2,
 	FxImpactProp = {
-		'/mods/SCTA/effects/emitters/napalm_fire_emit.bp',
-		'/mods/SCTA/effects/emitters/napalm_03_emit.bp',
-		'/mods/SCTA/effects/emitters/napalm_03_emit.bp',
-		'/mods/SCTA/effects/emitters/napalm_03_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_fire_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_03_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_03_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_03_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
 	},
 	FxPropHitScale = 2,
 	FxImpactLand = {
-		'/mods/SCTA/effects/emitters/napalm_fire_emit.bp',
-		'/mods/SCTA/effects/emitters/napalm_03_emit.bp',
-		'/mods/SCTA/effects/emitters/napalm_03_emit.bp',
-		'/mods/SCTA/effects/emitters/napalm_03_emit.bp',
-    	'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_fire_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_03_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_03_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_03_emit.bp',
+    	'/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
 	},
 	FxLandHitScale = 2,
 	FxImpactWater = {
@@ -222,23 +222,23 @@ TAHeavyCannonProjectile = Class(TAProjectile) {
 
 TACannonProjectile = Class(TAProjectile) {
 	FxImpactAirUnit = {
-		'/mods/SCTA/effects/emitters/napalm_fire_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_fire_emit.bp',
 	},
 	FxAirUnitHitScale = 1.25,
 	FxImpactShield = {
-		'/mods/SCTA/effects/emitters/napalm_fire_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_fire_emit.bp',
 	},
 	FxShieldHitScale = 1.25,
 	FxImpactUnit = {
-		'/mods/SCTA/effects/emitters/napalm_fire_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_fire_emit.bp',
 	},
 	FxUnitHitScale = 1.25,
 	FxImpactProp = {
-		'/mods/SCTA/effects/emitters/napalm_fire_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_fire_emit.bp',
 	},
 	FxPropHitScale = 1.25,
 	FxImpactLand = {
-		'/mods/SCTA/effects/emitters/napalm_fire_emit.bp',
+		'/mods/SCTAFix/effects/emitters/napalm_fire_emit.bp',
 	},
 	FxLandHitScale = 1.25,
 	FxImpactWater = {
@@ -251,39 +251,39 @@ TACannonProjectile = Class(TAProjectile) {
 
 TAMediumCannonProjectile = Class(TAProjectile) {
 	FxImpactNone = {
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_03_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_03_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_04_emit.bp',
 	},
 	FxNoneHitScale = 0.35,
 	FxImpactShield = {
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_03_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_03_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_04_emit.bp',
 	},
 	FxShieldHitScale = 0.35,
 	FxImpactUnit = {
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_03_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_03_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_04_emit.bp',
 	},
 	FxUnitHitScale = 0.35,
 	FxImpactAirUnit = {
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_03_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_03_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_04_emit.bp',
 	},
 	FxAirUnitHitScale = 0.35,
 	FxImpactProp = {
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_03_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_03_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_04_emit.bp',
 	},
 	FxPropHitScale = 0.35,
 	FxImpactLand = {
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_03_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_03_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_04_emit.bp',
 	},
 	FxLandHitScale = 0.35,
 	FxImpactWater = {
@@ -296,23 +296,23 @@ TAMediumCannonProjectile = Class(TAProjectile) {
 
 TALightCannonProjectile = Class(TAProjectile) {
 	FxImpactAirUnit = {
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_04_emit.bp',
 	},
 	FxAirUnitHitScale = 0.25,
 	FxImpactShield = {
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_04_emit.bp',
 	},
 	FxShieldHitScale = 0.25,
 	FxImpactUnit = {
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_04_emit.bp',
 	},
 	FxUnitHitScale = 0.25,
 	FxImpactProp = {
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_04_emit.bp',
 	},
 	FxPropHitScale = 0.25,
 	FxImpactLand = {
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_04_emit.bp',
 	},
 	FxLandHitScale = 0.25,
 	FxImpactWater = {
@@ -333,9 +333,9 @@ TAMissileProjectile = Class(TAMediumCannonProjectile) {
 
 TAAntiNukeProjectile = Class(TAMissileProjectile) {
 	FxImpactProjectile = {
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_03_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_03_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_04_emit.bp',
 	},
 	FxProjectileHitScale = 1.5,
 }
@@ -343,23 +343,23 @@ TAAntiNukeProjectile = Class(TAMissileProjectile) {
 TALaserProjectile = Class(TAProjectile) {
 
 	FxImpactAirUnit = {
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
 	},
 	FxAirUnitHitScale = 0.25,
 	FxImpactShield = {
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
 	},
 	FxShieldHitScale = 0.25,
 	FxImpactUnit = {
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
 	},
 	FxUnitHitScale = 0.25,
 	FxImpactProp = {
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
 	},
 	FxPropHitScale = 0.25,
 	FxImpactLand = {
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
 	},
 	FxLandHitScale = 0.25,
 	FxImpactWater = {
@@ -406,10 +406,10 @@ TAUnderWaterProjectile = Class(TAMediumCannonProjectile) {
 	},
 
 	FxImpactUnderWater = {
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_03_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_03_emit.bp',
-    		'/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_03_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_03_emit.bp',
+    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_04_emit.bp',
 	},
 	FxUnderWaterHitScale = 0.35,
 	FxImpactWater = {

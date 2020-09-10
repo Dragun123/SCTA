@@ -18,7 +18,7 @@ ProjectileBlueprint {
 	'DISINTEGRATOR',
     },
     Display = {
-        MeshBlueprint = '/mods/SCTA/meshes/projectiles/dgun_mesh.bp',
+        MeshBlueprint = '/mods/SCTAFix/meshes/projectiles/dgun_mesh.bp',
         UniformScale = 0.16,
         StrategicIconSize = 1,
     },

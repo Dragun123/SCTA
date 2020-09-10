@@ -12,9 +12,9 @@ PropBlueprint {
             LODs = {
                 {
                     LODCutoff = 230,
-		    NormalName = '/mods/SCTA/meshes/wrecks/Wreck_NormalsTS.dds',
-		    SpecularName = '/mods/SCTA/meshes/wrecks/Wreck_SpecTeam.dds',
-		    AlbedoName = '/mods/SCTA/meshes/wrecks/Wreck_Albedo.dds',
+		    NormalName = '/mods/SCTAFix/meshes/wrecks/Wreck_NormalsTS.dds',
+		    SpecularName = '/mods/SCTAFix/meshes/wrecks/Wreck_SpecTeam.dds',
+		    AlbedoName = '/mods/SCTAFix/meshes/wrecks/Wreck_Albedo.dds',
 		    MeshName = 'CORALAB_dead_lod0.scm',
                     ShaderName = 'Unit', 
                 },
@@ -39,10 +39,10 @@ PropBlueprint {
         BlockPath = false, 
     },
     Wreckage = {
-	Blueprint = '/mods/SCTA/units/CORALAB/CORALAB_heap_prop.bp',
+	Blueprint = '/mods/SCTAFix/units/CORALAB/CORALAB_heap_prop.bp',
     },
     ScriptClass = 'TAWreckage',
-    ScriptModule = '/mods/SCTA/lua/TAWreckage.lua',
+    ScriptModule = '/mods/SCTAFix/lua/TAWreckage.lua',
     SizeX = 5,
     SizeY = 2.5,
     SizeZ = 6,

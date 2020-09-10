@@ -44,7 +44,7 @@ ProjectileBlueprint {
     },
     Display = {
 	#TODO: corshiprckt1
-        MeshBlueprint = '/mods/SCTA/meshes/projectiles/corshiprckt1_mesh.bp',
+        MeshBlueprint = '/mods/SCTAFix/meshes/projectiles/corshiprckt1_mesh.bp',
         StrategicIconSize = 1,
         UniformScale = 0.16,
     },

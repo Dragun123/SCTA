@@ -1,0 +1,13 @@
+PropBlueprint {
+    Merge = true, 
+    Display = {
+        UniformScale = 0.10,
+    },
+    Footprint = {
+        SizeX = 1,
+        SizeZ = 1,
+    },
+    SizeX = 1,
+    SizeY = 1.25,
+    SizeZ = 1,
+}

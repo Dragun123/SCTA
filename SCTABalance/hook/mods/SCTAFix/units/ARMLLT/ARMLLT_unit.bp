@@ -1,0 +1,22 @@
+UnitBlueprint {
+    Merge = true,
+    Display = {
+        UniformScale = 0.08,
+    },
+    Footprint = {
+        SizeX = 1,
+        SizeZ = 1,
+	    MaxSlope = 0.875,
+    },
+    Physics = {
+        SkirtSizeX = 1, 
+        SkirtSizeZ = 1,  
+    },
+    Intel = {
+        VisionRadius = 12,
+    },
+    SelectionCenterOffsetZ = 0,
+    SizeX = 1,
+    SizeY = 3.5,
+    SizeZ = 1,
+}

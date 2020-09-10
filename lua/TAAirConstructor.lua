@@ -1,6 +1,6 @@
-local TAair = import('/mods/SCTA/lua/TAair.lua').TAair
+local TAair = import('/mods/SCTAFix/lua/TAair.lua').TAair
 local Unit = import('/lua/sim/Unit.lua').Unit
-local TAutils = import('/mods/SCTA/lua/TAutils.lua')
+local TAutils = import('/mods/SCTAFix/lua/TAutils.lua')
 
 TAAirConstructor = Class(TAair) {
 	currentState = "closed",
@@ -251,10 +251,10 @@ TAAirConstructor = Class(TAair) {
 						local bp
 						if (self.isBuilding == true) then
 							bp = self:GetBlueprint().Display.BuildEmitter or 'nanolathe.bp'
-							CreateEmitterAtBone(self, v, self:GetArmy(), '/mods/SCTA/effects/emitters/' .. bp ):ScaleEmitter(0.1):SetEmitterCurveParam('LIFETIME_CURVE',time,0)
+							CreateEmitterAtBone(self, v, self:GetArmy(), '/mods/SCTAFix/effects/emitters/' .. bp ):ScaleEmitter(0.1):SetEmitterCurveParam('LIFETIME_CURVE',time,0)
 						else
 							bp = self:GetBlueprint().Display.ReclaimEmitter or 'reclaimnanolathe.bp'
-							CreateEmitterAtBone(self, v, self:GetArmy(), '/mods/SCTA/effects/emitters/' .. bp ):ScaleEmitter(0.1):SetEmitterCurveParam('LIFETIME_CURVE',time,0):SetEmitterCurveParam('Z_POSITION_CURVE',distance * 10,0)
+							CreateEmitterAtBone(self, v, self:GetArmy(), '/mods/SCTAFix/effects/emitters/' .. bp ):ScaleEmitter(0.1):SetEmitterCurveParam('LIFETIME_CURVE',time,0):SetEmitterCurveParam('Z_POSITION_CURVE',distance * 10,0)
 						end
 						
 

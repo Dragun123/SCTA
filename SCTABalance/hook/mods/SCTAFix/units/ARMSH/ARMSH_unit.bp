@@ -1,0 +1,33 @@
+UnitBlueprint {
+   Merge = true,
+   Categories = {
+    'SELECTABLE',
+    'TECH3',
+    'VISIBLETORECON',
+    'RECLAIMABLE',
+    'MOBILE',
+'SCOUT',
+    'OVERLAYDIRECTFIRE',
+    'OVERLAYRADAR',
+    'OVERLAYOMNI',
+    'LAND',
+    'ARM',
+    'HOVER',
+'LEVEL1',
+
+
+
+},
+    Display = {
+       Abilities = {
+        '<LOC ability_radar>Radar',
+        '<LOC ability_omni>Omni Sensor',
+        },
+    },
+    Intel = {
+        RadarRadius = 80,
+        VisionRadius = 14,
+        OmniRadius = 25,
+    },
+    StrategicIconName = 'icon_land3_intel',
+}

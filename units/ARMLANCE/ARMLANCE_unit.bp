@@ -103,7 +103,7 @@ UnitBlueprint {
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
-				EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
+				EmitterBlueprint = {'/mods/SCTAFix/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
 		},
@@ -114,7 +114,7 @@ UnitBlueprint {
                 {
                     LODCutoff = 230,
                     ShaderName = 'Unit', 
-		    NormalsName = '/mods/SCTA/textures/common/normalsTS.dds'
+		    NormalsName = '/mods/SCTAFix/textures/common/normalsTS.dds'
                 },
             },
         },
@@ -210,7 +210,7 @@ UnitBlueprint {
                 MuzzleSalvoDelay = 1.8,
                 MuzzleSalvoSize = 1,
                 MuzzleVelocity = 0,
-                ProjectileId = '/mods/SCTA/projectiles/ARMAIR_TORPEDO/ARMAIR_TORPEDO_proj.bp',
+                ProjectileId = '/mods/SCTAFix/projectiles/ARMAIR_TORPEDO/ARMAIR_TORPEDO_proj.bp',
                 ProjectileLifetime = 20,
                 ProjectilesPerOnFire = 1,
                 RackBones = {

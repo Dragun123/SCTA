@@ -1,0 +1,11 @@
+#CORE Silencer - Nuclear Missile Launcher
+#CORSILO
+#
+#Blueprint created by Raevn
+
+UnitBlueprint {
+    Merge = true, 
+    Economy = {
+        BuildRate = 150,
+    },
+}

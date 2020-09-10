@@ -3,8 +3,8 @@
 #
 #Script created by Raevn
 
-local TAWalking = import('/mods/SCTA/lua/TAWalking.lua').TAWalking
-local TAweapon = import('/mods/SCTA/lua/TAweapon.lua').TAweapon
+local TAWalking = import('/mods/SCTAFix/lua/TAWalking.lua').TAWalking
+local TAweapon = import('/mods/SCTAFix/lua/TAweapon.lua').TAweapon
 
 CORAK = Class(TAWalking) {
 	

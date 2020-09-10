@@ -1,0 +1,34 @@
+UnitBlueprint {
+    Merge = true,
+    Defense = {
+        ArmorType = 'Structure',
+        Health = 800,
+        MaxHealth = 800,
+    },
+    Display = {
+    Abilities = {
+        '<LOC ability_upgradable>Upgradeable',
+    },
+  },  
+      Economy = {
+        BuildRate = 120,
+        BuildCostMass = 50,
+        MaintenanceConsumptionPerSecondEnergy = 2,
+        BuildableCategory = {
+               'armmoho',
+        },
+    },
+    General = {
+        UpgradesTo = 'armmoho',
+    },
+    Physics = {
+        SkirtOffsetX = 0,
+        SkirtOffsetZ = 0,
+        SkirtSizeX = 0,
+        SkirtSizeZ = 0,
+    },
+    SelectionSizeX = 1.3,
+    SelectionSizeZ = 1.3,
+    SizeX = 1.5,
+    SizeZ = 1.5,
+}

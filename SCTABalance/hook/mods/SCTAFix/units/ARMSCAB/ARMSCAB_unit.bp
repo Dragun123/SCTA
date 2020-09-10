@@ -1,0 +1,35 @@
+UnitBlueprint {
+    Merge = true, 
+    Categories = {
+        'SELECTABLE',
+        'TECH2',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'MOBILE',
+	'LAND',
+	'ANTIAIR',
+        'ARM',
+        'BUILTBYT2KBOT',
+	'LEVEL2',
+    'OVERLAYDEFENSE',
+    'SORTDEFENSE',
+	
+	
+	
+    },
+    Display = {
+        UniformScale = 0.06,
+    },
+    Footprint = {
+        SizeX = 3,
+        SizeZ = 3,
+    },
+    Economy = {
+        BuildCostEnergy = 12000,
+        BuildCostMass = 800,
+        BuildTime = 10000,
+    },
+    SizeX = 4,
+    SizeY = 2,
+    SizeZ = 4,
+}

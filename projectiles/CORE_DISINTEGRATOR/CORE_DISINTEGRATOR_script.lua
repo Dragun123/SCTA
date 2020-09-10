@@ -3,7 +3,7 @@
 #
 #Script created by Raevn
 
-local TALightCannonProjectile = import('/mods/SCTA/lua/TAProjectiles.lua').TALightCannonProjectile
+local TALightCannonProjectile = import('/mods/SCTAFix/lua/TAProjectiles.lua').TALightCannonProjectile
 
 CORE_DISINTEGRATOR = Class(TALightCannonProjectile) {
 	OnCreate = function(self)
@@ -20,7 +20,7 @@ CORE_DISINTEGRATOR = Class(TALightCannonProjectile) {
 				DamageArea(self, pos, 1.5, 99999, 'DGun', true)
 				self:SetPosition(pos, true)
 				self:PlaySound(Sound({Cue = 'XPLOMAS2', Bank = 'TA_Sound', LodCutoff = 'Weapon_LodCutoff'}))
-				CreateEmitterAtEntity(self, self:GetArmy(), '/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp' ):ScaleEmitter(0.5)
+				CreateEmitterAtEntity(self, self:GetArmy(), '/mods/SCTAFix/effects/emitters/terran_missile_hit_04_emit.bp' ):ScaleEmitter(0.5)
 			end
 			WaitSeconds(0.1)
 		end

@@ -1,0 +1,49 @@
+UnitBlueprint {
+    Merge = true,
+    Categories = {
+        'BUILTBYT1KBOT',
+        'SELECTABLE',
+        'DRAGBUILD',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'TECH2',
+	'FACTORY',
+        'RALLYPOINT',
+        'SHOWQUEUE',
+	'STRUCTURE',
+	'CONSTRUCTION',
+        'LAND',
+        'CONSTRUCTIONSORTDOWN',
+	'CORE',
+		'PLANT',
+	'SORTCONSTRUCTION',
+	'LEVEL2',
+	
+	
+	
+	
+    },
+    Defense = {
+        Health = 4300,
+        MaxHealth = 4300,
+    },
+        Display = {
+        UniformScale = 0.32,
+    },
+    Economy = {
+        BuildCostEnergy = 8000,
+        BuildableCategory = {
+            'KBOT LEVEL1 CORE', 
+            'KBOT LEVEL2 CORE',
+        },
+    },
+    LifeBarSize = 8,
+    Intel = {
+        VisionRadius = 10,
+    },
+    SelectionSizeX = 9.9,
+    SelectionSizeZ = 6.8,
+    SizeX = 12,
+    SizeY = 5,
+    SizeZ = 12,
+}

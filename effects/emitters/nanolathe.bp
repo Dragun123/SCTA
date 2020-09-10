@@ -23,8 +23,8 @@ EmitterBlueprint {
 	LowFidelity = true,
 	MedFidelity = true,
 	HighFidelity = true,
-	Texture = [[/mods/SCTA/textures/particles/nano.dds]],
-	RampTexture = [[/mods/SCTA/textures/particles/ramp_nano.dds]],
+	Texture = [[/mods/SCTAFix/textures/particles/nano.dds]],
+	RampTexture = [[/mods/SCTAFix/textures/particles/ramp_nano.dds]],
 	XDirectionCurve = {
 		XRange = 50.00,
 		Keys = {

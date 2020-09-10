@@ -1,0 +1,47 @@
+UnitBlueprint {
+    Merge = true,
+  Categories = {
+        'BUILTBYT1AIR',
+        'BUILTBYT1KBOT',
+        'BUILTBYT1VEHICLE',
+        'BUILTBYT1HOVER',
+        'SELECTABLE',
+        'DRAGBUILD',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'TECH2',
+	'STRUCTURE',
+        'MASSPRODUCTION',
+        'ECONOMIC',
+	'TEXTUREANIM',
+	'ARM',
+	'ENERGY',
+	'LEVEL2',
+	'SORTECONOMY',
+	
+	
+	'STORAGE',
+    },
+    Defense = {
+        Health = 1400,
+        MaxHealth = 1400,
+        },
+    Footprint = {
+        SizeX = 1,
+        SizeZ = 1,
+    },
+    Economy = {
+        BuildCostEnergy = 18000,
+        BuildCostMass = 1900,
+        BuildTime = 15000,
+        ProductionPerSecondMass = 3,
+	MaintenanceConsumptionPerSecondEnergy = 75,
+    },
+    Physics = {
+        SkirtSizeX = 0, 
+        SkirtSizeZ = 0, 
+    },
+    SizeX = 2,
+    SizeY = 2,
+    SizeZ = 2,
+}

@@ -3,9 +3,9 @@
 #
 #Script created by Raevn
 
-local TAnoassistbuild = import('/mods/SCTA/lua/TAnoassistbuild.lua').TAnoassistbuild
+local TAnoassistbuild = import('/mods/SCTAFix/lua/TAnoassistbuild.lua').TAnoassistbuild
 local DefaultWeapon = import('/lua/sim/DefaultWeapons.lua').DefaultProjectileWeapon
-local TAweapon = import('/mods/SCTA/lua/TAweapon.lua').TAweapon
+local TAweapon = import('/mods/SCTAFix/lua/TAweapon.lua').TAweapon
 
 ARMAMD = Class(TAnoassistbuild) {
 

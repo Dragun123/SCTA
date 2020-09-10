@@ -38,7 +38,7 @@ ProjectileBlueprint {
 	'ANTIMISSILE',
     },
     Display = {
-        MeshBlueprint = '/mods/SCTA/meshes/projectiles/amdrocket_mesh.bp',
+        MeshBlueprint = '/mods/SCTAFix/meshes/projectiles/amdrocket_mesh.bp',
         StrategicIconSize = 1,
         UniformScale = 0.16,
     },

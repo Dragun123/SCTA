@@ -3,8 +3,8 @@
 #
 #Script created by Raevn
 
-local TAunit = import('/mods/SCTA/lua/TAunit.lua').TAunit
-local TAweapon = import('/mods/SCTA/lua/TAweapon.lua').TAweapon
+local TAunit = import('/mods/SCTAFix/lua/TAunit.lua').TAunit
+local TAweapon = import('/mods/SCTAFix/lua/TAweapon.lua').TAweapon
 
 CORAH = Class(TAunit) {
 	Weapons = {

@@ -1,0 +1,64 @@
+UnitBlueprint {
+    Merge = true,
+    Categories = {
+        'BUILTBYT1SHIP',
+	'BUILTBYT1KBOT',
+	'BUILTBYT1VEHICLE',
+	'BUILTBYT1AIR',
+        'BUILTBYT1HOVER',
+        'BUILTBYT2SUB',
+	'BUILTBYCOMMANDER',
+        'SELECTABLE',
+        'DRAGBUILD',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'TECH1',
+	'FACTORY',
+        'RALLYPOINT',
+        'SHOWQUEUE',
+	'STRUCTURE',
+	'CONSTRUCTION',
+	'NAVAL',
+	'TEXTUREANIM',
+	'CORE',
+		'PLANT',
+	'SORTCONSTRUCTION',
+	
+	'LEVEL1',
+	
+	
+	
+    },
+    Defense = {
+        Health = 4200,
+        MaxHealth = 4200,
+    },
+        Display = {
+                Abilities = {
+                    '<LOC ability_upgradable>Upgradeable',
+                },
+        UniformScale = 0.32,
+    },
+    Economy = {
+        BuildCostEnergy = 4800,
+        BuildRate = 125,
+        BuildableCategory = {
+            'SHIP LEVEL1 CORE',
+            'NORMALSUB LEVEL1 CORE',
+            'cordsy',
+        },
+    },
+    LifeBarSize = 8,
+    General = {
+        UpgradesTo = 'cordsy', 
+    },
+    Intel = {
+        VisionRadius = 10,
+        WaterVisionRadius = 6,
+    },
+    SelectionSizeX = 9.9,
+    SelectionSizeZ = 6.8,
+    SizeX = 12,
+    SizeY = 5,
+    SizeZ = 12,
+}

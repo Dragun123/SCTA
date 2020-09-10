@@ -1,0 +1,60 @@
+UnitBlueprint {
+    Merge = true,
+    Categories = {
+        'BUILTBYT2VEHICLE',
+        'BUILTBYT1VEHICLE',
+        'BUILTBYT1KBOT',
+        'BUILTBYT1AIR',
+        'BUILTBYT1HOVER',
+        'BUILTBYCOMMANDER',
+        'SELECTABLE',
+        'DRAGBUILD',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'TECH1',
+	'FACTORY',
+        'RALLYPOINT',
+        'SHOWQUEUE',
+	'STRUCTURE',
+	'CONSTRUCTION',
+        'LAND',
+	'ARM',
+		'PLANT',
+	'SORTCONSTRUCTION',
+	
+	'LEVEL1',
+	
+	
+	
+    },
+    Defense = {
+        Health = 2000,
+        MaxHealth = 2000,
+    },
+        Display = {
+            Abilities = {
+                '<LOC ability_upgradable>Upgradeable',
+            },
+        UniformScale = 0.32,
+    },
+    Economy = {
+        BuildCostEnergy = 4200,
+        BuildRate = 75,
+        BuildableCategory = {
+            'armdvp',
+            'VEHICLE LEVEL1 ARM',
+        },
+    },
+    LifeBarSize = 8,
+    General = {
+        UpgradesTo = 'armdvp', 
+    },
+    Intel = {
+        VisionRadius = 10,
+    },
+    SelectionSizeX = 9.9,
+    SelectionSizeZ = 6.8,
+    SizeX = 12,
+    SizeY = 5,
+    SizeZ = 12,
+ }

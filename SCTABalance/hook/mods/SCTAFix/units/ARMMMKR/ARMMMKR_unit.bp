@@ -1,0 +1,20 @@
+UnitBlueprint {
+    Merge = true,
+    Display = {
+            UniformScale = 0.32,
+        },
+    Footprint = {
+          SizeX = 3,
+          SizeZ = 3,
+      },
+      Intel = {
+        VisionRadius = 10,
+    },
+      LifeBarSize = 4,
+    Economy = {
+        BuildCostEnergy = 12000,
+        BuildCostMass = 6000,
+        ProductionPerSecondMass = 10,
+	MaintenanceConsumptionPerSecondEnergy = 400,
+  },
+}

@@ -3,8 +3,8 @@
 #
 #Script created by Raevn
 
-local TAnoassistbuild = import('/mods/SCTA/lua/TAnoassistbuild.lua').TAnoassistbuild
-local TAweapon = import('/mods/SCTA/lua/TAweapon.lua').TAweapon
+local TAnoassistbuild = import('/mods/SCTAFix/lua/TAnoassistbuild.lua').TAnoassistbuild
+local TAweapon = import('/mods/SCTAFix/lua/TAweapon.lua').TAweapon
 
 CORFMD = Class(TAnoassistbuild) {
 	currentRound = 1,

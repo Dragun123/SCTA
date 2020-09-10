@@ -1,0 +1,25 @@
+#ARM Zeus - Assault Kbot
+#ARMZEUS
+#
+#Blueprint created by Raevn
+
+UnitBlueprint {
+   Merge = true,
+   BuildIconSortPriority = 13,
+    Defense = {
+        Health = 6000,
+        MaxHealth = 6000,
+    },
+    Footprint = {
+	SizeX = 1,
+	SizeZ = 1,
+    },
+    Intel = {
+        VisionRadius = 12,
+    },
+    Economy = {
+        BuildCostEnergy = 20000,
+        BuildCostMass = 2000,
+        BuildTime = 29000,
+    },
+}

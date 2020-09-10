@@ -1,0 +1,49 @@
+UnitBlueprint {
+    Merge = true,
+    Categories = {
+        'BUILTBYT1HOVER',
+        'BUILTBYT2VEHICLE',
+        'BUILTBYT2KBOT',
+        'BUILTBYT2AIR',
+        'BUILTBYT2SUB',
+        'SELECTABLE',
+        'DRAGBUILD',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'TECH3',
+	'FACTORY',
+        'RALLYPOINT',
+        'SHOWQUEUE',
+        'SELECTION',
+	'STRUCTURE',
+	'CONSTRUCTION',
+        'NAVAL', 
+	'ARM',
+		'PLANT',
+	'SORTCONSTRUCTION',
+	'LEVEL2',
+	
+	
+	
+	
+    },
+    Defense = {
+        Health = 4000,
+        MaxHealth = 4000,
+    },
+        Display = {
+        UniformScale = 0.32,
+    },
+    Economy = {
+        BuildRate = 250,
+        BuildCostEnergy = 6000,
+        BuildCostMass = 3000, 
+    },
+    LifeBarSize = 8,
+    SelectionSizeX = 9.9,
+    SelectionSizeZ = 6.8,
+    SizeX = 12,
+    SizeY = 5,
+    SizeZ = 12,
+    StrategicIconName = 'icon_factory3_naval',
+ }

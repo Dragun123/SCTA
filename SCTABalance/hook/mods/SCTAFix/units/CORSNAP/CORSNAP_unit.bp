@@ -1,0 +1,112 @@
+UnitBlueprint {
+    Merge = true,
+    Categories = {
+        'SELECTABLE',
+        'TECH3',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'MOBILE',
+	'DIRECTFIRE',
+        'LAND',
+        'CORE',
+        'HOVER',
+	
+	'LEVEL1',
+	
+	
+	
+    },
+    Defense = {
+        Health = 9000,
+        MaxHealth = 9000,
+        SurfaceThreatLevel = 12,
+    },
+    Economy = {
+        BuildCostEnergy = 14000,
+        BuildCostMass = 2100,
+        BuildTime = 32000,
+    },
+    Footprint = {
+	MaxSlope = 1,
+        SizeX = 1,
+        SizeZ = 1,
+    },
+    StrategicIconName = 'icon_land3_directfire',
+    Weapon = {
+        {
+            Audio = {
+                Fire = Sound {
+                    Bank = 'TA_Sound',
+                    Cue = 'CANLITE3',
+                    LodCutoff = 'Weapon_LodCutoff',
+                },
+            },
+            BallisticArc = 'RULEUBA_None',
+            CollideFriendly = false,
+            DamageFriendly = true,
+            Damage = 280,
+            DamageRadius = 0.5,
+            FiringRandomness = 0,
+            DamageType = 'Normal',
+            DisplayName = 'CORSNAP_WEAPON',
+            FireTargetLayerCapsTable = {
+                Land = 'Land|Water|Seabed',
+                Water = 'Land|Water|Seabed',
+            },
+	    RangeCategory = 'UWRC_DirectFire',
+            Label = 'CORSNAP_WEAPON',
+            MaxRadius = 32,
+            MuzzleSalvoDelay = 0,
+            MuzzleSalvoSize = 1,
+            MuzzleVelocity = 28,
+            ProjectileId = '/mods/SCTAFix/projectiles/ARMANAC_WEAPON/ARMANAC_WEAPON_proj.bp',
+            RackBones = {
+                {
+                    MuzzleBones = {
+                        'muzzle',
+                    },
+                    RackBone = 'recoil',
+                },
+            },
+            RackRecoilDistance = -2.4,
+            RackReloadTimeout = 0,
+            RackSalvoChargeTime = 0,
+            RackSalvoReloadTime = 0,
+            RackSalvoSize = 1,
+            RackSlavedToTurret = false,
+            RateOfFire = 1,
+            TargetCheckInterval = 1,
+            TargetPriorities = {
+                'ALLUNITS',
+            },
+            TargetRestrictDisallow = 'UNTARGETABLE, UNDERWATER',
+            TurretBoneMuzzle = 'muzzle',
+            TurretBonePitch = 'barrel',
+            TurretBoneYaw = 'turret',
+            TurretDualManipulators = false,
+            TurretPitch = 0,
+            TurretPitchRange = 360,
+            TurretPitchSpeed = 80,
+            TurretYaw = 0,
+            TurretYawRange = 360,
+            TurretYawSpeed = 170,
+            Turreted = true,
+        },
+        { #BIG_UNITEX
+            Damage = 50,
+            DamageFriendly = true,
+            DamageRadius = 3.4375,
+            DamageType = 'Normal',
+            DummyWeapon = true,
+            Label = 'DeathWeapon',
+        }, 
+        { #BIG_UNIT
+            Damage = 20,
+            DamageFriendly = true,
+            DamageRadius = 1,
+            DummyWeapon = true,
+            DamageType = 'Normal',
+            Label = 'SuicideWeapon',
+        },
+    },
+}

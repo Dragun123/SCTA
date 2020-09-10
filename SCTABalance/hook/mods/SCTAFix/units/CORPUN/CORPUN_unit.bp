@@ -1,0 +1,13 @@
+UnitBlueprint {
+    Merge = true, 
+    Physics = {
+        SkirtSizeX = 0, 
+        SkirtSizeZ = 0,  
+    },
+    SelectionSizeX = 2,
+    SelectionSizeZ = 2,
+    SelectionCenterOffsetZ = 0,
+    SizeX = 2,
+    SizeY = 2,
+    SizeZ = 2,
+}

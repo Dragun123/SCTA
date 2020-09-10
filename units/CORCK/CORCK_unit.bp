@@ -84,7 +84,7 @@ UnitBlueprint {
 		DestructionEmitters = {
 			{
 				EmitterBone = {'torso'},
-				EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
+				EmitterBlueprint = {'/mods/SCTAFix/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
 		},
@@ -96,7 +96,7 @@ UnitBlueprint {
                 {
                     LODCutoff = 230,
                     ShaderName = 'Unit', 
-		    NormalsName = '/mods/SCTA/textures/common/normalsTS.dds'
+		    NormalsName = '/mods/SCTAFix/textures/common/normalsTS.dds'
                 },
             },
         },
@@ -191,7 +191,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA/units/CORCK/CORCK_dead_prop.bp',
+        Blueprint = '/mods/SCTAFix/units/CORCK/CORCK_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Seabed = true,

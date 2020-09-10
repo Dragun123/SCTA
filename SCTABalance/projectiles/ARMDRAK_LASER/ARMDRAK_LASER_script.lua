@@ -1,5 +1,5 @@
 
-local TAMediumCannonProjectile = import('/mods/SCTA/lua/TAProjectiles.lua').TAMediumCannonProjectile
+local TAMediumCannonProjectile = import('/mods/SCTAFix/lua/TAProjectiles.lua').TAMediumCannonProjectile
 
 ARMDRAK_LASER = Class(TAMediumCannonProjectile) {
 }

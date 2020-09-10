@@ -2,10 +2,10 @@
 local Unit = import('/lua/sim/Unit.lua').Unit
 local explosion = import('/lua/defaultexplosions.lua')
 local scenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
-local TAutils = import('/mods/SCTA/lua/TAutils.lua')
+local TAutils = import('/mods/SCTAFix/lua/TAutils.lua')
 local Game = import('/lua/game.lua')
 local util = import('/lua/utilities.lua')
-local debrisCat = import('/mods/SCTA/lua/TAdebrisCategories.lua')
+local debrisCat = import('/mods/SCTAFix/lua/TAdebrisCategories.lua')
 
 
 TAunit = Class(Unit) 
@@ -198,13 +198,13 @@ TAunit = Class(Unit)
 		while not IsDestroyed(self) do
 			if self:GetFractionComplete() == 1 then
 				if self:GetHealth()/self:GetMaxHealth() < 0.25 then
-					CreateEmitterAtBone(self, bone, self:GetArmy(), '/mods/SCTA/effects/emitters/damage_bad_smoke_emit.bp' )
-					CreateEmitterAtBone(self, bone, self:GetArmy(), '/mods/SCTA/effects/emitters/damage_bad_smoke_emit.bp' )
+					CreateEmitterAtBone(self, bone, self:GetArmy(), '/mods/SCTAFix/effects/emitters/damage_bad_smoke_emit.bp' )
+					CreateEmitterAtBone(self, bone, self:GetArmy(), '/mods/SCTAFix/effects/emitters/damage_bad_smoke_emit.bp' )
 				elseif self:GetHealth()/self:GetMaxHealth() < 0.5 then
-					CreateEmitterAtBone(self, bone, self:GetArmy(), '/mods/SCTA/effects/emitters/damage_smoke_emit.bp' )
-					CreateEmitterAtBone(self, bone, self:GetArmy(), '/mods/SCTA/effects/emitters/damage_bad_smoke_emit.bp' )
+					CreateEmitterAtBone(self, bone, self:GetArmy(), '/mods/SCTAFix/effects/emitters/damage_smoke_emit.bp' )
+					CreateEmitterAtBone(self, bone, self:GetArmy(), '/mods/SCTAFix/effects/emitters/damage_bad_smoke_emit.bp' )
 				elseif self:GetHealth()/self:GetMaxHealth() < 0.75 then
-					CreateEmitterAtBone(self, bone, self:GetArmy(), '/mods/SCTA/effects/emitters/damage_smoke_emit.bp' )
+					CreateEmitterAtBone(self, bone, self:GetArmy(), '/mods/SCTAFix/effects/emitters/damage_smoke_emit.bp' )
 				end
 			end
 			WaitSeconds(0.5)
@@ -283,7 +283,7 @@ TAunit = Class(Unit)
 	    for i = 1, partamounts do
 	        local xpos, ypos, zpos = util.GetRandomOffset( sx, sy, sz, 1)
         	local xdir,ydir,zdir = util.GetRandomOffset( sx, sy, sz, 10)
-        	self:CreateProjectile('/mods/SCTA/effects/entities/Debris/Flame/DefaultFlameProjectileDebris_proj.bp',xpos,ypos,zpos,xdir,ydir + 5,zdir)
+        	self:CreateProjectile('/mods/SCTAFix/effects/entities/Debris/Flame/DefaultFlameProjectileDebris_proj.bp',xpos,ypos,zpos,xdir,ydir + 5,zdir)
 	    end
 	    partamounts = util.GetRandomInt( bp.Display.DestructionEffects.DefaultProjectileCountMin or 5, bp.Display.DestructionEffects.DefaultProjectileCountMax or (sx * sz + 4)) 
 		LOG("PartAmounts: ",partamounts)

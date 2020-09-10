@@ -1,0 +1,17 @@
+#CORE Informer - Mobile Radar
+#CORVRAD
+#
+#Blueprint created by Raevn
+
+UnitBlueprint {
+    Merge = true, 
+    Footprint = {
+	SizeX = 1,
+	SizeZ = 1,
+    },
+    SelectionSizeX = 1,
+    SelectionSizeZ = 1,
+    SizeX = 2,
+    SizeY = 1,
+    SizeZ = 2,
+}

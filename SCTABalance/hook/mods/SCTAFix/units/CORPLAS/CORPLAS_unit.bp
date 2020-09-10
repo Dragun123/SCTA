@@ -1,0 +1,16 @@
+#CORE Immolator - Plasma Tower
+#CORPLAS
+#
+#Blueprint created by Raevn
+
+UnitBlueprint {
+    Merge = true, 
+    Defense = {
+        Health = 1250,
+        MaxHealth = 1250,
+    },
+    Intel = {
+        VisionRadius = 16,
+    },
+    SelectionCenterOffsetZ = 0,
+}

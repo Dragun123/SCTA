@@ -1,0 +1,34 @@
+UnitBlueprint {
+    Merge = true, 
+    Defense = {
+        ArmorType = 'Structure',
+        Health = 800,
+        MaxHealth = 800,
+    },
+    Display = {
+        UniformScale = 0.12,
+    },
+    Economy = {
+        BuildCostEnergy = 1500,
+	    NaturalProducer = true,
+    },
+    Footprint = {
+        SizeX = 1,
+        SizeZ = 1,
+    },
+   Physics = {
+        MeshExtentsX = 1.25,
+        MeshExtentsY = 1.25,
+        MeshExtentsZ = 1.25,
+        SkirtOffsetX = 0,
+        SkirtOffsetZ = 0,
+        SkirtSizeX = 1,
+        SkirtSizeZ = 1,
+    },
+    SelectionSizeX = 1.2,
+    SelectionSizeZ = 1.2,
+    SelectionThickness = 0.6,
+    SizeX = 1.2,
+    SizeY = 1.4,
+    SizeZ = 1.2,
+}

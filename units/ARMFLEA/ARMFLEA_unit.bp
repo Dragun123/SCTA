@@ -59,7 +59,7 @@ UnitBlueprint {
 		DestructionEmitters = {
 			{
 				EmitterBone = {'torso'},
-				EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
+				EmitterBlueprint = {'/mods/SCTAFix/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
 		},
@@ -70,7 +70,7 @@ UnitBlueprint {
                 {
                     LODCutoff = 230,
                     ShaderName = 'Unit', 
-		    NormalsName = '/mods/SCTA/textures/common/normalsTS.dds'
+		    NormalsName = '/mods/SCTAFix/textures/common/normalsTS.dds'
                 },
             },
         },
@@ -162,7 +162,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
 	    MuzzleVelocity = 56.25,
-            ProjectileId = '/mods/SCTA/projectiles/ARMFLEA_WEAPON/ARMFLEA_WEAPON_proj.bp',
+            ProjectileId = '/mods/SCTAFix/projectiles/ARMFLEA_WEAPON/ARMFLEA_WEAPON_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
@@ -213,7 +213,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA/units/ARMFLEA/ARMFLEA_dead_prop.bp',
+        Blueprint = '/mods/SCTAFix/units/ARMFLEA/ARMFLEA_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Seabed = true,

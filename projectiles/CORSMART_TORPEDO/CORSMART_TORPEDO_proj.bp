@@ -33,7 +33,7 @@ ProjectileBlueprint {
 	'ANTINAVY',
     },
     Display = {
-        MeshBlueprint = '/mods/SCTA/meshes/projectiles/torpedo_mesh.bp',
+        MeshBlueprint = '/mods/SCTAFix/meshes/projectiles/torpedo_mesh.bp',
         UniformScale = 0.16,
         StrategicIconSize = 1,
     },

@@ -3,8 +3,8 @@
 #
 #Script created by Raevn
 
-local TAAirConstructor = import('/mods/SCTA/lua/TAAirConstructor.lua').TAAirConstructor
-local TAutils = import('/mods/SCTA/lua/TAutils.lua')
+local TAAirConstructor = import('/mods/SCTAFix/lua/TAAirConstructor.lua').TAAirConstructor
+local TAutils = import('/mods/SCTAFix/lua/TAutils.lua')
 
 CORCA = Class(TAAirConstructor) {
 

@@ -1,0 +1,15 @@
+#ARM Ranger - Missile Ship
+#ARMMSHIP
+#
+#Blueprint created by Raevn
+
+UnitBlueprint {
+    Merge = true,
+    Defense = {
+        Health = 2900,
+        MaxHealth = 2900,
+    },
+    Economy = {
+        BuildTime = 45000,
+    },
+}

@@ -66,7 +66,7 @@ UnitBlueprint {
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
-				EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
+				EmitterBlueprint = {'/mods/SCTAFix/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
 		},
@@ -154,7 +154,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA/units/CORASON/CORASON_dead_prop.bp',
+        Blueprint = '/mods/SCTAFix/units/CORASON/CORASON_dead_prop.bp',
         WreckageLayers = {
             Water = true,
             Seabed = true,

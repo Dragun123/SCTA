@@ -107,7 +107,7 @@ UnitBlueprint {
     },
     Description = 'Commander',
     Display = {
-        AnimationWalk = '/mods/SCTA/units/ARMCOM/ARMCOM_lod0_Awalk.sca',
+        AnimationWalk = '/mods/SCTAFix/units/ARMCOM/ARMCOM_lod0_Awalk.sca',
         AnimationWalkRate = 1,
         Abilities = {
             '<LOC ability_amphibious>Amphibious',
@@ -129,7 +129,7 @@ UnitBlueprint {
 			{
 				EmitterBone = {'ARMCOM'},
 				EmitterBlueprint = {
-					'/mods/SCTA/effects/emitters/COMBOOM_emit.bp',
+					'/mods/SCTAFix/effects/emitters/COMBOOM_emit.bp',
 				},
 				EmitterSize = 15,
 			},
@@ -278,7 +278,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 25,
-            ProjectileId = '/mods/SCTA/projectiles/ARMCOMLASER/ARMCOMLASER_proj.bp',
+            ProjectileId = '/mods/SCTAFix/projectiles/ARMCOMLASER/ARMCOMLASER_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
@@ -339,7 +339,7 @@ UnitBlueprint {
             EnergyRequired = 1000,
             EnergyDrainPerSecond = 1000,
             EnergyChargeForFirstShot = false,
-            ProjectileId = '/mods/SCTA/projectiles/ARM_DISINTEGRATOR/ARM_DISINTEGRATOR_proj.bp',
+            ProjectileId = '/mods/SCTAFix/projectiles/ARM_DISINTEGRATOR/ARM_DISINTEGRATOR_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {

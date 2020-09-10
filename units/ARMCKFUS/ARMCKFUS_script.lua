@@ -3,7 +3,7 @@
 #
 #Blueprint created by Raevn
 
-local TAunit = import('/mods/SCTA/lua/TAunit.lua').TAunit
+local TAunit = import('/mods/SCTAFix/lua/TAunit.lua').TAunit
 
 ARMCKFUS = Class(TAunit) {
     OnStopBeingBuilt = function(self,builder,layer)
@@ -17,7 +17,7 @@ ARMCKFUS = Class(TAunit) {
 	end,
 
 	OnIntelEnabled = function(self)
-		self:SetMesh('/mods/SCTA/units/ARMCKFUS/ARMCKFUS_cloak_mesh', true)
+		self:SetMesh('/mods/SCTAFix/units/ARMCKFUS/ARMCKFUS_cloak_mesh', true)
 	end,
 }
 

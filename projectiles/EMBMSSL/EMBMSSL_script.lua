@@ -3,7 +3,7 @@
 #
 #Script created by Raevn
 
-local TAEMPNuclearProjectile = import('/mods/SCTA/lua/TAProjectiles.lua').TAEMPNuclearProjectile
+local TAEMPNuclearProjectile = import('/mods/SCTAFix/lua/TAProjectiles.lua').TAEMPNuclearProjectile
 
 EMBMSSL = Class(TAEMPNuclearProjectile) {
 

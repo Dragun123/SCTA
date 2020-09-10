@@ -1,0 +1,119 @@
+#ARM Wombat - Hovercraft Rocket Launcher
+#ARMMH
+#
+#Blueprint created by Raevn
+
+UnitBlueprint {
+    Merge = true,
+    Categories = {
+        'SELECTABLE',
+        'TECH3',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+
+	
+        'MOBILE',
+	'INDIRECTFIRE',
+        'OVERLAYINDIRECTFIRE',
+        'LAND',
+
+	
+        'ARM',
+        'HOVER',
+	
+	'LEVEL1',
+	
+	
+	
+    },
+    Defense = {
+        Health = 2700,
+        MaxHealth = 2700,
+        SurfaceThreatLevel = 40,
+    },
+    Economy = {
+        BuildCostEnergy = 12000,
+        BuildCostMass = 1200,
+        BuildTime = 36000,
+    },
+    Footprint = {
+        SizeX = 1,
+        SizeZ = 1,
+    },
+    StrategicIconName = 'icon_land3_missile',
+    Intel = {
+        VisionRadius = 14,
+    },
+    Weapon = {
+        {
+            Audio = {
+                Fire = Sound {
+                    Bank = 'TA_Sound',
+                    Cue = 'ROCKHVY1',
+                    LodCutoff = 'Weapon_LodCutoff',
+                },
+            },
+            BallisticArc = 'RULEUBA_HighArc',
+            CollideFriendly = false,
+            DamageFriendly = true,
+            Damage = 1000,
+            DamageRadius = 2.5,
+            DamageType = 'Normal',
+            DisplayName = 'ARMMH_WEAPON',
+            FireTargetLayerCapsTable = {
+                Land = 'Land|Water|Air|Seabed',
+                Water = 'Land|Water|Air|Seabed',
+            },
+	    RangeCategory = 'UWRC_DirectFire',
+	    FiringTolerance = 7,
+            Label = 'ARMMH_WEAPON',
+            MaxRadius = 65,
+            MuzzleSalvoDelay = 0,
+            MuzzleSalvoSize = 1,
+            MuzzleVelocity = 0,
+            ProjectileId = '/mods/SCTAFix/projectiles/ARMMH_WEAPON/ARMMH_WEAPON_proj.bp',
+            RackBones = {
+                {
+                    MuzzleBones = {
+                        'muzzle',
+                    },
+                    RackBone = 'box',
+                },
+            },
+            RackRecoilDistance = 0,
+            RackReloadTimeout = 0,
+            RackSalvoChargeTime = 0,
+            RackSalvoReloadTime = 0,
+            RackSalvoSize = 1,
+            RackSlavedToTurret = false,
+            RateOfFire = 0.3,
+            TargetCheckInterval = 1,
+            EnergyDrainPerSecond = 100,
+            EnergyRequired = 200,
+            EnergyChargeForFirstShot = true,
+            TargetPriorities = {
+                'ALLUNITS',
+            },
+            TargetRestrictDisallow = 'UNTARGETABLE, UNDERWATER',
+            WeaponCategory = 'Indirect Fire',
+	    WeaponUnpacks = true,
+            WeaponRepackTimeout = 3,
+        },
+        { #BIG_UNITEX
+            Damage = 50,
+            DamageFriendly = true,
+            DamageRadius = 3.4375,
+            DamageType = 'Normal',
+            DummyWeapon = true,
+            Label = 'DeathWeapon',
+        }, 
+        { #BIG_UNIT
+            Damage = 20,
+            DamageFriendly = true,
+            DamageRadius = 1,
+            DummyWeapon = true,
+            DamageType = 'Normal',
+            Label = 'SuicideWeapon',
+        },
+    },
+}

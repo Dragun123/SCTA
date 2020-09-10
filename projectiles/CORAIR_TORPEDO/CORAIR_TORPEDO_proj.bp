@@ -33,7 +33,7 @@ ProjectileBlueprint {
         'TORPEDO',
     },
     Display = {
-        MeshBlueprint = '/mods/SCTA/meshes/projectiles/torpedo_mesh.bp',
+        MeshBlueprint = '/mods/SCTAFix/meshes/projectiles/torpedo_mesh.bp',
         StrategicIconSize = 1,
         UniformScale = 0.16,
     },

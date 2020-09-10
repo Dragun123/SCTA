@@ -3,7 +3,7 @@
 #
 #Script created by Raevn
 
-local TAair = import('/mods/SCTA/lua/TAair.lua').TAair
+local TAair = import('/mods/SCTAFix/lua/TAair.lua').TAair
 
 CORFINK = Class(TAair) {
 

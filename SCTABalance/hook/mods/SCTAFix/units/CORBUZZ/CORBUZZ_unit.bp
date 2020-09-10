@@ -1,0 +1,137 @@
+UnitBlueprint {
+    Merge = true, 
+    Defense = {
+        ArmorType = 'Structure',
+        Health = 15000,
+        MaxHealth = 15000,
+    },
+    Economy = {
+        BuildCostEnergy = 10000000,
+        BuildCostMass = 300000,
+        BuildTime = 1200000,
+    },
+    Footprint = {
+        SizeX = 8,
+        SizeZ = 8,
+    },
+        Display = {
+        UniformScale = 0.60,
+    },
+    SelectionThickness = 0.3,
+    SelectionSizeX = 10,
+    SelectionCenterOffsetZ = 0,
+    SelectionSizeZ = 10,
+    SizeX = 12,
+    SizeY = 20,
+    SizeZ = 12,
+    LifeBarSize = 10,
+    Weapon = {
+        {
+            Audio = {
+                Fire = Sound {
+                    Bank = 'TA_Sound',
+                    Cue = 'XPLONUK4',
+                    LodCutoff = 'Weapon_LodCutoff',
+                },
+            },
+            BallisticArc = 'RULEUBA_HighArc',
+            CollideFriendly = false,
+            DamageFriendly = true,
+            Damage = 1500,
+            DamageRadius = 15, 
+            DamageType = 'Normal',
+            DisplayName = 'CORBUZZ_WEAPON',
+            FireTargetLayerCapsTable = {
+                Land = 'Land|Water|Seabed',
+            },
+	    RangeCategory = 'UWRC_IndirectFire',
+            FiringTolerance = 10,	
+	    FiringRandomness = 6,
+            Label = 'CORBUZZ_WEAPON',
+            MaxRadius = 2500,
+            MinRadius = 100,
+            MuzzleSalvoDelay = 0, 
+            MuzzleSalvoSize = 1,
+            MuzzleVelocity = 50,
+            EnergyChargeForFirstShot = true,
+            EnergyDrainPerSecond = 250,
+            EnergyRequired = 1000,
+            
+            ProjectileId = '/mods/SCTAFix/projectiles/CORBUZZ_WEAPON/CORBUZZ_WEAPON_proj.bp',
+            RackBones = {
+                {
+                    MuzzleBones = {
+                        'flare',
+                    },
+                    RackBone = 'muzzle1',
+                },
+                {
+                    MuzzleBones = {
+                        'flare',
+                    },
+                    RackBone = 'muzzle2',
+                },
+                {
+                    MuzzleBones = {
+                        'flare',
+                    },
+                    RackBone = 'muzzle3',
+                },
+                {
+                    MuzzleBones = {
+                        'flare',
+                    },
+                    RackBone = 'muzzle4',
+                },
+                {
+                    MuzzleBones = {
+                        'flare',
+                    },
+                    RackBone = 'muzzle5',
+                },
+                {
+                    MuzzleBones = {
+                        'flare',
+                    },
+                    RackBone = 'muzzle6',
+                },
+            },
+            RackRecoilDistance = -5,
+            RackReloadTimeout = 0,
+            RackSalvoChargeTime = 0,
+            RackSalvoReloadTime = 0,
+            RackSalvoSize = 6,
+            RackSlavedToTurret = false,
+            RateOfFire = 4,
+            TargetCheckInterval = 1,
+            TargetPriorities = {
+                'ALLUNITS',
+            },
+            TargetRestrictDisallow = 'UNTARGETABLE, UNDERWATER',
+            TurretBoneMuzzle = 'flare',
+            TurretBonePitch = 'Spindle',
+            TurretBoneYaw = 'Turret',
+            TurretPitch = 0,
+            TurretPitchRange = 360,
+            TurretPitchSpeed = 100,
+            TurretYaw = 0,
+            TurretYawRange = 360,
+            TurretYawSpeed = 20,
+            Turreted = true,
+        },
+        { #ATOMIC_BLAST
+            Damage = 2000,
+            DamageFriendly = true,
+            DamageRadius = 16.125,
+            DamageType = 'Normal',
+            DummyWeapon = true,
+            Label = 'DeathWeapon',
+        },
+        { #ATOMIC_BLAST
+            Damage = 2000,
+            DamageRadius = 16.125,
+            DummyWeapon = true,
+            Label = 'SuicideWeapon',
+        },
+    },
+}

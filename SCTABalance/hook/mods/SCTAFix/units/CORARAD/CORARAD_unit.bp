@@ -1,0 +1,54 @@
+UnitBlueprint {
+    Merge = true,
+    BuildIconSortPriority = 20,
+    Categories = {
+        'BUILTBYT2VEHICLE',
+        'BUILTBYT2KBOT',
+        'BUILTBYT2AIR',
+        'SELECTABLE',
+        'DRAGBUILD',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'TECH2',
+	'STRUCTURE',
+	'INTELLIGENCE',
+    'RADAR',
+        'OVERLAYRADAR',
+    'CORE',
+    'SHOWQUEUE',
+	'SPECIAL',
+	'LEVEL3',
+	'SORTINTEL',
+	
+	
+	
+    },
+ Display = {
+  Abilities = {
+            '<LOC ability_radar>Radar',
+            '<LOC ability_upgradable>Upgradeable',
+            'Radar Targeting',
+        },
+     }, 
+     Economy = {
+        NaturalProducer = false,
+        BuildRate = 120, 
+        DifferentialUpgradeCostCalculation = true,
+        MaintenanceConsumptionPerSecondEnergy = 50,
+        ProductionPerSecondEnergy = 0,
+        BuildableCategory = {
+            'cortarg',
+      },
+    },
+    General = {
+    UpgradesFrom = 'corrad',
+    UpgradesTo = 'cortarg', 
+    },
+    Intel = {
+	    FreeIntel = false,
+        VisionRadius = 12, 
+        RadarRadius = 240,
+    },
+    SizeY = 5,
+    StrategicIconName = 'icon_structure2_intel',
+}

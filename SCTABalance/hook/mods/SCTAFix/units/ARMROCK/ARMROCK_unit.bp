@@ -1,0 +1,13 @@
+UnitBlueprint {
+   Merge = true,
+   Display = {
+    UniformScale = 0.12,
+        },
+    Footprint = {
+        SizeX = 1,
+        SizeZ = 1,
+    },
+    SizeX = 1,
+    SizeY = 1.2,
+    SizeZ = 1,
+}

@@ -3,8 +3,8 @@
 #
 #Blueprint created by Raevn
 
-local TAair = import('/mods/SCTA/lua/TAair.lua').TAair
-local TAweapon = import('/mods/SCTA/lua/TAweapon.lua').TAweapon
+local TAair = import('/mods/SCTAFix/lua/TAair.lua').TAair
+local TAweapon = import('/mods/SCTAFix/lua/TAweapon.lua').TAweapon
 
 CORSHAD = Class(TAair) {
 

@@ -1,0 +1,33 @@
+UnitBlueprint {
+    Merge = true,
+    Defense = {
+        Health = 800,
+        MaxHealth = 800,
+    },
+    Display = {
+    Abilities = {
+        '<LOC ability_upgradable>Upgradeable',
+    },
+}, 
+      Economy = {
+        BuildCostMass = 50,
+        MaintenanceConsumptionPerSecondEnergy = 2,
+        BuildRate = 120,
+        BuildableCategory = {
+               'cormoho',
+        },
+    },
+    General = {
+        UpgradesTo = 'cormoho',
+    },
+    Physics = {
+        SkirtOffsetX = 0,
+        SkirtOffsetZ = 0,
+        SkirtSizeX = 0,
+        SkirtSizeZ = 0,
+    },
+    SelectionSizeX = 1.6,
+    SelectionSizeZ = 1.6,
+    SizeX = 2,
+    SizeZ = 2,
+}

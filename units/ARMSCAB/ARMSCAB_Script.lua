@@ -3,8 +3,8 @@
 #
 #Blueprint created by Dragun
 
-local TAWalking = import('/mods/SCTA/lua/TAWalking.lua').TAWalking
-local TAweapon = import('/mods/SCTA/lua/TAweapon.lua').TAweapon
+local TAWalking = import('/mods/SCTAFix/lua/TAWalking.lua').TAWalking
+local TAweapon = import('/mods/SCTAFix/lua/TAweapon.lua').TAweapon
 
 ARMSCAB = Class(TAWalking) {
 	Weapons = {

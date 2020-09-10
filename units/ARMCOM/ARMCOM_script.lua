@@ -3,11 +3,11 @@
 #
 #Script created by Raevn
 
-local TAconstructor = import('/mods/SCTA/lua/TAconstructor.lua').TAconstructor
-local TAweapon = import('/mods/SCTA/lua/TAweapon.lua').TAweapon
-local TAutils = import('/mods/SCTA/lua/TAutils.lua')
-local TACommanderDeathWeapon = import('/mods/SCTA/lua/TAweapon.lua').TACommanderDeathWeapon
-local TACommanderSuicideWeapon = import('/mods/SCTA/lua/TAweapon.lua').TACommanderSuicideWeapon
+local TAconstructor = import('/mods/SCTAFix/lua/TAconstructor.lua').TAconstructor
+local TAweapon = import('/mods/SCTAFix/lua/TAweapon.lua').TAweapon
+local TAutils = import('/mods/SCTAFix/lua/TAutils.lua')
+local TACommanderDeathWeapon = import('/mods/SCTAFix/lua/TAweapon.lua').TACommanderDeathWeapon
+local TACommanderSuicideWeapon = import('/mods/SCTAFix/lua/TAweapon.lua').TACommanderSuicideWeapon
 
 #ARM Commander - Commander
 
@@ -94,7 +94,7 @@ ARMCOM = Class(TAconstructor) {
 				if self.cloakSet == true then
 					self.cloakOn = true
 					self:EnableIntel('Cloak')
-					self:SetMesh('/mods/SCTA/units/ARMCOM/ARMCOM_cloak_mesh', true)
+					self:SetMesh('/mods/SCTAFix/units/ARMCOM/ARMCOM_cloak_mesh', true)
 				end
 			end
 		end
@@ -155,7 +155,7 @@ ARMCOM = Class(TAconstructor) {
 		self.cloakOn = true
 		self.cloakSet = true
         	self:PlayUnitSound('Cloak')
-		self:SetMesh('/mods/SCTA/units/ARMCOM/ARMCOM_cloak_mesh', true)
+		self:SetMesh('/mods/SCTAFix/units/ARMCOM/ARMCOM_cloak_mesh', true)
 	end,
 
 

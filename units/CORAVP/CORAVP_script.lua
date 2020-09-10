@@ -3,7 +3,7 @@
 #
 #Script created by Raevn
 
-local TAFactory = import('/mods/SCTA/lua/TAFactory.lua').TAFactory
+local TAFactory = import('/mods/SCTAFix/lua/TAFactory.lua').TAFactory
 
 CORAVP = Class(TAFactory) {
 	pauseTime = 5,

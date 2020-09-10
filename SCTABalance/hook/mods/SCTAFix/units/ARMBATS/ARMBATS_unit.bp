@@ -1,0 +1,28 @@
+UnitBlueprint {
+    Merge = true,
+    Defense = {
+        ArmorType = 'Normal',
+        Health = 22000,
+        MaxHealth = 22000,
+    },
+    Display = {
+        UniformScale = 0.32,
+    },
+    Economy = {
+        BuildCostEnergy = 160000,
+        BuildCostMass = 16000,
+        BuildTime = 80000,
+    },
+    Physics = {
+        MaxAcceleration = 3,
+        MaxSpeed = 4,
+    },
+    Intel = {
+        VisionRadius = 12, 
+    },
+    SelectionSizeX = 6,
+    SelectionSizeZ = 12,
+    SizeX = 8,
+    SizeY = 7,
+    SizeZ = 16,
+}

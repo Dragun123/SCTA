@@ -1,0 +1,49 @@
+UnitBlueprint {
+    Merge = true, 
+    Air = {
+      BreakOffDistance = 17,
+      BreakOffTrigger = 12,
+      CombatTurnSpeed = 1.5,
+      MaxAirspeed = 20,
+      MinAirspeed = 10,
+      StartTurnDistance = 5,
+      TightTurnMultiplier = 1.02,
+      TurnSpeed = 1.5,
+  },
+    Display = {
+        Abilities = {
+            '<LOC ability_aa>Anti-Air',
+            '<LOC ability_jamming>Jamming',
+                    },
+              },
+    Defense = {
+          Health = 2100,
+          MaxHealth = 2100,
+              },
+    Economy = {
+      BuildCostMass = 480,
+        BuildCostEnergy = 66000,
+        MaintenanceConsumptionPerSecondEnergy = 3,
+        },
+    General = {
+      OrderOverrides = {
+        RULEUTC_JammingToggle = {
+            bitmapId = 'jamming',
+            helpText = 'toggle_jamming',
+                                },
+                        },
+              ToggleCaps = {
+                RULEUTC_JammingToggle = true,
+                RULEUTC_StealthToggle = false,
+                          },
+              },
+        Intel = {
+      JamRadius = {
+        Max = 4,
+        Min = 4,
+      },
+      JammerBlips = 3,
+      RadarStealth = false,
+	    FreeIntel = false,
+    },
+  }

@@ -1,0 +1,25 @@
+#CORE Reaper - Heavy Assault Tank
+#CORREAP
+#
+#Blueprint created by Raevn
+
+UnitBlueprint {
+    Merge = true, 
+    Defense = {
+        Health = 2400,
+        MaxHealth = 2400,
+    },
+    Economy = {
+        BuildCostEnergy = 5000,
+        BuildCostMass = 500,
+        BuildTime = 9200,
+    },
+    Footprint = {
+	SizeX = 1,
+	SizeZ = 1,
+    },
+    SelectionCenterOffsetZ = -0.2,
+    SizeX = 2,
+    SizeY = 1.5,
+    SizeZ = 2,
+}

@@ -3,8 +3,8 @@
 #
 #Script created by Raevn
 
-local TAFactory = import('/mods/SCTA/lua/TAFactory.lua').TAFactory
-local TAutils = import('/mods/SCTA/lua/TAutils.lua')
+local TAFactory = import('/mods/SCTAFix/lua/TAFactory.lua').TAFactory
+local TAutils = import('/mods/SCTAFix/lua/TAutils.lua')
 
 ARMAAP = Class(TAFactory) {
 	pauseTime = 5,

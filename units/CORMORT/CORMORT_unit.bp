@@ -63,15 +63,15 @@ UnitBlueprint {
             DestructionEmitters = {
                 {
                     EmitterBone = {'Torso'},
-                    EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
+                    EmitterBlueprint = {'/mods/SCTAFix/effects/emitters/napalm_fire_emit.bp'},
                     EmitterSize = 1.25,
                 },
                 {
                     EmitterBone = {'Barrel'},
                     EmitterBlueprint = {
-                            '/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
-                            '/mods/SCTA/effects/emitters/terran_missile_hit_03_emit.bp',
-                            '/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp',
+                            '/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
+                            '/mods/SCTAFix/effects/emitters/terran_missile_hit_03_emit.bp',
+                            '/mods/SCTAFix/effects/emitters/terran_missile_hit_04_emit.bp',
                     },
                     EmitterSize = 1.25,
                 },
@@ -83,7 +83,7 @@ UnitBlueprint {
                 {
                     LODCutoff = 230,
                     ShaderName = 'Unit', 
-                    NormalsName = '/mods/SCTA/textures/common/normalsTS.dds'
+                    NormalsName = '/mods/SCTAFix/textures/common/normalsTS.dds'
                 },
             },
         },
@@ -174,7 +174,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 18.125,
-            ProjectileId = '/mods/SCTA/projectiles/CORE_THUD/CORE_THUD_proj.bp',
+            ProjectileId = '/mods/SCTAFix/projectiles/CORE_THUD/CORE_THUD_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
@@ -229,7 +229,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA/units/CORMORT/CORMORT_dead_prop.bp',
+        Blueprint = '/mods/SCTAFix/units/CORMORT/CORMORT_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Seabed = true,

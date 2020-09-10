@@ -84,7 +84,7 @@ UnitBlueprint {
     },
     Description = 'Commander',
     Display = {
-        AnimationWalk = '/mods/SCTA/units/CORCOM/CORCOM_lod0_Awalk.sca',
+        AnimationWalk = '/mods/SCTAFix/units/CORCOM/CORCOM_lod0_Awalk.sca',
         AnimationWalkRate = 1,
         Abilities = {
             'Decoy',
@@ -101,7 +101,7 @@ UnitBlueprint {
                 {
                     EmitterBone = {'CORCOM'},
                     EmitterBlueprint = {
-                        '/mods/SCTA/effects/emitters/COMBOOM_emit.bp',
+                        '/mods/SCTAFix/effects/emitters/COMBOOM_emit.bp',
                     },
                     EmitterSize = 15,
                 },
@@ -113,9 +113,9 @@ UnitBlueprint {
             LODs = {
                 {
                     LODCutoff = 230,
-		    NormalName = '/mods/SCTA/units/CORCOM/CORCOM_normalsTS.dds',
-		    SpecularName = '/mods/SCTA/units/CORCOM/CORCOM_SpecTeam.dds',
-		    AlbedoName = '/mods/SCTA/units/CORCOM/CORCOM_Albedo.dds',
+		    NormalName = '/mods/SCTAFix/units/CORCOM/CORCOM_normalsTS.dds',
+		    SpecularName = '/mods/SCTAFix/units/CORCOM/CORCOM_SpecTeam.dds',
+		    AlbedoName = '/mods/SCTAFix/units/CORCOM/CORCOM_Albedo.dds',
                     ShaderName = 'Unit', 
                 },
             },
@@ -213,7 +213,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 25,
-            ProjectileId = '/mods/SCTA/projectiles/CORCOMLASER/CORCOMLASER_proj.bp',
+            ProjectileId = '/mods/SCTAFix/projectiles/CORCOMLASER/CORCOMLASER_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {

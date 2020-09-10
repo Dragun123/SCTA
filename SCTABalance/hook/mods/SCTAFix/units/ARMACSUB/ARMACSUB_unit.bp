@@ -1,0 +1,44 @@
+UnitBlueprint {
+    Merge = true,
+    Categories = {
+        'SELECTABLE',
+        'TECH2',
+        'ENGINEER',
+        'REPAIR',
+        'RECLAIM',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'PATROLHELPER',
+        'SHOWQUEUE',
+        'MOBILE',
+        'SELECTION',
+	'CONSTRUCTION',
+    'NAVAL',
+    'T2SUBMARINE',
+        'SHIP',
+        'OVERLAYSONAR',
+        'SELECTION',
+        'ARM',
+	
+	'LEVEL2',
+	
+	
+	
+	
+    },
+    Defense = {
+        Health = 900,
+        MaxHealth = 900,
+        },
+    Economy = {
+        BuildCostEnergy = 3600,
+        BuildableCategory = {
+            'BUILTBYT1SHIP ARM',
+            'BUILTBYT2SUB ARM',
+        },
+        BuildTime = 5000,
+        MaxBuildDistance = 7,
+        ProductionPerSecondEnergy = 2,
+        ProductionPerSecondMass = 0,
+    },
+}

@@ -1,0 +1,37 @@
+UnitBlueprint {
+    Merge = true, 
+    Categories = {
+        'BUILTBYT1AIR',
+        'BUILTBYT1KBOT',
+        'BUILTBYT1VEHICLE',
+        'SELECTABLE',
+        'DRAGBUILD',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'TECH2',
+	'STRUCTURE',
+    'DEFENSE',
+    'SORTDEFENSE',
+	'INDIRECTFIRE',
+        'OVERLAYINDIRECTFIRE',
+	'ARM',
+	'LEVEL3',
+	'STRATEGIC',
+	
+	
+	
+    },
+    Defense = {
+        ArmorType = 'Structure',
+        Health = 3000,
+        MaxHealth = 3000,
+    },
+    Display = {
+        UniformScale = 0.25,
+    },
+    Economy = {
+        BuildTime = 21000,
+    },
+    SizeY = 6,
+    StrategicIconName = 'icon_structure2_artillery',
+}

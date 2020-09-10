@@ -1,0 +1,17 @@
+#ARM Brawler - Gunship
+#ARMBRAWL
+#
+#Blueprint created by Raevn
+
+UnitBlueprint {
+    Merge = true,
+    Footprint = {
+	MaxSlope = 0.625,
+        SizeX = 1,
+        SizeZ = 1,
+    },
+    Intel = {
+        VisionRadius = 14,
+        WaterVisionRadius = 4, 
+    },
+}

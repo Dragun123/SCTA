@@ -3,8 +3,8 @@
 #
 #Script created by Raevn
 
-local TAunit = import('/mods/SCTA/lua/TAunit.lua').TAunit
-local TAutils = import('/mods/SCTA/lua/TAutils.lua')
+local TAunit = import('/mods/SCTAFix/lua/TAunit.lua').TAunit
+local TAutils = import('/mods/SCTAFix/lua/TAutils.lua')
 
 ARMTARG = Class(TAunit) {
 	damageReduction = 1,

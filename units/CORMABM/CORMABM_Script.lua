@@ -3,7 +3,7 @@
 #
 #Blueprint created by Raevn
 
-local TATreads = import('/mods/SCTA/lua/TATread.lua').TATreads
+local TATreads = import('/mods/SCTAFix/lua/TATread.lua').TATreads
 local AAMWillOWisp = import('/lua/aeonweapons.lua').AAMWillOWisp
 CORMABM = Class(TATreads) {
 	Weapons = {

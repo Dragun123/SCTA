@@ -1,0 +1,12 @@
+UnitBlueprint {
+   Merge = true,
+    Economy = {
+        BuildCostEnergy = 8000,
+        BuildCostMass = 260,
+        BuildTime = 7000,
+    },
+    Footprint = {
+        SizeX = 1,
+        SizeZ = 1,
+    },
+}

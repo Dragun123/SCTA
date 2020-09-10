@@ -1,0 +1,44 @@
+UnitBlueprint {
+    Merge = true,
+    Categories = {
+        'SELECTABLE',
+        'TECH2',
+        'ENGINEER',
+        'REPAIR',
+        'RECLAIM',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'PATROLHELPER',
+        'SHOWQUEUE',
+	'SELECTION',
+        'MOBILE',
+	'CONSTRUCTION',
+	'LAND',
+        'ARM',
+	'LEVEL2',
+	
+	
+	
+	
+	
+    },
+    Defense = {
+        Health = 1100,
+        MaxHealth = 1100,
+        },
+    Economy = {
+        BuildCostEnergy = 4800,
+        BuildTime = 6000,
+        BuildRate = 320,
+        BuildableCategory = {
+            'BUILTBYT1VEHICLE ARM',
+            'BUILTBYT2VEHICLE ARM',
+        },
+        MaxBuildDistance = 7,
+        ProductionPerSecondEnergy = 2,
+        ProductionPerSecondMass = 0,
+    },
+    Intel = {
+        VisionRadius = 12,
+    },
+}

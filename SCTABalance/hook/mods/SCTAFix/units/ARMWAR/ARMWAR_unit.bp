@@ -1,0 +1,32 @@
+UnitBlueprint {
+   Merge = true, 
+    Defense = {
+        Health = 560,
+        MaxHealth = 560,
+        },
+        Display = {
+            UniformScale = 0.10,
+        },
+    Economy = {
+        BuildCostEnergy = 1100,
+        BuildCostMass = 130,
+        BuildTime = 2400,
+    },
+    Footprint = {
+        SizeX = 1,
+        SizeZ = 1,
+    },
+    Intel = {
+        VisionRadius = 10,
+    },
+    SizeX = 1,
+    SizeY = 1.4,
+    SizeZ = 1,
+    Physics = {
+        MaxBrake = 2.4,
+        MaxSpeed = 2.4,
+        TurnRate = 80,
+        StandUpright = true,
+        MaxSteerForce = 10,
+    },
+}

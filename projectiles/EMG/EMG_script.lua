@@ -3,7 +3,7 @@
 #
 #Blueprint created by Raevn
 
-local TAEMGProjectile = import('/mods/SCTA/lua/TAProjectiles.lua').TAEMGProjectile
+local TAEMGProjectile = import('/mods/SCTAFix/lua/TAProjectiles.lua').TAEMGProjectile
 
 EMG = Class(TAEMGProjectile){
 }

@@ -1,0 +1,61 @@
+UnitBlueprint {
+    Merge = true,
+    Categories = {
+        'BUILTBYT1AIR',
+        'BUILTBYT1KBOT',
+        'BUILTBYT2KBOT',
+        'BUILTBYT1VEHICLE',
+        'BUILTBYT1HOVER',
+        'BUILTBYCOMMANDER',
+        'SELECTABLE',
+        'DRAGBUILD',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'TECH1',
+	'FACTORY',
+        'RALLYPOINT',
+        'SHOWQUEUE',
+	'STRUCTURE',
+	'CONSTRUCTION',
+        'LAND', 
+	'ARM',
+		'PLANT',
+	'SORTCONSTRUCTION',
+	
+	'LEVEL1',
+	
+	
+	
+    },
+        Display = {
+             Abilities = {
+            '<LOC ability_upgradable>Upgradeable',
+        },
+        UniformScale = 0.32,
+    },
+    Defense = {
+        ArmorType = 'Structure',
+        Health = 2400,
+        MaxHealth = 2400,
+    },
+    Economy = {
+        BuildCostEnergy = 3600,
+        BuildRate = 90,
+        BuildableCategory = {
+            'armdlab', 
+            'KBOT LEVEL1 ARM',
+        },
+    },
+    LifeBarSize = 8,
+    General = {
+        UpgradesTo = 'armdlab', 
+    },
+    Intel = {
+        VisionRadius = 10,
+    },
+    SelectionSizeX = 9.9,
+    SelectionSizeZ = 6.8,
+    SizeX = 12,
+    SizeY = 5,
+    SizeZ = 12,
+}

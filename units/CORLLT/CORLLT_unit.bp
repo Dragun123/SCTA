@@ -57,15 +57,15 @@ UnitBlueprint {
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
-				EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
+				EmitterBlueprint = {'/mods/SCTAFix/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
 			{
 				EmitterBone = {'Turret'},
 				EmitterBlueprint = {
-    					'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
-			    		'/mods/SCTA/effects/emitters/terran_missile_hit_03_emit.bp',
-    					'/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp',
+    					'/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
+			    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_03_emit.bp',
+    					'/mods/SCTAFix/effects/emitters/terran_missile_hit_04_emit.bp',
 				},
 				EmitterSize = 0.35,
 			},
@@ -160,7 +160,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 50,
-            ProjectileId = '/mods/SCTA/projectiles/CORE_LIGHTLASER/CORE_LIGHTLASER_proj.bp',
+            ProjectileId = '/mods/SCTAFix/projectiles/CORE_LIGHTLASER/CORE_LIGHTLASER_proj.bp',
             EnergyDrainPerSecond = 10,
             EnergyRequired = 10,
             EnergyChargeForFirstShot = true,
@@ -215,7 +215,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA/units/CORLLT/CORLLT_dead_prop.bp',
+        Blueprint = '/mods/SCTAFix/units/CORLLT/CORLLT_dead_prop.bp',
         WreckageLayers = {
             Land = true,
         },

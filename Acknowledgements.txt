@@ -1,6 +1,6 @@
-Acknowledgements and Permissions by individuals they have granted for improving SCTA and related mods to use there code and models:
-1) Raevn, has thankfully provided access and usage to his original SCTA code to use
-2) Armored Fish, for the TA Shaders he coded and for other work he had provided for SCTA Mod
+Acknowledgements and Permissions by individuals they have granted for improving SCTAFix and related mods to use there code and models:
+1) Raevn, has thankfully provided access and usage to his original SCTAFix code to use
+2) Armored Fish, for the TA Shaders he coded and for other work he had provided for SCTAFix Mod
 3) Axel (not Developer Axle), version where he provided bugfixes for Raevn code, and imported 3 units
 4) Balthezar of Brewlan, for providing and letting the project use Brewlan Code, as well making models
 5) Senth for making the code allowing the factions to not required to be cheatspawn in anymore

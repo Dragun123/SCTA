@@ -1,0 +1,25 @@
+UnitBlueprint {
+    Merge = true, 
+    Footprint = {
+        MinWaterDepth = 3,
+        SizeX = 2,
+        SizeZ = 2,
+    },
+    Defense = {
+        Health = 2500,
+        MaxHealth = 2500,
+    },
+    Physics = {
+        BuildOnLayerCaps = {
+            LAYER_Water = true,
+        },
+        SkirtSizeX = 0,
+        SkirtSizeZ = 0,
+    },
+    SelectionSizeX = 2,
+    SelectionSizeZ = 2,
+    SelectionThickness = 0.5,
+    SizeX = 4,
+    SizeY = 2.5,
+    SizeZ = 4,
+}

@@ -62,12 +62,12 @@ UnitBlueprint {
 		DestructionEmitters = {
 			{
 				EmitterBone = {'torso'},
-				EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
+				EmitterBlueprint = {'/mods/SCTAFix/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
 		},
     },
-    AnimationWalk = '/mods/SCTA/units/CORAK/CORAK_lod0_Awalk.sca',
+    AnimationWalk = '/mods/SCTAFix/units/CORAK/CORAK_lod0_Awalk.sca',
     AnimationWalkRate = 3,
         Mesh = {
             IconFadeInZoom = 130,
@@ -163,7 +163,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
 	    MuzzleVelocity = 25,
-            ProjectileId = '/mods/SCTA/projectiles/CORE_LASER/CORE_LASER_proj.bp',
+            ProjectileId = '/mods/SCTAFix/projectiles/CORE_LASER/CORE_LASER_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
@@ -222,7 +222,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA/units/CORAK/CORAK_dead_prop.bp',
+        Blueprint = '/mods/SCTAFix/units/CORAK/CORAK_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Seabed = true,

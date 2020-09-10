@@ -3,12 +3,12 @@
 #
 #Script created by Raevn
 
-local TALightCannonProjectile = import('/mods/SCTA/lua/TAProjectiles.lua').TALightCannonProjectile
+local TALightCannonProjectile = import('/mods/SCTAFix/lua/TAProjectiles.lua').TALightCannonProjectile
 
 FLAMETHROWER = Class(TALightCannonProjectile) {
 	Smoke = true,
 
-	FxSmoke = '/mods/SCTA/effects/emitters/flamethrower_emit.bp',
+	FxSmoke = '/mods/SCTAFix/effects/emitters/flamethrower_emit.bp',
 
 	OnCreate = function(self)
 		TALightCannonProjectile.OnCreate(self)

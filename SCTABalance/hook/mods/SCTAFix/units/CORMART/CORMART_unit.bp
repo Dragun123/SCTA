@@ -1,0 +1,12 @@
+UnitBlueprint {
+    Merge = true, 
+    Defense = {
+        Health = 850,
+        MaxHealth = 850,
+    },
+    Economy = {
+        BuildCostEnergy = 9500,
+        BuildCostMass = 1300,
+        BuildTime = 26000,
+    },
+}

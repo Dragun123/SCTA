@@ -3,9 +3,9 @@
 #
 #Script created by Raevn
 
-local TAWalking = import('/mods/SCTA/lua/TAWalking.lua').TAWalking
+local TAWalking = import('/mods/SCTAFix/lua/TAWalking.lua').TAWalking
 local Projectile = import('/lua/sim/DefaultWeapons.lua').DefaultProjectileWeapon
-local TAweapon = import('/mods/SCTA/lua/TAweapon.lua').TAweapon
+local TAweapon = import('/mods/SCTAFix/lua/TAweapon.lua').TAweapon
 
 CORKROG = Class(TAWalking) {
 	

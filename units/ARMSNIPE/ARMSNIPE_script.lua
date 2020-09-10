@@ -3,8 +3,8 @@
 #
 #Script created by Raevn
 
-local TAunit = import('/mods/SCTA/lua/TAunit.lua').TAunit
-local TAweapon = import('/mods/SCTA/lua/TAweapon.lua').TAweapon
+local TAunit = import('/mods/SCTAFix/lua/TAunit.lua').TAunit
+local TAweapon = import('/mods/SCTAFix/lua/TAweapon.lua').TAweapon
 
 ARMSNIPE = Class(TAunit) {
     OnStopBeingBuilt = function(self, builder, layer)
@@ -19,7 +19,7 @@ ARMSNIPE = Class(TAunit) {
 	end,
 
 	OnIntelEnabled = function(self)
-		self:SetMesh('/mods/SCTA/units/ARMSNIPE/ARMSNIPE_cloak_mesh', true)
+		self:SetMesh('/mods/SCTAFix/units/ARMSNIPE/ARMSNIPE_cloak_mesh', true)
 	end,
 
 	Weapons = {

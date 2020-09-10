@@ -100,7 +100,7 @@ UnitBlueprint {
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
-				EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
+				EmitterBlueprint = {'/mods/SCTAFix/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
 		},
@@ -201,7 +201,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
 	    MuzzleVelocity = 30,
-            ProjectileId = '/mods/SCTA/projectiles/VTOL_ROCKET/VTOL_ROCKET_proj.bp',
+            ProjectileId = '/mods/SCTAFix/projectiles/VTOL_ROCKET/VTOL_ROCKET_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
@@ -261,7 +261,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
 	    MuzzleVelocity = 30,
-            ProjectileId = '/mods/SCTA/projectiles/VTOL_ROCKET2/VTOL_ROCKET2_proj.bp',
+            ProjectileId = '/mods/SCTAFix/projectiles/VTOL_ROCKET2/VTOL_ROCKET2_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {

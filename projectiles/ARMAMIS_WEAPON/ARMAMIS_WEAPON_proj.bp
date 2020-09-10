@@ -35,7 +35,7 @@ ProjectileBlueprint {
     Display = {
         CameraFollowTimeout = 0,
         CameraFollowsProjectile = false,
-        MeshBlueprint = '/mods/SCTA/meshes/projectiles/missile_mesh.bp',
+        MeshBlueprint = '/mods/SCTAFix/meshes/projectiles/missile_mesh.bp',
         StrategicIconSize = 1,
         UniformScale = 0.16,
     },

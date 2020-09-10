@@ -1,5 +1,5 @@
-local TAunit = import('/mods/SCTA/lua/TAunit.lua').TAunit
-local TAweapon = import('/mods/SCTA/lua/TAweapon.lua').TAweapon
+local TAunit = import('/mods/SCTAFix/lua/TAunit.lua').TAunit
+local TAweapon = import('/mods/SCTAFix/lua/TAweapon.lua').TAweapon
 
 CORBUZZ = Class(TAunit) {
 	currentBarrel = 0,
@@ -23,7 +23,7 @@ CORBUZZ = Class(TAunit) {
 				if self.unit.currentBarrel == 1 then
 					self.unit.currentBarrel = 6
 				end
-				self.unit:CreateProjectileAtBone('/mods/SCTA/effects/entities/Shells/ARMVULC_Shell/ARMVULC_Shell_proj.bp','Turret')
+				self.unit:CreateProjectileAtBone('/mods/SCTAFix/effects/entities/Shells/ARMVULC_Shell/ARMVULC_Shell_proj.bp','Turret')
 			end,
 
     			PlayFxRackReloadSequence = function(self)

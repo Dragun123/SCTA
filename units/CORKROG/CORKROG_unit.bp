@@ -69,21 +69,21 @@ UnitBlueprint {
             DestructionEmitters = {
                 {
                     EmitterBone = {'torso','head','hips','rleg','lleg'},
-                    EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
+                    EmitterBlueprint = {'/mods/SCTAFix/effects/emitters/napalm_fire_emit.bp'},
                     EmitterSize = 1.25,
                 },
                 {
                     EmitterBone = {'larm','rarm','lthigh','rthigh'},
                     EmitterBlueprint = {
-                            '/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
-                            '/mods/SCTA/effects/emitters/terran_missile_hit_03_emit.bp',
-                            '/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp',
+                            '/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
+                            '/mods/SCTAFix/effects/emitters/terran_missile_hit_03_emit.bp',
+                            '/mods/SCTAFix/effects/emitters/terran_missile_hit_04_emit.bp',
                     },
                     EmitterSize = 0.35,
                 },
             },
         },
-        AnimationWalk = '/mods/SCTA/units/CORKROG/CORKROG_lod0_Walk.sca',
+        AnimationWalk = '/mods/SCTAFix/units/CORKROG/CORKROG_lod0_Walk.sca',
         AnimationWalkRate = 0.9,
         Mesh = {
             IconFadeInZoom = 130,
@@ -182,7 +182,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 0,
 	        MuzzleVelocity = 28.125,
-            ProjectileId = '/mods/SCTA/projectiles/CORKROG_FIRE/CORKROG_FIRE_proj.bp',
+            ProjectileId = '/mods/SCTAFix/projectiles/CORKROG_FIRE/CORKROG_FIRE_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
@@ -221,7 +221,7 @@ UnitBlueprint {
             TurretYawRange = 360,
             TurretYawSpeed = 100,
             WeaponUnpacks = true,
-            WeaponUnpackAnimation = '/mods/SCTA/units/CORKROG/CORKROG_lod_UNPACK.sca',
+            WeaponUnpackAnimation = '/mods/SCTAFix/units/CORKROG/CORKROG_lod_UNPACK.sca',
             WeaponUnpackAnimationRate = 1,
             WeaponUnpackTimeout = 1,
 			WeaponRepackTimeout = 1,
@@ -258,7 +258,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 0,
 	    MuzzleVelocity = 62.5,
-            ProjectileId = '/mods/SCTA/projectiles/CORKROG_HEAD/CORKROG_HEAD_proj.bp',
+            ProjectileId = '/mods/SCTAFix/projectiles/CORKROG_HEAD/CORKROG_HEAD_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
@@ -317,7 +317,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 0,
 	    MuzzleVelocity = 40,
-            ProjectileId = '/mods/SCTA/projectiles/CORKROG_ROCKET/CORKROG_ROCKET_proj.bp',
+            ProjectileId = '/mods/SCTAFix/projectiles/CORKROG_ROCKET/CORKROG_ROCKET_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
@@ -378,7 +378,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA/units/CORKROG/CORKROG_dead_prop.bp',
+        Blueprint = '/mods/SCTAFix/units/CORKROG/CORKROG_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Seabed = true,

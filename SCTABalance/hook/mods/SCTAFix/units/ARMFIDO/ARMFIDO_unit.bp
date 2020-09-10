@@ -1,0 +1,129 @@
+#ARM Fido - Assault Kbot
+#ARMFIDO
+#
+#Blueprint created by Raevn
+
+UnitBlueprint {
+    Merge = true,
+    BuildIconSortPriority = 3,
+    Categories = {
+        'SELECTABLE',
+        'TECH2',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'MOBILE',
+	'LAND',
+	'DIRECTFIRE',
+        'OVERLAYDIRECTFIRE',
+        'ARM',
+        'KBOT',
+	'LEVEL2',
+    },
+    Defense = {
+        Health = 1900,
+        MaxHealth = 1900,
+        AirThreatLevel = 5,
+        EconomyThreatLevel = 0,
+        SubThreatLevel = 0,
+        SurfaceThreatLevel = 2,
+    },
+    Economy = {
+        BuildCostEnergy = 3300,
+        BuildCostMass = 440,
+        BuildTime = 6000,
+    },
+    Footprint = {
+	SizeX = 1,
+	SizeZ = 1,
+    },
+    Weapon = {
+        {
+            Audio = {
+                Fire = Sound {
+                    Bank = 'TA_Sound',
+                    Cue = 'CANNHVY1',
+                    LodCutoff = 'Weapon_LodCutoff',
+                },
+            },
+            BallisticArc = 'RULEUBA_None',
+            CollideFriendly = false,
+	    DamageFriendly = true,
+            Damage = 60,
+	    DamageRadius = 0.25,
+            DamageType = 'Normal',
+            DisplayName = 'GAUSS',
+            FireTargetLayerCapsTable = {
+                Land = 'Land|Water|Seabed',
+                Seabed = 'Land|Water|Seabed',
+            },
+            RangeCategory = 'UWRC_DirectFire',
+     WeaponCategory = 'DirectFire',
+            FiringTolerance = 0.5,
+            FiringRandomness = 0.25,
+            Label = 'GAUSS',
+            MaxRadius = 21,
+            MuzzleSalvoDelay = 0.2,
+            MuzzleSalvoSize = 2,
+	    MuzzleVelocity = 45,
+            ProjectileId = '/mods/SCTAFix/projectiles/GAUSS/GAUSS_proj.bp',
+            RackBones = {
+                {
+                    MuzzleBones = {
+                        'Muzzle',
+                    },
+                    RackBone = 'Barrel',
+                },
+            },
+            RackFireTogether = false,
+            RackRecoilDistance = 0,
+            RackReloadTimeout = 0.2,
+            RackSalvoChargeTime = 0,
+            RackSalvoReloadTime = 0,
+            RackSalvoSize = 4,
+            RackSlavedToTurret = false,
+            RateOfFire = 0.5,
+            TargetCheckInterval = 1,
+            TargetPriorities = {
+                'ALLUNITS',
+            },
+            FiringTolerance = 2,
+            TargetRestrictDisallow = 'UNTARGETABLE, UNDERWATER',
+            TurretBoneMuzzle = 'Muzzle',
+            TurretBonePitch = 'Barrel',
+            TurretBoneYaw = 'Turret',
+            TurretDualManipulators = false,
+            TurretPitch = 0,
+            TurretPitchRange = 360,
+            TurretPitchSpeed = 50,
+            TurretYaw = 0,
+            TurretYawRange = 360,
+            TurretYawSpeed = 90,
+            Turreted = true,
+        },
+        { #BIG_UNITEX
+            Damage = 50,
+            DamageFriendly = true,
+            DamageRadius = 3.4375,
+            DamageType = 'Normal',
+            DummyWeapon = true,
+            Label = 'DeathWeapon',
+        },
+        { #BIG_UNIT
+            Damage = 350,
+                       DamageFriendly = true,
+            DamageRadius = 3,
+            DummyWeapon = true,
+            DamageType = 'Normal',
+            Label = 'SuicideWeapon',
+        },
+
+    },
+    Wreckage = {
+	UseCustomMesh = true,
+        Blueprint = '/mods/SCTAFix/units/ARMFIDO/ARMFIDO_dead_prop.bp',
+        WreckageLayers = {
+            Land = true,
+            Seabed = true,
+        },
+    },
+}

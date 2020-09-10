@@ -54,7 +54,7 @@ UnitBlueprint {
     Description = 'Gateway',
     Display = {
         BuildAttachBone = '0',
-        AnimationOpen = '/mods/SCTA/units/MAS0001/MAS0001_lod0_Aopen.sca',
+        AnimationOpen = '/mods/SCTAFix/units/MAS0001/MAS0001_lod0_Aopen.sca',
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {

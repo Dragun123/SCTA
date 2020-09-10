@@ -73,7 +73,7 @@ UnitBlueprint {
     },
     Description = 'Tech Level 2',
     Display = {
-        AnimationOpen = '/mods/SCTA/units/CORACSUB/CORACSUB_lod0_aopen.sca',
+        AnimationOpen = '/mods/SCTAFix/units/CORACSUB/CORACSUB_lod0_aopen.sca',
         AnimationOpenRate = 0.2, 
         Abilities = {
             'Construction Unit',
@@ -86,15 +86,15 @@ UnitBlueprint {
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
-				EmitterBlueprint = {'/mods/SCTA/effects/emitters/napalm_fire_emit.bp'},
+				EmitterBlueprint = {'/mods/SCTAFix/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
 			{
 				EmitterBone = {'door1','door2'},
 				EmitterBlueprint = {
-    					'/mods/SCTA/effects/emitters/terran_missile_hit_01_emit.bp',
-			    		'/mods/SCTA/effects/emitters/terran_missile_hit_03_emit.bp',
-    					'/mods/SCTA/effects/emitters/terran_missile_hit_04_emit.bp',
+    					'/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
+			    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_03_emit.bp',
+    					'/mods/SCTAFix/effects/emitters/terran_missile_hit_04_emit.bp',
 				},
 				EmitterSize = 0.35,
 			},
@@ -111,7 +111,7 @@ UnitBlueprint {
             },
         },
 	MovementEffects = {
-		Emitter = '/mods/SCTA/effects/emitters/sub_wake_emit.bp',
+		Emitter = '/mods/SCTAFix/effects/emitters/sub_wake_emit.bp',
 		Scale = 0.5,
 		Bones = {'Wake_01','Wake_02'},
 	},
@@ -206,7 +206,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA/units/CORACSUB/CORACSUB_dead_prop.bp',
+        Blueprint = '/mods/SCTAFix/units/CORACSUB/CORACSUB_dead_prop.bp',
         WreckageLayers = {
             Water = true,
 	    Sub = true,

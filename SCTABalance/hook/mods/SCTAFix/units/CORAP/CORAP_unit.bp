@@ -1,0 +1,64 @@
+UnitBlueprint {
+    Merge = true,
+    Categories = {
+        'BUILTBYT2AIR',
+        'BUILTBYT1AIR',
+        'BUILTBYT1KBOT',
+        'BUILTBYT1VEHICLE',
+        'BUILTBYT1HOVER',
+        'BUILTBYCOMMANDER',
+        'SELECTABLE',
+        'DRAGBUILD',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'TECH1',
+	'FACTORY',
+        'RALLYPOINT',
+        'SHOWQUEUE',
+	'STRUCTURE',
+	'CONSTRUCTION',
+        'OVERLAYRADAR',
+        'AIR', 
+	'CORE',
+		'PLANT',
+	'SORTCONSTRUCTION',
+	'LEVEL3',
+	
+	
+	
+	
+    },
+        Display = {
+                Abilities = {
+                    '<LOC ability_upgradable>Upgradeable',
+                    '<LOC ability_radar>Radar',
+                },
+        UniformScale = 0.32,
+    },
+    Defense = {
+        Health = 2400,
+        MaxHealth = 2400,
+    },
+    Economy = {
+        BuildCostEnergy = 5400,
+        BuildRate = 75,
+        BuildableCategory = {
+            'AIR LEVEL1 CORE',
+            'cordap', 
+        },
+    },
+    LifeBarSize = 8,
+    General = {
+        UpgradesTo = 'cordap', 
+    },
+    Intel = {
+        VisionRadius = 10,
+        RadarRadius = 30,
+        FreeIntel = true,
+    },
+    SelectionSizeX = 9.9,
+    SelectionSizeZ = 6.8,
+    SizeX = 12,
+    SizeY = 5,
+    SizeZ = 12,
+}

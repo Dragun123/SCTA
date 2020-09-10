@@ -1,0 +1,51 @@
+UnitBlueprint {
+    Merge = true,
+    Categories = {
+        'BUILTBYT1VEHICLE',
+        'SELECTABLE',
+        'DRAGBUILD',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'TECH2',
+	'FACTORY',
+        'RALLYPOINT',
+        'SHOWQUEUE',
+        'CONSTRUCTIONSORTDOWN',
+	'STRUCTURE',
+	'CONSTRUCTION',
+	'TEXTUREANIM',
+        'LAND', 
+	'CORE',
+		'PLANT',
+	'SORTCONSTRUCTION',
+	'LEVEL2',
+	
+	
+	
+	
+    },
+    Defense = {
+        Health = 4800,
+        MaxHealth = 4800,
+    },
+        Display = {
+        UniformScale = 0.32,
+    },
+    Economy = {
+        BuildCostEnergy = 7200,
+        BuildRate = 150,
+        BuildableCategory = {
+            'VEHICLE LEVEL1 CORE', 
+            'VEHICLE LEVEL2 CORE',
+        },
+    },
+    LifeBarSize = 8,
+    Intel = {
+        VisionRadius = 10,
+    },
+    SelectionSizeX = 9.9,
+    SelectionSizeZ = 6.8,
+    SizeX = 12,
+    SizeY = 5,
+    SizeZ = 12,
+}

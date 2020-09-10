@@ -1,0 +1,9 @@
+MeshBlueprint {
+   Merge = true,
+    LODs = {
+        {
+            ShaderName = 'TACloak', -- TACloak
+           
+        },
+    },
+}

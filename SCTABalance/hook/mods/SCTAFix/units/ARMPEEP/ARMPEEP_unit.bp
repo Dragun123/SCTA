@@ -1,0 +1,9 @@
+UnitBlueprint {
+    Merge = true,
+    Intel = {
+    RadarRadius = 60,
+    },
+    Economy = {
+        BuildCostMass = 80,
+    },
+}

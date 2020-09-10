@@ -3,7 +3,7 @@
 #
 #Script created by Raevn
 
-local TANuclearProjectile = import('/mods/SCTA/lua/TAProjectiles.lua').TANuclearProjectile
+local TANuclearProjectile = import('/mods/SCTAFix/lua/TAProjectiles.lua').TANuclearProjectile
 
 NUCLSC_MISSILE = Class(TANuclearProjectile) {
 

@@ -1,5 +1,5 @@
 #Generic TA Air unit
-local TAunit = import('/mods/SCTA/lua/TAunit.lua').TAunit
+local TAunit = import('/mods/SCTAFix/lua/TAunit.lua').TAunit
 
 TAair = Class(TAunit) 
 {

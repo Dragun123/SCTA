@@ -1,0 +1,58 @@
+UnitBlueprint {
+    Merge = true,
+    Categories = {
+        'BUILTBYT1AIR',
+        'BUILTBYT1KBOT',
+        'BUILTBYT2KBOT',
+        'BUILTBYT1VEHICLE',
+        'BUILTBYT1HOVER',
+        'BUILTBYCOMMANDER',
+        'SELECTABLE',
+        'DRAGBUILD',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'TECH1',
+	'FACTORY',
+        'RALLYPOINT',
+        'SHOWQUEUE',
+	'STRUCTURE',
+        'LAND', 
+	'CONSTRUCTION',
+	'TEXTUREANIM',
+	'CORE',
+		'PLANT',
+	'SORTCONSTRUCTION',
+	
+	'LEVEL1',
+	
+	
+	
+    },
+    Defense = {
+        Health = 2200,
+        MaxHealth = 2200,
+    },
+        Display = {
+                Abilities = {
+                    '<LOC ability_upgradable>Upgradeable',
+                },
+        UniformScale = 0.32,
+    },
+    Economy = {
+        BuildCostEnergy = 4000,
+        BuildRate = 75,
+        BuildableCategory = {
+            'KBOT LEVEL1 CORE',
+            'cordlab', 
+        },
+    },
+    LifeBarSize = 8,
+    General = {
+        UpgradesTo = 'cordlab', 
+    },
+    SelectionSizeX = 9.9,
+    SelectionSizeZ = 6.8,
+    SizeX = 12,
+    SizeY = 5,
+    SizeZ = 12,
+}
