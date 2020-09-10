@@ -1,8 +1,0 @@
-UnitBlueprint {
-    Merge = true,
-    Defense = {
-        ArmorType = 'Normal',
-        Health = 1300,
-        MaxHealth = 1300,
-    },
-}

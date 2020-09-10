@@ -1,8 +1,0 @@
-UnitBlueprint {
-   Merge = true, 
-    Footprint = {
-        SizeX = 1,
-        SizeZ = 1,
-    },
-   SizeY = 1, 
-}
