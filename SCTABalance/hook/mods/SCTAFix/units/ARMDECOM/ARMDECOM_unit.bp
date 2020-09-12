@@ -1,0 +1,30 @@
+UnitBlueprint {
+   Merge = true,
+   Categories = {
+    'SELECTABLE',
+    'TECH2',
+    'VISIBLETORECON',
+    'RECLAIMABLE',
+    'PATROLHELPER',
+    'RECLAIM',
+    'REPAIR',
+    'MOBILE',
+'LAND',
+'DIRECTFIRE',
+'KBOT',
+'LEVEL3',
+    'OVERLAYDIRECTFIRE',
+    'ARM',
+
+
+
+
+},
+   Display = {
+       UniformScale = 0.28,
+    },
+    SelectionSizeX = 2,
+    SelectionSizeZ = 2,
+    SizeY = 4.3,
+    SizeX = 2.8,
+}

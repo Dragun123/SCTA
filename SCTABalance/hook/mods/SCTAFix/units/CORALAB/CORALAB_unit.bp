@@ -1,7 +1,7 @@
 UnitBlueprint {
     Merge = true,
     Categories = {
-        'BUILTBYT1KBOT',
+        'BUILTBYT2KBOT',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',
@@ -35,6 +35,7 @@ UnitBlueprint {
         BuildableCategory = {
             'KBOT LEVEL1 CORE', 
             'KBOT LEVEL2 CORE',
+            'KBOT LEVEL3 CORE',
         },
     },
     LifeBarSize = 8,

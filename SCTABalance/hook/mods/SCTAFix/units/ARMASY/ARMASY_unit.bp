@@ -1,0 +1,50 @@
+UnitBlueprint {
+    Merge = true,
+    Categories = {
+        'BUILTBYT1SHIP',
+        'SELECTABLE',
+        'DRAGBUILD',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'TECH2',
+	'FACTORY',
+        'RALLYPOINT',
+        'SHOWQUEUE',
+	'STRUCTURE',
+	'CONSTRUCTION',
+	'NAVAL',
+	'CONSTRUCTIONSORTDOWN',
+	'ARM',
+		'PLANT',
+	'SORTCONSTRUCTION',
+	'LEVEL2',
+	
+	
+	
+	
+    },
+    Defense = {
+        Health = 6000,
+        MaxHealth = 6000,
+    },
+        Display = {
+        UniformScale = 0.32,
+    },
+    Economy = {
+        BuildableCategory = {
+            'SHIP LEVEL1 ARM',
+            'NORMALSUB LEVEL1 ARM',
+            'SHIP LEVEL2 ARM',
+            'ADVANCEDSUB LEVEL2 ARM',
+            'SHIP LEVEL3 ARM',
+        },
+        BuildRate = 160,
+        ProductionPerSecondMass = 0,
+    },
+    LifeBarSize = 8,
+    SelectionSizeX = 9.9,
+    SelectionSizeZ = 6.8,
+    SizeX = 12,
+    SizeY = 5,
+    SizeZ = 12,
+}

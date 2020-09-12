@@ -22,7 +22,7 @@ UnitBlueprint {
         'OVERLAYMISC',
 	'CORE',
 	'SHIP',
-	'LEVEL2',
+	'LEVEL3',
 	'NAVALCARRIER',
 	'SHOWQUEUE',
 	
@@ -35,7 +35,7 @@ UnitBlueprint {
     Economy = {
         BuildCostEnergy = 11715,
         BuildCostMass = 3000,
-        BuildTime = 25271,
+        BuildTime = 60000,
         BuildRate = 200,
         ProductionPerSecondEnergy = 300,
         MaintenanceConsumptionPerSecondEnergy = 35,

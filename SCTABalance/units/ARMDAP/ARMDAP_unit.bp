@@ -46,15 +46,15 @@ UnitBlueprint {
 		'PLANT',
 	'SORTCONSTRUCTION',
 	
-	'LEVEL3',
+	'LEVEL4',
 	
 	
 	
     },
     Defense = {
         ArmorType = 'Structure',
-        Health = 3400,
-        MaxHealth = 3400,
+        Health = 3700,
+        MaxHealth = 3700,
         AirThreatLevel = 0,
         EconomyThreatLevel = 3,
         SubThreatLevel = 0,

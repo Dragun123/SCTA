@@ -1,17 +1,87 @@
+#CORE The Can - Armored Assault Kbot
+#CORCAN
+#
+#Blueprint created by Raevn
+
 UnitBlueprint {
     Merge = true, 
-    Defense = {
-        Health = 5000,
-        MaxHealth = 5000,
-    },
-    Economy = {
-        BuildCostMass = 1500,
-    },
-    Footprint = {
-	SizeX = 1,
-	SizeZ = 1,
-    },
-    Intel = {
-        VisionRadius = 14,
+    Weapon = {
+        {
+            Audio = {
+                Fire = Sound {
+                    Bank = 'TA_Sound',
+                    Cue = 'LASRHVY3',
+                    LodCutoff = 'Weapon_LodCutoff',
+                },
+            },
+            BallisticArc = 'RULEUBA_None',
+            CollideFriendly = false,
+	    DamageFriendly = true,
+            Damage = 75,
+	    DamageRadius = 2,
+            DamageType = 'Normal',
+            DisplayName = 'CORE_CANLASER',
+            FireTargetLayerCapsTable = {
+                Land = 'Land|Water|Seabed',
+                Seabed = 'Land|Water|Seabed',
+            },
+	    RangeCategory = 'UWRC_DirectFire',
+     WeaponCategory = 'DirectFire',
+            FiringTolerance = 0,
+            Label = 'CORE_CANLASER',
+            MaxRadius = 28,
+            MuzzleSalvoDelay = 0,
+            MuzzleSalvoSize = 1,
+	    MuzzleVelocity = 20.75,
+            ProjectileId = '/mods/SCTA-master/projectiles/CORE_CANLASER/CORE_CANLASER_proj.bp',
+            RackBones = {
+                {
+                    MuzzleBones = {
+                        'firept',
+                    },
+                    RackBone = 'gun',
+                },
+            },
+            RackFireTogether = false,
+            RackRecoilDistance = -1.5,
+            RackReloadTimeout = 0,
+            RackSalvoChargeTime = 0,
+            RackSalvoReloadTime = 0,
+            RackSalvoSize = 1,
+            RackSlavedToTurret = false,
+            RateOfFire = 0.8,
+            TargetCheckInterval = 1,
+            TargetPriorities = {
+                'ALLUNITS',
+            },
+            TargetRestrictDisallow = 'UNTARGETABLE, UNDERWATER',
+            TurretBoneMuzzle = 'firept',
+            TurretBonePitch = 'gun',
+            TurretBoneYaw = 'head',
+            TurretDualManipulators = false,
+            TurretPitch = 0,
+            TurretPitchRange = 360,
+            TurretPitchSpeed = 45,
+            TurretYaw = 0,
+            TurretYawRange = 360,
+            TurretYawSpeed = 90,
+            Turreted = true,
+        },
+        { #BIG_UNITEX
+            Damage = 50,
+            DamageFriendly = true,
+            DamageRadius = 3.4375,
+            DamageType = 'Normal',
+            DummyWeapon = true,
+            Label = 'DeathWeapon',
+        },
+        { #BIG_UNIT
+            Damage = 350,
+                       DamageFriendly = true,
+            DamageRadius = 3,
+            DummyWeapon = true,
+            DamageType = 'Normal',
+            Label = 'SuicideWeapon',
+        },
     },
 }

@@ -1,7 +1,7 @@
 UnitBlueprint {
     Merge = true,
     Categories = {
-        'BUILTBYT1VEHICLE',
+        'BUILTBYT2VEHICLE',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',
@@ -37,6 +37,7 @@ UnitBlueprint {
         BuildableCategory = {
             'VEHICLE LEVEL1 CORE', 
             'VEHICLE LEVEL2 CORE',
+            'VEHICLE LEVEL3 CORE',
         },
     },
     LifeBarSize = 8,

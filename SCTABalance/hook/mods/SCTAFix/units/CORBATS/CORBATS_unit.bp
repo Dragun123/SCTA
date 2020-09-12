@@ -1,5 +1,28 @@
 UnitBlueprint {
     Merge = true,
+    Categories = {
+        'SELECTABLE',
+        'TECH2',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+
+	
+        'MOBILE',
+	'NAVAL',
+	'DIRECTFIRE',
+	'BATTLESHIP',
+        'OVERLAYINDIRECTFIRE',
+        'OVERLAYDIRECTFIRE',
+
+	
+        'CORE',
+        'SHIP',
+	'LEVEL3',
+	
+	
+	
+	
+    },
     Defense = {
         ArmorType = 'Normal',
         Health = 25000,

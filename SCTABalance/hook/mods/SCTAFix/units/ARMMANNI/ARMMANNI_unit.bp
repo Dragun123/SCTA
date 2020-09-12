@@ -1,0 +1,178 @@
+#ARM Penetrator - Mobile Energy Weapon
+#ARMMANNI
+#
+#Blueprint created by Raevn
+
+UnitBlueprint {
+    Merge = true,
+    Categories = {
+        'SELECTABLE',
+        'TECH2',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'MOBILE',
+	'LAND',
+	'DIRECTFIRE',
+	'TEXTUREANIM',
+        'OVERLAYDIRECTFIRE',
+        'ARM',
+        'VEHICLE',	
+	'LEVEL3',
+	
+	
+	
+	
+    },
+    Defense = {
+        ArmorType = 'Normal',
+        Health = 2500,
+        MaxHealth = 2500,
+    },
+    Economy = {
+        BuildCostEnergy = 17477,
+        BuildCostMass = 1500,
+        BuildTime = 35706,
+    },
+    Footprint = {
+	SizeX = 3,
+	SizeZ = 3,
+	MaxSlope = 0.75,
+	MaxWaterDepth = 0,
+    },
+    General = {
+        Category = 'Direct Fire',
+        Classification = 'RULEUC_MilitaryVehicle',
+        CommandCaps = {
+            RULEUCC_Attack = true,
+            RULEUCC_CallTransport = true,
+            RULEUCC_Guard = true,
+            RULEUCC_Move = true,
+            RULEUCC_Patrol = true,
+            RULEUCC_RetaliateToggle = true,
+            RULEUCC_Stop = true,
+        },
+        FactionName = 'ARM',
+        TechLevel = 'RULEUTL_Advanced',
+        UnitName = 'Penetrator',
+    },
+    Intel = {
+        VisionRadius = 12,
+    },
+    Interface = {
+        HelpText = 'Mobile Energy Weapon',
+    },
+    LifeBarHeight = 0.25,
+    LifeBarOffset = 0.5,
+    LifeBarSize = 2,
+    Physics = {
+        LayerChangeOffsetHeight = -2.00,
+	BackUpDistance = 0,
+	MaxSpeedReverse = 0,
+        MaxAcceleration = 1,
+        MaxBrake = 1,
+        MaxSpeed = 2,
+        MotionType = 'RULEUMT_Land',
+        TurnRate = 28,
+        MaxSteerForce = 10,
+    },
+    SelectionCenterOffsetZ = -0.3,
+    SelectionSizeX = 1.5,
+    SelectionSizeZ = 1.5,
+    SelectionThickness = 0.25,
+    SizeX = 3,
+    SizeY = 2.35,
+    SizeZ = 3,
+    StrategicIconName = 'icon_land2_artillery',
+    StrategicIconSortPriority = 0,
+    Weapon = {
+        {
+            Audio = {
+                Fire = Sound {
+                    Bank = 'TA_Sound',
+                    Cue = 'ANNIGUN1',
+                    LodCutoff = 'Weapon_LodCutoff',
+                },
+            },
+            BallisticArc = 'RULEUBA_None',
+            CollideFriendly = false,
+	    DamageFriendly = true,
+            Damage = 1000,
+	    DamageRadius = 0.5,
+            DamageType = 'Normal',
+            DisplayName = 'ARMMANNI_WEAPON',
+            EnergyChargeForFirstShot = true,
+            EnergyDrainPerSecond = 100,
+            EnergyRequired = 500,
+            
+            FireTargetLayerCapsTable = {
+                Land = 'Land|Water|Seabed',
+                Seabed = 'Land|Water|Seabed',
+            },
+	    RangeCategory = 'UWRC_DirectFire',
+     WeaponCategory = 'DirectFire',
+            Label = 'ARMMANNI_WEAPON',
+            MaxRadius = 60,
+            MuzzleSalvoDelay = 0,
+            MuzzleSalvoSize = 1,
+            MuzzleVelocity = 62.5,
+            ProjectileId = '/mods/SCTA-master/projectiles/ARMMANNI_WEAPON/ARMMANNI_WEAPON_proj.bp',
+            RackBones = {
+                {
+                    MuzzleBones = {
+                        'muzzle',
+                    },
+                    RackBone = 'barrel',
+                },
+            },
+            RackFireTogether = false,
+            RackRecoilDistance = 0,
+            RackReloadTimeout = 0,
+            RackSalvoChargeTime = 0,
+            RackSalvoReloadTime = 0,
+            RackSalvoSize = 1,
+            RackSlavedToTurret = false,
+            RateOfFire = 0.17,
+            TargetCheckInterval = 1,
+            TargetPriorities = {
+                'ALLUNITS',
+            },
+            TargetRestrictDisallow = 'UNTARGETABLE, UNDERWATER',
+            TurretBoneMuzzle = 'muzzle',
+            TurretBonePitch = 'barrel',
+            TurretBoneYaw = 'turret',
+            TurretDualManipulators = false,
+            TurretPitch = 0,
+            TurretPitchRange = 60,
+            TurretPitchSpeed = 4,
+            TurretYaw = 0,
+            TurretYawRange = 360,
+            TurretYawSpeed = 8,
+            Turreted = true,
+        },
+        { #ATOMIC_BLAST
+            Damage = 2000,
+            DamageFriendly = true,
+            DamageRadius = 16.125,
+            DamageType = 'Normal',
+            DummyWeapon = true,
+            Label = 'DeathWeapon',
+        },
+        { #CRAWL_BLASTSML
+            Damage = 1200,
+                        DamageFriendly = true,
+            DamageRadius = 9,
+            DummyWeapon = true,
+            DamageType = 'Normal',
+            Label = 'SuicideWeapon',
+        },
+
+    },
+    Wreckage = {
+	UseCustomMesh = true,
+        Blueprint = '/mods/SCTA-master/units/ARMMANNI/ARMMANNI_dead_prop.bp',
+        WreckageLayers = {
+            Land = true,
+            Seabed = true,
+        },
+    },
+}

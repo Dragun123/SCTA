@@ -1,7 +1,7 @@
 UnitBlueprint {
     Merge = true,
     Categories = {
-        'BUILTBYT1AIR',
+        'BUILTBYT2AIR',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',
@@ -20,7 +20,7 @@ UnitBlueprint {
 		'PLANT',
 	'SORTCONSTRUCTION',
 	
-	'LEVEL3',
+	'LEVEL4',
 	
 	
 	
@@ -37,6 +37,7 @@ UnitBlueprint {
         BuildableCategory = {
             'AIR LEVEL1 CORE', 
             'AIR LEVEL2 CORE',
+            'AIR LEVEL3 CORE',
         },
     },
     LifeBarSize = 8,

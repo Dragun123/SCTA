@@ -1,5 +1,30 @@
 UnitBlueprint {
    Merge = true, 
+   Categories = {
+    'SELECTABLE',
+    'TECH2',
+    'VISIBLETORECON',
+    'RECLAIMABLE',
+
+
+    'MOBILE',
+'LAND',
+'DIRECTFIRE',
+    'OVERLAYDIRECTFIRE',
+
+
+    'CORE',
+    'VEHICLE',	#'TANK' in TA
+'LEVEL3',
+
+
+
+
+},
+Defense = {
+    Health = 4800,
+    MaxHealth = 4800,
+},
     Economy = {
         BuildCostEnergy = 12000,
         BuildCostMass = 1400,

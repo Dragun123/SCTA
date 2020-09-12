@@ -35,7 +35,7 @@ UnitBlueprint {
         BuildableCategory = {
             'BUILTBYT1VEHICLE CORE',
             'BUILTBYT2KBOT CORE',
-            'coralab', 
+            'coravp',
         },
         MaxBuildDistance = 7,
         ProductionPerSecondEnergy = 3,

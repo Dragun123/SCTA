@@ -49,6 +49,7 @@ TAWin = Class(TAunit)
 end,
 
 OnWeatherInterval = function(self)
+    ---LOG('Wind Being Ran')
    self:SetProductionPerSecondEnergy (
        (WindEnergyMin + WindEnergyRange * ScenarioInfo.WindStats.Power)
    )

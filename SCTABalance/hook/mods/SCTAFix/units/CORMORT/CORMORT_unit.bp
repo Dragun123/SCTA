@@ -5,6 +5,24 @@
 
 UnitBlueprint {
     Merge = true,
+    Categories = {
+        'SELECTABLE',
+        'TECH2',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'MOBILE',
+        'LAND',
+        'INDIRECTFIRE',
+        'OVERLAYINDIRECTFIRE',
+        'ARTILLERY',
+        'CORE',
+        'KBOT',
+        'LEVEL3',
+        
+        
+        
+        
+    },
     Defense = {
         Health = 1300,
         MaxHealth = 1300,

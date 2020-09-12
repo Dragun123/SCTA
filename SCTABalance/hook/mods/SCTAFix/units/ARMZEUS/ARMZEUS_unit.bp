@@ -6,6 +6,23 @@
 UnitBlueprint {
    Merge = true,
    BuildIconSortPriority = 13,
+   Categories = {
+    'SELECTABLE',
+    'TECH2',
+    'VISIBLETORECON',
+    'RECLAIMABLE',
+
+
+    'MOBILE',
+'LAND',
+'DIRECTFIRE',
+    'OVERLAYDIRECTFIRE',
+
+
+    'ARM',
+    'KBOT',
+'LEVEL3',
+   },
     Defense = {
         Health = 6000,
         MaxHealth = 6000,

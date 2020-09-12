@@ -8,6 +8,8 @@ UnitBlueprint {
     Display = {
         UniformScale = 0.35,
     },
+    SelectionSizeX = 4,
+    SelectionSizeZ = 4,
     LifeBarHeight = 0.25,
     LifeBarOffset = 0.5,
     LifeBarSize = 10,

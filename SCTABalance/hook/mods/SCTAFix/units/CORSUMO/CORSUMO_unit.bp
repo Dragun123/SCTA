@@ -1,0 +1,39 @@
+UnitBlueprint {
+    Merge = true, 
+    Categories = {
+        'SELECTABLE',
+        'TECH2',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+
+	
+        'MOBILE',
+	'LAND',
+	'DIRECTFIRE',
+        'OVERLAYDIRECTFIRE',
+
+	
+        'CORE',
+        'KBOT',
+	'LEVEL3',
+	
+	
+	
+	
+    },
+    Defense = {
+        Health = 5000,
+        MaxHealth = 5000,
+    },
+    Economy = {
+        BuildCostMass = 1500,
+        BuildTime = 22500,
+    },
+    Footprint = {
+	SizeX = 1,
+	SizeZ = 1,
+    },
+    Intel = {
+        VisionRadius = 14,
+    },
+}

@@ -1,5 +1,8 @@
+do
+
 function CreateInitialArmyGroup(strArmy, createCommander)
 	local tblGroup, cdrUnit = doGateSpawn(strArmy, createCommander)
+	CreateWind()
     return tblGroup, cdrUnit
 end
 
@@ -39,7 +42,7 @@ function doGateSpawn(strArmy, createCommander)
 		
 		end
 		local focusarmy = GetFocusArmy()
-		LOG('*DEBUG----------------------: InitializeArmies, army = ', string.sub(strArmy, 6, -1))
+		---LOG('*DEBUG----------------------: InitializeArmies, army = ', string.sub(strArmy, 6, -1))
 		for aK, aV in pairs(GetArmyBrain(strArmy)) do
 			LOG(aK,aV)
 		end
@@ -66,14 +69,10 @@ function ControlDelay(cdrUnit, delay)
 		--cdrUnit:SetBlockCommandQueue(false)
 end
 
-do
-
-local OldCreateResources = CreateResources
-function CreateResources()
+function CreateWind()
 	if not ScenarioInfo.WindStats then
 		ScenarioInfo.WindStats = {Thread = ForkThread(WindThread)}
 	end
-	OldCreateResources()
 end
 
 function WindThread()

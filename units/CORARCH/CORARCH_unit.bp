@@ -65,12 +65,17 @@ UnitBlueprint {
 		DefaultProjectileCategories = {'ArmShip','MetalBarrel'},
 		DestructionEmitters = {
 			{
+<<<<<<< HEAD
 				EmitterBone = {0, 'turret'},
 				EmitterBlueprint = {'/mods/SCTAFix/effects/emitters/napalm_fire_emit.bp'},
+=======
+				EmitterBone = {0, 'turretA'},
+				EmitterBlueprint = {'/mods/SCTA-master/effects/emitters/napalm_fire_emit.bp'},
+>>>>>>> refs/remotes/github/master
 				EmitterSize = 1.25,
 			},
 			{
-				EmitterBone = {'launcher1','launcher2'},
+				EmitterBone = {'boxA','turretB'},
 				EmitterBlueprint = {
 	    				'/mods/SCTAFix/effects/emitters/terran_missile_hit_01_emit.bp',
 			    		'/mods/SCTAFix/effects/emitters/terran_missile_hit_03_emit.bp',
@@ -86,14 +91,18 @@ UnitBlueprint {
                 {
                     LODCutoff = 230,
                     ShaderName = 'Unit', 
+<<<<<<< HEAD
 		    NormalsName = '/mods/SCTAFix/textures/common/normalsTS.dds'
                 },
+=======
+		        },
+>>>>>>> refs/remotes/github/master
             },
         },
 	MovementEffects = {
 		Emitter = '/mods/SCTAFix/effects/emitters/wake_emit.bp',
 		Scale = 0.5,
-		Bones = {'Wake_01','Wake_02'},
+		Bones = {'wakeL','wakeR'},
 	},
         UniformScale = 0.16,
     },
@@ -181,27 +190,27 @@ UnitBlueprint {
             RackBones = {
                 {
                     MuzzleBones = {
-                        'launcher1a',
+                        'emitA1',
                     },
-                    RackBone = 'launcher1',
+                    RackBone = 'boxA',
                 },
                 {
                     MuzzleBones = {
-                        'launcher1b',
+                        'emitA2',
                     },
-                    RackBone = 'launcher1',
+                    RackBone = 'boxA',
                 },
                 {
                     MuzzleBones = {
-                        'launcher1c',
+                        'emitA3',
                     },
-                    RackBone = 'launcher1',
+                    RackBone = 'boxA',
                 },
                 {
                     MuzzleBones = {
-                        'launcher1d',
+                        'emitA4',
                     },
-                    RackBone = 'launcher1',
+                    RackBone = 'boxA',
                 },
             },
             RackFireTogether = false,
@@ -217,9 +226,9 @@ UnitBlueprint {
                 'ALLUNITS',
             },
             TargetRestrictDisallow = 'UNTARGETABLE, UNDERWATER',
-            TurretBoneMuzzle = 'launcher1',
-            TurretBonePitch = 'launcher1',
-            TurretBoneYaw = 'launcher1',
+            TurretBoneMuzzle = 'boxA',
+            TurretBonePitch = 'boxA',
+            TurretBoneYaw = 'turretA',
             TurretDualManipulators = false,
             TurretPitch = 0,
             TurretPitchRange = 90,
@@ -228,6 +237,10 @@ UnitBlueprint {
             TurretYawRange = 360,
             TurretYawSpeed = 255,
             Turreted = true,
+            WeaponUnpacks = true,
+			WeaponRepackTimeout = 3,
+			WeaponUnpackAnimation = '/mods/SCTA-master/units/CORARCH/CORARCH_lod0_Aunpack.sca',
+            WeaponUnpackAnimationRate = 3,
         },
         {
             Audio = {
@@ -259,27 +272,27 @@ UnitBlueprint {
             RackBones = {
                 {
                     MuzzleBones = {
-                        'launcher2a',
+                        'emitB1',
                     },
-                    RackBone = 'launcher2',
+                    RackBone = 'boxB',
                 },
                 {
                     MuzzleBones = {
-                        'launcher2b',
+                        'emitB2',
                     },
-                    RackBone = 'launcher2',
+                    RackBone = 'boxB',
                 },
                 {
                     MuzzleBones = {
-                        'launcher2c',
+                        'emitB3',
                     },
-                    RackBone = 'launcher2',
+                    RackBone = 'boxB',
                 },
                 {
                     MuzzleBones = {
-                        'launcher2d',
+                        'emitB4',
                     },
-                    RackBone = 'launcher2',
+                    RackBone = 'boxB',
                 },
             },
             RackFireTogether = false,
@@ -295,9 +308,9 @@ UnitBlueprint {
                 'ALLUNITS',
             },
             TargetRestrictDisallow = 'UNTARGETABLE, UNDERWATER',
-            TurretBoneMuzzle = 'launcher2',
-            TurretBonePitch = 'launcher2',
-            TurretBoneYaw = 'launcher2',
+            TurretBoneMuzzle = 'boxB',
+            TurretBonePitch = 'boxB',
+            TurretBoneYaw = 'turretB',
             TurretDualManipulators = false,
             TurretPitch = 0,
             TurretPitchRange = 90,
@@ -306,6 +319,10 @@ UnitBlueprint {
             TurretYawRange = 360,
             TurretYawSpeed = 255,
             Turreted = true,
+            WeaponUnpacks = true,
+			WeaponRepackTimeout = 3,
+			WeaponUnpackAnimation = '/mods/SCTA-master/units/CORARCH/CORARCH_lod0_Bunpack.sca',
+            WeaponUnpackAnimationRate = 3,
         },
         {
             Audio = {
@@ -339,15 +356,15 @@ UnitBlueprint {
             RackBones = {
                 {
                     MuzzleBones = {
-                        'muzzle1',
+                        'flareR',
                     },
-                    RackBone = 'barrel1',
+                    RackBone = 'guns',
                 },
                 {
                     MuzzleBones = {
-                        'muzzle2',
+                        'flareL',
                     },
-                    RackBone = 'barrel2',
+                    RackBone = 'guns2',
                 },
             },
             RackRecoilDistance = -2.4,
@@ -362,15 +379,15 @@ UnitBlueprint {
                 'ALLUNITS',
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
-            TurretBoneMuzzle = 'turret',
-            TurretBonePitch = 'turret',
-            TurretBoneYaw = 'turretbase',
+            TurretBoneMuzzle = 'aim',
+            TurretBonePitch = 'turretF1',
+            TurretBoneYaw = 'turretF',
             TurretPitch = 0,
             TurretPitchRange = 90,
-            TurretPitchSpeed = 730,
+            TurretPitchSpeed = 120,
             TurretYaw = 0,
             TurretYawRange = 360,
-            TurretYawSpeed = 755,
+            TurretYawSpeed = 120,
             Turreted = true,
         },
         { #BIG_UNITEX
