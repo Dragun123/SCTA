@@ -17,10 +17,10 @@ function doGateSpawn(strArmy, createCommander)
 			local factionIndex = GetArmyBrain(strArmy):GetFactionIndex()
 			local initialUnitName = 'mas0001'
 			cdrUnit = CreateInitialArmyUnit(strArmy, initialUnitName)
-			--cdrUnit:SetUnSelectable(true)
+			cdrUnit:SetUnSelectable(true)
 			cdrUnit:SetBusy(true)
-			--cdrUnit:SetBlockCommandQueue(true)
-			ForkThread(ControlDelay, cdrUnit, 3)
+			cdrUnit:SetBlockCommandQueue(true)
+			ForkThread(ControlDelay, cdrUnit, 7)
 			--UISelectAndZoomTo(cdrUnit, 0.1)
 			
 			ABrain.PreBuilt = true
@@ -64,9 +64,9 @@ end
 
 function ControlDelay(cdrUnit, delay)
     WaitSeconds(delay)
-		--cdrUnit:SetUnSelectable(false)
+		cdrUnit:SetUnSelectable(false)
 		cdrUnit:SetBusy(false)
-		--cdrUnit:SetBlockCommandQueue(false)
+		cdrUnit:SetBlockCommandQueue(false)
 end
 
 function CreateWind()

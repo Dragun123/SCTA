@@ -41,6 +41,7 @@ UnitBlueprint {
         MaxBuildDistance = 6,
         BuildableCategory = {
             'BUILTBYT1VEHICLE CORE',
+            'coralab',
         },
     },
     Intel = {

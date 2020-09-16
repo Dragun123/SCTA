@@ -34,6 +34,7 @@ UnitBlueprint {
         ProductionPerSecondEnergy = 2,
         BuildableCategory = {
             'BUILTBYT1KBOT ARM',
+            'armavp',
         },
         MaxBuildDistance = 6,
     },

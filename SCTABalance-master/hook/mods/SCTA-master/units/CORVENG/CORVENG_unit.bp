@@ -5,10 +5,10 @@ UnitBlueprint {
         MaxHealth = 420,
     },
     Intel = {
-        VisionRadius = 12,
+        VisionRadius = 18,
         }, 
     Economy = {
-        BuildCostEnergy = 6800,
+        BuildCostEnergy = 6000,
         BuildTime = 4500,
     },
     SizeX = 4,

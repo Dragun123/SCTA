@@ -15,6 +15,22 @@ ARMSONAR = Class(oldARMSONAR) {
 		self:PlayUnitSound('Activate')
 		TAutils.registerTargetingFacility(self:GetArmy())
 	end,
+
+	OnScriptBitSet = function(self, bit)
+		if bit == 3 then
+			self:PlayUnitSound('Deactivate')
+			TAutils.unregisterTargetingFacility(self:GetArmy())
+		end
+		oldARMSONAR.OnScriptBitSet(self, bit)
+	end,
+
+	OnScriptBitClear = function(self, bit)
+		if bit == 3 then
+			self:PlayUnitSound('Activate')
+			TAutils.registerTargetingFacility(self:GetArmy())
+		end
+		oldARMSONAR.OnScriptBitClear(self, bit)
+	end,
 }
 
 TypeClass = ARMSONAR

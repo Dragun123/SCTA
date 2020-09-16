@@ -3,14 +3,14 @@
 #
 #Script created by Raevn
 
-local TAunit = import('/mods/SCTA-master/lua/TAunit.lua').TAunit
+local TAMass = import('/mods/SCTA-master/lua/TAMass.lua').TAMass
 local ScenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
 
-ARMMEX = Class(TAunit) {
+ARMMEX = Class(TAMass) {
 	onMetalSpot = false,
 
 	OnCreate = function(self)
-		TAunit.OnCreate(self)
+		TAMass.OnCreate(self)
 		self:SetMaintenanceConsumptionActive()
 		self.Spinners = {
 			arms = CreateRotator(self, 'Extractor', 'y', nil, 0, 91, 0),
@@ -20,21 +20,21 @@ ARMMEX = Class(TAunit) {
 
 	CreateWreckage = function( self, overkillRatio )
 		if self.onMetalSpot == false then
-			TAunit.CreateWreckageProp(self, overkillRatio)
+			TAMass.CreateWreckageProp(self, overkillRatio)
 		else
 			return nil
 		end
 	end,
 
 	OnStopBeingBuilt = function(self, builder, layer)
-		TAunit.OnStopBeingBuilt(self, builder, layer)
+		TAMass.OnStopBeingBuilt(self, builder, layer)
 		local markers = ScenarioUtils.GetMarkers() 
 		local unitPosition = self:GetPosition()  
 		for k, v in pairs(markers) do 
 			if(v.type == 'Mass') then 
-                		local massPosition = v.position 
-                		if (massPosition[1] < unitPosition[1] + 1) and (massPosition[1] > unitPosition[1] - 1) then 
-	                    		if (massPosition[3] < unitPosition[3] + 1) and (massPosition[3] > unitPosition[3] - 1) then
+                		local MassPosition = v.position 
+                		if (MassPosition[1] < unitPosition[1] + 1) and (MassPosition[1] > unitPosition[1] - 1) then 
+	                    		if (MassPosition[3] < unitPosition[3] + 1) and (MassPosition[3] > unitPosition[3] - 1) then
 						self.onMetalSpot = true
 	                    			break 
 					end
@@ -46,7 +46,7 @@ ARMMEX = Class(TAunit) {
 	end,
 
 	OnProductionPaused = function(self)
-		TAunit.OnProductionPaused(self)
+		TAMass.OnProductionPaused(self)
 		self.Spinners.arms:SetAccel(182)
 		self.Spinners.arms:SetTargetSpeed(0)
 		self:SetMaintenanceConsumptionInactive()
@@ -54,7 +54,7 @@ ARMMEX = Class(TAunit) {
 	end,
 
 	OnProductionUnpaused = function(self)
-		TAunit.OnProductionUnpaused(self)
+		TAMass.OnProductionUnpaused(self)
 		self.Spinners.arms:SetAccel(91)
 		self.Spinners.arms:SetTargetSpeed(self:GetProductionPerSecondMass() * 50)
 		self:SetMaintenanceConsumptionActive()

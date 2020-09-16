@@ -31,7 +31,8 @@ UnitBlueprint {
         MaxHealth = 4500,
     },
     Economy = {
-        BuildCostEnergy = 7200,
+        BuildCostEnergy = 27000,
+        BuildCostMass = 3600, 
         BuildRate = 200,
         BuildableCategory = {
             'KBOT LEVEL1 ARM',

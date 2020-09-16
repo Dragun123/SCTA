@@ -208,7 +208,7 @@ UnitBlueprint {
             MuzzleVelocity = 0,
             NeedToComputeBombDrop = true,
             ProjectileId = '/mods/SCTA-master/projectiles/CORADVBOMB/CORADVBOMB_proj.bp',
-            ProjectilesPerOnFire = 1,
+            ProjectilesPerOnFire = 6,
             RackBones = {
                 {
                     MuzzleBones = {
@@ -222,7 +222,7 @@ UnitBlueprint {
             RackReloadTimeout = 10,
             RackSalvoChargeTime = 0,
             RackSalvoReloadTime = 0,
-            RackSalvoSize = 5,
+            RackSalvoSize = 8,
             RackSlavedToTurret = false,
             RateOfFire = 1,
             TargetCheckInterval = 2.5,

@@ -210,7 +210,7 @@ UnitBlueprint {
             MuzzleVelocity = 0,
             NeedToComputeBombDrop = true,
             ProjectileId = '/mods/SCTA-master/projectiles/ARMADVBOMB/ARMADVBOMB_proj.bp',
-            ProjectilesPerOnFire = 1,
+            ProjectilesPerOnFire = 4,
             RackBones = {
                 {
                     MuzzleBones = {

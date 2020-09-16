@@ -31,6 +31,8 @@ UnitBlueprint {
         UniformScale = 0.32,
     },
     Economy = {
+        BuildCostEnergy = 32000,
+        BuildCostMass = 4000, 
         BuildableCategory = {
             'SHIP LEVEL1 ARM',
             'NORMALSUB LEVEL1 ARM',

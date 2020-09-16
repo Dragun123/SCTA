@@ -1,13 +1,4 @@
-#****************************************************************************
-#**
-#**  File     :  /cdimage/units/URB5101/URB5101_script.lua
-#**  Author(s):  John Comes, David Tomandl
-#**
-#**  Summary  :  -- 				local terrain = GetTerrainType(xpos, zpos)
-#-- 				if terrain.TypeCode >= 220 then
-#**
-#**  Copyright � 2005 Gas Powered Games, Inc.  All rights reserved.
-#****************************************************************************
+
 local AWalkingLandUnit = import('/lua/aeonunits.lua').AWalkingLandUnit
 local Entity = import('/lua/sim/Entity.lua').Entity
 local EffectUtil = import('/lua/EffectUtilities.lua')
@@ -21,7 +12,8 @@ MAS0001 = Class(AWalkingLandUnit) {
 	end,
 
     OnStopBeingBuilt = function(self,builder,layer)
-        AWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
+		AWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
+		self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationOpen):SetRate(0.8)
     end,
 
    GiveInitialResources = function(self)
@@ -32,7 +24,7 @@ MAS0001 = Class(AWalkingLandUnit) {
 	
 	OnStartBuild = function(self, unitBeingBuilt, order)
 		local gtime = GetGameTimeSeconds()
-		if gtime < 5 then
+		if gtime < 9 then
 			ForkThread(self.Spawn, self, unitBeingBuilt, order)
 		else
 			AWalkingLandUnit.OnStartBuild(self, unitBeingBuilt, order)
@@ -49,9 +41,9 @@ MAS0001 = Class(AWalkingLandUnit) {
     end,
 
 	Spawn = function(self, unitBeingBuilt, order)
-		self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationOpen):SetRate(0.8)
+		--self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationOpen):SetRate(0.8)
 		local gtime = GetGameTimeSeconds()
-		while gtime < 5 do
+		while gtime < 9 do
 			WaitSeconds(0.2)
 			gtime = GetGameTimeSeconds()
 		end

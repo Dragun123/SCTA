@@ -33,7 +33,8 @@ UnitBlueprint {
         UniformScale = 0.32,
     },
     Economy = {
-        BuildCostEnergy = 11000,
+        BuildCostEnergy = 40000,
+        BuildCostMass = 4000, 
         BuildableCategory = {
             'AIR LEVEL1 CORE', 
             'AIR LEVEL2 CORE',

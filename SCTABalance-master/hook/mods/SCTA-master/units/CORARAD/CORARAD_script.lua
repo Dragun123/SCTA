@@ -30,6 +30,14 @@ CORARAD = Class(oldCORARAD) {
 		end
 		oldCORARAD.OnScriptBitSet(self, bit)
 	end,
+
+	OnScriptBitClear = function(self, bit)
+		if bit == 3 then
+			self:PlayUnitSound('Activate')
+			TAutils.registerTargetingFacility(self:GetArmy())
+		end
+		oldCORARAD.OnScriptBitClear(self, bit)
+	end,
 }
 
 TypeClass = CORARAD

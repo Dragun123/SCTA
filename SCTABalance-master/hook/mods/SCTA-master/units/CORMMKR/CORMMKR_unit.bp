@@ -1,7 +1,7 @@
 UnitBlueprint {
     Merge = true,
     Display = {
-            UniformScale = 0.32,
+            UniformScale = 0.20,
         },
     Footprint = {
           SizeX = 3,

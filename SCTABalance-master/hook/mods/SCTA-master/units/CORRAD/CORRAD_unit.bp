@@ -20,5 +20,7 @@ UnitBlueprint {
   Intel = {
     FreeIntel = false,
   }, 
+  SelectionSizeX = 1.5,
+  SelectionSizeZ = 1.5,
   SizeY = 6,
 }

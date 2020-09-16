@@ -26,10 +26,17 @@ ARMARAD = Class(oldARMARAD) {
 	OnScriptBitSet = function(self, bit)
 		if bit == 3 then
 			self:PlayUnitSound('Deactivate')
-    		ForkThread(self.Close, self)
 			TAutils.unregisterTargetingFacility(self:GetArmy())
 		end
 		oldARMARAD.OnScriptBitSet(self, bit)
+	end,
+
+	OnScriptBitClear = function(self, bit)
+		if bit == 3 then
+			self:PlayUnitSound('Activate')
+			TAutils.registerTargetingFacility(self:GetArmy())
+		end
+		oldARMARAD.OnScriptBitClear(self, bit)
 	end,
 }
 

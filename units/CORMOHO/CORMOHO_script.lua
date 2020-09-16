@@ -3,14 +3,14 @@
 #
 #Script created by Raevn
 
-local TAunit = import('/mods/SCTA-master/lua/TAunit.lua').TAunit
+local TAMass = import('/mods/SCTA-master/lua/TAMass.lua').TAMass
 local ScenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
 
-CORMOHO = Class(TAunit) {
+CORMOHO = Class(TAMass) {
 	onMetalSpot = false,
 
 	OnCreate = function(self)
-		TAunit.OnCreate(self)
+		TAMass.OnCreate(self)
 		self.Spinners = {
 			rotary = CreateRotator(self, 'rotary', 'y', nil, 0, 0, 0),
 			dingle1 = CreateRotator(self, 'dingle1', 'y', nil, 0, 0, 0),
@@ -30,14 +30,14 @@ CORMOHO = Class(TAunit) {
 
 	CreateWreckage = function( self, overkillRatio )
 		if self.onMetalSpot == false then
-			TAunit.CreateWreckage(self, overkillRatio)
+			TAMass.CreateWreckage(self, overkillRatio)
 		else
 			return nil
 		end
 	end,
 
 	OnStopBeingBuilt = function(self, builder, layer)
-		TAunit.OnStopBeingBuilt(self, builder, layer)
+		TAMass.OnStopBeingBuilt(self, builder, layer)
 		local markers = ScenarioUtils.GetMarkers() 
 		local unitPosition = self:GetPosition()  
 		for k, v in pairs(markers) do 
@@ -58,14 +58,14 @@ CORMOHO = Class(TAunit) {
 	end,
 
 	OnProductionPaused = function(self)
-		TAunit.OnProductionPaused(self)
+		TAMass.OnProductionPaused(self)
 		ForkThread(self.Close, self)
                 self:SetMaintenanceConsumptionInactive()
 		self:PlayUnitSound('Deactivate')
 	end,
 
 	OnProductionUnpaused = function(self)
-		TAunit.OnProductionUnpaused(self)
+		TAMass.OnProductionUnpaused(self)
 		ForkThread(self.Open, self)
                 self:SetMaintenanceConsumptionActive()
 		self:PlayUnitSound('Activate')

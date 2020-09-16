@@ -16,6 +16,12 @@ CORAMPH = Class(TAWalking) {
 				
 			end,
 		},
+		armamph_weapon1 = Class(TAweapon) {
+			OnWeaponFired = function(self)
+				TAweapon.OnWeaponFired(self)
+				
+			end,
+		},
 	},
 }
 

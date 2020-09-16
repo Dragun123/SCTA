@@ -60,7 +60,7 @@ UnitBlueprint {
     Description = 'Fast Attack Kbot',
     Display = {
         AnimationWalk = '/mods/SCTA-master/units/CORFAST/CORFAST_lod0_Awalk.sca',
-        AnimationWalkRate = 1,
+        AnimationWalkRate = 3,
         Abilities = {
             'Fast Bot',
         },
@@ -88,12 +88,11 @@ UnitBlueprint {
                 {
                     LODCutoff = 230,
                     ShaderName = 'Unit', 
-		    NormalsName = '/mods/SCTA-master/textures/common/normalsTS.dds'
                 },
             },
         },
 	SmokeBone = 'Torso',
-        UniformScale = 0.16,
+        UniformScale = 0.13,
     },
     Economy = {
         BuildCostEnergy = 2221,

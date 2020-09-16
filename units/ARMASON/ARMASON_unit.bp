@@ -42,7 +42,6 @@ UnitBlueprint {
         'OVERLAYSONAR',
     'ARM',
 	'SPECIAL',
-	'SONAR',
 	'LEVEL2',
 	'SORTINTEL',
 	

@@ -3,14 +3,14 @@
 #
 #Script created by Raevn
 
-local TAunit = import('/mods/SCTA-master/lua/TAunit.lua').TAunit
+local TAMass = import('/mods/SCTA-master/lua/TAMass.lua').TAMass
 local ScenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
 
-ARMMOHO = Class(TAunit) {
+ARMMOHO = Class(TAMass) {
 	onMetalSpot = false,
 
 	OnCreate = function(self)
-		TAunit.OnCreate(self)
+		TAMass.OnCreate(self)
 		self.Spinners = {
 			arms = CreateRotator(self, 'Blades', 'y', nil, 0, 91, 0),
 		}
@@ -19,14 +19,14 @@ ARMMOHO = Class(TAunit) {
 
 	CreateWreckage = function( self, overkillRatio )
 		if self.onMetalSpot == false then
-			TAunit.CreateWreckage(self, overkillRatio)
+			TAMass.CreateWreckage(self, overkillRatio)
 		else
 			return nil
 		end
 	end,
 
 	OnStopBeingBuilt = function(self, builder, layer)
-		TAunit.OnStopBeingBuilt(self, builder, layer)
+		TAMass.OnStopBeingBuilt(self, builder, layer)
 		local markers = ScenarioUtils.GetMarkers() 
 		local unitPosition = self:GetPosition()  
 		for k, v in pairs(markers) do 
@@ -47,7 +47,7 @@ ARMMOHO = Class(TAunit) {
 	end,
 
 	OnProductionPaused = function(self)
-		TAunit.OnProductionPaused(self)
+		TAMass.OnProductionPaused(self)
 		self.Spinners.arms:SetAccel(182)
 		self.Spinners.arms:SetTargetSpeed(0)
 		self:SetMaintenanceConsumptionInactive()
@@ -55,7 +55,7 @@ ARMMOHO = Class(TAunit) {
 	end,
 
 	OnProductionUnpaused = function(self)
-		TAunit.OnProductionUnpaused(self)
+		TAMass.OnProductionUnpaused(self)
 		self.Spinners.arms:SetAccel(91)
 		self.Spinners.arms:SetTargetSpeed(self:GetProductionPerSecondMass() * 17)
 		self:SetMaintenanceConsumptionActive()

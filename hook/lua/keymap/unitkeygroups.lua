@@ -9,10 +9,8 @@ TAunitkeygroups = {
     }, 
     ["Land_Factory"]= {
         "armlab",
-        "armvp",
         "armhp",
         "corvp",
-        "corlab",
         "corhp",
     },    
     ["Air_Factory"]= {
@@ -40,10 +38,10 @@ TAunitkeygroups = {
         "corgeo",
     },    
     ["Mass_Extractor"]= {
-        "armmex",
-        "cormex",
         "armmoho",
         "cormoho",
+        "armmex",
+        "cormex",
     },
     ["Mass_Fabricator"]= {
         "armmakr",
