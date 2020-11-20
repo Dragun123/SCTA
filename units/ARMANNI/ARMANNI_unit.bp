@@ -139,7 +139,7 @@ UnitBlueprint {
     SizeX = 4,
     SizeY = 3,
     SizeZ = 4,
-    StrategicIconName = 'icon_structure3_directfire',
+    StrategicIconName = 'icon_structure3_sniper',
     StrategicIconSortPriority = 5,
     Weapon = {
         {

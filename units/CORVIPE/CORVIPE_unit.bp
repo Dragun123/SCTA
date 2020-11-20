@@ -108,7 +108,7 @@ UnitBlueprint {
         VisionRadius = 14,
     },
     Interface = {
-        HelpText = 'Pop-up Heavy Cannon',
+        HelpText = 'Pop-up Laser Cannon',
     },
     LifeBarHeight = 0.25,
     LifeBarOffset = 0.5,
@@ -126,7 +126,7 @@ UnitBlueprint {
     SizeX = 3,
     SizeY = 2,
     SizeZ = 3,
-    StrategicIconName = 'icon_structure2_directfire',
+    StrategicIconName = 'icon_structure2_sniper',
     StrategicIconSortPriority = 0,
     Weapon = {
         {

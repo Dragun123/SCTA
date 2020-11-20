@@ -30,7 +30,7 @@ UnitBlueprint {
 	SizeX = 2,
 	SizeZ = 2,
     },
-    StrategicIconName = 'icon_land3_antishield',
+    StrategicIconName = 'icon_land3_sniper',
     SelectionCenterOffsetZ = -0.3,
     SelectionSizeX = 1.5,
     SelectionSizeZ = 1.5,

@@ -40,5 +40,5 @@ UnitBlueprint {
         JammerBlips = 4,
         VisionRadius = 14,
     },
-    StrategicIconName = 'icon_land2_counterintel',
+    StrategicIconName = 'icon_bot2_counterintel',
 }

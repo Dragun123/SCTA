@@ -58,5 +58,5 @@ UnitBlueprint {
     },
     SelectionSizeX = 1.25,
     SelectionSizeZ = 1.9,
-    StrategicIconName = 'icon_sub3_intel',
+    StrategicIconName = 'icon_sub3_counterintel',
 }

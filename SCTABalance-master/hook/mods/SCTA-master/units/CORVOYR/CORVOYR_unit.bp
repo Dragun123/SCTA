@@ -38,7 +38,7 @@ UnitBlueprint {
         SizeZ = 1,
 	MaxWaterDepth = 0,
     },
-    StrategicIconName = 'icon_land1_intel',
+    StrategicIconName = 'icon_bot1_intel',
     General = {
         OrderOverrides = {
                 RULEUTC_IntelToggle = {
