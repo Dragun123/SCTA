@@ -7,7 +7,6 @@ local TAMass = import('/mods/SCTA-master/lua/TAMass.lua').TAMass
 local ScenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
 
 CORMOHO = Class(TAMass) {
-	onMetalSpot = false,
 
 	OnCreate = function(self)
 		TAMass.OnCreate(self)
@@ -29,7 +28,7 @@ CORMOHO = Class(TAMass) {
 	end,
 
 	CreateWreckage = function( self, overkillRatio )
-		if self.onMetalSpot == true then
+		if self.onMetalSpot then
 			TAMass.CreateWreckage(self, overkillRatio)
 		--else
 			--return nil

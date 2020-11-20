@@ -1,12 +1,13 @@
-#CORE Metal Extractor - Extracts Metal
-#CORMEX
+#ARM Moho Mine - Advanced Metal Extractor
+#ARMMOHO
 #
 #Script created by Raevn
 
 local TAMass = import('/mods/SCTA-master/lua/TAMass.lua').TAMass
 local ScenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
 
-CORMEX = Class(TAMass) {
+CORMASS = Class(TAMass) {
+
 	OnCreate = function(self)
 		TAMass.OnCreate(self)
 		self:SetMaintenanceConsumptionActive()
@@ -21,7 +22,7 @@ CORMEX = Class(TAMass) {
 	end,
 
 	CreateWreckage = function( self, overkillRatio )
-		if self.onMetalSpot then
+		if self.onMetalSpot == true then
 			TAMass.CreateWreckageProp(self, overkillRatio)
 		---else
 			--return nil
@@ -82,4 +83,4 @@ CORMEX = Class(TAMass) {
 	end,
 }
 
-TypeClass = CORMEX
+TypeClass = CORMASS

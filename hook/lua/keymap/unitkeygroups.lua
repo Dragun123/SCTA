@@ -42,6 +42,8 @@ TAunitkeygroups = {
         "cormoho",
         "armmex",
         "cormex",
+        "armmass",
+        "cormass",
     },
     ["Mass_Fabricator"]= {
         "armmakr",

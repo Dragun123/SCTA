@@ -6,9 +6,15 @@
 UnitBlueprint {
     Merge = true, 
     Defense = {
-        Health = 3800,
-        MaxHealth = 3800,
+        Health = 4200,
+        MaxHealth = 4200,
     },
+    Economy = {
+        BuildCostEnergy = 4200,
+        BuildCostMass = 580,
+        BuildTime = 9300,
+    },
+    --SelectionCenterOffsetZ = -0.5,
     StrategicIconName = 'icon_bot2_armored',
     Weapon = {
         {
@@ -22,7 +28,7 @@ UnitBlueprint {
             BallisticArc = 'RULEUBA_None',
             CollideFriendly = false,
 	    DamageFriendly = true,
-            Damage = 75,
+            Damage = 120,
 	    DamageRadius = 2,
             DamageType = 'Normal',
             DisplayName = 'CORE_CANLASER',
@@ -37,7 +43,7 @@ UnitBlueprint {
             MaxRadius = 28,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
-	    MuzzleVelocity = 30,
+	    MuzzleVelocity = 43.75,
             ProjectileId = '/mods/SCTA-master/projectiles/CORE_CANLASER/CORE_CANLASER_proj.bp',
             RackBones = {
                 {
@@ -48,7 +54,7 @@ UnitBlueprint {
                 },
             },
             RackFireTogether = false,
-            RackRecoilDistance = -1.5,
+            RackRecoilDistance = 0,
             RackReloadTimeout = 0,
             RackSalvoChargeTime = 0,
             RackSalvoReloadTime = 0,

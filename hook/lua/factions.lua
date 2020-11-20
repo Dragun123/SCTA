@@ -250,6 +250,12 @@ Factions = {
                 '/icons/units/xnb0303_icon.dds',
             },
         },
+        -- AI stuff
+        BaseTemplatesFile = '/lua/CustomFactions/NomadsAIFiles/BaseTemplates.lua',
+        BuildingTemplatesFile = '/lua/CustomFactions/NomadsAIFiles/BuildingTemplates.lua',
+        UpgradeTemplatesFile = '/lua/CustomFactions/NomadsAIFiles/UpgradeTemplates.lua',
+        PlatoonTemplateKey = 'Nomads',
+
         GAZ_UI_Info = {
             BuildingIdPrefixes = { 'xnb', },
             TexEnhancementPrefix = {
@@ -350,7 +356,6 @@ Factions = {
     },
 }
 
--- map faction key to index, as this lookup is done frequently
 FactionIndexMap = {}
 
 -- file designator to faction key

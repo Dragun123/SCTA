@@ -7,8 +7,6 @@ local TAMass = import('/mods/SCTA-master/lua/TAMass.lua').TAMass
 local ScenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
 
 ARMMEX = Class(TAMass) {
-	onMetalSpot = false,
-
 	OnCreate = function(self)
 		TAMass.OnCreate(self)
 		self:SetMaintenanceConsumptionActive()
@@ -19,7 +17,7 @@ ARMMEX = Class(TAMass) {
 	end,
 
 	CreateWreckage = function( self, overkillRatio )
-		if self.onMetalSpot == true then
+		if self.onMetalSpot then
 			TAMass.CreateWreckageProp(self, overkillRatio)
 		---else
 			---return nil

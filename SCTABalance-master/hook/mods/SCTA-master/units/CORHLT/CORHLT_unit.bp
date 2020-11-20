@@ -51,8 +51,8 @@ UnitBlueprint {
             DamageType = 'Normal',
             DisplayName = 'CORE_LASERH1',
             FireTargetLayerCapsTable = {
-                Land = 'Land|Water',
-                Water = 'Land|Water',
+                Land = 'Land|Water|Air',
+                Water = 'Land|Water|Air',
             },
 	    RangeCategory = 'UWRC_DirectFire',
      WeaponCategory = 'DirectFire',

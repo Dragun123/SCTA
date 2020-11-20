@@ -1,11 +1,11 @@
 PropBlueprint {
    Merge = true, 
     Display = {
-        UniformScale = 0.1,
+        UniformScale = 0.07,
     },
     Economy = {
         ReclaimEnergyMax = 0,
-        ReclaimMassMax = 900,
+        ReclaimMassMax = 1800,
         ReclaimTime = 10,
         },
 }

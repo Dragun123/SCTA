@@ -1,5 +1,5 @@
-#CORE Metal Extractor - Extracts Metal
-#CORMEX
+#ARM MEX Mine - Advanced Metal Extractor
+#ARMMEX
 #
 #Blueprint created by Raevn
 
@@ -7,17 +7,17 @@ UnitBlueprint {
     Audio = {
         UISelection = Sound {
             Bank = 'TA_Sound',
-            Cue = 'MEXON2',
+            Cue = 'MEXON1',
             LodCutoff = 'UnitMove_LodCutoff',
         },
         Activate = Sound {
             Bank = 'TA_Sound',
-            Cue = 'MEXRUN2',
+            Cue = 'MEXRUN1',
             LodCutoff = 'UnitMove_LodCutoff',
         },
         Deactivate = Sound {
             Bank = 'TA_Sound',
-            Cue = 'MEXOFF2',
+            Cue = 'MEXOFF1',
             LodCutoff = 'UnitMove_LodCutoff',
         },
 
@@ -27,45 +27,42 @@ UnitBlueprint {
             LodCutoff = 'UnitMove_LodCutoff',
 	},
     },
-    BuildIconSortPriority = 5,
+    BuildIconSortPriority = 1,
     Categories = {
-        'BUILTBYT1AIR',
-        'BUILTBYT1KBOT',
-        'BUILTBYT1VEHICLE',
-        'BUILTBYT1HOVER',
-        'BUILTBYT1SHIP',
-        'BUILTBYCOMMANDER',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',
         'RECLAIMABLE',
-        'TECH1',
-	    'STRUCTURE',
+        'TECH3',
+	'STRUCTURE',
         'MASSPRODUCTION',
         'MASSEXTRACTION',
                 'ECONOMIC',
         'SORTECONOMY',
-    'CORE',        
-    'SHOWQUEUE',
-	'METAL',
-	'LEVEL1',
-	
-	
-	
+	'ARM',
+	'ENERGY',
+	'LEVEL3',
 	'STORAGE',
     },
     Defense = {
         ArmorType = 'Structure',
-        Health = 175,
-        MaxHealth = 175,
         AirThreatLevel = 0,
-        EconomyThreatLevel = 1000,
+        EconomyThreatLevel = 2000,
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
+        Health = 2000,
+        MaxHealth = 2000,
     },
-    Description = 'Extracts Metal',
+    Description = 'Advanced Metal Extractor',
     Display = {
         DestructionEffects = {
+		DefaultProjectileCategories = {'CamoflageC','Noise3'},
+		DestructionProjectiles = {
+			{
+				ProjectileBlueprint = '/mods/SCTA-master/effects/entities/Debris/Pieces/ARMMEX_debris01_proj.bp',
+				Bone = 'Extractor',
+			},
+		},
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
@@ -73,7 +70,7 @@ UnitBlueprint {
 				EmitterSize = 1.25,
 			},
 			{
-				EmitterBone = {'arms'},
+				EmitterBone = {'Extractor'},
 				EmitterBlueprint = {
     					'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
 			    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
@@ -88,52 +85,47 @@ UnitBlueprint {
             LODs = {
                 {
                     LODCutoff = 230,
+                    SpecularName = '/mods/SCTA-master/units/ARMMEX/ARMMEX_SpecTeam.dds',
+                    AlbedoName = '/mods/SCTA-master/units/ARMMEX/ARMMEX_Albedo.dds',
+                    MeshName =   '/mods/SCTA-master/units/ARMMEX/ARMMEX_lod0.scm',
                     ShaderName = 'Unit', 
+                    NormalsName = '/mods/SCTA-master/textures/common/normalsTS.dds'
                 },
             },
         },
-        UniformScale = 0.16,
+        UniformScale = 0.12,
     },
     Economy = {
-        BuildCostEnergy = 514,
-        BuildCostMass = 51,
-        BuildTime = 1874,
-        MaintenanceConsumptionPerSecondEnergy = 3,
-        ProductionPerSecondMass = 2.2,
+        BuildCostMass = 2400,
+        BuildCostEnergy = 24000,
+        MaintenanceConsumptionPerSecondEnergy = 10,
+        BuildTime = 17500,
+        DifferentialUpgradeCostCalculation = true,
+        ProductionPerSecondMass = 8,
+    },
+    Footprint = {
+        SizeX = 1,
+        SizeZ = 1,
     },
     General = {
 	BuildAngle = 2048,
         Category = 'Economy',
         Classification = 'RULEUC_Resource',
         SelectionPriority = 5,
-        CommandCaps = {
-            RULEUCC_Attack = false,
-            RULEUCC_CallTransport = false,
-            RULEUCC_Capture = false,
-            RULEUCC_Guard = false,
-            RULEUCC_Move = false,
-            RULEUCC_Nuke = false,
-            RULEUCC_Patrol = false,
-            RULEUCC_Pause = true,
-            RULEUCC_Reclaim = false,
-            RULEUCC_Repair = false,
-            RULEUCC_RetaliateToggle = false,
-            RULEUCC_Stop = false,
-            RULEUCC_Transport = false,
-        },
-        FactionName = 'CORE',
-        TechLevel = 'RULEUTL_Basic',
+        FactionName = 'ARM',
         ToggleCaps = {
             RULEUTC_ProductionToggle = true,
         },
-        UnitName = 'Metal Extractor',
+        TechLevel = 'RULEUTL_Secret',
+        UnitName = 'MEX Quarry',
+        UpgradesFrom = 'armmex',
     },
     Intel = {
         VisionRadius = 14,
         WaterVisionRadius = 4, 
     },
     Interface = {
-        HelpText = 'Extracts Metal',
+        HelpText = 'Advanced Metal Extractor',
     },
     LifeBarHeight = 0.25,
     LifeBarOffset = 0.5,
@@ -147,19 +139,20 @@ UnitBlueprint {
         MeshExtentsX = 1.25,
         MeshExtentsY = 1.25,
         MeshExtentsZ = 1.25,
+        DragCoefficient = 0.2,
         SkirtOffsetX = -0.5,
         SkirtOffsetZ = -0.5,
         SkirtSizeX = 2,
         SkirtSizeZ = 2,
         BuildRestriction = 'RULEUBR_OnMassDeposit',
     },
-    SelectionSizeX = 0.65,
-    SelectionSizeZ = 0.65,
+    SelectionSizeX = 1,
+    SelectionSizeZ = 1,
     SelectionThickness = 0.6,
-    SizeX = 0.75,
+    SizeX = 2,
     SizeY = 1.4,
-    SizeZ = 0.75,
-    StrategicIconName = 'icon_structure1_mass',
+    SizeZ = 2,
+    StrategicIconName = 'icon_structure2_mass',
     StrategicIconSortPriority = 0,
     Weapon = {
         { #SMALL_BUILDINGEX
@@ -181,7 +174,7 @@ UnitBlueprint {
     },
     Wreckage = {
 	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/CORMEX/CORMEX_dead_prop.bp',
+        Blueprint = '/mods/SCTA-master/SCTABalance-master/units/ARMMASS/ARMMASS_dead_prop.bp',
         WreckageLayers = {
             Land = true,
         },

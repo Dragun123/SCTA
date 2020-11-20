@@ -8,6 +8,7 @@ UnitBlueprint {
     Abilities = {
         '<LOC ability_upgradable>Upgradeable',
     },
+    UniformScale = 0.1,
 }, 
       Economy = {
         BuildCostEnergy = 900,
@@ -15,11 +16,11 @@ UnitBlueprint {
         MaintenanceConsumptionPerSecondEnergy = 2,
         BuildRate = 60,
         BuildableCategory = {
-               'cormoho',
+               'cormass',
         },
     },
     General = {
-        UpgradesTo = 'cormoho',
+        UpgradesTo = 'cormass',
     },
     Physics = {
         DragCoefficient = 0.2,
@@ -28,8 +29,8 @@ UnitBlueprint {
         SkirtSizeX = 2,
         SkirtSizeZ = 2,
     },
-    SelectionSizeX = 1.6,
-    SelectionSizeZ = 1.6,
+    SelectionSizeX = 1,
+    SelectionSizeZ = 1,
     SizeX = 2,
     SizeZ = 2,
 }
