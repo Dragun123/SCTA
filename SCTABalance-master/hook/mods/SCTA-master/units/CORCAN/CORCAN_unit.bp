@@ -9,7 +9,7 @@ UnitBlueprint {
         Health = 3800,
         MaxHealth = 3800,
     },
-    StrategicIconName = 'icon_land2_directfire',
+    StrategicIconName = 'icon_bot2_armored',
     Weapon = {
         {
             Audio = {

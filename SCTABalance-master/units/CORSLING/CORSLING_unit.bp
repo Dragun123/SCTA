@@ -139,7 +139,7 @@ UnitBlueprint {
     SizeX = 2,
     SizeY = 1.5,
     SizeZ = 2,
-    StrategicIconName = 'icon_land2_antiair',
+    StrategicIconName = 'icon_bot2_antiair',
     StrategicIconSortPriority = 0,
     Weapon = {
             {
