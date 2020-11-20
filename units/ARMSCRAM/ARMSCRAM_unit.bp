@@ -165,7 +165,7 @@ UnitBlueprint {
     SizeX = 2,
     SizeY = 1,
     SizeZ = 2,
-    StrategicIconName = 'icon_sub2_intel',
+    StrategicIconName = 'icon_sub2_counterintel',
     StrategicIconSortPriority = 20,
     Weapon = {
         { #BIG_UNITEX
