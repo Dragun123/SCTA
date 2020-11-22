@@ -64,7 +64,7 @@ UnitBlueprint {
 	DestructionEffects = {
 		DestructionEmitters = {
 			{
-				EmitterBone = {'Torso'},
+				EmitterBone = {'torso'},
 				EmitterBlueprint = {'/mods/SCTA-master/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
@@ -80,7 +80,7 @@ UnitBlueprint {
                 },
             },
         },
-	SmokeBone = 'Torso',
+	SmokeBone = 'torso',
         UniformScale = 0.16,
     },
     Economy = {
@@ -91,8 +91,6 @@ UnitBlueprint {
     Footprint = {
         SizeX = 1,
         SizeZ = 1,
-	MaxSlope = 1.0625,
-	MaxWaterDepth = 0.75,
     },
     General = {
         Category = 'Direct Fire',
@@ -174,9 +172,9 @@ UnitBlueprint {
             RackBones = {
                 {
                     MuzzleBones = {
-                        'LeftFlare',
+                        'emgflare',
                     },
-                    RackBone = 'LeftGun',
+                    RackBone = 'lemg',
                 },
             },
             RackRecoilDistance = 0,
@@ -190,9 +188,9 @@ UnitBlueprint {
                 'ALLUNITS',
             },
             TargetRestrictDisallow = 'UNTARGETABLE, UNDERWATER',
-            TurretBoneMuzzle = 'LeftFlare',
-            TurretBonePitch = 'LeftLowerArm',
-            TurretBoneYaw = 'Torso',
+            TurretBoneMuzzle = 'emgflare',
+            TurretBonePitch = 'larm',
+            TurretBoneYaw = 'torso',
             TurretDualManipulators = false,
             TurretPitch = 0,
             TurretPitchRange = 360,
@@ -234,9 +232,9 @@ UnitBlueprint {
             RackBones = {
                 {
                     MuzzleBones = {
-                        'RightFlare',
+                        'flare',
                     },
-                    RackBone = 'RightGun',
+                    RackBone = 'rgun',
                 },
             },
             RackRecoilDistance = 0,
@@ -250,9 +248,9 @@ UnitBlueprint {
                 'ALLUNITS',
             },
             TargetRestrictDisallow = 'UNTARGETABLE, UNDERWATER',
-            TurretBoneMuzzle = 'RightFlare',
-            TurretBonePitch = 'RightLowerArm',
-            TurretBoneYaw = 'RightLowerArm',
+            TurretBoneMuzzle = 'flare',
+            TurretBonePitch = 'rarm',
+            TurretBoneYaw = 'rarm',
             TurretDualManipulators = false,
             TurretPitch = 0,
             TurretPitchRange = 360,

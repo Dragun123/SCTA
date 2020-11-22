@@ -178,7 +178,7 @@ UnitBlueprint {
             MaxRadius = 28,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
-            MuzzleVelocity = 6.25,
+            MuzzleVelocity = 10,
             ProjectileId = '/mods/SCTA-master/projectiles/ARMSMART_TORPEDO/ARMSMART_TORPEDO_proj.bp',
             RackBones = {
                 {

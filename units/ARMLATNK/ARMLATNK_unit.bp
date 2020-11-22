@@ -64,7 +64,7 @@ UnitBlueprint {
 		DefaultProjectileCategories = {'Tredside'},
 		DestructionEmitters = {
 			{
-				EmitterBone = {'Turret'},
+				EmitterBone = {'Lturret'},
 				EmitterBlueprint = {'/mods/SCTA-master/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
@@ -168,9 +168,9 @@ UnitBlueprint {
             RackBones = {
                 {
                     MuzzleBones = {
-                        'Muzzle',
+                        'flare',
                     },
-                    RackBone = 'Barrel',
+                    RackBone = 'Lgun',
                 },
             },
             RackRecoilDistance = 0,
@@ -185,9 +185,9 @@ UnitBlueprint {
                 'ALLUNITS',
             },
             TargetRestrictDisallow = 'UNTARGETABLE, UNDERWATER',
-            TurretBoneMuzzle = 'Muzzle',
-            TurretBonePitch = 'Barrel',
-            TurretBoneYaw = 'Turret',
+            TurretBoneMuzzle = 'flare',
+            TurretBonePitch = 'Lgun',
+            TurretBoneYaw = 'Lturret',
             TurretDualManipulators = false,
             TurretPitch = 0,
             TurretPitchRange = 360,
@@ -228,9 +228,9 @@ UnitBlueprint {
             RackBones = {
                 {
                     MuzzleBones = {
-                        'MissileMuzzle',
+                        'Rflare1',
                     },
-                    RackBone = 'MissileBarrel',
+                    RackBone = 'Rgun',
                 },
             },
             RackRecoilDistance = 0,
@@ -245,9 +245,9 @@ UnitBlueprint {
                 'ALLUNITS',
             },
             TargetRestrictDisallow = 'UNTARGETABLE, UNDERWATER',
-            TurretBoneMuzzle = 'MissileMuzzle',
-            TurretBonePitch = 'MissileBarrel',
-            TurretBoneYaw = 'MissileTurret',
+            TurretBoneMuzzle = 'Rflare1',
+            TurretBonePitch = 'Rgun',
+            TurretBoneYaw = 'Rturret',
             TurretDualManipulators = false,
             TurretPitch = 0,
             TurretPitchRange = 360,

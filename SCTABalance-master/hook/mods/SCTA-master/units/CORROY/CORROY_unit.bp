@@ -118,7 +118,7 @@ UnitBlueprint {
             DamagesFriendly = true,
             Damage = 120,
             DamageRadius = 0.5,
-            DamageWater = 240,
+            DamageWater = 250,
             DamageRadiusWater = 0.5,
             DamageType = 'Normal',
             DisplayName = 'COREDEPTHCHARGE',

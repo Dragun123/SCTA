@@ -42,4 +42,9 @@ UnitBlueprint {
     Intel = {
         VisionRadius = 10,
     },
+    SelectionSizeX = 1,
+    SelectionSizeZ = 1,
+    SizeX = 1,
+    ---SizeY = 0.75,
+    SizeZ = 1,
 }

@@ -5,41 +5,14 @@
 
 UnitBlueprint {
     Merge = true, 
-    Display = {
-        Abilities = {
-            '<LOC ability_jamming>Jamming',
-        },
-    }, 
     Economy = {
 	MaintenanceConsumptionPerSecondEnergy = 10,
     },
     Footprint = {
-	SizeX = 2,
-	SizeZ = 2,
-	MaxSlope = 1,
-    },
-    General = {
-        ToggleCaps = {
-            RULEUTC_JammingToggle = true,
-            RULEUTC_StealthToggle = false,
+        Footprint = {
+            SizeX = 2,
+            SizeZ = 4,
         },
-        OrderOverrides = {
-            RULEUTC_JammingToggle = {
-                bitmapId = 'jamming',
-                helpText = 'toggle_jamming',
-            },
-        },
-    },
-    Intel = {
-    FreeIntel = false,
-    RadarStealth = false,
-    JamRadius = {
-        Max = 18,
-        Min = 18,
-    },
-    JammerBlips = 8,
-    VisionRadius = 14,
-	RadarStealthFieldRadius = 0,
     },
     SelectionSizeX = 1.25,
     SelectionSizeZ = 1.9,

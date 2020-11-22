@@ -105,7 +105,7 @@ UnitBlueprint {
             DamagesFriendly = true,
             Damage = 20,
             DamageRadius = 0.5,
-            DamageWater = 220,
+            DamageWater = 250,
             DamageRadiusWater = 0.5,
             DamageType = 'Normal',
             DisplayName = 'COREDEPTHCHARGE',
@@ -119,7 +119,7 @@ UnitBlueprint {
             MaxRadius = 20,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
-            MuzzleVelocity = 6.25,
+            MuzzleVelocity = 10,
             ProjectileId = '/mods/SCTA-master/projectiles/COREDEPTHCHARGE/COREDEPTHCHARGE_proj.bp',
             RackBones = {
                 {
@@ -136,7 +136,7 @@ UnitBlueprint {
             RackSalvoReloadTime = 0,
             RackSalvoSize = 1,
             RackSlavedToTurret = false,
-            RateOfFire = 0.2,
+            RateOfFire = 0.75,
             TargetCheckInterval = 1,
             TargetPriorities = {
                 'ALLUNITS',

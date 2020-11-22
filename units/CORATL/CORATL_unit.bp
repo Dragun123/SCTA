@@ -146,7 +146,7 @@ UnitBlueprint {
             CollideFriendly = false,
             Damage = 500,
             DamageRadius = 0.5,
-            DamageWater = 1250,
+            DamageWater = 1200,
             DamageRadiusWater = 0.5,
             DamageType = 'Normal',
             DisplayName = 'ARMATL_TORPEDO',   

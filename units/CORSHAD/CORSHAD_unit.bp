@@ -188,7 +188,7 @@ UnitBlueprint {
             BallisticArc = 'RULEUBA_None',
             BombDropThreshold = 3,
             CollideFriendly = false,
-            Damage = 140,
+            Damage = 60,
             DamageFriendly = true,
             DamageRadius = 4,
             DamageType = 'Normal',
@@ -206,7 +206,7 @@ UnitBlueprint {
             MuzzleVelocity = 0,
             NeedToComputeBombDrop = true,
             ProjectileId = '/mods/SCTA-master/projectiles/CORBOMB/CORBOMB_proj.bp',
-            ProjectilesPerOnFire = 5,
+            --ProjectilesPerOnFire = 5,
             RackBones = {
                 {
                     MuzzleBones = {
@@ -216,12 +216,12 @@ UnitBlueprint {
                 },
             },
             RackRecoilDistance = 0,
-            RackReloadTimeout = 10,
+            RackReloadTimeout = 5,
             RackSalvoChargeTime = 0,
             RackSalvoReloadTime = 0,
             RackSalvoSize = 1,
             RackSlavedToTurret = false,
-            RateOfFire = 0.5,
+            RateOfFire = 0.25,
             TargetCheckInterval = 1,
             TargetPriorities = {
                 'SPECIALHIGHPRI',
@@ -239,7 +239,7 @@ UnitBlueprint {
             TurretYawRange = 180,
             TurretYawSpeed = 60,
             Turreted = false,
-            RangeCategory = 'UWRC_DirectFire',
+            FixBombTrajectory = true,
             WeaponCategory = 'Bomb',
             WeaponRepackTimeout = 0,
             WeaponUnpacks = false,

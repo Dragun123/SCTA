@@ -11,7 +11,7 @@ ARMMASS = Class(TAMass) {
 		TAMass.OnCreate(self)
 		self:SetMaintenanceConsumptionActive()
 		self.Spinners = {
-			arms = CreateRotator(self, 'Extractor', 'y', nil, 0, 91, 0),
+			arms = CreateRotator(self, 'arms', 'y', nil, 0, 91, 0),
 		}
 		self.Trash:Add(self.Spinners.arms)
 	end,

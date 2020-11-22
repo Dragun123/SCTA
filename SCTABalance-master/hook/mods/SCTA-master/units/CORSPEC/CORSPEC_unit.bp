@@ -1,0 +1,22 @@
+#CORE Spectre - Radar Jammer
+#CORESPEC
+#
+#Blueprint created by Raevn
+
+UnitBlueprint {
+    Merge = true, 
+    Display = {
+        UniformScale = 0.08,
+    },
+    Footprint = {
+	SizeX = 1,
+	SizeZ = 1,
+    },
+    LifeBarSize = 1,
+    LifeBarOffset = 0,
+    SelectionSizeX = 0.6,
+    SelectionSizeZ = 0.6,
+    SizeX = 1,
+    SizeY = 0.8,
+    SizeZ = 1,
+}

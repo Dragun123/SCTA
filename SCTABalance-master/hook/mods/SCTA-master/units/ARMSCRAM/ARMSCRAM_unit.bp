@@ -30,7 +30,7 @@ UnitBlueprint {
     },
     Footprint = {
 	SizeX = 2,
-	SizeZ = 2,
+	SizeZ = 3,
 	MaxSlope = 1,
     },
     General = {

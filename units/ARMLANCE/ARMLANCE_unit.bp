@@ -209,7 +209,7 @@ UnitBlueprint {
                 MinRadius = 4,
                 MuzzleSalvoDelay = 1.8,
                 MuzzleSalvoSize = 1,
-                MuzzleVelocity = 6.25,
+                MuzzleVelocity = 10,
                 ProjectileId = '/mods/SCTA-master/projectiles/ARMAIR_TORPEDO/ARMAIR_TORPEDO_proj.bp',
                 ProjectileLifetime = 20,
                 ProjectilesPerOnFire = 1,

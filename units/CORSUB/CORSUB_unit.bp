@@ -187,7 +187,7 @@ UnitBlueprint {
             FiringTolerance = 360,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
-            MuzzleVelocity = 6.25,
+            MuzzleVelocity = 10,
             ProjectileId = '/mods/SCTA-master/projectiles/CORE_TORPEDO/CORE_TORPEDO_proj.bp',
             RackBones = {
                 {

@@ -20,11 +20,11 @@ PropBlueprint {
                 },
             },
         },
-        UniformScale = 0.16,
+        UniformScale = 0.08,
     },
     Economy = {
         ReclaimEnergyMax = 0,
-        ReclaimMassMax = 184,
+        ReclaimMassMax = 300,
         ReclaimTime = 10,
     },
     Footprint = {

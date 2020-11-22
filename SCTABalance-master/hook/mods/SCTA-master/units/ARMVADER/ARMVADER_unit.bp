@@ -10,6 +10,9 @@ UnitBlueprint {
         BuildCostMass = 500,
         BuildTime = 5000,
     },
+    LifeBarOffset = 0,
+    LifeBarSize = 1,
+    SizeY = 0.5, 
     Weapon = {
         {
             Audio = {

@@ -69,7 +69,7 @@ UnitBlueprint {
 		DestructionProjectiles = {
 			{
 				ProjectileBlueprint = '/mods/SCTA-master/effects/entities/Debris/Pieces/ARMMEX_debris01_proj.bp',
-				Bone = 'Extractor',
+				Bone = 'arms',
 			},
 		},
 		DestructionEmitters = {
@@ -79,7 +79,7 @@ UnitBlueprint {
 				EmitterSize = 1.25,
 			},
 			{
-				EmitterBone = {'Extractor'},
+				EmitterBone = {'arms'},
 				EmitterBlueprint = {
     					'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
 			    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',

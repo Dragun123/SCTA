@@ -6,7 +6,7 @@ UnitBlueprint {
         BuildTime = 5000,
     },
     Display = {
-        UniformScale = 0.10,
+        UniformScale = 0.08,
     },
     Defense = {
         Health = 2200,
@@ -22,7 +22,7 @@ UnitBlueprint {
     LifeBarSize = 1.5,
     SelectionSizeX = 1,
     SelectionSizeZ = 1,
-    SizeX = 1,
-    SizeZ = 1,
-    SizeY = 2,
+    SizeX = 1.4,
+    SizeZ = 1.4,
+    SizeY = 1.2,
 }

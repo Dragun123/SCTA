@@ -1,10 +1,16 @@
 UnitBlueprint {
    Merge = true, 
+   Display = {
+    Abilities = {
+        '<LOC ability_jamming>Jamming',
+    },
+}, 
 Defense = {
     Health = 2000,
     MaxHealth = 2000,
 },
 Economy = {
+    MaintenanceConsumptionPerSecondEnergy = 3,
     BuildCostEnergy = 8000,
     BuildCostMass = 1000,
     BuildTime = 6000,
@@ -12,6 +18,26 @@ Economy = {
     Footprint = {
         SizeX = 1,
         SizeZ = 1,
+    },
+    General = {
+        ToggleCaps = {
+            RULEUTC_JammingToggle = true,
+        },
+        OrderOverrides = {
+            RULEUTC_JammingToggle = {
+                bitmapId = 'jamming',
+                helpText = 'toggle_jamming',
+            },
+        },
+    },
+    Intel = {
+    FreeIntel = false,
+    JamRadius = {
+        Max = 10,
+        Min = 10,
+    },
+    JammerBlips = 5,
+    VisionRadius = 14,
     },
    SizeY = 1, 
    StrategicIconName = 'icon_bot2_directfire',
@@ -46,9 +72,9 @@ Economy = {
         RackBones = {
             {
                 MuzzleBones = {
-                    'Muzzle',
+                    'flare',
                 },
-                RackBone = 'Barrel',
+                RackBone = 'Lgun',
             },
         },
         RackRecoilDistance = 0,
@@ -63,9 +89,9 @@ Economy = {
             'ALLUNITS',
         },
         TargetRestrictDisallow = 'UNTARGETABLE, UNDERWATER',
-        TurretBoneMuzzle = 'Muzzle',
-        TurretBonePitch = 'Barrel',
-        TurretBoneYaw = 'Turret',
+        TurretBoneMuzzle = 'flare',
+        TurretBonePitch = 'Lturret',
+        TurretBoneYaw = 'Lturret',
         TurretDualManipulators = false,
         TurretPitch = 0,
         TurretPitchRange = 360,
@@ -106,9 +132,9 @@ Economy = {
         RackBones = {
             {
                 MuzzleBones = {
-                    'MissileMuzzle',
+                    'Rflare1',
                 },
-                RackBone = 'MissileBarrel',
+                RackBone = 'Rgun',
             },
         },
         RackRecoilDistance = 0,
@@ -123,9 +149,9 @@ Economy = {
             'ALLUNITS',
         },
         TargetRestrictDisallow = 'UNTARGETABLE, UNDERWATER',
-        TurretBoneMuzzle = 'MissileMuzzle',
-        TurretBonePitch = 'MissileBarrel',
-        TurretBoneYaw = 'MissileTurret',
+        TurretBoneMuzzle = 'Rflare1',
+        TurretBonePitch = 'Rgun',
+        TurretBoneYaw = 'Rturret',
         TurretDualManipulators = false,
         TurretPitch = 0,
         TurretPitchRange = 360,

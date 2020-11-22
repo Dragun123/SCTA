@@ -376,9 +376,15 @@ TAUnderWaterProjectile = Class(TAMediumCannonProjectile) {
 	OnCreate = function(self)
 		self:SetCollisionShape('Sphere', 0, 0, 0, 1)
 		TAMediumCannonProjectile.OnCreate(self)
-		local target = self:GetTrackingTarget()
+		ForkThread(self.MovementThread, self)
+		end,
+
+		MovementThread = function(self)
+			self:TrackTarget(true)
+			WaitSeconds(0.1)
+			self:SetTurnRate(50)
+			local target = self:GetTrackingTarget()
 			if target and IsBlip(target) then target = target:GetSource() end
-			
 			if target and IsUnit(target) then
 				local layer = target:GetCurrentLayer()
 				if layer == 'Sub' then
@@ -386,6 +392,7 @@ TAUnderWaterProjectile = Class(TAMediumCannonProjectile) {
 				end
 			end
 		end,
+
 		
 	OnEnterWater = function(self)
 		for k,v in self.FxImpactWater do
@@ -416,11 +423,4 @@ TAUnderWaterProjectile = Class(TAMediumCannonProjectile) {
 		'/effects/emitters/destruction_water_splash_ripples_01_emit.bp',
 	},
 		FxWaterHitScale = 0.35,
-	
-		PassDamageThread = function(self)
-			local bp = self:GetLauncher():GetBlueprint().Weapon
-			WaitSeconds(0.1)
-			self.DamageData.DamageAmount = bp.DamageWater or 100
-			self.DamageData.DamageRadius = bp.DamageRadiusWater or 0
-		end,
 }

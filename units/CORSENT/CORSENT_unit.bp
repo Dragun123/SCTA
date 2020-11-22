@@ -86,8 +86,6 @@ UnitBlueprint {
         BuildTime = 20380,
     },
     Footprint = {
-	MaxSlope = 1,
-	MaxWaterDepth = 0.75,
         SizeX = 3,
         SizeZ = 3,
     },
@@ -169,27 +167,15 @@ UnitBlueprint {
             RackBones = {
                 {
                     MuzzleBones = {
-                        'Muzzle_01',
+                        'Flare',
                     },
-                    RackBone = 'Barrel_01',
+                    RackBone = 'Guns',
                 },
                 {
                     MuzzleBones = {
-                        'Muzzle_02',
+                        'Flare2',
                     },
-                    RackBone = 'Barrel_02',
-                },
-                {
-                    MuzzleBones = {
-                        'Muzzle_03',
-                    },
-                    RackBone = 'Barrel_03',
-                },
-                {
-                    MuzzleBones = {
-                        'Muzzle_04',
-                    },
-                    RackBone = 'Barrel_04',
+                    RackBone = 'Guns',
                 },
             },
             RackRecoilDistance = -4,
@@ -204,8 +190,8 @@ UnitBlueprint {
                 'ALLUNITS',
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
-            TurretBoneMuzzle = 'Turret',
-            TurretBonePitch = 'Turret',
+            TurretBoneMuzzle = 'Guns',
+            TurretBonePitch = 'Guns',
             TurretBoneYaw = 'Turret',
             TurretDualManipulators = false,
             TurretPitch = 0,

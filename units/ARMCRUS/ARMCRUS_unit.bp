@@ -242,7 +242,7 @@ UnitBlueprint {
             Damage = 40,
             DamageRadius = 0.5,
             DamageType = 'Normal',
-            DamageWater = 130,
+            DamageWater = 200,
             DamageRadiusWater = 0.5,
             DisplayName = 'ARMDEPTHCHARGE',
             FireTargetLayerCapsTable = {
@@ -255,7 +255,7 @@ UnitBlueprint {
             MaxRadius = 45,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
-            MuzzleVelocity = 6.25,
+            MuzzleVelocity = 10,
             ProjectileId = '/mods/SCTA-master/projectiles/ARMDEPTHCHARGE/ARMDEPTHCHARGE_proj.bp',
             RackBones = {
                 {

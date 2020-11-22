@@ -160,7 +160,7 @@ UnitBlueprint {
 	    DamageFriendly = true,
             Damage = 100,
         DamageRadius = 0.5,
-        DamageWater = 1000,
+        DamageWater = 1500,
         DamageRadiusWater = 0.5,
             DamageType = 'Normal',
             DisplayName = 'CORSMART_TORPEDO',
@@ -173,7 +173,7 @@ UnitBlueprint {
             MaxRadius = 23.4375,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
-            MuzzleVelocity = 6.25,
+            MuzzleVelocity = 10,
             ProjectileId = '/mods/SCTA-master/projectiles/ARMSMART_TORPEDO/ARMSMART_TORPEDO_proj.bp',
             RackBones = {
                 {

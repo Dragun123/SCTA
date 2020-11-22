@@ -11,9 +11,9 @@ ARMTHUND = Class(TAair) {
 	OnCreate = function(self)
 		TAair.OnCreate(self)
 		self.Spinners = {
-			jets = CreateRotator(self, 'Jets', 'x', nil, 0, 0, 0),
-			wing1 = CreateRotator(self, 'Wing_01', 'y', nil, 0, 0, 0),
-			wing2 = CreateRotator(self, 'Wing_02', 'y', nil, 0, 0, 0),
+			jets = CreateRotator(self, 'jets', 'x', nil, 0, 0, 0),
+			wing1 = CreateRotator(self, 'wing1', 'y', nil, 0, 0, 0),
+			wing2 = CreateRotator(self, 'wing2', 'y', nil, 0, 0, 0),
 		}
 		for k, v in self.Spinners do
 			self.Trash:Add(v)
