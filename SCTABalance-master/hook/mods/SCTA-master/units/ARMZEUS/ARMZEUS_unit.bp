@@ -35,5 +35,5 @@ UnitBlueprint {
         BuildCostMass = 400,
         BuildTime = 5000,
     },
-    StrategicIconName = 'icon_land2_directfire',
+    StrategicIconName = 'icon_bot2_armored',
 }

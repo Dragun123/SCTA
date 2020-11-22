@@ -38,5 +38,5 @@ Defense = {
         MaxAcceleration = 1.6,
         MaxSpeed = 2.2,
     },
-    StrategicIconName = 'icon_land3_directfire',
+    StrategicIconName = 'icon_land3_armored',
 }
