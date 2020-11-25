@@ -29,9 +29,11 @@ UnitBlueprint {
         },
      }, 
      Economy = {
+        NaturalProducer = false,
         BuildRate = 60, 
         BuildCostEnergy = 6000,
-        BuildCostMass = 250,
+        BuildTime = 9600,
+        BuildCostMass = 400,
         MaintenanceConsumptionPerSecondEnergy = 50,
         ProductionPerSecondEnergy = 0,
         DifferentialUpgradeCostCalculation = true,

@@ -113,6 +113,7 @@ UnitBlueprint {
     BuildableCategory = {
         'VTOL LEVEL1 CORE', 
         'VTOL LEVEL2 CORE',
+        'coradap', 
     },
 	InitialRallyX = 1,
 	InitialRallyZ = 1,
@@ -139,6 +140,7 @@ UnitBlueprint {
         ConstructionBar = true,
         FactionName = 'CORE',
         UpgradesFrom = 'corap',
+        UpgradesTo = 'coradap', 
         TechLevel = 'RULEUTL_Advanced',
 	UnitName = 'Aircraft Development Plant',
     },

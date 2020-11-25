@@ -3,7 +3,7 @@
 #
 #Script created by Raevn
 
-local TATidal = import('/mods/SCTA-master/lua/TATidal.lua').TATidal
+local TATidal = import('/mods/SCTA-master/lua/TAWeather.lua').TATidal
 
 ARMTIDE = Class(TATidal) {
 	OnCreate = function(self)

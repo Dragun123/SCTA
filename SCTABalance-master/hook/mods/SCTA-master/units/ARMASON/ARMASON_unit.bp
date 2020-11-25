@@ -41,7 +41,7 @@ UnitBlueprint {
         NaturalProducer = false,
         DifferentialUpgradeCostCalculation = true,
         BuildCostEnergy = 9000,
-        BuildCostMass = 600,
+        BuildCostMass = 1200,
         MaintenanceConsumptionPerSecondEnergy = 100,
         },
 }

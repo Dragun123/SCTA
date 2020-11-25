@@ -17,7 +17,7 @@ UnitBlueprint {
         BuildTime = 3000,
         ProductionPerSecondEnergy = 30,
         ProductionPerSecondEnergyMin = 25,
-        ProductionPerSecondEnergyMax = 40,
+        ProductionPerSecondEnergyMax = 35,
 	    NaturalProducer = true,
     },
    Physics = {

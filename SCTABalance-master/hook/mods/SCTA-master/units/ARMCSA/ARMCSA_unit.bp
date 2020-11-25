@@ -16,6 +16,7 @@ UnitBlueprint {
 'VTOL',
 'SELECTION', 
     'ARM',
+    'SHIP',
 'LEVEL3',
 },
    Defense = {
@@ -32,8 +33,6 @@ UnitBlueprint {
             'BUILTBYT1HOVER ARM',
             'BUILTBYT2SUB ARM',
             'BUILTBYT2AIR ARM',
-            'armaap',
-            'armasy',
         },
         MaxBuildDistance = 7,
         ProductionPerSecondEnergy = 3,

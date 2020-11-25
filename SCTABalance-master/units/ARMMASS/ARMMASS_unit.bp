@@ -1,5 +1,5 @@
 #ARM MEX Mine - Advanced Metal Extractor
-#ARMMEX
+#ARMMOHO
 #
 #Blueprint created by Raevn
 
@@ -56,21 +56,14 @@ UnitBlueprint {
     Description = 'Advanced Metal Extractor',
     Display = {
         DestructionEffects = {
-		DefaultProjectileCategories = {'CamoflageC','Noise3'},
-		DestructionProjectiles = {
+        DestructionEmitters = {
 			{
-				ProjectileBlueprint = '/mods/SCTA-master/effects/entities/Debris/Pieces/ARMMEX_debris01_proj.bp',
-				Bone = 'arms',
-			},
-		},
-		DestructionEmitters = {
-			{
-				EmitterBone = {0},
+				EmitterBone = {'ARMMOHO'},
 				EmitterBlueprint = {'/mods/SCTA-master/effects/emitters/napalm_fire_emit.bp'},
 				EmitterSize = 1.25,
 			},
 			{
-				EmitterBone = {'arms'},
+				EmitterBone = {'Blades'},
 				EmitterBlueprint = {
     					'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
 			    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
@@ -78,28 +71,28 @@ UnitBlueprint {
 				},
 				EmitterSize = 0.35,
 			},
-        },
-    },
+		},
+	},
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
                 {
                     LODCutoff = 230,
-                    SpecularName = '/mods/SCTA-master/units/ARMMEX/ARMMEX_SpecTeam.dds',
-                    AlbedoName = '/mods/SCTA-master/units/ARMMEX/ARMMEX_Albedo.dds',
-                    MeshName =   '/mods/SCTA-master/units/ARMMEX/ARMMEX_lod0.scm',
+                    SpecularName = '/mods/SCTA-master/units/ARMMOHO/ARMMOHO_SpecTeam.dds',
+                    AlbedoName = '/mods/SCTA-master/units/ARMMOHO/ARMMOHO_Albedo.dds',
+                    MeshName =   '/mods/SCTA-master/units/ARMMOHO/ARMMOHO_lod0.scm',
                     ShaderName = 'Unit', 
                     NormalsName = '/mods/SCTA-master/textures/common/normalsTS.dds'
                 },
             },
         },
-        UniformScale = 0.12,
+        UniformScale = 0.08,
     },
     Economy = {
         BuildCostMass = 2400,
         BuildCostEnergy = 24000,
         MaintenanceConsumptionPerSecondEnergy = 10,
-        BuildTime = 17500,
+        BuildTime = 24000,
         DifferentialUpgradeCostCalculation = true,
         ProductionPerSecondMass = 8,
     },

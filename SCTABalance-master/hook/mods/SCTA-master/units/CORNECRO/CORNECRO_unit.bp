@@ -22,15 +22,16 @@ UnitBlueprint {
     'VTOL',
     }, 
     Defense = {
-        Health = 1200,
-        MaxHealth = 1200,
+        Health = 500,
+        MaxHealth = 500,
         },
     Display = {
         UniformScale = 0.06,
         },
     Economy = {
-    BuildCostEnergy = 9000,
-    BuildCostMass = 1500,
+    BuildCostEnergy = 3800,
+    BuildCostMass = 360,
+    BuildRate = 300,
     MaxBuildDistance = 7,
 	ProductionPerSecondEnergy = 3,
 	ProductionPerSecondMass = 0,

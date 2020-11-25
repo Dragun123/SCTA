@@ -3,13 +3,13 @@
 #
 #Script created by Raevn
 
-local TAMass = import('/mods/SCTA-master/lua/TAMass.lua').TAMass
+local TAMass = import('/mods/SCTA-master/lua/TAunit.lua').TAMass
 local ScenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
 
 CORMEX = Class(TAMass) {
 	OnCreate = function(self)
 		TAMass.OnCreate(self)
-		self:SetMaintenanceConsumptionActive()
+		---self:SetMaintenanceConsumptionActive()
 		self.Spinners = {
 			arms = CreateRotator(self, 'arms', 'y', nil, 0, 91, 0),
 		}

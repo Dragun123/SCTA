@@ -139,13 +139,13 @@ UnitBlueprint {
         { #SMALL_BUILDINGEX
             Damage = 750,
             DamageFriendly = true,
-            DamageRadius = 6.406,
+            DamageRadius = 6,
             DamageType = 'Normal',
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
          { #SMALL_BUILDING
-            Damage = 50,
+            Damage = 200,
             DamageFriendly = true,
             DamageRadius = 2,
             DummyWeapon = true,

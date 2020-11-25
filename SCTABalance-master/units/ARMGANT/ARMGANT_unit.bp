@@ -28,13 +28,14 @@ UnitBlueprint {
     },
     BuildIconSortPriority = 18,
     Categories = {
-        'BUILTBYT2KBOT',
+        'BUILTBYT1HOVER',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',
         'RECLAIMABLE',
         'FACTORY',
-        'TECH3', 
+        'GATE',
+        'EXPERIMENTAL', 
         'RALLYPOINT',
         'SHOWQUEUE',
         'STRUCTURE',
@@ -43,12 +44,8 @@ UnitBlueprint {
         'ARM',
         'STRATEGIC',
         	'PLANT',
-	'SORTSTRATEGIC',
+            'SORTCONSTRUCTION',
         'LEVEL3',
-        
-        
-        
-        
     },
     Defense = {
         ArmorType = 'Structure',
@@ -81,7 +78,7 @@ UnitBlueprint {
             },
         },
         BuildBones = {'nano1','nano2'},
-        BuildAttachBone = 'body',
+        BuildAttachBone = 'buildpad',
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -172,7 +169,7 @@ UnitBlueprint {
     SizeX = 14,
     SizeY = 16,
     SizeZ = 14,
-    StrategicIconName = 'icon_factory3_land',
+    StrategicIconName = 'icon_experimental_generic',
     StrategicIconSortPriority = 5,
     Weapon = {
         { #LARGE_BUILDINGEX

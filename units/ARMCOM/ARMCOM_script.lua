@@ -3,7 +3,7 @@
 #
 #Script created by Raevn
 
-local TAconstructor = import('/mods/SCTA-master/lua/TAconstructor.lua').TAconstructor
+local TACommander = import('/mods/SCTA-master/lua/TAconstructor.lua').TACommander
 local TAweapon = import('/mods/SCTA-master/lua/TAweapon.lua').TAweapon
 local TAutils = import('/mods/SCTA-master/lua/TAutils.lua')
 local TACommanderDeathWeapon = import('/mods/SCTA-master/lua/TAweapon.lua').TACommanderDeathWeapon
@@ -11,9 +11,10 @@ local TACommanderSuicideWeapon = import('/mods/SCTA-master/lua/TAweapon.lua').TA
 
 #ARM Commander - Commander
 
-ARMCOM = Class(TAconstructor) {
+ARMCOM = Class(TACommander) {
 	motion = 'Stopped',
-	cloakOn = false,
+	cloakOn = nil,
+	isCapturing = nil,
 
 	Weapons = {
 		ARMCOMLASER = Class(TAweapon) {
@@ -54,46 +55,9 @@ ARMCOM = Class(TAconstructor) {
 		for k, v in self.Spinners do
 			self.Trash:Add(v)
 		end
-		TAconstructor.OnCreate(self)
+		TACommander.OnCreate(self)
 		self:SetCapturable(false)
 	end,
-
-	OnStartCapture = function(self, target)
-		self:SetCaptureTimeMultiplier(1)
-		self:SetBuildRate(self:GetBlueprint().Economy.BuildRate * 0.6)
-		TAconstructor.OnStartCapture(self, target)
-		self.desiredTarget = target
-		if (self.currentState == "aimed") then
-			self.currentState = "opened"
-			self.desiredState = "aimed"
-		else
-			self.desiredState = "opened"
-		end
-		self.isReclaiming = false
-		self.isBuilding = false
-		if self.cloakOn == false then
-		self.isCapturing = true
-		if (not self.animating) then
-			ForkThread(self.AnimationThread, self)
-		end
-		end
-	end,
-
-    CloakDetection = function(self)
-        local GetUnitsAroundPoint = moho.aibrain_methods.GetUnitsAroundPoint
-        local brain = moho.entity_methods.GetAIBrain(self)
-        local cat = categories.SELECTABLE * categories.MOBILE
-        local getpos = moho.entity_methods.GetPosition
-        while not self.Dead do
-            coroutine.yield(11)
-            local dudes = GetUnitsAroundPoint(brain, cat, getpos(self), 4, 'Enemy')
-            if dudes[1] and self.cloakOn then
-                self:DisableIntel('Cloak')
-            elseif not dudes[1] and self.cloakOn then
-                self:EnableIntel('Cloak')
-            end
-        end
-    end,
 
 	PlayCommanderWarpInEffect = function(self)
         self:HideBone(0, true)
@@ -118,13 +82,13 @@ ARMCOM = Class(TAconstructor) {
     end,
 
 	OnStopBeingBuilt = function(self,builder,layer)
-		TAconstructor.OnStopBeingBuilt(self,builder,layer)
+		TACommander.OnStopBeingBuilt(self,builder,layer)
 		ForkThread(self.GiveInitialResources, self)
 			self:SetScriptBit('RULEUTC_CloakToggle', true)
 	end,
 
 	OnMotionHorzEventChange = function(self, new, old )
-		TAconstructor.OnMotionHorzEventChange(self, new, old)
+		TACommander.OnMotionHorzEventChange(self, new, old)
 		if old == 'Stopped' then
 			self:SetConsumptionPerSecondEnergy(1000)
 			self.motion = 'Moving'
@@ -135,7 +99,7 @@ ARMCOM = Class(TAconstructor) {
 	end,
 
 	OnIntelDisabled = function(self)
-		self.cloakOn = false
+		self.cloakOn = nil
 		self:DisableIntel('Cloak')
         self:SetIntelRadius('Omni', 10)
         self:PlayUnitSound('Uncloak')
@@ -151,7 +115,8 @@ ARMCOM = Class(TAconstructor) {
 		self.cloakOn = true
         	self:PlayUnitSound('Cloak')
 		self:SetMesh('/mods/SCTA-master/units/ARMCOM/ARMCOM_cloak_mesh', true)
-		ForkThread(self.CloakDetection, self)
+		ForkThread(TACommander.CloakDetection, self)
+		--end
 	end,
 
 
@@ -160,9 +125,9 @@ ARMCOM = Class(TAconstructor) {
 		if bit == 8 then
 			self:OnIntelDisabled()
 			if self.CloakThread then KillThread(self.CloakThread) end
-			self.CloakThread = self:ForkThread(self.CloakDetection)	
+			self.CloakThread = self:ForkThread(TACommander.CloakDetection)	
 		end
-		TAconstructor.OnScriptBitSet(self, bit)
+		TACommander.OnScriptBitSet(self, bit)
 	end,
 
 
@@ -170,10 +135,10 @@ ARMCOM = Class(TAconstructor) {
 		if bit == 8 then
 			if self.CloakThread then
 				KillThread(self.CloakThread)
-				self.cloakOn = false
+				self.cloakOn = nil
 			end
 		end
-		TAconstructor.OnScriptBitClear(self, bit)
+		TACommander.OnScriptBitClear(self, bit)
 	end,
 
 
@@ -184,7 +149,7 @@ ARMCOM = Class(TAconstructor) {
 	end,
 
 	OnKilled = function(self, instigator, type, overkillRatio)
-		TAconstructor.OnKilled(self, instigator, type, overkillRatio)
+		TACommander.OnKilled(self, instigator, type, overkillRatio)
 	end,
 
 	Aim = function(self,target)
@@ -205,7 +170,7 @@ ARMCOM = Class(TAconstructor) {
 
 		WaitFor(self.Spinners.torso)
 		WaitFor(self.Spinners.luparm)
-		TAconstructor.Aim(self, target)
+		TACommander.Aim(self, target)
 	end,
 
 
@@ -220,7 +185,7 @@ ARMCOM = Class(TAconstructor) {
 		WaitFor(self.Spinners.torso)
 		WaitFor(self.Spinners.luparm)
 
-		TAconstructor.Close(self)
+		TACommander.Close(self)
 	end,
 }
 

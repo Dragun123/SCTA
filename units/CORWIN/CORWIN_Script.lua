@@ -3,7 +3,7 @@
 #
 #Script created by Raevn
 
-local TAWin = import('/mods/SCTA-master/lua/TAWin.lua').TAWin
+local TAWin = import('/mods/SCTA-master/lua/TAWeather.lua').TAWin
 
 CORWIN = Class(TAWin) {
 	OnCreate = function(self,builder,layer)

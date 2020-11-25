@@ -7,7 +7,6 @@ local TAunit = import('/mods/SCTA-master/lua/TAunit.lua').TAunit
 local util = import('/lua/utilities.lua')
 local debrisCat = import('/mods/SCTA-master/lua/TAdebrisCategories.lua')
 
-
 TATreads = Class(TAunit) 
 {
 
@@ -86,9 +85,44 @@ CreateTreadsThread = function(self, treads)
         WaitSeconds(interval)
     end
 end,
-
-OnKilled = function(self, instigator, type, overkillRatio)
-    self:LOGDBG('TATreads.OnKilled')
-    TAunit.OnKilled(self, instigator, type, overkillRatio)
-end,
 }
+
+TAWalking = Class(TATreads) 
+{
+    WalkingAnim = nil,
+    WalkingAnimRate = 1,
+    IdleAnim = false,
+    IdleAnimRate = 1,
+    DeathAnim = nil,
+    DisabledBones = {},
+
+    OnMotionHorzEventChange = function( self, new, old )
+        self:LOGDBG('TAWalking.OnMotionHorzEventChange')
+        TATreads.OnMotionHorzEventChange(self, new, old)
+       
+        if ( old == 'Stopped' ) then
+            if (not self.Animator) then
+                self.Animator = CreateAnimator(self, true)
+            end
+            local bpDisplay = self:GetBlueprint().Display
+            if bpDisplay.AnimationWalk then
+                self.Animator:PlayAnim(bpDisplay.AnimationWalk, true)
+                self.Animator:SetRate(bpDisplay.AnimationWalkRate or 1)
+            end
+        elseif ( new == 'Stopped' ) then
+            if(self.IdleAnim and not self:IsDead()) then
+                self.Animator:PlayAnim(self.IdleAnim, true)
+            elseif(not self.DeathAnim or not self:IsDead()) then
+                self.Animator:Destroy()
+                self.Animator = false
+            end
+        end
+    end,
+
+    OnKilled = function(self, instigator, type, overkillRatio)
+        self:LOGDBG('TAWalking.OnKilled')
+		TATreads.OnKilled(self, instigator, type, overkillRatio)
+	end,
+}
+
+TypeClass = TAWalking

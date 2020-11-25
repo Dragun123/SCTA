@@ -10,7 +10,6 @@ ARMHAWK = Class(TAair) {
 
 	OnCreate = function(self)
 		TAair.OnCreate(self)
-		self:SetMaintenanceConsumptionActive()
 		self.Sliders = {
 			wing1 = CreateSlider(self, 'Wing_01'),
 			wing2 = CreateSlider(self, 'Wing_02'),
@@ -19,6 +18,12 @@ ARMHAWK = Class(TAair) {
 			self.Trash:Add(v)
 		end
 	end,
+
+	OnStopBeingBuilt = function(self,builder,layer)
+        TAair.OnStopBeingBuilt(self,builder,layer)
+        self:SetMaintenanceConsumptionActive()
+    end,
+
 
 	OpenWings = function(self)
 		--MOVE wing1 to x-axis <1.99> SPEED <2>;

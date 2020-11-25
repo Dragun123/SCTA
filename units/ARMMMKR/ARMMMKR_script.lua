@@ -7,8 +7,6 @@ local TAunit = import('/mods/SCTA-master/lua/TAunit.lua').TAunit
 
 ARMMMKR = Class(TAunit) {
 	closeDueToDamage = false,
-
-	#must be a better way, but couldn't find it
 	productionIsActive = true,
 
 	OnCreate = function(self)

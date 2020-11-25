@@ -1,5 +1,23 @@
 UnitBlueprint {
     Merge = true, 
+    Categories = {
+        'BUILTBYT1HOVER',
+        'SELECTABLE',
+        'DRAGBUILD',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'EXPERIMENTAL',
+	'STRUCTURE',
+	'SORTSTRATEGIC',
+    'OVERLAYDIRECTFIRE',
+    'DIRECTFIRE',
+    'CORE',
+	'LEVEL3',
+    'STRATEGIC',
+    'ARTILLERY',
+    'SHOWATTACKRETICLE',
+    'NOCUSTOMTARGET',
+    },
     Defense = {
         Health = 18000,
         MaxHealth = 18000,

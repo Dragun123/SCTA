@@ -3,7 +3,7 @@
 #
 #Script created by Raevn
 
-local TASeaair = import('/mods/SCTA-master/lua/TASeaair.lua').TASeaair
+local TASeaair = import('/mods/SCTA-master/lua/TAair.lua').TASeaair
 local TAweapon = import('/mods/SCTA-master/lua/TAweapon.lua').TAweapon
 
 CORSFIG = Class(TASeaair) {

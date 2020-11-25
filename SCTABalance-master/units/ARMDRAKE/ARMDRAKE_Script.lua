@@ -3,7 +3,7 @@
 #
 #Script created by Raevn
 
-local TAWalking = import('/mods/SCTA-master/lua/TAWalking.lua').TAWalking
+local TAWalking = import('/mods/SCTA-master/lua/TAMotion.lua').TAWalking
 local Projectile = import('/lua/sim/DefaultWeapons.lua').DefaultProjectileWeapon
 local TAweapon = import('/mods/SCTA-master/lua/TAweapon.lua').TAweapon
 

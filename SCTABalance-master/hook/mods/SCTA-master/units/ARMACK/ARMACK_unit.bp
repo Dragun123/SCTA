@@ -32,12 +32,12 @@ UnitBlueprint {
             },
     Economy = {
         BuildCostEnergy = 2400,
+        BuildCostMass = 220,
         BuildTime = 5400,
         BuildRate = 180,
         BuildableCategory = {
             'BUILTBYT1KBOT ARM',
             'BUILTBYT2KBOT ARM',
-            'armavp',
         },
         MaxBuildDistance = 7,
         ProductionPerSecondEnergy = 3,

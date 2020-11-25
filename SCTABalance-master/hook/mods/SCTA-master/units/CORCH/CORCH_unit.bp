@@ -19,7 +19,6 @@ UnitBlueprint {
         'KBOT',
         'VEHICLE',
 	'LEVEL3',
-	'SHIP',
     },
     Description = 'Tech Level 3',
     Defense = {
@@ -44,8 +43,6 @@ UnitBlueprint {
         BuildableCategory = {
             'BUILTBYT1HOVER CORE',
             'BUILTBYT2KBOT CORE',
-            'coravp', 
-            'coralab',
         },
     },
     Intel = {

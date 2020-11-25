@@ -2,10 +2,6 @@ UnitBlueprint {
     Merge = true,
     Categories = {
         'BUILTBYT1HOVER',
-        'BUILTBYT2VEHICLE',
-        'BUILTBYT2KBOT',
-        'BUILTBYT2AIR',
-        'BUILTBYT2SUB',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',
@@ -22,10 +18,6 @@ UnitBlueprint {
 		'PLANT',
 	'SORTCONSTRUCTION',
 	'LEVEL2',
-	
-	
-	
-	
     },
     Defense = {
         Health = 15000,
@@ -40,9 +32,9 @@ UnitBlueprint {
         UniformScale = 0.23,
     },
     Economy = {
-        BuildRate = 250,
-        BuildCostEnergy = 39000,
-        BuildCostMass = 7000, 
+        BuildRate = 400,
+        BuildCostEnergy = 54000,
+        BuildCostMass = 9000, 
         BuildTime = 60000,
         BuildableCategory = {
             'HOVER LEVEL1 ARM',
@@ -56,5 +48,5 @@ UnitBlueprint {
     SizeX = 9,
     SizeY = 1,
     SizeZ = 9,
-    StrategicIconName = 'icon_factory3_naval',
+    StrategicIconName = 'icon_factory3_land',
  }

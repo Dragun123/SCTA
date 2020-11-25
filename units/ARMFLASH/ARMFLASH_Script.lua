@@ -3,7 +3,7 @@
 #
 #Script created by Raevn
 
-local TATreads = import('/mods/SCTA-master/lua/TATread.lua').TATreads
+local TATreads = import('/mods/SCTA-master/lua/TAMotion.lua').TATreads
 local Projectile = import('/lua/sim/DefaultWeapons.lua').DefaultProjectileWeapon
 
 ARMFLASH = Class(TATreads) {

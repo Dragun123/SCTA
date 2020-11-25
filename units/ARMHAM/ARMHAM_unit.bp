@@ -178,7 +178,8 @@ UnitBlueprint {
             MinRadius = 5, 
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
-            MuzzleVelocity = 20,
+            MuzzleVelocity = 14,
+            MuzzleVelocityReduceDistance = 28,
             ProjectileId = '/mods/SCTA-master/projectiles/ARM_HAM/ARM_HAM_proj.bp',
             RackBones = {
                 {
@@ -213,8 +214,8 @@ UnitBlueprint {
             TurretBoneYaw = 'torso',
             TurretDualManipulators = true,
             TurretPitch = 0,
-            TurretPitchRange = 360,
-            TurretPitchSpeed = 50,
+            TurretPitchRange = 90,
+            TurretPitchSpeed = 45,
             TurretYaw = 0,
             TurretYawRange = 360,
             TurretYawSpeed = 90,

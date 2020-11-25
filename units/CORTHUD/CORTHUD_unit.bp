@@ -57,7 +57,7 @@ UnitBlueprint {
     Description = 'Artillery Kbot',
     Display = {
         AnimationWalk = '/mods/SCTA-master/units/CORTHUD/CORTHUD_lod0_Awalk.sca',
-        AnimationWalkRate = 1,
+        AnimationWalkRate = 2,
         Abilities = {
             'Artillery',
         },
@@ -85,7 +85,6 @@ UnitBlueprint {
                 {
                     LODCutoff = 230,
                     ShaderName = 'Unit', 
-		    NormalsName = '/mods/SCTA-master/textures/common/normalsTS.dds'
                 },
             },
         },
@@ -176,7 +175,8 @@ UnitBlueprint {
             MinRadius = 5, 
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
-            MuzzleVelocity = 25,
+            MuzzleVelocity = 14,
+            MuzzleVelocityReduceDistance = 28,
             ProjectileId = '/mods/SCTA-master/projectiles/CORE_THUD/CORE_THUD_proj.bp',
             RackBones = {
                 {
@@ -208,7 +208,7 @@ UnitBlueprint {
             TurretBonePitch = 'gun',
             TurretBoneYaw = 'torso',
             TurretPitch = 0,
-            TurretPitchRange = 360,
+            TurretPitchRange = 90,
             TurretPitchSpeed = 45,
             TurretYaw = 0,
             TurretYawRange = 360,

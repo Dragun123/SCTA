@@ -56,6 +56,10 @@ UnitBlueprint {
     },
     Description = 'Builds Krogoths',
     Display = {
+        AnimationUnpack = '/mods/SCTA-master/units/CORGANT/CORGANT_lod0_unpack.sca',
+        AnimationUnpackRate = 0.5, 
+        AnimationPack = '/mods/SCTA-master/units/CORGANT/CORGANT_lod0_repack.sca',
+        AnimationPackRate = 0.5, 
         DestructionEffects = {
             DefaultProjectileCategories = {'Construction','BuildMuzzle','BuildPlate', 'CorBld'},
             DestructionEmitters = {
@@ -76,7 +80,7 @@ UnitBlueprint {
             },
         },
         BuildBones = {'nano1','nano2','nano3','nano4'},
-        BuildAttachBone = 'base',
+        BuildAttachBone = 'gangplank',
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {

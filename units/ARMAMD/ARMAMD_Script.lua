@@ -3,7 +3,7 @@
 #
 #Script created by Raevn
 
-local TAnoassistbuild = import('/mods/SCTA-master/lua/TAnoassistbuild.lua').TAnoassistbuild
+local TAnoassistbuild = import('/mods/SCTA-master/lua/TAunit.lua').TAnoassistbuild
 local DefaultWeapon = import('/lua/sim/DefaultWeapons.lua').DefaultProjectileWeapon
 local TAweapon = import('/mods/SCTA-master/lua/TAweapon.lua').TAweapon
 

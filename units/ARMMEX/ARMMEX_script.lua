@@ -3,13 +3,12 @@
 #
 #Script created by Raevn
 
-local TAMass = import('/mods/SCTA-master/lua/TAMass.lua').TAMass
+local TAMass = import('/mods/SCTA-master/lua/TAunit.lua').TAMass
 local ScenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
 
 ARMMEX = Class(TAMass) {
 	OnCreate = function(self)
 		TAMass.OnCreate(self)
-		self:SetMaintenanceConsumptionActive()
 		self.Spinners = {
 			arms = CreateRotator(self, 'arms', 'y', nil, 0, 91, 0),
 		}
@@ -28,6 +27,7 @@ ARMMEX = Class(TAMass) {
 		TAMass.OnStopBeingBuilt(self, builder, layer)
 		local markers = ScenarioUtils.GetMarkers() 
 		local unitPosition = self:GetPosition()  
+		--self:SetMaintenanceConsumptionActive()
 		for k, v in pairs(markers) do 
 			if(v.type == 'Mass') then 
                 		local MassPosition = v.position 

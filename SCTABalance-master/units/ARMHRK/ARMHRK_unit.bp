@@ -40,10 +40,6 @@ UnitBlueprint {
         'ARM',
         'KBOT', 
 	'LEVEL2',
-	
-	
-	
-	
     },
     Defense = {
         ArmorType = 'Normal',
@@ -90,8 +86,8 @@ UnitBlueprint {
     },
     Economy = {
         BuildCostEnergy = 4200,
-        BuildCostMass = 580,
-        BuildTime = 9002,
+        BuildCostMass = 440,
+        BuildTime = 7002,
     },
     Footprint = {
         SizeX = 1,

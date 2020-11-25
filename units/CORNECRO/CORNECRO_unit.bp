@@ -92,7 +92,7 @@ UnitBlueprint {
 			},
 		},
 	},
-    BuildBones = {'nozzle1','nozzle2'},
+    BuildBones = {'nozzle1'},
     AnimationWalk = '/mods/SCTA-master/units/CORNECRO/CORNECRO_lod0_Awalk.sca',
     AnimationWalkRate = 1,
         Mesh = {

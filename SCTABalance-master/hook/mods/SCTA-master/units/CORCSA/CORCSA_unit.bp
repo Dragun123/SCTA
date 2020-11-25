@@ -16,6 +16,7 @@ UnitBlueprint {
 'VTOL',
 'SELECTION', 
     'CORE',
+    'SHIP',
 'LEVEL3',
 },
    Defense = {
@@ -32,8 +33,6 @@ UnitBlueprint {
             'BUILTBYT1HOVER CORE',
             'BUILTBYT2SUB CORE',
             'BUILTBYT2AIR CORE',
-            'coraap',
-            'corasy',
         },
         MaxBuildDistance = 7,
         ProductionPerSecondEnergy = 3,

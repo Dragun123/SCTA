@@ -56,37 +56,37 @@ UnitBlueprint {
     Description = 'Advanced Metal Extractor',
     Display = {
         DestructionEffects = {
-        DestructionEmitters = {
-			{
-				EmitterBone = {0},
-				EmitterBlueprint = {'/mods/SCTA-master/effects/emitters/napalm_fire_emit.bp'},
-				EmitterSize = 1.25,
-			},
-			{
-				EmitterBone = {'arms'},
-				EmitterBlueprint = {
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-			    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
-				},
-				EmitterSize = 0.35,
-			},
-        },
+            DestructionEmitters = {
+                {
+                    EmitterBone = {'CORMOHO'},
+                    EmitterBlueprint = {'/mods/SCTA-master/effects/emitters/napalm_fire_emit.bp'},
+                    EmitterSize = 1.25,
+                },
+                {
+                    EmitterBone = {'shell'},
+                    EmitterBlueprint = {
+                            '/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
+                            '/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
+                            '/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+                    },
+                    EmitterSize = 0.35,
+                },
+            },
         },
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
                 {
                     LODCutoff = 230,
-                    SpecularName = '/mods/SCTA-master/units/CORMEX/CORMEX_SpecTeam.dds',
-                    AlbedoName = '/mods/SCTA-master/units/CORMEX/CORMEX_Albedo.dds',
-                    MeshName =   '/mods/SCTA-master/units/CORMEX/CORMEX_lod0.scm',
+                    SpecularName = '/mods/SCTA-master/units/CORMOHO/CORMOHO_SpecTeam.dds',
+                    AlbedoName = '/mods/SCTA-master/units/CORMOHO/CORMOHO_Albedo.dds',
+                    MeshName =   '/mods/SCTA-master/units/CORMOHO/CORMOHO_lod0.scm',
                     ShaderName = 'Unit', 
-                    NormalsName = '/mods/SCTA-master/units/CORMEX/CORMEX_normalsTS.dds'
+                    NormalsName = '/mods/SCTA-master/units/CORMOHO/CORMOHO_normalsTS.dds'
                 },
             },
         },
-        UniformScale = 0.1,
+        UniformScale = 0.07,
     },
     Economy = {
         BuildCostMass = 2400,

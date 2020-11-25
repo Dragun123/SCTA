@@ -1,4 +1,4 @@
-local TAWalking = import('/mods/SCTA-master/lua/TAWalking.lua').TAWalking
+local TAWalking = import('/mods/SCTA-master/lua/TAMotion.lua').TAWalking
 local TAweapon = import('/mods/SCTA-master/lua/TAweapon.lua').TAweapon
 
 ARMPW = Class(TAWalking) {

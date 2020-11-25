@@ -167,7 +167,8 @@ UnitBlueprint {
             MinRadius = 5, 
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
-	    MuzzleVelocity = 17.5,
+            MuzzleVelocity = 14,
+            MuzzleVelocityReduceDistance = 28,
             ProjectileId = '/mods/SCTA-master/projectiles/CORLEVLR_WEAPON/CORLEVLR_WEAPON_proj.bp',
             RackBones = {
                 {
@@ -195,14 +196,14 @@ UnitBlueprint {
             TurretBoneYaw = 'Turret',
             TurretDualManipulators = false,
             TurretPitch = 0,
-            TurretPitchRange = 360,
-            TurretPitchSpeed = 170,
+            TurretPitchRange = 90,
+            TurretPitchSpeed = 45,
             TurretYaw = 0,
             TurretYawRange = 360,
             TurretYawSpeed = 20,
             Turreted = true,
             EnergyDrainPerSecond = 5,
-            EnergyRequired = 5,
+            EnergyRequired = 10,
             
         },
         { #MEDIUM_UNITEX #Does not exist, values guessed

@@ -31,7 +31,8 @@ UnitBlueprint {
      Economy = {
         NaturalProducer = false,
         BuildCostEnergy = 6000,
-        BuildCostMass = 250,
+        BuildTime = 9600,
+        BuildCostMass = 400,
         BuildRate = 60, 
         DifferentialUpgradeCostCalculation = true,
         MaintenanceConsumptionPerSecondEnergy = 50,
@@ -49,6 +50,7 @@ UnitBlueprint {
         VisionRadius = 12, 
         RadarRadius = 240,
     },
+    SelectionCenterOffsetZ = -0.1,
     SizeY = 5,
     StrategicIconName = 'icon_structure2_intel',
 }

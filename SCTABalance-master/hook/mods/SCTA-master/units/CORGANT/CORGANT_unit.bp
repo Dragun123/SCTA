@@ -1,12 +1,13 @@
 UnitBlueprint {
     Merge = true,
     Categories = {
-        'BUILTBYT2KBOT',
+        'BUILTBYT1HOVER',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',
         'RECLAIMABLE',
-        'TECH3',
+        'GATE',
+        'EXPERIMENTAL',
         'FACTORY',
         'RALLYPOINT',
         'SHOWQUEUE',
@@ -16,12 +17,8 @@ UnitBlueprint {
         'CORE',
         'STRATEGIC',
         	'PLANT',
-	'SORTSTRATEGIC',
-        'LEVEL3',
-        
-        
-        
-        
+            'SORTCONSTRUCTION',
+        'LEVEL3',  
     },
     Defense = {
     Health = 48000,
@@ -36,6 +33,7 @@ UnitBlueprint {
         Display = {
         UniformScale = 0.38,
     },
+    StrategicIconName = 'icon_experimental_generic',
     SelectionSizeX = 10,
     SelectionSizeZ = 10,
     LifeBarSize = 10,

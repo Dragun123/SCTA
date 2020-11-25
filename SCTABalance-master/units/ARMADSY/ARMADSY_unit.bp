@@ -97,9 +97,9 @@ UnitBlueprint {
     },
     Economy = {
         BuildCostEnergy = 120000,
-        BuildCostMass = 8000, 
+        BuildCostMass = 14000, 
         BuildTime = 100000,
-    BuildRate = 200,
+    BuildRate = 300,
     DifferentialUpgradeCostCalculation = true,
     BuildableCategory = {
         'SHIP LEVEL1 ARM',

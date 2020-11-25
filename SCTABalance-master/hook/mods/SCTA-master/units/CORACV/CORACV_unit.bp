@@ -18,10 +18,6 @@ UnitBlueprint {
         'KBOT',
         'VEHICLE',
 	'LEVEL2',
-	
-	
-	
-	
     },
     Defense = {
         Health = 1200,
@@ -36,12 +32,12 @@ UnitBlueprint {
         },
     Economy = {
         BuildCostEnergy = 2400,
+        BuildCostMass = 220,
         BuildTime = 5500,
         BuildRate = 180,
         BuildableCategory = {
             'BUILTBYT1VEHICLE CORE',
             'BUILTBYT2KBOT CORE',
-            'coralab',
         },
         MaxBuildDistance = 7,
         ProductionPerSecondEnergy = 3,

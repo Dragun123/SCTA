@@ -43,8 +43,6 @@ UnitBlueprint {
 	'SPECIAL',
 	'SORTSTRATEGIC',
 	'LEVEL3',
-	
-    
     'SHOWATTACKRETICLE',
     },
     Defense = {

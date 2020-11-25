@@ -37,10 +37,7 @@ UnitBlueprint {
         BuildableCategory = {
             'BUILTBYT1HOVER ARM',
             'BUILTBYT2KBOT ARM',
-            'armavp', 
-            'armalab',
-            'armasy',
-            'armaap',
+            'BUILTBYT2AIR ARM',
         },
         ProductionPerSecondEnergy = 700,
         ProductionPerSecondMass = 6,

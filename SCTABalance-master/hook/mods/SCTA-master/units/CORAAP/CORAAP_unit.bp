@@ -1,7 +1,8 @@
 UnitBlueprint {
     Merge = true,
     Categories = {
-        'BUILTBYT1AIR',
+        'BUILTBYT2AIR',
+        'BUILTBYT2SUB',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',
@@ -35,7 +36,7 @@ UnitBlueprint {
         },
     Economy = {
         BuildCostEnergy = 42000,
-        BuildCostMass = 1800,
+        BuildCostMass = 3600,
         BuildTime = 11000,
         BuildableCategory = {
             'VTOL LEVEL1 CORE', 

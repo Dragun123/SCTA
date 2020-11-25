@@ -1,11 +1,7 @@
 UnitBlueprint {
     Merge = true,
     Categories = {
-        'BUILTBYT2VEHICLE',
-        'BUILTBYT2KBOT',
-        'BUILTBYT2AIR',
         'BUILTBYT1HOVER',
-        'BUILTBYT2SUB',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',
@@ -21,10 +17,6 @@ UnitBlueprint {
 		'PLANT',
 	'SORTCONSTRUCTION',
 	'LEVEL2',
-	
-	
-	
-	
     },
     Defense = {
         Health = 16000,
@@ -56,5 +48,5 @@ UnitBlueprint {
     SizeX = 9,
     SizeY = 1,
     SizeZ = 9,
-    StrategicIconName = 'icon_factory3_naval',
+    StrategicIconName = 'icon_factory3_land',
  }

@@ -3,7 +3,7 @@
 #
 #Blueprint created by Raevn
 
-local TATreads = import('/mods/SCTA-master/lua/TATread.lua').TATreads
+local TATreads = import('/mods/SCTA-master/lua/TAMotion.lua').TATreads
 local TAweapon = import('/mods/SCTA-master/lua/TAweapon.lua').TAweapon
 
 ARMSTUMP = Class(TATreads) {

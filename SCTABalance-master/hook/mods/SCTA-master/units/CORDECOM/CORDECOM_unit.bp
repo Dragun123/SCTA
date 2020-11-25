@@ -37,10 +37,7 @@ UnitBlueprint {
         BuildableCategory = {
             'BUILTBYT1HOVER CORE',
             'BUILTBYT2KBOT CORE',
-            'coravp',
-            'coralab',
-            'corasy',
-            'coraap',
+            'BUILTBYT2AIR CORE',
         },
         ProductionPerSecondEnergy = 700,
         ProductionPerSecondMass = 6,

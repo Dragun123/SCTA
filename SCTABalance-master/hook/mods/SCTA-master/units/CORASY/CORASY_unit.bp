@@ -1,7 +1,8 @@
 UnitBlueprint {
     Merge = true,
     Categories = {
-        'BUILTBYT1SHIP',
+        'BUILTBYT2AIR',
+        'BUILTBYT2SUB',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',
@@ -18,10 +19,6 @@ UnitBlueprint {
 		'PLANT',
 	'SORTCONSTRUCTION',
 	'LEVEL2',
-	
-	
-	
-	
     },
     Defense = {
         Health = 13000,
@@ -42,7 +39,7 @@ UnitBlueprint {
             'SHIP LEVEL3 CORE',
             'ADVANCEDSUB LEVEL3 CORE',
         },
-        BuildRate = 220,
+        BuildRate = 360,
         ProductionPerSecondMass = 0,
     },
     LifeBarSize = 8,

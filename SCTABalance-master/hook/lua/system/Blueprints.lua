@@ -23,7 +23,7 @@ do
             Economy = {
                 BuildCostEnergy = 0.3,
                 BuildCostMass = 0.5,
-                BuildTime = 0.1,
+                BuildTime = 0.13,
                 BuildRate = 0.075,
                 MaintenanceConsumptionPerSecondEnergy = 3,
             },
@@ -77,7 +77,7 @@ do
                     BuildCostEnergy = 0.3,
                     BuildCostMass = 0.5,
                     BuildTime = 0.05,
-                    BuildRate = 0.15,
+                    BuildRate = 0.2,
                     MaintenanceConsumptionPerSecondEnergy = 3,
                 },
                 LifeBarHeight = 0.3,
