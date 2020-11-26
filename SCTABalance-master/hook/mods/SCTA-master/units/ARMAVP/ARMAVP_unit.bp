@@ -28,11 +28,10 @@ UnitBlueprint {
     },
     Economy = {
         BuildCostEnergy = 52000,
-        BuildCostMass = 4000, 
-        BuildRate = 280,
+        BuildCostMass = 1300, 
+        BuildRate = 150,
         BuildTime = 36000,
         BuildableCategory = {
-            'VEHICLE LEVEL3 ARM',
             'VEHICLE LEVEL2 ARM',
             'VEHICLE LEVEL1 ARM',
         },

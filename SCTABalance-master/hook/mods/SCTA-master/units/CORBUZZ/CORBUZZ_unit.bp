@@ -32,16 +32,16 @@ UnitBlueprint {
         SizeZ = 8,
     },
         Display = {
-        UniformScale = 0.55,
+        UniformScale = 0.30,
     },
     SelectionThickness = 0.3,
-    SelectionSizeX = 10,
+    SelectionSizeX = 5,
     SelectionCenterOffsetZ = 0.4,
-    SelectionSizeZ = 10,
-    SizeX = 12,
-    SizeY = 20,
-    SizeZ = 12,
-    LifeBarSize = 10,
+    SelectionSizeZ = 5,
+    SizeX = 6,
+    SizeY = 10,
+    SizeZ = 6,
+    LifeBarSize = 6,
     Weapon = {
         {
             AboveWaterTargetsOnly = true,
@@ -56,7 +56,7 @@ UnitBlueprint {
             BallisticArc = 'RULEUBA_HighArc',
             CollideFriendly = false,
             DamageFriendly = true,
-            Damage = 3000,
+            Damage = 5000,
             DamageRadius = 5, 
             DamageType = 'Normal',
             DisplayName = 'CORBUZZ_WEAPON',
@@ -81,25 +81,13 @@ UnitBlueprint {
             ProjectileId = '/mods/SCTA-master/SCTABalance-master/projectiles/CORBUZA_WEAPON/CORBUZA_WEAPON_proj.bp',
             RackBones = {
                 {
-                    MuzzleBones = {
-                        'flare',
-                    },
-                    RackBone = 'gun1',
+                MuzzleBones = {
+                    'flare',
                 },
-                {
-                    MuzzleBones = {
-                        'flare',
-                    },
-                    RackBone = 'gun3',
-                },
-                {
-                    MuzzleBones = {
-                        'flare',
-                    },
-                    RackBone = 'gun5',
-                },
+                RackBone = 'Turret',
             },
-            RackRecoilDistance = -0.5,
+        },
+            RackRecoilDistance = 0,
             RackReloadTimeout = 0,
             RackSalvoChargeTime = 2,
             RackSalvoReloadTime = 0,
@@ -111,15 +99,15 @@ UnitBlueprint {
                 'ALLUNITS',
             },
             TargetRestrictDisallow = 'UNTARGETABLE, UNDERWATER',
-            TurretBoneMuzzle = 'Spindle',
-            TurretBonePitch = 'Spindle',
+            TurretBoneMuzzle = 'flare',
+            TurretBonePitch = 'flare',
             TurretBoneYaw = 'Turret',
             TurretPitch = 0,
             TurretPitchRange = 360,
-            TurretPitchSpeed = 100,
+            TurretPitchSpeed = 60,
             TurretYaw = 0,
             TurretYawRange = 360,
-            TurretYawSpeed = 20,
+            TurretYawSpeed = 60,
             Turreted = true,
         },
         { #ATOMIC_BLAST

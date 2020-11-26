@@ -172,24 +172,12 @@ UnitBlueprint {
             EnergyRequired = 1000, --might be to high no rapids
             UseFiringSolutionInsteadOfAimBone = true,
             ProjectileId = '/mods/SCTA-master/projectiles/CORBUZZ_WEAPON/CORBUZZ_WEAPON_proj.bp',
-                RackBones = {
-                    {
+                    RackBones = {
+                        {
                         MuzzleBones = {
                             'flare',
                         },
-                        RackBone = 'gun1',
-                    },
-                    {
-                        MuzzleBones = {
-                            'flare',
-                        },
-                        RackBone = 'gun3',
-                    },
-                    {
-                        MuzzleBones = {
-                            'flare',
-                        },
-                        RackBone = 'gun5',
+                        RackBone = 'Turret',
                     },
                 },
             RackRecoilDistance = 0,
@@ -204,8 +192,8 @@ UnitBlueprint {
                 'ALLUNITS',
             },
             TargetRestrictDisallow = 'UNTARGETABLE, UNDERWATER',
-            TurretBoneMuzzle = 'Spindle',
-            TurretBonePitch = 'Spindle',
+            TurretBoneMuzzle = 'flare',
+            TurretBonePitch = 'flare',
             TurretBoneYaw = 'Turret',
             TurretPitch = 0,
             TurretPitchRange = 360,

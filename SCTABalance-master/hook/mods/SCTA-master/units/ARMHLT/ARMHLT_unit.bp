@@ -1,12 +1,11 @@
 UnitBlueprint {
     Merge = true, 
     Defense = {
-        ArmorType = 'Structure',
         Health = 2000,
         MaxHealth = 2000,
     },
     Display = {
-        UniformScale = 0.10,
+        UniformScale = 0.07,
     },
     Economy = {
         BuildCostEnergy = 12000,
@@ -16,7 +15,6 @@ UnitBlueprint {
     Footprint = {
         SizeX = 1,
         SizeZ = 1,
-	    MaxSlope = 0.625,
     },
     Intel = {
         VisionRadius = 12,
@@ -33,7 +31,7 @@ UnitBlueprint {
     SelectionCenterOffsetZ = 0,
     SelectionThickness = 0.25,
     SizeX = 1,
-    SizeY = 4,
+    SizeY = 3,
     SizeZ = 1,
     Weapon = {
         {

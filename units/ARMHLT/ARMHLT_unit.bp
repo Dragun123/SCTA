@@ -36,8 +36,6 @@ UnitBlueprint {
 		'DEFENSIVE',
 	'SORTDEFENSE',
 	'LEVEL2',
-	
-	
     },
     CollisionOffsetY = -0.5,
     Defense = {

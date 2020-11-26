@@ -2,7 +2,6 @@ UnitBlueprint {
     Merge = true,
     BuildIconSortPriority = 3,
     Categories = {
-        'BUILTBYT2AIR',
         'BUILTBYT1AIR',
         'BUILTBYT1KBOT',
         'BUILTBYT1VEHICLE',

@@ -32,19 +32,19 @@ UnitBlueprint {
         SizeZ = 6,
     },
         Display = {
-        UniformScale = 0.55,
+        UniformScale = 0.35,
     },
     Physics = {
     SkirtSizeX = 0, 
     SkirtSizeZ = 0,  
     }, 
     SelectionThickness = 0.3,
-    SelectionSizeX = 8,
-    SelectionCenterOffsetZ = -3,
-    SelectionSizeZ = 8,
-    SizeX = 8,
-    SizeY = 14,
-    SizeZ = 10,
+    SelectionSizeX = 6,
+    SelectionCenterOffsetZ = -2,
+    SelectionSizeZ = 6,
+    SizeX = 5,
+    SizeY = 10,
+    SizeZ = 6,
     LifeBarSize = 10,
     Weapon = {
         {

@@ -5,7 +5,7 @@ UnitBlueprint {
         MaxHealth = 2000,
     },
     Display = {
-        UniformScale = 0.06,
+        UniformScale = 0.065,
     },
     Economy = {
         BuildCostEnergy = 12000,
@@ -15,23 +15,19 @@ UnitBlueprint {
     Footprint = {
         SizeX = 1,
         SizeZ = 1,
-	    MaxSlope = 0.625,
     },
     Intel = {
         VisionRadius = 12,
-    },
-    Interface = {
-        HelpText = 'Floating Heavy Laser Tower',
     },
     LifeBarHeight = 0.25,
     LifeBarOffset = 0.5,
     LifeBarSize = 2,
     Physics = {
-        SkirtSizeX = 0, 
-        SkirtSizeZ = 0,  
+        SkirtSizeX = 1, 
+        SkirtSizeZ = 1,  
     },
-    SelectionSizeX = 1,
-    SelectionSizeZ = 1.2,
+    SelectionSizeX = 1.5,
+    SelectionSizeZ = 1.5,
     SelectionCenterOffsetZ = 0,
     SelectionThickness = 0.25,
     SizeX = 2,
@@ -54,8 +50,8 @@ UnitBlueprint {
             DamageType = 'Normal',
             DisplayName = 'CORFHLT_LASER',
             FireTargetLayerCapsTable = {
-                Land = 'Land|Water',
-                Water = 'Land|Water',
+                Land = 'Land|Water|Air',
+                Water = 'Land|Water|Air',
             },
 	    RangeCategory = 'UWRC_DirectFire',
      WeaponCategory = 'DirectFire',
@@ -68,6 +64,7 @@ UnitBlueprint {
             ProjectileId = '/mods/SCTA-master/projectiles/ARMFHLT_LASER/ARMFHLT_LASER_proj.bp',
             EnergyDrainPerSecond = 50,
             EnergyRequired = 100,
+            UseFiringSolutionInsteadOfAimBone = true,
             ProjectileLifetime = 1,
             RackBones = {
                 {
@@ -96,9 +93,9 @@ UnitBlueprint {
             },
             TargetRestrictDisallow = 'UNTARGETABLE, UNDERWATER',
             TurretBoneMuzzle = 'muzzle1',
-            TurretBonePitch = 'barrel2',
+            TurretBonePitch = 'gun',
             TurretBoneDualMuzzle = 'muzzle2',
-            TurretBoneDualPitch = 'barrel1',
+            TurretBoneDualPitch = 'gun',
             TurretBoneYaw = 'turret',
             TurretDualManipulators = true,
             TurretPitch = 0,

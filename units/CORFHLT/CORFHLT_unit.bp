@@ -18,9 +18,11 @@ UnitBlueprint {
     },
     BuildIconSortPriority = 2,
     Categories = {
-        'BUILTBYT1SHIP',
-        'BUILTBYT1HOVER',
         'BUILTBYT1AIR',
+        'BUILTBYT1KBOT',
+        'BUILTBYT1VEHICLE',
+        'BUILTBYT1HOVER',
+        'BUILTBYT1SHIP',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',
@@ -34,8 +36,6 @@ UnitBlueprint {
 	'SPECIAL',
 	'LEVEL2',
 	'SORTDEFENSE',
-	
-	
     },
     CollisionOffsetY = -0.5,
     Defense = {
@@ -43,7 +43,7 @@ UnitBlueprint {
         Health = 1325,
         MaxHealth = 1325,
     },
-    Description = 'Floating Heavy Laser Tower',
+    Description = 'Heavy Laser Tower',
     Display = {
         Abilities = {
             'Floating',
@@ -99,7 +99,7 @@ UnitBlueprint {
         WaterVisionRadius = 10, 
     },
     Interface = {
-        HelpText = 'Floating Heavy Laser Tower',
+        HelpText = 'Heavy Laser Tower',
     },
     LifeBarHeight = 0.25,
     LifeBarOffset = 0.5,
@@ -108,6 +108,7 @@ UnitBlueprint {
         SkirtSizeX = 4, 
         SkirtSizeZ = 4,  
         BuildOnLayerCaps = {
+            LAYER_Land = true,
             LAYER_Water = true,
         },
     },
@@ -137,8 +138,8 @@ UnitBlueprint {
             DamageType = 'Normal',
             DisplayName = 'CORFHLT_LASER',
             FireTargetLayerCapsTable = {
-                Land = 'Land|Water',
-                Water = 'Land|Water',
+                Land = 'Land|Water|Air',
+                Water = 'Land|Water|Air',
             },
 	    RangeCategory = 'UWRC_DirectFire',
      WeaponCategory = 'DirectFire',
@@ -151,7 +152,7 @@ UnitBlueprint {
             ProjectileId = '/mods/SCTA-master/projectiles/ARMFHLT_LASER/ARMFHLT_LASER_proj.bp',
             EnergyDrainPerSecond = 50,
             EnergyRequired = 100,
-            ProjectileLifetime = 1,
+            ---ProjectileLifetime = 1,
             RackBones = {
                 {
                     MuzzleBones = {

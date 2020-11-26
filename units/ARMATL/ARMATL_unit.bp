@@ -35,11 +35,7 @@ UnitBlueprint {
         'OVERLAYSONAR',
 	'ARM',
 	'SPECIAL',
-	
-	
 	'LEVEL2',
-	
-	
     },
     CollisionOffsetY = -1,
     Defense = {

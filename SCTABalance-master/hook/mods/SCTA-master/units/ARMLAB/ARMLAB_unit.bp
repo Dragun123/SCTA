@@ -4,7 +4,6 @@ UnitBlueprint {
     Categories = {
         'BUILTBYT1AIR',
         'BUILTBYT1KBOT',
-        'BUILTBYT2KBOT',
         'BUILTBYT1VEHICLE',
         'BUILTBYT1HOVER',
         'BUILTBYCOMMANDER',
@@ -36,7 +35,6 @@ UnitBlueprint {
             SizeZ = 8,
         },
     Defense = {
-        ArmorType = 'Structure',
         Health = 2400,
         MaxHealth = 2400,
     },

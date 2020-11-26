@@ -25,12 +25,11 @@ UnitBlueprint {
 	
     },
     Defense = {
-        ArmorType = 'Structure',
         Health = 4000,
         MaxHealth = 4000,
     },
     Display = {
-        UniformScale = 0.16,
+        UniformScale = 0.22,
     },
     Economy = {
         BuildCostEnergy = 40,
@@ -73,6 +72,6 @@ UnitBlueprint {
         SelectionSizeZ = 0.6,
         SelectionThickness = 0.66,
         SizeX = 2,
-        SizeY = 1,
+        SizeY = 0.7,
         SizeZ = 2,
 }

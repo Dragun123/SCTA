@@ -225,7 +225,7 @@ UnitBlueprint {
 			WeaponUnpackAnimationRate = 1,
 			WeaponUnpackTimeout = 1,
 			WeaponRepackTimeout = 1,
-			AimsStraightOnDisable = true,
+			--AimsStraightOnDisable = true,
         },
         {
             Audio = {

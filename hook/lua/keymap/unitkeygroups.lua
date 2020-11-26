@@ -4,14 +4,16 @@ TAunitkeygroups = {
         "armdrake",
         "corbuzz",
         "armvulc",
-    }, 
+    },
+    ["Quantum_Gateway"]= {
+        "armgant",
+        "corgant",
+    },
     ["Land_Factory"]= {
         "armlab",
         "armvp",
-        "armgant",
         "corvp",
         "corlab",
-        "corgant",
     },    
     ["Air_Factory"]= {
         "armap",
@@ -62,6 +64,8 @@ TAunitkeygroups = {
     ["Point_Defense"]= {
         "armllt",
         "corllt",
+        "armdrag",
+        "cordrag",
     },
     ["Anti_Air"]= {
         "armrl",
@@ -116,10 +120,8 @@ TAunitkeygroups = {
         "cormabm",
     },
     ["Shield_Generator"]= {
-        "armdrag",
-        "cordrag",
-        "armfort",
-        "corfort",
+        "armamb",
+        "cortoast",
     },
     ["T2_Support_Land_Factory"]= {
         "armalab",
@@ -157,10 +159,9 @@ TAunitkeygroups = {
     },    
     ["Heavy_Point_Defense"]= {
         "armhlt",
-        "armamb",
-        "corhlt",
+        "armfort",
         "corfhlt",
-        "cortoast",
+        "corfort",
     },
     ["T1_Air_Scout"]= {
         "armpeep",
@@ -332,7 +333,7 @@ TAunitkeygroups = {
         "armsubk",
         "corshark",
     },
-    ["T3_Battlecruiser"]= {
+    ["T3_Battleship"]= {
         "armbats",
         "corbats",
     },
@@ -346,8 +347,8 @@ TAunitkeygroups = {
         "cormort",
     },
     ["T3_Aircraft_Carrier"] = {
-        'armcarry',
-        'corcarry',
+        "armcarry",
+        "corcarry",
     },
     ["T3_Sniper_Bot"] = {
         "armmav",

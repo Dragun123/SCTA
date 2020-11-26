@@ -318,7 +318,6 @@ BuildingTemplates[6] = {
         },
         {
             'T2GroundDefense',
-            'corhlt',
             'corfhlt',
         },
 

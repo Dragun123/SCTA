@@ -33,11 +33,10 @@ UnitBlueprint {
         },
     Economy = {
         BuildCostEnergy = 52000,
-        BuildCostMass = 4000, 
-        BuildRate = 280,
+        BuildCostMass = 1300, 
+        BuildRate = 150,
         BuildTime = 36000,
         BuildableCategory = {
-            'KBOT LEVEL3 CORE',
             'KBOT LEVEL1 CORE', 
             'KBOT LEVEL2 CORE',
         },

@@ -29,15 +29,13 @@ UnitBlueprint {
     },
     Economy = {
         BuildCostEnergy = 36000,
-        BuildCostMass = 9000,
+        BuildCostMass = 2000,
         BuildTime = 30000,
         BuildableCategory = {
             'SHIP LEVEL1 CORE',
             'NORMALSUB LEVEL1 CORE',
             'SHIP LEVEL2 CORE',
             'ADVANCEDSUB LEVEL2 CORE',
-            'SHIP LEVEL3 CORE',
-            'ADVANCEDSUB LEVEL3 CORE',
         },
         BuildRate = 360,
         ProductionPerSecondMass = 0,

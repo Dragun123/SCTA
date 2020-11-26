@@ -34,7 +34,7 @@ UnitBlueprint {
     Economy = {
         BuildRate = 400,
         BuildCostEnergy = 54000,
-        BuildCostMass = 9000, 
+        BuildCostMass = 3000, 
         BuildTime = 60000,
         BuildableCategory = {
             'HOVER LEVEL1 ARM',

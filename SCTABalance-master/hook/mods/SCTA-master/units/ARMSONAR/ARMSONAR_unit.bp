@@ -8,7 +8,7 @@ UnitBlueprint {
     Categories = {
         'BUILTBYT1SHIP',
         'BUILTBYT1HOVER',
-        'BUILTBYT2AIR',
+        'BUILTBYT1AIR',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',
@@ -27,7 +27,6 @@ UnitBlueprint {
 	'TARGETING',
     },
     Defense = {
-        ArmorType = 'Structure',
         Health = 300,
         MaxHealth = 300,
     },

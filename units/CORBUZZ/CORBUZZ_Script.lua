@@ -21,16 +21,12 @@ CORBUZZ = Class(TAunit) {
 				TABuzz.OnWeaponFired(self)
 				
 				self.unit.currentBarrel = self.unit.currentBarrel + 1
-				if self.unit.currentBarrel == 3 then
+				if self.unit.currentBarrel == 6 then
 					self.unit.currentBarrel = 0
 				end
 				self.unit:CreateProjectileAtBone('/mods/SCTA-master/effects/entities/Shells/ARMVULC_Shell/ARMVULC_Shell_proj.bp','Turret')
-			end,
-
-    			PlayFxRackReloadSequence = function(self)
-				self.unit.Spinners.Spindle:SetGoal(-120 * (self.unit.currentBarrel + 1))
-				self.unit.Spinners.Spindle:SetSpeed(360)
-				TABuzz.PlayFxRackReloadSequence(self)
+				self.unit.Spinners.Spindle:SetGoal(-60 * (self.unit.currentBarrel))
+				self.unit.Spinners.Spindle:SetSpeed(720)
 			end,
 
 			OnGotTargetCheck = function(self)

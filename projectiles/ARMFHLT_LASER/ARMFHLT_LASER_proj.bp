@@ -27,7 +27,7 @@ ProjectileBlueprint {
         },
     },
     Categories = {
-        'ARM',
+        'CORE',
         'PROJECTILE',
         'DIRECTFIRE'
     },
@@ -37,11 +37,11 @@ ProjectileBlueprint {
     General = {
         Category = 'Direct Fire',
         EntityCategory = {
-            'ARM',
+            'CORE',
             'PROJECTILE',
             'DIRECTFIRE',
         },
-        Faction = 'ARM',
+        Faction = 'CORE',
         Weapon = 'ARMFHLT_LASER',
     },
     Interface = {

@@ -63,7 +63,7 @@ UnitBlueprint {
     Description = 'Produces Ships',
     Display = {
 	DestructionEffects = {
-		#DefaultProjectileCategories = {'Construction','ArmBui','BuildMuzzle'},
+		DefaultProjectileCategories = {'Construction','ArmBui','BuildMuzzle'},
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},

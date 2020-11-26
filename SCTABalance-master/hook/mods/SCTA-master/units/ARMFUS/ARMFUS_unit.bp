@@ -5,7 +5,7 @@ UnitBlueprint {
         'BUILTBYT2KBOT',
         'BUILTBYT2VEHICLE',
         'BUILTBYT2SUB',
-        'BUILTBYT2HOVER',
+        'BUILTBYT1HOVER',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',

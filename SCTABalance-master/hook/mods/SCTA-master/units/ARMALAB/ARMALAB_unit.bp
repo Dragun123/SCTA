@@ -33,13 +33,12 @@ UnitBlueprint {
         },
     Economy = {
         BuildCostEnergy = 45000,
-        BuildCostMass = 3600, 
-        BuildRate = 300,
+        BuildCostMass = 1100, 
+        BuildRate = 180,
         BuildTime = 30000,
         BuildableCategory = {
             'KBOT LEVEL1 ARM',
             'KBOT LEVEL2 ARM',
-            'KBOT LEVEL3 ARM',
         },
     },
     Intel = {

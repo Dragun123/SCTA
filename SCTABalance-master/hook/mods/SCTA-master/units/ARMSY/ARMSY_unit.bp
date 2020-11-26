@@ -7,7 +7,6 @@ UnitBlueprint {
 	'BUILTBYT1VEHICLE',
 	'BUILTBYT1AIR',
         'BUILTBYT1HOVER',
-        'BUILTBYT2SUB',
 	'BUILTBYCOMMANDER',
         'SELECTABLE',
         'DRAGBUILD',

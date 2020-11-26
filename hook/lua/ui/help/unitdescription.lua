@@ -204,7 +204,6 @@ Description = table.merged( Description, {
     ['corgator'] = "<LOC corgator_help>."       ,
     ['corgeo'] = "<LOC corgeo_help>."           ,
     ['corgol'] = "<LOC corgol_help>."           ,
-    ['corhlt'] = "<LOC corhlt_help>."           ,
     ['corhp'] = "<LOC corhp_help>."             ,
     ['corhrk'] = "<LOC corhrk_help>."         ,
     ['corhurc'] = "<LOC corhurc_help>."         ,
