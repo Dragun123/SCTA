@@ -43,7 +43,8 @@ UnitBlueprint {
 	'ARM',
 		'PLANT',
 	'SORTCONSTRUCTION',
-	'LEVEL2',
+    'LEVEL2',
+    'LAB',
     },
     Defense = {
         ArmorType = 'Structure',
@@ -134,6 +135,7 @@ UnitBlueprint {
     Economy = {
         BuildCostEnergy = 36000,
         BuildCostMass = 2500, 
+        BuildCostMassLab = 1000,
         BuildTime = 45000,
         BuildRate = 175,
         DifferentialUpgradeCostCalculation = true,

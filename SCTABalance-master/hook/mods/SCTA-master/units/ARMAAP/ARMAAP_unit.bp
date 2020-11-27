@@ -20,7 +20,8 @@ UnitBlueprint {
 	'ARM',
 		'PLANT',
 	'SORTCONSTRUCTION',
-	'LEVEL2',
+    'LEVEL2',
+    'LAB',
     },
         Display = {
         UniformScale = 0.23,

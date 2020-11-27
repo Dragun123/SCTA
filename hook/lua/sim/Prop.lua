@@ -1,5 +1,5 @@
 
-local oldProp=Prop
+local oldProp = Prop
 Prop = Class(oldProp) {
 
     GetReclaimCosts = function(self, reclaimer)

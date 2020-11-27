@@ -3,6 +3,8 @@ UnitBlueprint {
     Categories = {
         'BUILTBYT2AIR',
         'BUILTBYT2SUB',
+        'BUILTBYT1SHIP',
+        'BUILTBYT1AIR',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',
@@ -20,7 +22,8 @@ UnitBlueprint {
 	'CORE',
 		'PLANT',
 	'SORTCONSTRUCTION',
-	'LEVEL2',
+    'LEVEL2',
+    'LAB',
     },
     Defense = {
         Health = 10000,

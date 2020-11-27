@@ -2,6 +2,8 @@ UnitBlueprint {
     Merge = true,
     Categories = {
         'BUILTBYT2KBOT',
+        'BUILTBYT1KBOT',
+        'BUILTBYT1VEHICLE',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',
@@ -18,7 +20,8 @@ UnitBlueprint {
 	'CORE',
 		'PLANT',
 	'SORTCONSTRUCTION',
-	'LEVEL2',
+    'LEVEL2',
+    'LAB',
     },
     Defense = {
         Health = 11000,

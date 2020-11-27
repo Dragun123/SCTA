@@ -2,6 +2,8 @@ UnitBlueprint {
     Merge = true,
     Categories = {
         'BUILTBYT2KBOT',
+        'BUILTBYT1KBOT',
+        'BUILTBYT1VEHICLE',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',
@@ -17,7 +19,8 @@ UnitBlueprint {
 	'ARM',
 		'PLANT',
 	'SORTCONSTRUCTION',
-	'LEVEL2',
+    'LEVEL2',
+    'LAB',
     },
         Display = {
         UniformScale = 0.28,
