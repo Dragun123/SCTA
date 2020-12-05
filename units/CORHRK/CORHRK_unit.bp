@@ -141,7 +141,7 @@ UnitBlueprint {
     SizeX = 3,
     SizeY = 1.5,
     SizeZ = 3,
-    StrategicIconName = 'icon_land2_missile',
+    StrategicIconName = 'icon_bot2_missile',
     StrategicIconSortPriority = 0,
     Weapon = {
         {
