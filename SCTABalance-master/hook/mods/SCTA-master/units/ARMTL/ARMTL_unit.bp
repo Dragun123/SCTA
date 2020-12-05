@@ -5,6 +5,26 @@
 
 UnitBlueprint {
     Merge = true, 
+    Categories = {
+        'BUILTBYT1AIR',
+        'BUILTBYT1HOVER',
+        'BUILTBYCOMMANDER',
+        'SELECTABLE',
+        'DRAGBUILD',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'TECH1',
+	'STRUCTURE',
+	'DEFENSE',
+	'DIRECTFIRE',
+	'ANTINAVY',
+	'NAVAL',
+        'OVERLAYANTINAVY',
+        'SORTDEFENSE',
+	'ARM',
+	'SPECIAL',
+	'LEVEL2',
+    },
     Defense = {
         Health = 800,
         MaxHealth = 800,

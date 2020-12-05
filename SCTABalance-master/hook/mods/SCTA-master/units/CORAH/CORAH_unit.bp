@@ -16,7 +16,8 @@ UnitBlueprint {
 'OVERLAYANTIAIR',
     'LAND',
     'CORE',
-    'HOVER',
+        'HOVER',
+'PHIB',
 'LEVEL1',
 },
     Defense = {
@@ -120,13 +121,6 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-        { #BIG_UNIT
-            Damage = 20,
-            DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
 }

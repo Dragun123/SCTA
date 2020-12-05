@@ -75,7 +75,7 @@ UnitBlueprint {
         },
 	SmokeBone = 'CORROACH',
         UniformScale = 0.16,
-        DestructionEffects = {
+        	--[[DestructionEffects = {
             DefaultFlamingProjectileCountMin = 0,
             DefaultFlamingProjectileCountMax = 0,
             DefaultProjectileCountMin = 0,
@@ -91,7 +91,7 @@ UnitBlueprint {
                     EmitterSize = 2,
         },
      },
-        },
+       	},]]--
     },	
     Economy = {
         BuildCostEnergy = 5471,

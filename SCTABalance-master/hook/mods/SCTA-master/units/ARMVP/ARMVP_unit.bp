@@ -21,11 +21,7 @@ UnitBlueprint {
 	'ARM',
 		'PLANT',
 	'SORTCONSTRUCTION',
-	
 	'LEVEL1',
-	
-	
-	
     },
     Defense = {
         Health = 2000,
@@ -40,7 +36,8 @@ UnitBlueprint {
     Economy = {
         BuildCostEnergy = 4800,
         BuildCostMass = 700, 
-        BuildRate = 100,
+        BuildRate = 90,
+        BuildTime = 8400,
         BuildableCategory = {
             'armdvp',
             'VEHICLE LEVEL1 ARM',

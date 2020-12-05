@@ -15,7 +15,7 @@ UnitBlueprint {
         'ARM',
         'SUBMERSIBLE',
     'JAM',
-    'ADVANCEDSUB',
+    'OCEAN',
 	'LEVEL3',
     },
     Display = {

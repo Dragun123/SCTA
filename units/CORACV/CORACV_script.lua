@@ -33,14 +33,14 @@ CORACV = Class(TAconstructor) {
 		TAconstructor.Aim(self, target)
 		WaitFor(self.AnimManip)	
 		--TURN turret to y-axis buildheading SPEED <160.03>;
-		self.Spinners.stand:SetGoal(TAutils.GetAngle(selfPosition.x, selfPosition.z, targetPosition.x, targetPosition.z) - (self:GetHeading() * 180) / math.pi)
+		self.Spinners.stand:SetGoal(TAutils.GetAngleTA(selfPosition.x, selfPosition.z, targetPosition.x, targetPosition.z) - (self:GetHeading() * 180) / math.pi)
 		self.Spinners.stand:SetSpeed(160.03)
 		WaitFor(self.Spinners.stand)
 
 		local distance = VDist2(selfPosition.x, selfPosition.z, targetPosition.x, targetPosition.z)
 		selfPosition = self:GetPosition('gun') 
 
-		self.Spinners.gun:SetGoal(TAutils.GetAngle(0, selfPosition.y, distance, targetPosition.y) + 270)
+		self.Spinners.gun:SetGoal(TAutils.GetAngleTA(0, selfPosition.y, distance, targetPosition.y) + 270)
 		self.Spinners.gun:SetSpeed(160.03)
 		WaitFor(self.Spinners.gun)
 	end,

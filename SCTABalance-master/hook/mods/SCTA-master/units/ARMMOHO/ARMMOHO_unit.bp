@@ -22,8 +22,8 @@ UnitBlueprint {
 	'STORAGE',
     },
     Defense = {
-        Health = 2000,
-        MaxHealth = 2000,
+        Health = 2300,
+        MaxHealth = 2300,
     },
     Display = {
         UniformScale = 0.07,
@@ -33,7 +33,7 @@ UnitBlueprint {
         SizeZ = 1,
     },
     Economy = {
-        BuildCostMass = 2200,
+        BuildCostMass = 2300,
         BuildCostEnergy = 24000,
         MaintenanceConsumptionPerSecondEnergy = 10,
         BuildTime = 17500,

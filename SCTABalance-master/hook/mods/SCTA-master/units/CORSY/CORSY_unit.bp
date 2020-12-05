@@ -23,11 +23,7 @@ UnitBlueprint {
 	'CORE',
 		'PLANT',
 	'SORTCONSTRUCTION',
-	
 	'LEVEL1',
-	
-	
-	
     },
     Defense = {
         Health = 4200,
@@ -43,8 +39,7 @@ UnitBlueprint {
         BuildCostEnergy = 7200,
         BuildRate = 125,
         BuildableCategory = {
-            'SHIP LEVEL1 CORE',
-            'NORMALSUB LEVEL1 CORE',
+            'OCEAN LEVEL1 CORE',
             'cordsy',
         },
     },

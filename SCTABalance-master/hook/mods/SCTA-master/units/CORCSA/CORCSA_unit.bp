@@ -16,12 +16,12 @@ UnitBlueprint {
 'VTOL',
 'SELECTION', 
     'CORE',
-    'SHIP',
+    'OCEAN',
 'LEVEL3',
 },
    Defense = {
-    Health = 920,
-    MaxHealth = 920,
+    Health = 900,
+    MaxHealth = 900,
     },
     Description = 'Tech Level 3',
     Economy = {
@@ -34,9 +34,13 @@ UnitBlueprint {
             'BUILTBYT2SUB CORE',
             'BUILTBYT2AIR CORE',
         },
-        MaxBuildDistance = 7,
+        MaxBuildDistance = 5,
         ProductionPerSecondEnergy = 3,
         ProductionPerSecondMass = 0,
     },
-    StrategicIconName = 'icon_fighter3_engineer',
+    Physics = {
+        FuelRechargeRate = 888888,
+        FuelUseTime = 888888,
+    },
+    StrategicIconName = 'icon_bot3_engineer',
 }

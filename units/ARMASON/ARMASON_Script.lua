@@ -80,7 +80,7 @@ ARMASON = Class(TAunit) {
 
 
 		self:SetMaintenanceConsumptionInactive()
-		self.textureAnimation = false
+		
 		TAunit.OnIntelDisabled(self)
 		self:PlayUnitSound('Deactivate')
 		self.damageReduction = 0.46
@@ -127,7 +127,7 @@ ARMASON = Class(TAunit) {
 		self.Spinners.wheel:SetSpeed(60)
 
 		self:SetMaintenanceConsumptionActive()
-		self.textureAnimation = true
+		
 		TAunit.OnIntelEnabled(self)
 		self:PlayUnitSound('Activate')
 		self.damageReduction = 1
@@ -135,7 +135,7 @@ ARMASON = Class(TAunit) {
 
 	OnKilled = function(self, instigator, type, overkillRatio)
 		TAunit.OnKilled(self, instigator, type, overkillRatio)
-		self.textureAnimation = false
+		
 	end,
 }
 

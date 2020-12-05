@@ -40,15 +40,15 @@ ProjectileBlueprint {
     },
     Defense = {
         ArmorType = 'Normal',
-        Health = 60,
-        MaxHealth = 60,
+        Health = 60000,
+        MaxHealth = 60000,
     },
     Display = {
         CameraFollowTimeout = 5,
         CameraFollowsProjectile = true,
         MeshBlueprint = '/mods/SCTA-master/meshes/projectiles/ballmiss_mesh.bp',
         StrategicIconSize = 1,
-        UniformScale = 0.60,
+        UniformScale = 1.0,
     },
     Description = 'ARM Nuclear Missile',
     DesiredShooterCap = 1,

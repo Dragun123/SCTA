@@ -3,6 +3,7 @@ UnitBlueprint {
     Categories = {
         'BUILTBYT2AIR',
         'BUILTBYT2SUB',
+        'BUILTBYT1AIR',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',
@@ -18,7 +19,7 @@ UnitBlueprint {
         'AIR', 
         'CONSTRUCTIONSORTDOWN',
 	'CORE',
-		'PLANT',
+    'LAB',
 	'SORTCONSTRUCTION',
 	'LEVEL2',
     },
@@ -36,7 +37,7 @@ UnitBlueprint {
         },
     Economy = {
         BuildCostEnergy = 42000,
-        BuildCostMass = 1400,
+        BuildCostMass = 2300,
         BuildTime = 11000,
         BuildableCategory = {
             'VTOL LEVEL1 CORE', 

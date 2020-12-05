@@ -86,11 +86,11 @@ ARMAAP = Class(TAFactory) {
 		local selfPosition = self:GetPosition('Nozzle_01') 
 		local targetPosition = self:GetPosition('pad') 
 			
-		self.Spinners.nozzle1:SetGoal(TAutils.GetAngle(selfPosition.x, selfPosition.z, targetPosition.x, targetPosition.z) - (self:GetHeading() * 180) / math.pi)
+		self.Spinners.nozzle1:SetGoal(TAutils.GetAngleTA(selfPosition.x, selfPosition.z, targetPosition.x, targetPosition.z) - (self:GetHeading() * 180) / math.pi)
 		self.Spinners.nozzle1:SetSpeed(160.03)
 
 		selfPosition = self:GetPosition('Nozzle_02') 
-		self.Spinners.nozzle2:SetGoal(TAutils.GetAngle(selfPosition.x, selfPosition.z, targetPosition.x, targetPosition.z) - (self:GetHeading() * 180) / math.pi)
+		self.Spinners.nozzle2:SetGoal(TAutils.GetAngleTA(selfPosition.x, selfPosition.z, targetPosition.x, targetPosition.z) - (self:GetHeading() * 180) / math.pi)
 		self.Spinners.nozzle2:SetSpeed(160.03)
 	
 		WaitFor(self.Spinners.nozzle1)

@@ -28,8 +28,6 @@ UnitBlueprint {
 	'SPECIAL',
 	'LEVEL1',
 	'SORTDEFENSE',
-	
-	
     },
     Defense = {
         Health = 560,

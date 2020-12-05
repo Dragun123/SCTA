@@ -10,7 +10,6 @@ TAFactory = Class(TAconstructor) {
 	order = nil,
 
 	isBuilding = nil,
-	---isReclaiming = false,
 
 	pauseTime = 3,
 	isFactory = true,

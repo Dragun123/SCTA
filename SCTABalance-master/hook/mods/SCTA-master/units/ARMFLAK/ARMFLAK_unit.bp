@@ -8,7 +8,7 @@ UnitBlueprint {
         'DRAGBUILD',
         'VISIBLETORECON',
         'RECLAIMABLE',
-        'TECH2',
+        'TECH3',
 	'STRUCTURE',
 	'DEFENSE',
 	'ANTIAIR',
@@ -33,5 +33,5 @@ UnitBlueprint {
         SkirtSizeX = 0, 
         SkirtSizeZ = 0,  
     },
-    StrategicIconName = 'icon_structure2_antiair',
+    StrategicIconName = 'icon_structure3_antiair',
   }    

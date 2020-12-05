@@ -43,7 +43,7 @@ CORMAKR = Class(TAunit) {
 		#Close Animation		
 		TAunit.OnProductionPaused(self)
 		self:SetMaintenanceConsumptionInactive()
-		self.textureAnimation = false
+		
 		self:PlayUnitSound('Deactivate')
 		ForkThread(self.Close, self)
 	end,
@@ -57,7 +57,7 @@ CORMAKR = Class(TAunit) {
 
 		TAunit.OnProductionUnpaused(self)
 		self:SetMaintenanceConsumptionActive()
-		self.textureAnimation = true
+		
 	end,
 
 	WaterRise = function(self)

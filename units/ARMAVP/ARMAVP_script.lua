@@ -111,11 +111,11 @@ ARMAVP = Class(TAFactory) {
 
 		local selfPosition = self:GetPosition('LeftBuildMuzzle') 
 		local distance = VDist2(selfPosition.x, selfPosition.z, targetPosition.x, targetPosition.z)
-		self.Spinners.nanoAim1:SetGoal(-TAutils.GetAngle(0, targetPosition.y, distance, selfPosition.y))
+		self.Spinners.nanoAim1:SetGoal(-TAutils.GetAngleTA(0, targetPosition.y, distance, selfPosition.y))
 		self.Spinners.nanoAim1:SetSpeed(3600)
 
 		selfPosition = self:GetPosition('RightBuildMuzzle') 
-		self.Spinners.nanoAim2:SetGoal(270-TAutils.GetAngle(0, targetPosition.y, distance, selfPosition.y))
+		self.Spinners.nanoAim2:SetGoal(270-TAutils.GetAngleTA(0, targetPosition.y, distance, selfPosition.y))
 		self.Spinners.nanoAim2:SetSpeed(3600)
 
 		WaitFor(self.Spinners.nanoAim1)

@@ -38,9 +38,6 @@ UnitBlueprint {
 	'CORE',
 	'ENERGY',
 	'LEVEL1',
-	
-	
-	
 	'STORAGE',
     },
     Defense = {
@@ -54,7 +51,7 @@ UnitBlueprint {
     },
     Description = 'Increases Energy Storage',
     Display = {
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
@@ -62,8 +59,8 @@ UnitBlueprint {
 				EmitterSize = 1.25,
 			},
 		},
-	},
-	TextureAnimationFrames = 8,
+	},]]--
+	--TextureAnimationFrames = 8,
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -129,18 +126,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #CRAWL_BLASTSML
-            Damage = 1200,
-                        DamageFriendly = true,
-            DamageRadius = 9,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/CORESTOR/CORESTOR_dead_prop.bp',
+        Wreckage = {
+	---UseCustomMesh = true,
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/units/CORESTOR/CORESTOR_dead_prop.bp',
         WreckageLayers = {
             Land = true,
         },

@@ -14,7 +14,7 @@ UnitBlueprint {
         'OVERLAYSONAR',
         'OVERLAYRADAR', 
         'CORE',
-        'SHIP',
+        'OCEAN',
 	'LEVEL1',
 	'ANTISUB',
     },
@@ -40,6 +40,8 @@ UnitBlueprint {
         BuildCostMass = 600,
         BuildTime = 24000,
     },
+    SelectionSizeX = 2,
+    SelectionSizeZ = 4,
     Weapon = {
         {
             Audio = {
@@ -52,7 +54,7 @@ UnitBlueprint {
             BallisticArc = 'RULEUBA_LowArc',
             CollideFriendly = false,
             DamagesFriendly = true,
-            Damage = 18,
+            Damage = 20,
             DamageRadius = 1.5,
             DamageType = 'Normal',
             DisplayName = 'CORE_ROY',
@@ -176,13 +178,6 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #SMALL_UNIT
-            Damage = 10,
-                       DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
 }

@@ -57,7 +57,7 @@ UnitBlueprint {
     Display = {
         AnimationWalk = '/mods/SCTA-master/units/CORSPY/CORSPY_lod0_Awalk.sca',
         AnimationWalkRate = 1,
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DestructionEmitters = {
 			{
 				EmitterBone = {'head'},
@@ -65,7 +65,7 @@ UnitBlueprint {
 				EmitterSize = 1.25,
 			},
 		},
-	},
+	},]]--
     Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -147,18 +147,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #SMALL_UNIT
-            Damage = 10,
-                       DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/CORSPY/CORSPY_dead_prop.bp',
+        Wreckage = {
+	---UseCustomMesh = true,
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/units/CORSPY/CORSPY_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Seabed = true,

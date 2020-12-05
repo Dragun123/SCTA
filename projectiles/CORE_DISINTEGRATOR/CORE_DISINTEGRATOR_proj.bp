@@ -1,5 +1,5 @@
 #CORE Commander Disintegrator
-#CORE_DISINTEGRATOR
+#DGun
 #
 #Blueprint created by Raevn
 
@@ -31,7 +31,7 @@ ProjectileBlueprint {
 	    'DISINTEGRATOR',
         },
         Faction = 'CORE',
-        Weapon = 'CORE_DISINTEGRATOR',
+        Weapon = 'DGun',
     },
     Interface = {
         HelpText = 0,

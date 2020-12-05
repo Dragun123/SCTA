@@ -20,8 +20,8 @@ UnitBlueprint {
 	'LEVEL2',
     },
     Defense = {
-        Health = 3000,
-        MaxHealth = 3000,
+        Health = 2000,
+        MaxHealth = 2000,
         AirThreatLevel = 5,
         EconomyThreatLevel = 0,
         SubThreatLevel = 0,
@@ -29,13 +29,16 @@ UnitBlueprint {
     },
     Economy = {
         BuildCostEnergy = 3300,
-        BuildCostMass = 440,
+        BuildCostMass = 410,
         BuildTime = 6000,
     },
     Footprint = {
 	SizeX = 1,
 	SizeZ = 1,
     },
+    SizeX = 1.5,
+    SizeZ = 1.5,
+    SizeY = 1.5,
     Weapon = {
         {
             Audio = {
@@ -48,7 +51,7 @@ UnitBlueprint {
             BallisticArc = 'RULEUBA_None',
             CollideFriendly = false,
 	    DamageFriendly = true,
-            Damage = 18,
+            Damage = 30,
 	    DamageRadius = 0.25,
             DamageType = 'Normal',
             DisplayName = 'GAUSS',
@@ -63,7 +66,7 @@ UnitBlueprint {
             Label = 'GAUSS',
             MaxRadius = 26,
             MuzzleSalvoDelay = 0.2,
-            MuzzleSalvoSize = 2,
+            MuzzleSalvoSize = 3,
 	    MuzzleVelocity = 45,
             ProjectileId = '/mods/SCTA-master/projectiles/GAUSS/GAUSS_proj.bp',
             RackBones = {
@@ -79,9 +82,9 @@ UnitBlueprint {
             RackReloadTimeout = 0.2,
             RackSalvoChargeTime = 0,
             RackSalvoReloadTime = 0,
-            RackSalvoSize = 4,
+            RackSalvoSize = 1,
             RackSlavedToTurret = false,
-            RateOfFire = 2,
+            RateOfFire = 1,
             TargetCheckInterval = 1,
             TargetPriorities = {
                 'ALLUNITS',
@@ -107,14 +110,6 @@ UnitBlueprint {
             DamageType = 'Normal',
             DummyWeapon = true,
             Label = 'DeathWeapon',
-        },
-        { #BIG_UNIT
-            Damage = 350,
-                       DamageFriendly = true,
-            DamageRadius = 3,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
         },
     },
 }

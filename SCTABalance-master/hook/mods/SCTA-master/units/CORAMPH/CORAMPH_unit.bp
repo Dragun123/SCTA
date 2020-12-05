@@ -11,6 +11,7 @@ UnitBlueprint {
     'LAND',
     'CORE',
     'AMPHIBIOUS',
+    'PHIB',
 'LEVEL3',
 },
    Defense = {
@@ -98,8 +99,8 @@ Economy = {
             BallisticArc = 'RULEUBA_LowArc',
             CollideFriendly = false,
             DamageFriendly = false,
-            Damage = 400,
-            DamageRadius = 0.25,
+            Damage = 200,
+            DamageRadius = 2,
             DamageType = 'Normal',
             DisplayName = 'armamph_weapon1',
             FireTargetLayerCapsTable = {
@@ -157,13 +158,6 @@ Economy = {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-        { #BIG_UNIT
-            Damage = 20,
-            DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
 }

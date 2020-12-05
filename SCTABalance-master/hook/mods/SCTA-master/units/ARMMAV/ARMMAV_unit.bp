@@ -25,7 +25,7 @@ UnitBlueprint {
     },
     Economy = {
         BuildCostEnergy = 9000,
-        BuildCostMass = 1500,
+        BuildCostMass = 1200,
         BuildTime = 21000,
     },
     Footprint = {
@@ -45,7 +45,7 @@ UnitBlueprint {
             BallisticArc = 'RULEUBA_None',
             CollideFriendly = false,
             DamageFriendly = false,
-            Damage = 35,
+            Damage = 70,
             DamageRadius = 0.25,
             FiringRandomness = 0.05,
             DamageType = 'Normal',
@@ -110,14 +110,6 @@ UnitBlueprint {
             DamageType = 'Normal',
             DummyWeapon = true,
             Label = 'DeathWeapon',
-        },
-        { #BIG_UNIT
-            Damage = 25,
-                       DamageFriendly = true,
-            DamageRadius = 3,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+},
     },
 }

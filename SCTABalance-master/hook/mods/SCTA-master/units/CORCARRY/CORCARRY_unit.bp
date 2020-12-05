@@ -22,12 +22,10 @@ UnitBlueprint {
         'OVERLAYRADAR',
         'OVERLAYMISC',
 	'CORE',
-	'SHIP',
+	'OCEAN',
 	'LEVEL3',
 	'NAVALCARRIER',
 	'SHOWQUEUE',
-	
-	
     },
     Defense = {
         Health = 17000,
@@ -42,13 +40,14 @@ UnitBlueprint {
         BuildCostEnergy = 11715,
         BuildCostMass = 3000,
         BuildTime = 60000,
-        BuildRate = 200,
+        BuildRate = 600,
         ProductionPerSecondEnergy = 300,
         MaintenanceConsumptionPerSecondEnergy = 35,
         BuildableCategory = {
             'VTOL LEVEL1 CORE AIR ENGINEER',
             'VTOL LEVEL1 CORE HIGHALTAIR', 
             'VTOL LEVEL2 CORE AIR',
+            'VTOL LEVEL3 CORE',
         },
     },
 Footprint = {

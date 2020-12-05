@@ -2,7 +2,7 @@ local SinglePolyTrailProjectile = import('/lua/sim/Defaultprojectiles.lua').Sing
 local TAutils = import('/mods/SCTA-master/lua/TAutils.lua')
 
 TAProjectile = Class(SinglePolyTrailProjectile) {
-	Smoke = false,
+	Smoke = nil,
 
 	FxSmoke = '/mods/SCTA-master/effects/emitters/smoke_emit.bp',
 	FxSmokeScale = 1,
@@ -14,7 +14,7 @@ TAProjectile = Class(SinglePolyTrailProjectile) {
 		if self.TrackTime then
 			self:ForkThread( self.TrackingThread, self )
 		end
-		if self.Smoke == true then
+		if self.Smoke then
 			self.Trash:Add(CreateAttachedEmitter(self, 0, self:GetArmy(), self.FxSmoke):ScaleEmitter(self.FxSmokeScale))
 		end
         	---self:SetCollisionShape('Sphere', 0, 0, 0, 1)
@@ -23,74 +23,8 @@ TAProjectile = Class(SinglePolyTrailProjectile) {
 	TrackingThread = function(self)
 		WaitSeconds(self.TrackTime)
 		self:TrackTarget(false)
-		self.Smoke = false
+		self.Smoke = nil
 	end,
-
-    PassData = function(self, data)
-        self.Data = data
-    end,
-
-    PassDamageData = function(self, DamageData)
-        self.DamageData.DamageRadius = DamageData.DamageRadius
-        self.DamageData.DamageAmount = DamageData.DamageAmount
-        self.DamageData.DamageType = DamageData.DamageType
-        self.DamageData.DamageFriendly = DamageData.DamageFriendly
-        self.DamageData.CollideFriendly = DamageData.CollideFriendly
-        self.DamageData.DoTTime = DamageData.DoTTime
-        self.DamageData.DoTPulses = DamageData.DoTPulses
-        self.DamageData.MetaImpactAmount = DamageData.MetaImpactAmount
-        self.DamageData.MetaImpactRadius = DamageData.MetaImpactRadius
-        self.DamageData.Buffs = DamageData.Buffs
-        self.DamageData.ArtilleryShieldBlocks = DamageData.ArtilleryShieldBlocks
-        self.DamageData.InitialDamageAmount = DamageData.InitialDamageAmount
-        self.CollideFriendly = self.DamageData.CollideFriendly
-	end,
-	
-	DoDamage = function(self, instigator, DamageData, targetEntity)
-        local damage = DamageData.DamageAmount
-        if damage and damage > 0 then
-            local radius = DamageData.DamageRadius
-            if radius and radius > 0 then
-                if not DamageData.DoTTime or DamageData.DoTTime <= 0 then
-                    DamageArea(instigator, self:GetPosition(), radius, damage, DamageData.DamageType, DamageData.DamageFriendly, DamageData.DamageSelf or false)
-                else
-                    -- DoT damage - check for initial damage
-                    local initialDmg = DamageData.InitialDamageAmount or 0
-                    if initialDmg > 0 then
-                        if radius > 0 then
-                            DamageArea(instigator, self:GetPosition(), radius, initialDmg, DamageData.DamageType, DamageData.DamageFriendly, DamageData.DamageSelf or false)
-                        elseif targetEntity then
-                            Damage(instigator, self:GetPosition(), targetEntity, initialDmg, DamageData.DamageType)
-                        end
-                    end
-
-                    ForkThread(DefaultDamage.AreaDoTThread, instigator, self:GetPosition(), DamageData.DoTPulses or 1, (DamageData.DoTTime / (DamageData.DoTPulses or 1)), radius, damage, DamageData.DamageType, DamageData.DamageFriendly)
-                end
-            -- ONLY DO DAMAGE IF THERE IS DAMAGE DATA.  SOME PROJECTILE DO NOT DO DAMAGE WHEN THEY IMPACT.
-            elseif DamageData.DamageAmount and targetEntity then
-                if not DamageData.DoTTime or DamageData.DoTTime <= 0 then
-                    Damage(instigator, self:GetPosition(), targetEntity, DamageData.DamageAmount, DamageData.DamageType)
-                else
-                    -- DoT damage - check for initial damage
-                    local initialDmg = DamageData.InitialDamageAmount or 0
-                    if initialDmg > 0 then
-                        if radius > 0 then
-                            DamageArea(instigator, self:GetPosition(), radius, initialDmg, DamageData.DamageType, DamageData.DamageFriendly, DamageData.DamageSelf or false)
-                        elseif targetEntity then
-                            Damage(instigator, self:GetPosition(), targetEntity, initialDmg, DamageData.DamageType)
-                        end
-                    end
-
-                    ForkThread(DefaultDamage.UnitDoTThread, instigator, targetEntity, DamageData.DoTPulses or 1, (DamageData.DoTTime / (DamageData.DoTPulses or 1)), damage, DamageData.DamageType, DamageData.DamageFriendly)
-                end
-            end
-        end
-        if self.InnerRing and self.OuterRing then
-            local pos = self:GetPosition()
-            self.InnerRing:DoNukeDamage(self.Launcher, pos, self.Brain, self.Army, DamageData.DamageType or 'Nuke')
-            self.OuterRing:DoNukeDamage(self.Launcher, pos, self.Brain, self.Army, DamageData.DamageType or 'Nuke')
-        end
-    end,
 }
 
 TANuclearProjectile = Class(TAProjectile) {
@@ -122,9 +56,9 @@ TANuclearProjectile = Class(TAProjectile) {
 	},
     	FxWaterHitScale = 15,
 	    FxImpactProjectile = {
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 	},
 	FxProjectileHitScale = 1.5,
     
@@ -161,9 +95,9 @@ TAEMPNuclearProjectile = Class(TAProjectile) {
 	},
     	FxWaterHitScale = 15,
 	    FxImpactProjectile = {
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 	},
 	FxProjectileHitScale = 1.5,
     
@@ -177,7 +111,7 @@ TAHeavyCannonProjectile = Class(TAProjectile) {
 		'/mods/SCTA-master/effects/emitters/napalm_03_emit.bp',
 		'/mods/SCTA-master/effects/emitters/napalm_03_emit.bp',
 		'/mods/SCTA-master/effects/emitters/napalm_03_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
 	},
 	FxAirUnitHitScale = 2,
 	FxImpactShield = {
@@ -185,7 +119,7 @@ TAHeavyCannonProjectile = Class(TAProjectile) {
 		'/mods/SCTA-master/effects/emitters/napalm_03_emit.bp',
 		'/mods/SCTA-master/effects/emitters/napalm_03_emit.bp',
 		'/mods/SCTA-master/effects/emitters/napalm_03_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
 	},
 	FxShieldHitScale = 2,
 	FxImpactUnit = {
@@ -193,7 +127,7 @@ TAHeavyCannonProjectile = Class(TAProjectile) {
 		'/mods/SCTA-master/effects/emitters/napalm_03_emit.bp',
 		'/mods/SCTA-master/effects/emitters/napalm_03_emit.bp',
 		'/mods/SCTA-master/effects/emitters/napalm_03_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
 	},
 	FxUnitHitScale = 2,
 	FxImpactProp = {
@@ -201,7 +135,7 @@ TAHeavyCannonProjectile = Class(TAProjectile) {
 		'/mods/SCTA-master/effects/emitters/napalm_03_emit.bp',
 		'/mods/SCTA-master/effects/emitters/napalm_03_emit.bp',
 		'/mods/SCTA-master/effects/emitters/napalm_03_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
 	},
 	FxPropHitScale = 2,
 	FxImpactLand = {
@@ -209,7 +143,7 @@ TAHeavyCannonProjectile = Class(TAProjectile) {
 		'/mods/SCTA-master/effects/emitters/napalm_03_emit.bp',
 		'/mods/SCTA-master/effects/emitters/napalm_03_emit.bp',
 		'/mods/SCTA-master/effects/emitters/napalm_03_emit.bp',
-    	'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
+    	'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
 	},
 	FxLandHitScale = 2,
 	FxImpactWater = {
@@ -251,39 +185,39 @@ TACannonProjectile = Class(TAProjectile) {
 
 TAMediumCannonProjectile = Class(TAProjectile) {
 	FxImpactNone = {
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 	},
 	FxNoneHitScale = 0.35,
 	FxImpactShield = {
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 	},
 	FxShieldHitScale = 0.35,
 	FxImpactUnit = {
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 	},
 	FxUnitHitScale = 0.35,
 	FxImpactAirUnit = {
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 	},
 	FxAirUnitHitScale = 0.35,
 	FxImpactProp = {
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 	},
 	FxPropHitScale = 0.35,
 	FxImpactLand = {
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 	},
 	FxLandHitScale = 0.35,
 	FxImpactWater = {
@@ -296,23 +230,23 @@ TAMediumCannonProjectile = Class(TAProjectile) {
 
 TALightCannonProjectile = Class(TAProjectile) {
 	FxImpactAirUnit = {
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 	},
 	FxAirUnitHitScale = 0.25,
 	FxImpactShield = {
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 	},
 	FxShieldHitScale = 0.25,
 	FxImpactUnit = {
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 	},
 	FxUnitHitScale = 0.25,
 	FxImpactProp = {
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 	},
 	FxPropHitScale = 0.25,
 	FxImpactLand = {
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 	},
 	FxLandHitScale = 0.25,
 	FxImpactWater = {
@@ -333,9 +267,9 @@ TAMissileProjectile = Class(TAMediumCannonProjectile) {
 
 TAAntiNukeProjectile = Class(TAMissileProjectile) {
 	FxImpactProjectile = {
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 	},
 	FxProjectileHitScale = 1.5,
 }
@@ -343,23 +277,23 @@ TAAntiNukeProjectile = Class(TAMissileProjectile) {
 TALaserProjectile = Class(TAProjectile) {
 
 	FxImpactAirUnit = {
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
 	},
 	FxAirUnitHitScale = 0.25,
 	FxImpactShield = {
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
 	},
 	FxShieldHitScale = 0.25,
 	FxImpactUnit = {
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
 	},
 	FxUnitHitScale = 0.25,
 	FxImpactProp = {
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
 	},
 	FxPropHitScale = 0.25,
 	FxImpactLand = {
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
 	},
 	FxLandHitScale = 0.25,
 	FxImpactWater = {
@@ -413,10 +347,10 @@ TAUnderWaterProjectile = Class(TAMediumCannonProjectile) {
 	},
 
 	FxImpactUnderWater = {
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 	},
 	FxUnderWaterHitScale = 0.35,
 	FxImpactWater = {

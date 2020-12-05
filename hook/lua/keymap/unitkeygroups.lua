@@ -99,17 +99,15 @@ TAunitkeygroups = {
     },
     ["Radar_System"]= {
         "armrad",
+        "armarad",
         "armtarg",
         "corrad",
+        "corarad",
         "cortarg",
     },
     ["Sonar_System"]= {
         "armsonar",
         "corsonar",
-    },
-    ["Omni_Sensor"]= {
-        "armarad",
-        "corarad",
     },
     ["Strategic_Missile_Defense"]= {
         "armamd",
@@ -216,6 +214,10 @@ TAunitkeygroups = {
         "armseap",
         "corseap",
     },
+    ["T1_Attack_Boat"] = {
+        "armpt",
+        "corpt",
+    },
     ["T1_Land_Scout"]= {
         "armfav",
         "armflea",
@@ -243,10 +245,8 @@ TAunitkeygroups = {
     },
     ["T1_Engineer"]= {
         "armck",
-        "armcs",
         "armcv",
         "corck",
-        "corcs",
         "corcv",
     },
     ["T1_Light_Assault_Bot"]= {
@@ -285,7 +285,9 @@ TAunitkeygroups = {
     },
     ["T2_Field_Engineer"]= {
         "armfark", 
+        "armcs",
         "cornecro",
+        "corcs",
     },
     ["T2_Engineer"]= {
         "armaca",
@@ -311,9 +313,13 @@ TAunitkeygroups = {
         "armcrus",
         "corcrus",
     },
-    ["T2_Cruiser"]= {
+    ["T3_Missile_Ship"] = {
         "armmship",
         "cormship",
+    },
+    ["T2_Cruiser"]= {
+        "armaas",
+        "corarch",
     },
     ["T1_Attack_Submarine"]= {
         "armsub",

@@ -39,7 +39,7 @@ CORVAMP = Class(TAair) {
 
 	RollThread = function(self)
 		while not IsDestroyed(self) do
-			if self.moving == true then
+			if self.moving then
 				if math.random(10) == 5 then
 					--TURN base to z-axis <239.99> SPEED <120.02>
 					self.Spinners.base:SetGoal(240)
@@ -81,7 +81,7 @@ CORVAMP = Class(TAair) {
 	end,
 
 	CloseWings = function(self)
-		self.moving = false
+		self.moving = nil
 
 		--TURN winga to z-axis <0> SPEED <76.87>;
 		self.Spinners.winga:SetGoal(0)

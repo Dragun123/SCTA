@@ -54,7 +54,7 @@ UnitBlueprint {
         Abilities = {
             'Kamikazi',
         },
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
@@ -62,7 +62,7 @@ UnitBlueprint {
 				EmitterSize = 1.25,
 			},
 		},
-	},
+	},]]--
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -135,7 +135,7 @@ UnitBlueprint {
 	    DamageRadius = 4,
             DamageType = 'Normal',
             DisplayName = 'ARMMINE1',
-	    EdgeEffectiveness = 0.1,
+	    ---EdgeEffectiveness = 0.1,
             FireTargetLayerCapsTable = {
                 Land = 'Land|Water',
             },
@@ -174,18 +174,8 @@ UnitBlueprint {
             DamageRadius = 2,
             DamageType = 'Normal',
             DummyWeapon = true,
-	    EdgeEffectiveness = 0.1,
+	    ---EdgeEffectiveness = 0.1,
             Label = 'DeathWeapon',
         },
-        { #ARMMINE1
-            Damage = 50,
-            DamageFriendly = true,
-            DamageRadius = 2,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-	    EdgeEffectiveness = 0.1,
-            Label = 'SuicideWeapon',
-        },
-
     },
 }

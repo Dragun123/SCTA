@@ -45,12 +45,12 @@ UnitBlueprint {
         Health = 1300,
         MaxHealth = 1300,
     },
-    Description = 'Pop-up Heavy Cannon',
+    Description = 'Pop-up Laser Cannon',
     Display = {
         Abilities = {
             'Defense',
         },
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DefaultProjectileCategories = {'MetalBarrel'},
 		DestructionEmitters = {
 			{
@@ -61,14 +61,14 @@ UnitBlueprint {
 			{
 				EmitterBone = {'gunpitch'},
 				EmitterBlueprint = {
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-			    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    					'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+			    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+    					'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 				},
 				EmitterSize = 0.35,
 			},
 		},
-	},
+	},]]---
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -201,18 +201,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #LARGE_BUILDING
-            Damage = 500,
-            DamageFriendly = true,
-            DamageRadius = 13,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
     Wreckage = {
-	UseCustomMesh = true,
-    Blueprint = '/mods/SCTA-master/units/CORVIPE/CORVIPE_heap_prop.bp',
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+	--UseCustomMesh = true,
+    --Blueprint = '/mods/SCTA-master/units/CORVIPE/CORVIPE_heap_prop.bp',
         WreckageLayers = {
             Land = true,
         },

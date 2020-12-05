@@ -23,11 +23,7 @@ UnitBlueprint {
 	'ARM',
 		'PLANT',
 	'SORTCONSTRUCTION',
-	
 	'LEVEL1',
-	
-	
-	
     },
     Defense = {
         Health = 4000,
@@ -44,8 +40,7 @@ UnitBlueprint {
         BuildCostEnergy = 7200,
         BuildRate = 125,
         BuildableCategory = {
-            'SHIP LEVEL1 ARM',
-            'NORMALSUB LEVEL1 ARM',
+            'OCEAN LEVEL1 ARM',
             'armdsy',
         },
     },

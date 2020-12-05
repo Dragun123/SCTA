@@ -24,8 +24,8 @@ UnitBlueprint {
     },
     Economy = {
         BuildCostEnergy = 800000,
-        BuildCostMass = 20000,
-        BuildTime = 30000,
+        BuildCostMass = 30000,
+        BuildTime = 70000,
     },
     Footprint = {
         SizeX = 3,

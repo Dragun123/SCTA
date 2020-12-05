@@ -52,8 +52,8 @@ UnitBlueprint {
         KTurn = 1,
         KTurnDamping = 1.5,
         LiftFactor = 7,
-        MaxAirspeed = 25,
-        MinAirspeed = 20,
+        MaxAirspeed = 21,
+        MinAirspeed = 16,
         StartTurnDistance = 5,
         TightTurnMultiplier = 1.1,
         TurnSpeed = 0.8,
@@ -89,7 +89,7 @@ UnitBlueprint {
         Abilities = {
             '<LOC ability_radar>Radar',
         },
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DefaultFlamingProjectileCountMin = 0,
 		DefaultFlamingProjectileCountMax = 0,
 		DestructionDebrisUseLocalVelocity = true,
@@ -103,7 +103,7 @@ UnitBlueprint {
 				EmitterSize = 1.25,
 			},
 		},
-	},
+	},]]--
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -193,13 +193,6 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-        { #BIG_UNIT
-            Damage = 20,
-            DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
 }

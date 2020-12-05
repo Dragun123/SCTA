@@ -70,7 +70,7 @@ UnitBlueprint {
             RangeCategory = 'UWRC_IndirectFire',
             WeaponCategory = 'Artillery',
             FiringTolerance = 1.65,	
-	    FiringRandomness = 1,
+	    FiringRandomness = 0.25,
             Label = 'ARMVULC_WEAPON',
             MaxRadius = 2500,
             MinRadius = 50,
@@ -114,7 +114,7 @@ UnitBlueprint {
             RackSalvoReloadTime = 1,
             RackSalvoSize = 12,
             RackSlavedToTurret = false,
-            RateOfFire = 6,
+            RateOfFire = 4,
             TargetCheckInterval = 1,
             TargetPriorities = {
                 'ALLUNITS',
@@ -125,7 +125,7 @@ UnitBlueprint {
             TurretBoneYaw = 'Turret',
             TurretPitch = 0,
             TurretPitchRange = 360,
-            TurretPitchSpeed = 2,
+            TurretPitchSpeed = 1.25,
             TurretYaw = 0,
             TurretYawRange = 360,
             TurretYawSpeed = 10,
@@ -139,13 +139,6 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #ATOMIC_BLAST
-            Damage = 2000,
-            DamageFriendly = true,
-            DamageType = 'Normal',
-            DamageRadius = 16.125,
-            DummyWeapon = true,
-            Label = 'SuicideWeapon',
-        },
+
     },
 }

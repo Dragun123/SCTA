@@ -83,7 +83,7 @@ UnitBlueprint {
         Abilities = {
             'Construction Unit',
         },
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DefaultProjectileCategories = {'Construction','BuildMuzzle'},
 		DestructionEmitters = {
 			{
@@ -92,7 +92,7 @@ UnitBlueprint {
 				EmitterSize = 1.25,
 			},
 		},
-	},
+	},]]--
 	BuildBones = {'BuildNozzle'},
         Mesh = {
             IconFadeInZoom = 130,
@@ -183,18 +183,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-        { #BIG_UNIT
-            Damage = 20,
-            DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/CORCK/CORCK_dead_prop.bp',
+        Wreckage = {
+	---UseCustomMesh = true,
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/units/CORCK/CORCK_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Seabed = true,

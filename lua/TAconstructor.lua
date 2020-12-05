@@ -141,12 +141,9 @@ TAconstructor = Class(TAWalking) {
 
 	OnStartReclaim = function(self, target)
 		self:LOGDBG('TAContructor.OnStartReclaim')
-		---if not self.cloakOn or not self.isCapturing then
-		--self:SetReclaimTimeMultiplier(1)
-		--self:SetBuildRate(self:GetBlueprint().Economy.BuildRate * 0.60)
 		TAWalking.OnStartReclaim(self, target)
 		self.desiredTarget = target
-		if (self.currentState == "aimed") then
+		if (self.currentState == "aimed" or self.currentState == "opened") then
 			self.currentState = "opened"
 			self.desiredState = "aimed"
 		else
@@ -407,5 +404,11 @@ TACommander = Class(TAconstructor) {
                 self:EnableIntel('Cloak')
             end
         end
-    end,
+	end,
+
+	DeathThread = function(self)
+		local army = self:GetArmy()
+		CreateAttachedEmitter( self, 0, army, '/mods/SCTA-master/effects/emitters/COMBOOM_emit.bp'):ScaleEmitter(10)
+		TAconstructor.DeathThread(self)
+	end,
 }

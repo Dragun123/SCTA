@@ -20,7 +20,7 @@ ARMSONAR = Class(TAunit) {
 		self.Spinners.base:SetSpeed(0)
 
 		self:SetMaintenanceConsumptionInactive()
-		self.textureAnimation = false
+		
 		TAunit.OnIntelDisabled(self)
 		self:PlayUnitSound('Deactivate')
 	end,
@@ -30,7 +30,7 @@ ARMSONAR = Class(TAunit) {
 		self.Spinners.base:SetSpeed(60)
 
 		self:SetMaintenanceConsumptionActive()
-		self.textureAnimation = true
+		
 		TAunit.OnIntelEnabled(self)
 		self:PlayUnitSound('Activate')
 	end,
@@ -38,7 +38,7 @@ ARMSONAR = Class(TAunit) {
 	OnKilled = function(self, instigator, type, overkillRatio)
 		self.Spinners.base:SetSpeed(0)
 		TAunit.OnKilled(self, instigator, type, overkillRatio)
-		self.textureAnimation = false
+		
 	end,
 }
 

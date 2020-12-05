@@ -16,6 +16,7 @@ UnitBlueprint {
         'LAND',
         'ARM',
         'HOVER',
+        'PHIB',
         'KBOT',
         'VEHICLE',
     'LEVEL3',

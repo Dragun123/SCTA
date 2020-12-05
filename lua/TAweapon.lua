@@ -40,17 +40,17 @@ TAweapon = Class(DefaultWeapon) {
             currentTarget = currentTarget:GetSource()
         end
 
-        if (canSee == true or TAutils.ArmyHasTargetingFacility(self.unit:GetArmy()) == true or currentTarget == target or (target and IsProp(target)) or EntityCategoryContains(categories.NOCUSTOMTARGET, self.unit)) then
+        if (canSee or TAutils.ArmyHasTargetingFacility(self.unit:GetArmy()) or currentTarget == target or (target and IsProp(target)) or EntityCategoryContains(categories.NOCUSTOMTARGET, self.unit)) then
              return true
         else
             self:ResetTarget()
-            return false
+            return nil
         end
     end,
 
     IdleState = State(DefaultWeapon.IdleState) {
         OnGotTarget = function(self)
-            if (self:OnGotTargetCheck() == true) then
+            if (self:OnGotTargetCheck()) then
                 DefaultWeapon.IdleState.OnGotTarget(self)
             end
         end,
@@ -58,7 +58,7 @@ TAweapon = Class(DefaultWeapon) {
 
     WeaponUnpackingState = State(DefaultWeapon.WeaponUnpackingState) {
         Main = function(self)
-            if (self:OnGotTargetCheck() == true) then
+            if (self:OnGotTargetCheck()) then
                 DefaultWeapon.WeaponUnpackingState.Main(self)
             else
                 ChangeState(self, self.WeaponPackingState)
@@ -66,7 +66,7 @@ TAweapon = Class(DefaultWeapon) {
         end,
 
         OnGotTarget = function(self)
-            if (self:OnGotTargetCheck() == true) then
+            if (self:OnGotTargetCheck()) then
                 DefaultWeapon.WeaponUnpackingState.OnGotTarget(self)
             end
         end,
@@ -78,7 +78,7 @@ TAweapon = Class(DefaultWeapon) {
 
         Main = function(self)
             local bp = self:GetBlueprint()
-            if (bp.CountedProjectile == true and bp.WeaponUnpacks == true) then
+            if (bp.CountedProjectile and bp.WeaponUnpacks) then
                 self.unit:SetBusy(true)
             else
                 self.unit:SetBusy(false)
@@ -93,14 +93,14 @@ TAweapon = Class(DefaultWeapon) {
                 aiBrain:TakeResource('Energy', bp.EnergyRequired)
                 self.WeaponCanFire = true
             end
-            if bp.CountedProjectile == true then
+            if bp.CountedProjectile then
                 ChangeState(self, self.RackSalvoFiringState)
             end
 
         end,
 
         OnGotTarget = function(self)
-            if (self:OnGotTargetCheck() == true) then
+            if (self:OnGotTargetCheck()) then
                 DefaultWeapon.RackSalvoFireReadyState.OnGotTarget(self)
             end
         end,
@@ -113,7 +113,7 @@ TAweapon = Class(DefaultWeapon) {
 
         OnLostTarget = function(self)
             local bp = self:GetBlueprint()
-            if bp.WeaponUnpacks == true then
+            if bp.WeaponUnpacks then
                 ChangeState(self, self.WeaponPackingState)
             end
         end,
@@ -122,50 +122,11 @@ TAweapon = Class(DefaultWeapon) {
 
     WeaponPackingState = State(DefaultWeapon.WeaponPackingState) {
         OnGotTarget = function(self)
-            if (self:OnGotTargetCheck() == true) then
+            if (self:OnGotTargetCheck()) then
                 DefaultWeapon.WeaponPackingState.OnGotTarget(self)
             end
         end,
     },
-
-    GetDamageTable = function(self)
-        local weaponBlueprint = self:GetBlueprint()
-        local damageTable = {}
-        damageTable.EdgeEffectiveness = weaponBlueprint.EdgeEffectiveness
-        damageTable.DamageRadius = weaponBlueprint.DamageRadius or 0
-        damageTable.DamageAmount = weaponBlueprint.Damage + (self.DamageMod or 0)
-        damageTable.DamageType = weaponBlueprint.DamageType
-        damageTable.DamageFriendly = weaponBlueprint.DamageFriendly
-        if damageTable.DamageFriendly == nil then
-            damageTable.DamageFriendly = true
-        end
-        damageTable.CollideFriendly = weaponBlueprint.CollideFriendly or false
-        damageTable.DoTTime = weaponBlueprint.DoTTime
-        damageTable.DoTPulses = weaponBlueprint.DoTPulses
-        damageTable.MetaImpactAmount = weaponBlueprint.MetaImpactAmount
-        damageTable.MetaImpactRadius = weaponBlueprint.MetaImpactRadius
-        #Add buff
-        damageTable.Buffs = {}
-        if weaponBlueprint.Buffs != nil then
-            for k, v in weaponBlueprint.Buffs do
-                damageTable.Buffs[k] = {}
-                damageTable.Buffs[k] = v
-            end   
-        end     
-        #remove disabled buff
-        if (self.Disabledbf != nil) and (damageTable.Buffs != nil) then
-            for k, v in damageTable.Buffs do
-                for j, w in self.Disabledbf do
-                    if v.BuffType == w then
-                        #Removing buff
-                        table.remove( damageTable.Buffs, k )
-                    end
-                end
-            end  
-        end  
-
-        return damageTable
-    end,
 }
 
 TAHide = Class(TAweapon) {
@@ -225,66 +186,52 @@ TABomb = Class(BareBonesWeapon) {
 
 }
 
+
 TACommanderDeathWeapon = Class(BareBonesWeapon) {
     OnCreate = function(self)
         BareBonesWeapon.OnCreate(self)
-
-        local myBlueprint = self:GetBlueprint()
-        self.Data = {
-            NukeOuterRingDamage = myBlueprint.NukeOuterRingDamage or 50,
-            NukeOuterRingRadius = myBlueprint.NukeOuterRingRadius or 20,
-            NukeOuterRingTicks = myBlueprint.NukeOuterRingTicks or 20,
-            NukeOuterRingTotalTime = myBlueprint.NukeOuterRingTotalTime or 10,
-
-            NukeInnerRingDamage = myBlueprint.NukeInnerRingDamage or 250,
-            NukeInnerRingRadius = myBlueprint.NukeInnerRingRadius or 15,
-            NukeInnerRingTicks = myBlueprint.NukeInnerRingTicks or 24,
-            NukeInnerRingTotalTime = myBlueprint.NukeInnerRingTotalTime or 24,
-        }
-    end,
-
-
-    OnFire = function(self)
-    end,
-
-    Fire = function(self)
-        local myBlueprint = self:GetBlueprint()
-        local myProjectile = self.unit:CreateProjectile( myBlueprint.ProjectileId, 0, 0, 0, nil, nil, nil):SetCollision(false)
-        myProjectile:PassDamageData(self:GetDamageTable())
-        if self.Data then
-            myProjectile:PassData(self.Data)
-        end
     end,
 }
 
-TACommanderSuicideWeapon = Class(BareBonesWeapon) {
-    OnCreate = function(self)
-        BareBonesWeapon.OnCreate(self)
+TADGun = Class(TAweapon) {
+    EnergyRequired = nil,
 
-        local myBlueprint = self:GetBlueprint()
-        self.Data = {
-            NukeOuterRingDamage = myBlueprint.NukeOuterRingDamage or 10,
-            NukeOuterRingRadius = myBlueprint.NukeOuterRingRadius or 40,
-            NukeOuterRingTicks = myBlueprint.NukeOuterRingTicks or 20,
-            NukeOuterRingTotalTime = myBlueprint.NukeOuterRingTotalTime or 10,
-
-            NukeInnerRingDamage = myBlueprint.NukeInnerRingDamage or 250,
-            NukeInnerRingRadius = myBlueprint.NukeInnerRingRadius or 30,
-            NukeInnerRingTicks = myBlueprint.NukeInnerRingTicks or 24,
-            NukeInnerRingTotalTime = myBlueprint.NukeInnerRingTotalTime or 24,
-        }
+    HasEnergy = function(self)
+        return self.unit:GetAIBrain():GetEconomyStored('ENERGY') >= self.EnergyRequired
     end,
 
-
-    OnFire = function(self)
+    -- Can we use the OC weapon?
+    CanOvercharge = function(self)
+        return not self.unit:IsOverchargePaused() and self:HasEnergy() and not
+            self:UnitOccupied() 
     end,
 
-    Fire = function(self)
-        local myBlueprint = self:GetBlueprint()
-        local myProjectile = self.unit:CreateProjectile( myBlueprint.ProjectileId, 0, 0, 0, nil, nil, nil):SetCollision(false)
-        myProjectile:PassDamageData(self:GetDamageTable())
-        if self.Data then
-            myProjectile:PassData(self.Data)
-        end
+    StartEconomyDrain = function(self) -- OverchargeWeapon drains energy on impact
     end,
+
+    OnWeaponFired = function(self)
+        ---TAweapon.OnWeaponFired(self)
+        self.unit:SetWeaponEnabledByLabel('DGun', true)
+        self:ForkThread(self.PauseOvercharge)
+    end,
+
+        OnLostTarget = function(self)
+        self.unit:SetWeaponEnabledByLabel('DGun', true)
+        TAweapon.OnLostTarget(self)
+    end,
+        
+        PauseOvercharge = function(self)
+            if not self.unit:IsOverchargePaused() then
+                self.unit:SetOverchargePaused(true)
+                WaitSeconds(1/self:GetBlueprint().RateOfFire)
+                self.unit:SetOverchargePaused(false)
+            end
+        end,
+
+        OnCreate = function(self)
+            TAweapon.OnCreate(self)
+            self.EnergyRequired = self:GetBlueprint().EnergyRequired
+            self.unit:SetWeaponEnabledByLabel('DGun', true)
+            self.unit:SetOverchargePaused(false)
+        end,
 }

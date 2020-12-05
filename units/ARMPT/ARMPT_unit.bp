@@ -40,12 +40,8 @@ UnitBlueprint {
         'OVERLAYDIRECTFIRE',
 	'OVERLAYANTIAIR',
         'ARM',
-        'SHIP',
+        'OCEAN',
 	'LEVEL1',
-	
-	
-	
-	
     },
     CollisionOffsetY = -0.5,
     Defense = {
@@ -62,7 +58,7 @@ UnitBlueprint {
         Abilities = {
             '<LOC ability_aa>Anti-Air',
         },
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DefaultProjectileCategories = {'ArmShip','ArmCockpit'},
 		DestructionEmitters = {
 			{
@@ -71,7 +67,7 @@ UnitBlueprint {
 				EmitterSize = 1.25,
 			},
 		},
-	},
+	},]]--
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -133,8 +129,8 @@ UnitBlueprint {
         MotionType = 'RULEUMT_Water',
         MaxSteerForce = 10,
     },
-    SelectionSizeX = 2,
-    SelectionSizeZ = 2,
+    SelectionSizeX = 1.5,
+    SelectionSizeZ = 2.5,
     SelectionThickness = 0.25,
     SizeX = 2,
     SizeY = 1.75,
@@ -279,18 +275,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #SMALL_UNIT
-            Damage = 10,
-                       DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/ARMPT/ARMPT_dead_prop.bp',
+        Wreckage = {
+	---UseCustomMesh = true,
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/units/ARMPT/ARMPT_dead_prop.bp',
         WreckageLayers = {
             Water = true,
 	    Sub = true,

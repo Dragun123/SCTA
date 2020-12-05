@@ -51,16 +51,11 @@ UnitBlueprint {
         'MOBILE',
 	    'CONSTRUCTION',
 	    'NAVAL',
-        'SHIP',
+        'CORE',
+        'OCEAN',
         'T2SUBMARINE',
         'OVERLAYSONAR',
-        'CORE', 
-	    
 	    'LEVEL2',
-	    
-	    
-	    
-	    
     },
     Defense = {
         ArmorType = 'Normal',
@@ -78,7 +73,7 @@ UnitBlueprint {
         Abilities = {
             'Construction Unit',
         },
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DefaultFlamingProjectileCountMin = 0,
 		DefaultFlamingProjectileCountMax = 0,
 		DefaultProjectileCountMin = 0,
@@ -92,14 +87,14 @@ UnitBlueprint {
 			{
 				EmitterBone = {'door1','door2'},
 				EmitterBlueprint = {
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-			    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    					'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+			    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+    					'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 				},
 				EmitterSize = 0.35,
 			},
 		},
-	},
+	},]]---
 	BuildBones = {'muzzle'},
         Mesh = {
             IconFadeInZoom = 130,
@@ -202,18 +197,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #SMALL_UNIT
-            Damage = 10,
-                       DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/CORACSUB/CORACSUB_dead_prop.bp',
+        Wreckage = {
+	---UseCustomMesh = true,
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/units/CORACSUB/CORACSUB_dead_prop.bp',
         WreckageLayers = {
             Water = true,
 	    Sub = true,

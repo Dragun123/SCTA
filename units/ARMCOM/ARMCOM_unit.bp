@@ -110,14 +110,13 @@ UnitBlueprint {
         AnimationWalkRate = 1,
         Abilities = {
             '<LOC ability_amphibious>Amphibious',
-            '<LOC ability_customizable>Customizable',
             '<LOC ability_notcap>Not Capturable',
             '<LOC ability_omni>Omni Sensor',
             '<LOC ability_cloak>Cloaking',
             'D-Gun',
             'Construction Unit',
         },
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DefaultFlamingProjectileCountMin = 0,
 		DefaultFlamingProjectileCountMax = 0,
 		DefaultProjectileCountMin = 0,
@@ -133,7 +132,7 @@ UnitBlueprint {
 				EmitterSize = 15,
 			},
 		},
-	},
+	},]]--
 	BuildBones = {'LaserMuzzle'},
         Mesh = {
             IconFadeInZoom = 130,
@@ -322,14 +321,14 @@ UnitBlueprint {
             Damage = 50,
             DamageRadius = 1,
             DamageType = 'DGun',
-            DisplayName = 'ARM_DISINTEGRATOR',
+            DisplayName = 'DGun',
             FireTargetLayerCapsTable = {
                 Land = 'Land|Water|Seabed',
                 Seabed = 'Land|Water|Seabed',
             },
 	        RangeCategory = 'UWRC_DirectFire',
          WeaponCategory = 'DirectFire',
-            Label = 'ARM_DISINTEGRATOR',
+            Label = 'DGun',
             MaxRadius = 22,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
@@ -337,7 +336,7 @@ UnitBlueprint {
 	        NeedPrep = true,
             EnergyRequired = 2000,
             EnergyDrainPerSecond = 2000,
-            EnergyChargeForFirstShot = false,
+            EnergyChargeForFirstShot = true,
             ProjectileId = '/mods/SCTA-master/projectiles/ARM_DISINTEGRATOR/ARM_DISINTEGRATOR_proj.bp',
             RackBones = {
                 {
@@ -372,24 +371,13 @@ UnitBlueprint {
         ManualFire = 1,
         },
         {
-            Damage = 1000,
+            Damage = 3000,
             DamageFriendly = true,
             DamageRadius = 20,
             DamageType = 'Normal',
             DisplayName = 'DeathWeapon',
             Label = 'DeathWeapon',
             DummyWeapon = true,
-	    EdgeEffectiveness= 0.3,
-        },
-        {
-            Damage = 1000,
-            DamageFriendly = true,
-            DamageRadius = 20,
-            DamageType = 'Normal',
-            DisplayName = 'SuicideWeapon',
-            Label = 'SuicideWeapon',
-            DummyWeapon = true,
-	    EdgeEffectiveness = 0.3,
         },
     },
 }

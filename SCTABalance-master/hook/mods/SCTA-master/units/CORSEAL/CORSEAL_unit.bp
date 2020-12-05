@@ -7,11 +7,12 @@ UnitBlueprint {
         'RECLAIMABLE',
         'MOBILE',
 	'LAND',
-	'AMPHIBIOUS',
+    'AMPHIBIOUS',
+    'PHIB',
 	'DIRECTFIRE',
         'OVERLAYDIRECTFIRE',
         'CORE',
-        'VEHICLE',	#'TANK' in TA
+        'VEHICLE',	
 	'LEVEL2',
     },
     Defense = {
@@ -46,7 +47,7 @@ UnitBlueprint {
             BallisticArc = 'RULEUBA_None',
             CollideFriendly = false,
 	    DamageFriendly = true,
-            Damage = 120,
+            Damage = 60,
             DamageRadius = 1.5,
             DamageType = 'Normal',
             DisplayName = 'CORE_MEDIUMCANNON',
@@ -109,13 +110,6 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #BIG_UNIT
-            Damage = 100,
-            DamageFriendly = true,
-            DamageRadius = 3,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
 }

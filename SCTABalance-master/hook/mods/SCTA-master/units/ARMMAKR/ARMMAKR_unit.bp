@@ -19,8 +19,6 @@ UnitBlueprint {
 	'ENERGY',
 	'LEVEL2',
 	'SORTECONOMY',
-	
-	
 	'STORAGE',
     },
     Defense = {

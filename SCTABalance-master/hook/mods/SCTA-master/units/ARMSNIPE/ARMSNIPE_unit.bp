@@ -44,7 +44,7 @@ UnitBlueprint {
             BallisticArc = 'RULEUBA_None',
             CollideFriendly = false,
 	    DamageFriendly = true,
-            Damage = 2000,
+            Damage = 600,
 	    DamageRadius = 0.25,
             DamageType = 'Normal',
             DisplayName = 'ARM_FAST',
@@ -104,13 +104,6 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #SMALL_UNIT
-            Damage = 10,
-                       DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
 }

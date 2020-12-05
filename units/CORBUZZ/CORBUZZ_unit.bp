@@ -46,7 +46,7 @@ UnitBlueprint {
         Abilities = {
             'Game Ender',
         },
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DefaultProjectileCategories = {'MetalBarrel','Stone','BuildPlate'},
 		DestructionEmitters = {
 			{
@@ -57,14 +57,14 @@ UnitBlueprint {
             {
 				EmitterBone = {'flare'},
 				EmitterBlueprint = {
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-			    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    					'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+			    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+    					'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 				},
 				EmitterSize = 0.35,
 			},
 		},
-	},
+	},]]---
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -211,18 +211,15 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #ATOMIC_BLAST
-            Damage = 2000,
-            DamageFriendly = true,
-            DamageRadius = 16.125,
-            DamageType = 'Normal',
-            DummyWeapon = true,
-            Label = 'SuicideWeapon',
-        },
     },
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/CORBUZZ/CORBUZZ_dead_prop.bp',
+        Wreckage = {
+	---UseCustomMesh = true,
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/units/CORBUZZ/CORBUZZ_dead_prop.bp',
         WreckageLayers = {
             Land = true,
         },

@@ -11,7 +11,8 @@ UnitBlueprint {
         'CORE',
         'VEHICLE',
         'KBOT',
-        'HOVER',
+            'HOVER',
+'PHIB',
 	'LEVEL3',
     },
     Defense = {
@@ -38,7 +39,7 @@ UnitBlueprint {
             BallisticArc = 'RULEUBA_None',
             CollideFriendly = false,
             DamageFriendly = false,
-            Damage = 280,
+            Damage = 160,
             DamageRadius = 0.5,
             FiringRandomness = 0,
             DamageType = 'Normal',
@@ -68,7 +69,7 @@ UnitBlueprint {
             RackSalvoReloadTime = 0,
             RackSalvoSize = 1,
             RackSlavedToTurret = false,
-            RateOfFire = 1,
+            RateOfFire = 2,
             TargetCheckInterval = 1,
             TargetPriorities = {
                 'ALLUNITS',
@@ -94,13 +95,6 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-        { #BIG_UNIT
-            Damage = 20,
-            DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
 }

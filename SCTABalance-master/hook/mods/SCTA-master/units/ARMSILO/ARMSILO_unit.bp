@@ -30,7 +30,7 @@ UnitBlueprint {
         BuildCostEnergy = 900000,
         BuildCostMass = 120000,
         BuildTime = 600000,
-        BuildRate = 6000,
+        BuildRate = 2000,
     },
   Defense = {
         Health = 12000,
@@ -70,7 +70,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0, 
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 0,
-            ProjectileId = '/mods/SCTA-master/SCTABalance-master/projectiles/CRSCMSSL/CRSCMSSL_proj.bp',
+            ProjectileId = '/mods/SCTA-master/SCTABalance-master/projectiles/NUCLSC_MISSILE/NUCLSC_MISSILE_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
@@ -125,13 +125,6 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #NUCLEAR_MISSILE
-            Damage = 5500,
-            DamageFriendly = true,
-            DamageRadius = 16,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
 }

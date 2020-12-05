@@ -90,10 +90,10 @@ UnitBlueprint {
             },
         },
         AnimationWalk = '/mods/SCTA-master/units/ARMPW/ARMPW_awalk.sca',
-        AnimationWalkRate = 2,
+        AnimationWalkRate = 1,
         AnimationRun = '/mods/SCTA-master/units/ARMPW/ARMPW_arun.sca',
         AnimationRunRate = 0.5,
-    	--[[DestructionEffects = {
+    --[[DestructionEffects = {
     		DefaultProjectileCategories = {'Test'},
     		DestructionEmitters = {
     			{
@@ -111,7 +111,8 @@ UnitBlueprint {
                     ShaderName = 'Unit',
                 },
             },
-        },--[[
+        },
+        --[[
         MovementEffects = {
             Land = {
                 Footfall = {
@@ -137,7 +138,7 @@ UnitBlueprint {
                     },
                 },
             },
-        },]]
+        },]]--
 	    --SmokeBone = 'Torso',
         UniformScale = 0.16,
     },
@@ -208,7 +209,7 @@ UnitBlueprint {
             DamageFriendly = false,
             Damage = 3,
             DamageRadius = 0,
-            FiringRandomness = 1,
+            FiringRandomness = 0,
             DamageType = 'Normal',
             DisplayName = 'EMG',
             FireTargetLayerCapsTable = {
@@ -259,27 +260,11 @@ UnitBlueprint {
             DamageType = 'Normal',
             DummyWeapon = true,
             Label = 'DeathWeapon',
-        },--[[
-        { --SMALL_UNIT
-            Damage = 10,
-            DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },]]
-    },
-    --[[Wreckage = {  --A static single death prop isn't going to work with multiple death animations.
-        UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/ARMPW/ARMPW_dead_prop.bp',
-        WreckageLayers = {
-            Land = true,
-            Seabed = true,
         },
-    },]]
+    },
     Wreckage = {
-        UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/ARMPW/ARMPW_heap_prop.bp',
+        ---UseCustomMesh = true,
+        --Blueprint = '/mods/SCTA-master/units/ARMPW/ARMPW_heap_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,

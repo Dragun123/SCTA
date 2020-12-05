@@ -23,10 +23,6 @@ UnitBlueprint {
 		'PLANT',
 	'SORTCONSTRUCTION',
 	'LEVEL1',
-	
-	
-	
-	
     },
         Display = {
                 Abilities = {

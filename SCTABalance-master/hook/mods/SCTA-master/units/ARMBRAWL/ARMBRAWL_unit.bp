@@ -5,13 +5,95 @@
 
 UnitBlueprint {
     Merge = true,
+    Economy = {
+        BuildCostEnergy = 8500,
+        BuildCostMass = 400,
+        BuildTime = 12000,
+    },
     Footprint = {
-	MaxSlope = 0.625,
         SizeX = 1,
         SizeZ = 1,
     },
     Intel = {
         VisionRadius = 14,
         WaterVisionRadius = 4, 
+    },
+    Weapon = {
+        {
+            Audio = {
+                Fire = Sound {
+                    Bank = 'TA_Sound',
+                    Cue = 'ARMSML3',
+                    LodCutoff = 'Weapon_LodCutoff',
+                },
+            },
+            BallisticArc = 'RULEUBA_None',
+            CollideFriendly = false,
+            DamageFriendly = false,
+            Damage = 10,
+            DamageRadius = 0.25,
+            FiringRandomness = 0.25, 
+            DamageType = 'Normal',
+            DisplayName = 'VTOL_EMG',
+            FireTargetLayerCapsTable = {
+                Air = 'Land|Water|Air',
+                Land = 'Land|Water|Air',
+            },
+        RangeCategory = 'UWRC_DirectFire',
+        WeaponCategory = 'DirectFire',
+            FiringTolerance = 3,
+            Label = 'VTOL_EMG',
+            MaxRadius = 25,
+            MuzzleSalvoDelay = 0.1,
+            MuzzleSalvoSize = 2,
+	    MuzzleVelocity = 28.125,
+            ProjectileId = '/mods/SCTA-master/projectiles/VTOL_EMG/VTOL_EMG_proj.bp',
+            RackBones = {
+                {
+                    MuzzleBones = {
+                        'Muzzle_01a',
+                        'Muzzle_01b',
+                    },
+                    RackBone = 'Weapon_01',
+                },
+                {
+                    MuzzleBones = {
+                        'Muzzle_02a',
+                        'Muzzle_02b',
+                    },
+                    RackBone = 'Weapon_02',
+                },
+            },
+            RackRecoilDistance = 0,
+            RackReloadTimeout = 0.5,
+            RackSalvoChargeTime = 0,
+            RackSalvoReloadTime = 0,
+            RackSalvoSize = 1,
+            RateOfFire = 4,
+            TargetCheckInterval = 1,
+            TargetPriorities = {
+                'ALLUNITS',
+            },
+            TargetRestrictDisallow = 'UNTARGETABLE, UNDERWATER',
+            TurretBoneMuzzle = 'ARMBRAWL',
+            TurretBonePitch = 'ARMBRAWL',
+            TurretBoneYaw = 'ARMBRAWL',
+            TurretPitch = 0,
+            TurretPitchRange = 360,
+            TurretPitchSpeed = 200,
+            TurretYaw = 0,
+            TurretYawRange = 360,
+            TurretYawSpeed = 0,
+            Turreted = true,
+        },
+        { #BIG_UNITEX
+            Damage = 50,
+            DamageFriendly = true,
+            DamageRadius = 3.4375,
+            DamageType = 'Normal',
+            DummyWeapon = true,
+            Label = 'DeathWeapon',
+        }, 
+
     },
 }

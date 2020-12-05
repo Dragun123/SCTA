@@ -20,6 +20,8 @@ UnitBlueprint {
     Physics = {
         MaxSpeed = 3.375,
     },
+    LifeBarSize = 1.5,
+    SelectionCenterOffsetZ = 0.1,
     SelectionSizeX = 0.5,
     SelectionSizeZ = 0.5,
     SizeX = 1,

@@ -41,7 +41,8 @@ UnitBlueprint {
     Economy = {
         BuildCostMass = 600, 
         BuildCostEnergy = 4500,
-        BuildRate = 120,
+        BuildRate = 100,
+        BuildTime = 8000,
         BuildableCategory = {
             'armdlab', 
             'KBOT LEVEL1 ARM',

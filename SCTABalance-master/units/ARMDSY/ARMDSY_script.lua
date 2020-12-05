@@ -31,7 +31,7 @@ ARMDSY = Class(TAFactory) {
 
 	OnKilled = function(self, instigator, type, overkillRatio)
 		TAFactory.OnKilled(self, instigator, type, overkillRatio)
-		self.textureAnimation = false
+		
 	end,
 
 	Open = function(self)

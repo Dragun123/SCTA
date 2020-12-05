@@ -17,7 +17,7 @@ UnitBlueprint {
     'OVERLAYRADAR',
     'OVERLAYSONAR',
         'CORE',
-        'SHIP',
+        'OCEAN',
 	'LEVEL1',
 	
 	
@@ -25,13 +25,12 @@ UnitBlueprint {
 	
     },
     Defense = {
-        Health = 250,
-        MaxHealth = 250,
+        Health = 320,
+        MaxHealth = 320,
     },    
     Economy = {
         BuildCostEnergy = 630,
         BuildCostMass = 90,
-        MaintenanceConsumptionPerSecondEnergy = 1,
         BuildTime = 4200,
     },
     Display = {
@@ -117,7 +116,7 @@ UnitBlueprint {
             BallisticArc = 'RULEUBA_None',
             CollideFriendly = false,
             DamagesFriendly = true,
-            Damage = 10,
+            Damage = 8,
             DamageRadius = 0.25,
             DamageType = 'Normal',
             DisplayName = 'CORPT_LASER',
@@ -173,18 +172,11 @@ UnitBlueprint {
         { #SMALL_UNITEX
             Damage = 10,
             DamageFriendly = true,
-            DamageRadius = 0.9375,
+            DamageRadius = 1,
             DamageType = 'Normal',
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #SMALL_UNIT
-            Damage = 10,
-            DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
 }

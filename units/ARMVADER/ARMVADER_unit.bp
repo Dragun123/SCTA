@@ -64,7 +64,7 @@ UnitBlueprint {
         Abilities = {
             'Kamikazi',
         },
-        DestructionEffects = {
+        	--[[DestructionEffects = {
             DefaultFlamingProjectileCountMin = 0,
             DefaultFlamingProjectileCountMax = 0,
             DefaultProjectileCountMin = 0,
@@ -80,7 +80,7 @@ UnitBlueprint {
                     EmitterSize = 1,
         },
     },
-},
+	},]]--
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {

@@ -9,8 +9,8 @@ UnitBlueprint {
         UniformScale = 0.2,
     },
     Defense = {
-        Health = 14000,
-        MaxHealth = 14000,
+        Health = 12000,
+        MaxHealth = 12000,
     },
     Economy = {
         BuildCostMass = 4400,
@@ -161,13 +161,6 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #BIG_UNIT //Was SMALL_UNIT, but not appropriate
-            Damage = 350,
-                       DamageFriendly = true,
-            DamageRadius = 3,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
 }

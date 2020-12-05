@@ -14,11 +14,11 @@ UnitBlueprint {
 	'LEVEL3',
     },
     Defense = {
-        Health = 16000,
-        MaxHealth = 16000,
+        Health = 14000,
+        MaxHealth = 14000,
     },
     Display = {
-        UniformScale = 0.24,
+        UniformScale = 0.22,
     },
     Economy = {
         BuildCostMass = 2400,
@@ -32,11 +32,11 @@ UnitBlueprint {
     Intel = {
         VisionRadius = 14,
     },
-    LifeBarSize = 4,
-    SelectionSizeX = 2.4,
-    SelectionSizeZ = 2.4,
+    LifeBarSize = 2,
+    SelectionSizeX = 2,
+    SelectionSizeZ = 2,
     SizeX = 3,
-    SizeZ = 3,
+    SizeZ = 2,
     SizeY = 3,
     StrategicIconName = 'icon_bot3_armored',
 }

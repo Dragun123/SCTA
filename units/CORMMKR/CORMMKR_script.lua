@@ -3,7 +3,7 @@
 local TAunit = import('/mods/SCTA-master/lua/TAunit.lua').TAunit
 
 CORMMKR = Class(TAunit) {
-	closeDueToDamage = false,
+	closeDueToDamage = nil,
 	productionIsActive = true,
 
 	OnCreate = function(self)
@@ -27,7 +27,7 @@ CORMMKR = Class(TAunit) {
 	OpeningState = State {
 		Main = function(self)
 			self:PlayUnitSound('Activate')
-			self.textureAnimation = true
+			
 
 
 			--SLEEP <772>;
@@ -87,24 +87,20 @@ CORMMKR = Class(TAunit) {
 			WaitSeconds(0.7)
 
 			ChangeState(self, self.IdleClosedState)
-			self.textureAnimation = false
+			
 		end,
 
 	},
 
 	IdleClosedState = State {
 		Main = function(self)
-			#Building was closed due to damage
-			if self.closeDueToDamage == true then 
+			if self.closeDueToDamage then 
 				while self.DamageSeconds > 0 do
 					WaitSeconds(1)
 					self.DamageSeconds = self.DamageSeconds - 1
 				end
-
-				self.closeDueToDamage = false
-
-				#Only Open if set to active
-				if self.productionIsActive == true then 
+				self.closeDueToDamage = nil
+				if self.productionIsActive then 
 					ChangeState(self, self.OpeningState)
 				end
 			end
@@ -133,7 +129,7 @@ CORMMKR = Class(TAunit) {
 
 	OnProductionPaused = function(self)
 		TAunit.OnProductionPaused(self)
-		self.productionIsActive = false
+		self.productionIsActive = nil
 		ChangeState(self, self.ClosingState)
 	end,
 

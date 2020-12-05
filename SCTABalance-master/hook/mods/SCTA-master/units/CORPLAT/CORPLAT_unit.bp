@@ -7,6 +7,8 @@ UnitBlueprint {
    Merge = true,
     Categories = {
         'BUILTBYT1HOVER',
+        --'BUILTBYT2SUB',
+        ---'BUILTBYT2AIR',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',
@@ -21,7 +23,7 @@ UnitBlueprint {
         'OVERLAYRADAR',
     'CORE',
     'AIR',
-		'PLANT',
+    'PLATFORM',
 	'SORTCONSTRUCTION',
 	'LEVEL3',
     },
@@ -40,7 +42,7 @@ UnitBlueprint {
     },
     Economy = {
         BuildCostEnergy = 120000,
-        BuildCostMass = 3000, 
+        BuildCostMass = 4000, 
         BuildTime = 85000,
     ProductionPerSecondMass = 0,
     BuildRate = 300,

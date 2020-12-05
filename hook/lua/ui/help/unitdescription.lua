@@ -31,8 +31,8 @@ Description = table.merged( Description, {
     ['armacv'] = "An Advanced Engineering Vehicle. Includes a Tech Level 3 engineering suite, including the Drake Gantry",
     
       -- T1 Naval Con Ship
-    ['corcs'] = "An Engineering Ship. Includes a naval engineering suite and may construct the Advanced Ship Yard",
-    ['armcs'] = "An Engineering Ship. Includes a naval engineering suite and may construct the Advanced Ship Yard",
+    ['corcs'] = "An Engineering Ship. Includes a naval engineering suite and may construct the Advanced Ship Yard. Has same the abilities of the Necro in SCTABalance.",
+    ['armcs'] = "An Engineering Ship. Includes a naval engineering suite and may construct the Advanced Ship Yard. Has same the abilities of the FARK in SCTABalance.",
     
       -- T2 Naval Con Sub
     ['coracsub'] = "An Advanced Engineering Sub. Includes a T2 naval engineering suite and may construct the Seaplane Platform",

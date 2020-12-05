@@ -93,7 +93,7 @@ UnitBlueprint {
         Abilities = {
             '<LOC ability_transport>Transport',
         },
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DefaultFlamingProjectileCountMin = 0,
 		DefaultFlamingProjectileCountMax = 0,
 		DestructionDebrisUseLocalVelocity = true,
@@ -107,7 +107,7 @@ UnitBlueprint {
 				EmitterSize = 1.25,
 			},
 		},
-	},
+	},]]--
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -172,8 +172,8 @@ UnitBlueprint {
         MotionType = 'RULEUMT_Air',
     MaxSpeed = 0.5, 
     RotateOnSpot = true,
-	FuelRechargeRate = 999999,
-	FuelUseTime = 999999,
+	FuelRechargeRate = 444444,
+	FuelUseTime = 444444,
     },
     SelectionSizeX = 1.5,
     SelectionSizeZ = 1.5,
@@ -198,13 +198,6 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-        { #BIG_UNIT
-            Damage = 20,
-            DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
 }

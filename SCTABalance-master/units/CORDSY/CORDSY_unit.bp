@@ -41,7 +41,7 @@ UnitBlueprint {
 	'CONSTRUCTION',
 	'NAVAL',
 	'CORE',
-		'PLANT',
+    'PLANT',
 	'SORTCONSTRUCTION',
 	'LEVEL2',
 	
@@ -62,7 +62,7 @@ UnitBlueprint {
     },
     Description = 'Produces Ships',
     Display = {
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		#DefaultProjectileCategories = {'Construction','ArmBui','BuildMuzzle'},
 		DestructionEmitters = {
 			{
@@ -73,17 +73,17 @@ UnitBlueprint {
 			{
 				EmitterBone = {'turreta','turretb','a'},
 				EmitterBlueprint = {
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-			    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    					'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+			    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+    					'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 				},
 				EmitterSize = 0.35,
 			},
 		},
-	},
+	},]]---
 	BuildBones = {'muzzlea','muzzleb'},
 	BuildAttachBone = 0,
-	TextureAnimationFrames = 6,
+	--TextureAnimationFrames = 6,
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -103,10 +103,8 @@ UnitBlueprint {
     BuildRate = 175,
     DifferentialUpgradeCostCalculation = true,
     BuildableCategory = {
-        'SHIP LEVEL1 CORE',
-        'NORMALSUB LEVEL1 CORE',
-        'SHIP LEVEL2 CORE',
-        'ADVANCEDSUB LEVEL2 CORE',
+        'OCEAN LEVEL1 CORE',
+        'OCEAN LEVEL2 CORE',
         'coradsy',
     },
 	InitialRallyX = 0,
@@ -199,18 +197,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #LARGE_BUILDING
-            Damage = 50,
-            DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/SCTABalance-master/units/CORDSY/CORDSY_dead_prop.bp',
+        Wreckage = {
+	---UseCustomMesh = true,
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/SCTABalance-master/units/CORDSY/CORDSY_dead_prop.bp',
         WreckageLayers = {
             Water = true,
             Seabed = true,

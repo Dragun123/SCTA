@@ -69,12 +69,12 @@ ARMCSA = Class(TAAirConstructor) {
 		local distance = VDist2(selfPosition.x, selfPosition.z, targetPosition.x, targetPosition.z)
 		
 		TAAirConstructor.Aim(self, target)
-		self.Spinners.nozzle1:SetGoal(TAutils.GetAngle(0, targetPosition.y, distance, selfPosition.y))
+		self.Spinners.nozzle1:SetGoal(TAutils.GetAngleTA(0, targetPosition.y, distance, selfPosition.y))
 		self.Spinners.nozzle1:SetSpeed(160.03)
 
 		WaitFor(self.Spinners.nozzle1)
 
-		self.Spinners.nozzle2:SetGoal(TAutils.GetAngle(0, targetPosition.y, distance, selfPosition.y))
+		self.Spinners.nozzle2:SetGoal(TAutils.GetAngleTA(0, targetPosition.y, distance, selfPosition.y))
 		self.Spinners.nozzle2:SetSpeed(160.03)
 
 		WaitFor(self.Spinners.nozzle2)

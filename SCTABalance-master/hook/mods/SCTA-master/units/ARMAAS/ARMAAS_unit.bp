@@ -13,8 +13,8 @@ UnitBlueprint {
         UniformScale = 0.24,
     },
     LifeBarSize = 3,
-    SelectionSizeX = 3,
-    SelectionSizeZ = 6,
+    SelectionSizeX = 2,
+    SelectionSizeZ = 7.6,
     SizeX = 3,
     SizeY = 3,
     SizeZ = 10,
@@ -248,22 +248,5 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-        { #BIG_UNIT
-            Damage = 20,
-            DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
-    },
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/ARMAAS/ARMAAS_dead_prop.bp',
-        WreckageLayers = {
-            Water = true,
-	    Sub = true,
-	    Seabed = true,
-        },
     },
 }

@@ -17,7 +17,7 @@ UnitBlueprint {
         },
         StopMove = Sound {
             Bank = 'TA_Sound',
-            Cue = 'TCORST0P',
+            Cue = 'VCORSTOP',
             LodCutoff = 'UnitMove_LodCutoff',
         },
 	    Destroyed = Sound {
@@ -37,12 +37,8 @@ UnitBlueprint {
 	'DIRECTFIRE',
         'OVERLAYDIRECTFIRE',
         'CORE',
-        'VEHICLE',	#'TANK' in TA
+        'VEHICLE',
 	'LEVEL1',
-	
-	
-	
-	
     },
     Defense = {
         ArmorType = 'Normal',
@@ -58,7 +54,7 @@ UnitBlueprint {
         Abilities = {
             'Assault Tank',
         },
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
@@ -66,7 +62,7 @@ UnitBlueprint {
 				EmitterSize = 1.25,
 			},
 		},
-	},
+	},]]--
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -212,18 +208,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-        { #BIG_UNIT
-            Damage = 20,
-            DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/CORGATOR/CORGATOR_dead_prop.bp',
+        Wreckage = {
+	---UseCustomMesh = true,
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/units/CORGATOR/CORGATOR_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Seabed = true,

@@ -1,5 +1,5 @@
 #ARM Commander Disintegrator
-#ARM_DISINTEGRATOR
+#DGun
 #
 #Blueprint created by Raevn
 
@@ -31,7 +31,7 @@ ProjectileBlueprint {
 	        'DISINTEGRATOR',
         },
         Faction = 'ARM',
-        Weapon = 'ARM_DISINTEGRATOR',
+        Weapon = 'DGun',
     },
     Interface = {
         HelpText = 0,

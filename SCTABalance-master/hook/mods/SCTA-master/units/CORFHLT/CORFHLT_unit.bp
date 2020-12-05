@@ -114,11 +114,6 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #LARGE_BUILDING
-            Damage = 200,
-            DamageRadius = 12.5,
-            DummyWeapon = true,
-            Label = 'SuicideWeapon',
-        },
+
     },
 }

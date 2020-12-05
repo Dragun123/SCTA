@@ -5,7 +5,7 @@
 
 local TALightCannonProjectile = import('/mods/SCTA-master/lua/TAProjectiles.lua').TALightCannonProjectile
 
-CORE_DISINTEGRATOR = Class(TALightCannonProjectile) {
+DCORE_DISINTEGRATOR = Class(TALightCannonProjectile) {
 	OnCreate = function(self)
 		TALightCannonProjectile.OnCreate(self)
 		ForkThread(self.MovementThread,self)
@@ -20,11 +20,11 @@ CORE_DISINTEGRATOR = Class(TALightCannonProjectile) {
 				DamageArea(self, pos, 1.5, 1000, 'DGun', true)
 				self:SetPosition(pos, true)
 				self:PlaySound(Sound({Cue = 'XPLOMAS2', Bank = 'TA_Sound', LodCutoff = 'Weapon_LodCutoff'}))
-				CreateEmitterAtEntity(self, self:GetArmy(), '/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp' ):ScaleEmitter(0.5)
+				CreateEmitterAtEntity(self, self:GetArmy(), '/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp' ):ScaleEmitter(0.5)
 			end
 			WaitSeconds(0.1)
 		end
 	end,
 }
 
-TypeClass = CORE_DISINTEGRATOR
+TypeClass = DCORE_DISINTEGRATOR

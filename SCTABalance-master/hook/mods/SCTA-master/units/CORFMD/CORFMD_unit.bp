@@ -1,7 +1,6 @@
 UnitBlueprint {
    Merge = true,
    Defense = {
-    ArmorType = 'Structure',
     Health = 10000,
     MaxHealth = 10000,
     },

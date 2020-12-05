@@ -30,7 +30,7 @@ UnitBlueprint {
         BuildCostEnergy = 900000,
         BuildCostMass = 120000,
         BuildTime = 600000,
-        BuildRate = 6000,
+        BuildRate = 2000,
     },
   Defense = {
         Health = 13000,
@@ -123,14 +123,6 @@ UnitBlueprint {
         DamageType = 'Normal',
         DummyWeapon = true,
         Label = 'DeathWeapon',
-    },
-    { #NUCLEAR_MISSILE
-        Damage = 5500,
-        DamageFriendly = true,
-        DamageRadius = 16,
-        DummyWeapon = true,
-        DamageType = 'Normal',
-        Label = 'SuicideWeapon',
     },
 },
 }

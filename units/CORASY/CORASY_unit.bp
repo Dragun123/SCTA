@@ -37,21 +37,13 @@ UnitBlueprint {
 	'FACTORY',
         'RALLYPOINT',
         'SHOWQUEUE',
-
-	
 	'STRUCTURE',
 	'CONSTRUCTION',
 	'NAVAL',
-
-	
 	'CORE',
 		'PLANT',
 	'SORTCONSTRUCTION',
 	'LEVEL2',
-	
-	
-	
-	
     },
     CollisionOffsetY = -1,
     CollisionOffsetZ = 0,
@@ -66,7 +58,7 @@ UnitBlueprint {
     },
     Description = 'Produces Ships',
     Display = {
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
@@ -76,16 +68,16 @@ UnitBlueprint {
 			{
 				EmitterBone = {'gun1','gun2'},
 				EmitterBlueprint = {
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-			    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    					'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+			    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+    					'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 				},
 				EmitterSize = 0.35,
 			},
 		},
-	},
+	},]]---
 	BuildBones = {'beam1','beam2'},
-	TextureAnimationFrames = 4,
+	--TextureAnimationFrames = 4,
 	BuildAttachBone = 0,
         Mesh = {
             IconFadeInZoom = 130,
@@ -109,8 +101,7 @@ UnitBlueprint {
 	InitialRallyX = 0,
 	InitialRallyZ = 7.5,
         BuildableCategory = {
-            'SHIP LEVEL2 CORE',
-            'ADVANCEDSUB LEVEL2 CORE',
+            'OCEAN LEVEL2 CORE',
         },
         StorageMass = 200,
         StorageEnergy = 200,
@@ -195,18 +186,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #LARGE_BUILDING
-            Damage = 50,
-            DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/CORASY/CORASY_dead_prop.bp',
+        Wreckage = {
+	---UseCustomMesh = true,
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/units/CORASY/CORASY_dead_prop.bp',
         WreckageLayers = {
             Water = true,
             Seabed = true,

@@ -28,7 +28,7 @@ CORASON = Class(TAunit) {
 		self.Spinners.dish:SetSpeed(0)
 
 		self:SetMaintenanceConsumptionInactive()
-		self.textureAnimation = false
+		
 		TAunit.OnIntelDisabled(self)
 		self:PlayUnitSound('Deactivate')
 		self.damageReduction = 0.46
@@ -41,7 +41,7 @@ CORASON = Class(TAunit) {
 		self.Spinners.dish:SetSpeed(60)
 
 		self:SetMaintenanceConsumptionActive()
-		self.textureAnimation = true
+		
 		TAunit.OnIntelEnabled(self)
 		self:PlayUnitSound('Activate')
 		self.damageReduction = 1
@@ -49,7 +49,7 @@ CORASON = Class(TAunit) {
 
 	OnKilled = function(self, instigator, type, overkillRatio)
 		TAunit.OnKilled(self, instigator, type, overkillRatio)
-		self.textureAnimation = false
+		
 	end,
 }
 

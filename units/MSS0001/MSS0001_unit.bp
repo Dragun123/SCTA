@@ -31,7 +31,7 @@ UnitBlueprint {
         'PRODUCTSC1',
         'SELECTABLE',
        	'COMMAND',
-        'CYBRAN',
+        'SERAPHIM',
         'MOBILE',
         'LAND',
         'TECH1',
@@ -114,7 +114,7 @@ UnitBlueprint {
             RULEUCC_Stop = true,
             RULEUCC_Transport = false,
         },
-        FactionName = 'Cybran',
+        FactionName = 'Seraphim',
         Icon = 'land',
         TechLevel = 'RULEUTL_Basic',
         ToggleCaps = {

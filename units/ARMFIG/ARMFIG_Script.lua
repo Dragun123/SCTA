@@ -7,7 +7,7 @@ local TAair = import('/mods/SCTA-master/lua/TAair.lua').TAair
 local TAweapon = import('/mods/SCTA-master/lua/TAweapon.lua').TAweapon
 
 ARMFIG = Class(TAair) {
-	moving = false,
+	moving = nil,
 
 	OnCreate = function(self)
 		TAair.OnCreate(self)
@@ -32,7 +32,7 @@ ARMFIG = Class(TAair) {
 
 	RollThread = function(self)
 		while not IsDestroyed(self) do
-			if self.moving == true then
+			if self.moving then
 				if math.random(10) == 5 then
 					--TURN base to z-axis <239.99> SPEED <120.02>
 					self.Spinners.base:SetGoal(240)

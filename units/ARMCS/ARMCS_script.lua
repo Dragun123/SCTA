@@ -82,14 +82,14 @@ ARMCS = Class(TAconstructor) {
 		local targetPosition = target:GetPosition()
 			
 		--TURN turret to y-axis buildheading SPEED <160.03>;
-		self.Spinners.turret:SetGoal(TAutils.GetAngle(selfPosition.x, selfPosition.z, targetPosition.x, targetPosition.z) - (self:GetHeading() * 180) / math.pi)
+		self.Spinners.turret:SetGoal(TAutils.GetAngleTA(selfPosition.x, selfPosition.z, targetPosition.x, targetPosition.z) - (self:GetHeading() * 180) / math.pi)
 		self.Spinners.turret:SetSpeed(160.03)
 		WaitFor(self.Spinners.turret)
 
 		local distance = VDist2(selfPosition.x, selfPosition.z, targetPosition.x, targetPosition.z)
 		selfPosition = self:GetPosition('Build_Muzzle') 
 
-		self.Spinners.nano:SetGoal(-180 + TAutils.GetAngle(0, selfPosition.y, distance, targetPosition.y))
+		self.Spinners.nano:SetGoal(-180 + TAutils.GetAngleTA(0, selfPosition.y, distance, targetPosition.y))
 		self.Spinners.nano:SetSpeed(160.03)
 		WaitFor(self.Spinners.nano)
 		TAconstructor.Aim(self, target)

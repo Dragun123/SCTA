@@ -6,7 +6,7 @@
 local TAunit = import('/mods/SCTA-master/lua/TAunit.lua').TAunit
 
 CORARAD = Class(TAunit) {
-	closeDueToDamage = false,
+	closeDueToDamage = nil,
 
 	intelIsActive = true,
 
@@ -74,15 +74,15 @@ CORARAD = Class(TAunit) {
 
 	IdleClosedState = State {
 		Main = function(self)
-			if self.closeDueToDamage == true then 
+			if self.closeDueToDamage then 
 				while self.DamageSeconds > 0 do
 					WaitSeconds(1)
 					self.DamageSeconds = self.DamageSeconds - 1
 				end
 
-				self.closeDueToDamage = false
+				self.closeDueToDamage = nil
 
-				if self.intelIsActive == true then 
+				if self.intelIsActive then 
 					ChangeState(self, self.OpeningState)
 				end
 			end
@@ -112,7 +112,7 @@ CORARAD = Class(TAunit) {
 
 	OnScriptBitSet = function(self, bit)
 		if bit == 3 then
-			self.intelIsActive = false
+			self.intelIsActive = nil
 			self:SetMaintenanceConsumptionInactive()
 			ChangeState(self, self.ClosingState)
 		end

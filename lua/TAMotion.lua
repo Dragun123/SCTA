@@ -5,7 +5,6 @@ local TAutils = import('/mods/SCTA-master/lua/TAutils.lua')
 local Game = import('/lua/game.lua')
 local TAunit = import('/mods/SCTA-master/lua/TAunit.lua').TAunit
 local util = import('/lua/utilities.lua')
-local debrisCat = import('/mods/SCTA-master/lua/TAdebrisCategories.lua')
 
 TATreads = Class(TAunit) 
 {
@@ -14,7 +13,7 @@ MovementEffects = function( self, EffectsBag, TypeSuffix)
     self:LOGDBG('TATreads.MovementEffects')
     local layer = self:GetCurrentLayer()
     local bpTable = self:GetBlueprint().Display.MovementEffects
-    TAunit.MovementEffects(self)
+    TAunit.MovementEffects(self, EffectsBag, TypeSuffix)
     if bpTable[layer] then
         bpTable = bpTable[layer]
         if bpTable.Treads then
@@ -124,5 +123,3 @@ TAWalking = Class(TATreads)
 		TATreads.OnKilled(self, instigator, type, overkillRatio)
 	end,
 }
-
-TypeClass = TAWalking

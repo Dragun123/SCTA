@@ -5,6 +5,7 @@ UnitBlueprint {
       '<LOC ability_radar>Radar',
       '<LOC ability_upgradable>Upgradeable',
   },
+  UniformScale = 0.10,
 }, 
     Economy = {
         BuildRate = 40, 
@@ -20,7 +21,5 @@ UnitBlueprint {
   Intel = {
     FreeIntel = false,
   }, 
-  SelectionSizeX = 1.5,
-  SelectionSizeZ = 1.5,
-  SizeY = 6,
+  SelectionCenterOffsetZ = -0.2,
 }

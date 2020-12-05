@@ -16,23 +16,18 @@ UnitBlueprint {
     'OVERLAYANTIAIR',
     'OVERLAYRADAR',
     'OVERLAYSONAR',
-        'ARM',
-        'SHIP',
+    'ARM',
+    'OCEAN',
 	'LEVEL1',
-	
-	
-	
-	
     },
     Defense = {
-        Health = 400,
-        MaxHealth = 400,
+        Health = 280,
+        MaxHealth = 280,
     },
     Economy = {
         BuildCostEnergy = 720,
         BuildCostMass = 80,
         BuildTime = 4500,
-        MaintenanceConsumptionPerSecondEnergy = 1,
     },
     Display = {
         Abilities = {
@@ -59,7 +54,7 @@ UnitBlueprint {
             BallisticArc = 'RULEUBA_None',
             CollideFriendly = false,
             DamageFriendly = false,
-            Damage = 6,
+            Damage = 9,
             DamageRadius = 1.5, 
             DamageType = 'AntiAir',
             DisplayName = 'ARMKBOT_MISSILE',
@@ -122,7 +117,7 @@ UnitBlueprint {
             BallisticArc = 'RULEUBA_None',
             CollideFriendly = false,
             DamagesFriendly = true,
-            Damage = 15,
+            Damage = 5,
             DamageRadius = 0.25,
             DamageType = 'Normal',
             DisplayName = 'ARMPT_LASER',
@@ -178,18 +173,11 @@ UnitBlueprint {
         { #SMALL_UNITEX
             Damage = 10,
             DamageFriendly = true,
-            DamageRadius = 0.9375,
+            DamageRadius = 1,
             DamageType = 'Normal',
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #SMALL_UNIT
-            Damage = 10,
-                       DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
 }

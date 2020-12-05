@@ -18,9 +18,6 @@ UnitBlueprint {
 	'CORE',
 	'ENERGY',
 	'LEVEL2',
-	
-	
-	
     },
     Display = {
         UniformScale = 0.32,

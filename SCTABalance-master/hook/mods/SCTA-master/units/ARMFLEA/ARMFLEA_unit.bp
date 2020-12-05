@@ -13,24 +13,27 @@ UnitBlueprint {
     'ARM',
     'KBOT',
     'LEVEL1',
-    
-    
-    
-    
 },
     Display = {
         Abilities = {
             '<LOC ability_radar>Radar',
         },
+            UniformScale = 0.12,
        },
     Intel = {
     RadarRadius = 40,
     },
+    Physics = {
+        MaxAcceleration = 3,
+        MaxBrake = 3,
+        MaxSpeed = 4.5,
+        TurnRate = 100,
+    },
     LifeBarSize = 1,
     SelectionSizeX = 0.6,
     SelectionSizeZ = 0.6,
-    SelectionCenterOffsetZ = -0.1,
+    SelectionCenterOffsetZ = -0.15,
     SizeX = 1,
-    SizeY = 1,
+    SizeY = 2,
     SizeZ = 1,
 }

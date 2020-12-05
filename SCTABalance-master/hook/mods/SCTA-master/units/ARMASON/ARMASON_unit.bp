@@ -3,11 +3,12 @@ UnitBlueprint {
     Categories = {
         'BUILTBYT2SUB',
         'BUILTBYT2AIR',
+        'BUILTBYT1HOVER',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',
         'RECLAIMABLE',
-        'TECH3',
+        'TECH2',
 	'STRUCTURE',
 	'INTELLIGENCE',
 	'SONAR',
@@ -26,7 +27,7 @@ UnitBlueprint {
     },
     Display = {
         Abilities = {
-            'Sonar',
+            '<LOC ability_sonar>Sonar',
             'Radar Targeting',
         },
     },
@@ -44,5 +45,8 @@ UnitBlueprint {
         BuildCostEnergy = 9000,
         BuildCostMass = 1200,
         MaintenanceConsumptionPerSecondEnergy = 100,
+        },
+        Intel = {
+            SonarRadius = 400,
         },
 }

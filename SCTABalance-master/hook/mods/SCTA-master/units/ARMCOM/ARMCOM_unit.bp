@@ -9,7 +9,6 @@ UnitBlueprint {
       Display = {
           Abilities = {
             '<LOC ability_amphibious>Amphibious',
-            '<LOC ability_customizable>Customizable',
             '<LOC ability_notcap>Not Capturable',
             '<LOC ability_omni>Omni Sensor',
             '<LOC ability_personalstealth>Personal Stealth',
@@ -43,8 +42,8 @@ UnitBlueprint {
         StorageEnergy = 2500,
         StorageMass = 1250,
     },
-   SelectionSizeX = 2,
-   SelectionSizeZ = 2,
+   SelectionSizeX = 1.6,
+   SelectionSizeZ = 1.6,
    SizeY = 4.3,
    SizeX = 2.8,
 }

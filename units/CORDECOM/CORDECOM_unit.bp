@@ -87,7 +87,7 @@ UnitBlueprint {
             'Decoy',
             'Construction Unit',
         },
-        DestructionEffects = {
+        	--[[DestructionEffects = {
             DefaultFlamingProjectileCountMin = 0,
             DefaultFlamingProjectileCountMax = 0,
             DefaultProjectileCountMin = 0,
@@ -103,7 +103,7 @@ UnitBlueprint {
                     EmitterSize = 15,
                 },
             },
-        },
+     	},]]--
         BuildBones = {'NanoMuzzle'},
         Mesh = {
             IconFadeInZoom = 130,
@@ -257,20 +257,20 @@ UnitBlueprint {
             Damage = 50,
             DamageRadius = 1,
             DamageType = 'DGun',
-            DisplayName = 'CORE_DISINTEGRATOR',
+            DisplayName = 'DGun',
             FireTargetLayerCapsTable = {
                 Land = 'Land|Water|Seabed',
                 Seabed = 'Land|Water|Seabed',
             },
 	    RangeCategory = 'UWRC_DirectFire',
      WeaponCategory = 'DirectFire',
-            Label = 'CORE_DISINTEGRATOR',
+            Label = 'DGun',
             MaxRadius = 22,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 12.5,
             NeedPrep = true,
-            EnergyChargeForFirstShot = false,
+            EnergyChargeForFirstShot = true,
             EnergyRequired = 1500,
             EnergyDrainPerSecond = 1500,
             ProjectileId = '/mods/SCTA-master/projectiles/DCORE_DISINTEGRATOR/DCORE_DISINTEGRATOR_proj.bp',
@@ -316,15 +316,6 @@ UnitBlueprint {
             DummyWeapon = true,
 	    EdgeEffectiveness = 0.15,
         },
-        {
-            Damage = 100,
-            DamageFriendly = true,
-            DamageRadius = 23.75,
-            DamageType = 'Normal',
-            DisplayName = 'SuicideWeapon',
-            Label = 'SuicideWeapon',
-            DummyWeapon = true,
-	    EdgeEffectiveness = 0.15,
-        },
+
     },
 }

@@ -21,8 +21,6 @@ UnitBlueprint {
 	'LEVEL1',
     'SORTDEFENSE',
     'SELECTABLE',
-	
-	
     },
     Defense = {
         Health = 4000,

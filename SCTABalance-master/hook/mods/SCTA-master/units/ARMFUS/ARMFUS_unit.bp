@@ -18,12 +18,10 @@ UnitBlueprint {
 	'ENERGY',
 	'LEVEL2',
 	'SORTECONOMY',
-	
-	
     },
     Defense = {
-        Health = 5000,
-        MaxHealth = 5000,
+        Health = 2200,
+        MaxHealth = 2200,
     },
     Display = {
     UniformScale = 0.30,
@@ -34,7 +32,7 @@ UnitBlueprint {
     },
     Economy = {
         BuildCostEnergy = 40000,
-        BuildCostMass = 3000,
+        BuildCostMass = 2200,
         BuildTime = 60000,
 	    NaturalProducer = true,
         ProductionPerSecondEnergy = 500,

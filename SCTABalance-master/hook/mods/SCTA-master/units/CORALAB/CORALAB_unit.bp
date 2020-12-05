@@ -15,7 +15,7 @@ UnitBlueprint {
         'LAND',
         'CONSTRUCTIONSORTDOWN',
 	'CORE',
-		'PLANT',
+    'LAB',
 	'SORTCONSTRUCTION',
 	'LEVEL2',
     },
@@ -32,10 +32,10 @@ UnitBlueprint {
         SizeZ = 8,
         },
     Economy = {
-        BuildCostEnergy = 52000,
-        BuildCostMass = 1300, 
+        BuildCostEnergy = 18000,
+        BuildCostMass = 1200, 
         BuildRate = 150,
-        BuildTime = 36000,
+        BuildTime = 12000,
         BuildableCategory = {
             'KBOT LEVEL1 CORE', 
             'KBOT LEVEL2 CORE',

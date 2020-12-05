@@ -12,7 +12,8 @@ UnitBlueprint {
     'OVERLAYOMNI',
     'LAND',
     'ARM',
-    ---'HOVER',
+'HOVER',
+--'PHIB',
 'LEVEL1',
 },
     Display = {

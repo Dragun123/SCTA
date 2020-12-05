@@ -19,7 +19,8 @@ UnitBlueprint {
 
 	
         'ARM',
-        'HOVER',
+            'HOVER',
+'PHIB',
 	
 	'LEVEL1',
 	
@@ -105,13 +106,6 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-        { #BIG_UNIT
-            Damage = 20,
-            DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
 }

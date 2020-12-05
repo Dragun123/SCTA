@@ -42,7 +42,7 @@ UnitBlueprint {
 	'TEXTUREANIM',
         'LAND', 
 	'CORE',
-		'PLANT',
+    'PLANT',
 	'SORTCONSTRUCTION',
 	'LEVEL3',
 	
@@ -63,7 +63,7 @@ UnitBlueprint {
     Display = {
         AnimationUnpack = '/mods/SCTA-master/units/CORVP/CORVP_lod0_aopen.sca',
         AnimationUnpackRate = 0.5, 
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DestructionEmitters = {
 			{
 				EmitterBone = {'layer1a','layer2a', 'layer3a'},
@@ -73,14 +73,14 @@ UnitBlueprint {
 			{
 				EmitterBone = {'a', 'muzzle1','muzzle2'},
 				EmitterBlueprint = {
-	    				'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-			    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+	    				'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+			    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+    					'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 				},
 				EmitterSize = 0.35,
 			},
 		},
-	},
+	},]]---
 	BuildBones = {'muzzle1','muzzle2'},
 	BuildAttachBone = 'pad',
     Mesh = {
@@ -96,7 +96,7 @@ UnitBlueprint {
             },
         },
     },
-	TextureAnimationFrames = 6,
+	--TextureAnimationFrames = 6,
         UniformScale = 0.25,
     },
     Economy = {
@@ -194,18 +194,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #LARGE_BUILDING
-        Damage = 50,
-        DamageFriendly = true,
-        DamageRadius = 1,
-        DummyWeapon = true,
-        DamageType = 'Normal',
-        Label = 'SuicideWeapon',
-        },
+
     },
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/SCTABalance-master/units/CORADVP/CORADVP_dead_prop.bp',
+        Wreckage = {
+	---UseCustomMesh = true,
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/SCTABalance-master/units/CORADVP/CORADVP_dead_prop.bp',
         WreckageLayers = {
             Land = true,
         },

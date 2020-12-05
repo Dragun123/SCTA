@@ -65,7 +65,7 @@ UnitBlueprint {
         TurnSpeed = 1.5,
         Winged = true,
     },
-    BuildIconSortPriority = 2,
+    BuildIconSortPriority = 3,
     Categories = {
         'SELECTABLE',
         'TECH2',
@@ -96,7 +96,7 @@ UnitBlueprint {
             '<LOC ability_aa>Anti-Air',
             '<LOC ability_personalstealth>Personal Stealth',
         },
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DefaultFlamingProjectileCountMin = 0,
 		DefaultFlamingProjectileCountMax = 0,
 		DestructionDebrisUseLocalVelocity = true,
@@ -110,7 +110,7 @@ UnitBlueprint {
 				EmitterSize = 1.25,
 			},
 		},
-	},
+	},]]--
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -167,8 +167,8 @@ UnitBlueprint {
         MaxSpeed = 0.5,
 	RotateOnSpot = true,
 	TurnRadius = 0,
-	FuelRechargeRate = 999999,
-	FuelUseTime = 999999,
+	FuelRechargeRate = 444444,
+	FuelUseTime = 444444,
     },
     SelectionSizeX = 1,
     SelectionSizeZ = 1,
@@ -310,13 +310,6 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-        { #BIG_UNIT
-            Damage = 20,
-            DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
 }

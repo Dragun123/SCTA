@@ -4,24 +4,21 @@ UnitBlueprint {
         'BUILTBYT1SHIP',
         'BUILTBYT1HOVER',
         'BUILTBYT1AIR',
+        'BUILTBYCOMMANDER',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',
         'RECLAIMABLE',
-        'TECH2',
+        'TECH1',
 	'STRUCTURE',
 	'INTELLIGENCE',
 	'NAVAL',
-	'TEXTUREANIM',
         'OVERLAYSONAR',
 	'CORE',
 	'SPECIAL',
 	'SONAR',
 	'LEVEL2',
 	'SORTINTEL',
-	
-	
-	
     },
     Defense = {
         Health = 300,
@@ -29,9 +26,8 @@ UnitBlueprint {
     },
     Display = {
         Abilities = {
-            'Sonar',
+            '<LOC ability_sonar>Sonar',
             '<LOC ability_upgradable>Upgradeable',
-            'Radar Targeting',
         },
     },
     Footprint = {
@@ -43,7 +39,7 @@ UnitBlueprint {
         NaturalProducer = false,
         ProductionPerSecondEnergy = 0,
         BuildRate = 40, 
-        BuildCostMass = 400,
+        BuildCostMass = 200,
         MaintenanceConsumptionPerSecondEnergy = 10,
         ProductionPerSecondEnergy = 0,
         BuildableCategory = {

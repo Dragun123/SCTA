@@ -23,7 +23,6 @@ UnitBlueprint {
 	'SORTINTEL',
     },
     Defense = {
-        ArmorType = 'Structure',
         Health = 3000,
         MaxHealth = 3000,
     },

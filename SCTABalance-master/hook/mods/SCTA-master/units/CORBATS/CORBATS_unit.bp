@@ -13,7 +13,7 @@ UnitBlueprint {
         'OVERLAYINDIRECTFIRE',
         'OVERLAYDIRECTFIRE',
         'CORE',
-        'SHIP',
+        'OCEAN',
 	'LEVEL3',
     },
     Defense = {
@@ -139,7 +139,7 @@ UnitBlueprint {
             FiringRandomness = 3,
             FiringTolerance = 0,
             Label = 'COR_BATS',
-            MaxRadius = 78.125,
+            MaxRadius = 125,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 35,
@@ -194,13 +194,6 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-        { #BIG_UNIT
-            Damage = 20,
-            DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
 }

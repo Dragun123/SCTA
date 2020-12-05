@@ -6,7 +6,7 @@
 local TAunit = import('/mods/SCTA-master/lua/TAunit.lua').TAunit
 
 ARMSOLAR = Class(TAunit) {
-	closeDueToDamage = false,
+	closeDueToDamage = nil,
 	damageReduction = 1,
 	productionIsActive = true,
 
@@ -92,16 +92,16 @@ ARMSOLAR = Class(TAunit) {
 	IdleClosedState = State {
 		Main = function(self)
 			#Building was closed due to damage
-			if self.closeDueToDamage == true then 
+			if self.closeDueToDamage then 
 				while self.DamageSeconds > 0 do
 					WaitSeconds(1)
 					self.DamageSeconds = self.DamageSeconds - 1
 				end
 
-				self.closeDueToDamage = false
+				self.closeDueToDamage = nil
 
 				#Only Open if set to active
-				if self.productionIsActive == true then 
+				if self.productionIsActive then 
 					ChangeState(self, self.OpeningState)
 				end
 			end
@@ -130,7 +130,7 @@ ARMSOLAR = Class(TAunit) {
 
 	OnProductionPaused = function(self)
 		TAunit.OnProductionPaused(self)
-		self.productionIsActive = false
+		self.productionIsActive = nil
 		ChangeState(self, self.ClosingState)
 	end,
 

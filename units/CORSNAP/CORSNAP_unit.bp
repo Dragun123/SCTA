@@ -37,11 +37,7 @@ UnitBlueprint {
         'LAND',
         'CORE',
         'HOVER',
-	
 	'LEVEL1',
-	
-	
-	
     },
     Defense = {
         ArmorType = 'Normal',
@@ -57,7 +53,7 @@ UnitBlueprint {
         Abilities = {
             '<LOC ability_hover>Hover',
         },
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DefaultProjectileCategories = {'MetalBarrel','ArmHover'},
 		DestructionEmitters = {
 			{
@@ -66,7 +62,7 @@ UnitBlueprint {
 				EmitterSize = 1.25,
 			},
 		},
-	},
+	},]]--
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -215,18 +211,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-        { #BIG_UNIT
-            Damage = 20,
-            DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/CORSNAP/CORSNAP_dead_prop.bp',
+        Wreckage = {
+	---UseCustomMesh = true,
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/units/CORSNAP/CORSNAP_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Water = true,

@@ -55,7 +55,7 @@ UnitBlueprint {
     },
     Description = 'Advanced Metal Extractor',
     Display = {
-        DestructionEffects = {
+        	--[[DestructionEffects = {
             DestructionEmitters = {
                 {
                     EmitterBone = {'CORMOHO'},
@@ -65,14 +65,14 @@ UnitBlueprint {
                 {
                     EmitterBone = {'shell'},
                     EmitterBlueprint = {
-                            '/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-                            '/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-                            '/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+                            '/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+                            '/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+                            '/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
                     },
-                    EmitterSize = 0.35,
-                },
-            },
-        },
+				EmitterSize = 0.35,
+			},
+		},
+	},]]--
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -89,7 +89,7 @@ UnitBlueprint {
         UniformScale = 0.07,
     },
     Economy = {
-        BuildCostMass = 2400,
+        BuildCostMass = 2300,
         BuildCostEnergy = 24000,
         MaintenanceConsumptionPerSecondEnergy = 10,
         BuildTime = 17500,
@@ -156,18 +156,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-         { #SMALL_BUILDING
-            Damage = 50,
-            DamageFriendly = true,
-            DamageRadius = 2,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+         
     },
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/SCTABalance-master/units/CORMASS/CORMASS_dead_prop.bp',
+        Wreckage = {
+	---UseCustomMesh = true,
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/SCTABalance-master/units/CORMASS/CORMASS_dead_prop.bp',
         WreckageLayers = {
             Land = true,
         },

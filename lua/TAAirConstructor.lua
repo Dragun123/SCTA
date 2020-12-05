@@ -60,10 +60,6 @@ TAAirConstructor = Class(TAair) {
 		self.animating = nil
 	end,
 
-    OnKilled = function(self, instigator, type, overkillRatio)
-        TAair.OnKilled(self, instigator, type, overkillRatio)
-    end,
-
 	FlattenSkirt = function(self)
 		TAair.FlattenSkirt(self)
         local x, y, z = unpack(self:GetPosition())
@@ -104,21 +100,10 @@ TAAirConstructor = Class(TAair) {
 		--self:SetAllWeaponsEnabled(true)
 	end,
 
-	DestroyUnitBeingBuilt = function(self)
-        self:LOGDBG('TAContructor.DestroyUnitBeingBuilt')
-    end,
-
-    OnFailedToBuild = function(self)
-        self:LOGDBG('TAContructor.OnFailedToBuild')
-		TAair.OnFailedToBuild(self)
-		--self:OnStopBuild()
-    end,
-
-
 	OnStartReclaim = function(self, target)
 		TAair.OnStartReclaim(self, target)
 		self.desiredTarget = target
-		if (self.currentState == "aimed") then
+		if (self.currentState == "aimed" or self.currentState == "opened") then
 			self.currentState = "opened"
 			self.desiredState = "aimed"
 		else
@@ -135,12 +120,17 @@ TAAirConstructor = Class(TAair) {
 
 	OnStopReclaim = function(self, target)
 		TAair.OnStopReclaim(self, target)
+		self.Conclude(self, target)
+	end,
+
+	Conclude = function(self, target)
 		self.desiredTarget = nil
 		self.isReclaiming = nil
+		--self.isBuilding = nil
 		self.countdown = self.pauseTime
 		self.desiredState = "closed"
-		---self:SetAllWeaponsEnabled(true)
 	end,
+
 
 	GetCloseArea = function(self)
 		local bp = self:GetBlueprint()
@@ -211,13 +201,8 @@ TAAirConstructor = Class(TAair) {
 						end
 
 						local bp
-						if (self.isBuilding) then
-							bp = self:GetBlueprint().Display.BuildEmitter or 'nanolathe.bp'
-							CreateEmitterAtBone(self, v, self:GetArmy(), '/mods/SCTA-master/effects/emitters/' .. bp ):ScaleEmitter(0.1):SetEmitterCurveParam('LIFETIME_CURVE',time,0)
-						else
-							bp = self:GetBlueprint().Display.ReclaimEmitter or 'reclaimnanolathe.bp'
-							CreateEmitterAtBone(self, v, self:GetArmy(), '/mods/SCTA-master/effects/emitters/' .. bp ):ScaleEmitter(0.1):SetEmitterCurveParam('LIFETIME_CURVE',time,0):SetEmitterCurveParam('Z_POSITION_CURVE',distance * 10,0)
-						end
+						bp = self:GetBlueprint().Display.BuildEmitter or 'nanolathe.bp'
+						CreateEmitterAtBone(self, v, self:GetArmy(), '/mods/SCTA-master/effects/emitters/' .. bp ):ScaleEmitter(0.1):SetEmitterCurveParam('LIFETIME_CURVE',time,0)
 						
 
 						if lowestRatio < 1 and lowestStored < 0.1 then
@@ -233,5 +218,3 @@ TAAirConstructor = Class(TAair) {
 		end
 	end,
 }
-
-TypeClass = TAAirConstructor

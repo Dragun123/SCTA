@@ -26,21 +26,14 @@ UnitBlueprint {
         'VISIBLETORECON',
         'RECLAIMABLE',
         'TECH1',
-
-	
 	'STRUCTURE',
                 'ECONOMIC',
         'SORTECONOMY',
 	'ENERGYPRODUCTION',
 	'NAVAL',
-
-	
 	'CORE',
 	'ENERGY',
 	'LEVEL1',
-	
-	
-	
     },
     CollisionOffsetY = -0.5,
     Defense = {
@@ -54,7 +47,7 @@ UnitBlueprint {
     },
     Description = 'Produces Energy',
     Display = {
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
@@ -62,7 +55,7 @@ UnitBlueprint {
 				EmitterSize = 1.25,
 			},
 		},
-	},
+	},]]--
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -132,18 +125,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-         { #SMALL_BUILDING
-            Damage = 50,
-            DamageFriendly = true,
-            DamageRadius = 2,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+         
     },
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/CORTIDE/CORTIDE_dead_prop.bp',
+        Wreckage = {
+	---UseCustomMesh = true,
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/units/CORTIDE/CORTIDE_dead_prop.bp',
         WreckageLayers = {
             Water = true,
             Seabed = true,

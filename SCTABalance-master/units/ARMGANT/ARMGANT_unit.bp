@@ -29,6 +29,7 @@ UnitBlueprint {
     BuildIconSortPriority = 18,
     Categories = {
         'BUILTBYT1HOVER',
+        ---'BUILTBYT2KBOT',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',
@@ -43,12 +44,12 @@ UnitBlueprint {
         'LAND',
         'ARM',
         'STRATEGIC',
-        	'PLANT',
+        	'GANTRY',
             'SORTCONSTRUCTION',
-        'LEVEL3',
+        'LEVEL4',
     },
     Defense = {
-        ArmorType = 'Structure',
+        ArmorType = 'ExperimentalStructure',
         Health = 40000,
         MaxHealth = 40000,
         AirThreatLevel = 0,
@@ -58,7 +59,7 @@ UnitBlueprint {
     },
     Description = 'Builds Drake',
     Display = {
-        DestructionEffects = {
+        	--[[DestructionEffects = {
             DefaultProjectileCategories = {'Construction','BuildMuzzle','BuildPlate', 'CorBld'},
             DestructionEmitters = {
                 {
@@ -69,14 +70,14 @@ UnitBlueprint {
                 {
                     EmitterBone = {'RightA1','RightA2','RightA3','LeftA1','LeftA2', 'LeftA3' },
                     EmitterBlueprint = {
-                            '/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-                            '/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-                            '/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+                            '/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+                            '/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+                            '/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
                     },
-                    EmitterSize = 0.35,
-                },
-            },
-        },
+				EmitterSize = 0.35,
+			},
+		},
+	},]]--
         BuildBones = {'nano1','nano2'},
         BuildAttachBone = 'buildpad',
         Mesh = {
@@ -180,18 +181,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #LARGE_BUILDING
-        Damage = 50,
-        DamageFriendly = true,
-        DamageRadius = 1,
-        DummyWeapon = true,
-        DamageType = 'Normal',
-        Label = 'SuicideWeapon',
-        },
+
     },
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/SCTABalance-master/units/ARMGANT/ARMGANT_dead_prop.bp',
+        Wreckage = {
+	---UseCustomMesh = true,
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/SCTABalance-master/units/ARMGANT/ARMGANT_dead_prop.bp',
         WreckageLayers = {
             Land = true,
         },

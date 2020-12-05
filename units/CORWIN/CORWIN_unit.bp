@@ -46,7 +46,7 @@ UnitBlueprint {
     },
     Description = 'Produces Energy',
     Display = {
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		#DefaultProjectileCategories = {'CamoflageC'},
 		DestructionProjectiles = {
 			{
@@ -63,14 +63,14 @@ UnitBlueprint {
 			{
 				EmitterBone = {'cradle','fan'},
 				EmitterBlueprint = {
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-			    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    					'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+			    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+    					'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 				},
 				EmitterSize = 0.35,
 			},
 		},
-	},
+	},]]---
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -88,9 +88,9 @@ UnitBlueprint {
         BuildCostMass = 55,
         BuildTime = 1687,
 	    NaturalProducer = true,
-        ProductionPerSecondEnergy = 20,
-        ProductionPerSecondEnergyMin = 15,
-        ProductionPerSecondEnergyMax = 30,
+        ProductionPerSecondEnergy = 25,
+        ProductionPerSecondEnergyMin = 10,
+        ProductionPerSecondEnergyMax = 40,
     },
     Footprint = {
 	MaxSlope = 0.625,
@@ -139,18 +139,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-         { #SMALL_BUILDING
-            Damage = 50,
-            DamageFriendly = true,
-            DamageRadius = 2,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+         
     },
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/CORWIN/CORWIN_dead_prop.bp',
+        Wreckage = {
+	---UseCustomMesh = true,
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/units/CORWIN/CORWIN_dead_prop.bp',
         WreckageLayers = {
             Land = true,
         },

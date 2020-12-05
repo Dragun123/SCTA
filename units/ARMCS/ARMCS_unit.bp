@@ -53,7 +53,7 @@ UnitBlueprint {
     'DEFENSIVEBOAT',
 	'NAVAL',
         'ARM',
-        'SHIP',
+        'OCEAN',
 	'LEVEL1',
 	
 	
@@ -61,7 +61,7 @@ UnitBlueprint {
 	
 	
     },
-    CollisionOffsetY = -0.5,
+    CollisionOffsetY = -0.25,
     Defense = {
         ArmorType = 'Normal',
         Health = 1105,
@@ -76,7 +76,7 @@ UnitBlueprint {
         Abilities = {
             'Construction Unit',
         },
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DefaultProjectileCategories = {'Construction','ArmShip','BuildMuzzle'},
 		DestructionEmitters = {
 			{
@@ -87,14 +87,14 @@ UnitBlueprint {
 			{
 				EmitterBone = {'Door_01','Door_02'},
 				EmitterBlueprint = {
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-			    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    					'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+			    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+    					'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 				},
 				EmitterSize = 0.35,
 			},
 		},
-	},
+	},]]---
 	BuildBones = {'Build_Muzzle'},
         Mesh = {
             IconFadeInZoom = 130,
@@ -170,8 +170,8 @@ UnitBlueprint {
         TurnRate = 33,
         MaxSteerForce = 10,
     },
-    SelectionSizeX = 2,
-    SelectionSizeZ = 2,
+    SelectionSizeX = 1.5,
+    SelectionSizeZ = 3,
     SelectionThickness = 0.25,
     SizeX = 2.5,
     SizeY = 2,
@@ -187,18 +187,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-        { #BIG_UNIT
-            Damage = 20,
-            DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/ARMCS/ARMCS_dead_prop.bp',
+        Wreckage = {
+	---UseCustomMesh = true,
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/units/ARMCS/ARMCS_dead_prop.bp',
         WreckageLayers = {
             Water = true,
 	    Sub = true,

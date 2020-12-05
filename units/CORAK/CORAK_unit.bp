@@ -58,7 +58,7 @@ UnitBlueprint {
         Abilities = {
             'Infantry',
         },
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DestructionEmitters = {
 			{
 				EmitterBone = {'torso'},
@@ -66,7 +66,7 @@ UnitBlueprint {
 				EmitterSize = 1.25,
 			},
 		},
-    },
+   	},]]--
     AnimationWalk = '/mods/SCTA-master/units/CORAK/CORAK_lod0_Awalk.sca',
     AnimationWalkRate = 1,
         Mesh = {
@@ -212,18 +212,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #SMALL_UNIT
-            Damage = 10,
-                       DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/CORAK/CORAK_dead_prop.bp',
+        Wreckage = {
+	---UseCustomMesh = true,
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/units/CORAK/CORAK_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Seabed = true,

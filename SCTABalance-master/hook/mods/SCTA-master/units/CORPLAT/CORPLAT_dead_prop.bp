@@ -1,9 +1,0 @@
-PropBlueprint {
-    Merge = true,
-    Display = {
-        UniformScale = 0.2,
-    },
-    Economy = {
-        ReclaimMassMax = 3000,
-        },
-}

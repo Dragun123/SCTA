@@ -41,13 +41,9 @@ UnitBlueprint {
 	    'CONSTRUCTION',
         'LAND', 
 	'ARM',
-		'PLANT',
+    'PLANT',
 	'SORTCONSTRUCTION',
 	'LEVEL2',
-	
-	
-	
-	
     },
     Defense = {
         ArmorType = 'Structure',
@@ -63,7 +59,7 @@ UnitBlueprint {
         Abilities = {
             'Upgradeable',
         },
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DefaultProjectileCategories = {'Construction','BuildMuzzle','BuildPlate','Circuits'},
 		DestructionEmitters = {
 			{
@@ -74,14 +70,14 @@ UnitBlueprint {
 			{
 				EmitterBone = {'Build_Plate_01', 'Build_Plate_02'},
 				EmitterBlueprint = {
-	    				'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-			    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+	    				'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+			    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+    					'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 				},
 				EmitterSize = 0.35,
 			},
 		},
-	},
+	},]]---
 	BuildBones = {'Nozzle_01','Nozzle_02'},
 	BuildAttachBone = 'BuildPlate',
         Mesh = {
@@ -195,18 +191,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #LARGE_BUILDING
-        Damage = 50,
-        DamageFriendly = true,
-        DamageRadius = 5,
-        DummyWeapon = true,
-        DamageType = 'Normal',
-        Label = 'SuicideWeapon',
-        },
+ 
     },
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/SCTABalance-master/units/ARMDVP/ARMDVP_dead_prop.bp',
+        Wreckage = {
+	---UseCustomMesh = true,
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/SCTABalance-master/units/ARMDVP/ARMDVP_dead_prop.bp',
         WreckageLayers = {
             Land = true,
         },

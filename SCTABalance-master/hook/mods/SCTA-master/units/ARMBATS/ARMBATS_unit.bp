@@ -13,7 +13,7 @@ UnitBlueprint {
         'OVERLAYINDIRECTFIRE',
         'OVERLAYDIRECTFIRE',
         'ARM',
-        'SHIP',
+        'OCEAN',
 	'LEVEL3',
     },
     Defense = {

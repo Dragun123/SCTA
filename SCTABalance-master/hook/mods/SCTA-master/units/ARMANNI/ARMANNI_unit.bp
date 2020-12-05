@@ -5,6 +5,24 @@
 
 UnitBlueprint {
    Merge = true,
+   Categories = {
+    'BUILTBYT1HOVER',
+    'SELECTABLE',
+    'DRAGBUILD',
+    'VISIBLETORECON',
+    'RECLAIMABLE',
+    'TECH3',
+'STRUCTURE',
+'DEFENSE',
+'STRATEGIC',
+'DIRECTFIRE',
+'TEXTUREANIM',
+    'OVERLAYDIRECTFIRE',
+'ARM',
+'SPECIAL',
+'SORTDEFENSE',
+'LEVEL3',
+},
     Defense = {
         Health = 16000,
         MaxHealth = 16000,
@@ -103,14 +121,6 @@ UnitBlueprint {
             DamageType = 'Normal',
             DummyWeapon = true,
             Label = 'DeathWeapon',
-        },
-        { #CRAWL_BLASTSML
-            Damage = 1200,
-            DamageFriendly = true,
-            DamageRadius = 9,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
         },
     },
 }

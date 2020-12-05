@@ -35,9 +35,6 @@ UnitBlueprint {
         'KBOT',
         'SPIDER',
 	'LEVEL2',
-	
-	
-	
     },
     Defense = {
         ArmorType = 'Normal',
@@ -56,7 +53,7 @@ UnitBlueprint {
             'All Terrain',
             'AntiAir',
         },
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DefaultProjectileCategories = {'ArmCockpit'},
 		DestructionEmitters = {
 			{
@@ -67,14 +64,14 @@ UnitBlueprint {
 			{
 				EmitterBone = {'leg1','leg2','leg3','leg4','leg5','leg6'},
 				EmitterBlueprint = {
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-			    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    					'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+			    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+    					'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 				},
 			EmitterSize = 0.35,
 			},
 		},
-	},
+	},]]--
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -153,7 +150,7 @@ UnitBlueprint {
                 BallisticArc = 'RULEUBA_None',
                 CollideFriendly = false,
                 DamageFriendly = true,
-                Damage = 180,
+                Damage = 220,
                 DamageRadius = 1,
                 FiringRandomness = 0,
                 DamageType = 'AntiAir',
@@ -185,7 +182,7 @@ UnitBlueprint {
                 RackSalvoReloadTime = 0,
                 RackSalvoSize = 1,
                 RackSlavedToTurret = false,
-                RateOfFire = 0.25,
+                RateOfFire = 0.36,
                 TargetCheckInterval = 1,
                 TargetPriorities = {
                     'ALLUNITS',
@@ -216,7 +213,7 @@ UnitBlueprint {
                 BallisticArc = 'RULEUBA_None',
                 CollideFriendly = false,
                 DamageFriendly = true,
-                Damage = 180,
+                Damage = 220,
                 DamageRadius = 1,
                 FiringRandomness = 0,
                 DamageType = 'AntiAir',
@@ -248,7 +245,7 @@ UnitBlueprint {
                 RackSalvoReloadTime = 0,
                 RackSalvoSize = 1,
                 RackSlavedToTurret = false,
-                RateOfFire = 0.25,
+                RateOfFire = 0.36,
                 TargetCheckInterval = 1,
                 TargetPriorities = {
                     'ALLUNITS',
@@ -276,18 +273,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #BIG_UNIT
-            Damage = 350,
-                       DamageFriendly = true,
-            DamageRadius = 3,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/SCTABalance-master/units/ARMSPDAA/ARMSPDAA_dead_prop.bp',
+        Wreckage = {
+	---UseCustomMesh = true,
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/SCTABalance-master/units/ARMSPDAA/ARMSPDAA_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Seabed = true,

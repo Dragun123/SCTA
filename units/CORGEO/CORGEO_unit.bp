@@ -53,7 +53,7 @@ UnitBlueprint {
     },
     Description = 'Produces Energy',
     Display = {
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
@@ -61,7 +61,7 @@ UnitBlueprint {
 				EmitterSize = 1.25,
 			},
 		},
-	},
+	},]]--
         Abilities = {
             'Geothermal',
         },
@@ -134,18 +134,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #NUCLEAR_MISSILE
-            Damage = 5500,
-            DamageFriendly = true,
-            DamageRadius = 16,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
     Wreckage = {
-        UseCustomMesh = true,
-            Blueprint = '/mods/SCTA-master/units/CORGEO/CORGEO_dead_prop.bp',
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --UseCustomMesh = true,
+            --Blueprint = '/mods/SCTA-master/units/CORGEO/CORGEO_dead_prop.bp',
             WreckageLayers = {
                 Land = true,
             },

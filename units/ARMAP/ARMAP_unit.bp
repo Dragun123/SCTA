@@ -69,7 +69,7 @@ UnitBlueprint {
         Abilities = {
             '<LOC ability_radar>Radar',
         },
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DefaultProjectileCategories = {'Construction','BuildMuzzle','BuildPlate','Runway'},
 		DestructionEmitters = {
 			{
@@ -80,24 +80,24 @@ UnitBlueprint {
 			{
 				EmitterBone = {'Post_01','Post_02'},
 				EmitterBlueprint = {
-	    				'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-			    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+	    				'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+			    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+    					'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 				},
 				EmitterSize = 0.35,
 			},
 			{
 				EmitterBone = {'Radar'},
 				EmitterBlueprint = {
-		    			'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+		    			'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 				},
 				EmitterSize = 0.25,
 			},
 		},
-	},
+	},]]--
 	BuildBones = {'Nozzle_01','Nozzle_02'},
 	BuildAttachBone = 'BasePlate',
-	TextureAnimationFrames = 6,
+	--TextureAnimationFrames = 6,
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -181,18 +181,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #LARGE_BUILDING
-            Damage = 50,
-            DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/ARMAP/ARMAP_dead_prop.bp',
+        Wreckage = {
+	---UseCustomMesh = true,
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/units/ARMAP/ARMAP_dead_prop.bp',
         WreckageLayers = {
             Land = true,
         },

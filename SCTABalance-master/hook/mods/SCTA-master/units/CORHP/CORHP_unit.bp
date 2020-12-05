@@ -2,6 +2,7 @@ UnitBlueprint {
     Merge = true,
     Categories = {
         'BUILTBYT1HOVER',
+        --'BUILTBYT2KBOT',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',
@@ -14,9 +15,9 @@ UnitBlueprint {
 	'CONSTRUCTION',
         'NAVAL', 
 	'CORE',
-		'PLANT',
+    'PLATFORM',
 	'SORTCONSTRUCTION',
-	'LEVEL2',
+	'LEVEL3',
     },
     Defense = {
         Health = 16000,
@@ -32,14 +33,13 @@ UnitBlueprint {
             },
     LifeBarSize = 8,
     Economy = {
-        BuildRate = 250,
+        BuildRate = 300,
         BuildCostEnergy = 39000,
         BuildCostMass = 3000, 
         BuildTime = 60000,
         BuildableCategory = {
-            'HOVER LEVEL1 CORE',
-            'HOVER LEVEL3 CORE',
-            'coramph',
+            'PHIB LEVEL1 CORE',
+            'PHIB LEVEL3 CORE',
         },
     },
     SelectionSizeX = 7,

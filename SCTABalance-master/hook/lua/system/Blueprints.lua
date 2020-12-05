@@ -33,8 +33,6 @@ do
             Physics = {
                 MaxSpeed = 1.2,
                 TurnRate = 0.75,
-                FuelRechargeRate = 0.000005,
-                FuelUseTime = 0.0006,
             },    
             SelectionSizeX = 0.5,
             SelectionSizeZ = 0.5,
@@ -44,7 +42,102 @@ do
             SizeZ = 0.5,
         }
         for id, bp in all_blueprints.Unit do
-            if bp.Categories and (table.find(bp.Categories, 'MOBILE')) and (table.find(bp.Categories, 'ARM') or table.find(bp.Categories, 'CORE')) then
+            if bp.Categories and (table.find(bp.Categories, 'MOBILE') and table.find(bp.Categories, 'LAND')) and (table.find(bp.Categories, 'ARM') or table.find(bp.Categories, 'CORE')) then
+                for group, gdata in Mults do
+                    if type(gdata) == 'table' then
+                        for stat, data in gdata do
+                            if bp[group] and bp[group][stat] then
+                                bp[group][stat] = bp[group][stat] * data
+                            end
+                        end
+                    else
+	                    if bp[group] then
+	                        bp[group] = bp[group] * gdata
+	                    end
+	                end
+	            end
+	        end
+        end
+
+        Mults = {
+            Defense = {
+                Health = 0.8,
+                MaxHealth = 0.8,
+            },
+            Display = {
+                UniformScale = 0.5,
+            },
+            Intel = {
+                VisionRadius = 1.5, 
+                WaterVisionRadius = 3,
+                },
+            Economy = {
+                BuildCostEnergy = 0.3,
+                BuildCostMass = 0.5,
+                BuildTime = 0.13,
+                BuildRate = 0.075,
+                MaintenanceConsumptionPerSecondEnergy = 3,
+            },
+            LifeBarHeight = 0.3,
+            LifeBarOffset = 0.5,
+            LifeBarSize = 0.5,
+            Physics = {
+                MaxSpeed = 1.5,
+            },    
+            SelectionSizeX = 0.5,
+            SelectionSizeZ = 0.5,
+            SizeX = 0.5,
+            SizeY = 0.5,
+            SizeZ = 0.5,
+        }
+        for id, bp in all_blueprints.Unit do
+            if bp.Categories and (table.find(bp.Categories, 'MOBILE') and table.find(bp.Categories, 'NAVAL')) and (table.find(bp.Categories, 'ARM') or table.find(bp.Categories, 'CORE')) then
+                for group, gdata in Mults do
+                    if type(gdata) == 'table' then
+                        for stat, data in gdata do
+                            if bp[group] and bp[group][stat] then
+                                bp[group][stat] = bp[group][stat] * data
+                            end
+                        end
+                    else
+	                    if bp[group] then
+	                        bp[group] = bp[group] * gdata
+	                    end
+	                end
+	            end
+	        end
+        end
+
+        Mults = {
+            Defense = {
+                Health = 0.5,
+                MaxHealth = 0.5,
+            },
+            Display = {
+                UniformScale = 0.5,
+            },
+            Intel = {
+                WaterVisionRadius = 3,
+                },
+            Economy = {
+                BuildCostEnergy = 0.3,
+                BuildCostMass = 0.5,
+                BuildTime = 0.13,
+                BuildRate = 0.04,
+            },
+            LifeBarHeight = 0.3,
+            LifeBarOffset = 0.5,
+            LifeBarSize = 0.5,
+            Physics = {
+                FuelRechargeRate = 0.00001,
+                FuelUseTime = 0.0012,
+            },    
+            SelectionSizeX = 0.5,
+            SelectionSizeZ = 0.5,
+            SelectionThickness = 2.5,
+        }
+        for id, bp in all_blueprints.Unit do
+            if bp.Categories and (table.find(bp.Categories, 'MOBILE') and table.find(bp.Categories, 'AIR')) and (table.find(bp.Categories, 'ARM') or table.find(bp.Categories, 'CORE')) then
                 for group, gdata in Mults do
                     if type(gdata) == 'table' then
                         for stat, data in gdata do
@@ -109,52 +202,8 @@ do
             end
         
         Mults = {
-            Defense = {
-                Health = 0.75,
-                MaxHealth = 0.75,
-            },
             Display = {
-                UniformScale = 0.5,
-            },
-            Economy = {
-                ReclaimEnergyMax = 0.25,
-                ReclaimMassMax = 0.35,
-                ReclaimTime = 10,
-            },
-            Footprint = {
-                OccupancyCaps = 0,
-            },
-            SelectionSizeX = 0.5,
-            SelectionSizeZ = 0.5,
-            SelectionThickness = 0.5,
-            SizeX = 0.5,
-            SizeY = 0.5,
-            SizeZ = 0.5,    
-            CollisionSizeX = 0,
-            CollisionSizeZ = 0,
-            CollisionOffsetZ = 0,
-        }
-        for id, bp in all_blueprints.Prop do
-            if bp.ScriptClass == 'TAWreckage' then
-                for group, gdata in Mults do
-                    if type(gdata) == 'table' then
-                        for stat, data in gdata do
-                            if bp[group] and bp[group][stat] then
-                                bp[group][stat] = bp[group][stat] * data
-                            end
-                        end
-                    else
-                        if bp[group] then
-                            bp[group] = bp[group] * gdata
-                        end
-                    end
-                end
-            end
-        end
-        
-        Mults = {
-            Display = {
-                UniformScale = 0.5,
+                UniformScale = 0.35,
             },
         }
         for id, bp in all_blueprints.Projectile do
@@ -182,7 +231,7 @@ do
             end
         end
     end
-    
+
     function GiveVet(all_bps)
         for id, bp in all_bps do
             if bp.Weapon and bp.Categories then

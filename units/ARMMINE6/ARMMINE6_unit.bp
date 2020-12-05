@@ -54,12 +54,12 @@ UnitBlueprint {
         Abilities = {
             'Kamikazi',
         },
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DestructionEmitters = {
 			{
 				EmitterBone = {0},
 				EmitterBlueprint = {
-					'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp'
+					'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp'
 				},
 				EmitterSize = 15,
 			},
@@ -71,7 +71,7 @@ UnitBlueprint {
 				EmitterSize = 1.35,
 			},
 		},
-	},
+	},]]--
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -186,15 +186,5 @@ UnitBlueprint {
 	    EdgeEffectiveness = 0.15,
             Label = 'DeathWeapon',
         },
-        { #ARMMINE6
-            Damage = 50,
-            DamageRadius = 4,
-            DamageFriendly = true,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-	    EdgeEffectiveness = 0.1,
-            Label = 'SuicideWeapon',
-        },
-
     },
 }

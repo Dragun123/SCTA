@@ -58,8 +58,8 @@ UnitBlueprint {
         Abilities = {
             '<LOC ability_aa>Anti-Air',
         },
-        TextureAnimationFrames = 8,
-        DestructionEffects = {
+        --TextureAnimationFrames = 8,
+        	--[[DestructionEffects = {
             DestructionEmitters = {
                 {
                     EmitterBone = {'torso','head','hips','rleg','lleg'},
@@ -69,14 +69,14 @@ UnitBlueprint {
                 {
                     EmitterBone = {'luparm','ruparm','lthigh','rthigh'},
                     EmitterBlueprint = {
-                            '/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-                            '/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-                            '/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+                            '/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+                            '/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+                            '/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
                     },
-                    EmitterSize = 0.35,
-                },
-            },
-        },        
+				EmitterSize = 0.35,
+			},
+		},
+	},]]--        
         AnimationWalk = '/mods/SCTA-master/SCTABalance-master/units/ARMDRAKE/ARMDRAKE_lod0_Awalk.sca',
         AnimationWalkRate = 0.6,
         AttackReticuleSize = 1,
@@ -175,11 +175,12 @@ UnitBlueprint {
             },
             RangeCategory = 'UWRC_DirectFire',
             WeaponCategory = 'DirectFire',
+            RackFireTogether = true,
             FiringTolerance = 2.75,
             Label = 'CORKROG_FIRE',
             MaxRadius = 30,
             MuzzleSalvoDelay = 0.1,
-            MuzzleSalvoSize = 3,
+            MuzzleSalvoSize = 2,
 			MuzzleVelocity = 50,
             ProjectileId = '/mods/SCTA-master/SCTABalance-master/projectiles/ARMDRAK_LASER/ARMDRAK_LASER_proj.bp',
             RackBones = {
@@ -197,11 +198,11 @@ UnitBlueprint {
                 },
             },			
             RackRecoilDistance = 0,
-            RackReloadTimeout = 0.4,
+            RackReloadTimeout = 0.2,
             RackSalvoChargeTime = 0,
             RackSalvoReloadTime = 0,
-            RackSalvoSize = 2,
-            RateOfFire = 5,
+            RackSalvoSize = 8,
+            RateOfFire = 2,
             TargetCheckInterval = 1,
             TargetPriorities = {
                 'ALLUNITS',
@@ -379,18 +380,15 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #NUCLEAR_MISSILE
-        Damage = 5500,
-        DamageFriendly = true,
-        DamageRadius = 16,
-        DummyWeapon = true,
-        DamageType = 'Normal',
-        Label = 'SuicideWeapon',
-        },
     },
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/SCTABalance-master/units/ARMDRAKE/ARMDRAKE_dead_prop.bp',
+        Wreckage = {
+	---UseCustomMesh = true,
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/SCTABalance-master/units/ARMDRAKE/ARMDRAKE_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Seabed = true,

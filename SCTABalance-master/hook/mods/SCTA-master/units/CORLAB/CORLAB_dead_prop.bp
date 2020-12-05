@@ -1,6 +1,0 @@
-PropBlueprint {
-   Merge = true, 
-    Display = {
-        UniformScale = 0.25,
-    },
-}

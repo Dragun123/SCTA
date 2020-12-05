@@ -5,7 +5,6 @@ local TAutils = import('/mods/SCTA-master/lua/TAutils.lua')
 local Game = import('/lua/game.lua')
 local TAunit = import('/mods/SCTA-master/lua/TAunit.lua').TAunit
 local util = import('/lua/utilities.lua')
-local debrisCat = import('/mods/SCTA-master/lua/TAdebrisCategories.lua')
 
 local SyncroniseThread = function(self, interval, event, data)
     local time = GetGameTick()

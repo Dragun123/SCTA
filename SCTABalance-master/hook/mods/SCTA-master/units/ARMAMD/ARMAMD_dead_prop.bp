@@ -1,8 +1,0 @@
-PropBlueprint {
-   Merge = true, 
-    Economy = {
-        ReclaimEnergyMax = 0,
-        ReclaimMassMax = 5000,
-        ReclaimTime = 10,
-    },
-}

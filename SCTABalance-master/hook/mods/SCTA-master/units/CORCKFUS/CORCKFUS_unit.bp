@@ -1,8 +1,8 @@
 UnitBlueprint {
     Merge = true, 
     Defense = {
-        Health = 7000,
-        MaxHealth = 7000,
+        Health = 8000,
+        MaxHealth = 8000,
     },
     Display = {
         UniformScale = 0.40,
@@ -12,7 +12,7 @@ UnitBlueprint {
             SizeZ = 5,
         },
     Economy = {
-    BuildCostEnergy = 60000,
+    BuildCostEnergy = 120000,
     ProductionPerSecondEnergy = 2000,
 	MaintenanceConsumptionPerSecondEnergy = 100,
     },

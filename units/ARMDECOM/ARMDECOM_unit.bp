@@ -82,7 +82,7 @@ UnitBlueprint {
             'Decoy',
             'Construction Unit',
         },
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DefaultFlamingProjectileCountMin = 0,
 		DefaultFlamingProjectileCountMax = 0,
 		DefaultProjectileCountMin = 0,
@@ -91,7 +91,7 @@ UnitBlueprint {
 			{
 				EmitterBone = {0},
 				EmitterBlueprint = {
-					'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
+					'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
 				},
 				EmitterSize = 15,
 			},
@@ -103,7 +103,7 @@ UnitBlueprint {
 				EmitterSize = 1.35,
 			},
 		},
-	},
+	},]]--
 	BuildBones = {'LaserMuzzle'},
         Mesh = {
             IconFadeInZoom = 130,
@@ -256,23 +256,23 @@ UnitBlueprint {
             Damage = 50,
             DamageRadius = 1,
             DamageType = 'DGun',
-            DisplayName = 'ARM_DISINTEGRATOR',
+            DisplayName = 'DGun',
             FireTargetLayerCapsTable = {
                 Land = 'Land|Water|Seabed',
                 Seabed = 'Land|Water|Seabed',
             },
 	        RangeCategory = 'UWRC_DirectFire',
          WeaponCategory = 'DirectFire',
-            Label = 'ARM_DISINTEGRATOR',
+            Label = 'DGun',
             MaxRadius = 22,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 12.5,
 	        NeedPrep = true,
-            EnergyRequired = 2000,
-            EnergyDrainPerSecond = 2000,
-            EnergyChargeForFirstShot = false,
-            ProjectileId = '/mods/SCTA-master/projectiles/DARM_DISINTEGRATOR/ARM_DISINTEGRATOR_proj.bp',
+            EnergyRequired = 1500,
+            EnergyDrainPerSecond = 1500,
+            EnergyChargeForFirstShot = true,
+            ProjectileId = '/mods/SCTA-master/projectiles/DARM_DISINTEGRATOR/DARM_DISINTEGRATOR_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
@@ -313,17 +313,6 @@ UnitBlueprint {
             DisplayName = 'DeathWeapon',
             Label = 'DeathWeapon',
             DummyWeapon = true,
-	    EdgeEffectiveness = 0.15,
-        },
-        {
-            Damage = 100,
-            DamageFriendly = true,
-            DamageRadius = 23.75,
-            DamageType = 'Normal',
-            DisplayName = 'SuicideWeapon',
-            Label = 'SuicideWeapon',
-            DummyWeapon = true,
-	    EdgeEffectiveness = 0.15,
         },
     },
 }

@@ -7,7 +7,7 @@ local TAunit = import('/mods/SCTA-master/lua/TAunit.lua').TAunit
 local Projectile = import('/lua/sim/DefaultWeapons.lua').DefaultProjectileWeapon
 
 ARMMINE5 = Class(TAunit) {
-	attacked = false,
+	attacked = nil,
 
 	Weapons = {
 		ARMMINE5 = Class(Projectile) {
@@ -19,7 +19,7 @@ ARMMINE5 = Class(TAunit) {
 	},
 
 	OnKilled = function(self, instigator, type, overkillRatio)
-		if self.unit.attacked == true then
+		if self.unit.attacked then
 			instigator = self
 		end
 		TAunit.OnKilled(self, instigator, type, overkillRatio)

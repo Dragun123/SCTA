@@ -54,11 +54,6 @@ UnitBlueprint {
         'ARM',
         'KBOT',
 	'LEVEL2',
-	
-	
-	
-	
-	
     },
     Defense = {
         ArmorType = 'Normal',
@@ -84,7 +79,7 @@ UnitBlueprint {
                 Weight = 100,
             },
         },
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DefaultProjectileCategories = {'Construction','BuildMuzzle'},
 		DestructionEmitters = {
 			{
@@ -95,14 +90,14 @@ UnitBlueprint {
 			{
 				EmitterBone = {'Build_Muzzle_01','Build_Muzzle_02','Left_Upper_Leg','Right_Upper_Leg'},
 				EmitterBlueprint = {
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_01_emit.bp',
-			    		'/mods/SCTA-master/effects/emitters/terran_missile_hit_03_emit.bp',
-    					'/mods/SCTA-master/effects/emitters/terran_missile_hit_04_emit.bp',
+    					'/mods/SCTA-master/effects/emitters/ta_missile_hit_01_emit.bp',
+			    		'/mods/SCTA-master/effects/emitters/ta_missile_hit_03_emit.bp',
+    					'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 				},
 				EmitterSize = 0.35,
 			},
 		},
-	},
+	},]]---
 	BuildBones = {'Build_Muzzle_01','Build_Muzzle_02'},
         Mesh = {
             IconFadeInZoom = 130,
@@ -194,18 +189,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-        { #BIG_UNIT
-            Damage = 20,
-            DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/units/ARMACK/ARMACK_dead_prop.bp',
+        Wreckage = {
+	---UseCustomMesh = true,
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/units/ARMACK/ARMACK_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Seabed = true,

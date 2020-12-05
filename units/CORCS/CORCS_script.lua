@@ -3,10 +3,10 @@
 #
 #Script created by Raevn
 
-local TAconstructor = import('/mods/SCTA-master/lua/TAconstructor.lua').TAconstructor
+local TANecro = import('/mods/SCTA-master/lua/TAconstructor.lua').TANecro
 local TAutils = import('/mods/SCTA-master/lua/TAutils.lua')
 
-CORCS = Class(TAconstructor) {
+CORCS = Class(TANecro) {
 
 	OnCreate = function(self)
 		self.AnimManip = CreateAnimator(self)
@@ -17,24 +17,24 @@ CORCS = Class(TAconstructor) {
 		for k, v in self.Spinners do
 			self.Trash:Add(v)
 		end
-		TAconstructor.OnCreate(self)
+		TANecro.OnCreate(self)
 	end,
 
 	Open = function(self)
-		TAconstructor.Open(self)
+		TANecro.Open(self)
 		self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationOpen)
 		self.AnimManip:SetRate(1 * (self:GetBlueprint().Display.AnimationOpenRate or 0.2))
-		TAconstructor.Open(self)
+		TANecro.Open(self)
 	end,
 
 	Aim = function(self, target)
 		local selfPosition = self:GetPosition('nano') 
 		local targetPosition = target:GetPosition()
 		
-		TAconstructor.Aim(self, target)
+		TANecro.Aim(self, target)
 		WaitFor(self.AnimManip)
 		--TURN turret to y-axis buildheading SPEED <160.03>;
-		self.Spinners.gun:SetGoal(TAutils.GetAngle(selfPosition.x, selfPosition.z, targetPosition.x, targetPosition.z) - (self:GetHeading() * 180) / math.pi)
+		self.Spinners.gun:SetGoal(TAutils.GetAngleTA(selfPosition.x, selfPosition.z, targetPosition.x, targetPosition.z) - (self:GetHeading() * 180) / math.pi)
 		self.Spinners.gun:SetSpeed(160.03)
 
 		WaitFor(self.Spinners.gun)
@@ -45,7 +45,7 @@ CORCS = Class(TAconstructor) {
 		self.Spinners.gun:SetGoal(0)
 		self.Spinners.gun:SetSpeed(160.03)
 		WaitFor(self.Spinners.gun)
-		TAconstructor.Close(self)
+		TANecro.Close(self)
 		self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationOpen)
 		self.AnimManip:SetRate(-1 * (self:GetBlueprint().Display.AnimationOpenRate or 0.2))
 	end,

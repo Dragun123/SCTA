@@ -2,6 +2,7 @@ UnitBlueprint {
     Merge = true,
     Categories = {
         'BUILTBYT2KBOT',
+        'BUILTBYT1KBOT',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',
@@ -15,7 +16,7 @@ UnitBlueprint {
         'LAND', 
         'CONSTRUCTIONSORTDOWN',
 	'ARM',
-		'PLANT',
+    'LAB',
 	'SORTCONSTRUCTION',
 	'LEVEL2',
     },
@@ -32,10 +33,10 @@ UnitBlueprint {
     SizeZ = 8,
         },
     Economy = {
-        BuildCostEnergy = 45000,
-        BuildCostMass = 1100, 
+        BuildCostEnergy = 30000,
+        BuildCostMass = 2200, 
         BuildRate = 180,
-        BuildTime = 30000,
+        BuildTime = 20000,
         BuildableCategory = {
             'KBOT LEVEL1 ARM',
             'KBOT LEVEL2 ARM',

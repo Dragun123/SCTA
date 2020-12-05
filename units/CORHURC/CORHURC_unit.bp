@@ -38,13 +38,13 @@ UnitBlueprint {
     },
     Air = {
         AutoLandTime = 1,
-        BankFactor = 2.5,
-        BankForward = false,
-        BreakOffDistance = 60,
+        BankFactor = 3,
+        BankForward = true,
+        BreakOffDistance = 24,
         BreakOffIfNearNewTarget = true,
-        BreakOffTrigger = 30,
+        BreakOffTrigger = 20,
         CanFly = true,
-        CombatTurnSpeed = 0.8,
+        CombatTurnSpeed = 1.5,
         EngageDistance = 50,
         KLift = 3,
         KLiftDamping = 2.5,
@@ -58,7 +58,8 @@ UnitBlueprint {
         MaxAirspeed = 17,
         MinAirspeed = 15,
         PredictAheadForBombDrop = 3,
-        StartTurnDistance = 5,
+        StartTurnDistance = 2,
+        RandomBreakOffDistanceMult = 1.5,
         TightTurnMultiplier = 0,
         TurnSpeed = 0.8,
         Winged = true,
@@ -93,7 +94,7 @@ UnitBlueprint {
         Abilities = {
             'Bomber',
         },
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DefaultFlamingProjectileCountMin = 0,
 		DefaultFlamingProjectileCountMax = 0,
 		DestructionDebrisUseLocalVelocity = true,
@@ -107,7 +108,7 @@ UnitBlueprint {
 				EmitterSize = 1.25,
 			},
 		},
-	},
+	},]]--
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -160,8 +161,8 @@ UnitBlueprint {
         MotionType = 'RULEUMT_Air',
     MaxSpeed = 0.5, 
     RotateOnSpot = true,
-	FuelRechargeRate = 999999,
-	FuelUseTime = 999999,
+	FuelRechargeRate = 444444,
+	FuelUseTime = 444444,
     },
     SelectionSizeX = 1.75,
     SelectionSizeZ = 1.9,
@@ -321,13 +322,6 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-        { #BIG_UNIT
-            Damage = 20,
-            DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
 }

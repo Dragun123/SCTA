@@ -23,7 +23,7 @@ UnitBlueprint {
     Economy = {
       BuildCostMass = 480,
         BuildCostEnergy = 66000,
-        MaintenanceConsumptionPerSecondEnergy = 3,
+        MaintenanceConsumptionPerSecondEnergy = 15,
         },
     General = {
       OrderOverrides = {
@@ -46,4 +46,8 @@ UnitBlueprint {
       RadarStealth = false,
 	    FreeIntel = false,
     },
+    Physics = {
+      FuelRechargeRate = 666666,
+      FuelUseTime = 666666,
+    },    
   }

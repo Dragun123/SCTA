@@ -12,7 +12,7 @@ Defense = {
 Economy = {
     MaintenanceConsumptionPerSecondEnergy = 3,
     BuildCostEnergy = 8000,
-    BuildCostMass = 1000,
+    BuildCostMass = 450,
     BuildTime = 6000,
 },
     Footprint = {
@@ -53,7 +53,7 @@ Economy = {
         BallisticArc = 'RULEUBA_None',
         CollideFriendly = false,
         DamageFriendly = true,
-        Damage = 120,
+        Damage = 80,
         DamageRadius = 0.25, 
         DamageType = 'Normal',
         DisplayName = 'ARMLATNK_WEAPON',
@@ -169,13 +169,5 @@ Economy = {
         DummyWeapon = true,
         Label = 'DeathWeapon',
     }, 
-    { #BIG_UNIT
-        Damage = 20,
-        DamageFriendly = true,
-        DamageRadius = 1,
-        DummyWeapon = true,
-        DamageType = 'Normal',
-        Label = 'SuicideWeapon',
-    },
 },
 }

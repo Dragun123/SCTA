@@ -9,7 +9,7 @@ UnitBlueprint {
         UniformScale = 0.28,
     },
     LifeBarSize = 3,
-    SelectionSizeX = 3,
+    SelectionSizeX = 2,
     SelectionSizeZ = 6,
     SizeX = 4,
     SizeY = 3,

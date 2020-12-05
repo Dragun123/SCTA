@@ -5,6 +5,22 @@
 
 UnitBlueprint {
    Merge = true,
+   Categories = {
+    'BUILTBYT1HOVER',
+    'SELECTABLE',
+    'DRAGBUILD',
+    'VISIBLETORECON',
+    'RECLAIMABLE',
+    'TECH3',
+    'SORTDEFENSE',
+'STRUCTURE',
+'DEFENSE',
+'DIRECTFIRE',
+    'OVERLAYDIRECTFIRE',
+'CORE',
+'STRATEGIC',
+'LEVEL3',
+},
     Defense = {
         Health = 22000,
         MaxHealth = 22000,
@@ -12,7 +28,6 @@ UnitBlueprint {
     Display = {
         UniformScale = 0.18,
     },
-    Description = 'Energy Weapon',
     Economy = {
         BuildCostEnergy = 1000000,
         BuildCostMass = 60000,
@@ -244,13 +259,6 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #CRAWL_BLASTSML
-            Damage = 1200,
-                        DamageFriendly = true,
-            DamageRadius = 9,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
 }

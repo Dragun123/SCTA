@@ -10,12 +10,13 @@ UnitBlueprint {
     'KBOT',
     'LAND',
     'ARM',
-    'HOVER',
+        'HOVER',
+'PHIB',
 'LEVEL3',
 },
    Defense = {
-    Health = 12000,
-    MaxHealth = 12000,
+    Health = 11000,
+    MaxHealth = 11000,
 },
 Economy = {
     BuildCostEnergy = 30000,
@@ -106,7 +107,7 @@ Economy = {
             EnergyDrainPerSecond = 25,
             EnergyRequired = 50,
             WeaponCategory = 'Direct Fire',
-            Damage = 400,
+            Damage = 180,
             DamageRadius = 0.25,
             DamageType = 'Normal',
             DisplayName = 'armamph_weapon2',
@@ -163,13 +164,6 @@ Economy = {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-        { #BIG_UNIT
-            Damage = 20,
-            DamageFriendly = true,
-            DamageRadius = 1,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
     },
 }

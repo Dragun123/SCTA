@@ -20,7 +20,7 @@ CORSONAR = Class(TAunit) {
 		self.Spinners.dish:SetSpeed(0)
 
 		self:SetMaintenanceConsumptionInactive()
-		self.textureAnimation = false
+		
 		TAunit.OnIntelDisabled(self)
 		self:PlayUnitSound('Deactivate')
 	end,
@@ -30,7 +30,7 @@ CORSONAR = Class(TAunit) {
 		self.Spinners.dish:SetSpeed(60)
 
 		self:SetMaintenanceConsumptionActive()
-		self.textureAnimation = true
+		
 		TAunit.OnIntelEnabled(self)
 		self:PlayUnitSound('Activate')
 	end,

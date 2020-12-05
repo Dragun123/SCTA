@@ -13,10 +13,11 @@ UnitBlueprint {
         'MOBILE',
 	'LAND',
     'AMPHIBIOUS',
+    'PHIB',
 	'DIRECTFIRE',
         'OVERLAYDIRECTFIRE',
         'ARM',
-        'VEHICLE',	#'TANK' in TA
+        'VEHICLE',
 	'LEVEL2',
     },
     Defense = {
@@ -34,7 +35,7 @@ UnitBlueprint {
     SizeZ = 1.8,
     Economy = {
         BuildCostEnergy = 8000,
-        BuildCostMass = 800,
+        BuildCostMass = 600,
         BuildTime = 9000,
     },
     StrategicIconName = 'icon_land2_directfire',
@@ -50,7 +51,7 @@ UnitBlueprint {
             BallisticArc = 'RULEUBA_None',
             CollideFriendly = false,
 	    DamageFriendly = true,
-            Damage = 100,
+            Damage = 150,
             DamageRadius = 1.5,
             DamageType = 'Normal',
             DisplayName = 'ARM_MEDIUMCANNON',
@@ -107,14 +108,7 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        { #BIG_UNIT
-            Damage = 100,
-            DamageFriendly = true,
-            DamageRadius = 3,
-            DummyWeapon = true,
-            DamageType = 'Normal',
-            Label = 'SuicideWeapon',
-        },
+
 
     },
 }

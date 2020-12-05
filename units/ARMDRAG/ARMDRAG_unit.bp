@@ -44,12 +44,12 @@ UnitBlueprint {
         Abilities = {
             'Wall',
         },
-	DestructionEffects = {
+		--[[DestructionEffects = {
 		DefaultFlamingProjectileCountMin = 0,
 		DefaultFlamingProjectileCountMax = 0,
 		FlashSize = 0,
 		FlashTime = 0,
-	},
+	},]]--
         Mesh = {
 	    IconFadeInZoom = 130,
             LODs = {
@@ -105,9 +105,14 @@ UnitBlueprint {
     SizeZ = 2,
     StrategicIconName = 'icon_structure_wall',
     StrategicIconSortPriority = 0,
-    Wreckage = {
-	UseCustomMesh = true,
-        Blueprint = '/mods/SCTA-master/meshes/rockteeth/rockteeth_prop.bp',
+        Wreckage = {
+	---UseCustomMesh = true,
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/meshes/rockteeth/rockteeth_prop.bp',
         WreckageLayers = {
             Land = true,
         },

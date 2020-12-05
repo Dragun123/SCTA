@@ -38,11 +38,11 @@ ARMEMP = Class(TAnoassistbuild) {
 					currentTarget = currentTarget:GetSource()
 				end
 		
-				if (canSee == true or TAutils.ArmyHasTargetingFacility(self.unit:GetArmy()) == true or currentTarget == target or (target and IsProp(target)) or EntityCategoryContains(categories.NOCUSTOMTARGET, self.unit)) then
+				if (canSee or TAutils.ArmyHasTargetingFacility(self.unit:GetArmy()) or currentTarget == target or (target and IsProp(target)) or EntityCategoryContains(categories.NOCUSTOMTARGET, self.unit)) then
 					 return true
 				else
 					self:ResetTarget()
-					return false
+					return nil
 				end
 			end,
 		},
