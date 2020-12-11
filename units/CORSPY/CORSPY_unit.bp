@@ -136,7 +136,7 @@ UnitBlueprint {
     SizeX = 2,
     SizeY = 2,
     SizeZ = 2,
-    StrategicIconName = 'icon_land2_intel',
+    StrategicIconName = 'icon_bot2_intel',
     StrategicIconSortPriority = 0,
     Weapon = {
         { #SMALL_UNITEX

@@ -141,7 +141,7 @@ UnitBlueprint {
     SizeX = 3,
     SizeY = 1.5,
     SizeZ = 3,
-    StrategicIconName = 'icon_land2_directfire',
+    StrategicIconName = 'icon_land2_armored',
     StrategicIconSortPriority = 0,
     Weapon = {
         {

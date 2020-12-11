@@ -15,7 +15,7 @@ UnitBlueprint {
         BuildTime = 9300,
     },
     --SelectionCenterOffsetZ = -0.5,
-    StrategicIconName = 'icon_land2_directfire',
+    StrategicIconName = 'icon_bot2_armored',
     Weapon = {
         [1] = {
             Damage = 120,

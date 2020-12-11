@@ -56,4 +56,5 @@ UnitBlueprint {
     SizeX = 1.2,
     SizeY = 1.1,
     SizeZ = 1.2,
+    StrategicIconName = 'icon_land1_engineer',
 }
