@@ -108,27 +108,3 @@ FindHQType = function(aiBrain, category)
     end
     return false
 end
-
-
-targetingFacilityData = {}
-
-function registerTargetingFacility(army)
-    if (targetingFacilityData[army]) then
-        targetingFacilityData[army] = targetingFacilityData[army] + 1
-    else
-        targetingFacilityData[army] = 1
-    end
-
-end
-
-function unregisterTargetingFacility(army)
-    if (targetingFacilityData[army]) then
-        targetingFacilityData[army] = targetingFacilityData[army] - 1
-    else
-        targetingFacilityData[army] = 0
-    end
-end
-
-function ArmyHasTargetingFacility(army)
-    return (targetingFacilityData[army] > 0 and GetArmyBrain(army):GetEconomyStored('ENERGY') > 0)
-end

@@ -29,25 +29,16 @@ ARMTARG = Class(TAStructure) {
 		end
 	end,
 
-	OnKilled = function(self, instigator, type, overkillRatio)
-            if (self:GetScriptBit(3) == false) then
-	        TAutils.unregisterTargetingFacility(self:GetArmy())
-            end
-            TAStructure.OnKilled(self, instigator, type, overkillRatio)
-        end,
-
 	OnStopBeingBuilt = function(self,builder,layer)
 		TAStructure.OnStopBeingBuilt(self,builder,layer)
 		ForkThread(self.Open, self)
 		self:PlayUnitSound('Activate')
-		TAutils.registerTargetingFacility(self:GetArmy())
 	end,
 
 	OnScriptBitSet = function(self, bit)
 		if bit == 3 then
 			self:PlayUnitSound('Deactivate')
-    		        ForkThread(self.Close, self)
-			TAutils.unregisterTargetingFacility(self:GetArmy())
+    		ForkThread(self.Close, self)
 		end
 		TAStructure.OnScriptBitSet(self, bit)
 	end,
@@ -56,7 +47,6 @@ ARMTARG = Class(TAStructure) {
 		if bit == 3 then
 			self:PlayUnitSound('Activate')
 			ForkThread(self.Open, self)
-			TAutils.registerTargetingFacility(self:GetArmy())
 		end
 		TAStructure.OnScriptBitClear(self, bit)
 	end,
