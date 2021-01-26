@@ -8,7 +8,7 @@ UnitBlueprint {
             BuildCostMass = 80,
         },
     Intel = {
-        VisionRadius = 11,
+        VisionRadius = 12,
     },
     SelectionSizeX = 0.8,
     SelectionSizeZ = 0.8,

@@ -18,7 +18,7 @@ do
                 UniformScale = 0.5,
             },
             Intel = {
-                VisionRadius = 2, 
+                VisionRadius = 1.5, 
                 WaterVisionRadius = 3,
             },
             Economy = {
@@ -121,8 +121,9 @@ do
                 UniformScale = 0.5,
             },
             Intel = {
-                VisionRadius = 2.5, 
+                VisionRadius = 1.5, 
                 WaterVisionRadius = 3,
+                RadarRadius = 1.5,
                 },
             Economy = {
                 BuildCostEnergy = 0.3,

@@ -37,7 +37,7 @@ UnitBlueprint {
         MaxBuildDistance = 6,
     },
     Intel = {
-        VisionRadius = 9,
+        VisionRadius = 10,
     },
     Physics = {
         MaxAcceleration = 1.4,
