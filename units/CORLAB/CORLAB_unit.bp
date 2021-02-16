@@ -49,6 +49,7 @@ UnitBlueprint {
 	    'SORTCONSTRUCTION',
         'LEVEL1',
         'LAND', 
+        'SECONDARY',
     },
     Defense = {
         ArmorType = 'Structure',
@@ -70,7 +71,6 @@ UnitBlueprint {
                 {
                     LODCutoff = 400,
                     ShaderName = 'Unit', 
-		    NormalsName = '/mods/SCTA-master/textures/common/normalsTS.dds'
                 },
             },
         },
