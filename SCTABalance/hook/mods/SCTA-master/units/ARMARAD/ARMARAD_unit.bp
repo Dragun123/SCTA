@@ -18,8 +18,8 @@ UnitBlueprint {
 	    'OPTICS',
         'CQUEMOV',
     },
- Display = {
-  Abilities = {
+    Display = {
+            Abilities = {
             '<LOC ability_radar>Radar',
             'Radar Targeting',
             '<LOC ability_upgradable>Upgradeable',
@@ -35,15 +35,17 @@ UnitBlueprint {
         DifferentialUpgradeCostCalculation = true,
         BuildableCategory = {
             'armxrad',
-      },
+        },
     },
     General = {
-    UpgradesFrom = 'armrad',
-    UpgradesTo = 'armxrad', 
+        UpgradesFrom = 'armrad',
+        UpgradesTo = 'armxrad', 
     },
     Intel = {
     VisionRadius = 12, 
     RadarRadius = 240,
     },
     LifeBarSize = 1,
+    SizeX = 1,
+    SizeZ = 1,
 }

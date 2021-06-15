@@ -38,11 +38,11 @@ ARMBRAWL = Class(TAair) {
 		self.Sliders.wing2:SetSpeed(2)
 
 		--TURN tail1 to z-axis <55.94> SPEED <56.07>;
-		self.Spinners.tail1:SetGoal(-55.94)
+		self.Spinners.tail1:SetGoal(-60)
 		self.Spinners.tail1:SetSpeed(60)
 
 		--TURN tail2 to z-axis <-65.67> SPEED <65.81>;
-		self.Spinners.tail2:SetGoal(65.67)
+		self.Spinners.tail2:SetGoal(60)
 		self.Spinners.tail2:SetSpeed(60)
 
 		--SLEEP <998>;
@@ -65,7 +65,6 @@ ARMBRAWL = Class(TAair) {
 		--MOVE weapon2 to x-axis <0> SPEED <2.00>;
 		self.Sliders.weapon2:SetGoal(0,0,0)
 		self.Sliders.weapon2:SetSpeed(2)
-		self.Spinners.tail2:SetSpeed(60)
 
 		--SLEEP <998>;
 
@@ -83,6 +82,7 @@ ARMBRAWL = Class(TAair) {
 
 		--TURN tail2 to z-axis <0> SPEED <65.17>;
 		self.Spinners.tail2:SetGoal(0)
+		self.Spinners.tail2:SetSpeed(60)
 	end,
 
 	Weapons = {

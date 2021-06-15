@@ -11,18 +11,11 @@ CORWIN = Class(TAWin) {
 		self:SetProductionPerSecondEnergy(0)
 		self.Spinners = {
 		   --CreateRotator(Win, bone, axis, [goal], [speed], [accel], [goalspeed])
-		   fan = CreateRotator(self, 'Rotor', 'z', nil, 0, 0, 0),
-		   cradle = CreateRotator(self, 'Tower', 'z', nil, 0, 0, 0),
+		   blades = CreateRotator(self, 'Rotor', 'z', nil, 0, 0, 0),
+		   post = CreateRotator(self, 'Tower', 'z', nil, 0, 0, 0),
 	   }
-	   for k, v in self.Spinners do
-		self.Trash:Add(v)
-	end
-	end,
-
-	OnStopBeingBuilt = function(self,builder,layer)
-		TAWin.OnStopBeingBuilt(self,builder,layer)
-		self.Spinners.cradle:SetSpeed(35)
-		self.Spinners.fan:SetSpeed(50)
+	   self.Trash:Add(self.Spinners.blades)
+	   self.Trash:Add(self.Spinners.post)
 	end,
 }
 

@@ -6,6 +6,8 @@
 UnitBlueprint {
    Merge = true,
     Economy = {
+        BuildCostEnergy = 20000,
+        BuildTime = 3000,
         ProductionPerSecondEnergy = 0,
         MaintenanceConsumptionPerSecondEnergy = 1000,
         BuildCostMass = 300,
@@ -24,6 +26,7 @@ UnitBlueprint {
         },
         },
         Intel = {
+            VisionRadius = 50,
             CloakField = true,
             Cloak = true,
             CloakFieldRadius = 15,

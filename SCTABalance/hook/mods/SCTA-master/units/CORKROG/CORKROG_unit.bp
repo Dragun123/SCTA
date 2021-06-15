@@ -8,9 +8,9 @@ UnitBlueprint {
         UniformScale = 0.35,
     },
     Economy = {
-        BuildCostEnergy = 990000,
-        BuildCostMass = 50000,
-        BuildTime = 500000,
+        BuildCostEnergy = 900000,
+        BuildCostMass = 45000,
+        BuildTime = 250000,
     },
     SelectionSizeX = 4,
     SelectionSizeZ = 4,

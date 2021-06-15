@@ -13,8 +13,9 @@ UnitBlueprint {
         MaxHealth = 8000,
     },
     Economy = {
+        BuildCostEnergy = 40000,
         BuildCostMass = 4000,
-        BuildTime = 36000,
+        BuildTime = 56000,
     },
     LifeBarSize = 4,
     SelectionSizeX = 3,

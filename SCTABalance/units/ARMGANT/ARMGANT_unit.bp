@@ -85,6 +85,7 @@ UnitBlueprint {
         BuildableCategory = {
             'BUILTBYQUANTUMGATE ARM',
         },
+        Gantry = true,
         InitialRallyX = 0,
         InitialRallyZ = 8,
         StorageMass = 500,
@@ -100,6 +101,7 @@ UnitBlueprint {
             BuildAttachBone = 'buildpad',
             BuildEffectBones = {'flashy', 'nano1', 'nano2'},
         },    
+                ---RolloffDelay = 1,
         Category = 'Factory',
         Classification = 'RULEUC_Factory',
         CommandCaps = {

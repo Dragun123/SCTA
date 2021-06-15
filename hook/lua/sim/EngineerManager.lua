@@ -22,7 +22,7 @@ EngineerManager = Class(SCTAEngineerManager) {
         self.ConsumptionUnits = {
             Engineers = { Category = categories.ENGINEER, Units = {}, UnitsList = {}, Count = 0, },
             Fabricators = { Category = categories.MASSFABRICATION * categories.STRUCTURE, Units = {}, UnitsList = {}, Count = 0, },
-            Intel = { Category = categories.STRUCTURE * ( categories.SONAR + categories.RADAR + categories.OMNI), Units = {}, UnitsList = {}, Count = 0, },
+            Intel = { Category = categories.STRUCTURE * ( categories.SONAR + categories.RADAR + categories.OMNI) - categories.FACTORY, Units = {}, UnitsList = {}, Count = 0, },
             MobileIntel = { Category = categories.MOBILE - categories.ENGINEER, Units = {}, UnitsList = {}, Count = 0, },
         }
         self.EngineerList = {}
@@ -45,93 +45,20 @@ EngineerManager = Class(SCTAEngineerManager) {
         if not self.Brain.SCTAAI then
             return SCTAEngineerManager.LowMass(self)
         end
-        local econ = AIUtils.AIGetEconomyNumbers(self.Brain)
-        local pauseVal = 0
-
-        self.Brain.LowMassMode = true
-
-        pauseVal = self:DisableMassGroup(self.ConsumptionUnits.Engineers, econ, pauseVal, self.ProductionCheck, categories.DEFENSE)
-
-        if pauseVal != true then
-        pauseVal = self:DisableMassGroup(self.ConsumptionUnits.Engineers, econ, pauseVal, self.ProductionCheck, categories.FACTORY * (categories.TECH2 + categories.TECH3 + categories.GATE))
-        end
-
-        -- Disable those building mobile units (through assist or experimental)
-        if pauseVal != true then
-            --pauseVal = self:DisableMassGroup(self.ConsumptionUnits.Engineers, econ, pauseVal, self.ExperimentalCheck)
-        end
-
-        -- Disable those building mobile units (through assist or experimental)
-        if pauseVal != true then
-            --pauseVal = self:DisableMassGroup(self.ConsumptionUnits.Engineers, econ, pauseVal, self.ProductionCheck, categories.MOBILE - categories.EXPERIMENTAL)
-        end
-
-        -- Disable those building mobile units (through assist or experimental)
-        if pauseVal != true then
-            --pauseVal = self:DisableMassGroup(self.ConsumptionUnits.Engineers, econ, pauseVal, self.ProductionCheck, categories.STRUCTURE - categories.MASSEXTRACTION - categories.ENERGYPRODUCTION - categories.FACTORY - categories.EXPERIMENTAL)
-        end
-
-        self:ForkThread(self.LowMassRepeatThread)
     end,
 
     LowEnergy = function(self)
         if not self.Brain.SCTAAI then
             return SCTAEngineerManager.LowEnergy(self)
         end
-        local econ = AIUtils.AIGetEconomyNumbers(self.Brain)
-        local pauseVal = 0
-
-        self.Brain.LowEnergyMode = true
-
-        --LOG('*AI DEBUG: Shutting down units for energy needs')
-
-        -- Disable fabricators if mass in > mass out until 10% under
-        if pauseVal != true then
-            pauseVal = self:DisableEnergyGroup(self.ConsumptionUnits.Fabricators, econ, pauseVal, self.MassDrainCheck)
-        end
-
-        if pauseVal != true then
-            pauseVal = self:DisableEnergyGroup(self.ConsumptionUnits.MobileIntel, econ, pauseVal)
-        end
-
-        -- Disable engineers assisting non-econ until 10% under
-        if pauseVal != true then
-            pauseVal = self:DisableEnergyGroup(self.ConsumptionUnits.Engineers, econ, pauseVal, self.ProductionCheck, categories.ALLUNITS - categories.ENERGYPRODUCTION - categories.MASSPRODUCTION)
-        end
-
-        -- Disable Intel if mass in > mass out until 10% under
-        if pauseVal != true then
-            pauseVal = self:DisableEnergyGroup(self.ConsumptionUnits.Intel, econ, pauseVal)
-        end
-
-        -- Disable fabricators until 10% under
-        if pauseVal != true then
-            pauseVal = self:DisableEnergyGroup(self.ConsumptionUnits.Fabricators, econ, pauseVal)
-        end
-
-        -- Disable engineers until 10% under
-        if pauseVal != true then
-            pauseVal = self:DisableEnergyGroup(self.ConsumptionUnits.Engineers, econ, pauseVal, self.ProductionCheck, categories.ALLUNITS - categories.ENERGYPRODUCTION)
-        end
-
-        self:ForkThread(self.LowEnergyRepeatThread)
     end,
 
-    RestoreEnergy = function(self)
-        if not self.Brain.SCTAAI then
-            return SCTAEngineerManager.RestoreEnergy(self)
+    TADelayAssign = function(manager, unit, delaytime)
+        if unit.ForkedEngineerTask then
+            KillThread(unit.ForkedEngineerTask)
         end
-        self.Brain.LowEnergyMode = false
-
-        self:EnableGroup(self.ConsumptionUnits.Intel)
-
-        self:EnableGroup(self.ConsumptionUnits.MobileIntel)
-        
-        self:EnableGroup(self.ConsumptionUnits.Fabricators)
-
-        self:EnableGroup(self.ConsumptionUnits.Engineers)
+        unit.ForkedEngineerTask = unit:ForkThread(manager.Wait, manager, delaytime or (math.random(10,30)))
     end,
-
 
     AddBuilder = function(self, builderData, locationType)
         if not self.Brain.SCTAAI then
@@ -179,26 +106,26 @@ EngineerManager = Class(SCTAEngineerManager) {
         --LOG('*Who', unit)
         if not self.Brain.SCTAAI then
             return SCTAEngineerManager.AssignEngineerTask(self, unit)
-        end      
+        end
+        if self.AssigningTask and unit:IsIdleState() then
+            self.AssigningTask = nil
+        elseif self.AssigningTask and not unit:IsIdleState() then
+            return
+        else
                 if unit:GetBlueprint().Economy.Land then
-                    self:TAAssignEngineerTask(unit, 'LandTA')
-                    return
+                    return self:TAAssignEngineerTask(unit, 'LandTA')
                 elseif unit:GetBlueprint().Economy.Air then
-                    self:TAAssignEngineerTask(unit, 'AirTA')
-                    return
+                    return self:TAAssignEngineerTask(unit, 'AirTA')
                 elseif unit:GetBlueprint().Economy.Naval then
-                    self:TAAssignEngineerTask(unit, 'SeaTA')
-                    return
+                    return self:TAAssignEngineerTask(unit, 'SeaTA')
                 elseif unit:GetBlueprint().Economy.TECH3 then
-                    self:TAAssignEngineerTask(unit, 'T3TA')
-                    return
+                    return self:TAAssignEngineerTask(unit, 'T3TA')
                 elseif unit:GetBlueprint().Economy.Command then
-                    self:TAAssignEngineerTask(unit, 'Command')
-                    return
+                    return self:TAAssignEngineerTask(unit, 'Command')
                 else 
-                    self:TAAssignEngineerTask(unit, 'FieldTA')
-                    return
+                    return self:TAAssignEngineerTask(unit, 'FieldTA')                
                 end
+            end
         end,
 
 
@@ -207,12 +134,22 @@ EngineerManager = Class(SCTAEngineerManager) {
         if unit.UnitBeingBuilt or unit.unitBuilding then
             return
         end
-
         unit.DesiresAssist = false
         unit.NumAssistees = nil
         unit.MinNumAssistees = nil
         unit.bType = bType
+        
+        if unit.UnitBeingAssist or unit.UnitBeingBuilt then
+            self:TADelayAssign(unit, 50)
+            return
+        end
+
+        unit.DesiresAssist = false
+        unit.NumAssistees = nil
+        unit.MinNumAssistees = nil
+
         if self.AssigningTask then
+            self:TADelayAssign(unit, 50)
             return
         end
         local builder = self:GetHighestBuilder(unit.bType, {unit})
@@ -280,6 +217,6 @@ EngineerManager = Class(SCTAEngineerManager) {
             return
         end
         self.AssigningTask = nil
-        self:DelayAssign(unit, 10)
+        self:TADelayAssign(unit)
     end,
 }

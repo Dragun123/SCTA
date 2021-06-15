@@ -88,6 +88,7 @@ UnitBlueprint {
         UniformScale = 0.16,
         },
         Economy = {
+        AirFactory = true,
         BuildCostEnergy = 11257,
         BuildCostMass = 1372,
         BuildTime = 25394,

@@ -5,7 +5,7 @@
      MaxHealth = 320,
      },
      Economy = {
-             BuildCostMass = 120,
+        BuildCostMass = 120,
          },
          SelectionSizeX = 0.8,
          SelectionSizeZ = 0.8,
@@ -13,10 +13,4 @@
          SizeX = 1.5,
          SizeY = 1.7,
          SizeZ = 1.7,
-     Weapon = {
-        [1] = {
-        },
-        [2] = {
-        },
-    },
 }

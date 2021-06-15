@@ -78,7 +78,8 @@ UnitBlueprint {
         BuildCostEnergy = 1000,
         BuildCostMass = 620, 
         BuildTime = 6500,
-	BuildRate = 100,
+        Vehicle = true,
+	    BuildRate = 100,
         BuildableCategory = {
             'TANK MOBILE TECH1 ARM',
         },
@@ -96,6 +97,7 @@ UnitBlueprint {
         BuildBones = {
             BuildEffectBones = {'spray1','spray2', 'spray3', 'spray4', },
         },            
+                ---RolloffDelay = 1,
         Category = 'Factory',
         Classification = 'RULEUC_Factory',
         CommandCaps = {

@@ -3,11 +3,11 @@
 #
 #Script created by Axle
 
-local TAWalking = import('/mods/SCTA-master/lua/TAMotion.lua').TAWalking
+local TASeaWalking = import('/mods/SCTA-master/lua/TAMotion.lua').TASeaWalking
 local TAweapon = import('/mods/SCTA-master/lua/TAweapon.lua').TAweapon
 
 
-CORAMPH = Class(TAWalking) {
+CORAMPH = Class(TASeaWalking) {
 
 	Weapons = {
 		WEAPON = Class(TAweapon) {},

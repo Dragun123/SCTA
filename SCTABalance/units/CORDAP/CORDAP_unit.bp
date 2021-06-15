@@ -79,6 +79,7 @@ UnitBlueprint {
         UniformScale = 0.2,
     },
     Economy = {
+        AirFactory = true,
         BuildCostEnergy = 54000,
         BuildCostMass = 2700, 
         BuildTime = 40000,
@@ -103,6 +104,7 @@ UnitBlueprint {
         BuildBones = {
             BuildEffectBones = {'muzzlea','muzzleb'},
         },      
+                ---RolloffDelay = 1,
         Category = 'Factory',
         Classification = 'RULEUC_Factory',
         CommandCaps = {

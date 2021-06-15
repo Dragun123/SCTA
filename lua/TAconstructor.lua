@@ -29,7 +29,7 @@ TAconstructor = Class(TAWalking) {
             end
         end
         self.BuildingUnit = false
-        if __blueprints['armgant'] then
+        if __blueprints['armgant'] and not EntityCategoryContains(categories.TECH3, self) then
             TAutils.updateBuildRestrictions(self)
         end
         --LOG('*Who', self:GetBlueprint().General.FactionName)
@@ -160,12 +160,13 @@ TASeaConstructor = Class(TAconstructor)
 	CreateMovementEffects = function(self, EffectsBag, TypeSuffix)
 		if not IsDestroyed(self) then
 		TAconstructor.CreateMovementEffects(self, EffectsBag, TypeSuffix)
-		local bp = self:GetBlueprint()
+        local bp = self:GetBlueprint()
 		if self:IsUnitState('Moving') and bp.Display.MovementEffects.TAMovement then
 			for k, v in bp.Display.MovementEffects.TAMovement.Bones do
 				self.FxMovement:Add(CreateAttachedEmitter(self, v, self:GetArmy(), bp.Display.MovementEffects.TAMovement.Emitter ):ScaleEmitter(bp.Display.MovementEffects.TAMovement.Scale))
 			end
-			elseif not self:IsUnitState('Moving') then
+		end
+		if not self:IsUnitState('Moving') then
 			for k,v in self.FxMovement do
 				v:Destroy()
 			end
@@ -248,19 +249,16 @@ TACommander = Class(TAconstructor) {
     end,
 
     SetAutoOvercharge = function(self, auto)
-        local wep = self:GetWeaponByLabel('AutoOverCharge')
-        wep:SetAutoOvercharge(auto)
+        self:GetWeaponByLabel('AutoOverCharge'):SetAutoOvercharge(auto)
         self.Sync.AutoOvercharge = auto
     end,
 
     ResetRightArm = function(self)
        self:SetImmobile(false)
-       self:SetWeaponEnabledByLabel('OverCharge', false)
-       self:SetWeaponEnabledByLabel('AutoOverCharge', false)
-
-        -- Ugly hack to re-initialise auto-OC once a task finishes
-        local wep = self:GetWeaponByLabel('AutoOverCharge')
-        wep:SetAutoOvercharge(wep.AutoMode)
+       self:SetWeaponEnabledByLabel('OverCharge', true)
+        if self.Sync.AutoOvercharge then
+        self:GetWeaponByLabel('AutoOverCharge'):SetAutoOvercharge(wep.AutoMode)
+        end
     end,
 
     OnPrepareArmToBuild = function(self)
@@ -292,17 +290,18 @@ TACommander = Class(TAconstructor) {
     end,
 
 	DeathThread = function(self)
-        local army = self:GetArmy()
-        local position = self:GetPosition()
-        local PlumeEffectYOffset = 1
-        self:CreateProjectile('/effects/entities/UEFNukeEffect02/UEFNukeEffect02_proj.bp',0,PlumeEffectYOffset,0,0,0,1)
-		CreateAttachedEmitter( self, 0, army, '/mods/SCTA-master/effects/emitters/COMBOOM_emit.bp'):ScaleEmitter(10)
+        self:CreateProjectile('/effects/entities/UEFNukeEffect02/UEFNukeEffect02_proj.bp',0,1,0,0,0,1)
+		CreateAttachedEmitter( self, 0, self:GetArmy(), '/mods/SCTA-master/effects/emitters/COMBOOM_emit.bp'):ScaleEmitter(10)
 		TAconstructor.DeathThread(self)
     end,
 
     OnStartReclaim = function(self, target)
 		TAconstructor.OnStartReclaim(self, target)
 		self:SetScriptBit('RULEUTC_CloakToggle', true)
+    end,
+
+    OnStopReclaim = function(self, target)
+        TAconstructor.OnStopReclaim(self, target)
         if self:BeenDestroyed() then return end
         self:ResetRightArm()
     end,
@@ -310,8 +309,6 @@ TACommander = Class(TAconstructor) {
     OnStartCapture = function(self, target)
 		TAconstructor.OnStartCapture(self, target)
 		self:SetScriptBit('RULEUTC_CloakToggle', true)
-        if self:BeenDestroyed() then return end
-        self:ResetRightArm()
     end,
 
     OnStopBuild = function(self, unitBeingBuilt)
@@ -335,15 +332,12 @@ TACommander = Class(TAconstructor) {
 
 TARealCommander = Class(TACommander) {
     DeathThread = function(self)
-        local army = self:GetArmy()
-        local position = self:GetPosition()
         TACommander.DeathThread(self)
         self:CreateInitialFireballSmokeRing()
         self:ForkThread(self.CreateOuterRingWaveSmokeRing)
-        local orientation = RandomFloat(0,2*math.pi)
-        CreateDecal(position, orientation, 'Crater01_albedo', '', 'Albedo', 50, 50, 1200, 0, self.Army)
-        CreateDecal(position, orientation, 'Crater01_normals', '', 'Normals', 50, 50, 1200, 0, self.Army)
-        CreateDecal(position, orientation, 'nuke_scorch_003_albedo', '', 'Albedo', 60, 60, 1200, 0, self.Army)
+        CreateDecal(self:GetPosition(), RandomFloat(0,2*math.pi), 'Crater01_albedo', '', 'Albedo', 50, 50, 1200, 0, self.Army)
+        CreateDecal(self:GetPosition(), RandomFloat(0,2*math.pi), 'Crater01_normals', '', 'Normals', 50, 50, 1200, 0, self.Army)
+        CreateDecal(self:GetPosition(), RandomFloat(0,2*math.pi), 'nuke_scorch_003_albedo', '', 'Albedo', 60, 60, 1200, 0, self.Army)
     end,  
 
     CreateInitialFireballSmokeRing = function(self)

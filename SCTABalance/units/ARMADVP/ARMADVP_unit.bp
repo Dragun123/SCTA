@@ -75,8 +75,9 @@ UnitBlueprint {
         UniformScale = 0.16,
     },
     Economy = {
-        BuildCostEnergy = 60000,
-        BuildCostMass = 6300, 
+        Vehicle = true,
+        BuildCostEnergy = 180000,
+        BuildCostMass = 10600, 
         BuildTime = 220000,
         DifferentialUpgradeCostCalculation = true,
 	BuildRate = 300,
@@ -100,6 +101,7 @@ UnitBlueprint {
         BuildBones = {
             BuildEffectBones = {'spray1','spray2', 'spray3', 'spray4', },
         },                   
+                ---RolloffDelay = 1,
         Category = 'Factory',
         Classification = 'RULEUC_Factory',
         CommandCaps = {

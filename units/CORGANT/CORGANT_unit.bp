@@ -81,6 +81,7 @@ UnitBlueprint {
         BuildCostMass = 6587, 
         BuildTime = 41937,
         BuildRate = 200,
+        Gantry = true,
         BuildableCategory = {
             'BUILTBYQUANTUMGATE CORE',
         },
@@ -99,6 +100,7 @@ UnitBlueprint {
             BuildAttachBone = 'build',
             BuildEffectBones = {'nano1','nano2','nano3','nano4','nano5','nano6','nano7','nano8','nano9','nano10',},
         },  
+                ---RolloffDelay = 1,
         Category = 'Factory',
         Classification = 'RULEUC_Factory',
         CommandCaps = {

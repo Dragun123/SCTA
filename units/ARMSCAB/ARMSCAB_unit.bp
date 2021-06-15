@@ -167,9 +167,8 @@ UnitBlueprint {
             TrackingRadius = 5,
             WeaponUnpackLocksMotion = true,
             WeaponUnpackAnimation = '/mods/SCTA-master/units/ARMSCAB/ARMSCAB_lod0_unpack.sca',
-            WeaponUnpackAnimationRate = 1,
+            WeaponUnpackAnimationRate = 5,
             WeaponRepackTimeout = 1,
-            WeaponUnpackTimeout = 1,
             WeaponUnpacks = true,
         },
         { #SMALL_UNITEX

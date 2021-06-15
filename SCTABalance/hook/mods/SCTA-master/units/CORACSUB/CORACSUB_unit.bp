@@ -13,8 +13,8 @@ UnitBlueprint {
             UniformScale = 0.12,
         },
     Economy = {
-        BuildCostEnergy = 1800,
-        BuildCostMass = 400,
+        BuildCostEnergy = 4200,
+        BuildCostMass = 300,
         BuildRate = 300,
         BuildableCategory = {
             'BUILTBYTIER2COMMANDER CORE',

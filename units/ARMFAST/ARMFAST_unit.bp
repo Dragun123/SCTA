@@ -130,8 +130,8 @@ UnitBlueprint {
             DamageType = 'Normal',
             DisplayName = 'ARM_FAST',
             FireTargetLayerCapsTable = {
-                Land = 'Land|Water|Seabed',
-                Seabed = 'Land|Water|Seabed',
+                Land = 'Land|Water|Seabed|Air',
+                Seabed = 'Land|Water|Seabed|Air',
             },
 	    RangeCategory = 'UWRC_DirectFire',
      WeaponCategory = 'DirectFire',

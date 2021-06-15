@@ -81,7 +81,8 @@ UnitBlueprint {
         BuildCostEnergy = 1340,
         BuildCostMass = 830, 
         BuildTime = 7180,
-	BuildRate = 100,
+        AirFactory = true,
+	    BuildRate = 100,
         BuildableCategory = {
             'AIR MOBILE TECH1 CORE',
         },
@@ -97,6 +98,7 @@ UnitBlueprint {
         BuildBones = {
             BuildEffectBones = {'muzzlea','muzzleb'},
         },      
+                ---RolloffDelay = 1,
         Category = 'Factory',
         Classification = 'RULEUC_Factory',
         CommandCaps = {

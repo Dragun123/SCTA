@@ -6,6 +6,8 @@
 UnitBlueprint {
     Merge = true, 
     Economy = {
+        BuildCostEnergy = 12000,
+        BuildCostMass = 800,
         BuildRate = 150000,
     }, 
     Weapon = {

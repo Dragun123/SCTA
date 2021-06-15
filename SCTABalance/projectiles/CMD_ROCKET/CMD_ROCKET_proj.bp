@@ -61,6 +61,7 @@ ProjectileBlueprint {
     DoNotCollideList = {
         'AIR',
     },
+    DesiredShooterCap = 1,
     Physics = {
         Acceleration = 30,
         DestroyOnWater = false,

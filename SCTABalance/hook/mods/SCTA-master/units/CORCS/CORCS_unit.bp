@@ -6,8 +6,8 @@ UnitBlueprint {
         },
     Economy = {
         BuildRate = 120,
-        BuildCostMass = 120,
-        BuildCostEnergy = 1200,
+        BuildCostMass = 180,
+        BuildCostEnergy = 2000,
         BuildTime = 2000,
         ProductionPerSecondEnergy = 3,
         MaxBuildDistance = 7,

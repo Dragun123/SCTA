@@ -28,15 +28,14 @@ UnitBlueprint {
         'DRAGBUILD',
         'VISIBLETORECON',
         'RECLAIMABLE',
-
         'TECH3',
-	'STRUCTURE',
-	'INTELLIGENCE',
-	'SONAR',
-	'NAVAL',
+	    'STRUCTURE',
+	    'INTELLIGENCE',
+	    'SONAR',
+	    'NAVAL',
         'OVERLAYSONAR',
-    'CORE',
-	'SORTINTEL',
+        'CORE',
+	    'SORTINTEL',
     },
     CollisionOffsetY = -0.5,
     Defense = {
@@ -144,13 +143,11 @@ UnitBlueprint {
          
     },
         Wreckage = {
-	---UseCustomMesh = true,
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/CORASON/CORASON_dead_prop.bp',
         WreckageLayers = {
             Water = true,
             Seabed = true,

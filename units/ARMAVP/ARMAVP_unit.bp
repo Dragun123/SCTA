@@ -70,6 +70,7 @@ UnitBlueprint {
         UniformScale = 0.16,
     },
     Economy = {
+        Vehicle = true,
         BuildCostEnergy = 3200,
         BuildCostMass = 1984, 
         BuildTime = 14950,
@@ -91,6 +92,7 @@ InitialRallyZ = 7,
         BuildBones = {
             BuildEffectBones = {'LeftBuildMuzzle','RightBuildMuzzle'},
         },        
+                ---RolloffDelay = 1,
         Category = 'Factory',
         Classification = 'RULEUC_Factory',
         CommandCaps = {

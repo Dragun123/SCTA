@@ -75,6 +75,7 @@ UnitBlueprint {
         UniformScale = 0.16,
     },
     Economy = {
+        KBot = true,
         BuildCostEnergy = 1130,
         BuildCostMass = 705, 
         BuildTime = 6760,
@@ -96,6 +97,7 @@ InitialRallyZ = 7,
         BuildBones = {
                 BuildEffectBones = {'Nozzle_01','Nozzle_02'},
             },
+                ---RolloffDelay = 1,
         Category = 'Factory',
         Classification = 'RULEUC_Factory',
         CommandCaps = {

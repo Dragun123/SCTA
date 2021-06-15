@@ -30,6 +30,7 @@ BaseBuilderTemplate {
         'SCTAAIEngineerMiscBuilder',
        
         --MiscFunctions
+        'SCTAGantryProduction',
         'SCTAAssisters',
         'SCTAExpansionBuilders',
     },

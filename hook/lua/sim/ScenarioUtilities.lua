@@ -2,6 +2,11 @@
 
 function CreateInitialArmyGroup(strArmy, createCommander)
 	CreateWind()
+	for index, moddata in __active_mods do
+		if not moddata.name == 'AI-Uveso' then
+			BuildGraphAreasTA()
+		end
+	end
 	--[[for index, moddata in __active_mods do
 		if moddata.name == 'All factions FAF BlackOps Nomads' then
 			TACreateInitialArmyGroup(strArmy, createCommander)
@@ -76,4 +81,77 @@ function WindThread()
 		WaitTicks(30 + 1)
 		--Wait ticks waits 1 less tick than it should. #timingissues
 	end
+end
+
+function BuildGraphAreasTA()
+    local GraphIndex = {
+        ['Land Path Node'] = 0,
+        ['Water Path Node'] = 0,
+        ['Amphibious Path Node'] = 0,
+        ['Air Path Node'] = 0,
+    }
+    local old
+    for k, v in Scenario.MasterChain._MASTERCHAIN_.Markers do
+        -- only check waypoint markers
+        if MarkerDefaults[v.type] then
+            -- Do we have already an Index number for this Graph area ?
+            if not v.GraphArea then
+                GraphIndex[v.type] = GraphIndex[v.type] + 1
+                Scenario.MasterChain._MASTERCHAIN_.Markers[k].GraphArea = GraphIndex[v.type]
+                --LOG('*BuildGraphAreas: Marker '..k..' has no Graph index, set it to '..GraphArea[v.type])
+            end
+            -- check adjancents
+            if v.adjacentTo then
+                local adjancents = STR_GetTokens(v.adjacentTo or '', ' ')
+                if adjancents[0] then
+                    for i, node in adjancents do
+                        -- check if the new node has not a GraphIndex 
+                        if not Scenario.MasterChain._MASTERCHAIN_.Markers[node].GraphArea then
+                            --LOG('*BuildGraphAreas: adjacentTo '..node..' has no Graph index, set it to '..Scenario.MasterChain._MASTERCHAIN_.Markers[k].GraphArea)
+                            Scenario.MasterChain._MASTERCHAIN_.Markers[node].GraphArea = Scenario.MasterChain._MASTERCHAIN_.Markers[k].GraphArea
+                        -- the node has already a graph index. Overwrite all nodes connected to this node with the new index
+                        elseif Scenario.MasterChain._MASTERCHAIN_.Markers[node].GraphArea ~= Scenario.MasterChain._MASTERCHAIN_.Markers[k].GraphArea then
+                            -- save the old index here, we will overwrite Markers[node].GraphArea
+                            old = Scenario.MasterChain._MASTERCHAIN_.Markers[node].GraphArea
+                            --LOG('*BuildGraphAreas: adjacentTo '..node..' has Graph index '..old..' overwriting it with '..Scenario.MasterChain._MASTERCHAIN_.Markers[k].GraphArea)
+                            for k2, v2 in Scenario.MasterChain._MASTERCHAIN_.Markers do
+                                -- Has the adjacent the same type than the marker
+                                if v.type == v2.type then
+                                    -- has this node the same index then our main marker ?
+                                    if Scenario.MasterChain._MASTERCHAIN_.Markers[k2].GraphArea == old then
+                                        --LOG('*BuildGraphAreas: adjacentTo '..k2..' has Graph index '..old..' overwriting it with '..Scenario.MasterChain._MASTERCHAIN_.Markers[k].GraphArea)
+                                        Scenario.MasterChain._MASTERCHAIN_.Markers[k2].GraphArea = Scenario.MasterChain._MASTERCHAIN_.Markers[k].GraphArea
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    -- make propper Area names and IDs
+    for k, v in Scenario.MasterChain._MASTERCHAIN_.Markers do
+        if v.GraphArea then
+            -- We can't just copy it into .graph without breaking stuff, so we use .GraphArea instead
+--            Scenario.MasterChain._MASTERCHAIN_.Markers[k].graph = MarkerDefaults[v.type].area..'_'..v.GraphArea
+            Scenario.MasterChain._MASTERCHAIN_.Markers[k].GraphArea = MarkerDefaults[v.type].area..'_'..v.GraphArea
+        end
+    end
+
+    -- Validate
+    local GraphCountIndex = {
+        ['Land Path Node'] = {},
+        ['Water Path Node'] = {},
+        ['Amphibious Path Node'] = {},
+        ['Air Path Node'] = {},
+    }
+    for k, v in Scenario.MasterChain._MASTERCHAIN_.Markers do
+        if v.GraphArea then
+            GraphCountIndex[v.type][v.GraphArea] = GraphCountIndex[v.type][v.GraphArea] or 1
+            GraphCountIndex[v.type][v.GraphArea] = GraphCountIndex[v.type][v.GraphArea] + 1
+        end
+    end
+    SPEW('* AI-Uveso: BuildGraphAreas(): '..repr(GraphCountIndex))
 end

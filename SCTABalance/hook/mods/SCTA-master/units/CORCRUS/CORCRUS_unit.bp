@@ -13,8 +13,9 @@ UnitBlueprint {
         MaxHealth = 9000,
     },
     Economy = {
+        BuildCostEnergy = 40000,
         BuildCostMass = 4400,
-        BuildTime = 35000, 
+        BuildTime = 56000, 
     },
     Description = 'Destroyer',
         Physics = {

@@ -79,9 +79,9 @@ UnitBlueprint {
         UniformScale = 0.35,
     },
     Economy = {
-        BuildCostEnergy = 840000,
-        BuildCostMass = 44000,
-        BuildTime = 450000,
+        BuildCostEnergy = 900000,
+        BuildCostMass = 36000,
+        BuildTime = 225000,
     },
     Footprint = {
         SizeX = 3,
@@ -368,7 +368,7 @@ UnitBlueprint {
         },
     },
         Wreckage = {
-Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+        Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,

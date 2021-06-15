@@ -78,11 +78,12 @@ UnitBlueprint {
         BuildCostMass = 680, 
         BuildTime = 7000,
 	BuildRate = 100,
+    KBot = true,
         BuildableCategory = {
             'BOT MOBILE TECH1 CORE',
         },
 	InitialRallyX = 0,
-InitialRallyZ = 7,
+    InitialRallyZ = 7,
         StorageMass = 50,
         StorageEnergy = 50,
     },
@@ -95,6 +96,7 @@ InitialRallyZ = 7,
         BuildBones = {
             BuildEffectBones = {'muzzle1', 'muzzle2','muzzle3','muzzle4'},
         },          
+                ---RolloffDelay = 1,
         Category = 'Factory',
         Classification = 'RULEUC_Factory',
         CommandCaps = {

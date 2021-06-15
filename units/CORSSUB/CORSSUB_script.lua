@@ -8,7 +8,7 @@ local TAweapon = import('/mods/SCTA-master/lua/TAweapon.lua').TAweapon
 
 CORSSUB = Class(TASeaCounter) {
     Weapons = {
-        ARMSMART_TORPEDO = Class(TAweapon) {
+        CORSMART_TORPEDO = Class(TAweapon) {
 	},
     },
 }

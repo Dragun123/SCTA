@@ -19,21 +19,14 @@ ARMSONAR = Class(TAStructure) {
 		--SPIN base around y-axis  SPEED <0>;
 		self.Spinners.base:SetSpeed(0)
 		TAStructure.OnIntelDisabled(self)
-		self:PlayUnitSound('Deactivate')
 	end,
 
 	OnIntelEnabled = function(self)
 		--SPIN base around y-axis  SPEED <60.01>;
 		self.Spinners.base:SetSpeed(60)
 		TAStructure.OnIntelEnabled(self)
-		self:PlayUnitSound('Activate')
 	end,
 
-	OnKilled = function(self, instigator, type, overkillRatio)
-		self.Spinners.base:SetSpeed(0)
-		TAStructure.OnKilled(self, instigator, type, overkillRatio)
-		
-	end,
 }
 
 TypeClass = ARMSONAR

@@ -134,6 +134,7 @@ TechLevel = 'RULEUTL_Basic',
             DisplayName = 'CORKBOT_MISSILE',
             FireTargetLayerCapsTable = {
                 Land = 'Land|Water|Air',
+                Seabed = 'Land|Water|Air',
             },
             RangeCategory = 'UWRC_AntiAir',
             WeaponCategory = 'AntiAir',

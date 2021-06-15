@@ -4,9 +4,9 @@ UnitBlueprint {
         UniformScale = 0.1,
     },
     Economy = {
-        BuildCostMass = 114,
+        BuildCostMass = 110,
         BuildCostEnergy = 750,
-        BuildTime = 2300,
+        BuildTime = 2000,
     },
     Physics = {
         MaxSpeed = 2.4,
@@ -16,4 +16,12 @@ UnitBlueprint {
     SizeX = 1,
     SizeY = 1,
     SizeZ = 1.4,
+    Weapon = {
+        [1] = {
+            Damage = 50,
+            RateOfFire = 0.5,
+        },
+        [2] = {
+        }, 
+    },
 }

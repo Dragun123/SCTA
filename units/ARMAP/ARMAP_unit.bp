@@ -82,7 +82,8 @@ UnitBlueprint {
         BuildCostEnergy = 1370,
         BuildCostMass = 850, 
         BuildTime = 7240,
-	BuildRate = 100,
+	    BuildRate = 100,
+        AirFactory = true,
         BuildableCategory = {
             'AIR MOBILE TECH1 ARM',
         },
@@ -98,6 +99,7 @@ UnitBlueprint {
         BuildBones = {
             BuildEffectBones = {'Nozzle_01', 'Nozzle_02'},
         }, 
+                ---RolloffDelay = 1,
         Category = 'Factory',
         Classification = 'RULEUC_Factory',
         CommandCaps = {

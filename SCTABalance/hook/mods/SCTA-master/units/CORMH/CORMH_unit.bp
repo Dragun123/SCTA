@@ -16,7 +16,7 @@ UnitBlueprint {
     SizeY = 1.4,
     Weapon = {
         [1] = {
-            Damage = 1200,
+            Damage = 600,
             MaxRadius = 65,
             RateOfFire = 0.5,
             ProjectileId = '/mods/SCTA-master/SCTABalance/projectiles/MA_ROCKET/MA_ROCKET_proj.bp',

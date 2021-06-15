@@ -1,0 +1,13 @@
+#ARM Tiny - Low Damage, Med. Range Mine
+#ARMMINE1
+#
+#Blueprint created by Raevn
+
+UnitBlueprint {
+   Merge = true,
+    Economy = {
+        BuildCostEnergy = 3000,
+        BuildCostMass = 400,
+    },
+    LifeBarSize = 1,
+}

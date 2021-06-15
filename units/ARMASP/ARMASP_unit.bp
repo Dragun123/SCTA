@@ -70,7 +70,7 @@ UnitBlueprint {
             LODs = {
                 {
                     LODCutoff = 230,
-                    ShaderName = 'AeonCZAR', 
+                    ShaderName = 'Unit', 
 		    NormalsName = '/mods/SCTA-master/textures/common/normalsTS.dds'
                 },
             },
@@ -85,11 +85,6 @@ UnitBlueprint {
 	NaturalProducer = true,
     ProductionPerSecondEnergy = 10,
 	StorageEnergy = 100,
-    },
-    Footprint = {
-	MaxSlope = 0.625,
-        SizeX = 2,
-        SizeZ = 2,
     },
     General = {
         BuildBones = {
@@ -134,8 +129,19 @@ UnitBlueprint {
             LAYER_Land = true,
             LAYER_Water = true,
         },
-        SkirtSizeX = 2,
-        SkirtSizeZ = 2,
+        DragCoefficient = 0.2,
+        FlattenSkirt = true,
+        MaxSteerForce = 0,
+        MeshExtentsX = 3,
+        MeshExtentsY = 1.25,
+        MeshExtentsZ = 3,
+        MinSpeedPercent = 0,
+        MotionType = 'RULEUMT_None',
+        SkirtOffsetX = -1.5,
+        SkirtOffsetZ = -1.5,
+        SkirtSizeX = 6,
+        SkirtSizeZ = 6,
+        TurnRate = 0,
     },
     SelectionSizeX = 3,
     SelectionSizeZ = 3,

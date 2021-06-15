@@ -6,14 +6,12 @@
 local TACounter = import('/mods/SCTA-master/lua/TAMotion.lua').TACounter 
 
 CORSPY = Class(TACounter) {
-    OnStopBeingBuilt = function(self, builder, layer)
-		TACounter.OnStopBeingBuilt(self, builder, layer)
-		self.Spinners = {
-			fork = CreateRotator(self, 'jam', 'y', nil, 0, 0, 0),
+	OnCreate = function(self)
+		TACounter.OnCreate(self)
+		self.Disc = {
+			fork = CreateRotator(self, 'jam', 'y', nil, 25, 25, 25),
 		}
-		for k, v in self.Spinners do
-			self.Trash:Add(v)
-		end
+		self.Trash:Add(self.Disc.fork)
     end,
 
 }

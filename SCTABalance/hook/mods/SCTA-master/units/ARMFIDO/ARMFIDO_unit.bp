@@ -14,4 +14,12 @@ UnitBlueprint {
     Economy = {
         BuildTime = 7000,
     },
+    Weapon = {
+        [1] = {
+            Damage = 60,
+            RateOfFire = 1,
+        },
+        [2] = {
+        },
+    },
 }

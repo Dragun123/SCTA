@@ -55,6 +55,10 @@ UnitBlueprint {
     },
     Description = 'Extended Sonar',
     Display = {
+        AnimationUnpack = '/mods/SCTA-master/units/ARMASON/ARMASON_Aopen.sca',
+        AnimationUnpackRate = 0.5, 
+        AnimationRepack = '/mods/SCTA-master/units/ARMASON/ARMASON_Aclose.sca',
+        AnimationRepackRate = 0.5, 
         Abilities = {
             '<LOC ability_sonar>Sonar',
         },
@@ -63,7 +67,7 @@ UnitBlueprint {
             LODs = {
                 {
                   LODCutoff = 230,
-                    ShaderName = 'AeonCZAR', 
+                    ShaderName = 'Unit', 
 		    NormalsName = '/mods/SCTA-master/textures/common/normalsTS.dds'
                 },
             },
@@ -117,6 +121,7 @@ UnitBlueprint {
     VisionRadius = 12,
 	SonarRadius = 140,
 	WaterVisionRadius = 12,
+    RadarStealth = true, 
     },
     LifeBarHeight = 0.25,
     LifeBarOffset = 0.5,

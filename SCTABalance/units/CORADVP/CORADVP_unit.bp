@@ -75,8 +75,9 @@ UnitBlueprint {
         UniformScale = 0.22,
     },
     Economy = {
-        BuildCostEnergy = 54000,
-        BuildCostMass = 6000, 
+        Vehicle = true,
+        BuildCostEnergy = 160000,
+        BuildCostMass = 10000, 
         BuildTime = 200000,
         BuildRate = 360,
         DifferentialUpgradeCostCalculation = true,
@@ -101,6 +102,7 @@ InitialRallyZ = 7,
             BuildEffectBones = {'muzzle1', 'muzzle2'},
         },       
 	
+                ---RolloffDelay = 1,
         Category = 'Factory',
         Classification = 'RULEUC_Factory',
         CommandCaps = {

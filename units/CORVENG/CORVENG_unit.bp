@@ -220,7 +220,6 @@ TechLevel = 'RULEUTL_Basic',
                 'ALLUNITS',
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
-            AboveWaterTargetsOnly = true,
         },
         {
             Audio = {
@@ -278,7 +277,6 @@ TechLevel = 'RULEUTL_Basic',
                 'ALLUNITS',
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
-            AboveWaterTargetsOnly = true,
         },
         { #SMALL_UNITEX #was big_unitx
         Damage = 30,

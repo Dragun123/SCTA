@@ -36,8 +36,11 @@ UnitBlueprint {
     SizeY = 3,
     Weapon = {
         [1] = {
-            EnergyDrainPerSecond = 40,
-            EnergyRequired = 40,
+            EnergyDrainPerSecond = 25,
+            EnergyRequired = 25,
+            Damage = 450,
+            RackFireTogether = true,
+            RateOfFire = 0.33,
         },
         [2] = {
         },

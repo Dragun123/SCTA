@@ -28,6 +28,7 @@ UnitBlueprint {
         'ARM',
         'CORE',
         'BOMB',
+        'DRAGBUILD',
         'STRUCTURE',
     },
     Defense = {
@@ -72,6 +73,7 @@ UnitBlueprint {
 	ToggleCaps = {
 		RULEUTC_CloakToggle = true,
 	},
+        SelectionPriority = 5,
         FactionName = 'ARM',
         Icon = 'land',
 TechLevel = 'RULEUTL_Advanced',

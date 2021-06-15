@@ -17,17 +17,11 @@ TAair = Class(TAunit)
 		if (new == 'Down' or new == 'Bottom') then
 			self:CloseWings()
 			self:PlayUnitSound('Landing')
-			local vis = (self:GetBlueprint().Intel.VisionRadius / 2)
-            self:SetIntelRadius('Vision', vis)
+            self:SetIntelRadius('Vision', (self:GetBlueprint().Intel.VisionRadius / 2))
         elseif (new == 'Up' or new == 'Top') then
 			self:OpenWings()
 			self:PlayUnitSound('TakeOff')
-			local bpVision = self:GetBlueprint().Intel.VisionRadius
-            if bpVision then
-                self:SetIntelRadius('Vision', bpVision)
-            else
-                self:SetIntelRadius('Vision', 0)
-            end
+            self:SetIntelRadius('Vision', self:GetBlueprint().Intel.VisionRadius)
         end
 	end,
 	
@@ -77,13 +71,15 @@ TASeaair = Class(TAair)
 	OnMotionVertEventChange = function(self, new, old )
 		---TAair.OnMotionVertEventChange(self, new, old)
 			if (new == 'Down' or new == 'Bottom') then
-						self:PlayUnitSound('Landing')
+				self:PlayUnitSound('Landing')
 				self:CloseWings(self)
-				ForkThread(self.OnLayerChange, self, new, old)
+				self:SetIntelRadius('Vision', (self:GetBlueprint().Intel.VisionRadius / 2))
 			elseif (new == 'Up' or new == 'Top') then
-						self:PlayUnitSound('TakeOff')
+				self:PlayUnitSound('TakeOff')
 				self:OpenWings(self)
+				self:SetIntelRadius('Vision', self:GetBlueprint().Intel.VisionRadius)
 			end
+			ForkThread(self.OnLayerChange, self, new, old)
 		end,
 
 	OnLayerChange = function(self, new, old)
@@ -106,6 +102,8 @@ TASeaair = Class(TAair)
 				self.Sliders.chassis:SetSpeed(12)
 				self.Sliders.chassis:SetGoal(0,0,0)
 				self:DisableIntel('RadarStealth')
+			else
+				self:EnableIntel('Vision')
 				--ForkThread(self.OnMotionVertEventChange, self, new, old)
 			end
 		end

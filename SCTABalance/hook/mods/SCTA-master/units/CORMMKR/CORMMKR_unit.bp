@@ -9,12 +9,12 @@ UnitBlueprint {
       },    
       LifeBarSize = 4,
   Economy = {
-      BuildCostEnergy = 600000,
-      BuildCostMass = 5600,
+      BuildCostEnergy = 400000,
+      BuildCostMass = 5000,
       ProductionPerSecondMass = 24,
       MaintenanceConsumptionPerSecondEnergy = 1500,
-      BuildTime = 105000,
+      BuildTime = 70000,
   },
-  SelectionSizeX = 4,
-  SelectionSizeZ = 4,
+  SelectionSizeX = 3,
+  SelectionSizeZ = 3,
 }

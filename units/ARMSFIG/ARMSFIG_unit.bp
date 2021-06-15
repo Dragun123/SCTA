@@ -35,7 +35,7 @@ UnitBlueprint {
             Cue = 'VTOLCRLD',
             LodCutoff = 'UnitMove_LodCutoff',
         },
-	Destroyed = Sound { #was big_unitx
+	Destroyed = Sound { 
             Bank = 'TA_Sound',
             Cue = 'XPLOMED2',
             LodCutoff = 'UnitMove_LodCutoff',

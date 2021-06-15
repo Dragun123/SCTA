@@ -10,18 +10,23 @@ ARMMARK = Class(TACounter) {
 	OnCreate = function(self)
 		TACounter.OnCreate(self)
 		self.Spinners = {
-			dish1 = CreateRotator(self, 'Ldish', 'x', nil, 0, 0, 0),
-			dish2 = CreateRotator(self, 'Rdish', 'x', nil, 0, 0, 0),
+			fork = CreateRotator(self, 'Ldish', 'x', nil, 50, 100, 0),
+			dish2 = CreateRotator(self, 'Rdish', 'x', nil, 50, 100, 0),
 		}
 		for k, v in self.Spinners do
 			self.Trash:Add(v)
 		end
 	end,
 
-	OnStopBeingBuilt = function(self,builder,layer)
-		TACounter.OnStopBeingBuilt(self,builder,layer)
-		self.Spinners.dish1:SetSpeed(90)
-		self.Spinners.dish2:SetSpeed(-90)
+	OnIntelDisabled = function(self)
+		self.Spinners.dish2:SetTargetSpeed(0)
+		TACounter.OnIntelDisabled(self)
+	end,
+
+
+	OnIntelEnabled = function(self)
+		self.Spinners.dish2:SetTargetSpeed(-100)
+		TACounter.OnIntelEnabled(self)
 	end,
 }
 

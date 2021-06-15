@@ -79,6 +79,7 @@ UnitBlueprint {
         BuildCostEnergy = 120000,
         BuildCostMass = 14000, 
         BuildTime = 100000,
+        NavalFactory = true,
     BuildRate = 360,
     DifferentialUpgradeCostCalculation = true,
     BuildableCategory = {
@@ -101,6 +102,7 @@ UnitBlueprint {
         BuildBones = {
             BuildEffectBones = {'Nozzle_01','Nozzle_02'},
         },
+                ---RolloffDelay = 1,
         Category = 'Factory',
         Classification = 'RULEUC_Factory',
         CommandCaps = {

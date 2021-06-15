@@ -32,11 +32,11 @@ ARMAWAC = Class(TAIntelAir) {
 	OpenWings = function(self)
 
 		--MOVE Rwing to x-axis <4.45> SPEED <3.00>;
-		self.Sliders.Rwing:SetGoal(-4.45,0,0)
+		self.Sliders.Rwing:SetGoal(-3,0,0)
 		self.Sliders.Rwing:SetSpeed(3)
 
 		--MOVE Lwing to x-axis <-4.45> SPEED <3.00>;
-		self.Sliders.Lwing:SetGoal(4.45,0,0)
+		self.Sliders.Lwing:SetGoal(3,0,0)
 		self.Sliders.Lwing:SetSpeed(3)
 
 	end,

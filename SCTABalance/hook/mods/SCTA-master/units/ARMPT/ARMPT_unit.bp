@@ -1,22 +1,5 @@
 UnitBlueprint {
     Merge = true,
-    Categories = {
-        'SELECTABLE',
-        'ARM',
-        'TECH1',
-        'VISIBLETORECON',
-        'RECLAIMABLE',
-        'MOBILE',
-	    'NAVAL',
-	    'DIRECTFIRE',
-	    'ANTIAIR',
-	    'LIGHTBOAT',
-        'OVERLAYDIRECTFIRE',
-        'OVERLAYANTIAIR',
-        'OVERLAYRADAR',
-        'OVERLAYSONAR',
-        'SCOUT',
-    },
     Defense = {
         Health = 600,
         MaxHealth = 600,

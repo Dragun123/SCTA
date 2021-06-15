@@ -1,11 +1,22 @@
 UnitBlueprint {
     Merge = true,
     Defense = {
-        Health = 3000,
-        MaxHealth = 3000,
+        Health = 1250,
+        MaxHealth = 1250,
+    },
+    Economy = {
+    BuildCostEnergy = 33000,
+    BuildCostMass = 2900,
     },
     Intel = {
         SonarRadius = 55,
         VisionRadius = 15,
+    },
+    Weapon = {
+        [1] = {
+            RateOfFire = 0.4,
+        },
+        [2] = {
+        },
     },
 }

@@ -304,6 +304,7 @@ UnitBlueprint {
             CollideFriendly = false,
             DamageFriendly = false,
             Damage = 120,
+            DamageRadius = 1,
             DamageType = 'Normal',
             DisplayName = 'ARMAAS_WEAPON3',
             FireTargetLayerCapsTable = {

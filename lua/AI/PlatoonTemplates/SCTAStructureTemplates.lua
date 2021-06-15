@@ -11,8 +11,8 @@
 # ==== Extractor Upgrades === #
 PlatoonTemplate {
     Name = 'SctaExtractorUpgrades',
-    Plan = 'UnitUpgradeAI',
-    PlatoonType = 'StructureForm',
+    Plan = 'UnitUpgradeAISCTA',
+    ---PlatoonType = 'StructureForm',
     GlobalSquads = {
         { categories.MASSEXTRACTION * categories.STRUCTURE * categories.TECH1, 1, 1, 'support', 'none' }
     },
@@ -20,8 +20,8 @@ PlatoonTemplate {
 
 PlatoonTemplate {
     Name = 'SctaIntelUpgrades',
-    Plan = 'UnitUpgradeAI',
-    PlatoonType = 'StructureForm',
+    Plan = 'UnitUpgradeAISCTA',
+    ---PlatoonType = 'StructureForm',
     GlobalSquads = {
         { categories.INTELLIGENCE * categories.STRUCTURE * categories.TECH1, 1, 1, 'support', 'none' }
     },
@@ -29,8 +29,8 @@ PlatoonTemplate {
 
 PlatoonTemplate {
     Name = 'SctaRadar2Upgrades',
-    Plan = 'UnitUpgradeAI',
-    PlatoonType = 'StructureForm',
+    Plan = 'UnitUpgradeAISCTA',
+    ---PlatoonType = 'StructureForm',
     GlobalSquads = {
         { categories.RADAR * categories.STRUCTURE * categories.TECH2, 1, 1, 'support', 'none' }
     },
@@ -38,17 +38,17 @@ PlatoonTemplate {
 
 PlatoonTemplate {
     Name = 'FabricationSCTA',
-    Plan = 'PauseAI',
-    PlatoonType = 'StructureForm',
+    Plan = 'TAPauseAI',
+    ---PlatoonType = 'StructureForm',
     GlobalSquads = {
-        { categories.STRUCTURE * categories.MASSFABRICATION, 1, 1, 'support', 'none' },
+        { categories.STRUCTURE * categories.MASSFABRICATION, 1, 100, 'support', 'none' },
     }
 }
 
 PlatoonTemplate {
     Name = 'SCTAIntel',
     Plan = 'PauseAI',
-    PlatoonType = 'StructureForm',
+    ---PlatoonType = 'StructureForm',
     GlobalSquads = {
         { categories.STRUCTURE * (categories.OPTICS + categories.RADAR), 1, 1, 'support', 'none' },
     }
@@ -57,7 +57,7 @@ PlatoonTemplate {
 PlatoonTemplate {
     Name = 'ArtillerySCTA',
     Plan = 'ArtilleryAI',
-    PlatoonType = 'StructureForm',
+    ---PlatoonType = 'StructureForm',
     GlobalSquads = {
         { categories.ARTILLERY * categories.STRUCTURE, 1, 1, 'artillery', 'None' }
     },
@@ -65,8 +65,8 @@ PlatoonTemplate {
 
 PlatoonTemplate {
     Name = 'TacticalMissileSCTA',
-    Plan = 'TacticalAI',
-    PlatoonType = 'StructureForm',
+    Plan = 'NukeAISAI',
+    ---PlatoonType = 'StructureForm',
     GlobalSquads = {
         { categories.TACTICALMISSILEPLATFORM * categories.STRUCTURE, 1, 1, 'attack', 'None' }
     },
@@ -74,8 +74,8 @@ PlatoonTemplate {
 
 PlatoonTemplate {
     Name = 'NuclearMissileSCTA',
-    Plan = 'NukeAI',
-    PlatoonType = 'CommandTA',
+    Plan = 'NukeAISAI',
+    ---PlatoonType = 'CommandTA',
     GlobalSquads = {
         { categories.NUKE * categories.STRUCTURE * categories.TECH3, 1, 1, 'attack', 'None' }
     },
@@ -84,7 +84,7 @@ PlatoonTemplate {
 PlatoonTemplate {
     Name = 'AntiNuclearMissileSCTA',
     Plan = 'AntiNukeAI',
-    PlatoonType = 'CommandTA',
+    ---PlatoonType = 'CommandTA',
     GlobalSquads = {
         { categories.ANTIMISSILE * categories.STRUCTURE * categories.TECH3, 1, 1, 'attack', 'None' }
     },

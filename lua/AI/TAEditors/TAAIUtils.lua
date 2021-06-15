@@ -58,6 +58,20 @@ function CompareBodySCTA(numOne, numTwo, compareType)
 end
 
 
+function TAHavePoolUnitInArmy(aiBrain, unitCount, unitCategory, compareType)
+    local poolPlatoon = aiBrain:GetPlatoonUniquelyNamed('ArmyPool')
+    local numUnits = poolPlatoon:GetNumCategoryUnits(unitCategory)
+    --LOG('* HavePoolUnitInArmy: numUnits= '..numUnits) 
+    return CompareBodySCTA(numUnits, unitCount, compareType)
+end
+
+function TAHaveLessThanArmyPoolWithCategory(aiBrain, unitCount, unitCategory)
+    return TAHavePoolUnitInArmy(aiBrain, unitCount, unitCategory, '<=')
+end
+function TAHaveGreaterThanArmyPoolWithCategory(aiBrain, unitCount, unitCategory)
+    return TAHavePoolUnitInArmy(aiBrain, unitCount, unitCategory, '>=')
+end
+
 --TA Build Conditions
 
 function TAAIGetEconomyNumbersStorageRatio(aiBrain)
@@ -91,13 +105,15 @@ function GreaterThanStorageRatioTA(aiBrain, mStorageRatio, eStorageRatio)
     return false
 end
 
-function ExpansionBaseCheck(aiBrain)
+-----TAExpansion
+
+function TAExpansionBaseCheck(aiBrain)
     -- Removed automatic setting of Land-Expasions-allowed. We have a Game-Option for this.
     local checkNum = tonumber(ScenarioInfo.Options.LandExpansionsAllowed)/5 or 1 
-    return ExpansionBaseCount(aiBrain, '<', checkNum)
+    return TAExpansionBaseCount(aiBrain, '<', checkNum)
 end
 
-function ExpansionBaseCount(aiBrain, compareType, checkNum)
+function TAExpansionBaseCount(aiBrain, compareType, checkNum)
     local expBaseCount = aiBrain:GetManagerCount('Expansion Area')
         ---LOG('*SCTAEXPANSIONTA', expBaseCount)
        if expBaseCount > checkNum then
@@ -105,13 +121,13 @@ function ExpansionBaseCount(aiBrain, compareType, checkNum)
        return CompareBodySCTA(expBaseCount, checkNum, compareType)
 end
 
-function StartBaseCheck(aiBrain)
+function TAStartBaseCheck(aiBrain)
     -- Removed automatic setting of Land-Expasions-allowed. We have a Game-Option for this.
     local checkNum2 = tonumber(ScenarioInfo.Options.LandExpansionsAllowed)/3 or 2 
-    return StartBaseCount(aiBrain, '<', checkNum2)
+    return TAStartBaseCount(aiBrain, '<', checkNum2)
 end
 
-function StartBaseCount(aiBrain, compareType, checkNum2)
+function TAStartBaseCount(aiBrain, compareType, checkNum2)
        local expBaseCount2 = aiBrain:GetManagerCount('Start Location')
        ----LOG('*SCTAEXPANSIONTA2', expBaseCount2)
        if expBaseCount2 > checkNum2 + 1 then
@@ -132,33 +148,34 @@ function FormerBaseCheck(aiBrain, compareType, checkNum)
        return CompareBodySCTA(expBaseCount, checkNum, compareType)
 end]]
 
-function HaveUnitsWithCategoryAndAllianceFalse(aiBrain, numReq, category, alliance)
+function TAHaveUnitsWithCategoryAndAllianceFalse(aiBrain, numReq, category, alliance)
     local numUnits = aiBrain:GetNumUnitsAroundPoint(category, Vector(0,0,0), 100000, alliance)
     if numUnits > numReq then
         return false
-    end
+    else
     return true
+    end
 end
 
+---TAUnit Building
 
-function TAFactoryCapCheck(aiBrain, locationType, TECH)
-    local catCheck = false
-    catCheck = TECH * categories.FACTORY
-    local factoryManager = aiBrain.BuilderManagers[locationType].FactoryManager
-    if not factoryManager then
-        WARN('*AI WARNING: FactoryCapCheck - Invalid location - ' .. locationType)
-        return false
-    end
-    local numUnits = factoryManager:GetNumCategoryFactories(catCheck)
-    numUnits = numUnits + aiBrain:GetEngineerManagerUnitsBeingBuilt(catCheck)
-
-    if numUnits < 12 then
+function TAFactoryCapCheckT1(aiBrain)
+    --LOG('*SCTALABs', aiBrain.Plants)
+    if aiBrain.Plants < 10 then
         return true
     end
     return false
 end
 
-function HaveEnemyUnitAtLocation(aiBrain, radius, locationType, unitCount, categoryEnemy, compareType)
+function TAFactoryCapCheckT2(aiBrain)
+    --LOG('*SCTALABs', aiBrain.Plants)
+    if aiBrain.Labs < 4 then
+        return true
+    end
+    return false
+end
+
+function TAHaveEnemyUnitAtLocation(aiBrain, radius, locationType, unitCount, categoryEnemy, compareType)
     if not aiBrain.BuilderManagers[locationType] then
         WARN('*AI WARNING: HaveEnemyUnitAtLocation - Invalid location - ' .. locationType)
         return false
@@ -171,12 +188,12 @@ function HaveEnemyUnitAtLocation(aiBrain, radius, locationType, unitCount, categ
     return CompareBodySCTA(numEnemyUnits, unitCount, compareType)
 end
 --            { UCBC, 'EnemyUnitsGreaterAtLocationRadius', {  BasePanicZone, 'LocationType', 0, categories.MOBILE * categories.LAND }}, -- radius, LocationType, unitCount, categoryEnemy
-function EnemyUnitsGreaterAtLocationRadius(aiBrain, radius, locationType, unitCount, categoryEnemy)
-    return HaveEnemyUnitAtLocation(aiBrain, radius, locationType, unitCount, categoryEnemy, '>')
+function TAEnemyUnitsGreaterAtLocationRadius(aiBrain, radius, locationType, unitCount, categoryEnemy)
+    return TAHaveEnemyUnitAtLocation(aiBrain, radius, locationType, unitCount, categoryEnemy, '>')
 end
 --            { UCBC, 'EnemyUnitsLessAtLocationRadius', {  BasePanicZone, 'LocationType', 1, categories.MOBILE * categories.LAND }}, -- radius, LocationType, unitCount, categoryEnemy
-function EnemyUnitsLessAtLocationRadius(aiBrain, radius, locationType, unitCount, categoryEnemy)
-    return HaveEnemyUnitAtLocation(aiBrain, radius, locationType, unitCount, categoryEnemy, '<')
+function TAEnemyUnitsLessAtLocationRadius(aiBrain, radius, locationType, unitCount, categoryEnemy)
+    return TAHaveEnemyUnitAtLocation(aiBrain, radius, locationType, unitCount, categoryEnemy, '<')
 end
 
 
@@ -198,9 +215,50 @@ function TAAttackNaval(aiBrain, bool)
     return false
 end
 
+function TAHaveUnitRatioGreaterThanLand(aiBrain, Land)
+    local numOne = aiBrain:GetCurrentUnits((Land) * categories.LAND * categories.MOBILE - categories.ENGINEER)
+    local numTwo = aiBrain:GetCurrentUnits(categories.LAND * categories.MOBILE - categories.ENGINEER)
+    if ((numOne + 1) / (numTwo + 1)) < 0.15 then
+        return true
+    else
+        return false
+    end
+end
+
+function TAHaveUnitRatioGreaterThanNavalT1(aiBrain, Naval)
+    local numOne = aiBrain:GetCurrentUnits(Naval)
+    local numTwo = aiBrain:GetCurrentUnits(categories.LIGHTBOAT)
+    if (numOne < (numTwo + 1) * 2) then
+        return true
+    else
+        return false
+    end
+end
+
+function TAHaveUnitRatioGreaterThanNaval(aiBrain, Naval)
+    local numOne = aiBrain:GetCurrentUnits(Naval)
+    local numTwo = aiBrain:GetCurrentUnits(categories.FACTORY * categories.NAVAL * categories.TECH2)
+    if (numOne < (numTwo + 1) * 2) then
+        return true
+    else
+        return false
+    end
+end
+
+function TAHaveUnitRatioGreaterThanNavalT3(aiBrain, Naval)
+    local numOne = aiBrain:GetCurrentUnits(Naval)
+    local numTwo = aiBrain:GetCurrentUnits(categories.FACTORY * categories.NAVAL * categories.TECH2)
+    if (numOne < numTwo) then
+        return true
+    else
+        return false
+    end
+end
+----TAReclaim
+
 function TAReclaimablesInArea(aiBrain, locType)
     --DUNCAN - was .9. Reduced as dont need to reclaim yet if plenty of mass
-    if aiBrain:GetEconomyStoredRatio('MASS') > .5 then
+    if aiBrain:GetEconomyStoredRatio('MASS') > 0.5 then
         return false
     end
 
@@ -210,11 +268,11 @@ function TAReclaimablesInArea(aiBrain, locType)
     --end
 
     local ents = TAAIGetReclaimablesAroundLocation(aiBrain, locType)
-    if ents and table.getn(ents) > 0 then
+    if ents and not table.empty(ents) then
         return true
-    end
-
+    else
     return false
+    end
 end
 
 function TAAIGetReclaimablesAroundLocation(aiBrain, locationType)
@@ -246,17 +304,17 @@ function TAAIGetReclaimablesAroundLocation(aiBrain, locationType)
 end
 
 
-local AITaunts = {
+local TAAITaunts = {
     {99, 100, 101, 102, 103}, -- Seraphim
 }
 local AIChatText = import('/lua/AI/sorianlang.lua').AIChatText
 
 function TAAIRandomizeTaunt(aiBrain)
-    tauntid = Random(1,table.getn(AITaunts[1]))
-    AISendChat('all', aiBrain.Nickname, '/'..AITaunts[1][tauntid])
+    tauntid = Random(1,table.getn(TAAITaunts[1]))
+    TAAISendChat('all', aiBrain.Nickname, '/'..TAAITaunts[1][tauntid])
 end
 
-function AISendChat(aigroup, ainickname, aiaction, targetnickname, extrachat)
+function TAAISendChat(aigroup, ainickname, aiaction, targetnickname, extrachat)
         if aiaction and AIChatText[aiaction] then
             local ranchat = Random(1, table.getn(AIChatText[aiaction]))
             local chattext
@@ -272,3 +330,87 @@ function AISendChat(aigroup, ainickname, aiaction, targetnickname, extrachat)
             table.insert(Sync.AIChat, {group=aigroup, text=aiaction, sender=ainickname})
         end
 end
+
+function TACanBuildOnMassLessThanDistanceLand(aiBrain, locationType, distance, threatMin, threatMax, threatRings, threatType, maxNum )
+    local engineerManager = aiBrain.BuilderManagers[locationType].EngineerManager
+    if not engineerManager or locationType == 'Naval Area' then
+        return false
+    end
+    local position = engineerManager:GetLocationCoords()
+    local markerTable = AIUtils.AIGetSortedMassLocations(aiBrain, maxNum, threatMin, threatMax, threatRings, threatType, position)
+    if markerTable[1] and VDist3( markerTable[1], position ) < distance then
+        local dist = VDist3( markerTable[1], position )
+        return true
+    end
+    return false
+end
+
+function TAKite(vec1, vec2, distance)
+    -- Courtesy of chp2001
+    -- note the distance param is {distance, distance - weapon range}
+    -- vec1 is friendly unit, vec2 is enemy unit
+    distanceFrac = distance[2] / distance[1]
+    x = vec1[1] * (1 - distanceFrac) + vec2[1] * distanceFrac
+    y = vec1[2] * (1 - distanceFrac) + vec2[2] * distanceFrac
+    z = vec1[3] * (1 - distanceFrac) + vec2[3] * distanceFrac
+    return {x,y,z}
+end
+
+--[[function MassFabManagerThreadSCTAI(aiBrain)
+    while aiBrain.Result ~= "defeat" do
+        while math.abs(aiBrain:GetEconomyIncome('ENERGY')-aiBrain:GetEconomyUsage('ENERGY'))<150 and not aiBrain:GetEconomyStoredRatio('ENERGY')<0.9 do
+            WaitSeconds(2)
+        end
+        local fabs = aiBrain:GetListOfUnits(categories.MASSFABRICATION * categories.STRUCTURE,false,false)
+        if table.getn(fabs)<1 then 
+            WaitSeconds(20) 
+            continue 
+        end
+        for k, v in fabs do
+            if v:GetScriptBit('RULEUTC_ProductionToggle') then
+                if aiBrain:GetEconomyIncome('ENERGY')-aiBrain:GetEconomyUsage('ENERGY')<0 or aiBrain:GetEconomyStoredRatio('ENERGY')<0.9 then
+                    v:SetScriptBit('RULEUTC_ProductionToggle', false)
+                    WaitTicks(1)
+                end
+            else
+                if aiBrain:GetEconomyIncome('ENERGY')-aiBrain:GetEconomyUsage('ENERGY')>150 then
+                    v:SetScriptBit('RULEUTC_ProductionToggle', true)
+                    WaitTicks(1)
+                end
+            end
+        end
+        WaitSeconds(2)
+    end
+end
+
+function MexManagerThreadSCTAI(aiBrain)
+    while aiBrain.Result ~= "defeat" do
+        local mex = aiBrain:GetListOfUnits(categories.MASSEXTRACTION * categories.STRUCTURE, false,false)
+        if table.getn(mex) < 1 then 
+            WaitSeconds(20) 
+            continue 
+        end
+        for k, v in mex do
+            if not v:GetFractionComplete == 1 then continue end
+            if not v:IsUnitState('Upgrading') then
+                if aiBrain:GetEconomyIncome('ENERGY').8 - aiBrain:GetEconomyUsage('ENERGY') < 0 or aiBrain:GetEconomyStoredRatio('ENERGY') < 0.9 then --do we want to upgrade
+                    IssueUpgrade({v}, self:GetBlueprint().General.UpgradesTo)
+                    WaitSeconds(2)
+                end
+            else
+                if not v:IsPaused() then
+                    if aiBrain:GetEconomyIncome('ENERGY') - aiBrain:GetEconomyUsage('ENERGY') > 150 then--if power stalling or mass stalling bad then pause
+                        v:SetPaused(true)
+                        WaitTicks(1)
+                    end
+                else
+                    if aiBrain:GetEconomyIncome('ENERGY') - aiBrain:GetEconomyUsage('ENERGY') > 150 then--if not power stalling or mass stalling bad then unpause
+                        v:SetPaused(false)
+                        WaitTicks(1)
+                    end
+                end
+            end
+        end
+        WaitSeconds(4)--do the loop every 4 seconds
+    end
+end]]

@@ -8,15 +8,9 @@ CORVRAD = Class(TACounter) {
 	OnCreate = function(self)
 		TACounter.OnCreate(self)
 		self.Spinners = {
-			dish = CreateRotator(self, 'dish', 'y', nil, 0, 100, 0),
+			fork = CreateRotator(self, 'dish', 'y', nil, 100, 50, 0),
 		}
-		self.Trash:Add(self.Spinners.dish)
-	end,
-
-	OnStopBeingBuilt = function(self,builder,layer)
-		TACounter.OnStopBeingBuilt(self,builder,layer)
-		--spin dish around y-axis speed <100>;
-		self.Spinners.dish:SetTargetSpeed(100)
+		self.Trash:Add(self.Spinners.fork)
 	end,
 }
 TypeClass = CORVRAD

@@ -20,7 +20,7 @@ UnitBlueprint {
     },
     Economy = {
         BuildCostEnergy = 3600,
-        BuildRate = 125,
+        BuildRate = 100,
         BuildableCategory = {
             'NAVAL MOBILE TECH1 ARM',
             'armdsy',

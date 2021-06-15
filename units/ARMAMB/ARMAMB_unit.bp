@@ -65,6 +65,11 @@ UnitBlueprint {
         BuildCostMass = 2200,
         BuildTime = 20172,
     },
+    Footprint = {
+        MaxSlope = 0.625,
+            SizeX = 2,
+            SizeZ = 2,
+        },
     General = {
         Category = 'Defense',
         Classification = 'RULEUC_Weapon',
@@ -118,7 +123,7 @@ TechLevel = 'RULEUTL_Secret',
             DisplayName = 'ARMAMB_GUN',
             FireTargetLayerCapsTable = {
                 Land = 'Land|Water|Seabed',
-                Water = 'Land|Water|Seabed',
+                Seabed = 'Land|Water|Seabed',
             },
             RangeCategory = 'UWRC_DirectFire',
             WeaponCategory = 'DirectFire',

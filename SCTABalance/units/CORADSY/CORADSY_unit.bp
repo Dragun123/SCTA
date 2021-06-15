@@ -80,6 +80,7 @@ UnitBlueprint {
         BuildCostMass = 14000, 
         BuildTime = 100000,
     BuildRate = 360,
+    NavalFactory = true,
     DifferentialUpgradeCostCalculation = true,
     BuildableCategory = {
         'NAVAL MOBILE TECH1 CORE',
@@ -101,6 +102,7 @@ UnitBlueprint {
         BuildBones = {
             BuildEffectBones = {'muzzlea', 'muzzleb'},
         },     
+                ---RolloffDelay = 1,
         Category = 'Factory',
         Classification = 'RULEUC_Factory',
         CommandCaps = {

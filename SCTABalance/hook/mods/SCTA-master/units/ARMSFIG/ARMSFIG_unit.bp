@@ -16,8 +16,9 @@ UnitBlueprint {
         MaxHealth = 3000,
     },
     Economy = {
-        BuildCostEnergy = 36000,
+        BuildCostEnergy = 80000,
         BuildCostMass = 600,
+        BuildTime = 10000,
     },
     Physics = {
 	FuelRechargeRate = 666666,

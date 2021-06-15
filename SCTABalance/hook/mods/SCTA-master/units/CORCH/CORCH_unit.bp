@@ -26,15 +26,17 @@ UnitBlueprint {
             UniformScale = 0.1,
         },
     Physics = {
-        TurnRate = 100,
+        TurnRate = 120,
         MaxSteerForce = 100,
 	TurnFacingRate = 100,
     },
     Economy = {
-        BuildCostEnergy = 3200,
+        BuildCostEnergy = 4800,
+        BuildCostMass = 700,
         BuildTime = 9000,
         BuildRate = 300,
         ProductionPerSecondEnergy = 4,
+        ProductionPerSecondMass = 1,
         MaxBuildDistance = 8,
         BuildableCategory = {
             'BUILTBYTIER3ENGINEER CORE',

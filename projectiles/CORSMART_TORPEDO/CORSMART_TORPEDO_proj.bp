@@ -34,7 +34,7 @@ ProjectileBlueprint {
     },
     Display = {
         MeshBlueprint = '/mods/SCTA-master/meshes/projectiles/torpedo_mesh.bp',
-        UniformScale = 0.16,
+        UniformScale = 0.32,
         StrategicIconSize = 1,
     },
     Defense = {

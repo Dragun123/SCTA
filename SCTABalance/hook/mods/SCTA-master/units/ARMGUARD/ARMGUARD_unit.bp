@@ -4,8 +4,8 @@ UnitBlueprint {
         UniformScale = 0.24,
     },
     Economy = {
-        BuildCostEnergy = 45000,
-        BuildCostMass = 3000,
+        BuildCostEnergy = 50000,
+        BuildCostMass = 4000,
         BuildTime = 40000,
     },
     Intel = {
@@ -15,6 +15,7 @@ UnitBlueprint {
     SelectionSizeZ = 2,
     Weapon = {
     [1] = {
+        MaxRadius = 110,
         Damage = 250,
         EnergyDrainPerSecond = 250,
         EnergyRequired = 500,

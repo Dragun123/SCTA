@@ -27,6 +27,7 @@ UnitBlueprint {
         'OVERLAYDIRECTFIRE',
         'ARM',
         'CORE',
+        'DRAGBUILD',
         'BOMB',
         'STRUCTURE',
     },
@@ -69,12 +70,13 @@ UnitBlueprint {
         CommandCaps = {
         	RULEUCC_RetaliateToggle = true,
         },
-	ToggleCaps = {
+	    ToggleCaps = {
 		RULEUTC_CloakToggle = true,
-	},
+	    },
         FactionName = 'ARM',
         Icon = 'land',
-TechLevel = 'RULEUTL_Advanced',
+        TechLevel = 'RULEUTL_Advanced',
+        SelectionPriority = 5,
         UnitName = 'Precision Mine',
     },
     Intel = {

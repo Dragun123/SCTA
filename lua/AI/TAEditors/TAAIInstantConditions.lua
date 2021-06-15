@@ -12,7 +12,7 @@ function TAGetEngineerFaction(engineer)
 end
 
 ------AIUTILITIES FUNCTIONS (RNG, NUTCTACKER, and RECLAIM MY OWN)
-function NormalizeVector( v )
+function TANormalizeVector( v )
 
 	if v.x then
 		v = {v.x, v.y, v.z}
@@ -28,15 +28,15 @@ function NormalizeVector( v )
     end
 end
 
-function GetDirectionVector( v1, v2 )
-    return NormalizeVector( Vector(v1[1] - v2[1], v1[2] - v2[2], v1[3] - v2[3]) )
+function TAGetDirectionVector( v1, v2 )
+    return TANormalizeVector( Vector(v1[1] - v2[1], v1[2] - v2[2], v1[3] - v2[3]) )
 end
 -----locational things
 
-function GetDirectionInDegrees( v1, v2 )
+function TAGetDirectionInDegrees( v1, v2 )
     local SCTAACOS = math.acos
     local PI = math.pi
-    local vec = GetDirectionVector( v1, v2)
+    local vec = TAGetDirectionVector( v1, v2)
     
     if vec[1] >= 0 then
         return SCTAACOS(vec[3]) * (360/(PI*2))
@@ -45,7 +45,7 @@ function GetDirectionInDegrees( v1, v2 )
     return 360 - (SCTAACOS(vec[3]) * (360/(PI*2)))
 end
 
-function GetMOARadii(bool)
+function TAGetMOARadii(bool)
     -- Military area is slightly less than half the map size (10x10map) or maximal 200.
     local BaseMilitaryArea = math.max( ScenarioInfo.size[1]-50, ScenarioInfo.size[2]-50 ) / 2.2
     BaseMilitaryArea = math.max( 180, BaseMilitaryArea )
@@ -78,7 +78,7 @@ function SCTAEngineerTryReclaimCaptureArea(aiBrain, eng, pos)
     -- Check if enemy units are at location
     local checkUnits = aiBrain:GetUnitsAroundPoint( (categories.STRUCTURE + categories.MOBILE) - categories.AIR, pos, 10, 'Enemy')
     -- reclaim units near our building place.
-    if checkUnits and table.getn(checkUnits) > 0 then
+    if checkUnits and not table.empty(checkUnits) then
         for num, unit in checkUnits do
             if unit.Dead or unit:BeenDestroyed() then
                 continue
@@ -100,7 +100,7 @@ function SCTAEngineerTryReclaimCaptureArea(aiBrain, eng, pos)
     end
     -- reclaim rocks etc or we can't build mexes or hydros
     local Reclaimables = GetReclaimablesInRect(Rect(pos[1], pos[3], pos[1], pos[3]))
-    if Reclaimables and table.getn( Reclaimables ) > 0 then
+    if Reclaimables and not table.empty( Reclaimables ) then
         for k,v in Reclaimables do
             if v.MaxMassReclaim > 0 or v.MaxEnergyReclaim > 0 then
                 IssueReclaim({eng}, v)
@@ -131,8 +131,8 @@ function TAAIEcoConditionEfficiency(aiBrain)
     if aiBrain.EconomyMonitorThread then
         local econTime = aiBrain:GetEconomyOverTime()
 
-        econEff.EnergyEfficiencyOverTime = math.min(econTime.EnergyIncome / econTime.EnergyRequested, 4)
-        econEff.MassEfficiencyOverTime = math.min(econTime.MassIncome / econTime.MassRequested, 4)
+        econEff.EnergyEfficiencyOverTime = math.min(econTime.EnergyIncome / econTime.EnergyRequested, 30)
+        econEff.MassEfficiencyOverTime = math.min(econTime.MassIncome / econTime.MassRequested, 10)
     end
 
     return econEff
@@ -142,54 +142,77 @@ function TAEnergyEfficiency(aiBrain)
     local econ = {}
     econ.EnergyIncome = aiBrain:GetEconomyIncome('ENERGY')
     econ.EnergyRequested = aiBrain:GetEconomyRequested('ENERGY')
-
+    econ.MassIncome = aiBrain:GetEconomyIncome('MASS')
+    econ.MassRequested = aiBrain:GetEconomyRequested('MASS')
     if aiBrain.EconomyMonitorThread then
         local econTime = aiBrain:GetEconomyOverTime()
-        econ.EnergyEfficiencyOverTime = math.min(econTime.EnergyIncome / econTime.EnergyRequested, 4)
+        econ.EnergyEfficiencyOverTime = math.min(econTime.EnergyIncome / econTime.EnergyRequested, 40)
+        econ.MassEfficiencyOverTime = math.min(econTime.MassIncome / econTime.MassRequested, 10)
     end
 
     return econ
 end
 
-function EcoManagementTA(aiBrain, mStorageRatio, eStorageRatio, EnergyEfficiency, MassEfficiency)
+function EcoManagementTA(aiBrain, MassEfficiency, EnergyEfficiency)
     local econEff = TAAIEcoConditionEfficiency(aiBrain)
-    if (econEff.MassEfficiencyOverTime >= MassEfficiency and econEff.EnergyEfficiencyOverTime >= EnergyEfficiency) then
-        return true
-    elseif (aiBrain:GetEconomyStoredRatio('Mass').MassStorageRatio >= mStorageRatio and aiBrain:GetEconomyStoredRatio('ENERGY').EnergyStorageRatio >= eStorageRatio) then
-        return true
+    if ((aiBrain:GetEconomyStored('MASS') >= 125) and (aiBrain:GetEconomyStored('ENERGY') >= 350)) then
+        if (econEff.MassEfficiencyOverTime >= MassEfficiency and econEff.EnergyEfficiencyOverTime >= EnergyEfficiency) or
+        (aiBrain:GetEconomyStoredRatio('Mass').MassStorageRatio >= 0.5 and aiBrain:GetEconomyStoredRatio('ENERGY').EnergyStorageRatio >= 0.5) then
+            return true
+        else
+            return false
+        end
     else
     return false
     end
 end
 
 function LessMassStorageMaxTA(aiBrain, mStorageRatio)
-    if (aiBrain:GetEconomyStoredRatio('MASS').MassStorageRatio < mStorageRatio) then
+    if (aiBrain:GetEconomyStoredRatio('MASS').MassStorageRatio <= mStorageRatio) then
         return true
+    else
+        return false
     end
-    return false
 end
 
 function GreaterEnergyStorageMaxTA(aiBrain, eStorageRatio)
     if (aiBrain:GetEconomyStoredRatio('ENERGY').EnergyStorageRatio >= eStorageRatio) then
         return true
-    end
+    else
     return false
+    end
+end
+
+
+function GreaterTAStorageRatio(aiBrain, mStorageRatio, eStorageRatio)
+    local econ = TAEnergyEfficiency(aiBrain)
+    if (econ.EnergyEfficiencyOverTime >= 0.5 and econ.MassEfficiencyOverTime >= 0.3) then
+        if (aiBrain:GetEconomyStoredRatio('ENERGY').EnergyStorageRatio >= eStorageRatio and aiBrain:GetEconomyStoredRatio('MASS').MassStorageRatio >= mStorageRatio) then
+            return true
+        else
+            return false
+        end
+    else
+        return false
+    end
 end
 
 function LessThanEconEnergyTAEfficiency(aiBrain, EnergyEfficiency)
     local econ = TAEnergyEfficiency(aiBrain)
-    if (econ.EnergyEfficiencyOverTime <= EnergyEfficiency)  then
+    if (econ.EnergyEfficiencyOverTime <= EnergyEfficiency) and (econ.MassEfficiencyOverTime >= 0.5) then
         return true
-    end
+    else
     return false
+    end
 end
 
 function GreaterThanEconEnergyTAEfficiency(aiBrain, EnergyEfficiency)
     local econ = TAEnergyEfficiency(aiBrain)
     if (econ.EnergyEfficiencyOverTime >= EnergyEfficiency) then
         return true
-    end
+    else
     return false
+    end
 end
 
 function TARandomLocation(x,z, value)

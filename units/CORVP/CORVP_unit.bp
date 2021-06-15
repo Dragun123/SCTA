@@ -77,6 +77,7 @@ UnitBlueprint {
         BuildCostEnergy = 1100,
         BuildCostMass = 600, 
         BuildTime = 6700,
+        Vehicle = true,
 	BuildRate = 100,
         BuildableCategory = {
             'TANK MOBILE TECH1 CORE',
@@ -95,6 +96,7 @@ UnitBlueprint {
         BuildBones = {
             BuildEffectBones = {'muzzle1', 'muzzle2'},
         },     
+                ---RolloffDelay = 1,
         Category = 'Factory',
         Classification = 'RULEUC_Factory',
         CommandCaps = {

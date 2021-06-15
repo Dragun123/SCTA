@@ -187,9 +187,6 @@ ARMANNI = Class(TAStructure) {
 				--SLEEP <519>;
 				WaitSeconds(0.5)
 
-				--SLEEP <169>;
-				WaitSeconds(0.1)
-
 				--SPIN radar around x-axis  SPEED <100.02>;
 				self.unit.Spinners.radar:ClearGoal()
 				self.unit.Spinners.radar:SetSpeed(100)

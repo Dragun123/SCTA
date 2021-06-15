@@ -202,8 +202,8 @@ Disintegrator = Class(TALightCannonProjectile) {
 	OnCreate = function(self)
 		TALightCannonProjectile.OnCreate(self)
 		self.launcher = self:GetLauncher()
-		self.DGunDamage = self.launcher:GetWeaponByLabel('OverCharge'):GetBlueprint().DGun
 		self.launcher.EconDrain = CreateEconomyEvent(self.launcher, 500, 0, 0)
+		self.DGunDamage = self.launcher:GetWeaponByLabel('OverCharge'):GetBlueprint().DGun
 		self.launcher:ForkThread(function()
                 WaitFor(self.launcher.EconDrain)
                 RemoveEconomyEvent(self.launcher, self.launcher.EconDrain)
@@ -228,8 +228,8 @@ Disintegrator = Class(TALightCannonProjectile) {
 	end,
 
 	OnImpact = function(self, targetType, targetEntity)
+		self.DamageData = 0
 		TALightCannonProjectile.OnImpact(self, targetType, targetEntity)
-        self.DamageData.DamageAmount = 0
 	end,
 }
 

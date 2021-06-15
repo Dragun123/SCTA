@@ -123,6 +123,7 @@ UnitBlueprint {
             DisplayName = 'ARM_TOTAL_ANNIHILATOR',
             FireTargetLayerCapsTable = {
                 Land = 'Land|Water|Seabed',
+                Seabed = 'Land|Water|Seabed',
             },
             RangeCategory = 'UWRC_DirectFire',
             WeaponCategory = 'DirectFire',

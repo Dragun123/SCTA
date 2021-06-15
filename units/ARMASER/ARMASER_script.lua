@@ -11,7 +11,7 @@ ARMASER = Class(TACounter) {
 		self.Spinners = {
 			ltong = CreateRotator(self, 'LeftFork', 'y', nil, 0, 0, 0),
 			rtong = CreateRotator(self, 'RightFork', 'y', nil, 0, 0, 0),
-			tongpivot = CreateRotator(self, 'ForkPivot', 'z', nil, 0, 0, 0),
+			fork = CreateRotator(self, 'ForkPivot', 'z', nil, 0, 0, 0),
 		}
 		self.Sliders = {
 			ltong = CreateSlider(self, 'LeftFork'),
@@ -30,13 +30,13 @@ ARMASER = Class(TACounter) {
 
 	OnIntelDisabled = function(self)
 		TACounter.OnIntelDisabled(self)
+		self.Spinners.fork:SetGoal(0)
 		self.Sliders.ltong:SetGoal(0,0,0)
 		self.Sliders.ltong:SetSpeed(4)
 		--MOVE rtong to y-axis <0> SPEED <4.00>;
 		self.Sliders.rtong:SetGoal(0,0,0)
 		self.Sliders.rtong:SetSpeed(4)
-		self.Spinners.tongpivot:SetSpeed(100)
-		self.Spinners.tongpivot:SetGoal(0) 
+		 
 		--TURN ltong to y-axis <0> SPEED <174.54>;
 		self.Spinners.ltong:SetGoal(0)
 		self.Spinners.ltong:SetSpeed(171)
@@ -69,9 +69,8 @@ ARMASER = Class(TACounter) {
 		self.Spinners.rtong:SetGoal(90)
 		self.Spinners.rtong:SetSpeed(155)
 
-		self.Spinners.tongpivot:SetSpeed(100)	
-		self.Spinners.tongpivot:ClearGoal()
 		TACounter.OnIntelEnabled(self)
+		self.Spinners.fork:ClearGoal()
 	end,
 }
 TypeClass = ARMASER

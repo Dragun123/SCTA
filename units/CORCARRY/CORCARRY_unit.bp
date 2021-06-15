@@ -92,6 +92,7 @@ UnitBlueprint {
         BuildCostMass = 1379,
         BuildTime = 25271,
         BuildRate = 200,
+        AirFactory = true,
         ProductionPerSecondEnergy = 200,
         MaintenanceConsumptionPerSecondEnergy = 35,
         BuildableCategory = {

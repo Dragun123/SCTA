@@ -23,7 +23,6 @@ ARMSEAP = Class(TASeaair) {
 		for k, v in self.Spinners do
 			self.Trash:Add(v)
 		end
-		self.moving = nil
 	end,
 
 
@@ -35,12 +34,9 @@ ARMSEAP = Class(TASeaair) {
 		--MOVE wing2 to x-axis <-5.65> SPEED <5.00>;
 		self.Spinners.wing2:SetGoal(-90)
 		self.Spinners.wing2:SetSpeed(50)
-
-		self.moving = true
 	end,
 
 	CloseWings = function(self)
-		self.moving = nil
 
 		--MOVE winga to x-axis <5.59> SPEED <5.00>;
 		self.Spinners.wing1:SetGoal(0)

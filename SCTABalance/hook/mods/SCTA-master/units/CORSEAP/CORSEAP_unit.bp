@@ -9,12 +9,12 @@ UnitBlueprint {
         MinAirspeed = 10,
     },
     Defense = {
-        Health = 2000,
-        MaxHealth = 2000,
+        Health = 2500,
+        MaxHealth = 2500,
     },
     Economy = {
-        BuildCostEnergy = 20000,
-        BuildCostMass = 1200,
+        BuildCostEnergy = 160000,
+        BuildCostMass = 3300,
     },
     Weapon = {
         [1] = {

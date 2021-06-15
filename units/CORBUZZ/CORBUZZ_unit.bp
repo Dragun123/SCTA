@@ -125,6 +125,7 @@ TechLevel = 'RULEUTL_Secret',
             DisplayName = 'CORBUZZ_WEAPON',
             FireTargetLayerCapsTable = {
                 Land = 'Land|Water|Seabed',
+                Seabed = 'Land|Water|Seabed',
             },
 	    RangeCategory = 'UWRC_DirectFire',
      WeaponCategory = 'Artillery',

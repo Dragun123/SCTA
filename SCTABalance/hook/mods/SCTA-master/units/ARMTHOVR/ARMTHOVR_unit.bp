@@ -1,0 +1,13 @@
+UnitBlueprint {
+    Merge = true,
+    Defense = {
+        Health = 6000,
+        MaxHealth = 6000,
+    },
+    Economy = {
+        BuildCostEnergy = 30000,
+    },
+    LifeBarHeight = 0.5,
+    LifeBarOffset = 0,
+    LifeBarSize = 6,
+}

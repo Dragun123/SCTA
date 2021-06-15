@@ -37,7 +37,7 @@ UnitBlueprint {
 	    'INDIRECTFIRE',
 	    'ANTIAIR',
         'SILO',
-	    'CRUISER',
+	    'BATTLESHIP',
         'OVERLAYINDIRECTFIRE',
 	    'OVERLAYANTIAIR',
 	    'OVERLAYRADAR',

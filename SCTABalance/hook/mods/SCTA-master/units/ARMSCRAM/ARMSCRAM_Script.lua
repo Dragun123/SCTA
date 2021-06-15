@@ -4,7 +4,7 @@ ARMSCRAM = Class(oldARMSCRAM) {
 		oldARMSCRAM.OnStopBeingBuilt(self,builder,layer)
 		self:SetScriptBit('RULEUTC_CloakToggle', false)
 		self:RequestRefreshUI()
-        IssueDive({self})
+        --IssueDive({self})
         self.DelayedCloakThread = self:ForkThread(self.CloakDelayed)
     end,
 

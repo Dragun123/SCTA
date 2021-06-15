@@ -3,13 +3,13 @@
 #
 #Script created by Axle
 
-local TAWalking = import('/mods/SCTA-master/lua/TAMotion.lua').TAWalking
+local TASeaWalking = import('/mods/SCTA-master/lua/TAMotion.lua').TASeaWalking
 local TAweapon = import('/mods/SCTA-master/lua/TAweapon.lua').TAweapon
 
 
-ARMAMPH = Class(TAWalking) {
+ARMAMPH = Class(TASeaWalking) {
 	OnStopBeingBuilt = function(self,builder,layer)
-        TAWalking.OnStopBeingBuilt(self,builder,layer)
+        TASeaWalking.OnStopBeingBuilt(self,builder,layer)
         # If created with F2 on land, then play the transform anim.
         self.Walking = true
         self.SwitchAnims = true
@@ -20,7 +20,7 @@ ARMAMPH = Class(TAWalking) {
     end,
 
 	OnMotionHorzEventChange = function(self, new, old)
-        TAWalking.OnMotionHorzEventChange(self, new, old)
+        TASeaWalking.OnMotionHorzEventChange(self, new, old)
         if self:IsDead() then return end
         if( not self.IsWaiting ) then
             if( self.Swim ) then
@@ -39,7 +39,7 @@ ARMAMPH = Class(TAWalking) {
     end,
 
     OnLayerChange = function(self, new, old)
-        TAWalking.OnLayerChange(self, new, old)
+        TASeaWalking.OnLayerChange(self, new, old)
         if( old != 'None' ) then
             if( self.AT1 ) then
                 self.AT1:Destroy()

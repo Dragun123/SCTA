@@ -9,7 +9,7 @@ UnitBlueprint {
     },
 Economy = {
     BuildCostEnergy = 750,
-    BuildCostMass = 130,
+    BuildCostMass = 120,
     BuildTime = 2200,
 },
 SelectionSizeX = 0.8,
@@ -20,7 +20,7 @@ SizeY = 1.7,
 SizeZ = 1.7,
 Physics = {
     MaxBrake = 2.4,
-    MaxSpeed = 3.6,
+    MaxSpeed = 3.4,
     TurnRate = 150,
     MaxSteerForce = 10,
     },

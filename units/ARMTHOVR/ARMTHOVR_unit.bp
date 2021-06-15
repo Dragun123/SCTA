@@ -1,0 +1,165 @@
+#COR Snapper - Hovertank
+#CORSNAP
+#
+#Blueprint created by Raevn
+
+UnitBlueprint {
+    Audio = {
+        UISelection = Sound {
+            Bank = 'TA_Sound',
+            Cue = 'TARMSEL',
+            LodCutoff = 'UnitMove_LodCutoff',
+        },
+        StartMove = Sound {
+            Bank = 'TA_Sound',
+            Cue = 'TARMMOVE',
+            LodCutoff = 'UnitMove_LodCutoff',
+        },
+        StopMove = Sound {
+            Bank = 'TA_Sound',
+            Cue = 'TARMST0P',
+            LodCutoff = 'UnitMove_LodCutoff',
+        },
+	Destroyed = Sound {
+            Bank = 'TA_Sound',
+            Cue = 'XPLOLRG3',
+            LodCutoff = 'UnitMove_LodCutoff',
+	},
+    },
+    BuildIconSortPriority = 30,
+    Categories = {
+        'SELECTABLE',
+        'HOVER',
+        'TECH3',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'MOBILE',
+        'TRANSPORTATION',
+        'TRANSPORTFOCUS',
+        'CANTRANSPORTCOMMANDER',
+        'CANNOTUSEAIRSTAGING',
+        'LAND',
+        'ARM',
+    },
+    CollisionOffsetY = 0.8,
+    Defense = {
+        ArmorType = 'Normal',
+        Health = 1080,
+        MaxHealth = 1080,
+        AirThreatLevel = 0,
+        EconomyThreatLevel = 0,
+        SubThreatLevel = 0,
+        SurfaceThreatLevel = 8,
+    },
+    Description = 'Hover Transport',
+    Display = {
+        Abilities = {
+            '<LOC ability_hover>Hover',
+            '<LOC ability_transport>Transport',
+        },
+        Mesh = {
+            IconFadeInZoom = 130,
+            LODs = {
+                {
+                    LODCutoff = 230,
+                    ShaderName = 'Unit', 
+                },
+            },
+        },
+	MovementEffects = {
+        TAMovement = {
+		Emitter = '/mods/SCTA-master/effects/emitters/hover_wake_emit.bp',
+		Scale = 0.5,
+		Bones = {'wake01', 'wake02', 'wake03', 'wake04'},
+        },
+	},
+        UniformScale = 0.16,
+    },
+    Economy = {
+        BuildCostEnergy = 7500,
+        BuildCostMass = 650,
+        BuildTime = 19500,
+    },
+    General = {
+        Category = 'Transport',
+        Classification = 'RULEUC_MilitaryVehicle',
+        CommandCaps = {
+            RULEUCC_Attack = true,
+            RULEUCC_CallTransport = true,
+            RULEUCC_Capture = false,
+            --RULEUCC_Ferry = true,
+            RULEUCC_Guard = true,
+            RULEUCC_Move = true,
+            RULEUCC_Nuke = false,
+            RULEUCC_Patrol = true,
+            RULEUCC_Reclaim = false,
+            RULEUCC_Repair = false,
+            RULEUCC_RetaliateToggle = true,
+            RULEUCC_Stop = true,
+            RULEUCC_Transport = true,
+        },
+        SelectionPriority = 4,
+        FactionName = 'ARM',
+        Icon = 'land',
+        TechLevel = 'RULEUTL_Advanced',
+        UnitName = 'Bear',
+    },
+    Intel = {
+        VisionRadius = 18,
+        WaterVisionRadius = 6, 
+    },
+    LifeBarHeight = 0.25,
+    LifeBarOffset = 0.5,
+    LifeBarSize = 2,
+    Physics = {
+        Elevation = 0.25,    
+	BackUpDistance = 0,
+	MaxSpeedReverse = 0,
+        MaxAcceleration = 2,
+        MaxBrake = 2,
+        MaxSpeed = 3,
+        MotionType = 'RULEUMT_Hover',
+        TurnRate = 82,
+        MaxSteerForce = 100,
+	RotateOnSpot = true,
+	TurnFacingRate = 82,
+	WobbleFactor = 0.02,
+	WobbleSpeed = 0.05,
+    },
+    SelectionSizeX = 6,
+    SelectionSizeZ = 6,
+    SelectionThickness = 0.25,
+    SizeX = 9,
+    SizeZ = 9,
+    SizeZ = 9,
+    StrategicIconName = 'icon_structure3_transport',
+    StrategicIconSortPriority = 0,
+    Transport = {
+        Class2AttachSize = 2,
+        Class3AttachSize = 4,
+        TransportClass = 10,
+    },
+    Weapon = {
+        { #BIG_UNITEX
+            Damage = 50,
+            DamageFriendly = true,
+            DamageRadius = 3,
+            DamageType = 'Normal',
+            DummyWeapon = true,
+            Label = 'DeathWeapon',
+        }, 
+
+    },
+        Wreckage = {
+        Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        --Blueprint = '/mods/SCTA-master/units/CORSNAP/CORSNAP_dead_prop.bp',
+        WreckageLayers = {
+            Land = true,
+            Water = true,
+        },
+    },
+}

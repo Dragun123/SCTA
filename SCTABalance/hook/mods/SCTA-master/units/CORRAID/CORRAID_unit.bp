@@ -7,7 +7,7 @@ UnitBlueprint {
     Merge = true,
     Economy = {
         BuildCostEnergy = 810,
-        BuildCostMass = 130,
+        BuildCostMass = 120,
     },
     LifeBarSize = 1.4,
     SelectionSizeX = 1,

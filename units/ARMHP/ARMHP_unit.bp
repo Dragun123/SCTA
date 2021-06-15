@@ -44,7 +44,6 @@ UnitBlueprint {
 	    'CONSTRUCTION',
 	    'ARM',
 	    'SORTCONSTRUCTION',
-        'HOVER',
     },
     Defense = {
         ArmorType = 'Structure',
@@ -76,6 +75,7 @@ UnitBlueprint {
         UniformScale = 0.1,
     },
     Economy = {
+        Hover = true,
         BuildCostEnergy = 5277,
         BuildCostMass = 2007, 
         BuildTime = 18520,
@@ -97,6 +97,7 @@ UnitBlueprint {
         BuildBones = {
             BuildEffectBones = {'beam1','beam2', 'beam3', 'beam4'},
         },      
+                ---RolloffDelay = 1,
         Category = 'Factory',
         Classification = 'RULEUC_Factory',
         CommandCaps = {

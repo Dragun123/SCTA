@@ -38,6 +38,7 @@ UnitBlueprint {
         EnergyRequired = 25,
         Damage = 90, 
         DamageRadius = 2,
+        RateOfFire = 1,
         EnergyChargeForFirstShot = true,
     },
     [2] = {

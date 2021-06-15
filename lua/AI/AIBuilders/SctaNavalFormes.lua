@@ -16,9 +16,10 @@ BuilderGroup {
         InstanceCount = 4,
         BuilderType = 'SeaForm',
         BuilderConditions = {
-            { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 0, categories.NAVAL * categories.SCOUT } },
+            { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 0, categories.LIGHTBOAT } },
          },
          BuilderData = {
+            LocationType = 'LocationType',
             UseFormation = 'AttackFormation',
             ThreatWeights = {
                 IgnoreStrongerTargetsRatio = 100.0,  #DUNCAN - uncommented, was 100
@@ -36,13 +37,15 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTA Hunt Ships',
         PlatoonTemplate = 'SCTAPatrolBoatHunt',
-        Priority = 100,
+        PriorityFunction = TAPrior.NavalProduction,
+        Priority = 125,
         InstanceCount = 25,
         BuilderType = 'SeaForm',
         BuilderConditions = {
-            { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 1, categories.NAVAL * categories.SCOUT } },
+            { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 1, categories.LIGHTBOAT } },
          },
          BuilderData = {
+            LocationType = 'LocationType',
             UseFormation = 'AttackFormation',
             ThreatWeights = {
                 IgnoreStrongerTargetsRatio = 100.0,  #DUNCAN - uncommented, was 100
@@ -60,13 +63,15 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTA Sub Hunt Ships',
         PlatoonTemplate = 'SCTASubHunter',
-        Priority = 100,
+        PriorityFunction = TAPrior.NavalProduction,
+        Priority = 120,
         InstanceCount = 5,
         BuilderType = 'SeaForm',
         BuilderConditions = {
-            { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 0, categories.NAVAL * categories.SUBMERSIBLE - categories.ENGINEER} },
+            { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 1, categories.NAVAL * categories.SUBMERSIBLE * categories.MOBILE - categories.ENGINEER} },
          },
          BuilderData = {
+            LocationType = 'LocationType',
             UseFormation = 'AttackFormation',
             ThreatWeights = {
                 IgnoreStrongerTargetsRatio = 100.0,  #DUNCAN - uncommented, was 100
@@ -84,10 +89,12 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTA T1 Naval Assault',
         PlatoonTemplate = 'SCTANavalAssault',
+        PriorityFunction = TAPrior.NavalProduction,
         Priority = 110,
-        InstanceCount = 10,
+        InstanceCount = 20,
         BuilderType = 'SeaForm',
         BuilderData = {
+            LocationType = 'LocationType',
             UseFormation = 'AttackFormation',
             ThreatWeights = {
                 IgnoreStrongerTargetsRatio = 100.0,  #DUNCAN - uncommented, was 100
@@ -102,73 +109,66 @@ BuilderGroup {
             },
         },
         BuilderConditions = {
-            { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 3, categories.NAVAL * categories.MOBILE - categories.ENGINEER } },
+            { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 2, categories.NAVAL * categories.MOBILE * categories.MOBILE - categories.ENGINEER } },
         },
     },
     Builder {
-        BuilderName = 'SCTA HighTech Naval',
-        PlatoonTemplate = 'SCTANavalAssaultT2',
-        PriorityFunction = TAPrior.UnitProduction,
-        Priority = 120,
-        InstanceCount = 10,
+        BuilderName = 'SCTAAI Bomber Attack Torpedo',
+        PlatoonTemplate = 'SCTATorpedosBombers',
+        PriorityFunction = TAPrior.NavalProduction,
+        Priority = 200,
+        InstanceCount = 50,
         BuilderType = 'SeaForm',
         BuilderData = {
-            UseFormation = 'AttackFormation',
-            ThreatWeights = {
-                IgnoreStrongerTargetsRatio = 100.0,  #DUNCAN - uncommented, was 100
-                PrimaryThreatTargetType = 'Economy',
-                SecondaryThreatTargetType = 'Naval',
-                SecondaryThreatWeight = 0.1,
-                WeakAttackThreatWeight = 1,
-                VeryNearThreatWeight = 10,
-                NearThreatWeight = 5,
-                MidThreatWeight = 1,
-                FarThreatWeight = 1,
+        },        
+        BuilderConditions = { 
+            --{ TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, SKY * categories.BOMBER} },
             },
         },
-        BuilderConditions = {
-            { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 0, categories.NAVAL * categories.MOBILE * (categories.TECH2 + categories.TECH3) - categories.ENGINEER} },
-        },
-    },
     Builder {
         BuilderName = 'SCTAAI Air Naval Intercept',
-        PlatoonTemplate = 'IntieAISCTA',
-        Priority = 100,
-        FormRadius = 500,
+        PlatoonTemplate = 'IntieAISCTAEnd',
+        PriorityFunction = TAPrior.GantryConstruction,
+        Priority = 110,
+        InstanceCount = 10,
         PlatoonAddBehaviors = { 'SCTAAirUnitRefit' },                              
-        InstanceCount = 200,
-        BuilderType = 'AirForm',     
+        BuilderType = 'SeaForm',
+        BuilderData = {
+            LocationType = 'LocationType',
+            Energy = true,
+        },        
         BuilderConditions = { 
-            { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 4, categories.ANTIAIR * categories.MOBILE * categories.AIR - categories.BOMBER } },
+            { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 1,  (categories.ANTIAIR * categories.MOBILE * categories.AIR) - categories.BOMBER - categories.GROUNDATTACK} },
         },
     },
     Builder {
-        BuilderName = 'SCTA Hover Strike',
+        BuilderName = 'SCTA Hover Naval Strike',
         PlatoonTemplate = 'StrikeForceSCTAHover', -- The platoon template tells the AI what units to include, and how to use them.
         PriorityFunction = TAPrior.ProductionT3,
         Priority = 120,
         InstanceCount = 25,
-        BuilderType = 'LandForm',
+        BuilderType = 'SeaForm',
         BuilderData = {
+            LocationType = 'LocationType',
             Small = true,
             NeverGuardBases = false,
             NeverGuardEngineers = false,
             UseFormation = 'AttackFormation',
         },        
         BuilderConditions = {
-            { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 2, categories.MOBILE * categories.HOVER} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2,  categories.MOBILE * categories.HOVER} },
          },
     },
     Builder {
         BuilderName = 'SCTA Engineer Finish Navy',
         PlatoonTemplate = 'EngineerBuilderSCTANaval',
-        PlatoonAIPlan = 'ManagerEngineerFindUnfinished',
-        Priority = 85,
+        PlatoonAIPlan = 'ManagerEngineerFindUnfinishedSCTA',
+        Priority = 500,
         InstanceCount = 2,
         DelayEqualBuildPlattons = {'Unfinished', 2},
         BuilderConditions = {
             { TASlow, 'CheckBuildPlatoonDelaySCTA', { 'Unfinished' }},
-            { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 0, categories.ENGINEER * categories.NAVAL} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, categories.ENGINEER * categories.NAVAL} },
             { UCBC, 'UnfinishedUnits', { 'LocationType', categories.STRUCTURE}},
         },
         BuilderData = {
@@ -180,7 +180,7 @@ BuilderGroup {
                 Time = 20,
             },
         },
-        BuilderType = 'EngineerForm',
+        BuilderType = 'SeaForm',
     },
     Builder {
         BuilderName = 'SCTA Engineer Reclaim Energy Naval',
@@ -190,8 +190,8 @@ BuilderGroup {
         Priority = 111,
         InstanceCount = 8,
         BuilderConditions = {
-            { UCBC, 'UnitsGreaterAtLocation', { 'LocationType', 0, TIDAL}},
-            { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 0, categories.ENGINEER * categories.NAVAL} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1,  TIDAL}},
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1,  categories.ENGINEER * categories.NAVAL} },
             { TAutils, 'LessMassStorageMaxTA',  { 0.3}},
             },
         BuilderData = {
@@ -199,6 +199,17 @@ BuilderGroup {
             Reclaim = {'cortide, armtide,'},
             ReclaimTime = 30,
         },
-        BuilderType = 'EngineerForm',
+        BuilderType = 'SeaForm',
+    },
+    Builder {
+        BuilderName = 'SCTA Aircraft Carrier',
+        PlatoonTemplate = 'SCTAAirCarrier',
+        PriorityFunction = TAPrior.AirCarrierExist,
+        Priority = 111,
+        InstanceCount = 2,
+        BuilderConditions = {
+            { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 0, categories.NAVALCARRIER} },
+            },
+        BuilderType = 'SeaForm',
     },
 }

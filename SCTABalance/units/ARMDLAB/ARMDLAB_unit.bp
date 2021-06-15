@@ -82,6 +82,7 @@ UnitBlueprint {
         BuildCostMass = 2500, 
         BuildTime = 45000,
         BuildRate = 175,
+        KBot = true,
         DifferentialUpgradeCostCalculation = true,
         BuildableCategory = {
             'armadlab',
@@ -102,6 +103,7 @@ InitialRallyZ = 7,
         BuildBones = {
                 BuildEffectBones = {'Nozzle_01','Nozzle_02'},
             },
+                ---RolloffDelay = 1,
         Category = 'Factory',
         Classification = 'RULEUC_Factory',
         CommandCaps = {

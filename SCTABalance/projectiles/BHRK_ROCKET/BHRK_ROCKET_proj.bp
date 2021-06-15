@@ -1,0 +1,74 @@
+#ARM Merl Rocket
+#ARMTRUCK_ROCKET
+#
+#Projectile created by Raevn
+
+ProjectileBlueprint {
+    Audio = {
+        Impact = Sound {
+            Bank = 'TA_Sound',
+            Cue = 'XPLOSML4',
+            LodCutoff = 'Weapon_LodCutoff',
+        },
+        ImpactUnit = Sound {
+            Bank = 'TA_Sound',
+            Cue = 'XPLOSML4',
+            LodCutoff = 'Weapon_LodCutoff',
+        },
+        ImpactShield = Sound {
+            Bank = 'TA_Sound',
+            Cue = 'XPLOSML4',
+            LodCutoff = 'Weapon_LodCutoff',
+        },
+        ImpactTerrain = Sound {
+            Bank = 'TA_Sound',
+            Cue = 'XPLOSML4',
+            LodCutoff = 'Weapon_LodCutoff',
+        },
+        ImpactWater = Sound {
+            Bank = 'TA_Sound',
+            Cue = 'SPLSMED',
+            LodCutoff = 'Weapon_LodCutoff',
+        },
+    },
+    Categories = {
+        'ARM',
+        'PROJECTILE',
+        'TACTICAL',
+        'MISSILE',
+    },
+    Defense = {
+        ArmorType = 'Normal',
+        Health = 1,
+        MaxHealth = 1,
+    },
+    Display = {
+        MeshBlueprint = '/mods/SCTA-master/meshes/projectiles/rocket_mesh.bp',
+        StrategicIconSize = 1,
+        UniformScale = 0.1,
+    },
+    General = {
+        Category = 'Missile',
+        EntityCategory = {
+            'ARM',
+            'PROJECTILE',
+            'TACTICAL',
+            'MISSILE',   
+        },
+        Faction = 'ARM',
+    },
+    Physics = {
+        Acceleration = 4,
+        DestroyOnWater = true,
+	    InitialSpeed = 5,
+        TargetDistance = 14,
+        LeadTarget = false,
+        Lifetime = 20,
+        MaxSpeed = 13,
+        TrackTime = 2,
+        TrackTarget = true,
+        TurnRate = 60,
+        UseGravity = false,
+        VelocityAlign = true,
+    },
+}

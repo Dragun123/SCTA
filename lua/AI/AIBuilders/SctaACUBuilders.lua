@@ -3,6 +3,7 @@ local EBC = '/lua/editor/EconomyBuildConditions.lua'
 local IBC = '/lua/editor/InstantBuildConditions.lua'
 local SAI = '/lua/ScenarioPlatoonAI.lua'
 local TAutils = '/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua'
+local TASlow = '/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua'
 local MIBC = '/lua/editor/MiscBuildConditions.lua'
 local MABC = '/lua/editor/MarkerBuildConditions.lua'
 local PLANT = (categories.FACTORY * categories.TECH1)
@@ -48,7 +49,7 @@ BuilderGroup {
             { MIBC, 'LessThanGameTime', {360} }, -- Don't make tanks if we have lots of them.
             { MIBC, 'GreaterThanGameTime', {90} },
             { UCBC, 'HaveLessThanUnitsWithCategory', { 1, PLANT * ((categories.CORE * categories.BOT) + (categories.ARM * categories.TANK))} },
-            { TAutils, 'EcoManagementTA', { 0.5, 0.5, 0.5, 0.5, } },
+            { TAutils, 'EcoManagementTA', { 0.75, 0.75, } },
         },
         BuilderType = 'Command',
         BuilderData = {
@@ -71,7 +72,7 @@ BuilderGroup {
             { MIBC, 'LessThanGameTime', {300} }, -- Don't make tanks if we have lots of them.
             { MIBC, 'GreaterThanGameTime', {90} },
             { UCBC, 'HaveLessThanUnitsWithCategory', { 2, PLANT * ((categories.CORE * categories.TANK) + (categories.ARM * categories.BOT))} },
-            { TAutils, 'EcoManagementTA', { 0.5, 0.5, 0.5, 0.5, } },
+            { TAutils, 'EcoManagementTA', { 0.75, 0.75, } },
         },
         BuilderType = 'Command',
         BuilderData = {
@@ -134,7 +135,7 @@ BuilderGroup {
         InstanceCount = 1,
         BuilderConditions = {
             { UCBC, 'HaveLessThanUnitsWithCategory', { 1, categories.FACTORY * categories.AIR } }, -- Stop after 10 facs have been built.
-            { TAutils, 'EcoManagementTA', { 0.5, 0.5, 0.5, 0.5, } },
+            { TAutils, 'EcoManagementTA', { 0.75, 0.75, } },
         },
         BuilderType = 'Command',
         BuilderData = {
@@ -150,14 +151,37 @@ BuilderGroup {
         }
     },
     Builder {
-        BuilderName = 'SCTAAI T1Commander LandFac',
+        BuilderName = 'SCTAAI T1ACU Pgen2',
         PlatoonTemplate = 'CommanderBuilderSCTA',
-        PriorityFunction = TAPrior.FactoryProductionT1,
-        Priority = 91,
+        Priority = 50,
+        PriorityFunction = TAPrior.HighTechEnergyProduction,
         InstanceCount = 1,
         BuilderConditions = {
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.75, 0.75 } },
-            { EBC, 'GreaterThanEconStorageRatio', { 0.2, 0.25}},
+            { TAutils , 'LessThanEconEnergyTAEfficiency', {0.9 }},
+        },
+        BuilderType = 'Command',
+        BuilderData = {
+            NeedGuard = false,
+            DesiresAssist = false,
+            Construction = {
+                BuildClose = true,
+                BuildStructures = {
+                    'T1EnergyProduction2',
+                }
+            }
+        }
+    },  
+    Builder {
+        BuilderName = 'SCTAAI T1Commander LandFac',
+        PlatoonTemplate = 'CommanderBuilderSCTA',
+       PriorityFunction = TAPrior.UnitProductionT1Fac,
+        Priority = 60,
+        InstanceCount = 1,
+        DelayEqualBuildPlattons = {'Factory', 1},
+        BuilderConditions = {
+            { UCBC, 'CheckBuildPlattonDelay', { 'Factory' }},
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 6, categories.FACTORY} },
+            { TAutils, 'EcoManagementTA', { 0.75, 0.75, } },
         },
         BuilderType = 'Command',
         BuilderData = {
@@ -191,6 +215,73 @@ BuilderGroup {
                 }
             }
         }
+    },
+    Builder {
+        BuilderName = 'SCTA Engineer Reclaim Excess',
+        PlatoonTemplate = 'EngineerBuilderSCTA',
+        PlatoonAIPlan = 'SCTAReclaimAI',
+        Priority = 120,
+        InstanceCount = 2,
+        BuilderConditions = {
+            { MIBC, 'GreaterThanGameTime', { 120 } }, 
+            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.LAND - categories.COMMAND}},
+            { TASlow, 'TAReclaimablesInArea', { 'LocationType', }},
+            { TAutils, 'LessMassStorageMaxTA',  { 0.2}},   
+        },
+        BuilderData = {
+            Terrain = true,
+            LocationType = 'LocationType',
+            ReclaimTime = 30,
+        },
+        BuilderType = 'LandTA',
+    },
+    Builder {
+        BuilderName = 'SCTA Engineer Factory Assist',
+        PlatoonTemplate = 'EngineerBuilderSCTAALL',
+        PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
+        PriorityFunction = TAPrior.AssistProduction,
+        Priority = 50,
+        InstanceCount = 10,
+        BuilderConditions = {
+            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.LAND - categories.COMMAND}},
+            { UCBC, 'HaveGreaterThanUnitsInCategoryBeingBuilt', { 0, LAB + PLATFORM + categories.GATE, 'LocationType', }},
+            { UCBC, 'LocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, LAB + PLATFORM + categories.GATE}},
+            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+        },
+        BuilderData = {
+            Assist = {
+                AssistLocation = 'LocationType',
+                AssisteeType = 'Engineer',
+                BeingBuiltCategories = {'STRUCTURE FACTORY TECH2, STRUCTURE FACTORY TECH3, GATE'},
+                Time = 20,
+            },
+        },
+        BuilderType = 'NotACU',
+    },
+    Builder {
+        BuilderName = 'SCTA Assist Unit Production Idle',
+        PlatoonTemplate = 'EngineerBuilderSCTA123',
+        PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
+        PriorityFunction = TAPrior.AssistProduction,
+        Priority = 50,
+        InstanceCount = 10,
+        BuilderConditions = {
+            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.LAND - categories.COMMAND}},
+            { UCBC, 'FactoryGreaterAtLocation', { 'LocationType', 2, LAB + PLATFORM + categories.GATE } },
+            { UCBC, 'HaveGreaterThanUnitsInCategoryBeingBuilt', { 0, categories.MOBILE, 'LocationType', }},
+            { UCBC, 'LocationFactoriesBuildingGreater', { 'LocationType', 0, categories.MOBILE }},
+            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+        },
+        BuilderData = {
+            Assist = {
+                AssistLocation = 'LocationType',
+                AssisteeType = 'Factory',
+                PermanentAssist = false,
+                BeingBuiltCategories = {'MOBILE'},                                        
+                Time = 60,
+            },
+        },
+        BuilderType = 'NotACU',
     },
 }
 

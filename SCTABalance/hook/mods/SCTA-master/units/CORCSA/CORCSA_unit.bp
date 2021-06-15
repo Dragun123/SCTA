@@ -12,7 +12,7 @@ UnitBlueprint {
         UniformScale = 0.12,
     },
     Economy = {
-        BuildCostEnergy = 7200,
+        BuildCostEnergy = 15000,
         BuildRate = 450,
         BuildTime = 6000, 
         BuildCostMass = 400,  
@@ -22,8 +22,8 @@ UnitBlueprint {
             'BUILTBYTIER2ENGINEER CORE',
         },
         MaxBuildDistance = 5,
-        ProductionPerSecondEnergy = 3,
-        ProductionPerSecondMass = 0,
+        ProductionPerSecondEnergy = 4,
+        ProductionPerSecondMass = 1,
     },
     Physics = {
         FuelRechargeRate = 888888,

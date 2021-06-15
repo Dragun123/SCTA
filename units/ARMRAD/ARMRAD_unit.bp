@@ -80,8 +80,8 @@ UnitBlueprint {
         MaintenanceConsumptionPerSecondEnergy = 5,
     },
     Footprint = {
-        SizeZ = 2,
-        SizeX = 2,
+        SizeZ = 1,
+        SizeX = 1,
 	MaxSlope = 0.625,
     },
     General = {
@@ -128,6 +128,10 @@ UnitBlueprint {
         MeshExtentsZ = 1.1,
         MinSpeedPercent = 0,
         MotionType = 'RULEUMT_None',
+        SkirtOffsetX = -0.5,
+        SkirtOffsetZ = -0.5,
+        SkirtSizeX = 2,
+        SkirtSizeZ = 2,
         TurnRate = 0,
     },
     SelectionSizeX = 1,

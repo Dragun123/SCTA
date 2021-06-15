@@ -9,7 +9,6 @@ UnitBlueprint {
         'RECLAIMABLE',
         'TECH3',
 	    'FACTORY',
-        'SUBMERSIBLE',
         'RALLYPOINT',
         'SHOWQUEUE',
 	    'STRUCTURE',

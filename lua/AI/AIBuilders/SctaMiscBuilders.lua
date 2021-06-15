@@ -204,4 +204,26 @@ BuilderGroup {
             },
         }
     },
+    Builder {
+        BuilderName = 'SCTA Defensive Point 3',
+        PlatoonTemplate = 'CommanderBuilderSCTADecoy',
+        PlatoonAddBehaviors = { 'CommanderBehaviorSCTADecoy' },
+        Priority = 125,
+        InstanceCount = 2,
+        PriorityFunction = TAPrior.GantryProduction,
+        BuilderConditions = {
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 8, categories.ANTISHIELD * categories.TECH3 - categories.MOBILE} }, 
+            { EBC, 'GreaterThanEconStorageRatio', { 0.2, 0.5}}, 
+        },
+        BuilderType = 'T3TA',
+        BuilderData = {
+            Construction = {
+                NearBasePatrolPoints = false,
+                BuildClose = true,
+                BuildStructures = {
+                    'T3RapidArtillery',
+                },
+            },
+        }
+    },
 }

@@ -72,6 +72,7 @@ UnitBlueprint {
         UniformScale = 0.08,
     },
     Economy = {
+        NavalFactory = true,
         BuildCostEnergy = 2402,
         BuildCostMass = 2524, 
         BuildTime = 13310,
@@ -91,6 +92,7 @@ UnitBlueprint {
         BuildBones = {
             BuildEffectBones = {'beam1','beam2', 'beam3', 'beam4'},
         }, 
+                ---RolloffDelay = 1,
         Category = 'Factory',
         Classification = 'RULEUC_Factory',
         CommandCaps = {

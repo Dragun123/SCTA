@@ -22,6 +22,7 @@ ARMARAD = Class(TACloser) {
 			self.Trash:Add(v)
 		end
 	end,
+	
 	OpeningState = State {
 		Main = function(self)
 			self:EnableIntel('Radar')

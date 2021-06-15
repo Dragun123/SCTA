@@ -25,5 +25,7 @@ UnitBlueprint {
       WaterVisionRadius = 8,
     },
     LifeBarSize = 1,
-  SelectionCenterOffsetZ = -0.2,
+  SizeX = 1,
+  SizeY = 3,
+  SizeZ = 1,
 }

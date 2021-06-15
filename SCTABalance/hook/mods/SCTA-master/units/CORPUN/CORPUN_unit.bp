@@ -2,7 +2,7 @@ UnitBlueprint {
     Merge = true, 
     Economy = {
         BuildCostEnergy = 45000,
-        BuildCostMass = 3000,
+        BuildCostMass = 4000,
         BuildTime = 40000,
     },
     Intel = {
@@ -10,6 +10,7 @@ UnitBlueprint {
     },
     Weapon = {
         [1] = {
+            MaxRadius = 120,
             Damage = 500,
             EnergyDrainPerSecond = 250,
             EnergyRequired = 1000,

@@ -21,7 +21,9 @@ UnitBlueprint {
     Physics = {
         MaxAcceleration = 1.4,
         MaxBrake = 1.25,
-        MaxSpeed = 1.7,
+        MaxSpeed = 1.8,
+        TurnRadius = 0,
+        TurnRate = 120,
     },
     SelectionSizeX = 0.6,
     SelectionSizeZ = 0.6,

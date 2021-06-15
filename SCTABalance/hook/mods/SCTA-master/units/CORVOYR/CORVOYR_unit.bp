@@ -21,7 +21,7 @@ UnitBlueprint {
         Abilities = {
                 '<LOC ability_radar>Radar',
             },
-        UniformScale = 0.08,
+        UniformScale = 0.1,
     },
     Defense = {
         Health = 100,

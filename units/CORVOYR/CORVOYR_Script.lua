@@ -11,16 +11,9 @@ CORVOYR = Class(TACounter) {
 	OnCreate = function(self)
 		TACounter.OnCreate(self)
 		self.Spinners = {
-			dish1 = CreateRotator(self, 'dish1', 'y', nil, 0, 0, 0),
+			fork = CreateRotator(self, 'dish1', 'y', nil, 100, 50, 0),
 		}
-		for k, v in self.Spinners do
-			self.Trash:Add(v)
-		end
-	end,
-
-	OnStopBeingBuilt = function(self,builder,layer)
-		TACounter.OnStopBeingBuilt(self,builder,layer)
-		self.Spinners.dish1:SetSpeed(90)
+		self.Trash:Add(self.Spinners.fork)
 	end,
 }
 

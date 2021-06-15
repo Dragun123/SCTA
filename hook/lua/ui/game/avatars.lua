@@ -60,7 +60,7 @@ function AvatarUpdate()
         end
     end
 
-    if engineers and table.getn(engineers) > 0 then
+    if engineers and not table.empty(engineers) then
         if controls.idleEngineers then
             controls.idleEngineers:Update(engineers)
         else
@@ -77,7 +77,7 @@ function AvatarUpdate()
             needsAvatarLayout = true
         end
     end
-    if fieldengineers and table.getn(fieldengineers) > 0 then
+    if fieldengineers and not table.empty(fieldengineers) then
             if controls.idleFieldEngineers  then
                 controls.idleFieldEngineers:Update(fieldengineers)
             else
@@ -94,7 +94,7 @@ function AvatarUpdate()
             needsAvatarLayout = true
         end
     end
-    if terrainengineers and table.getn(terrainengineers) > 0 then
+    if terrainengineers and not table.empty(terrainengineers) then
         if controls.idleTerrainEngineers then
             controls.idleTerrainEngineers:Update(terrainengineers)
         else
@@ -112,7 +112,7 @@ function AvatarUpdate()
         end
     end
 
-    if factories and table.getn(EntityCategoryFilterDown(categories.ALLUNITS - categories.GATE - categories.ORBITALSYSTEM, factories)) > 0 then
+    if factories and not table.empty(EntityCategoryFilterDown(categories.ALLUNITS - categories.GATE - categories.ORBITALSYSTEM, factories)) then
         if controls.idleFactories then
             controls.idleFactories:Update(EntityCategoryFilterDown(categories.ALLUNITS - categories.GATE, factories))
         else
@@ -198,7 +198,7 @@ function CreateIdleTab(unitData, id, expandFunc)
             local i = table.getn(sortedUnits)
             local needIcon = true
             while i > 0 do
-                if table.getn(sortedUnits[i]) > 0 then
+                if not table.empty(sortedUnits[i])  then
                     if needIcon then
                         -- Idle engineer icons
                         if Factions[currentFaction].IdleEngTextures[keyToIcon[i]] and UIUtil.UIFile(Factions[currentFaction].IdleEngTextures[keyToIcon[i]],true) then
@@ -227,7 +227,7 @@ function CreateIdleTab(unitData, id, expandFunc)
             local i = table.getn(sortedUnits)
             local needIcon = true
             while i > 0 do
-                if table.getn(sortedUnits[i]) > 0 then
+                if not table.empty(sortedUnits[i])  then
                     if needIcon then
                         -- Idle engineer icons
                         if Factions[currentFaction].IdleEngTextures[keyToIcon[i]] and UIUtil.UIFile(Factions[currentFaction].IdleEngTextures[keyToIcon[i]],true) then
@@ -255,7 +255,7 @@ function CreateIdleTab(unitData, id, expandFunc)
             local i = table.getn(sortedUnits)
             local needIcon = true
             while i > 0 do
-                if table.getn(sortedUnits[i]) > 0 then
+                if not table.empty(sortedUnits[i])  then
                     if needIcon then
                         -- Idle engineer icons
                         if Factions[currentFaction].IdleEngTextures[keyToIcon[i]] and UIUtil.UIFile(Factions[currentFaction].IdleEngTextures[keyToIcon[i]],true) then
@@ -283,7 +283,7 @@ function CreateIdleTab(unitData, id, expandFunc)
             local needIcon = true
             while i > 0 do
                 for curCat = 1, 3 do
-                    if table.getn(sortedFactories[curCat][i]) > 0 then
+                    if not table.empty(sortedFactories[curCat][i]) then
                         if needIcon then
                             -- Idle factory icons
                             if UIUtil.UIFile(Factions[currentFaction].IdleFactoryTextures[categoryTable[curCat]][i],true) then
@@ -302,7 +302,7 @@ function CreateIdleTab(unitData, id, expandFunc)
             end
            if needIcon == true then
                local ExpFactories = EntityCategoryFilterDown(categories.EXPERIMENTAL, self.allunits)
-               if table.getn(ExpFactories) > 0 then
+               if not table.empty(ExpFactories) then
                    local FactoryUnitId = ExpFactories[1]:GetUnitId()
                    if UIUtil.UIFile('/icons/units/' .. FactoryUnitId .. '_icon.dds', true) then
                        self.icon:SetTexture(UIUtil.UIFile('/icons/units/' .. FactoryUnitId .. '_icon.dds', true))
@@ -421,7 +421,7 @@ function CreateIdleFieldEngineerList(parent, units)
                 self.icons[i] = CreateUnitEntry(indexToIcon[i], units, Factions[currentFaction].IdleEngTextures[keyToIcon[index]])
                 self.icons[i].priority = i
             end
-            if table.getn(units) > 0 and not self.icons[i]:IsHidden() then
+            if not table.empty(units) and not self.icons[i]:IsHidden() then
                 self.icons[i].units = units
                 self.icons[i].count:SetText(table.getn(units))
                 self.icons[i].count:Show()
@@ -557,7 +557,7 @@ function CreateIdleTerrainEngineerList(parent, units)
                 self.icons[i] = CreateUnitEntry(indexToIcon[i], units, Factions[currentFaction].IdleEngTextures[keyToIcon[index]])
                 self.icons[i].priority = i
             end
-            if table.getn(units) > 0 and not self.icons[i]:IsHidden() then
+            if not table.empty(units) and not self.icons[i]:IsHidden() then
                 self.icons[i].units = units
                 self.icons[i].count:SetText(table.getn(units))
                 self.icons[i].count:Show()
@@ -692,7 +692,7 @@ function CreateIdleEngineerList(parent, units)
                 self.icons[i] = CreateUnitEntry(indexToIcon[i], units, Factions[currentFaction].IdleEngTextures[keyToIcon[index]])
                 self.icons[i].priority = i
             end
-            if table.getn(units) > 0 and not self.icons[i]:IsHidden() then
+            if not table.empty(units) and not self.icons[i]:IsHidden() then
                 self.icons[i].units = units
                 self.icons[i].count:SetText(table.getn(units))
                 self.icons[i].count:Show()
@@ -729,7 +729,9 @@ end
 
 function SetSkinTA(unit)
     local bp = unit:GetBlueprint().General
+    unit.TASkin = true
     if unit:GetBlueprint().BlueprintId == 'mas0001' then
+        unit.TASkin = nil
         return
     elseif bp.FactionName == 'Cybran' then
         return ConExecute('UI_SetSkin cybran')
@@ -750,6 +752,8 @@ end
 
 TACreateAvater = CreateAvatar
 function CreateAvatar(unit)
+    if not unit.TASkin then
     SetSkinTA(unit)
+    end
    return TACreateAvater(unit)
 end

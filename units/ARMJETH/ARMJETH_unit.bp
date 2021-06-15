@@ -127,7 +127,7 @@ UnitBlueprint {
             BallisticArc = 'RULEUBA_None',
             CollideFriendly = false,
             DamageFriendly = false,
-            Damage = 63,
+            Damage = 31,
             DamageRadius = 2, 
             DamageType = 'TASpec',
             DisplayName = 'ARMKBOT_MISSILE',
@@ -164,7 +164,7 @@ UnitBlueprint {
             RackSalvoReloadTime = 0,
             RackSalvoSize = 1,
             RackSlavedToTurret = false,
-            RateOfFire = 2,
+            RateOfFire = 0.4,
             TargetCheckInterval = 1,
             TargetPriorities = {
                 'SPECIALHIGHPRI',

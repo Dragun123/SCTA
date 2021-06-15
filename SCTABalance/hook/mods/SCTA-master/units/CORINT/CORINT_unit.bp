@@ -7,10 +7,18 @@ UnitBlueprint {
     Economy = {
         BuildCostEnergy = 800000,
         BuildCostMass = 60000,
-        BuildTime = 150000,
+        BuildTime = 750000,
     },
     Display = {
         UniformScale = 0.5,
+    },
+    Footprint = {
+        SizeZ = 5,
+        SizeX = 5,
+    },
+    Physics = {
+        SkirtSizeX = 5, 
+        SkirtSizeZ = 5,  
     },
     LifeBarSize = 6,
     SelectionSizeX = 6,
@@ -23,7 +31,7 @@ UnitBlueprint {
             BallisticArc = 'RULEUBA_HighArc',        
             MuzzleVelocityReduceDistance = 800,
             Damage = 4500,
-            EnergyDrainPerSecond = 500,
+            EnergyDrainPerSecond = 400,
             EnergyRequired = 2000,
             RateOfFire = 0.1,
         },

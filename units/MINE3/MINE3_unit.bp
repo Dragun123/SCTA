@@ -28,6 +28,7 @@ UnitBlueprint {
         'ARM',
         'CORE',
         'BOMB',
+        'DRAGBUILD',
         'STRUCTURE',
     },
     Defense = {
@@ -39,7 +40,7 @@ UnitBlueprint {
         Health = 200,
         MaxHealth = 200,
     },
-    Description = 'Med. Damage, Small Range Mine',
+    Description = 'Med. Damage, Medium Range Mine',
     Display = {
         Abilities = {
             '<LOC ability_cloak>Cloaking',
@@ -69,12 +70,13 @@ UnitBlueprint {
         CommandCaps = {
         	RULEUCC_RetaliateToggle = true,
         },
-	ToggleCaps = {
+	    ToggleCaps = {
 		RULEUTC_CloakToggle = true,
-	},
+	    },
         FactionName = 'CORE',
         Icon = 'land',
-TechLevel = 'RULEUTL_Advanced',
+        SelectionPriority = 5,
+        TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Focused Mine',
     },
     Intel = {

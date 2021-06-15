@@ -15,7 +15,7 @@ UnitBlueprint {
 	    'INDIRECTFIRE',
 	    'ANTIAIR',
         'SILO',
-	    'CRUISER',
+	    'BATTLESHIP',
         'OVERLAYINDIRECTFIRE',
 	    'OVERLAYANTIAIR',
 	    'OVERLAYRADAR',
@@ -23,16 +23,18 @@ UnitBlueprint {
     },
     Display = {
         Abilities = {
+            '<LOC ability_aa>Anti-Air',
+            '<LOC ability_radar>Radar',
             '<LOC ability_tacmissiledef>Tactical Missile Defense',
         },
         UniformScale = 0.2,
     },
     Defense = {
-        Health = 9500,
-        MaxHealth = 9500,
+        Health = 20000,
+        MaxHealth = 20000,
     },
     Economy = {
-        BuildCostEnergy = 42000,
+        BuildCostEnergy = 160000,
         BuildCostMass = 12000,
         BuildTime = 90000,
     },
@@ -44,6 +46,7 @@ UnitBlueprint {
     SizeZ = 10,
     Weapon = {
         [1] = {
+            Damage = 500,
         },
         [2] = {            
         },

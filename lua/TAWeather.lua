@@ -87,9 +87,6 @@ TATidal = Class(TAStructure)
         self:SetProductionPerSecondEnergy( power )
     end,
 
-    OnKilled = function(self, instigator, type, overKillRatio)
-        TAStructure.OnKilled(self, instigator, type, overKillRatio)
-    end,
 }
 
 -----------------------
@@ -100,39 +97,39 @@ local WindEnergyRange = false
 TAWin = Class(TAStructure) 
 {
     OnStopBeingBuilt = function(self,builder,layer)
-    TAStructure.OnStopBeingBuilt(self,builder,layer)
-    self:SetProductionPerSecondEnergy(0)
-    if not WindEnergyMin and not WindEnergyRange then
+        TAStructure.OnStopBeingBuilt(self,builder,layer)
+        self:SetProductionPerSecondEnergy(0)
+        if not WindEnergyMin and not WindEnergyRange then
         --LOG("Defining wind turbine energy output value range.")
-        local bp = self:GetBlueprint().Economy
-        local mean = bp.ProductionPerSecondEnergy or 17.5
-        local min = bp.ProductionPerSecondEnergyMin or 5
-        local max = bp.ProductionPerSecondEnergyMax or 30
-        if (min + max) / 2 == mean then
+            local bp = self:GetBlueprint().Economy
+            local mean = bp.ProductionPerSecondEnergy or 17.5
+            local min = bp.ProductionPerSecondEnergyMin or 5
+            local max = bp.ProductionPerSecondEnergyMax or 30
+                if (min + max) / 2 == mean then
             --Then nothing has messed with the numbers, or something messed with all of them.
-            WindEnergyMin = min
-            WindEnergyRange = max - min
-        else
+                WindEnergyMin = min
+                WindEnergyRange = max - min
+            else
             --Something has messed with the numbers, and we should move to match.
-            local mult = mean / 17.5
-            WindEnergyMin = min * mult
-            WindEnergyRange = (max - min) * mult
+                local mult = mean / 17.5
+                WindEnergyMin = min * mult
+                WindEnergyRange = (max - min) * mult
+            end
         end
-    end
     ------------------------------------------------------------------------
     -- Run the thread
     ------------------------------------------------------------------------
-    self:ForkThread(SyncroniseThread,30,self.OnWeatherInterval,self)
-end,
+        self:ForkThread(SyncroniseThread,30,self.OnWeatherInterval,self)
+    end,
 
-OnWeatherInterval = function(self)
+    OnWeatherInterval = function(self)
     ---LOG('Wind Being Ran')
-   self:SetProductionPerSecondEnergy (
-       (WindEnergyMin + WindEnergyRange * ScenarioInfo.WindStats.Power)
-   )
-end,
-
-        OnKilled = function(self, instigator, type, overKillRatio)
-           TAStructure.OnKilled(self, instigator, type, overKillRatio)
-        end,
+    self:SetProductionPerSecondEnergy (
+        (WindEnergyMin + WindEnergyRange * ScenarioInfo.WindStats.Power)
+    )
+    ---local Wind = 
+    ---LOG(Wind)
+    self.Spinners.post:SetSpeed(self:GetProductionPerSecondEnergy())
+    self.Spinners.blades:SetSpeed((self:GetProductionPerSecondEnergy()) * 2)
+    end,
     }

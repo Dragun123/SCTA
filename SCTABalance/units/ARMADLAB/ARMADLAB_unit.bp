@@ -75,10 +75,11 @@ UnitBlueprint {
         UniformScale = 0.22,
     },
     Economy = {
-        BuildCostEnergy = 54000,
-        BuildCostMass = 6000, 
+        BuildCostEnergy = 160000,
+        BuildCostMass = 10000, 
         BuildTime = 200000,
         BuildRate = 360,
+        KBot = true,
         DifferentialUpgradeCostCalculation = true,
         BuildableCategory = {
             'BOT MOBILE TECH1 ARM',
@@ -99,6 +100,7 @@ InitialRallyZ = 7,
     BuildBones = {
             BuildEffectBones = {'Nozzle_01','Nozzle_02'},
         },
+                ---RolloffDelay = 1,
         Category = 'Factory',
         Classification = 'RULEUC_Factory',
         CommandCaps = {

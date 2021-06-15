@@ -28,7 +28,7 @@ UnitBlueprint {
         },
     },
     Economy = {
-        BuildCostEnergy = 8000,
+        BuildCostEnergy = 24000,
         BuildCostMass = 220,
         BuildTime = 5600,
         ProductionPerSecondEnergy = 0,
@@ -45,6 +45,7 @@ UnitBlueprint {
             Omni = true,
             Radar = true,
         },
+        VisionRadius = 40,
     TAIntel = true,
     RadarRadius = 100, 
     OmniRadius = 20,

@@ -24,8 +24,7 @@ ARMSFIG = Class(TASeaair) {
 		end	
 		for k, v in self.Spinners do
 			self.Trash:Add(v)
-		end
-		self.moving = nil	
+		end	
 	end,
 
 
@@ -37,11 +36,9 @@ ARMSFIG = Class(TASeaair) {
 		--TURN wingb to z-axis <91.21> SPEED <63.22>;
 		self.Spinners.wingb:SetGoal(-30)
 		self.Spinners.wingb:SetSpeed(30)
-		self.moving = true
 	end,
 
 	CloseWings = function(self)
-		self.moving = nil
 		--TURN winga to z-axis <0> SPEED <63.13>;
 		self.Spinners.winga:SetGoal(0)
 		self.Spinners.winga:SetSpeed(63)

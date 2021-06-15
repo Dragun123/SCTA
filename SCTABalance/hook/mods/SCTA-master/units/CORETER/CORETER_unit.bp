@@ -6,7 +6,7 @@
 UnitBlueprint {
    Merge = true,
     Display = {
-        UniformScale = 0.12,
+        UniformScale = 0.1,
     },
     Economy = {
         ProductionPerSecondEnergy = 0,
@@ -19,7 +19,7 @@ UnitBlueprint {
     LifeBarSize = 1.5,
     SelectionSizeX = 0.8,
     SelectionSizeZ = 0.8,
-    SizeX = 2,
-    SizeY = 1.5,
-    SizeZ = 2,
+    SizeX = 1.6,
+    SizeY = 1.25,
+    SizeZ = 1.6,
 }

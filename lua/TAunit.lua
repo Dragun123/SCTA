@@ -16,8 +16,7 @@ TAunit = Class(Unit)
         --self._UnitName = bp.General.UnitName
         ---self:LOGDBG('TAUnit.OnCreate')
         Unit.OnCreate(self)
-		local aiBrain = self:GetAIBrain()
-		if aiBrain.SCTAAI then
+		if self:GetAIBrain().SCTAAI then
 			self:SetFireState(FireState.RETURN_FIRE)
 			else
 			self:SetFireState(FireState.GROUND_FIRE)
@@ -36,7 +35,7 @@ TAunit = Class(Unit)
 	end,
 
 	OnIntelDisabled = function(self)
-		Unit.OnIntelDisabled()
+		Unit.OnIntelDisabled(self)
 		if self.TACloak and not self:IsIntelEnabled('Cloak') then
 			self:PlayUnitSound('Uncloak')
 			self.CloakOn = nil
@@ -49,7 +48,7 @@ TAunit = Class(Unit)
 	end,
 
 	OnIntelEnabled = function(self)
-		Unit.OnIntelEnabled()
+		Unit.OnIntelEnabled(self)
 		if not IsDestroyed(self) then
 			if self:IsIntelEnabled('Cloak') and self.TACloak then
 					self.CloakOn = true
@@ -68,7 +67,7 @@ TAunit = Class(Unit)
 	TAIntelMotion = function(self) 
 		while not self.Dead do
             coroutine.yield(11)
-			if self.TAIntelOn and self:IsIdleState() then
+			if self.TAIntelOn and (self:IsIdleState() or self:IsUnitState('Attacking')) then
                 self:SetConsumptionPerSecondEnergy(self.MainCost)
 			elseif self.TAIntelOn then
                 self:SetConsumptionPerSecondEnergy(self.MainCost * 2)
@@ -102,7 +101,7 @@ TAunit = Class(Unit)
 				self:EnableIntel('Cloak')
 				self:EnableIntel('CloakField')
 				self:SetMesh(self:GetBlueprint().Display.CloakMeshBlueprint, true)
-				if self:IsIdleState() then
+				if self:IsIdleState() or self:IsUnitState('Attacking') then
 					self:SetConsumptionPerSecondEnergy(self.MainCost)
 				else
 					self:SetConsumptionPerSecondEnergy(self.MainCost * 3)

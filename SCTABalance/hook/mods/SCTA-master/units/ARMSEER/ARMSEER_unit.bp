@@ -18,7 +18,8 @@ UnitBlueprint {
         'TANK',
         'OVERLAYOMNI',
         'STEALTHFIELD',
-        'OVERLAYCOUNTERINTEL',        
+        'OVERLAYCOUNTERINTEL', 
+        'RADAR',      
     },
     Display = {
     Abilities = {

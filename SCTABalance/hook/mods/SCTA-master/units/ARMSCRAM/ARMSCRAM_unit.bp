@@ -1,5 +1,6 @@
 UnitBlueprint {
     Merge = true, 
+    BuildIconSortPriority = 1,
     Categories = {
         'SELECTABLE',
         'TECH3',
@@ -7,15 +8,11 @@ UnitBlueprint {
         'RECLAIMABLE',
         'MOBILE',
 	    'MOBILESONAR',
-        'BUILTBYTIER3ENGINEER',
-        'BUILTBYTIER3COMMANDER',
+        'NAVAL',
 	    'INTELLIGENCE',
         'STEALTHFIELD',
         'OVERLAYCOUNTERINTEL',        
-        'NEEDMOBILEBUILD',
-        'CQUEMOV',
         'DEFENSIVEBOAT',
-        'SORTINTEL',
         'ARM',
         'SUBMERSIBLE',
     },

@@ -30,21 +30,10 @@ ARMMMKR = Class(TACloser) {
 		Main = function(self)
 			self.IsActive = true
 			self:SetProductionActive(true)
-			self.Spinners.lid2:SetGoal(30.40)
-			self.Spinners.lid2:SetSpeed(36.00)
-
-			--TURN lid3 to x-axis <-26.75> SPEED <35.45>;
-			self.Spinners.lid3:SetGoal(-30.40)
-			self.Spinners.lid3:SetSpeed(36.00)
 
 			--TURN mmakercore to y-axis <-30.40> SPEED <39.39>;
 			self.Spinners.core:SetGoal(-30.40)
 			self.Spinners.core:SetSpeed(39.39)
-
-
-			--MOVE mmakercore to y-axis <5.05> SPEED <6.00>;
-			self.Sliders.core:SetGoal(0,5.05,0)
-			self.Sliders.core:SetSpeed(6)
 
 			--TURN lid1 to x-axis <35.26> SPEED <45.57>;
 			self.Spinners.lid1:SetGoal(30.40)
@@ -66,8 +55,8 @@ ARMMMKR = Class(TACloser) {
 			self.Spinners.core:SetGoal(-60.80)
 			self.Spinners.core:SetSpeed(39.39)
 
-			self.Sliders.core:SetGoal(0,15.84,0)
-			self.Sliders.core:SetSpeed(13)
+			self.Sliders.core:SetGoal(0,15,0)
+			self.Sliders.core:SetSpeed(15)
 
 			--TURN mmakercore to y-axis <-90.00> SPEED <37.67>;
 			self.Spinners.core:SetGoal(-90.00)
@@ -81,8 +70,6 @@ ARMMMKR = Class(TACloser) {
 	ClosingState = State {
 		Main = function(self)
 			self:SetProductionActive(false)
-			self.Sliders.core:SetGoal(0,5.05,0)
-			self.Sliders.core:SetSpeed(15)
 
 			--TURN mmakercore to y-axis <-60.80> SPEED <42.74>;
 			self.Spinners.core:SetGoal(-60.80)
@@ -90,7 +77,7 @@ ARMMMKR = Class(TACloser) {
 
 			--MOVE mmakercore to y-axis <0> SPEED <7.00>;
 			self.Sliders.core:SetGoal(0,0,0)
-			self.Sliders.core:SetSpeed(7)
+			self.Sliders.core:SetSpeed(15)
 
 			--TURN lid1 to x-axis <0> SPEED <51.35>;
 			self.Spinners.lid1:SetGoal(0)
@@ -100,13 +87,6 @@ ARMMMKR = Class(TACloser) {
 			self.Spinners.lid4:SetGoal(0)
 			self.Spinners.lid4:SetSpeed(51.35)
 
-			--TURN lid2 to x-axis <30.40> SPEED <44.26>;
-			self.Spinners.lid2:SetGoal(30.40)
-			self.Spinners.lid2:SetSpeed(69.05)
-
-			--TURN lid3 to x-axis <-26.75> SPEED <69.05>;
-			self.Spinners.lid3:SetGoal(-30.40)
-			self.Spinners.lid3:SetSpeed(69.05)
 
 			--TURN mmakercore to y-axis <-30.40> SPEED <44.26>;
 			self.Spinners.core:SetGoal(-30.40)
@@ -122,7 +102,7 @@ ARMMMKR = Class(TACloser) {
 
 			--TURN mmakercore to y-axis <0> SPEED <44.46>;
 			self.Spinners.core:SetGoal(0)
-			self.Spinners.core:SetSpeed(44.46)
+			self.Spinners.core:SetSpeed(30)
 			TACloser.ClosingState.Main(self)
 			
 		end,

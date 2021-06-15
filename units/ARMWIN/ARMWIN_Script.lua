@@ -11,17 +11,11 @@ ARMWIN = Class(TAWin) {
 		self:SetProductionPerSecondEnergy(0)
 		self.Spinners = {
 		   --CreateRotator(Win, bone, axis, [goal], [speed], [accel], [goalspeed])
-		   blades = CreateRotator(self, 'Blades', 'z', nil, 0, 0, 0),
-		   post = CreateRotator(self, 'Turret', 'y', nil, 0, 0, 0),
+		   blades = CreateRotator(self, 'Rotor', 'z', nil, 0, 0, 0),
+		   post = CreateRotator(self, 'Top', 'z', nil, 0, 0, 0),
 	   }
 	   	self.Trash:Add(self.Spinners.blades)
 		self.Trash:Add(self.Spinners.post)
-	end,
-
-	OnStopBeingBuilt = function(self,builder,layer)
-		TAWin.OnStopBeingBuilt(self,builder,layer)
-		self.Spinners.post:SetSpeed(35)
-		self.Spinners.blades:SetSpeed(50)
 	end,
 }
 

@@ -34,15 +34,15 @@ UnitBlueprint {
         'VISIBLETORECON',
         'RECLAIMABLE',
         'TECH2',
-	'FACTORY',
+	    'FACTORY',
         'RALLYPOINT',
         'SHOWQUEUE',
-	'STRUCTURE',
-	'CONSTRUCTION',
+	    'STRUCTURE',
+	    'CONSTRUCTION',
         'OVERLAYRADAR',
-	'CORE',
-	'SORTCONSTRUCTION',
-	'AIR',
+	    'CORE',
+	    'SORTCONSTRUCTION',
+	    'AIR',
     },
     Defense = {
         ArmorType = 'Structure',
@@ -73,6 +73,7 @@ UnitBlueprint {
         UniformScale = 0.16,
     },
     Economy = {
+        AirFactory = true,
         BuildCostEnergy = 4422,
         BuildCostMass = 2191, 
         BuildTime = 17232,
@@ -92,6 +93,7 @@ UnitBlueprint {
         BuildBones = {
             BuildEffectBones = {'beam1', 'beam2'},
         },             
+                ---RolloffDelay = 1,
         Category = 'Factory',
         Classification = 'RULEUC_Factory',
         CommandCaps = {

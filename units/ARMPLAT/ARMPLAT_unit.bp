@@ -39,7 +39,6 @@ UnitBlueprint {
         'SHOWQUEUE',
 	    'STRUCTURE',
 	    'CONSTRUCTION',
-        'SUBMERSIBLE',
         'OVERLAYSONAR',
         'ARM',
         'AIR',
@@ -63,7 +62,7 @@ UnitBlueprint {
         },
 	BuildAttachBone = 'pad',
         Mesh = {
-            IconFadeInZoom = 400,
+            IconFadeInZoom = 130,
             LODs = {
                 {
                     LODCutoff = 400,
@@ -74,6 +73,7 @@ UnitBlueprint {
         UniformScale = 0.16,
     },
     Economy = {
+        Seaplane = true,
         BuildCostEnergy = 5396,
         BuildCostMass = 2223,
         BuildTime = 19248,
@@ -96,6 +96,7 @@ UnitBlueprint {
         BuildBones = {
             BuildEffectBones = {'beam1', 'beam2'},
         },   
+                ---RolloffDelay = 1,
         Category = 'Factory',
         Classification = 'RULEUC_Factory',
         CommandCaps = {

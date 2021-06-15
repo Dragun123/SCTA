@@ -49,8 +49,7 @@ UnitBlueprint {
             LODs = {
                 {
                     LODCutoff = 230,
-                    ShaderName = 'AeonCZAR',
-		            NormalsName = '/mods/SCTA-master/textures/common/normalsTS.dds'
+                    ShaderName = 'Unit',
                 },
             },
         },
@@ -83,7 +82,6 @@ UnitBlueprint {
     LifeBarHeight = 0.25,
     LifeBarOffset = 0.5,
     LifeBarSize = 2,
-    SelectionCenterOffsetX = -0.4,
     SelectionSizeX = 2.5,
     SelectionSizeZ = 2.5,
     SelectionThickness = 0.25,
@@ -104,12 +102,11 @@ UnitBlueprint {
          
     },
         Wreckage = {
-Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+        Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/ARMWIN/ARMWIN_dead_prop.bp',
         WreckageLayers = {
             Land = true,
         },

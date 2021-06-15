@@ -13,13 +13,6 @@ UnitBlueprint {
         FreeIntel = true,
         RadarStealth = true,
         },
-    SelectionSizeX = 1,
-    SelectionSizeZ = 1,
-    SelectionCenterOffsetZ = -0.1,
-    SelectionThickness = 0.5,
-    SizeX = 1,
-    SizeY = 2,
-    SizeZ = 1,
     LifeBarSize = 1,
     Weapon = {
         [1] = {

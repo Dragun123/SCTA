@@ -105,6 +105,7 @@ UnitBlueprint {
         Category = 'Construction',
         Classification = 'RULEUC_Engineer',
         CommandCaps = {
+            RULEUCC_Attack = true,
             RULEUCC_CallTransport = true,
             RULEUCC_Guard = true,
             RULEUCC_Move = true,

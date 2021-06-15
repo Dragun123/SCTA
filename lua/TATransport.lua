@@ -3,65 +3,18 @@ local AirTransport = import('/lua/defaultunits.lua').AirTransport
 local FireSelfdestructWeapons = import('/lua/selfdestruct.lua').FireSelfdestructWeapons
 
 
-TATransportAir = Class(AirTransport)
+TATransport = Class(AirTransport)
 {
 	OnCreate = function(self)
         AirTransport.OnCreate(self)
-        self.HasFuel = true
         self.FxMovement = TrashBag()
 	end,
 	
-
-    OnMotionVertEventChange = function(self, new, old)
-        AirTransport.OnMotionVertEventChange(self, new, old)
-        self.CreateMovementEffects(self)
-        if (new == 'Down' or new == 'Bottom') then
-			self:CloseWings()
-			self:PlayUnitSound('Landing')
-			local vis = self:GetBlueprint().Intel.VisionRadius / 2
-            self:SetIntelRadius('Vision', vis)
-        elseif (new == 'Up' or new == 'Top') then
-			self:OpenWings()
-			self:PlayUnitSound('TakeOff')
-			local bpVision = self:GetBlueprint().Intel.VisionRadius
-            if bpVision then
-                self:SetIntelRadius('Vision', bpVision)
-            else
-                self:SetIntelRadius('Vision', 0)
-            end
-        end
-	end,
-	
-	
 	OnStopBeingBuilt = function(self,builder,layer)
 		AirTransport.OnStopBeingBuilt(self,builder,layer)
-		self:OpenWings(self)
-		self:PlayUnitSound('TakeOff')
 		self.KillingInProgress = nil
 	end,
 
-	OpenWings = function(self)
-	end,
-
-	CloseWings = function(self)
-	end,
-
-	OnRunOutOfFuel = function(self)
-		self.HasFuel = false
-        # penalize movement for running out of fuel
-        self:SetSpeedMult(0.25)     # change the speed of the unit by this mult
-        self:SetAccMult(0.25)       # change the acceleration of the unit by this mult
-        self:SetTurnMult(0.25)      # change the turn ability of the unit by this mult
-    end,
-
-	OnGotFuel = function(self)
-		self.HasFuel = true
-        # revert these values to the blueprint values
-        self:SetSpeedMult(1)
-        self:SetAccMult(1)
-        self:SetTurnMult(1)
-	end,
-	
     OnKilled = function(self, instigator, type, overkillRatio)
         local layer = self:GetCurrentLayer()
         self.Dead = true
@@ -129,4 +82,67 @@ TATransportAir = Class(AirTransport)
 		end
 	end,
 
+}
+
+TATransportSea = Class(TATransport) {
+    OnMotionHorzEventChange = function(self, new, old )
+		TATransport.OnMotionHorzEventChange(self, new, old)
+		self.CreateMovementEffects(self)
+	end,
+}
+
+
+TATransportAir = Class(TATransport) {
+    OnCreate = function(self)
+        TATransport.OnCreate(self)
+        HasFuel = true
+	end,
+    
+    OnStopBeingBuilt = function(self,builder,layer)
+		TATransport.OnStopBeingBuilt(self,builder,layer)
+		self:OpenWings(self)
+		self:PlayUnitSound('TakeOff')
+	end,
+
+    OnMotionVertEventChange = function(self, new, old)
+        TATransport.OnMotionVertEventChange(self, new, old)
+        self.CreateMovementEffects(self)
+        if (new == 'Down' or new == 'Bottom') then
+			self:CloseWings()
+			self:PlayUnitSound('Landing')
+			local vis = self:GetBlueprint().Intel.VisionRadius / 2
+            self:SetIntelRadius('Vision', vis)
+        elseif (new == 'Up' or new == 'Top') then
+			self:OpenWings()
+			self:PlayUnitSound('TakeOff')
+			local bpVision = self:GetBlueprint().Intel.VisionRadius
+            if bpVision then
+                self:SetIntelRadius('Vision', bpVision)
+            else
+                self:SetIntelRadius('Vision', 0)
+            end
+        end
+	end,
+    
+    OpenWings = function(self)
+	end,
+
+	CloseWings = function(self)
+	end,
+
+	OnRunOutOfFuel = function(self)
+		self.HasFuel = false
+        # penalize movement for running out of fuel
+        self:SetSpeedMult(0.25)     # change the speed of the unit by this mult
+        self:SetAccMult(0.25)       # change the acceleration of the unit by this mult
+        self:SetTurnMult(0.25)      # change the turn ability of the unit by this mult
+    end,
+
+	OnGotFuel = function(self)
+		self.HasFuel = true
+        # revert these values to the blueprint values
+        self:SetSpeedMult(1)
+        self:SetAccMult(1)
+        self:SetTurnMult(1)
+	end,
 }

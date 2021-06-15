@@ -136,7 +136,7 @@ UnitBlueprint {
 	        DamageFriendly = true,
             Damage = 800,
             DamageType = 'Normal',
-            DisplayName = 'ARMSMART_TORPEDO',
+            DisplayName = 'CORSMART_TORPEDO',
             FireTargetLayerCapsTable = {
                 Sub = 'Seabed|Sub|Water',
                 Water = 'Seabed|Sub|Water',
@@ -170,6 +170,7 @@ UnitBlueprint {
             RackSalvoReloadTime = 0,
             RackSalvoSize = 1,
             RackSlavedToTurret = false,
+            Turreted = false,
             RateOfFire = 0.25,
             TargetCheckInterval = 1,
             TargetPriorities = {

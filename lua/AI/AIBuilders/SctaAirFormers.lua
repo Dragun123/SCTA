@@ -2,6 +2,10 @@ local UCBC = '/lua/editor/UnitCountBuildConditions.lua'
 local SAI = '/lua/ScenarioPlatoonAI.lua'
 local MIBC = '/lua/editor/MiscBuildConditions.lua'
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
+local TASlow = '/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua'
+local SKY = categories.AIR * categories.MOBILE
+local STEALTH = categories.armhawk + categories.corvamp
+
 
 BuilderGroup {
     BuilderGroupName = 'SCTAAIAirFormers',
@@ -9,80 +13,69 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTAAI Air Scout',
         PlatoonTemplate = 'T1AirScoutFormSCTA',
-        PriorityFunction = TAPrior.UnitProductionT1AIR,
-        Priority = 100,
-        InstanceCount = 10,
+        Priority = 150,
+        InstanceCount = 5,
         BuilderType = 'Scout',
+        BuilderData = {
+        }, 
         BuilderConditions = {
-            { UCBC, 'HaveGreaterThanUnitsWithCategory', { 0, categories.SCOUT * categories.AIR} },
-         },
-    },
-    Builder {
-        BuilderName = 'SCTAAI Radar T3 Scout',
-        PlatoonTemplate = 'SCTAT3AirScouting',
-        PriorityFunction = TAPrior.ProductionT3,
-        Priority = 125,
-        InstanceCount = 10,
-        BuilderType = 'Scout',
-        BuilderConditions = {
-            { UCBC, 'HaveGreaterThanUnitsWithCategory', { 0, categories.OVERLAYOMNI * categories.AIR * categories.MOBILE} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, SKY * categories.SCOUT * categories.OVERLAYRADAR} },
          },
     },
     Builder {
         BuilderName = 'SCTAAI Bomber Attack',
         PlatoonTemplate = 'SCTABomberAttack',
-        PriorityFunction = TAPrior.UnitProductionT1AIR,
-        Priority = 100,
-        FormRadius = 500,
-        InstanceCount = 5,
-        BuilderType = 'Scout',        
+        Priority = 200,
+        InstanceCount = 50,
+        BuilderType = 'AirForm',
+        BuilderData = {
+        },        
         BuilderConditions = { 
-            { UCBC, 'HaveGreaterThanUnitsWithCategory', { 0, categories.BOMBER} },
+            --{ TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, SKY * categories.BOMBER} },
+            },
         },
-    },
     Builder {
         BuilderName = 'SCTAAI Air Intercept',
         PlatoonTemplate = 'IntieAISCTA',
-        PriorityFunction = TAPrior.UnitProductionT1AIR,
         Priority = 100,
-        FormRadius = 500,
         PlatoonAddBehaviors = { 'SCTAAirUnitRefit' },                              
-        InstanceCount = 5,
-        BuilderType = 'AirForm',     
+        InstanceCount = 50,
+        BuilderType = 'AirForm', 
+        BuilderData = {
+        },     
         BuilderConditions = { 
-            { UCBC, 'HaveGreaterThanUnitsWithCategory', { 4, categories.ANTIAIR * categories.MOBILE * categories.AIR - categories.BOMBER } },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, SKY * categories.ANTIAIR * categories.TECH1} },
         },
     },
     Builder {
         BuilderName = 'SCTAAI Air Intercept Stealth',
-        PlatoonTemplate = 'IntieAISCTAStealth',
+        PlatoonTemplate = 'IntieAIStealthSCTA',
         PriorityFunction = TAPrior.UnitProduction,
         Priority = 110,
-        InstanceCount = 5,
-        FormRadius = 500,
-        PlatoonAddBehaviors = { 'SCTAAirUnitRefit' },                              
+        InstanceCount = 50,                          
         BuilderType = 'AirForm',
         BuilderData = {
             Energy = true,
+            Stealth = true,
         },        
         BuilderConditions = { 
-            { UCBC, 'HaveGreaterThanUnitsWithCategory', { 2, categories.AIR * (((categories.ANTIAIR + categories.GROUNDATTACK) * categories.TECH2) + categories.BOMBER)} },
-        },
-    },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, (SKY * (categories.GROUNDATTACK + categories.BOMBER)) + STEALTH} },
+            },
+        },   
     Builder {
         BuilderName = 'SCTAAI Air Intercept Omni',
-        PlatoonTemplate = 'IntieAISCTAALL',
+        PlatoonTemplate = 'IntieAISCTAEnd',
         PriorityFunction = TAPrior.GantryConstruction,
         Priority = 110,
-        InstanceCount = 10,
-        FormRadius = 500,
+        InstanceCount = 50,
         PlatoonAddBehaviors = { 'SCTAAirUnitRefit' },                              
         BuilderType = 'AirForm',
         BuilderData = {
             Energy = true,
-        },        
+            Interceptor = true,
+        },         
         BuilderConditions = { 
-            { UCBC, 'HaveGreaterThanUnitsWithCategory', { 2, categories.ANTIAIR * categories.MOBILE * categories.AIR - categories.BOMBER } },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, SKY * categories.ANTIAIR - categories.BOMBER - categories.GROUNDATTACK} },
         },
     },
 }

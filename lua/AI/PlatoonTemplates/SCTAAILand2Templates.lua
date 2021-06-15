@@ -29,7 +29,8 @@ PlatoonTemplate {
             { 'armfav', 1, 1, 'scout', 'none' }
         },
         Core = {
-            { 'corfav', 1, 1, 'scout', 'none' }
+            { 'corcv', 1, 1, 'support', 'None' },
+            { 'corfav', 1, 1, 'scout', 'none' },
         },
     }
 }
@@ -52,10 +53,11 @@ PlatoonTemplate {
     Name = 'T1LandDFTankSCTA2Early',
     FactionSquads = {
         Arm = {
-            { 'armstump', 1, 4, 'attack', 'none' },
+            { 'armstump', 1, 2, 'attack', 'none' },
         },
         Core = {
-            { 'corraid', 1, 4, 'attack', 'none' },
+            { 'corraid', 1, 2, 'attack', 'none' },
+            { 'corcv', 1, 1, 'support', 'None' },
         },
     }
 }
@@ -64,11 +66,10 @@ PlatoonTemplate {
     Name = 'T1LandDFTankSCTA2',
     FactionSquads = {
         Arm = {
-            { 'armstump', 1, 4, 'attack', 'none' },
+            { 'armstump', 1, 2, 'attack', 'none' },
+            { 'armck', 1, 1, 'support', 'None' },
         },
         Core = {
-            { 'corraid', 1, 2, 'attack', 'none' },
-            { 'corcv', 1, 1, 'support', 'None' },
             { 'corraid', 1, 2, 'attack', 'none' },
         },
     }
@@ -103,9 +104,11 @@ PlatoonTemplate {
     FactionSquads = {
         Arm = {
             { 'armmerl', 1, 1, 'attack', 'none' },
+            { 'armack', 1, 1, 'support', 'None' },
         },
         Core = {
             { 'corvroc', 1, 1, 'attack', 'none' },
+            { 'cornecro', 1, 1, 'support', 'None' },
         },
     }
 }
@@ -114,7 +117,7 @@ PlatoonTemplate {
     Name = 'T2LandAASCTA2',
     FactionSquads = {
         Arm = {
-            { 'armyork', 1, 1, 'attack', 'none' }
+            { 'armyork', 1, 1, 'attack', 'none' },
         },
         Core = {
             { 'corsent', 1, 1, 'attack', 'none' }
@@ -127,14 +130,10 @@ PlatoonTemplate {
     Name = 'T2LandDFTank2SCTA',
     FactionSquads = {
         Arm = {
-            { 'armlatnk', 1, 2, 'attack', 'none' },
-            { 'armack', 1, 1, 'support', 'None' },
-            { 'armlatnk', 1, 1, 'attack', 'none' },
+            { 'armlatnk', 1, 3, 'attack', 'none' },
         },
         Core = {
-            { 'correap', 1, 2, 'attack', 'none' },
-            { 'cornecro', 1, 1, 'support', 'None' },
-            { 'correap', 1, 2, 'attack', 'none' },
+            { 'correap', 1, 3, 'attack', 'none' },
         },
     }
 }
@@ -146,9 +145,7 @@ PlatoonTemplate {
             { 'armbull', 1, 3, 'attack', 'none' },
         },
         Core = {
-            { 'corgol', 1, 2, 'attack', 'none' },
-            { 'corch', 1, 1, 'attack', 'none' },
-            { 'corgol', 1, 1, 'attack', 'none' },
+            { 'corgol', 1, 3, 'attack', 'none' },
         },
     }
 }
