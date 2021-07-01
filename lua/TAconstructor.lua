@@ -241,17 +241,6 @@ TANecro = Class(TAconstructor) {
         newUnit:SetHealth(nil, 100)
         newUnit.Necro = true
     end,
-
-    --[[GetReclaimCosts = function(self, target_entity)
-        if self.NecroingInProgress then
-            local time = self.TimeReclaim * (math.max(self.MaxMassReclaim, self.MaxEnergyReclaim) / reclaimer:GetBuildRate())
-            time = math.max(time / 10, 0.0001)
-           --LOG('self.NecroingInProgress = true, returning nil eco')
-           return time, 1, 1
-        else 
-         TAconstructor.GetReclaimCosts(self, target_entity)
-        end
-    end,]]
 }
 
 TACommander = Class(TAconstructor) {

@@ -9,11 +9,11 @@ Unit = Class(taUnitClass) {
         end
     end,
 
-    CreateWreckageProp = function(self, overkillRatio)
+    CreateWreckage = function (self, overkillRatio)
         if self.Necro then
             TADeath.CreateHeapProp(self, overkillRatio)
         else
-        taUnitClass.CreateWreckageProp(self, overkillRatio)
+            taUnitClass.CreateWreckage(self, overkillRatio)
         end
     end,
 
