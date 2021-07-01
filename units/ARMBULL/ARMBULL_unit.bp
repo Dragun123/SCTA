@@ -139,7 +139,7 @@ UnitBlueprint {
             MaxRadius = 36,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
-            DamageRadius = 2,
+            DamageRadius = 1,
             MuzzleVelocity = 25,
             ProjectileId = '/mods/SCTA-master/projectiles/ARM_BULL/ARM_BULL_proj.bp',
             RackBones = {

@@ -179,7 +179,7 @@ TASeaConstructor = Class(TAconstructor)
 
 
 TANecro = Class(TAconstructor) {
-    OnStartReclaim = function(self, target, oldPosition)
+    OnStartReclaim = function(self, target)
         if self:GetBlueprint().Economy.Necro then
             if not target.ReclaimInProgress and not target.NecroingInProgress and not target:GetBlueprint().Economy.Heap then
                 --LOG('* Necro: OnStartReclaim:  I am a necro! no ReclaimInProgress; starting Necroing')
@@ -210,11 +210,11 @@ TANecro = Class(TAconstructor) {
                 return
             end
         end
-        TAconstructor.OnStartReclaim(self, target, oldPosition)
+        TAconstructor.OnStartReclaim(self, target)
     end,
 
-    OnStopReclaim = function(self, target, oldPosition)
-        TAconstructor.OnStopReclaim(self, target, oldPosition)
+    OnStopReclaim = function(self, target)
+        TAconstructor.OnStopReclaim(self, target)
         if not target then
             if self.RecBP and self:GetBlueprint().Economy.Necro and oldPosition ~= self.RecPosition and self.spawnUnit then
                 --LOG('* Necro: OnStopReclaim:  I am a necro! and RecBP = true ')
@@ -239,6 +239,7 @@ TANecro = Class(TAconstructor) {
         WaitTicks(3)
         local newUnit = CreateUnitHPR(RecBP, army, pos[1], pos[2], pos[3], 0, 0, 0)
         newUnit:SetHealth(nil, 100)
+        newUnit.Necro = true
     end,
 }
 

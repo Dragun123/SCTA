@@ -103,7 +103,6 @@ BuilderGroup {
         PriorityFunction = TAPrior.TechEnergyExist,
         BuilderConditions = {
             { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.MASSFABRICATION} },
-                { UCBC, 'HaveGreaterThanUnitsWithCategory', { 0, categories.MASSFABRICATION}},
             },
         BuilderType = 'StructureForm',
     },
@@ -115,7 +114,6 @@ BuilderGroup {
         PriorityFunction = TAPrior.TechEnergyExist,
         BuilderConditions = {
             { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.ARTILLERY * categories.STRUCTURE} },
-            { UCBC, 'HaveGreaterThanUnitsWithCategory', { 0, categories.ARTILLERY * categories.STRUCTURE}},
             },
         BuilderType = 'StructureForm',
     },
@@ -125,7 +123,6 @@ BuilderGroup {
         Priority = 300,
         BuilderConditions = {
             { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.TACTICALMISSILEPLATFORM * categories.STRUCTURE} },
-            { UCBC, 'HaveGreaterThanUnitsWithCategory', { 0, categories.TACTICALMISSILEPLATFORM * categories.STRUCTURE}},
             },
         BuilderType = 'StructureForm',
     },
