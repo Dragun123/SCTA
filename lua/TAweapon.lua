@@ -60,8 +60,8 @@ TAweapon = Class(DefaultWeapon) {
     WeaponUnpackingState = State(DefaultWeapon.WeaponUnpackingState) {
         Main = function(self)          
             ---LOG('Resulting Table'..repr(TAutils.targetingFacilityData))
-            if (TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
-            self.unit:GetAIBrain().SCTAAI or
+            if (self.unit:GetAIBrain().SCTAAI or
+            TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
             self:OnGotTargetCheck() == true) then
                 DefaultWeapon.WeaponUnpackingState.Main(self)
             end

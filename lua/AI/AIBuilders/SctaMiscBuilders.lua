@@ -18,7 +18,7 @@ BuilderGroup {
         Priority = 75,
         InstanceCount = 2,
         BuilderConditions = {
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 10, categories.ANTIAIR * categories.TECH1 - categories.MOBILE} }, 
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 10, categories.ANTIAIR - categories.MOBILE} }, 
             { EBC, 'GreaterThanEconStorageRatio', { 0.5, 0.5}},
         },
         BuilderType = 'LandTA',
@@ -56,11 +56,11 @@ BuilderGroup {
         BuilderName = 'SCTAMissileDefense2',
         PlatoonTemplate = 'EngineerBuilderSCTA3',
         PriorityFunction = TAPrior.TechEnergyExist,
-        Priority = 74,
+        Priority = 100,
         InstanceCount = 1,
         BuilderConditions = {
             { MIBC, 'GreaterThanGameTime', {1500} },
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 1, categories.ANTIMISSILE * categories.TECH3} },
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 1, categories.ANTIMISSILE * categories.TECH3 * categories.STRUCTURE} },
             { TAutils, 'GreaterThanEconEnergyTAEfficiency', {1.05 }},
         },
         BuilderType = 'T3TA',
@@ -82,7 +82,7 @@ BuilderGroup {
         Priority = 81,
         InstanceCount = 1,
         BuilderConditions = {
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 4, categories.DIRECTFIRE * categories.TECH3 - categories.MOBILE - categories.ANTIAIR} }, 
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 4, categories.DIRECTFIRE * categories.TECH3 - categories.MOBILE} }, 
             { EBC, 'GreaterThanEconStorageRatio', { 0.15, 0.25}}, 
         },
         BuilderType = 'NotACU',
@@ -124,7 +124,7 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTAStaging',
         PlatoonTemplate = 'EngineerBuilderSCTA',
-        Priority = 57,
+        Priority = 52,
         PriorityFunction = TAPrior.UnitProduction,
         InstanceCount = 1,
         BuilderConditions = {

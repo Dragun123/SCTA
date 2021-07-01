@@ -33,7 +33,7 @@ PlatoonTemplate {
     Plan = 'SCTAArtyHuntAI', -- The platoon function to use.
     ---PlatoonType = 'Scout',
     GlobalSquads = {
-        { ((categories.AMPHIBIOUS + categories.HOVER) * GROUND) - SPECIAL, -- ---PlatoonType of units.
+        { (((categories.AMPHIBIOUS + categories.HOVER) * GROUND) - SPECIAL) + categories.BOMB, -- ---PlatoonType of units.
           1, -- Min number of units.
           5, -- Max number of units.
           'Attack', -- platoon ---PlatoonTypes: 'support', 'Attack', 'scout',
@@ -75,8 +75,7 @@ PlatoonTemplate {
     Plan = 'TAHunt', -- The platoon function to use.
     ---PlatoonType = 'LandForm',
     GlobalSquads = {
-        { (GROUND * (categories.HOVER + categories.AMPHIBIOUS)) - SPECIAL, 2, 10, 'Artillery', 'none' }, -- platoon move formations: 'None', 'AttackFormation', 'GrowthFormation',
-        { categories.BOMB, 0, 2, 'Attack', 'none' },
+        { ((GROUND * (categories.HOVER + categories.AMPHIBIOUS)) - SPECIAL) + categories.BOMB, 2, 10, 'Artillery', 'none' }, -- platoon move formations: 'None', 'AttackFormation', 'GrowthFormation',
     },
 }
 
@@ -136,7 +135,7 @@ PlatoonTemplate {
     Plan = 'ExperimentalAIHubSorian', 
     ---PlatoonType = 'CommandTA',
     GlobalSquads = {
-        { categories.EXPERIMENTAL * categories.MOBILE - categories.SUBCOMMANDER, 1, 1, 'Attack', 'none' }
+        { (categories.EXPERIMENTAL * categories.MOBILE) - categories.SUBCOMMANDER, 1, 1, 'Attack', 'none' }
     },
 }
 
@@ -144,9 +143,11 @@ PlatoonTemplate {
     Name = 'SCTAExperimental',
     FactionSquads = {
         Arm = {
+            { 'armdecom', 1, 1, 'Support', 'None' },
             { 'armdrake', 1, 1, 'Attack', 'none' },
         },
         Core = {
+            { 'cordecom', 1, 1, 'Support', 'None' },
             { 'corkrog', 1, 1, 'Attack', 'none' },
         },
     }

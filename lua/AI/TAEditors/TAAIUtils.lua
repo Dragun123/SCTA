@@ -175,6 +175,15 @@ function TAFactoryCapCheckT2(aiBrain)
     return false
 end
 
+function TAFactoryCapCheckT2Expansion(aiBrain)
+    --LOG('*SCTALABs', aiBrain.Plants)
+    if (aiBrain.Labs + (aiBrain:GetCurrentUnits(categories.TECH2 * categories.FACTORY) - aiBrain.Labs)) < 7 and not aiBrain.CapCheckT2 then
+        return true
+    end
+    aiBrain.CapCheckT2 = true
+    return false
+end
+
 function TAHaveEnemyUnitAtLocation(aiBrain, radius, locationType, unitCount, categoryEnemy, compareType)
     if not aiBrain.BuilderManagers[locationType] then
         WARN('*AI WARNING: HaveEnemyUnitAtLocation - Invalid location - ' .. locationType)

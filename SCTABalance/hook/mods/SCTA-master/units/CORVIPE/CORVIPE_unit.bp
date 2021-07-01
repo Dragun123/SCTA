@@ -6,8 +6,8 @@ UnitBlueprint {
     },
     Economy = {
         BuildCostEnergy = 12000,
-        BuildCostMass = 2400,
-        BuildTime = 30000,
+        BuildCostMass = 1200,
+        BuildTime = 15000,
     },
     Intel = {
         FreeIntel = true,
