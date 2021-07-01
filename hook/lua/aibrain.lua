@@ -60,7 +60,7 @@ AIBrain = Class(SCTAAIBrainClass) {
                 if aiBrain.SeaForm < 1 and checks.SeaForm < 1 then
                     aiBrain.SeaForm = GetCurrentUnits(aiBrain, (categories.NAVAL * categories.MOBILE) - categories.ENGINEER)
                     WaitTicks(1)
-                    checks.SeaForm = checks.SeaForm + 3
+                    checks.SeaForm = checks.SeaForm + 5
                 end
                 if aiBrain.StructureForm > 3 and checks.StructureForm < 1 then
                     aiBrain.StructureForm = GetCurrentUnits(aiBrain, categories.STRUCTURE * (categories.CQUEMOV + categories.MASSFABRICATION))

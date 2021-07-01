@@ -150,7 +150,6 @@ UnitBlueprint {
             CollideFriendly = false,
             DamageFriendly = true,
             Damage = 750,
-            DamageRadius = 2,
             DamageType = 'Normal',
             DisplayName = 'CORKROG_FIRE',
             FireTargetLayerCapsTable = {

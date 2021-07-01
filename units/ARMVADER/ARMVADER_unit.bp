@@ -145,7 +145,7 @@ UnitBlueprint {
             CollideFriendly = false,
 	        DamageFriendly = true,
             Damage = 2000, #Doubles up with death, so death damage subtracted
-	        DamageRadius = 5,
+	        DamageRadius = 6,
             FireOnSelfDestruct = true,
             DamageType = 'Normal',
             RackBones = {

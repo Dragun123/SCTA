@@ -127,7 +127,7 @@ UnitBlueprint {
             CollideFriendly = false,
             DamageFriendly = false,
             Damage = 105,
-            DamageRadius = 2, 
+            DamageRadius = 1, 
             DamageType = 'Normal',
             DisplayName = 'KBOT_ROCKET',
             FireTargetLayerCapsTable = {

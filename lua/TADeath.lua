@@ -35,7 +35,11 @@ CreateHeapProp = function(self, overkillRatio)
 
     time = time * 1
     local overkillMultiplier = 1 - (overkillRatio or 0.5)
-    mass = mass * overkillMultiplier
+    if self.Necro then
+        mass = 12
+        else
+        mass = mass * overkillMultiplier
+    end
     energy = energy * overkillMultiplier
     time = time * overkillMultiplier
     -- Now we adjust the global multiplier. This is used for balance purposes to adjust global reclaim rate.

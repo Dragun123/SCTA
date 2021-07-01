@@ -166,7 +166,7 @@ TechLevel = 'RULEUTL_Basic',
         { #MEDIUM_BUILDINGEX
             Damage = 100,
             DamageFriendly = true,
-            DamageRadius = 3.28,
+            DamageRadius = 3,
             DamageType = 'Normal',
             DummyWeapon = true,
             Label = 'DeathWeapon',

@@ -132,7 +132,7 @@ UnitBlueprint {
             CollideFriendly = false,
             DamageFriendly = false,
             Damage = 100,
-            DamageRadius = 3, 
+            DamageRadius = 1, 
             DamageType = 'Normal',
             DisplayName = 'ARM_HAM',
             FireTargetLayerCapsTable = {
