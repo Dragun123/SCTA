@@ -77,7 +77,7 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'Factory2', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory2' }},
-            { TASlow, 'TAFactoryCapCheckExpansion', { 'LocationType'} },
+            { UCBC, 'UnitsLessAtLocation', { 'LocationType', 4, categories.TECH2 * categories.FACTORY * categories.LAND}},
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, LAB} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
@@ -103,7 +103,7 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'Factory2', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory2' }},
-            { TASlow, 'TAFactoryCapCheckExpansion', { 'LocationType'} },
+            { UCBC, 'UnitsLessAtLocation', { 'LocationType', 4, categories.TECH2 * categories.FACTORY * categories.LAND}},
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, LAB} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
@@ -131,7 +131,7 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'Factory', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory' }},
-            { UCBC, 'FactoryCapCheck', { 'LocationType', 'Air' } },
+            { UCBC, 'UnitsLessAtLocation', { 'LocationType', 2, categories.TECH1 * categories.FACTORY * categories.LAND}},
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, categories.FACTORY} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
@@ -157,7 +157,7 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'Factory2', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory2' }},
-            { UCBC, 'FactoryCapCheck', { 'LocationType', 'Air' } },
+            { UCBC, 'UnitsLessAtLocation', { 'LocationType', 2, categories.TECH2 * categories.FACTORY * categories.AIR}},
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, LAB * categories.AIR} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
