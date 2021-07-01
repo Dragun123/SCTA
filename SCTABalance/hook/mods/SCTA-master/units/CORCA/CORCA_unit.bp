@@ -2,7 +2,7 @@ UnitBlueprint {
     Merge = true,
     Air = {
         MaxAirspeed = 8,
-        MinAirspeed = 4,
+        MinAirspeed = 3,
     },    
     Defense = {
         Health = 440,
@@ -15,10 +15,8 @@ UnitBlueprint {
         BuildCostMass = 60,
         BuildCostEnergy = 2800,
         ProductionPerSecondEnergy = 2,
-        MaxBuildDistance = 5,
         BuildTime = 2000,
     },
-    
     Physics = {
         FuelRechargeRate = 666666,
         FuelUseTime = 666666,

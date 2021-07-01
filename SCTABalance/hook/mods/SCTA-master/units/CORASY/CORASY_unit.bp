@@ -39,6 +39,7 @@ UnitBlueprint {
             'NAVAL MOBILE TECH2 CORE',
             'NAVAL MOBILE TECH3 CORE',
             'corch',
+            'cornecro',
         },
         BuildRate = 360,
     },

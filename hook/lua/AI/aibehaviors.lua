@@ -161,8 +161,8 @@ function CDRSCTADGunDecoy(aiBrain, cdr)
                     counter = counter + 0.5
                 end
             else
-                WaitSeconds(5)
-                counter = counter + 5
+                WaitSeconds(3)
+                counter = counter + 0.5
             end
 
             distressLoc = aiBrain:BaseMonitorDistressLocation(cdrPos)
@@ -478,8 +478,8 @@ function CDRSCTADGun(aiBrain, cdr)
                     counter = counter + 0.5
                 end
             else
-                WaitSeconds(5)
-                counter = counter + 5
+                WaitSeconds(3)
+                counter = counter + 0.5
             end
 
             distressLoc = aiBrain:BaseMonitorDistressLocation(cdrPos)

@@ -35,7 +35,7 @@ function ExecutePlan(aiBrain)
         for k,v in pool:GetPlatoonUnits() do
             if EntityCategoryContains(categories.ENGINEER, v) then
                 mainManagers.EngineerManager:AddUnit(v)
-            elseif EntityCategoryContains(categories.FACTORY * categories.STRUCTURE, v) then
+            elseif EntityCategoryContains(categories.FACTORY, v) then
                 mainManagers.FactoryManager:AddFactory(v)
             end
         end

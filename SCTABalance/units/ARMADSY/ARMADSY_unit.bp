@@ -86,6 +86,7 @@ UnitBlueprint {
         'NAVAL MOBILE TECH1 ARM',
         'NAVAL MOBILE TECH2 ARM',
         'NAVAL MOBILE TECH3 ARM',
+        'armfark',
         'armch',
     },
     StorageMass = 50,
