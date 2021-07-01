@@ -254,6 +254,21 @@ function TAHaveUnitRatioGreaterThanNavalT3(aiBrain, Naval)
         return false
     end
 end
+
+function TAFactoryCapCheckExpansion(aiBrain, locationType)
+    local factoryManager = aiBrain.BuilderManagers[locationType].FactoryManager
+    if not factoryManager then
+        WARN('*AI WARNING: FactoryCapCheck - Invalid location - ' .. locationType)
+        return false
+    end
+    local numUnits = factoryManager:GetNumCategoryFactories(categories.TECH2 * categories.FACTORY)
+    numUnits = numUnits + aiBrain:GetEngineerManagerUnitsBeingBuilt(categories.TECH2 * categories.FACTORY)
+
+    if numUnits < 4 then
+        return true
+    end
+    return false
+end
 ----TAReclaim
 
 function TAReclaimablesInArea(aiBrain, locType)
