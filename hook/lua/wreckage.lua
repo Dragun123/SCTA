@@ -6,7 +6,6 @@
 --**
 --**  Copyright 2006 Gas Powered Games, Inc.  All rights reserved.
 --***************************************************************************
-
 --- Create a wreckage prop.
 ---THIS IS A DESTRUCTIVE HOOK. There is no other way to make this work as intended for Heaps or easily enough
 function CreateWreckage(bp, position, orientation, mass, energy, time, deathHitBox)
