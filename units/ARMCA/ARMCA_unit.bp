@@ -127,7 +127,7 @@ UnitBlueprint {
         BuildableCategory = {
             'BUILTBYTIER1FACTORY ARM',
         },
-        MaxBuildDistance = 2.5,
+        BuildRadius = 8,
         StorageEnergy = 5,
         StorageMass = 5,
 	ProductionPerSecondEnergy = 11,

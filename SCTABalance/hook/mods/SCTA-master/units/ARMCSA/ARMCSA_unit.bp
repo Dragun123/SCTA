@@ -21,7 +21,6 @@ UnitBlueprint {
             'BUILTBYTIER2FACTORY ARM',
             'BUILTBYTIER2ENGINEER ARM',
         },
-        MaxBuildDistance = 5,
         ProductionPerSecondEnergy = 5,
     },
     Physics = {

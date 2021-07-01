@@ -21,7 +21,6 @@ UnitBlueprint {
             'BUILTBYTIER2FACTORY CORE',
             'BUILTBYTIER2ENGINEER CORE',
         },
-        MaxBuildDistance = 5,
         ProductionPerSecondEnergy = 5,
     },
     Physics = {

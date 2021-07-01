@@ -19,7 +19,6 @@ UnitBlueprint {
             'BUILTBYTIER1FACTORY CORE',
             'BUILTBYTIER2FACTORY CORE',
         },
-        MaxBuildDistance = 5,
         ProductionPerSecondEnergy = 3,
         ProductionPerSecondMass = 0,
     },

@@ -256,7 +256,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             end
             if EntityCategoryContains(categories.ENGINEER, finishedUnit) then
                 self.Brain.BuilderManagers[self.LocationType].EngineerManager:AddUnit(finishedUnit)
-            elseif EntityCategoryContains(categories.FACTORY * categories.STRUCTURE, finishedUnit) then
+            elseif EntityCategoryContains(categories.FACTORY, finishedUnit) then
                 self:AddFactory(finishedUnit)
             end
             self:TAAssignBuildOrder(factory, factory.BuilderManagerData.BuilderType)

@@ -87,6 +87,7 @@ UnitBlueprint {
         'NAVAL MOBILE TECH2 CORE',
         'NAVAL MOBILE TECH3 CORE',
         'corch',
+        'cornecro',
     },
     StorageMass = 50,
     StorageEnergy = 50,

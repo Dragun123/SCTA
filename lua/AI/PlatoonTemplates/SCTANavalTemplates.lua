@@ -40,13 +40,13 @@ PlatoonTemplate {
     Plan = 'NavalForceAISorian',
     --Type = 'SeaForm',
     GlobalSquads = {
-        {NAVY - categories.ENGINEER, 4, 10, 'Attack', 'GrowthFormation' },
+        {NAVY - categories.ENGINEER - categories.NAVALCARRIER, 4, 10, 'Attack', 'GrowthFormation' },
     },
 }
 
 PlatoonTemplate {
     Name = 'SCTAAirCarrier',
-    Plan = 'CarrierAI',
+    Plan = 'None',
     --Type = 'SeaForm',
     GlobalSquads = {
         {categories.NAVALCARRIER, 1, 1, 'Attack', 'GrowthFormation' }
