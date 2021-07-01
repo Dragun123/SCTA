@@ -89,7 +89,7 @@ BuilderConditions = {
     Builder {
         BuilderName = 'SCTAAi FactoryT2 Kbot',
         PlatoonTemplate = 'T2LandDFTankSCTA',
-        Priority = 125,
+        Priority = 121,
 BuilderConditions = {
             { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
         },
@@ -98,7 +98,7 @@ BuilderConditions = {
     Builder {
         BuilderName = 'SCTAAi FactoryT2 Kbot Artillery',
         PlatoonTemplate = 'T2LandRocketSCTA',
-        Priority = 125,
+        Priority = 123,
         InstanceCount = 1,
         DelayEqualBuildPlattons = {'ArtillerySCTA', 1},
         BuilderConditions = {
@@ -136,7 +136,7 @@ BuilderConditions = {
     Builder {
         BuilderName = 'SCTAAi FactoryT2 Tank',
         PlatoonTemplate = 'T2LandDFTank2SCTA',
-        Priority = 125,
+        Priority = 135,
         DelayEqualBuildPlattons = {'FactoryProductionSCTA', 1},
         BuilderConditions = {
         { UCBC, 'CheckBuildPlattonDelay', { 'FactoryProductionSCTA' }},
@@ -147,7 +147,7 @@ BuilderConditions = {
     Builder {
         BuilderName = 'SCTAAi Factory Counter Tank',
         PlatoonTemplate = 'T2LandAuxFact2',
-        Priority = 125,
+        Priority = 124,
         InstanceCount = 1,
         BuilderConditions = {   
             { UCBC, 'HaveLessThanUnitsWithCategory', { 4, categories.STEALTHFIELD * categories.LAND * categories.TECH2} },
@@ -158,7 +158,7 @@ BuilderConditions = {
     Builder {
         BuilderName = 'SCTAAi Factory All Tank Terrain T2',
         PlatoonTemplate = 'T2LandAuxTerrain2',
-        Priority = 125,
+        Priority = 129,
         InstanceCount = 1,
         BuilderConditions = {   
             { TASlow, 'TAHaveUnitRatioGreaterThanLand', {categories.TANK * categories.AMPHIBIOUS - categories.SCOUT} },
@@ -169,7 +169,7 @@ BuilderConditions = {
     Builder {
         BuilderName = 'SCTAAi FactoryT2 AntiAir Tank',
         PlatoonTemplate = 'T2LandAASCTA2',
-        Priority = 125,
+        Priority = 126,
         InstanceCount = 2,
         DelayEqualBuildPlattons = {'AntiAirSCTA', 1},
         BuilderConditions = {
@@ -182,7 +182,7 @@ BuilderConditions = {
     Builder {
         BuilderName = 'SCTAAi FactoryT2 Artillery Tank',
         PlatoonTemplate = 'T2LandMissileSCTA2',
-        Priority = 125,
+        Priority = 127,
         InstanceCount = 1,
         DelayEqualBuildPlattons = {'ArtillerySCTA', 1},
         BuilderConditions = {
@@ -196,7 +196,7 @@ BuilderConditions = {
     Builder {
         BuilderName = 'SCTAAi Factory Artillery-AntiAir',
         PlatoonTemplate = 'T2LandAntiArtySCTA',
-        Priority = 125,
+        Priority = 128,
         BuilderConditions = {
             { TASlow, 'TAHaveUnitRatioGreaterThanLand', {categories.ARTILLERY + categories.ANTIAIR} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
