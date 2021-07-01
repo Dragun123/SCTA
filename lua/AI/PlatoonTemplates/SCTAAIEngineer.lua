@@ -24,7 +24,7 @@ PlatoonTemplate {
     Plan = 'EngineerBuildAISCTA',
     ---PlatoonType = 'EngineerForm',
     GlobalSquads = {
-        { categories.ENGINEER * TA - WEIRD, 1, 1, 'support', 'None' }
+        { (categories.ENGINEER * TA) - WEIRD, 1, 1, 'support', 'None' }
     },
 }
 
@@ -33,7 +33,7 @@ PlatoonTemplate {
     Plan = 'SCTAEngineerTypeAI',
     ---PlatoonType = 'EngineerForm',
     GlobalSquads = {
-        { categories.ENGINEER * TA - categories.NAVAL - categories.FIELDENGINEER - categories.COMMAND, 1, 1, 'support', 'None' }
+        { (categories.ENGINEER * TA) - categories.NAVAL - categories.FIELDENGINEER - categories.COMMAND, 1, 1, 'support', 'None' }
     },
 }
 
@@ -43,7 +43,7 @@ PlatoonTemplate {
     Plan = 'EngineerBuildAISCTA',
     ---PlatoonType = 'EngineerForm',
     GlobalSquads = {
-        { categories.ENGINEER * TA * (categories.TECH3 + (categories.TECH2 - WEIRD)), 1, 1, 'support', 'None' }
+        { (categories.ENGINEER * TA) * (categories.TECH3 + (categories.TECH2 - WEIRD)), 1, 1, 'support', 'None' }
     },
 }
 
@@ -53,7 +53,7 @@ PlatoonTemplate {
     Plan = 'EngineerBuildAISCTA',
     ---PlatoonType = 'EngineerForm',
     GlobalSquads = {
-        { categories.ENGINEER * categories.TECH1 * TA - WEIRD, 1, 1, 'support', 'None' }
+        { (categories.ENGINEER * categories.TECH1 * TA) - WEIRD, 1, 1, 'support', 'None' }
     },
 }
 
@@ -62,7 +62,7 @@ PlatoonTemplate {
     Plan = 'EngineerBuildAISCTAAir',
     ---PlatoonType = 'EngineerForm',
     GlobalSquads = {
-        { categories.ENGINEER * ((categories.AIR * (categories.TECH1 + categories.TECH2)) + categories.TECH3) * TA, 1, 1, 'support', 'None' }
+        { (categories.ENGINEER * ((categories.AIR * (categories.TECH1 + categories.TECH2)) + categories.TECH3)) * TA, 1, 1, 'support', 'None' }
     },
 }
 
@@ -72,7 +72,7 @@ PlatoonTemplate {
     Plan = 'EngineerBuildAISCTAAir',
     ---PlatoonType = 'EngineerForm',
     GlobalSquads = {
-        { categories.ENGINEER * ((categories.AIR * categories.TECH2) + categories.TECH3) * TA, 1, 1, 'support', 'None' }
+        { (categories.ENGINEER * ((categories.AIR * categories.TECH2) + categories.TECH3)) * TA, 1, 1, 'support', 'None' }
     },
 }
 
@@ -81,7 +81,7 @@ PlatoonTemplate {
     Plan = 'EngineerBuildAISCTAAir',
     ---PlatoonType = 'EngineerForm',
     GlobalSquads = {
-        { categories.ENGINEER * categories.TECH1 * categories.AIR * TA, 1, 1, 'support', 'None' }
+        { (categories.ENGINEER * categories.TECH1 * categories.AIR) * TA, 1, 1, 'support', 'None' }
     },
 }
 
@@ -90,7 +90,7 @@ PlatoonTemplate {
     Plan = 'EngineerBuildAISCTANaval',
     ---PlatoonType = 'SeaForm',
     GlobalSquads = {
-        { categories.NAVAL * categories.ENGINEER * categories.TECH2 * TA, 1, 1, 'support', 'None' }
+        { (categories.NAVAL * categories.ENGINEER * categories.TECH2) * TA, 1, 1, 'support', 'None' }
     },
 }
 
@@ -99,7 +99,7 @@ PlatoonTemplate {
     Plan = 'EngineerBuildAISCTANaval',
     ---PlatoonType = 'SeaForm',
     GlobalSquads = {
-        { categories.NAVAL * categories.ENGINEER * TA, 1, 1, 'support', 'None' }
+        { (categories.NAVAL * categories.ENGINEER) * TA, 1, 1, 'support', 'None' }
     },
 }
 
@@ -117,7 +117,7 @@ PlatoonTemplate {
     Plan = 'SCTAEngineerTypeAI',
     ---PlatoonType = 'EngineerForm',
     GlobalSquads = {
-        { (categories.ENGINEER * (categories.TECH2 + categories.TECH3 + categories.SUBCOMMANDER)) * TA - categories.NAVAL - categories.FIELDENGINEER, 1, 1, 'support', 'None' }
+        { ((categories.ENGINEER * (categories.TECH2 + categories.TECH3 + categories.SUBCOMMANDER)) * TA) - categories.NAVAL - categories.FIELDENGINEER, 1, 1, 'support', 'None' }
     },
 }
 
@@ -126,7 +126,7 @@ PlatoonTemplate {
     Plan = 'SCTAEngineerTypeAI',
     ---PlatoonType = 'EngineerForm',
     GlobalSquads = {
-        { categories.ENGINEER * (categories.TECH3 + categories.SUBCOMMANDER) * TA, 1, 1, 'support', 'None' }
+        { (categories.ENGINEER * (categories.TECH3 + categories.SUBCOMMANDER)) * TA, 1, 1, 'support', 'None' }
     },
 }
 

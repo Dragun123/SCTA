@@ -11,10 +11,6 @@ EngineerManager = Class(SCTAEngineerManager) {
             error('*PLATOOM FORM MANAGER ERROR: Invalid parameters; requires locationType, location, and radius')
             return false
         end
-        local builderTypes = { 'AirTA', 'LandTA', 'SeaTA', 'T3TA', 'FieldTA', 'Command', }
-        for k,v in builderTypes do
-            self:AddBuilderType(v)
-        end
         ---LOG('IEXIST')
         self.Location = location
         self.Radius = radius
@@ -25,7 +21,10 @@ EngineerManager = Class(SCTAEngineerManager) {
             Intel = { Category = categories.STRUCTURE * ( categories.SONAR + categories.RADAR + categories.OMNI) - categories.FACTORY, Units = {}, UnitsList = {}, Count = 0, },
             MobileIntel = { Category = categories.MOBILE - categories.ENGINEER, Units = {}, UnitsList = {}, Count = 0, },
         }
-        self.EngineerList = {}
+        local builderTypes = { 'AirTA', 'LandTA', 'SeaTA', 'T3TA', 'FieldTA', 'Command', }
+        for k,v in builderTypes do
+            self:AddBuilderType(v)
+        end
         ---LOG(self.ConsumptionUnits)
 
     end,
@@ -57,7 +56,29 @@ EngineerManager = Class(SCTAEngineerManager) {
         if unit.ForkedEngineerTask then
             KillThread(unit.ForkedEngineerTask)
         end
-        unit.ForkedEngineerTask = unit:ForkThread(manager.Wait, manager, delaytime or (math.random(10,30)))
+        unit.ForkedEngineerTask = unit:ForkThread(manager.TAWait, manager, delaytime or (math.random(10,30)))
+    end,
+
+    TAWait = function(unit, manager, ticks)
+        coroutine.yield(ticks)
+        if unit.bType and not unit.Dead then
+            manager:TAAssignEngineerTask(unit, unit.bType)
+        elseif not unit.Dead then
+            manager:AssignEngineerTask(unit)
+        end
+    end,
+
+    ForkEngineerTask = function(manager, unit)
+        if not manager.Brain.SCTAAI then
+            --LOG('*TABrain', manager.Brain.SCTAAI)
+            return SCTAEngineerManager.ForkEngineerTask(manager, unit)
+        end
+        if unit.ForkedEngineerTask then
+            KillThread(unit.ForkedEngineerTask)
+            unit.ForkedEngineerTask = unit:ForkThread(manager.TAWait, manager, 3)
+        else
+            unit.ForkedEngineerTask = unit:ForkThread(manager.TAWait, manager, 20)
+        end
     end,
 
     AddBuilder = function(self, builderData, locationType)
@@ -107,52 +128,49 @@ EngineerManager = Class(SCTAEngineerManager) {
         if not self.Brain.SCTAAI then
             return SCTAEngineerManager.AssignEngineerTask(self, unit)
         end
+        unit.DesiresAssist = false
+        unit.NumAssistees = nil
+        unit.MinNumAssistees = nil
+        if unit.UnitBeingAssist or unit.UnitBeingBuilt or unit.unitBuilding then
+            self:TADelayAssign(unit, 50)
+            return
+        end
         if self.AssigningTask and unit:IsIdleState() then
             self.AssigningTask = nil
         elseif self.AssigningTask and not unit:IsIdleState() then
             return
+        end
+        if unit.bType then
+            return self:TAAssignEngineerTask(unit, unit.bType)
         else
-                if unit:GetBlueprint().Economy.Land then
-                    return self:TAAssignEngineerTask(unit, 'LandTA')
-                elseif unit:GetBlueprint().Economy.Air then
-                    return self:TAAssignEngineerTask(unit, 'AirTA')
-                elseif unit:GetBlueprint().Economy.Naval then
-                    return self:TAAssignEngineerTask(unit, 'SeaTA')
-                elseif unit:GetBlueprint().Economy.TECH3 then
-                    return self:TAAssignEngineerTask(unit, 'T3TA')
-                elseif unit:GetBlueprint().Economy.Command then
-                    return self:TAAssignEngineerTask(unit, 'Command')
-                else 
-                    return self:TAAssignEngineerTask(unit, 'FieldTA')                
+            local bp = unit:GetBlueprint().Economy
+                if bp.Land then
+                    unit.bType = 'LandTA'
+                    --return self:TAAssignEngineerTask(unit, 'LandTA')
+                elseif bp.Air then
+                    unit.bType = 'AirTA'
+                    --return self:TAAssignEngineerTask(unit, 'AirTA')
+                elseif bp.Naval then
+                    unit.bType = 'SeaTA'
+                    --return self:TAAssignEngineerTask(unit, 'SeaTA')
+                elseif bp.TECH3 then
+                    unit.bType = 'T3TA'
+                    --return self:TAAssignEngineerTask(unit, 'T3TA')
+                elseif bp.Command then
+                    unit.bType = 'Command'
+                    --return self:TAAssignEngineerTask(unit, 'Command')
+                else
+                    unit.bType = 'FieldTA'                
                 end
+                return self:TAAssignEngineerTask(unit, unit.bType)
             end
         end,
 
 
     TAAssignEngineerTask = function(self, unit, bType)
         ---LOG('*Brain', self.Brain.SCTAAI)   
-        if unit.UnitBeingBuilt or unit.unitBuilding then
-            return
-        end
-        unit.DesiresAssist = false
-        unit.NumAssistees = nil
-        unit.MinNumAssistees = nil
-        unit.bType = bType
-        
-        if unit.UnitBeingAssist or unit.UnitBeingBuilt then
-            self:TADelayAssign(unit, 50)
-            return
-        end
-
-        unit.DesiresAssist = false
-        unit.NumAssistees = nil
-        unit.MinNumAssistees = nil
-
-        if self.AssigningTask then
-            self:TADelayAssign(unit, 50)
-            return
-        end
-        local builder = self:GetHighestBuilder(unit.bType, {unit})
+        --unit.bType = bType
+        local builder = self:GetHighestBuilder(bType, {unit})
         if builder then
             self.AssigningTask = true
             -- Fork off the platoon here

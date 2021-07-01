@@ -82,7 +82,7 @@ BuilderGroup {
         Priority = 81,
         InstanceCount = 1,
         BuilderConditions = {
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 4, categories.STRUCTURE * categories.DIRECTFIRE * categories.TECH3 - categories.MOBILE - categories.ANTIAIR} }, 
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 4, categories.DIRECTFIRE * categories.TECH3 - categories.MOBILE - categories.ANTIAIR} }, 
             { EBC, 'GreaterThanEconStorageRatio', { 0.15, 0.25}}, 
         },
         BuilderType = 'NotACU',

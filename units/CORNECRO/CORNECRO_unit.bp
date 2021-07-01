@@ -90,10 +90,11 @@ UnitBlueprint {
         BuildTime = 7931,
         MaxBuildDistance = 3.75,
         Necro = true,
+        FieldEngineer = true,
 	    NaturalProducer = true,
 	    ProductionPerSecondEnergy = 17,
         ProductionPerSecondMass = 1,
-    BuildableCategory = {
+        BuildableCategory = {
         'BOMB STRUCTURE CORE',
     },
     },

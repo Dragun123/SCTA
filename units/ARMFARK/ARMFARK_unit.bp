@@ -79,10 +79,10 @@ UnitBlueprint {
                 },
             },
         },
-	---SmokeBone = 'pelvis',
         UniformScale = 0.12,
     },
     Economy = {
+        FieldEngineer = true,
         BuildCostEnergy = 3219,
         BuildCostMass = 480,
         BuildRate = 180,

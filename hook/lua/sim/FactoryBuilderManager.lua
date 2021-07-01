@@ -267,13 +267,8 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             if factory.Dead then
                 return
             end
-            --[[if factory.TABuildingUnit then
-                return self:ForkThread(self.DelayBuildOrder, factory, bType, 2)
-            end]]
-            --LOG('*TAIEXIST2', factory.TABuildingUnit)
             local builder = self:GetHighestBuilder(bType,{factory})
             --LOG('*TAIEXIST2', factory)
-            --LOG('*TAIEXIST', factory.TABuildingUnit)
                 if builder then
                 ---LOG('*TAIEXIST3', factory)
                 local template = self:GetFactoryTemplate(builder:GetPlatoonTemplate(), factory)

@@ -81,6 +81,7 @@ UnitBlueprint {
         UniformScale = 0.16,
     },
     Economy = {
+        FieldEngineer = true,
         BuildCostEnergy = 1031,
         BuildCostMass = 173,
         BuildRate = 100,
