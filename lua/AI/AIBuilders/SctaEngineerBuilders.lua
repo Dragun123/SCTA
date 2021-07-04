@@ -168,7 +168,7 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTA Decoy Commander',
         PlatoonTemplate = 'SCTADecoyCommander',
-        PriorityFunction = TAPrior.GantryUnitBuilding,
+        PriorityFunction = TAPrior.GantryUnitBuildingDecoy,
         Priority = 150,
         InstanceCount = 1,
         BuilderConditions = {},

@@ -215,6 +215,14 @@ GantryUnitBuilding = function(self, aiBrain)
     end
 end
 
+GantryUnitBuildingDecoy = function(self, aiBrain)
+    if Factory(aiBrain,  0, categories.EXPERIMENTAL * categories.MOBILE) then 
+        return 300
+    else
+        return 0
+    end
+end
+
 TechEnergyExist = function(self, aiBrain)
     if Factory(aiBrain,  1, FUSION) then 
         return 125

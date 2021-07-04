@@ -143,11 +143,9 @@ PlatoonTemplate {
     Name = 'SCTAExperimental',
     FactionSquads = {
         Arm = {
-            { 'armdecom', 1, 1, 'Support', 'None' },
             { 'armdrake', 1, 1, 'Attack', 'none' },
         },
         Core = {
-            { 'cordecom', 1, 1, 'Support', 'None' },
             { 'corkrog', 1, 1, 'Attack', 'none' },
         },
     }
