@@ -307,7 +307,7 @@ TAAntiNukeProjectile = Class(SinglePolyTrailProjectile) {
 	
 	TrackingThread = function(self)
 		self:TrackTarget(false)
-		WaitTicks(1)
+		WaitTicks(2)
 		self:TrackTarget(true)
 	end,
 }

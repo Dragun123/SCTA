@@ -1631,7 +1631,9 @@ Platoon = Class(SCTAAIPlatoon) {
         local platoonUnits = self:GetPlatoonUnits()
         local aiBrain = self:GetBrain()
         for k, v in platoonUnits do
+            if not v.Dead then
             v:SetScriptBit('RULEUTC_ProductionToggle', true)
+            end
         end
         local econ = AIUtils.AIGetEconomyNumbers(aiBrain)
         while ((econ.EnergyStorageRatio < 0.4) or (econ.MassStorageRatio > 0.8)) do
@@ -1639,7 +1641,9 @@ Platoon = Class(SCTAAIPlatoon) {
             econ = AIUtils.AIGetEconomyNumbers(aiBrain)
         end
         for k, v in platoonUnits do
+            if not v.Dead then
             v:SetScriptBit('RULEUTC_ProductionToggle', false)
+            end
         end
         self:PlatoonDisband()
     end,

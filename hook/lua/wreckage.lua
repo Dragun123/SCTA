@@ -8,6 +8,24 @@
 --***************************************************************************
 --- Create a wreckage prop.
 ---THIS IS A DESTRUCTIVE HOOK. There is no other way to make this work as intended for Heaps or easily enough
+local TotalWreckage = Wreckage
+
+Wreckage = Class(TotalWreckage) {
+
+GetReclaimCosts = function(self, reclaimer)
+    if self.NecroingInProgress then
+        local time = self.TimeReclaim * (math.max(self.MaxMassReclaim, self.MaxEnergyReclaim) / reclaimer:GetBuildRate())
+        time = math.max(time / 10, 0.0001)
+       --LOG('self.NecroingInProgress = true, returning nil eco')
+       return time, 1, 1
+    else
+    --LOG('self.NecroingInProgress = false, returning full eco')
+    return TotalWreckage.GetReclaimCosts(self, reclaimer)
+    end
+end,
+
+}
+
 function CreateWreckage(bp, position, orientation, mass, energy, time, deathHitBox)
     local wreck = bp.Wreckage
     local bpWreck = bp.Wreckage.Blueprint

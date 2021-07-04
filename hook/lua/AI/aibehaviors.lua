@@ -56,76 +56,41 @@ end
 function CDRSCTADGunDecoy(aiBrain, cdr)
     local weapBPs = cdr:GetBlueprint().Weapon
     local weapon
+
     for k, v in weapBPs do
         if v.Label == 'OverCharge' then
             weapon = v
             break
         end
     end
-
-    local distressRange = 100
-    local maxRadius = weapon.MaxRadius * 4.55
-    local weapRange = weapon.MaxRadius
-    cdr.UnitBeingBuiltBehavior = false
+    
 
     local cdrPos = cdr.CDRHome
-    local numUnits1 = aiBrain:GetNumUnitsAroundPoint(categories.LAND * categories.TECH1 - categories.SCOUT - categories.ENGINEER, cdrPos, maxRadius, 'Enemy')
-    local numUnits2 = aiBrain:GetNumUnitsAroundPoint(categories.LAND * categories.TECH2 - categories.SCOUT - categories.ENGINEER, cdrPos, maxRadius, 'Enemy')
-    local numUnits3 = aiBrain:GetNumUnitsAroundPoint(categories.LAND * categories.TECH3 - categories.SCOUT - categories.ENGINEER, cdrPos, maxRadius, 'Enemy')
-    local numUnitsEng = aiBrain:GetNumUnitsAroundPoint(categories.ENGINEER * (categories.TECH1 + categories.TECH2 + categories.TECH3), cdrPos, maxRadius, 'Enemy')
-    local numUnits4 = aiBrain:GetNumUnitsAroundPoint(categories.EXPERIMENTAL, cdrPos, maxRadius + 130, 'Enemy')
-    local numStructs = aiBrain:GetNumUnitsAroundPoint(categories.STRUCTURE, cdrPos, maxRadius, 'Enemy')
-    local numUnitsDF = aiBrain:GetNumUnitsAroundPoint(categories.DEFENSE * categories.STRUCTURE * categories.DIRECTFIRE - categories.TECH1, cdrPos, maxRadius + 50, 'Enemy')
-    local numUnitsDF1 = aiBrain:GetNumUnitsAroundPoint(categories.DEFENSE * categories.STRUCTURE * categories.DIRECTFIRE * categories.TECH1, cdrPos, maxRadius + 30, 'Enemy')
-    local numUnitsIF = aiBrain:GetNumUnitsAroundPoint(categories.DEFENSE * categories.STRUCTURE * categories.INDIRECTFIRE - categories.TECH1, cdrPos, maxRadius + 260, 'Enemy')
-    local totalUnits = numUnits1 + numUnits2 + numUnits3 + numUnits4 + numStructs + numUnitsEng
+    local numUnits = aiBrain:GetNumUnitsAroundPoint(categories.LAND * categories.MOBILE - categories.SCOUT, cdrPos, (maxRadius), 'Enemy')
     local distressLoc = aiBrain:BaseMonitorDistressLocation(cdrPos)
-
-    if Utilities.XZDistanceTwoVectors(cdrPos, cdr:GetPosition()) > distressRange then
+    local overCharging = false
+    cdr.UnitBeingBuiltBehavior = false
+    if Utilities.XZDistanceTwoVectors(cdrPos, cdr:GetPosition()) > maxRadius then
         return
     end
 
-    local commanderResponse = false
-    if distressLoc then
-        local distressUnitsNaval = aiBrain:GetNumUnitsAroundPoint(categories.NAVAL, distressLoc, 40, 'Enemy')
-        local distressUnitsAir = aiBrain:GetNumUnitsAroundPoint(categories.AIR * (categories.BOMBER + categories.GROUNDATTACK + categories.ANTINAVY), distressLoc, 30, 'Enemy')
-        local distressUnitsexp = aiBrain:GetNumUnitsAroundPoint(categories.EXPERIMENTAL, distressLoc, 50, 'Enemy')
-        if distressUnitsNaval > 0 then
-            if cdr:HasEnhancement('NaniteTorpedoTube') and distressUnitsNaval < 5 and distressUnitsexp < 1 then
-                commanderResponse = true
-            else
-                commanderResponse = false
-            end
-        elseif distressUnitsAir > 0 then
-            commanderResponse = false
-        elseif distressUnitsexp > 0 then
-            commanderResponse = false
-        elseif numUnits1 > 14 or numUnits2 > 9 or numUnits3 > 4 or numUnits4 > 0 or numUnitsDF > 0 or numUnitsIF > 0 or numUnitsDF1 > 2 then
-            commanderResponse = false
-        else
-            commanderResponse = true
-        end
-    end
-
-    local overCharging = false
-    if (not cdr.DistressCall and distressLoc and commanderResponse and Utilities.XZDistanceTwoVectors(distressLoc, cdrPos) < distressRange) then
-        CDRRevertPriorityChange(aiBrain, cdr)
+    if numUnits > 0 or (not cdr.DistressCall and distressLoc and Utilities.XZDistanceTwoVectors(distressLoc, cdrPos) < distressRange) then
         if cdr.UnitBeingBuilt then
             cdr.UnitBeingBuiltBehavior = cdr.UnitBeingBuilt
         end
-
-        cdr.Fighting = true
-        cdr.GoingHome = false
-        cdr.Upgrading = false
         local plat = aiBrain:MakePlatoon('', '')
         aiBrain:AssignUnitsToPlatoon(plat, {cdr}, 'support', 'None')
         plat:Stop()
-
-        local priList = {categories.ENERGYPRODUCTION * categories.STRUCTURE * categories.DRAGBUILD, categories.TECH3 * categories.INDIRECTFIRE,
-            categories.TECH3 * categories.MOBILE, categories.TECH2 * categories.INDIRECTFIRE, categories.MOBILE * categories.TECH2,
-            categories.TECH1 * categories.INDIRECTFIRE, categories.TECH1 * categories.MOBILE, categories.CONSTRUCTION * categories.STRUCTURE, categories.ECONOMIC * categories.STRUCTURE, categories.ALLUNITS}
-        plat:SetPrioritizedTargetList('support', priList)
-        cdr:SetTargetPriorities(priList)
+        local priList = {
+            categories.EXPERIMENTAL,
+            categories.TECH3 * categories.INDIRECTFIRE,
+            categories.TECH3 * categories.MOBILE,
+            categories.TECH2 * categories.INDIRECTFIRE,
+            categories.MOBILE * categories.TECH2,
+            categories.TECH1 * categories.INDIRECTFIRE,
+            categories.TECH1 * categories.MOBILE,
+            categories.ALLUNITS
+        }
 
         local target
         local continueFighting = true
@@ -134,46 +99,53 @@ function CDRSCTADGunDecoy(aiBrain, cdr)
         local enemyThreat
         repeat
             overCharging = false
-            local cdrCurrentPos = cdr:GetPosition()
             if counter >= 5 or not target or target.Dead or Utilities.XZDistanceTwoVectors(cdrPos, target:GetPosition()) > maxRadius then
                 counter = 0
-                for _, v in priList do
-                    target = plat:FindClosestUnit('Support', 'Enemy', true, v)
-                    if target and Utilities.XZDistanceTwoVectors(cdrPos, target:GetPosition()) < maxRadius then
-                        local cdrLayer = cdr:GetCurrentLayer()
-                        local targetLayer = target:GetCurrentLayer()
-                        if not (cdrLayer == 'Land' and (targetLayer == 'Air' or targetLayer == 'Sub' or targetLayer == 'Seabed')) and
-                           not (cdrLayer == 'Seabed' and (targetLayer == 'Air' or targetLayer == 'Water')) then
+                searchRadius = 30
+                repeat
+                    searchRadius = searchRadius + 30
+                    for k, v in priList do
+                        target = plat:FindClosestUnit('Support', 'Enemy', true, v)
+                        if target and Utilities.XZDistanceTwoVectors(cdrPos, target:GetPosition()) <= searchRadius then
+                            local cdrLayer = cdr:GetCurrentLayer()
+                            local targetLayer = target:GetCurrentLayer()
+                            if not (cdrLayer == 'Land' and (targetLayer == 'Air' or targetLayer == 'Sub' or targetLayer == 'Seabed')) and
+                               not (cdrLayer == 'Seabed' and (targetLayer == 'Air' or targetLayer == 'Water')) then
+                                break
+                            end
+                        end
+                        target = false
+                    end
+                until target or searchRadius >= maxRadius
+
+                if target then
+                    local targetPos = target:GetPosition()
+
+                    -- If inside base dont check threat, just shoot!
+                    if Utilities.XZDistanceTwoVectors(cdr.CDRHome, cdr:GetPosition()) > 45 then
+                        enemyThreat = aiBrain:GetThreatAtPosition(targetPos, 1, true, 'AntiSurface')
+                        friendlyThreat = aiBrain:GetThreatAtPosition(targetPos, 1, true, 'AntiSurface', aiBrain:GetArmyIndex())
+                        if enemyThreat >= friendlyThreat + cdrThreat then
                             break
                         end
                     end
-                    target = false
-                end
-                if target then
-                    local targetPos = target:GetPosition()
-                    enemyThreat = aiBrain:GetThreatAtPosition(targetPos, 1, true, 'AntiSurface')
-                    enemyCdrThreat = aiBrain:GetThreatAtPosition(targetPos, 1, true, 'Commander')
-                    friendlyThreat = aiBrain:GetThreatAtPosition(targetPos, 1, true, 'AntiSurface', aiBrain:GetArmyIndex())
-                    if enemyThreat - enemyCdrThreat >= friendlyThreat + cdrThreat then
-                        return
-                    end
-                    if aiBrain:GetEconomyStored('ENERGY') >= weapon.EnergyRequired and target and not target.Dead and Utilities.XZDistanceTwoVectors(cdrCurrentPos, target:GetPosition()) <= weapRange then
+
+                    if aiBrain:GetEconomyStored('ENERGY') >= weapon.EnergyRequired and target and not target.Dead then
                         overCharging = true
                         IssueClearCommands({cdr})
+                        ---TAReclaim.TAAIRandomizeTaunt(aiBrain)
                         IssueOverCharge({cdr}, target)
-                    elseif target and not target.Dead then
-                        local tarPos = target:GetPosition()
+                    elseif target and not target.Dead then -- Commander attacks even if not enough energy for overcharge
                         IssueClearCommands({cdr})
-                        IssueMove({cdr}, tarPos)
-                        IssueOverCharge({cdr}, target)
+                        IssueMove({cdr}, targetPos)
                         IssueMove({cdr}, cdr.CDRHome)
                     end
                 elseif distressLoc then
                     enemyThreat = aiBrain:GetThreatAtPosition(distressLoc, 1, true, 'AntiSurface')
                     enemyCdrThreat = aiBrain:GetThreatAtPosition(distressLoc, 1, true, 'Commander')
                     friendlyThreat = aiBrain:GetThreatAtPosition(distressLoc, 1, true, 'AntiSurface', aiBrain:GetArmyIndex())
-                    if enemyThreat - enemyCdrThreat >= friendlyThreat + (cdrThreat / 1.5) then
-                        return
+                    if enemyThreat - enemyCdrThreat >= friendlyThreat + (cdrThreat / 3) then
+                        break
                     end
                     if distressLoc and (Utilities.XZDistanceTwoVectors(distressLoc, cdrPos) < distressRange) then
                         IssueClearCommands({cdr})
@@ -182,6 +154,7 @@ function CDRSCTADGunDecoy(aiBrain, cdr)
                     end
                 end
             end
+
             if overCharging then
                 while target and not target.Dead and not cdr.Dead and counter <= 5 do
                     WaitSeconds(0.5)
@@ -189,7 +162,7 @@ function CDRSCTADGunDecoy(aiBrain, cdr)
                 end
             else
                 WaitSeconds(3)
-                counter = counter + 0.5
+                counter = counter + 3
             end
 
             distressLoc = aiBrain:BaseMonitorDistressLocation(cdrPos)
@@ -197,25 +170,20 @@ function CDRSCTADGunDecoy(aiBrain, cdr)
                 return
             end
 
-            enemyThreat = aiBrain:GetThreatAtPosition(cdrPos, 1, true, 'AntiSurface')
-            enemyCdrThreat = aiBrain:GetThreatAtPosition(cdrPos, 1, true, 'Commander')
-            friendlyThreat = aiBrain:GetThreatAtPosition(cdrPos, 1, true, 'AntiSurface', aiBrain:GetArmyIndex())
-            if ((aiBrain:GetNumUnitsAroundPoint(categories.LAND - categories.SCOUT, cdrPos, maxRadius, 'Enemy') == 0)
-                and (not distressLoc or (Utilities.XZDistanceTwoVectors(distressLoc, cdrPos) > distressRange)
-                and (Utilities.XZDistanceTwoVectors(cdr.CDRHome, cdr:GetPosition()) < maxRadius))) or enemyThreat - enemyCdrThreat >= friendlyThreat + (cdrThreat / 1.5) or (aiBrain:GetNumUnitsAroundPoint(categories.LAND - categories.SCOUT, cdrPos, maxRadius, 'Enemy')) >= 15 then
+            if aiBrain:GetNumUnitsAroundPoint(categories.LAND * categories.MOBILE - categories.SCOUT, cdrPos, maxRadius, 'Enemy') <= 0
+                and (not distressLoc or Utilities.XZDistanceTwoVectors(distressLoc, cdrPos) > distressRange) then
                 continueFighting = false
             end
+            -- If com is down to yellow then dont keep fighting
         until not continueFighting or not aiBrain:PlatoonExists(plat)
 
-        cdr.Fighting = false
         IssueClearCommands({cdr})
-        if overCharging then
-            IssueMove({cdr}, cdr.CDRHome)
-        end
 
-        if cdr.UnitBeingBuiltBehavior then
-            cdr:ForkThread(CDRFinishUnit)
+        -- Finish the unit
+        if cdr.UnitBeingBuiltBehavior and not cdr.UnitBeingBuiltBehavior:BeenDestroyed() and cdr.UnitBeingBuiltBehavior:GetFractionComplete() < 1 then
+            IssueRepair({cdr}, cdr.UnitBeingBuiltBehavior)
         end
+        cdr.UnitBeingBuiltBehavior = false
     end
 end
 
@@ -382,76 +350,63 @@ end
 function CDRSCTADGun(aiBrain, cdr)
     local weapBPs = cdr:GetBlueprint().Weapon
     local weapon
+
     for k, v in weapBPs do
         if v.Label == 'OverCharge' then
             weapon = v
             break
         end
     end
-
-    local distressRange = 100
-    local maxRadius = weapon.MaxRadius * 4.55
-    local weapRange = weapon.MaxRadius
-    cdr.UnitBeingBuiltBehavior = false
-
-    local cdrPos = cdr.CDRHome
-    local numUnits1 = aiBrain:GetNumUnitsAroundPoint(categories.LAND * categories.TECH1 - categories.SCOUT - categories.ENGINEER, cdrPos, maxRadius, 'Enemy')
-    local numUnits2 = aiBrain:GetNumUnitsAroundPoint(categories.LAND * categories.TECH2 - categories.SCOUT - categories.ENGINEER, cdrPos, maxRadius, 'Enemy')
-    local numUnits3 = aiBrain:GetNumUnitsAroundPoint(categories.LAND * categories.TECH3 - categories.SCOUT - categories.ENGINEER, cdrPos, maxRadius, 'Enemy')
-    local numUnitsEng = aiBrain:GetNumUnitsAroundPoint(categories.ENGINEER * (categories.TECH1 + categories.TECH2 + categories.TECH3), cdrPos, maxRadius, 'Enemy')
-    local numUnits4 = aiBrain:GetNumUnitsAroundPoint(categories.EXPERIMENTAL, cdrPos, maxRadius + 130, 'Enemy')
-    local numStructs = aiBrain:GetNumUnitsAroundPoint(categories.STRUCTURE, cdrPos, maxRadius, 'Enemy')
-    local numUnitsDF = aiBrain:GetNumUnitsAroundPoint(categories.DEFENSE * categories.STRUCTURE * categories.DIRECTFIRE - categories.TECH1, cdrPos, maxRadius + 50, 'Enemy')
-    local numUnitsDF1 = aiBrain:GetNumUnitsAroundPoint(categories.DEFENSE * categories.STRUCTURE * categories.DIRECTFIRE * categories.TECH1, cdrPos, maxRadius + 30, 'Enemy')
-    local numUnitsIF = aiBrain:GetNumUnitsAroundPoint(categories.DEFENSE * categories.STRUCTURE * categories.INDIRECTFIRE - categories.TECH1, cdrPos, maxRadius + 260, 'Enemy')
-    local totalUnits = numUnits1 + numUnits2 + numUnits3 + numUnits4 + numStructs + numUnitsEng
-    local distressLoc = aiBrain:BaseMonitorDistressLocation(cdrPos)
-
-    if Utilities.XZDistanceTwoVectors(cdrPos, cdr:GetPosition()) > distressRange then
+    
+    -- Added for ACUs starting near each other
+    if GetGameTimeSeconds() < 180 then
         return
     end
 
-    local commanderResponse = false
-    if distressLoc then
-        local distressUnitsNaval = aiBrain:GetNumUnitsAroundPoint(categories.NAVAL, distressLoc, 40, 'Enemy')
-        local distressUnitsAir = aiBrain:GetNumUnitsAroundPoint(categories.AIR * (categories.BOMBER + categories.GROUNDATTACK + categories.ANTINAVY), distressLoc, 30, 'Enemy')
-        local distressUnitsexp = aiBrain:GetNumUnitsAroundPoint(categories.EXPERIMENTAL, distressLoc, 50, 'Enemy')
-        if distressUnitsNaval > 0 then
-            if cdr:HasEnhancement('NaniteTorpedoTube') and distressUnitsNaval < 5 and distressUnitsexp < 1 then
-                commanderResponse = true
-            else
-                commanderResponse = false
-            end
-        elseif distressUnitsAir > 0 then
-            commanderResponse = false
-        elseif distressUnitsexp > 0 then
-            commanderResponse = false
-        elseif numUnits1 > 14 or numUnits2 > 9 or numUnits3 > 4 or numUnits4 > 0 or numUnitsDF > 0 or numUnitsIF > 0 or numUnitsDF1 > 2 then
-            commanderResponse = false
-        else
-            commanderResponse = true
-        end
+    -- Increase distress on non-water maps
+    local distressRange = 60
+    if cdr:GetHealthPercent() > 0.8 and aiBrain:GetMapWaterRatio() < 0.4 then
+        distressRange = 100
     end
 
+    -- Increase attack range for a few mins on small maps
+    local maxRadius = weapon.MaxRadius + 10
+    local mapSizeX, mapSizeZ = GetMapSize()
+    if cdr:GetHealthPercent() > 0.8
+        and GetGameTimeSeconds() < 360
+        and GetGameTimeSeconds() > 120
+        and mapSizeX <= 512 and mapSizeZ <= 512
+        then
+        maxRadius = 256
+    end
+
+    -- Take away engineers too
+    local cdrPos = cdr.CDRHome
+    local numUnits = aiBrain:GetNumUnitsAroundPoint(categories.LAND * categories.MOBILE - categories.SCOUT, cdrPos, (maxRadius), 'Enemy')
+    local distressLoc = aiBrain:BaseMonitorDistressLocation(cdrPos)
     local overCharging = false
-    if (not cdr.DistressCall and distressLoc and commanderResponse and Utilities.XZDistanceTwoVectors(distressLoc, cdrPos) < distressRange) then
-        CDRRevertPriorityChange(aiBrain, cdr)
+    cdr.UnitBeingBuiltBehavior = false
+    if Utilities.XZDistanceTwoVectors(cdrPos, cdr:GetPosition()) > maxRadius then
+        return
+    end
+
+    if numUnits > 0 or (not cdr.DistressCall and distressLoc and Utilities.XZDistanceTwoVectors(distressLoc, cdrPos) < distressRange) then
         if cdr.UnitBeingBuilt then
             cdr.UnitBeingBuiltBehavior = cdr.UnitBeingBuilt
         end
-
-        cdr.Fighting = true
-        cdr.GoingHome = false
-        cdr.Upgrading = false
         local plat = aiBrain:MakePlatoon('', '')
         aiBrain:AssignUnitsToPlatoon(plat, {cdr}, 'support', 'None')
         plat:Stop()
-
-        local priList = {categories.ENERGYPRODUCTION * categories.STRUCTURE * categories.DRAGBUILD, categories.TECH3 * categories.INDIRECTFIRE,
-            categories.TECH3 * categories.MOBILE, categories.TECH2 * categories.INDIRECTFIRE, categories.MOBILE * categories.TECH2,
-            categories.TECH1 * categories.INDIRECTFIRE, categories.TECH1 * categories.MOBILE, categories.CONSTRUCTION * categories.STRUCTURE, categories.ECONOMIC * categories.STRUCTURE, categories.ALLUNITS}
-        plat:SetPrioritizedTargetList('support', priList)
-        cdr:SetTargetPriorities(priList)
+        local priList = {
+            categories.EXPERIMENTAL,
+            categories.TECH3 * categories.INDIRECTFIRE,
+            categories.TECH3 * categories.MOBILE,
+            categories.TECH2 * categories.INDIRECTFIRE,
+            categories.MOBILE * categories.TECH2,
+            categories.TECH1 * categories.INDIRECTFIRE,
+            categories.TECH1 * categories.MOBILE,
+            categories.ALLUNITS
+        }
 
         local target
         local continueFighting = true
@@ -460,46 +415,54 @@ function CDRSCTADGun(aiBrain, cdr)
         local enemyThreat
         repeat
             overCharging = false
-            local cdrCurrentPos = cdr:GetPosition()
             if counter >= 5 or not target or target.Dead or Utilities.XZDistanceTwoVectors(cdrPos, target:GetPosition()) > maxRadius then
                 counter = 0
-                for _, v in priList do
-                    target = plat:FindClosestUnit('Support', 'Enemy', true, v)
-                    if target and Utilities.XZDistanceTwoVectors(cdrPos, target:GetPosition()) < maxRadius then
-                        local cdrLayer = cdr:GetCurrentLayer()
-                        local targetLayer = target:GetCurrentLayer()
-                        if not (cdrLayer == 'Land' and (targetLayer == 'Air' or targetLayer == 'Sub' or targetLayer == 'Seabed')) and
-                           not (cdrLayer == 'Seabed' and (targetLayer == 'Air' or targetLayer == 'Water')) then
+                searchRadius = 30
+                repeat
+                    searchRadius = searchRadius + 30
+                    for k, v in priList do
+                        target = plat:FindClosestUnit('Support', 'Enemy', true, v)
+                        if target and Utilities.XZDistanceTwoVectors(cdrPos, target:GetPosition()) <= searchRadius then
+                            local cdrLayer = cdr:GetCurrentLayer()
+                            local targetLayer = target:GetCurrentLayer()
+                            if not (cdrLayer == 'Land' and (targetLayer == 'Air' or targetLayer == 'Sub' or targetLayer == 'Seabed')) and
+                               not (cdrLayer == 'Seabed' and (targetLayer == 'Air' or targetLayer == 'Water')) then
+                                break
+                            end
+                        end
+                        target = false
+                    end
+                until target or searchRadius >= maxRadius
+
+                if target then
+                    local targetPos = target:GetPosition()
+
+                    -- If inside base dont check threat, just shoot!
+                    if Utilities.XZDistanceTwoVectors(cdr.CDRHome, cdr:GetPosition()) > 45 then
+                        enemyThreat = aiBrain:GetThreatAtPosition(targetPos, 1, true, 'AntiSurface')
+                        enemyCdrThreat = aiBrain:GetThreatAtPosition(targetPos, 1, true, 'Commander')
+                        friendlyThreat = aiBrain:GetThreatAtPosition(targetPos, 1, true, 'AntiSurface', aiBrain:GetArmyIndex())
+                        if enemyThreat - enemyCdrThreat >= friendlyThreat + (cdrThreat / 1.5) then
                             break
                         end
                     end
-                    target = false
-                end
-                if target then
-                    local targetPos = target:GetPosition()
-                    enemyThreat = aiBrain:GetThreatAtPosition(targetPos, 1, true, 'AntiSurface')
-                    enemyCdrThreat = aiBrain:GetThreatAtPosition(targetPos, 1, true, 'Commander')
-                    friendlyThreat = aiBrain:GetThreatAtPosition(targetPos, 1, true, 'AntiSurface', aiBrain:GetArmyIndex())
-                    if enemyThreat - enemyCdrThreat >= friendlyThreat + cdrThreat then
-                        return
-                    end
-                    if aiBrain:GetEconomyStored('ENERGY') >= weapon.EnergyRequired and target and not target.Dead and Utilities.XZDistanceTwoVectors(cdrCurrentPos, target:GetPosition()) <= weapRange then
+
+                    if aiBrain:GetEconomyStored('ENERGY') >= weapon.EnergyRequired and target and not target.Dead then
                         overCharging = true
                         IssueClearCommands({cdr})
+                        ---TAReclaim.TAAIRandomizeTaunt(aiBrain)
                         IssueOverCharge({cdr}, target)
-                    elseif target and not target.Dead then
-                        local tarPos = target:GetPosition()
+                    elseif target and not target.Dead then -- Commander attacks even if not enough energy for overcharge
                         IssueClearCommands({cdr})
-                        IssueMove({cdr}, tarPos)
-                        IssueOverCharge({cdr}, target)
+                        IssueMove({cdr}, targetPos)
                         IssueMove({cdr}, cdr.CDRHome)
                     end
                 elseif distressLoc then
                     enemyThreat = aiBrain:GetThreatAtPosition(distressLoc, 1, true, 'AntiSurface')
                     enemyCdrThreat = aiBrain:GetThreatAtPosition(distressLoc, 1, true, 'Commander')
                     friendlyThreat = aiBrain:GetThreatAtPosition(distressLoc, 1, true, 'AntiSurface', aiBrain:GetArmyIndex())
-                    if enemyThreat - enemyCdrThreat >= friendlyThreat + (cdrThreat / 1.5) then
-                        return
+                    if enemyThreat - enemyCdrThreat >= friendlyThreat + (cdrThreat / 3) then
+                        break
                     end
                     if distressLoc and (Utilities.XZDistanceTwoVectors(distressLoc, cdrPos) < distressRange) then
                         IssueClearCommands({cdr})
@@ -508,6 +471,7 @@ function CDRSCTADGun(aiBrain, cdr)
                     end
                 end
             end
+
             if overCharging then
                 while target and not target.Dead and not cdr.Dead and counter <= 5 do
                     WaitSeconds(0.5)
@@ -515,7 +479,7 @@ function CDRSCTADGun(aiBrain, cdr)
                 end
             else
                 WaitSeconds(3)
-                counter = counter + 0.5
+                counter = counter + 3
             end
 
             distressLoc = aiBrain:BaseMonitorDistressLocation(cdrPos)
@@ -523,25 +487,23 @@ function CDRSCTADGun(aiBrain, cdr)
                 return
             end
 
-            enemyThreat = aiBrain:GetThreatAtPosition(cdrPos, 1, true, 'AntiSurface')
-            enemyCdrThreat = aiBrain:GetThreatAtPosition(cdrPos, 1, true, 'Commander')
-            friendlyThreat = aiBrain:GetThreatAtPosition(cdrPos, 1, true, 'AntiSurface', aiBrain:GetArmyIndex())
-            if ((aiBrain:GetNumUnitsAroundPoint(categories.LAND - categories.SCOUT, cdrPos, maxRadius, 'Enemy') == 0)
-                and (not distressLoc or (Utilities.XZDistanceTwoVectors(distressLoc, cdrPos) > distressRange)
-                and (Utilities.XZDistanceTwoVectors(cdr.CDRHome, cdr:GetPosition()) < maxRadius))) or enemyThreat - enemyCdrThreat >= friendlyThreat + (cdrThreat / 1.5) or (aiBrain:GetNumUnitsAroundPoint(categories.LAND - categories.SCOUT, cdrPos, maxRadius, 'Enemy')) >= 15 then
+            if aiBrain:GetNumUnitsAroundPoint(categories.LAND * categories.MOBILE - categories.SCOUT, cdrPos, maxRadius, 'Enemy') <= 0
+                and (not distressLoc or Utilities.XZDistanceTwoVectors(distressLoc, cdrPos) > distressRange) then
+                continueFighting = false
+            end
+            -- If com is down to yellow then dont keep fighting
+            if (cdr:GetHealthPercent() < 0.75) and Utilities.XZDistanceTwoVectors(cdr.CDRHome, cdr:GetPosition()) > 30 then
                 continueFighting = false
             end
         until not continueFighting or not aiBrain:PlatoonExists(plat)
 
-        cdr.Fighting = false
         IssueClearCommands({cdr})
-        if overCharging then
-            IssueMove({cdr}, cdr.CDRHome)
-        end
 
-        if cdr.UnitBeingBuiltBehavior then
-            cdr:ForkThread(CDRFinishUnit)
+        -- Finish the unit
+        if cdr.UnitBeingBuiltBehavior and not cdr.UnitBeingBuiltBehavior:BeenDestroyed() and cdr.UnitBeingBuiltBehavior:GetFractionComplete() < 1 then
+            IssueRepair({cdr}, cdr.UnitBeingBuiltBehavior)
         end
+        cdr.UnitBeingBuiltBehavior = false
     end
 end
 

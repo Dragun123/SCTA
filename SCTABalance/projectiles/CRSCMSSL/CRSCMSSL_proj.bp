@@ -48,7 +48,7 @@ ProjectileBlueprint {
         CameraFollowsProjectile = true,
         MeshBlueprint = '/mods/SCTA-master/meshes/projectiles/crblmssl_mesh.bp',
         StrategicIconSize = 1,
-        UniformScale = 1.0,
+        UniformScale = 0.5,
     },
     Description = 'CORE Nuclear Missile',
     DesiredShooterCap = 1,
@@ -67,9 +67,7 @@ ProjectileBlueprint {
             'INDIRECTFIRE',
         },
         Faction = 'CORE',
-        Weapon = 'CRSCMSSL',
     },
-
     Physics = {
         Acceleration = 3,
         CollideEntity = false,
