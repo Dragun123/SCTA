@@ -56,7 +56,6 @@ ProjectileBlueprint {
 	    'ANTIMISSILE',
         },
         Faction = 'ARM',
-        Weapon = 'AMD_ROCKET',
     },
     DoNotCollideList = {
         'AIR',

@@ -35,12 +35,6 @@ CORFMD = Class(TAStructure) {
 						end)
 					end,
 				},
-
-		OnWeaponFired = function(self)
-			self.unit:ShowBone('dummy', true)
-			TAMInterceptorWeapon.OnWeaponFired(self)
-		end,
-
 		},
 	},
 }
