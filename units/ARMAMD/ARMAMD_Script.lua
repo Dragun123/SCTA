@@ -22,7 +22,6 @@ ARMAMD = Class(TAStructure) {
                 end,
                 
                 OnFire = function(self)
-					self.unit:ShowBone('Rocket_01', true)
                     if not nukeFiredOnGotTarget then
                         TAMInterceptorWeapon.IdleState.OnFire(self)
                     end
@@ -35,6 +34,16 @@ ARMAMD = Class(TAStructure) {
 					self.unit:HideBone('Rocket_01', true)
 				end,
 			},
+
+            OnWeaponFired = function(self)
+                TAMInterceptorWeapon.OnWeaponFired(self)
+                self.unit:HideBone('Rocket_01', true)
+            end,
+
+            PlayFxWeaponUnpackSequence = function(self)
+                TAMInterceptorWeapon.PlayFxWeaponUnpackSequence(self)
+                self.unit:ShowBone('Rocket_01', true)
+            end,
 		},
 	},
 }

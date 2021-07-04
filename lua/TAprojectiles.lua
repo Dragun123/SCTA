@@ -298,8 +298,18 @@ TAAntiNukeProjectile = Class(SinglePolyTrailProjectile) {
     		'/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp',
 	},
 	FxProjectileHitScale = 1.5,
-
 	FxTrails = { '/mods/SCTA-master/effects/emitters/smoke_emit.bp'},
+
+	OnCreate = function(self)
+		SinglePolyTrailProjectile.OnCreate(self)
+		self:ForkThread( self.TrackingThread, self )
+	end,
+	
+	TrackingThread = function(self)
+		self:TrackTarget(false)
+		WaitTicks(1)
+		self:TrackTarget(true)
+	end,
 }
 
 TALaserProjectile = Class(TAProjectile) {

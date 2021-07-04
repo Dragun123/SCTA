@@ -35,6 +35,15 @@ CORFMD = Class(TAStructure) {
 						end)
 					end,
 				},
+				OnWeaponFired = function(self)
+					TAMInterceptorWeapon.OnWeaponFired(self)
+					self.unit:HideBone('dummy', true)
+				end,
+	
+				PlayFxWeaponUnpackSequence = function(self)
+					TAMInterceptorWeapon.PlayFxWeaponUnpackSequence(self)
+					self.unit:ShowBone('dummy', true)
+				end,
 		},
 	},
 }
