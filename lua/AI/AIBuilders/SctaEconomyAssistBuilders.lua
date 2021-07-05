@@ -73,7 +73,25 @@ BuilderGroup {
             LocationType = 'LocationType',
             ReclaimTime = 30,
         },
-        BuilderType = 'NotACU',
+        BuilderType = 'OmniLand',
+    },
+    Builder {
+        BuilderName = 'SCTA Engineer Reclaim Idle Air',
+        PlatoonTemplate = 'EngineerBuilderSCTAEco123',
+        PlatoonAIPlan = 'SCTAReclaimAIAir',
+        Priority = 75,
+        InstanceCount = 10,
+        BuilderConditions = {
+            { MIBC, 'GreaterThanGameTime', { 240 } },
+            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.AIR}},
+            { TASlow, 'TAReclaimablesInArea', { 'LocationType', }},  
+            { TAutils, 'LessMassStorageMaxTA',  { 0.2}},
+        },
+        BuilderData = {
+            LocationType = 'LocationType',
+            ReclaimTime = 30,
+        },
+        BuilderType = 'OmniAir',
     },
     Builder {
         BuilderName = 'SCTA Engineer Finish',

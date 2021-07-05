@@ -1936,7 +1936,6 @@ Platoon = Class(SCTAAIPlatoon) {
     end,
 
 
-
     MergeWithNearbyPlatoonsSCTA = function(self, planName, newPlatoon, radius)
         local aiBrain = self:GetBrain()
         if not aiBrain then
@@ -1996,19 +1995,22 @@ Platoon = Class(SCTAAIPlatoon) {
                 local unitsArtillery = aPlat:GetSquadUnits('Artillery')
                 local unitsSupport = aPlat:GetSquadUnits('Support')
                 local validUnits = {}
+                local validUnitsSc = {}
+                local validUnitsAt = {}
+                local validUnitsSu = {}
                 local bValidUnits = false
     
                 if unitsArtillery > 0 then
                     for _,u in unitsArtillery do
                         if not u.Dead and not u:IsUnitState('Attached') then
-                        table.insert(validUnits, u)
+                        table.insert(validUnitsAt, u)
                         bValidUnits = true
                         end
                     end
                     if not bValidUnits then
                     continue
                     end
-                aiBrain:AssignUnitsToPlatoon(self, validUnits, 'Artillery', 'GrowthFormation')
+                aiBrain:AssignUnitsToPlatoon(self, validUnitsAt, 'Artillery', 'GrowthFormation')
                 bValidUnits = false
                 --WaitSeconds(2)
                 end
@@ -2028,23 +2030,23 @@ Platoon = Class(SCTAAIPlatoon) {
                 --WaitSeconds(2)
                 end
                 if unitsSupport > 0 then        
-                    for _,u in units do
+                    for _,u in unitsSupport do
                         if not u.Dead and not u:IsUnitState('Attached') then
-                            table.insert(validUnits, u)
+                            table.insert(validUnitsSu, u)
                             bValidUnits = true
                         end
                     end
                     if not bValidUnits then
                         continue
                     end        
-                aiBrain:AssignUnitsToPlatoon(self, validUnits, 'Support', 'GrowthFormation')
+                aiBrain:AssignUnitsToPlatoon(self, validUnitsSu, 'Support', 'GrowthFormation')
                 bValidUnits = false
                 --WaitSeconds(2)
                 end
                 if unitsAntiAir > 0 then
                     for _,u in unitsAntiAir do
                         if not u.Dead and not u:IsUnitState('Attached') then
-                        table.insert(validUnits, u)
+                        table.insert(validUnitsSc, u)
                         bValidUnits = true
                         end
                     end
@@ -2052,7 +2054,7 @@ Platoon = Class(SCTAAIPlatoon) {
                     continue
                     end
                 --WaitSeconds(1)
-                aiBrain:AssignUnitsToPlatoon(self, validUnits, 'Scout', 'GrowthFormation')
+                aiBrain:AssignUnitsToPlatoon(self, validUnitsSc, 'Scout', 'GrowthFormation')
                 bValidUnits = false
                 --WaitSeconds(2)
                 end                    
@@ -2755,6 +2757,43 @@ Platoon = Class(SCTAAIPlatoon) {
     end,
 
     SCTAReclaimAI = function(self)
+            self:Stop()
+            local brain = self:GetBrain()
+            local eng = self:GetPlatoonUnits()[1]
+            local createTick = GetGameTick()
+            if not eng then
+                self:PlatoonDisband()
+                return
+            end
+            --LOG('*SCTAEXPANSIONTA', locationType)
+            --eng.BadReclaimables = eng.BadReclaimables or {}
+    
+            while brain:PlatoonExists(self) do
+                local ents = TAReclaim.TAAIGetReclaimablesAroundLocation(brain, self.PlatoonData.LocationType) or {}
+                if not ents[1] or not self:GetPlatoonPosition() then
+                    WaitTicks(1)
+                    self:PlatoonDisband()
+                    return
+                end
+                if eng:CanPathTo(ents[1]:GetPosition()) then
+                self:AggressiveMoveToLocation(ents[1]:GetPosition())
+                end
+                local reclaiming = not eng:IsIdleState()
+                while reclaiming do
+                    WaitSeconds(5)
+    
+                    if eng:IsIdleState() or (self.PlatoonData.ReclaimTime and (GetGameTick() - createTick)*10 > self.PlatoonData.ReclaimTime) then
+                        reclaiming = false
+                    end
+                end
+                local basePosition = brain.BuilderManagers[self.PlatoonData.LocationType].Position
+                self:MoveToLocation(AIUtils.RandomLocation(basePosition[1],basePosition[3]), false)
+                WaitSeconds(1)
+                self:PlatoonDisband()
+            end
+        end,
+
+        SCTAReclaimAIAir = function(self)
             self:Stop()
             local brain = self:GetBrain()
             local eng = self:GetPlatoonUnits()[1]
