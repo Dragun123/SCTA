@@ -150,7 +150,8 @@ UnitBlueprint {
     SizeX = 2,
     SizeY = 1.5,
     SizeZ = 2,
-    StrategicIconName = 'icon_land2_engineer',
+    StrategicIconName = 'icon_bot2_engineer', --'icon_fighter1_engineer',
+    ---TAStrategicIconName = '2/land_engineer',
     StrategicIconSortPriority = 0,
     Weapon = {
         { #BIG_UNITEX
@@ -161,7 +162,6 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-
     },
         Wreckage = {
 Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',

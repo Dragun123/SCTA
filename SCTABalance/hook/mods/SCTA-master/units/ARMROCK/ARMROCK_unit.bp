@@ -33,7 +33,7 @@ UnitBlueprint {
     SizeX = 1.5,
     SizeY = 1.5,
     SizeZ = 1.5,
-    StrategicIconName = 'icon_land2_missile',
+    StrategicIconName = 'icon_bot2_missile',
     Weapon = {
         [1] = {
             BallisticArc = 'RULEUBA_LowArc',

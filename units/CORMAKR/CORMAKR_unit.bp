@@ -114,7 +114,7 @@ UnitBlueprint {
     SizeY = 2,
     SizeZ = 2.5,
     StrategicIconName = 'icon_structure2_mass',
-    TAStrategicIconName = '2/structure_massfab',
+    ---TAStrategicIconName = '2/structure_massfab',
     StrategicIconSortPriority = 0,
     Weapon = {
         { #SMALL_BUILDINGEX

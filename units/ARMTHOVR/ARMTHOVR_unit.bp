@@ -132,7 +132,8 @@ UnitBlueprint {
     SizeX = 9,
     SizeZ = 9,
     SizeZ = 9,
-    StrategicIconName = 'icon_structure3_transport',
+    StrategicIconName = 'icon_land3_transport',
+    ---TAStrategicIconName = '3/structure_transport',
     StrategicIconSortPriority = 0,
     Transport = {
         Class2AttachSize = 2,

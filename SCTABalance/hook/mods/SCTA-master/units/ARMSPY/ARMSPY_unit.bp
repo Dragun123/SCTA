@@ -38,7 +38,6 @@ UnitBlueprint {
           RadarRadius = 30,
           RadarStealth = true,
     },
-    StrategicIconName = 'icon_land2_counterintel',
     SizeX = 1.2,
     SizeY = 1.2,
     SizeZ = 1.2,

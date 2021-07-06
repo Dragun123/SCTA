@@ -164,7 +164,8 @@ TechLevel = 'RULEUTL_Basic',
     SizeX = 3,
     SizeY = 1.25,
     SizeZ = 3,
-    StrategicIconName = 'icon_land1_engineer',
+    StrategicIconName = 'icon_bot1_engineer', --'icon_fighter1_engineer',
+    ---TAStrategicIconName = '1/land_engineer',
     StrategicIconSortPriority = 0,
     Weapon = {
         { #BIG_UNITEX

@@ -101,7 +101,8 @@ UnitBlueprint {
     SizeX = 4,
     SizeY = 3,
     SizeZ = 4,
-    StrategicIconName = 'icon_bot3_sniper',
+    StrategicIconName = 'icon_structure3_sniper',
+    ---TAStrategicIconName = '3/bot_sniper',
     StrategicIconSortPriority = 5,
     Weapon = {
         {

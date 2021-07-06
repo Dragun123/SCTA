@@ -149,7 +149,8 @@ TechLevel = 'RULEUTL_Advanced',
     SizeX = 5,
     SizeY = 2.5,
     SizeZ = 6,
-    StrategicIconName = 'icon_factory2_land', 
+    StrategicIconName = 'icon_factory2_bot', 
+    ---TAStrategicIconName = '2/factory_land',
     StrategicIconSortPriority = 0,
     Weapon = {
         { #LARGE_BUILDINGEX

@@ -98,7 +98,8 @@ TechLevel = 'RULEUTL_Secret',
     SizeX = 3,
     SizeY = 3,
     SizeZ = 3,
-    StrategicIconName = 'icon_bot3_sniper',
+    StrategicIconName = 'icon_structure3_sniper',
+    ---TAStrategicIconName = '3/bot_sniper',
     StrategicIconSortPriority = 0,
     Weapon = {
         {
