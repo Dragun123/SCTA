@@ -109,7 +109,7 @@ UnitBlueprint {
         WaterVisionRadius = 6, 
     },
     LifeBarHeight = 0.25,
-    LifeBarOffset = 0.5,
+    LifeBarOffset = 1,
     LifeBarSize = 2,
     Physics = {
         Elevation = 0.25,    

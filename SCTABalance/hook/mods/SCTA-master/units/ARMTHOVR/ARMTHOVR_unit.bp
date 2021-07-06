@@ -8,6 +8,5 @@ UnitBlueprint {
         BuildCostEnergy = 30000,
     },
     LifeBarHeight = 0.5,
-    LifeBarOffset = 0,
     LifeBarSize = 6,
 }
