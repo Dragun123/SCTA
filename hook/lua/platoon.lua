@@ -1990,74 +1990,29 @@ Platoon = Class(SCTAAIPlatoon) {
          --aiBrain:PlatoonExists(self) do
             --WaitSeconds(3)
             if VDist2Sq(platPos[1], platPos[3], allyPlatPos[1], allyPlatPos[3]) <= radiusSq and aiBrain:PlatoonExists(aPlat) and aiBrain:PlatoonExists(self) then
-                local unitsAntiAir = aPlat:GetSquadUnits('Scout')
-                local units = aPlat:GetSquadUnits('Attack')
-                local unitsArtillery = aPlat:GetSquadUnits('Artillery')
-                local unitsSupport = aPlat:GetSquadUnits('Support')
-                local validUnits = {}
-                local validUnitsSc = {}
-                local validUnitsAt = {}
-                local validUnitsSu = {}
-                local bValidUnits = false
-    
-                if unitsArtillery > 0 then
-                    for _,u in unitsArtillery do
-                        if not u.Dead and not u:IsUnitState('Attached') then
-                        table.insert(validUnitsAt, u)
-                        bValidUnits = true
+                local squads={
+                    'Scout',
+                    'Attack',
+                    'Artillery',
+                    'Support',
+                }
+                for _,squad in squads do
+                    local units = aPlat:GetSquadUnits(squad)
+                    local svalid = false
+                    local validsquad = {}
+                    if table.getn(units) > 0 then
+                        for _,v in units do
+                            if not v.Dead and not v:IsUnitState('Attached') then
+                                table.insert(validsquad, v)
+                                svalid = true
+                            end
+                        end
+                        if svalid then
+                            aiBrain:AssignUnitsToPlatoon(self, validsquad, squad, 'GrowthFormation')
                         end
                     end
-                    if not bValidUnits then
-                    continue
-                    end
-                aiBrain:AssignUnitsToPlatoon(self, validUnitsAt, 'Artillery', 'GrowthFormation')
-                bValidUnits = false
-                --WaitSeconds(2)
                 end
-                --LOG("*AI DEBUG: Merging platoons " .. self.BuilderName .. ": (" .. platPos[1] .. ", " .. platPos[3] .. ") and " .. aPlat.BuilderName .. ": (" .. allyPlatPos[1] .. ", " .. allyPlatPos[3] .. ")")             
-                if units > 0 then        
-                    for _,u in units do
-                        if not u.Dead and not u:IsUnitState('Attached') then
-                            table.insert(validUnits, u)
-                            bValidUnits = true
-                        end
-                    end
-                    if not bValidUnits then
-                        continue
-                    end        
-                aiBrain:AssignUnitsToPlatoon(self, validUnits, 'Attack', 'GrowthFormation')
-                bValidUnits = false
-                --WaitSeconds(2)
-                end
-                if unitsSupport > 0 then        
-                    for _,u in unitsSupport do
-                        if not u.Dead and not u:IsUnitState('Attached') then
-                            table.insert(validUnitsSu, u)
-                            bValidUnits = true
-                        end
-                    end
-                    if not bValidUnits then
-                        continue
-                    end        
-                aiBrain:AssignUnitsToPlatoon(self, validUnitsSu, 'Support', 'GrowthFormation')
-                bValidUnits = false
-                --WaitSeconds(2)
-                end
-                if unitsAntiAir > 0 then
-                    for _,u in unitsAntiAir do
-                        if not u.Dead and not u:IsUnitState('Attached') then
-                        table.insert(validUnitsSc, u)
-                        bValidUnits = true
-                        end
-                    end
-                    if not bValidUnits then
-                    continue
-                    end
-                --WaitSeconds(1)
-                aiBrain:AssignUnitsToPlatoon(self, validUnitsSc, 'Scout', 'GrowthFormation')
-                bValidUnits = false
-                --WaitSeconds(2)
-                end                    
+            end                  
                 bMergedPlatoons = true
             end
         end

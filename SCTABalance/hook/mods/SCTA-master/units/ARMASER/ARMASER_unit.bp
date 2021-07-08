@@ -47,5 +47,4 @@ UnitBlueprint {
         SizeX = 4,
         SizeY = 4,
         SizeZ = 4,
-        StrategicIconName = 'icon_structure2_counterintel',
 }

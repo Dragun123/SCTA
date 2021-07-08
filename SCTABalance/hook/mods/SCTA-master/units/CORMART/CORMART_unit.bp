@@ -18,24 +18,20 @@ UnitBlueprint {
         Health = 1600,
         MaxHealth = 1600,
     },
-    Display = {
-        UniformScale = 0.21,
-    },
     Economy = {
         BuildCostEnergy = 15000,
         BuildCostMass = 1200,
         BuildTime = 26000,
     },
-    SelectionSizeX = 2,
-    SelectionSizeZ = 2,
     Weapon = {
         [1] = {
             Damage = 800,
 	        DamageRadius = 3,
+            RenderFireClock = true,
             FiringRandomness = 1.25,
             FiringTolerance = 2,
             MinRadius = 20,
-            MaxRadius = 110,
+            MaxRadius = 90,
             RateOfFire = 0.1,
         },
         [2] = {},
