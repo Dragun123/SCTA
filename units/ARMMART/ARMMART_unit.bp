@@ -62,7 +62,7 @@ UnitBlueprint {
                 },
             },
         },
-        UniformScale = 0.1,
+        UniformScale = 0.09,
     },
     Economy = {
         BuildCostEnergy = 2140,
@@ -107,9 +107,9 @@ UnitBlueprint {
     SelectionSizeZ = 1.5,
     --SelectionCenterOffsetZ = -0.25,
     SelectionThickness = 0.25,
-    SizeX = 3,
-    SizeY = 1.5,
-    SizeZ = 3,
+    SizeX = 2,
+    SizeY = 1,
+    SizeZ = 2,
     StrategicIconName = 'icon_land3_artillery',
     StrategicIconSortPriority = 0,
     Transport = {

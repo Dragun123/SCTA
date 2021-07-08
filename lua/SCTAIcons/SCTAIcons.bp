@@ -1,0 +1,15 @@
+UnitBlueprint {
+    Merge = true,
+    BlueprintId="uea0001", ---ACU Drone
+    StrategicIconName = 'icon_bot1_engineer',
+}
+UnitBlueprint {
+    Merge = true,
+    BlueprintId="uea0003", ---sACU Drone
+    StrategicIconName = 'icon_bot3_engineer',
+}
+UnitBlueprint {
+    Merge = true,
+    BlueprintId="xea3204", ---Kennel Drone
+    StrategicIconName = 'icon_bot2_engineer',
+}
