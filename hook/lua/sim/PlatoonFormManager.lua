@@ -60,7 +60,7 @@ PlatoonFormManager = Class(SCTAPlatoonFormManager) {
         BuilderManager.ManagerLoopBody(self,builder,bType)
         ---local builder = self:GetHighestBuilder(bType, {builder})
             --local pool = self.Brain:GetPlatoonUniquelyNamed('ArmyPool')
-        --local aiBrain = self.Brain
+        local aiBrain = self.Brain
         if self.Brain.BuilderManagers[self.LocationType] and builder.Priority >= 1 and builder:CheckInstanceCount() then
             --LOG('*TATerrain3', self.Main)
             if bType == 'LandForm' and self.Brain.LandForm > 0 then 
@@ -70,10 +70,10 @@ PlatoonFormManager = Class(SCTAPlatoonFormManager) {
             elseif bType == 'Scout' and self.Brain.Scout > 0 then
                     if not self.Main then
                         return self:SCTAManagerLoopBody(builder, 'Scout')
-                    elseif self.Main and TAPrior.UnitProductionT1 >= 75 then 
+                    elseif self.Main and TAPrior.UnitProductionT1(self, aiBrain) >= 75 then 
                         return self:SCTAManagerLoopBody(builder, 'Scout')
                     end
-            elseif TAPrior.TechEnergyExist >= 75 and ((bType == 'StructureForm' and self.Brain.StructureForm < 2) or TAPrior.GantryProduction >= 200 and (bType == 'Other' and self.Main and self.Brain.Other > 0)) then
+            elseif TAPrior.TechEnergyExist(self, aiBrain) >= 75 and ((bType == 'StructureForm' and self.Brain.StructureForm < 2) or TAPrior.GantryProduction(self, aiBrain) >= 200 and (bType == 'Other' and self.Main and self.Brain.Other > 0)) then
                     if bType == 'StructureForm' then
                         return self:SCTAManagerLoopBody(builder, 'StructueForm')
                     elseif bType == 'Other' then

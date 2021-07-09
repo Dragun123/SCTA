@@ -70,6 +70,7 @@ BuilderGroup {
             { TAutils, 'LessMassStorageMaxTA',  { 0.2}},
         },
         BuilderData = {
+            Layer = 'Land', 
             LocationType = 'LocationType',
             ReclaimTime = 30,
         },
@@ -78,7 +79,7 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTA Engineer Reclaim Idle Air',
         PlatoonTemplate = 'EngineerBuilderSCTAEco123',
-        PlatoonAIPlan = 'SCTAReclaimAIAir',
+        PlatoonAIPlan = 'SCTAReclaimAI',
         Priority = 75,
         InstanceCount = 10,
         BuilderConditions = {

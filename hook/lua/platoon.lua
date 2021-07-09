@@ -1712,7 +1712,7 @@ Platoon = Class(SCTAAIPlatoon) {
             end
             self:SetPlatoonFormationOverride('Attack')
             WaitSeconds(5)
-            if aiBrain:PlatoonExists(self) and TAPrior.UnitProduction >= 80 then
+            if aiBrain:PlatoonExists(self) and TAPrior.UnitProduction(self, aiBrain) >= 80 then
                 self:MergeWithNearbyPlatoonsSCTA('SCTAStrikeForceAIEarly', 'SCTAStrikeForceAI', 5)
             end
         end
@@ -1816,7 +1816,7 @@ Platoon = Class(SCTAAIPlatoon) {
                     end
                 end
             end
-            if aiBrain:PlatoonExists(self) and TAPrior.ProductionT3 >= 80 and numberOfUnitsInPlatoon < 20 then
+            if aiBrain:PlatoonExists(self) and TAPrior.ProductionT3(self, aiBrain) >= 80 and numberOfUnitsInPlatoon < 20 then
                 self:MergeWithNearbyPlatoonsSCTA('SCTAStrikeForceAI', 'SCTAStrikeForceAIEndgame', 10)
             end
             --self:SetPlatoonFormationOverride('Attack')
@@ -1990,17 +1990,17 @@ Platoon = Class(SCTAAIPlatoon) {
          --aiBrain:PlatoonExists(self) do
             --WaitSeconds(3)
             if VDist2Sq(platPos[1], platPos[3], allyPlatPos[1], allyPlatPos[3]) <= radiusSq and aiBrain:PlatoonExists(aPlat) and aiBrain:PlatoonExists(self) then
-                local squads={
+                local squads = {
                     'Scout',
                     'Attack',
                     'Artillery',
                     'Support',
                 }
-                for _,squad in squads do
+                for _, squad in squads do
                     local units = aPlat:GetSquadUnits(squad)
                     local svalid = false
                     local validsquad = {}
-                    if table.getn(units) > 0 then
+                    if units > 0 then
                         for _,v in units do
                             if not v.Dead and not v:IsUnitState('Attached') then
                                 table.insert(validsquad, v)
@@ -2013,8 +2013,7 @@ Platoon = Class(SCTAAIPlatoon) {
                     end
                 end
             end                  
-                bMergedPlatoons = true
-            end
+            bMergedPlatoons = true
         end
         if bMergedPlatoons then
                 self:StopAttack()
@@ -2051,7 +2050,7 @@ Platoon = Class(SCTAAIPlatoon) {
             local position = AIUtils.RandomLocation(self.Center[1],self.Center[3])
             self:MoveToLocation(position, false)
             WaitSeconds(2)
-            if TAPrior.UnitProduction >= 80 and aiBrain:PlatoonExists(self) then
+            if TAPrior.UnitProduction(self, aiBrain) >= 80 and aiBrain:PlatoonExists(self) then
                 self:MergeWithNearbyPlatoonsSCTA('HuntSCTAAI', 'AttackSCTAForceAI', 5)
             end
         end
@@ -2099,7 +2098,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 aiBrain:PickEnemyLogic()
             end
             numberOfUnitsInPlatoon = table.getn(platoonUnits)
-            if aiBrain:PlatoonExists(self) and TAPrior.TechEnergyExist >= 80 and numberOfUnitsInPlatoon < 20 then
+            if aiBrain:PlatoonExists(self) and TAPrior.TechEnergyExist(self, aiBrain) >= 80 and numberOfUnitsInPlatoon < 20 then
                 self:MergeWithNearbyPlatoonsSCTA('AttackSCTAForceAI', 'SCTAStrikeForceAIEndgame', 20)
             end
 
@@ -2700,8 +2699,7 @@ Platoon = Class(SCTAAIPlatoon) {
     end,
 
     SCTALabType = function(self)
-        AIAttackUtils.GetMostRestrictiveLayer(self)
-        
+        AIAttackUtils.GetMostRestrictiveLayer(self)   
         if self.MovementLayer == 'Air' then 
             WaitTicks(1)
             return self:HuntAirAISCTA() 
@@ -2730,43 +2728,7 @@ Platoon = Class(SCTAAIPlatoon) {
                     self:PlatoonDisband()
                     return
                 end
-                if eng:CanPathTo(ents[1]:GetPosition()) then
-                self:AggressiveMoveToLocation(ents[1]:GetPosition())
-                end
-                local reclaiming = not eng:IsIdleState()
-                while reclaiming do
-                    WaitSeconds(5)
-    
-                    if eng:IsIdleState() or (self.PlatoonData.ReclaimTime and (GetGameTick() - createTick)*10 > self.PlatoonData.ReclaimTime) then
-                        reclaiming = false
-                    end
-                end
-                local basePosition = brain.BuilderManagers[self.PlatoonData.LocationType].Position
-                self:MoveToLocation(AIUtils.RandomLocation(basePosition[1],basePosition[3]), false)
-                WaitSeconds(1)
-                self:PlatoonDisband()
-            end
-        end,
-
-        SCTAReclaimAIAir = function(self)
-            self:Stop()
-            local brain = self:GetBrain()
-            local eng = self:GetPlatoonUnits()[1]
-            local createTick = GetGameTick()
-            if not eng then
-                self:PlatoonDisband()
-                return
-            end
-            --LOG('*SCTAEXPANSIONTA', locationType)
-            --eng.BadReclaimables = eng.BadReclaimables or {}
-    
-            while brain:PlatoonExists(self) do
-                local ents = TAReclaim.TAAIGetReclaimablesAroundLocation(brain, self.PlatoonData.LocationType) or {}
-                if not ents[1] or not self:GetPlatoonPosition() then
-                    WaitTicks(1)
-                    self:PlatoonDisband()
-                    return
-                end
+            if not self.PlatoonData.Layer or self.PlatoonData.Layer and AIAttackUtils.CanGraphAreaToSCTA(eng:GetPosition(), ents[1]:GetPosition(), self.PlatoonData.Layer) then
                 self:AggressiveMoveToLocation(ents[1]:GetPosition())
                 local reclaiming = not eng:IsIdleState()
                 while reclaiming do
@@ -2779,10 +2741,10 @@ Platoon = Class(SCTAAIPlatoon) {
                 local basePosition = brain.BuilderManagers[self.PlatoonData.LocationType].Position
                 self:MoveToLocation(AIUtils.RandomLocation(basePosition[1],basePosition[3]), false)
                 WaitSeconds(1)
+            end
                 self:PlatoonDisband()
             end
         end,
-
 
         NavalHuntSCTAAI = function(self)
             local aiBrain = self:GetBrain()

@@ -33,7 +33,7 @@ PlatoonTemplate {
     Plan = 'SCTAArtyHuntAI', -- The platoon function to use.
     ---PlatoonType = 'Scout',
     GlobalSquads = {
-        { (((categories.AMPHIBIOUS + categories.HOVER) * GROUND) - SPECIAL) + categories.BOMB, -- ---PlatoonType of units.
+        { ((categories.AMPHIBIOUS * GROUND) - SPECIAL) + categories.BOMB, -- ---PlatoonType of units.
           1, -- Min number of units.
           5, -- Max number of units.
           'Attack', -- platoon ---PlatoonTypes: 'support', 'Attack', 'scout',
