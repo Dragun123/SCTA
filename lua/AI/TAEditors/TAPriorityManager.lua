@@ -23,7 +23,7 @@ end
 AirProduction = function(self, aiBrain)
     if Factory(aiBrain,  0, categories.GATE) then
         return 0
-    elseif aiBrain.Labs > 4 then 
+    elseif aiBrain.Labs >= 4 then 
         return 10
     else
         return 105
@@ -40,9 +40,9 @@ end
 
 
 AssistProduction = function(self, aiBrain)
-    if aiBrain.Plant > 10 then 
+    if aiBrain.Plants > 10 then 
         return 100
-    elseif aiBrain.Plant > 4 then 
+    elseif aiBrain.Plants >= 4 then 
         return 50
     else
         return 0
@@ -78,9 +78,9 @@ StructureProductionT2 = function(self, aiBrain)
 end
 
 StructureProductionT2Energy = function(self, aiBrain)
-    if aiBrain.Labs > 2 and PowerGeneration(aiBrain,  2, CLOAKREACT) then 
+    if aiBrain.Labs >= 2 and PowerGeneration(aiBrain,  2, CLOAKREACT) then 
         return 150
-    elseif aiBrain.Plant > 10  and PowerGeneration(aiBrain,  2, CLOAKREACT) then
+    elseif aiBrain.Plants > 10  and PowerGeneration(aiBrain,  2, CLOAKREACT) then
         return 100
     else
         return 0
@@ -102,7 +102,7 @@ end
 FactoryReclaim = function(self, aiBrain)
     if Factory(aiBrain,  1, PLATFORM) then
         return 200
-    elseif aiBrain.Labs > 2 then 
+    elseif aiBrain.Labs >= 2 then 
         return 150
     elseif aiBrain.Plants > 10 then 
         return 10
@@ -154,7 +154,7 @@ end
 UnitProductionT1 = function(self, aiBrain)
     if Factory(aiBrain,  0, categories.GATE) then
           return 0
-    elseif aiBrain.Labs > 2 then
+    elseif aiBrain.Labs >= 2 then
               return 5
     elseif Factory(aiBrain,  0, categories.STRUCTURE * categories.TECH2) then 
               return 50
@@ -233,7 +233,7 @@ end
 
 GantryConstruction = function(self, aiBrain)
     if Factory(aiBrain,  1, PLATFORM) and Factory(aiBrain,  2, FUSION) then
-        return 150
+        return 200
     elseif aiBrain.Labs > 4 and Factory(aiBrain,  2, FUSION) then
         return 100
     else

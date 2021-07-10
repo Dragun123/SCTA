@@ -1,6 +1,6 @@
 local TAutils = import('/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua')
 local TAReclaim = import('/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua')
-local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
+--local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
 WARN('['..string.gsub(debug.getinfo(1).source, ".*\\(.*.lua)", "%1")..', line:'..debug.getinfo(1).currentline..'] * SCTAAI: offset platoon.lua' )
 
 --[[buildingTmplFile = import(cons.BuildingTemplateFile or '/lua/BuildingTemplates.lua')
@@ -1712,7 +1712,7 @@ Platoon = Class(SCTAAIPlatoon) {
             end
             self:SetPlatoonFormationOverride('Attack')
             WaitSeconds(5)
-            if aiBrain:PlatoonExists(self) and TAPrior.UnitProduction(self, aiBrain) >= 80 then
+            if aiBrain.Labs > 0 or aiBrain.Plants > 10 then
                 self:MergeWithNearbyPlatoonsSCTA('SCTAStrikeForceAIEarly', 'SCTAStrikeForceAI', 5)
             end
         end
@@ -1755,6 +1755,9 @@ Platoon = Class(SCTAAIPlatoon) {
         local maxRadius = self.PlatoonData.SearchRadius or 100
         while aiBrain:PlatoonExists(self) do
             local numberOfUnitsInPlatoon = table.getn(platoonUnits)
+            if aiBrain.Labs >= 4 and numberOfUnitsInPlatoon < 20 then
+                self:MergeWithNearbyPlatoonsSCTA('SCTAStrikeForceAI', 'SCTAStrikeForceAIEndgame', 10)
+            end
             --self:SetPlatoonFormationOverride('Attack')
             if not target or target:IsDead() then
                 if aiBrain:GetCurrentEnemy() and aiBrain:GetCurrentEnemy():IsDefeated() then
@@ -1815,9 +1818,6 @@ Platoon = Class(SCTAAIPlatoon) {
                         self:MoveToLocation( (v), false )
                     end
                 end
-            end
-            if aiBrain:PlatoonExists(self) and TAPrior.ProductionT3(self, aiBrain) >= 80 and numberOfUnitsInPlatoon < 20 then
-                self:MergeWithNearbyPlatoonsSCTA('SCTAStrikeForceAI', 'SCTAStrikeForceAIEndgame', 10)
             end
             --self:SetPlatoonFormationOverride('Attack')
             WaitSeconds(7)
@@ -2050,7 +2050,7 @@ Platoon = Class(SCTAAIPlatoon) {
             local position = AIUtils.RandomLocation(self.Center[1],self.Center[3])
             self:MoveToLocation(position, false)
             WaitSeconds(2)
-            if TAPrior.UnitProduction(self, aiBrain) >= 80 and aiBrain:PlatoonExists(self) then
+            if aiBrain.Labs > 0 or aiBrain.Plants > 10 then
                 self:MergeWithNearbyPlatoonsSCTA('HuntSCTAAI', 'AttackSCTAForceAI', 5)
             end
         end
@@ -2098,7 +2098,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 aiBrain:PickEnemyLogic()
             end
             numberOfUnitsInPlatoon = table.getn(platoonUnits)
-            if aiBrain:PlatoonExists(self) and TAPrior.TechEnergyExist(self, aiBrain) >= 80 and numberOfUnitsInPlatoon < 20 then
+            if aiBrain.Labs >= 4 and numberOfUnitsInPlatoon < 20 then
                 self:MergeWithNearbyPlatoonsSCTA('AttackSCTAForceAI', 'SCTAStrikeForceAIEndgame', 20)
             end
 

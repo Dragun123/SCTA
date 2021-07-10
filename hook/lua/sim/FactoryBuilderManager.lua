@@ -247,6 +247,11 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             end
             WaitTicks(1)
             factory.DelayThread = false
+            if factory.Dead then
+                return
+                elseif factory:IsIdleState() then
+                factory.TABuildingUnit = nil
+            end
             self:TAAssignBuildOrder(factory,bType)
         end,
 

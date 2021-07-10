@@ -119,7 +119,7 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'Factory', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory' }},
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 1, categories.GATE} }, -- Stop after 10 facs have been built.
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 2, categories.GATE} }, -- Stop after 10 facs have been built.
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, categories.GATE} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
