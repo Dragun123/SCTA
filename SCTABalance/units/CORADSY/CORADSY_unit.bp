@@ -44,7 +44,7 @@ UnitBlueprint {
     'RESEARCH',
 	'SORTCONSTRUCTION',
     },
-    CollisionOffsetY = -1,
+    CollisionOffsetY = -0.75,
     CollisionOffsetZ = 0,
     Defense = {
         ArmorType = 'Structure',

@@ -60,7 +60,7 @@ UnitBlueprint {
                 },
             },
         },
-        UniformScale = 0.14,
+        UniformScale = 0.12,
     },
     Economy = {
         BuildCostEnergy = 1241,

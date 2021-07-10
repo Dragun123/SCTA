@@ -1,8 +1,8 @@
 UnitBlueprint {
     Merge = true, 
     Defense = {
-        Health = 2800,
-        MaxHealth = 2800,
+        Health = 2500,
+        MaxHealth = 2500,
     },
      Intel = {
         VisionRadius = 15, 
