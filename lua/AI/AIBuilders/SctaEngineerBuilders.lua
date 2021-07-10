@@ -98,7 +98,7 @@ BuilderGroup {
         InstanceCount = 2,
         BuilderConditions = {
             --{ UCBC, 'CheckBuildPlattonDelay', { 'T2Engineer' }},
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 2, (categories.ENGINEER * categories.TECH2 * categories.LAND) - categories.FIELDENGINEER } }, -- Build engies until we have 4 of them.
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 2, categories.ENGINEER * categories.TECH2 * categories.LAND - categories.FIELDENGINEER } }, -- Build engies until we have 4 of them.
         },
         BuilderType =  'Land',
     },

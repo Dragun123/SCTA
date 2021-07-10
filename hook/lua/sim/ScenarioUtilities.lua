@@ -2,11 +2,11 @@
 
 function CreateInitialArmyGroup(strArmy, createCommander)
 	CreateWind()
-	for index, moddata in __active_mods do
+	--[[for index, moddata in __active_mods do
 		if not moddata.name == 'AI-Uveso' then
 			BuildGraphAreasTA()
 		end
-	end
+	end]]
 	--[[for index, moddata in __active_mods do
 		if moddata.name == 'All factions FAF BlackOps Nomads' then
 			TACreateInitialArmyGroup(strArmy, createCommander)
@@ -83,7 +83,7 @@ function WindThread()
 	end
 end
 
-function BuildGraphAreasTA()
+--[[function BuildGraphAreasTA()
     local GraphIndex = {
         ['Land Path Node'] = 0,
         ['Water Path Node'] = 0,
@@ -154,4 +154,4 @@ function BuildGraphAreasTA()
         end
     end
     SPEW('* AI-Uveso: BuildGraphAreas(): '..repr(GraphCountIndex))
-end
+end]]

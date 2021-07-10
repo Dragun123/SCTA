@@ -125,7 +125,7 @@ UnitBlueprint {
 	        FiringRandomness = 0.25,
             Label = 'ARM_BERTHACANNON',
             RenderFireClock = true,
-            MaxRadius = 450,
+            MaxRadius = 850,
             MuzzleSalvoDelay = 0, 
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 75,

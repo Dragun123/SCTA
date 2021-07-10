@@ -152,13 +152,9 @@ PlatoonTemplate {
             { 'armpw', 1, 1, 'attack', 'none' },
             { 'armck', 1, 1, 'support', 'None' },
             { 'armjeth', 1, 1, 'guard', 'none' },
-            { 'armck', 1, 1, 'support', 'None'},
-            { 'armjeth', 1, 1, 'guard', 'none' },
-            { 'armck', 1, 2, 'support', 'None' },
-            { 'armjeth', 1, 1, 'guard', 'none' },
-            { 'armck', 1, 2, 'support', 'None' },
-            { 'armjeth', 1, 1, 'guard', 'none' },
-            { 'armck', 1, 5, 'support', 'None' },
+            { 'armck', 1, 2, 'support', 'None'},
+            { 'armjeth', 1, 2, 'guard', 'none' },
+            { 'armck', 1, 3, 'support', 'None' },
         },
         Core = {
             { 'corcv', 1, 1, 'support', 'None' },
@@ -167,13 +163,9 @@ PlatoonTemplate {
             { 'corgator', 1, 1, 'attack', 'none' },
             { 'corcv', 1, 1, 'support', 'None' },
             { 'cormist', 1, 1, 'guard', 'none' },
-            { 'corcv', 1, 1, 'support', 'None' },
-            { 'cormist', 1, 1, 'guard', 'none' },
             { 'corcv', 1, 2, 'support', 'None' },
-            { 'cormist', 1, 1, 'guard', 'none' },
-            { 'corcv', 1, 2, 'support', 'None' },
-            { 'cormist', 1, 1, 'guard', 'none' },
-            { 'corcv', 1, 5, 'support', 'None' },
+            { 'cormist', 1, 2, 'guard', 'none' },
+            { 'corcv', 1, 3, 'support', 'None' },
         },
     }
 }
@@ -254,11 +246,9 @@ PlatoonTemplate {
     FactionSquads = {
         Arm = {
             { 'armfark', 1, 1, 'support', 'None' },
-            { 'armack', 1, 1, 'support', 'None' },
         },
         Core = {
             { 'cornecro', 1, 1, 'support', 'None' },
-            { 'coracv', 1, 1, 'support', 'None' },
         },
     }
 }
