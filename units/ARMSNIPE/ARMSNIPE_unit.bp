@@ -155,12 +155,12 @@ UnitBlueprint {
             MaxRadius = 55,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
-            MuzzleVelocity = 60,
-            ProjectileId = '/mods/SCTA-master/projectiles/ARM_FAST/ARM_FAST_proj.bp',
+            MuzzleVelocity = 90,
+            ProjectileId = '/mods/SCTA-master/projectiles/ARM_SNIPE/ARM_SNIPE_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
-                        'spark1',
+                        'fire',
                     },
                     RackBone = 'rarm',
                 },
@@ -184,7 +184,7 @@ UnitBlueprint {
             RenderFireClock = true,
             TargetRestrictDisallow = 'UNTARGETABLE',
             AboveWaterTargetsOnly = true,
-            TurretBoneMuzzle = 'spark1',
+            TurretBoneMuzzle = 'fire',
             TurretBonePitch = 'rarm',
             TurretBoneYaw = 'torso',
             TurretPitch = 0,
