@@ -75,6 +75,80 @@ UnitBlueprint {
                 },
             },
         },
+        MovementEffects = {
+            Land = {
+                Effects = {
+                    {
+                        Bones = {
+                            'rheel',
+                            'lheel',
+                        },
+                        Scale = 2,
+                        Type = 'GroundKickup01',
+                    },
+                },
+                Footfall = {
+                    Bones = {
+                        {
+                            FootBone = 'Right_Footfall',
+                            HipBone = 'rthigh',
+                            KneeBone = 'rleg',
+                            MaxFootFall = -0.25,
+                            Offset = {
+                                z = -1,
+                            },
+                            StraightLegs = false,
+                            Tread = {
+                                TreadLifeTime = 135,
+                                TreadMarks = 'CommanderPrint_albedo',
+                                TreadMarksSizeX = 1.7,
+                                TreadMarksSizeZ = 1.7,
+                                TreadOffset = {
+                                    -1,
+                                    0,
+                                    2,
+                                },
+                            },
+                            Type = 'FootFall01',
+                        },
+                        {
+                            FootBone = 'Left_Footfall',
+                            HipBone = 'lthigh',
+                            KneeBone = 'lleg',
+                            MaxFootFall = -0.25,
+                            Offset = {
+                                z = -1,
+                            },
+                            StraightLegs = false,
+                            Tread = {
+                                TreadLifeTime = 135,
+                                TreadMarks = 'CommanderPrint_albedo',
+                                TreadMarksSizeX = 1.7,
+                                TreadMarksSizeZ = 1.7,
+                                TreadOffset = {
+                                    1,
+                                    0,
+                                    2,
+                                },
+                            },
+                            Type = 'FootFall01',
+                        },
+                    },
+                    CameraShake = {
+                        Interval = 1,
+                        MaxShakeEpicenter = 0.125,
+                        MinShakeAtRadius = 0,
+                        Radius = 10,
+                    },
+                    Damage = {
+                        Amount = 3500,
+                        DamageFriendly = false,
+                        Radius = 1,
+                        Type = 'ExperimentalFootfall',
+                    },
+                },
+            },
+        },
         ---SmokeBone = 'torso',
         UniformScale = 0.35,
     },
@@ -142,14 +216,14 @@ UnitBlueprint {
             Audio = {
                 Fire = Sound {
                     Bank = 'TA_Sound',
-                    Cue = 'KROGUN1',
+                    Cue = 'FLAMHVY1',
                     LodCutoff = 'Weapon_LodCutoff',
                 },
             },
             BallisticArc = 'RULEUBA_None',
             CollideFriendly = false,
             DamageFriendly = false,
-            Damage = 750,
+            Damage = 75,
             DamageType = 'Normal',
             DisplayName = 'CORKROG_FIRE',
             FireTargetLayerCapsTable = {
@@ -162,10 +236,10 @@ UnitBlueprint {
             FiringTolerance = 2.75,
             Label = 'CORKROG_FIRE',
             MaxRadius = 30,
-            MuzzleSalvoDelay = 0,
-            MuzzleSalvoSize = 1,
-			MuzzleVelocity = 40,
-            ProjectileId = '/mods/SCTA-master/SCTABalance/projectiles/CORKROG_BALA/CORKROG_BALA_proj.bp',
+            MuzzleSalvoDelay = 0.01,
+            MuzzleSalvoSize = 2,
+			MuzzleVelocity = 20,
+            ProjectileId = '/mods/SCTA-master/SCTABalance/projectiles/DRAGONFLAME/DRAGONFLAME_proj.bp',
             RackBones = {
                 {
                     MuzzleBones = {
@@ -180,12 +254,13 @@ UnitBlueprint {
                     RackBone = 'luparm',
                 },
             },			
-            RackRecoilDistance = -0.1,
+            FiringRandomness = 0.1,  
+            RackRecoilDistance = 0,
             RackReloadTimeout = 0,
             RackSalvoChargeTime = 0,
             RackSalvoReloadTime = 0,
-            RackSalvoSize = 1,
-            RateOfFire = 2,
+            RackSalvoSize = 2,
+            RateOfFire = 10,
             TargetCheckInterval = 1,
             TargetPriorities = {
                 'ALLUNITS',
@@ -223,7 +298,7 @@ UnitBlueprint {
             BallisticArc = 'RULEUBA_None',
             CollideFriendly = false,
             DamageFriendly = false,
-            Damage = 3000,
+            Damage = 4500,
             DamageType = 'Normal',
             DisplayName = 'ARMDRAK_LASER',
             EnergyChargeForFirstShot = true,

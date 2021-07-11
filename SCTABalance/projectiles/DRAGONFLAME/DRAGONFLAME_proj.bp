@@ -5,7 +5,7 @@
 
 ProjectileBlueprint {
     Categories = {
-        'CORE',
+        'ARM',
         'PROJECTILE',
         'DIRECTFIRE',
     },
@@ -15,18 +15,18 @@ ProjectileBlueprint {
     General = {
         Category = 'Direct Fire',
         EntityCategory = {
-            'CORE',
+            'ARM',
             'PROJECTILE',
             'DIRECTFIRE',
         },
-        Faction = 'CORE',
-        Weapon = 'FLAMETHROWER',
+        Faction = 'ARM',
     },
     Physics = {
-        CollideEntity = false,
         DestroyOnWater = true,
-        InitialSpeed = 11.75,
-        Lifetime = 1,
+        InitialSpeed = 20,
+        Acceleration = 5,
+        MaxSpeed = 40,
+        Lifetime = 4,
         UseGravity = false,
     },
 }
