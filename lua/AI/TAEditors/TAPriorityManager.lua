@@ -92,7 +92,7 @@ ProductionT3Air = function(self, aiBrain)
         return 125
     elseif Factory(aiBrain,  0, PLATFORM) and Factory(aiBrain,  0, CLOAKREACT) then
         return 105
-    elseif aiBrain.Labs > 4 and Factory(aiBrain,  4, FUSION) then 
+    elseif aiBrain.Labs > 4 and Factory(aiBrain,  2, FUSION) then 
         return 100
     else
         return 0

@@ -228,6 +228,37 @@ function CanGraphAreaToSCTA(unit, destPos, layer)
     return false
 end
 
+--[[function TAGetMostRestrictiveLayer(platoon)
+    -- in case the platoon is already destroyed return false.
+    if not platoon then
+        return false
+    end
+    local unit = false
+    platoon.MovementLayer = 'Air'
+    for k,v in platoon:GetPlatoonUnits() do
+        if not v.Dead then
+            local mType = v:GetBlueprint().Physics.MotionType
+            if (mType == 'RULEUMT_AmphibiousFloating' or mType == 'RULEUMT_Hover') and (platoon.MovementLayer == 'Air' or platoon.MovementLayer == 'Water') then
+                platoon.MovementLayer = 'Amphibious'
+                unit = v
+            elseif (mType == 'RULEUMT_Water' or mType == 'RULEUMT_SurfacingSub') and (platoon.MovementLayer ~= 'Water') then
+                platoon.MovementLayer = 'Water'
+                unit = v
+                break   --Nothing more restrictive than water, since there should be no mixed land/water platoons
+            elseif (mType == 'RULEUMT_Air' or mType == 'RULEUMT_Amphibious') and (platoon.MovementLayer == 'Air') then
+                platoon.MovementLayer = 'Air'
+                unit = v
+            elseif (mType == 'RULEUMT_Biped' or mType == 'RULEUMT_Land') and platoon.MovementLayer ~= 'Land' then
+                platoon.MovementLayer = 'Land'
+                unit = v
+                break   --Nothing more restrictive than land, since there should be no mixed land/water platoons
+            end
+        end
+    end
+
+    return unit
+end]]
+
 --[[function CanGraphAreaToSCTANew(startPos, destPos, layer)
     local graphTable = GetPathGraphs()[layer]
     local startNode, endNode, distS, distE

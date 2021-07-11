@@ -1,13 +1,13 @@
 UnitBlueprint {
     Merge = true,
     Defense = {
-        Health = 600,
-        MaxHealth = 600,
+        Health = 300,
+        MaxHealth = 300,
     },
     Economy = {
         BuildCostEnergy = 1400,
-        BuildCostMass = 150,
-        BuildTime = 4500,
+        BuildCostMass = 100,
+        BuildTime = 2250,
     },
     Intel = {
     RadarRadius = 50,
@@ -15,9 +15,11 @@ UnitBlueprint {
     },
     Weapon = {
         [1] = {
+            Damage = 15,
+            RateOfFire = 1,
         },
         [2] = {
-            Damage = 25,
+            Damage = 20,
             RateOfFire = 1,
         },
         [3] = {

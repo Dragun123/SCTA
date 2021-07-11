@@ -22,6 +22,7 @@ UnitBlueprint {
     SizeZ = 6,
 Weapon = {
     [1] = {
+    Damage = 2500,
     MaxRadius = 45,    
     MuzzleVelocity = 40,
     ProjectileId = '/mods/SCTA-master/SCTABalance/projectiles/CORKROG_BALA/CORKROG_BALA_proj.bp',

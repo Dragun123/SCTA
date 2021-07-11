@@ -378,7 +378,7 @@ function CDRSCTADGun(aiBrain, cdr)
         local enemyThreat
         repeat
             overCharging = false
-            if counter >= 5 or not target or target.Dead or Utilities.XZDistanceTwoVectors(cdrPos, target:GetPosition()) > 100 then
+            if counter >= 5 or not target or target.Dead or Utilities.XZDistanceTwoVectors(cdrPos, target:GetPosition()) > 30 then
                 counter = 0
                 searchRadius = 30
                 repeat
@@ -413,6 +413,7 @@ function CDRSCTADGun(aiBrain, cdr)
                     if aiBrain:GetEconomyStored('ENERGY') >= weapon.EnergyRequired and target and not target.Dead then
                         overCharging = true
                         IssueMove({cdr}, targetPos)
+                        IssueClearCommands({cdr})
                         IssueOverCharge({cdr}, target)
                     elseif target and not target.Dead then -- Commander attacks even if not enough energy for overcharge
                         IssueMove({cdr}, targetPos)
@@ -432,7 +433,7 @@ function CDRSCTADGun(aiBrain, cdr)
                 counter = counter + 3
             end
             -- If com is down to yellow then dont keep fighting
-            if (cdr:GetHealthPercent() < 0.25) and Utilities.XZDistanceTwoVectors(cdr.CDRHome, cdr:GetPosition()) > 30 then
+            if (cdr:GetHealthPercent() < 0.5) and Utilities.XZDistanceTwoVectors(cdr.CDRHome, cdr:GetPosition()) > 30 then
                 continueFighting = false
             end
         until not continueFighting or not aiBrain:PlatoonExists(plat)

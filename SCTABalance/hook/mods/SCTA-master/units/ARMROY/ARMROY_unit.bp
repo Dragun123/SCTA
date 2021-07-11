@@ -16,7 +16,7 @@ UnitBlueprint {
     Economy = {
         BuildCostEnergy = 6100,
         BuildCostMass = 580,
-        BuildTime = 13000,
+        BuildTime = 11000,
     },
     Description = 'Frigate',
     SelectionSizeX = 2,
@@ -26,11 +26,10 @@ UnitBlueprint {
     SizeZ = 6.6,
     Weapon = {
         [1] = {
-            Damage = 100,
+            Damage = 90,
             MaxRadius = 32,
         },
         [2] = {
-            Damage = 50,
         },
         [3] = {
         }, 

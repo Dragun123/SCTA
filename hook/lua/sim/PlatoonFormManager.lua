@@ -60,7 +60,6 @@ PlatoonFormManager = Class(SCTAPlatoonFormManager) {
         BuilderManager.ManagerLoopBody(self,builder,bType)
         ---local builder = self:GetHighestBuilder(bType, {builder})
             --local pool = self.Brain:GetPlatoonUniquelyNamed('ArmyPool')
-        local aiBrain = self.Brain
         if self.Brain.BuilderManagers[self.LocationType] and builder.Priority >= 1 and builder:CheckInstanceCount() then
             --LOG('*TATerrain3', self.Main)
             if bType == 'LandForm' and self.Brain.LandForm > 0 then 
@@ -70,15 +69,13 @@ PlatoonFormManager = Class(SCTAPlatoonFormManager) {
             elseif bType == 'Scout' and self.Brain.Scout > 0 then
                     if not self.Main then
                         return self:SCTAManagerLoopBody(builder, 'Scout')
-                    elseif self.Main and self.Brain.Plants <= 4 then 
+                    elseif self.Main and (self.Brain.Plants <= 4) then 
                         return self:SCTAManagerLoopBody(builder, 'Scout')
                     end
-            elseif self.Brain.Labs > 0 and ((bType == 'StructureForm' and self.Brain.StructureForm < 2) or (self.Brain.Labs >= 4 and bType == 'Other' and self.Main and self.Brain.Other > 0)) then
-                    if bType == 'StructureForm' then
-                        return self:SCTAManagerLoopBody(builder, 'StructueForm')
-                    elseif bType == 'Other' then
-                        return self:SCTAManagerLoopBody(builder, 'Other')
-                    end     
+            elseif (self.Brain.Labs > 0 or self.Brain.Plants > 10) and bType == 'StructureForm' and self.Brain.StructureForm > 3 then
+                    return self:SCTAManagerLoopBody(builder, 'StructueForm')
+            elseif self.Brain.Labs > 4 and bType == 'Other' and self.Main and self.Brain.Other > 0 then
+                    return self:SCTAManagerLoopBody(builder, 'Other')    
             end
             if self.Naval and bType == 'SeaForm' and self.Brain.SeaForm > 0 then 
                 return self:SCTAManagerLoopBody(builder, 'SeaForm')

@@ -1,7 +1,5 @@
 
 local UCBC = '/lua/editor/UnitCountBuildConditions.lua'
-local EBC = '/lua/editor/EconomyBuildConditions.lua'
-local SAI = '/lua/ScenarioPlatoonAI.lua'
 local TASlow = '/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua'
 local TAutils = '/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua'
 local MIBC = '/lua/editor/MiscBuildConditions.lua'
@@ -215,7 +213,7 @@ BuilderGroup {
         BuilderName = 'SCTAAI T3AirFactory T2',
         PlatoonTemplate = 'EngineerBuilderSCTAEco23',
         PriorityFunction = TAPrior.ProductionT3Air,
-        Priority = 130,
+        Priority = 140,
         InstanceCount = 1,
         DelayEqualBuildPlattons = {'Factory3', 1},
         BuilderConditions = {

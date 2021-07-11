@@ -1,9 +1,5 @@
 local UCBC = '/lua/editor/UnitCountBuildConditions.lua'
-local SAI = '/lua/ScenarioPlatoonAI.lua'
-local MABC = '/lua/editor/MarkerBuildConditions.lua'
-local MIBC = '/lua/editor/MiscBuildConditions.lua'
 local TASlow = '/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua'
-local TAutils = '/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua'
 local BaseRestrictedArea, BaseMilitaryArea, BaseDMZArea, BaseEnemyArea = import('/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua').TAGetMOARadii()
 local PLANT = (categories.FACTORY * categories.TECH1)
 local LAB = (categories.FACTORY * categories.TECH2)
@@ -11,7 +7,6 @@ local PLATFORM = (categories.FACTORY * categories.TECH3)
 local RAIDAIR = categories.armfig + categories.corveng + categories.GROUNDATTACK
 local RAIDER = categories.armpw + categories.corak + categories.armflash + categories.corgator
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
-local EBC = '/lua/editor/EconomyBuildConditions.lua'
 
 BuilderGroup {
     BuilderGroupName = 'SCTAAIUniversalFormers',
@@ -92,7 +87,7 @@ BuilderGroup {
         PlatoonTemplate = 'T4ExperimentalSCTA',
         PriorityFunction = TAPrior.GantryProduction,
         Priority = 10000,
-        InstanceCount = 2,
+        InstanceCount = 4,
         BuilderType = 'Other',
         BuilderConditions = {
             { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.EXPERIMENTAL * categories.MOBILE - categories.ENGINEER } },
@@ -112,7 +107,6 @@ BuilderGroup {
         Priority = 300,
         BuilderConditions = {
             { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.NUKE * categories.STRUCTURE * categories.TECH3} },
-                { UCBC, 'HaveGreaterThanUnitsWithCategory', { 0, categories.NUKE * categories.STRUCTURE * categories.TECH3}},
             },
         BuilderType = 'Other',
     },
@@ -123,7 +117,6 @@ BuilderGroup {
         Priority = 300,
         BuilderConditions = {
             { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.ANTIMISSILE * categories.STRUCTURE * categories.TECH3} },
-            { UCBC, 'HaveGreaterThanUnitsWithCategory', { 0, categories.ANTIMISSILE * categories.STRUCTURE * categories.TECH3}},
             },
         BuilderType = 'Other',
     },

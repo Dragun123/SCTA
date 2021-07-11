@@ -232,12 +232,13 @@ Disintegrator = Class(TALightCannonProjectile) {
 		TALightCannonProjectile.OnImpact(self, targetType, targetEntity)
 	end,
 }
-
-FlameProjectile = Class(TALightCannonProjectile) {
+TAFlame = Class(TALightCannonProjectile) {
 	FxTrails = {'/mods/SCTA-master/effects/emitters/TAFlamethrower_emit.bp'},
+}
 
+FlameProjectile = Class(TAFlame) {
 	OnCreate = function(self)
-		TALightCannonProjectile.OnCreate(self)
+		TAFlame.OnCreate(self)
 		self.launcher = self:GetLauncher()
 		ForkThread(self.MovementThread, self)
 	end,
