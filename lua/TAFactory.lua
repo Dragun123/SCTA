@@ -225,7 +225,7 @@ TACarrier = Class(AircraftCarrier) {
             local unitBuilding = self.unitBeingBuilt
             unitBuilding:DetachFrom(true)
             self:DetachAll(self.BuildAttachBone)
-            if self:TransportHasAvailableStorage() then
+            if self:TransportHasAvailableStorage() and not self:GetAIBrain().SCTAAI then
                 self:AddUnitToStorage(unitBuilding)
             else
                 local worldPos = self:CalculateWorldPositionFromRelative({0, 0, -20})

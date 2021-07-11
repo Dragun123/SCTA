@@ -277,7 +277,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             end
             local builder = self:GetHighestBuilder(bType,{factory})
             --LOG('*TAIEXIST2', factory)
-                if builder then
+                if builder and not factory.TABuildingUnit then
                 ---LOG('*TAIEXIST3', factory)
                 local template = self:GetFactoryTemplate(builder:GetPlatoonTemplate(), factory)
                 --LOG('*TAAI DEBUG: ARMY ', repr(self.Brain:GetArmyIndex()),': Factory Builder Manager Building - ',repr(builder.BuilderName))

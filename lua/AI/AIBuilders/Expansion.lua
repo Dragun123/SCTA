@@ -16,9 +16,6 @@ local BaseTmpl = 'BaseTemplates'
 local ExBaseTmpl = 'ExpansionBaseTemplates'
 local UCBC = '/lua/editor/UnitCountBuildConditions.lua'
 local MIBC = '/lua/editor/MiscBuildConditions.lua'
-local EBC = '/lua/editor/EconomyBuildConditions.lua'
-local SAI = '/lua/ScenarioPlatoonAI.lua'
-local PlatoonFile = '/lua/platoon.lua'
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
 
 BuilderGroup {
@@ -202,8 +199,7 @@ BuilderGroup {
             { UCBC, 'CheckBuildPlattonDelay', { 'NavalStart' }},
             { UCBC, 'NavalBaseCheck', { } }, -- related to ScenarioInfo.Options.NavalExpansionsAllowed
             { UCBC, 'NavalAreaNeedsEngineer', { 'LocationType', 1000, -1000, 1000, 1, 'StructuresNotMex' } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.9, 0.5 } },
-            { EBC, 'GreaterThanEconStorageCurrent', { 100, 500 } },
+            { TAutils, 'EcoManagementTA', { 0.75, 0.75, } },
         },
         BuilderType = 'SeaTA',
         BuilderData = {
