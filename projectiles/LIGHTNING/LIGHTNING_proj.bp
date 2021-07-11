@@ -44,7 +44,6 @@ ProjectileBlueprint {
         Faction = 'ARM',
         Weapon = 'LIGHTNING',
     },
-
     Physics = {
         DestroyOnWater = true,
         InitialSpeed = 25,

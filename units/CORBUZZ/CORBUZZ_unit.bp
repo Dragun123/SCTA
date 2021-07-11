@@ -138,8 +138,7 @@ TechLevel = 'RULEUTL_Secret',
             MuzzleVelocity = 50,
             EnergyChargeForFirstShot = true,
             EnergyDrainPerSecond = 2000,
-            EnergyRequired = 2000, --might be to high no rapids
-            ---UseFiringSolutionInsteadOfAimBone = true,
+            EnergyRequired = 2000, 
             ProjectileId = '/mods/SCTA-master/projectiles/CORBUZZ_WEAPON/CORBUZZ_WEAPON_proj.bp',
                 RackBones = {
                         {

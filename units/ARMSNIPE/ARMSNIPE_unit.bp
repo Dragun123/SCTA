@@ -188,7 +188,6 @@ UnitBlueprint {
             TurretBonePitch = 'rarm',
             TurretBoneYaw = 'torso',
             TurretPitch = 0,
-            UseFiringSolutionInsteadOfAimBone = true,
             TurretPitchRange = 360,
             TurretPitchSpeed = 200,
             TurretYaw = 0,

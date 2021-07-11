@@ -143,8 +143,6 @@ TechLevel = 'RULEUTL_Advanced',
             EnergyDrainPerSecond = 75,
             EnergyRequired = 75,
             EnergyChargeForFirstShot = true,
-            UseFiringSolutionInsteadOfAimBone = false,
-            ---ProjectileLifetime = 1,
             RackBones = {
                 {
                     MuzzleBones = {
