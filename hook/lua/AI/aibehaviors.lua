@@ -46,7 +46,7 @@ function CommanderThreadSCTADecoy(cdr, platoon)
         end
         WaitTicks(1)        
         if not cdr.Dead and GetGameTimeSeconds() > WaitTaunt and (not aiBrain.LastVocTaunt or GetGameTimeSeconds() - aiBrain.LastVocTaunt > WaitTaunt) then
-            TAReclaim.TAAIRandomizeTaunt(aiBrain)
+            SUtils.AIRandomizeTaunt(aiBrain)
             WaitTaunt = 600 + Random(1, 900)
         end
     end
@@ -306,7 +306,7 @@ function CommanderThreadSCTA(cdr, platoon)
     SetCDRHome(cdr, platoon)
     while not cdr.Dead do
         -- Overcharge
-        if not cdr.Dead and (aiBrain.Labs > 0 or aiBrain.Plants > 10) then CDRSCTADGun(aiBrain, cdr) end
+        if not cdr.Dead and aiBrain.Plants > 4 then CDRSCTADGun(aiBrain, cdr) end
         WaitTicks(1)
 
         -- Go back to base
@@ -409,16 +409,14 @@ function CDRSCTADGun(aiBrain, cdr)
                             break
                         end
                     end
-
+                    IssueClearCommands({cdr})
                     if aiBrain:GetEconomyStored('ENERGY') >= weapon.EnergyRequired and target and not target.Dead then
                         overCharging = true
-                        IssueClearCommands({cdr})
-                        --IssueMove({cdr}, targetPos)
-                        ---TAReclaim.TAAIRandomizeTaunt(aiBrain)
+                        IssueMove({cdr}, targetPos)
                         IssueOverCharge({cdr}, target)
                     elseif target and not target.Dead then -- Commander attacks even if not enough energy for overcharge
-                        IssueClearCommands({cdr})
                         IssueMove({cdr}, targetPos)
+                    elseif target.Dead then
                         IssueMove({cdr}, cdr.CDRHome)
                     end
                 end
@@ -434,7 +432,7 @@ function CDRSCTADGun(aiBrain, cdr)
                 counter = counter + 3
             end
             -- If com is down to yellow then dont keep fighting
-            if (cdr:GetHealthPercent() < 0.75) and Utilities.XZDistanceTwoVectors(cdr.CDRHome, cdr:GetPosition()) > 30 then
+            if (cdr:GetHealthPercent() < 0.25) and Utilities.XZDistanceTwoVectors(cdr.CDRHome, cdr:GetPosition()) > 30 then
                 continueFighting = false
             end
         until not continueFighting or not aiBrain:PlatoonExists(plat)
@@ -448,6 +446,7 @@ function CDRSCTADGun(aiBrain, cdr)
         cdr.UnitBeingBuiltBehavior = false
     end
 end
+
 function SCTACDRReturnHome(aiBrain, cdr)
     -- This is a reference... so it will autoupdate
     local cdrPos = cdr:GetPosition()
