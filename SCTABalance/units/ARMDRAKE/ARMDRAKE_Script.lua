@@ -22,7 +22,7 @@ ARMDRAKE = Class(TAWalking) {
 					TARotatingWeapon.PlayRackRecoil(self, rackList)
 				end, 
 			},
-		CORKROG_HEAD = Class(TAweapon) {
+		ARMDRAK_LASER = Class(TAweapon) {
 		},
 		CORKROG_ROCKET = Class(TAweapon) {},
 	},

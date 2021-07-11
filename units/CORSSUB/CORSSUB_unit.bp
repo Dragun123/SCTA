@@ -133,7 +133,7 @@ UnitBlueprint {
             },
             BallisticArc = 'RULEUBA_None',
             CollideFriendly = false,
-	        DamageFriendly = true,
+            DamageFriendly = false,
             Damage = 800,
             DamageType = 'Normal',
             DisplayName = 'CORSMART_TORPEDO',

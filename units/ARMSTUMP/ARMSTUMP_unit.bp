@@ -144,7 +144,7 @@ UnitBlueprint {
             },
             BallisticArc = 'RULEUBA_None',
             CollideFriendly = false,
-	    DamageFriendly = true,
+            DamageFriendly = false,
             Damage = 60,
             DamageType = 'Normal',
             DisplayName = 'ARM_LIGHTCANNON',
