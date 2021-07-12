@@ -28,7 +28,7 @@ TAconstructor = Class(TAWalking) {
                 self.BuildArmManipulator:Disable()
             end
         end
-        self.BuildingUnit = false
+        --self.BuildingUnit = false
         if __blueprints['armgant'] and not EntityCategoryContains(categories.TECH3, self) then
             TAutils.updateBuildRestrictions(self)
         end
@@ -81,7 +81,7 @@ TAconstructor = Class(TAWalking) {
         elseif self.BuildingOpenAnimManip then
             self.BuildingOpenAnimManip:SetRate(-1)
         end
-        self.BuildingUnit = false
+        self.BuildingUnit = nil
         self:SetImmobile(false)
         TAWalking.OnStopBuild(self, unitBeingBuilt)
     end,
