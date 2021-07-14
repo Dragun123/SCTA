@@ -28,8 +28,8 @@ TAconstructor = Class(TAWalking) {
                 self.BuildArmManipulator:Disable()
             end
         end
-        --self.BuildingUnit = false
-        if __blueprints['armgant'] and not EntityCategoryContains(categories.TECH3, self) then
+        self.BuildingUnit = false
+        if __blueprints['armgant'] and not (EntityCategoryContains(categories.TECH3, self) or self:GetAIBrain().Level3) then
             TAutils.updateBuildRestrictions(self)
         end
         --LOG('*Who', self:GetBlueprint().General.FactionName)
@@ -67,7 +67,7 @@ TAconstructor = Class(TAWalking) {
 
     OnStopBeingBuilt = function(self, builder, layer)
         TAWalking.OnStopBeingBuilt(self, builder, layer)
-        if __blueprints['armgant'] then
+        if __blueprints['armgant'] and self.TARestrict then
             TAutils.TABuildRestrictions(self)
         end
     end,  
@@ -81,7 +81,7 @@ TAconstructor = Class(TAWalking) {
         elseif self.BuildingOpenAnimManip then
             self.BuildingOpenAnimManip:SetRate(-1)
         end
-        self.BuildingUnit = nil
+        self.BuildingUnit = false
         self:SetImmobile(false)
         TAWalking.OnStopBuild(self, unitBeingBuilt)
     end,

@@ -1712,7 +1712,7 @@ Platoon = Class(SCTAAIPlatoon) {
             end
             self:SetPlatoonFormationOverride('Attack')
             WaitSeconds(5)
-            if aiBrain.Labs > 0 or aiBrain.Plants > 10 then
+            if aiBrain.Level2 then
                 self:MergeWithNearbyPlatoonsSCTA('SCTAStrikeForceAIEarly', 'SCTAStrikeForceAI', 5)
             end
         end
@@ -1755,7 +1755,7 @@ Platoon = Class(SCTAAIPlatoon) {
         local maxRadius = self.PlatoonData.SearchRadius or 100
         while aiBrain:PlatoonExists(self) do
             local numberOfUnitsInPlatoon = table.getn(platoonUnits)
-            if aiBrain.Labs >= 4 and numberOfUnitsInPlatoon < 20 then
+            if aiBrain.Level3 and numberOfUnitsInPlatoon < 20 then
                 self:MergeWithNearbyPlatoonsSCTA('SCTAStrikeForceAI', 'SCTAStrikeForceAIEndgame', 10)
             end
             --self:SetPlatoonFormationOverride('Attack')
@@ -2050,7 +2050,7 @@ Platoon = Class(SCTAAIPlatoon) {
             local position = AIUtils.RandomLocation(self.Center[1],self.Center[3])
             self:MoveToLocation(position, false)
             WaitSeconds(2)
-            if aiBrain.Labs > 0 or aiBrain.Plants > 10 then
+            if aiBrain.Level2 then
                 self:MergeWithNearbyPlatoonsSCTA('HuntSCTAAI', 'AttackSCTAForceAI', 5)
             end
         end
@@ -2098,7 +2098,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 aiBrain:PickEnemyLogic()
             end
             numberOfUnitsInPlatoon = table.getn(platoonUnits)
-            if aiBrain.Labs >= 4 and numberOfUnitsInPlatoon < 20 then
+            if aiBrain.Level3 and numberOfUnitsInPlatoon < 20 then
                 self:MergeWithNearbyPlatoonsSCTA('AttackSCTAForceAI', 'SCTAStrikeForceAIEndgame', 20)
             end
 

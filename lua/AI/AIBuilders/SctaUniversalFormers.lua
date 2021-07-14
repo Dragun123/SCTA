@@ -1,11 +1,8 @@
 local UCBC = '/lua/editor/UnitCountBuildConditions.lua'
 local TASlow = '/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua'
+RAIDAIR = categories.armfig + categories.corveng + categories.GROUNDATTACK
+RAIDER = categories.armpw + categories.corak + categories.armflash + categories.corgator
 local BaseRestrictedArea, BaseMilitaryArea, BaseDMZArea, BaseEnemyArea = import('/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua').TAGetMOARadii()
-local PLANT = (categories.FACTORY * categories.TECH1)
-local LAB = (categories.FACTORY * categories.TECH2)
-local PLATFORM = (categories.FACTORY * categories.TECH3)
-local RAIDAIR = categories.armfig + categories.corveng + categories.GROUNDATTACK
-local RAIDER = categories.armpw + categories.corak + categories.armflash + categories.corgator
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
 
 BuilderGroup {

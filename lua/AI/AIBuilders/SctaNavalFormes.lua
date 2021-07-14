@@ -1,9 +1,8 @@
 local UCBC = '/lua/editor/UnitCountBuildConditions.lua'
-local MIBC = '/lua/editor/MiscBuildConditions.lua'
 local TASlow = '/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua'
 local TAutils = '/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua'
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
-local TIDAL = (categories.cortide + categories.armtide)
+TIDAL = (categories.cortide + categories.armtide)
 
 BuilderGroup {
     BuilderGroupName = 'SCTANavalFormer',

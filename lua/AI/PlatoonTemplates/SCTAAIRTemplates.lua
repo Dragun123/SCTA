@@ -6,8 +6,8 @@
 #**
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
-local SKY = categories.AIR * categories.MOBILE
-local STEALTH = categories.armhawk + categories.corvamp
+SKY = categories.AIR * categories.MOBILE
+STEALTH = categories.armhawk + categories.corvamp
 
 PlatoonTemplate {
     Name = 'SCTATorpedosBombers',

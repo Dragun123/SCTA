@@ -4,11 +4,11 @@
     Summary :
         Responsible for defining a mapping from AIBuilders keys -> Plans (Plans === platoon.lua functions)
 ]]
-local RAIDAIR = (categories.armfig + categories.corveng + categories.GROUNDATTACK)
-local RAIDER = (categories.armpw + categories.corak + categories.armflash + categories.corgator)
-local SPECIAL = (RAIDER + categories.EXPERIMENTAL + categories.ENGINEER + categories.SCOUT + categories.BOMB)
-local GROUND = (categories.MOBILE * categories.LAND)
-local RANGE = (categories.ARTILLERY + categories.SILO + categories.ANTIAIR + categories.SNIPER)
+RAIDAIR = (categories.armfig + categories.corveng + categories.GROUNDATTACK)
+RAIDER = (categories.armpw + categories.corak + categories.armflash + categories.corgator)
+SPECIAL = (RAIDER + categories.EXPERIMENTAL + categories.ENGINEER + categories.SCOUT + categories.BOMB)
+GROUND = (categories.MOBILE * categories.LAND)
+RANGE = (categories.ARTILLERY + categories.SILO + categories.ANTIAIR + categories.SNIPER)
 
 PlatoonTemplate {
     Name = 'T1LandScoutFormSCTA',

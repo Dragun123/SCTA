@@ -25,13 +25,12 @@ Physics = {
     MaxSteerForce = 10,
     },
     Weapon = {
-	    [1] = {
-            Damage = 5,
-            MaxRadius = 15,
+        [1] = {
+            RateOfFire = 1,
+            Damage = 20,
         },
         [2] = {
-            RateOfFire = 1,
-            Damage = 15,
+            Damage = 4,
         },
         [3] = {
         },

@@ -7,8 +7,11 @@ TAFactory = Class(FactoryUnit) {
     FactoryUnit.OnCreate(self)
     self.AnimManip = CreateAnimator(self)
     self.Trash:Add(self.AnimManip)
-    if __blueprints['armgant'] and not EntityCategoryContains(categories.TECH3 + categories.GATE, self) then
+    if __blueprints['armgant'] and not (EntityCategoryContains(categories.TECH3 + categories.GATE, self) or self:GetAIBrain().Level3) then
         TAutils.updateBuildRestrictions(self)
+    end
+    if self:GetAIBrain().SCTAAI then
+        self.SCTAAIBrain = true
     end
 end,
 
@@ -16,9 +19,11 @@ end,
         FactoryUnit.OnStopBeingBuilt(self, builder, layer)
         if __blueprints['armgant'] then
             local aiBrain = GetArmyBrain(self.Army)
-            local buildRestrictionVictims = aiBrain:GetListOfUnits(categories.FACTORY + categories.ENGINEER, false)
-            for id, unit in buildRestrictionVictims do    
-            TAutils.TABuildRestrictions(unit)
+            if not aiBrain.Level3 then
+                local buildRestrictionVictims = aiBrain:GetListOfUnits(categories.FACTORY + categories.ENGINEER, false)
+                for id, unit in buildRestrictionVictims do    
+                TAutils.TABuildRestrictions(unit)
+                end
             end
         end
     end,
@@ -89,6 +94,13 @@ end,
 		CreateBuildEffects = function(self, unitBeingBuilt, order)
 			TAutils.CreateTAFactBuildingEffects( self, unitBeingBuilt, self.BuildEffectBones, self.BuildEffectsBag )
         end,
+
+        OnStopBeingCaptured = function(self, captor)
+            FactoryUnit.OnStopBeingCaptured(self, captor)
+            if self.SCTAAIBrain then
+                self:Kill()
+            end
+        end,
     }
     
     TASeaFactory = Class(TAFactory) {
@@ -157,6 +169,16 @@ TACarrier = Class(AircraftCarrier) {
     OnCreate = function(self)
         AircraftCarrier.OnCreate(self)
         self.BuildEffectBones = self:GetBlueprint().General.BuildBones.BuildEffectBones
+        if self:GetAIBrain().SCTAAI then
+            self.SCTAAIBrain = true
+        end
+    end,
+
+    OnStopBeingCaptured = function(self, captor)
+        AircraftCarrier.OnStopBeingCaptured(self, captor)
+        if self.SCTAAIBrain then
+            self:Kill()
+        end
     end,
 
     CreateBuildEffects = function(self, unitBeingBuilt, order)
@@ -225,7 +247,7 @@ TACarrier = Class(AircraftCarrier) {
             local unitBuilding = self.unitBeingBuilt
             unitBuilding:DetachFrom(true)
             self:DetachAll(self.BuildAttachBone)
-            if self:TransportHasAvailableStorage() and not self:GetAIBrain().SCTAAI then
+            if self:TransportHasAvailableStorage() and not self.SCTAAIBrain then
                 self:AddUnitToStorage(unitBuilding)
             else
                 local worldPos = self:CalculateWorldPositionFromRelative({0, 0, -20})

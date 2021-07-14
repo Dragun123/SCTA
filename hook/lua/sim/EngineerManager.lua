@@ -131,18 +131,15 @@ EngineerManager = Class(SCTAEngineerManager) {
         unit.DesiresAssist = false
         unit.NumAssistees = nil
         unit.MinNumAssistees = nil
-        if unit.UnitBeingAssist or unit.UnitBeingBuilt or unit.unitBuilding then
-            self:TADelayAssign(unit, 50)
-            return
-        end
-        if self.AssigningTask and unit:IsIdleState() then
-            self.AssigningTask = nil
-        elseif self.AssigningTask and not unit:IsIdleState() then
-            return
-        end
         if unit.bType then
             return self:TAAssignEngineerTask(unit, unit.bType)
         else
+            if unit.AssigningTask and unit:IsIdleState() then
+                unit.AssigningTask = nil
+            elseif unit.AssigningTask and not unit:IsIdleState() then
+                self:TADelayAssign(unit, 50)
+                return
+            end
             local bp = unit:GetBlueprint().Economy
                 if bp.Land then
                     unit.bType = 'LandTA'
@@ -170,9 +167,15 @@ EngineerManager = Class(SCTAEngineerManager) {
     TAAssignEngineerTask = function(self, unit, bType)
         ---LOG('*Brain', self.Brain.SCTAAI)   
         --unit.bType = bType
+        if unit.AssigningTask and unit:IsIdleState() then
+            unit.AssigningTask = nil
+        elseif unit.AssigningTask and not unit:IsIdleState() then
+            self:TADelayAssign(unit, 50)
+            return
+        end
         local builder = self:GetHighestBuilder(bType, {unit})
         if builder then
-            self.AssigningTask = true
+            unit.AssigningTask = true
             -- Fork off the platoon here
             local template = self:GetEngineerPlatoonTemplate(builder:GetPlatoonTemplate())
             local hndl = self.Brain:MakePlatoon(template[1], template[2])
@@ -231,10 +234,10 @@ EngineerManager = Class(SCTAEngineerManager) {
 
 
             builder:StoreHandle(hndl)
-            self.AssigningTask = nil
+            unit.AssigningTask = nil
             return
         end
-        self.AssigningTask = nil
+        unit.AssigningTask = nil
         self:TADelayAssign(unit)
     end,
 }
