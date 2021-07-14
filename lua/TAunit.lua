@@ -16,10 +16,11 @@ TAunit = Class(Unit)
         --self._UnitName = bp.General.UnitName
         ---self:LOGDBG('TAUnit.OnCreate')
         Unit.OnCreate(self)
-		if self:GetAIBrain().SCTAAI then
-			self:SetFireState(FireState.RETURN_FIRE)
+			if self:GetAIBrain().SCTAAI then
+				self:SetFireState(FireState.RETURN_FIRE)
+				self.SCTAAIBrain = true
 			else
-			self:SetFireState(FireState.GROUND_FIRE)
+				self:SetFireState(FireState.GROUND_FIRE)
 			end
 		---LOG(self:GetBlueprint().Physics.MotionType)
         end,
@@ -33,6 +34,13 @@ TAunit = Class(Unit)
 	OnDamage = function(self, instigator, amount, vector, damageType)
 		Unit.OnDamage(self, instigator, amount * (self.Pack or 1), vector, damageType)
 	end,
+
+	OnStopBeingCaptured = function(self, captor)
+        Unit.OnStopBeingCaptured(self, captor)
+        if self.SCTAAIBrain then
+            self:Kill()
+        end
+    end,
 
 	OnIntelDisabled = function(self)
 		Unit.OnIntelDisabled(self)

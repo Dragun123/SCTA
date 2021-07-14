@@ -22,6 +22,7 @@ PlatoonFormManager = Class(SCTAPlatoonFormManager) {
         --LOG('*TALocation', lType)
         if string.find(lType, 'Naval') then
             self.Naval = true
+            brain.TANavy = true
             --LOG('*TALocation3', self.LocationType)
             elseif lType == 'MAIN' then
             self.Main = true
@@ -72,9 +73,9 @@ PlatoonFormManager = Class(SCTAPlatoonFormManager) {
                     elseif self.Main and (self.Brain.Plants <= 4) then 
                         return self:SCTAManagerLoopBody(builder, 'Scout')
                     end
-            elseif (self.Brain.Labs > 0 or self.Brain.Plants > 10) and bType == 'StructureForm' and self.Brain.StructureForm > 3 then
+            elseif self.Brain.Level2 and bType == 'StructureForm' and self.Brain.StructureForm > 3 then
                     return self:SCTAManagerLoopBody(builder, 'StructueForm')
-            elseif self.Brain.Labs > 4 and bType == 'Other' and self.Main and self.Brain.Other > 0 then
+            elseif self.Brain.Level3 and bType == 'Other' and self.Main and self.Brain.Other > 0 then
                     return self:SCTAManagerLoopBody(builder, 'Other')    
             end
             if self.Naval and bType == 'SeaForm' and self.Brain.SeaForm > 0 then 

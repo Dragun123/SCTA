@@ -4,9 +4,7 @@ local Numbers = import('/lua/editor/UnitCountBuildConditions.lua').HaveUnitsWith
 local MoreProduct = import('/lua/editor/UnitCountBuildConditions.lua').HaveGreaterThanUnitsInCategoryBeingBuilt
 local LessProduct = import('/lua/editor/UnitCountBuildConditions.lua').HaveLessThanUnitsInCategoryBeingBuilt
 local LessTime = import('/lua/editor/MiscBuildConditions.lua').LessThanGameTime
-local RAIDAIR = (categories.armfig + categories.corveng + categories.GROUNDATTACK)
-local RAIDER =  (categories.armpw + categories.corak + categories.armflash + categories.corgator + (categories.AMPHIBIOUS - categories.COMMAND))
-local PLANT = (categories.FACTORY * categories.TECH1)
+local RAIDER = (categories.armpw + categories.corak + categories.armflash + categories.corgator)
 local LAB = (categories.FACTORY * categories.TECH2)
 local PLATFORM = (categories.FACTORY * categories.TECH3)
 local FUSION = ((categories.ENERGYPRODUCTION * (categories.TECH2 + categories.TECH3)) * categories.STRUCTURE)
@@ -23,7 +21,7 @@ end
 AirProduction = function(self, aiBrain)
     if Factory(aiBrain,  0, categories.GATE) then
         return 0
-    elseif aiBrain.Labs >= 4 then 
+    elseif aiBrain.Level3 then 
         return 10
     else
         return 105
@@ -40,7 +38,7 @@ end
 
 
 AssistProduction = function(self, aiBrain)
-    if aiBrain.Plants > 10 then 
+    if aiBrain.Level2 then 
         return 100
     elseif aiBrain.Plants >= 4 then 
         return 50
@@ -80,7 +78,7 @@ end
 StructureProductionT2Energy = function(self, aiBrain)
     if aiBrain.Labs >= 2 and PowerGeneration(aiBrain,  2, CLOAKREACT) then 
         return 150
-    elseif aiBrain.Plants > 10  and PowerGeneration(aiBrain,  2, CLOAKREACT) then
+    elseif aiBrain.Level2 and PowerGeneration(aiBrain,  2, CLOAKREACT) then
         return 100
     else
         return 0
@@ -92,7 +90,7 @@ ProductionT3Air = function(self, aiBrain)
         return 125
     elseif Factory(aiBrain,  0, PLATFORM) and Factory(aiBrain,  0, CLOAKREACT) then
         return 105
-    elseif aiBrain.Labs > 4 and Factory(aiBrain,  2, FUSION) then 
+    elseif aiBrain.Level3 and Factory(aiBrain,  2, FUSION) then 
         return 100
     else
         return 0
@@ -104,7 +102,7 @@ FactoryReclaim = function(self, aiBrain)
         return 200
     elseif aiBrain.Labs >= 2 then 
         return 150
-    elseif aiBrain.Plants > 10 then 
+    elseif aiBrain.Level2 then 
         return 10
     else
         return 0
@@ -132,7 +130,7 @@ ProductionT3 = function(self, aiBrain)
         return 125
     elseif Factory(aiBrain,  0, PLATFORM) then
         return 105    
-    elseif aiBrain.Labs > 4 then
+    elseif aiBrain.Level3 then
         return 100
     else
         return 0
@@ -142,10 +140,8 @@ end
 UnitProduction = function(self, aiBrain)
     if Factory(aiBrain,  1, PLATFORM) then
         return 80
-    elseif aiBrain.Labs > 0 then
+    elseif aiBrain.Level2 then 
         return 125
-    elseif aiBrain.Plants > 10 then 
-        return 110
     else
         return 0
     end
@@ -234,7 +230,7 @@ end
 GantryConstruction = function(self, aiBrain)
     if Factory(aiBrain,  1, PLATFORM) and Factory(aiBrain,  2, FUSION) then
         return 200
-    elseif aiBrain.Labs > 4 and Factory(aiBrain,  2, FUSION) then
+    elseif aiBrain.Level3 and Factory(aiBrain,  2, FUSION) then
         return 100
     else
         return 0

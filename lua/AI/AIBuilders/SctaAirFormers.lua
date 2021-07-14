@@ -1,10 +1,7 @@
-local UCBC = '/lua/editor/UnitCountBuildConditions.lua'
-local SAI = '/lua/ScenarioPlatoonAI.lua'
-local MIBC = '/lua/editor/MiscBuildConditions.lua'
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
 local TASlow = '/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua'
-local SKY = categories.AIR * categories.MOBILE
-local STEALTH = categories.armhawk + categories.corvamp
+SKY = categories.AIR * categories.MOBILE
+STEALTH = categories.armhawk + categories.corvamp
 
 
 BuilderGroup {

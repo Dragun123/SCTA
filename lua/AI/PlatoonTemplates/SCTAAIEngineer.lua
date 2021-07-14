@@ -1,5 +1,5 @@
-local WEIRD = (categories.NAVAL + categories.COMMAND + categories.FIELDENGINEER + categories.AIR)
-local TA = (categories.ARM + categories.CORE)
+WEIRD = (categories.NAVAL + categories.COMMAND + categories.FIELDENGINEER + categories.AIR)
+TA = (categories.ARM + categories.CORE)
 
 PlatoonTemplate {
     Name = 'CommanderBuilderSCTA',

@@ -57,17 +57,17 @@ AIBrain = Class(SCTAAIBrainClass) {
             }
             local GetCurrentUnits = moho.aibrain_methods.GetCurrentUnits
             while (aiBrain.Result ~= 'defeat') do
-                if aiBrain.SeaForm < 1 and checks.SeaForm < 1 then
+                if aiBrain.SeaForm < 1 and checks.SeaForm < 1 and aiBrain.TANavy then
                     aiBrain.SeaForm = GetCurrentUnits(aiBrain, (categories.NAVAL * categories.MOBILE) - categories.ENGINEER)
                     WaitTicks(1)
                     checks.SeaForm = checks.SeaForm + 5
                 end
-                if aiBrain.StructureForm < 3 and checks.StructureForm < 1 and (aiBrain.Plants > 10 or aiBrain.Labs > 0) then
+                if aiBrain.StructureForm < 3 and checks.StructureForm < 1 and (aiBrain.Level2) then
                     aiBrain.StructureForm = GetCurrentUnits(aiBrain, categories.STRUCTURE * (categories.CQUEMOV + categories.MASSFABRICATION))
                     WaitTicks(1)
                     checks.StructureForm = checks.StructureForm + 5
                 end
-                if aiBrain.Other < 1 and checks.Other < 1 and aiBrain.Labs > 4 then
+                if aiBrain.Other < 1 and checks.Other < 1 and aiBrain.Level3 then
                     aiBrain.Other = GetCurrentUnits(aiBrain, categories.EXPERIMENTAL * categories.MOBILE)
                     WaitTicks(1)
                     checks.Other = checks.Other + 10
