@@ -19,6 +19,7 @@ UnitBlueprint {
         'BOT',
         'AMPHIBIOUS',
         'SNIPEMODE',
+        'BUILTBYLANDTIER3FACTORY',
     },
     Display = {
         UniformScale = 0.2,

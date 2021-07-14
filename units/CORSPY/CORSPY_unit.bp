@@ -37,6 +37,9 @@ UnitBlueprint {
 	    'LAND',
         'CORE',
         'SCOUT',
+        'RADAR',
+        'OVERLAYRADAR',
+        'BUILTBYLANDTIER2FACTORY',
     },
     Defense = {
         ArmorType = 'Normal',

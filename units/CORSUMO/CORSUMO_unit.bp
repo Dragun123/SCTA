@@ -39,6 +39,7 @@ UnitBlueprint {
         'CORE',
         'BOT',
         'ANTISHIELD',
+        'BUILTBYLANDTIER2FACTORY',
     },
     Defense = {
         ArmorType = 'Normal',

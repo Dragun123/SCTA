@@ -17,6 +17,7 @@ UnitBlueprint {
     'OVERLAYDIRECTFIRE',
     'ARM',
     'BOT',
+    'BUILTBYLANDTIER3FACTORY',
    },
     Defense = {
         Health = 6000,

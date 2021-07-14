@@ -16,6 +16,7 @@ UnitBlueprint {
 	    'DIRECTFIRE',
         'OVERLAYDIRECTFIRE',
         'CORE',
+        'BUILTBYLANDTIER3FACTORY',
     },
     Defense = {
         Health = 4800,

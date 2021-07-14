@@ -75,7 +75,7 @@ UnitBlueprint {
         KBot = true,
 	    BuildRate = 200,
         BuildableCategory = {
-            'BOT MOBILE TECH2 CORE',
+            'BOT MOBILE BUILTBYLANDTIER2FACTORY CORE',
         },
 	InitialRallyX = 0,
 InitialRallyZ = 7,

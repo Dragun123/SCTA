@@ -85,7 +85,7 @@ UnitBlueprint {
     DifferentialUpgradeCostCalculation = true,
         BuildableCategory = {
             'coradlab',
-            'BOT MOBILE TECH2 CORE',
+            'BOT MOBILE BUILTBYLANDTIER2FACTORY CORE',
             'BOT MOBILE TECH1 CORE',
         },
         InitialRallyX = 0,

@@ -12,6 +12,7 @@ UnitBlueprint {
         'CORE',
         'BOT',
         'ANTISHIELD',
+        'BUILTBYLANDTIER3FACTORY',
     },
     Defense = {
         Health = 14000,

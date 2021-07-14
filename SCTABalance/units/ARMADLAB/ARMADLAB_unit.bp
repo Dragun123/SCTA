@@ -83,8 +83,8 @@ UnitBlueprint {
         DifferentialUpgradeCostCalculation = true,
         BuildableCategory = {
             'BOT MOBILE TECH1 ARM',
-            'BOT MOBILE TECH2 ARM',
-            'BOT MOBILE TECH3 ARM',
+            'BOT MOBILE BUILTBYLANDTIER2FACTORY ARM',
+            'BOT MOBILE BUILTBYLANDTIER3FACTORY ARM',
         },
 	InitialRallyX = 0,
 InitialRallyZ = 7,

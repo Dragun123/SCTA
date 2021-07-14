@@ -87,7 +87,7 @@ UnitBlueprint {
         BuildableCategory = {
             'armadlab',
             'BOT MOBILE TECH1 ARM',
-            'BOT MOBILE TECH2 ARM',
+            'BOT MOBILE BUILTBYLANDTIER2FACTORY ARM',
         },
 	InitialRallyX = 0,
 InitialRallyZ = 7,

@@ -28,6 +28,7 @@ UnitBlueprint {
     },
     BuildIconSortPriority = 3,
     Categories = {
+        'BUILTBYLANDTIER2FACTORY',
         'SELECTABLE',
         'TECH2',
         'BOT',

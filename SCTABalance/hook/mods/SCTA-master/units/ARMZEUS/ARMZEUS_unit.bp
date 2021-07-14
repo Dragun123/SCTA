@@ -18,6 +18,7 @@ UnitBlueprint {
     'LAND',
     'ARM',
     'ANTISHIELD',
+    'BUILTBYLANDTIER3FACTORY',
     },
     Defense = {
     Health = 13000,

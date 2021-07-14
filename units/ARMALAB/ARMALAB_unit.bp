@@ -75,7 +75,7 @@ UnitBlueprint {
         BuildTime = 13520,
 	    BuildRate = 200,
         BuildableCategory = {
-            'BOT MOBILE TECH2 ARM',
+            'BOT MOBILE BUILTBYLANDTIER2FACTORY ARM',
         },
         KBot = true,
 	InitialRallyX = 0,

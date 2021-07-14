@@ -41,6 +41,7 @@ UnitBlueprint {
         'LAND',
         'CORE',
         'HOVER',
+        'BUILTBYLANDTIER2FACTORY',
     },
     Defense = {
         ArmorType = 'Normal',

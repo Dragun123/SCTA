@@ -12,6 +12,7 @@ UnitBlueprint {
     'OVERLAYINDIRECTFIRE',
     'ARM',
     'SILO',
+    'BUILTBYLANDTIER2FACTORY',
     },
    Defense = {
     Health = 1100,

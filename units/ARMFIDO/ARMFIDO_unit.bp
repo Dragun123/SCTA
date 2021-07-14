@@ -38,6 +38,7 @@ UnitBlueprint {
         'OVERLAYDIRECTFIRE',
         'ARM',
         'BOT',
+        'BUILTBYLANDTIER2FACTORY',
     },
     Defense = {
         ArmorType = 'Normal',

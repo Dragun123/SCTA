@@ -17,6 +17,7 @@ UnitBlueprint {
         'CORE',
         'BOT',
         'TANK',
+        'BUILTBYLANDTIER2FACTORY',
     },
     Defense = {
         Health = 1200,

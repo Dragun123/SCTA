@@ -41,6 +41,7 @@ UnitBlueprint {
         'BOT',
         'SNIPEMODE',
         'AMPHIBIOUS', 
+        'BUILTBYLANDTIER2FACTORY',
     },
     Defense = {
         ArmorType = 'Normal',
