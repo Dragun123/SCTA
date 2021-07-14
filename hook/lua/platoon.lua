@@ -2815,7 +2815,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 WaitSeconds(17)
             end
         end,
-
+            
         CheckEnergySCTAEco = function(self)
             self.EcoCheck = true
             if self:GetBrain():GetEconomyStoredRatio('ENERGY').EnergyStorageRatio < 0.1 then

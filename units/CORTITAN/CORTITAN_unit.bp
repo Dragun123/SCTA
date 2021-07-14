@@ -76,6 +76,7 @@ UnitBlueprint {
         'OVERLAYSONAR',
         'CORE',
         'SNIPEMODE',
+        'BOMBER',
     },
     Defense = {
         ArmorType = 'Light',

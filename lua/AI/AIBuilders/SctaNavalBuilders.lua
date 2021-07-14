@@ -59,10 +59,11 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTAAi Factory Hover',
         PlatoonTemplate = 'T1ScoutShipSCTA',
-        PriorityFunction = TAPrior.UnitProductionT1,
+        PriorityFunction = TAPrior.ScoutShipProduction,
         Priority = 115,
         BuilderConditions = {
             { TASlow,   'TAAttackNaval', {true}},
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 10, categories.SCOUT * categories.NAVAL } },
             { UCBC, 'HaveUnitsWithCategoryAndAlliance', { true, 0, categories.xsl0103 + categories.ual0201, 'Enemy'}},	
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },

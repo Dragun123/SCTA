@@ -14,7 +14,7 @@ PlatoonTemplate {
     Plan = 'BomberAISCTANaval',
     --Type = 'SeaForm',
     GlobalSquads = {
-        { SKY * categories.ANTINAVY, 1, 10, 'Attack', 'GrowthFormation' },
+        { SKY * categories.BOMBER * categories.ANTINAVY, 1, 10, 'Attack', 'GrowthFormation' },
     }
 }
 
@@ -50,7 +50,7 @@ PlatoonTemplate {
     Plan = 'InterceptorAISCTAStealth',
     ---PlatoonType = 'AirForm',
     GlobalSquads = {
-        { SKY * (categories.BOMBER + categories.GROUNDATTACK) + STEALTH - categories.ANTINAVY, 1, 100, 'Attack', 'GrowthFormation' },
+        { (SKY * (categories.BOMBER + categories.GROUNDATTACK) - categories.ANTINAVY) + STEALTH, 1, 100, 'Attack', 'GrowthFormation' },
     }
 }
 

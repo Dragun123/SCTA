@@ -6,7 +6,7 @@
 #**
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
-NAVY = categories.NAVAL * categories.MOBILE
+NAVY = (categories.NAVAL * categories.MOBILE)
 
 PlatoonTemplate {
     Name = 'SCTAPatrolBoatAttack',
@@ -37,10 +37,10 @@ PlatoonTemplate {
 
 PlatoonTemplate {
     Name = 'SCTANavalAssault',
-    Plan = 'NavalForceAISorian',
+    Plan = 'NavalForceAI',
     --Type = 'SeaForm',
     GlobalSquads = {
-        {NAVY - categories.ENGINEER - categories.NAVALCARRIER, 4, 10, 'Attack', 'GrowthFormation' },
+        {NAVY - categories.ENGINEER - categories.NAVALCARRIER, 2, 10, 'Attack', 'GrowthFormation' },
     },
 }
 

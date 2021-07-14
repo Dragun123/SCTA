@@ -83,6 +83,19 @@ TAunit = Class(Unit)
 		end
     end,
 
+	TAMovementThread = function(self, EffectsBag, TypeSuffix)
+		if not IsDestroyed(self) then
+			local bp = self:GetBlueprint()
+			if bp.Display.MovementEffects.TAMovement then
+				for k, v in bp.Display.MovementEffects.TAMovement.Bones do
+				self.FxMovement:Add(CreateAttachedEmitter(self, v, self:GetArmy(), bp.Display.MovementEffects.TAMovement.Emitter ):ScaleEmitter(bp.Display.MovementEffects.TAMovement.Scale))
+				WaitSeconds(3)
+				self.FxMovement:Destroy()
+				end
+			end
+		end
+	end,
+
 	CloakDetection = function(self)
 		local GetUnitsAroundPoint = moho.aibrain_methods.GetUnitsAroundPoint
 		local brain = moho.entity_methods.GetAIBrain(self)

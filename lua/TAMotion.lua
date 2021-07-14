@@ -10,25 +10,7 @@ TASea = Class(TAunit)
      
 	OnMotionHorzEventChange = function(self, new, old )
 		TAunit.OnMotionHorzEventChange(self, new, old)
-		self.CreateMovementEffects(self)
-	end,
-    
-    
-	CreateMovementEffects = function(self, EffectsBag, TypeSuffix)
-		if not IsDestroyed(self) then
-		TAunit.CreateMovementEffects(self, EffectsBag, TypeSuffix)
-		local bp = self:GetBlueprint()
-		if self:IsUnitState('Moving') and bp.Display.MovementEffects.TAMovement then
-			for k, v in bp.Display.MovementEffects.TAMovement.Bones do
-				self.FxMovement:Add(CreateAttachedEmitter(self, v, self:GetArmy(), bp.Display.MovementEffects.TAMovement.Emitter ):ScaleEmitter(bp.Display.MovementEffects.TAMovement.Scale))
-			end
-		end
-		if not self:IsUnitState('Moving') then
-			for k,v in self.FxMovement do
-				v:Destroy()
-			end
-		end
-		end
+		ForkThread(self.TAMovementThread, self)
 	end,
 }
 
@@ -110,25 +92,7 @@ TASeaWalking = Class(TAWalking)
      
 	OnMotionHorzEventChange = function(self, new, old )
 		TAWalking.OnMotionHorzEventChange(self, new, old)
-		self.CreateMovementEffects(self)
-	end,
-    
-    
-	CreateMovementEffects = function(self, EffectsBag, TypeSuffix)
-		if not IsDestroyed(self) then
-			TAWalking.CreateMovementEffects(self, EffectsBag, TypeSuffix)
-		local bp = self:GetBlueprint()
-		if self:IsUnitState('Moving') and bp.Display.MovementEffects.TAMovement then
-			for k, v in bp.Display.MovementEffects.TAMovement.Bones do
-				self.FxMovement:Add(CreateAttachedEmitter(self, v, self:GetArmy(), bp.Display.MovementEffects.TAMovement.Emitter ):ScaleEmitter(bp.Display.MovementEffects.TAMovement.Scale))
-			end
-		end
-			if not self:IsUnitState('Moving') then
-			for k,v in self.FxMovement do
-				v:Destroy()
-			end
-		end
-		end
+		ForkThread(self.TAMovementThread, self)
 	end,
 }
 

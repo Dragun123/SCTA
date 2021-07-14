@@ -66,19 +66,16 @@ TATransport = Class(AirTransport)
 
     end,
 
-    CreateMovementEffects = function(self, EffectsBag, TypeSuffix)
+    TAMovementThread = function(self, EffectsBag, TypeSuffix)
 		if not IsDestroyed(self) then
-		AirTransport.CreateMovementEffects(self, EffectsBag, TypeSuffix)
-		local bp = self:GetBlueprint()
-		if self:IsUnitState('Moving') and bp.Display.MovementEffects.TAMovement then
-			for k, v in bp.Display.MovementEffects.TAMovement.Bones do
+			local bp = self:GetBlueprint()
+			if bp.Display.MovementEffects.TAMovement then
+				for k, v in bp.Display.MovementEffects.TAMovement.Bones do
 				self.FxMovement:Add(CreateAttachedEmitter(self, v, self:GetArmy(), bp.Display.MovementEffects.TAMovement.Emitter ):ScaleEmitter(bp.Display.MovementEffects.TAMovement.Scale))
+				WaitSeconds(3)
+				self.FxMovement:Destroy()
+				end
 			end
-			elseif not self:IsUnitState('Moving') then
-			for k,v in self.FxMovement do
-				v:Destroy()
-			end
-		end
 		end
 	end,
 
@@ -87,7 +84,7 @@ TATransport = Class(AirTransport)
 TATransportSea = Class(TATransport) {
     OnMotionHorzEventChange = function(self, new, old )
 		TATransport.OnMotionHorzEventChange(self, new, old)
-		self.CreateMovementEffects(self)
+		ForkThread(self.TAMovementThread, self)
 	end,
 }
 
@@ -106,7 +103,7 @@ TATransportAir = Class(TATransport) {
 
     OnMotionVertEventChange = function(self, new, old)
         TATransport.OnMotionVertEventChange(self, new, old)
-        self.CreateMovementEffects(self)
+        ForkThread(self.TAMovementThread, self)
         if (new == 'Down' or new == 'Bottom') then
 			self:CloseWings()
 			self:PlayUnitSound('Landing')

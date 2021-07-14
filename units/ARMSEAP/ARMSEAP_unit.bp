@@ -78,6 +78,7 @@ UnitBlueprint {
         'OVERLAYSONAR',
         'ARM',
         'TRANSPORTATION',
+        'BOMBER',
     },
     Defense = {
         ArmorType = 'Light',

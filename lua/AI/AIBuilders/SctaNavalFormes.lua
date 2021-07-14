@@ -89,7 +89,7 @@ BuilderGroup {
         BuilderName = 'SCTA T1 Naval Assault',
         PlatoonTemplate = 'SCTANavalAssault',
         PriorityFunction = TAPrior.NavalProduction,
-        Priority = 110,
+        Priority = 150,
         InstanceCount = 20,
         BuilderType = 'SeaForm',
         BuilderData = {
@@ -121,7 +121,7 @@ BuilderGroup {
         BuilderData = {
         },        
         BuilderConditions = { 
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, SKY * categories.BOMBER} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, SKY * categories.BOMBER * categories.ANTINAVY} },
             },
         },
     Builder {
