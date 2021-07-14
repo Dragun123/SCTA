@@ -4,11 +4,11 @@ local Numbers = import('/lua/editor/UnitCountBuildConditions.lua').HaveUnitsWith
 local MoreProduct = import('/lua/editor/UnitCountBuildConditions.lua').HaveGreaterThanUnitsInCategoryBeingBuilt
 local LessProduct = import('/lua/editor/UnitCountBuildConditions.lua').HaveLessThanUnitsInCategoryBeingBuilt
 local LessTime = import('/lua/editor/MiscBuildConditions.lua').LessThanGameTime
-RAIDER = (categories.armpw + categories.corak + categories.armflash + categories.corgator)
-LAB = (categories.FACTORY * categories.TECH2)
-PLATFORM = (categories.FACTORY * categories.TECH3)
-FUSION = ((categories.ENERGYPRODUCTION * (categories.TECH2 + categories.TECH3)) * categories.STRUCTURE)
-CLOAKREACT = (categories.ENERGYPRODUCTION * categories.TECH3 * categories.STRUCTURE)
+local RAIDER = (categories.armpw + categories.corak + categories.armflash + categories.corgator)
+local LAB = (categories.FACTORY * categories.TECH2)
+local PLATFORM = (categories.FACTORY * categories.TECH3)
+local FUSION = ((categories.ENERGYPRODUCTION * (categories.TECH2 + categories.TECH3)) * categories.STRUCTURE)
+local CLOAKREACT = (categories.ENERGYPRODUCTION * categories.TECH3 * categories.STRUCTURE)
 
 AirCarrierExist = function(self, aiBrain)
     if Factory(aiBrain,  0, categories.NAVALCARRIER) then 

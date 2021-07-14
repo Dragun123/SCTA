@@ -7,7 +7,7 @@
 RAIDAIR = (categories.armfig + categories.corveng + categories.GROUNDATTACK)
 RAIDER = (categories.armpw + categories.corak + categories.armflash + categories.corgator)
 SPECIAL = (RAIDER + categories.EXPERIMENTAL + categories.ENGINEER + categories.SCOUT + categories.BOMB)
-GROUND = (categories.MOBILE * categories.LAND)
+GROUND = (categories.MOBILE * categories.LAND - categories.TRANSPORTFOCUS)
 RANGE = (categories.ARTILLERY + categories.SILO + categories.ANTIAIR + categories.SNIPER)
 
 PlatoonTemplate {
