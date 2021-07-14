@@ -7,34 +7,8 @@ local LessTime = import('/lua/editor/MiscBuildConditions.lua').LessThanGameTime
 local RAIDER = (categories.armpw + categories.corak + categories.armflash + categories.corgator)
 local LAB = (categories.FACTORY * categories.TECH2)
 local PLATFORM = (categories.FACTORY * categories.TECH3)
-local FUSION = ((categories.ENERGYPRODUCTION * (categories.TECH2 + categories.TECH3)) * categories.STRUCTURE)
+local FUSION = (categories.ENERGYPRODUCTION * categories.STRUCTURE * (categories.TECH2 + categories.TECH3))
 local CLOAKREACT = (categories.ENERGYPRODUCTION * categories.TECH3 * categories.STRUCTURE)
-
-AirCarrierExist = function(self, aiBrain)
-    if Factory(aiBrain,  0, categories.NAVALCARRIER) then 
-        return 200
-    else
-        return 0
-    end
-end
-
-AirProduction = function(self, aiBrain)
-    if Factory(aiBrain,  0, categories.GATE) then
-        return 0
-    elseif aiBrain.Level3 then 
-        return 10
-    else
-        return 105
-    end
-end
-
-ScoutShipProduction = function(self, aiBrain)
-    if Factory(aiBrain,  0, categories.NAVAL * categories.FACTORY) and PowerGeneration(aiBrain,  1, categories.GATE) then 
-        return 110
-    else
-        return 0
-    end
-end
 
 
 AssistProduction = function(self, aiBrain)
@@ -49,24 +23,10 @@ end
 
 
 ---TECHUPPRoduction
-NavalProduction = function(self, aiBrain)
-    if (Numbers(aiBrain, true, 0, categories.NAVAL * categories.FACTORY, 'Enemy') and Factory(aiBrain,  0, categories.NAVAL * categories.FACTORY)) or Numbers(aiBrain, true, 0, categories.NAVAL * categories.MOBILE, 'Enemy') then
-        return 125
-    else
-        return 0
-    end
-end
 
-NavalProductionT2 = function(self, aiBrain)
-    if (Numbers(aiBrain, true, 0, categories.NAVAL * categories.FACTORY, 'Enemy') and Factory(aiBrain,  0, categories.NAVAL * LAB)) or Numbers(aiBrain, true, 0, categories.NAVAL * categories.MOBILE, 'Enemy') then
-        return 160
-    else
-        return 0
-    end
-end
 
 StructureProductionT2 = function(self, aiBrain)
-    if aiBrain.Labs > 0  then 
+    if aiBrain.Level2 then 
         return 120
     elseif Factory(aiBrain,  0, categories.STRUCTURE * categories.TECH2) then
         return 10
@@ -85,12 +45,10 @@ StructureProductionT2Energy = function(self, aiBrain)
     end
 end
 
-ProductionT3Air = function(self, aiBrain)
-    if Factory(aiBrain,  0, categories.GATE) and Factory(aiBrain,  0, CLOAKREACT) then
-        return 125
-    elseif Factory(aiBrain,  0, PLATFORM) and Factory(aiBrain,  0, CLOAKREACT) then
-        return 105
-    elseif aiBrain.Level3 and Factory(aiBrain,  2, FUSION) then 
+GantryConstruction = function(self, aiBrain)
+    if Factory(aiBrain,  1, PLATFORM) and Factory(aiBrain,  2, FUSION) then
+        return 200
+    elseif aiBrain.Level3 and Factory(aiBrain,  2, FUSION) then
         return 100
     else
         return 0
@@ -110,42 +68,59 @@ FactoryReclaim = function(self, aiBrain)
 end
 
 
-
-
-
----WithinTechProduction
-
-
-
-
-
-
-
-
-----TECH1 PRODUCTION
-
-
-ProductionT3 = function(self, aiBrain)
-    if Factory(aiBrain,  0, categories.GATE) then
+----NAVY PRODUCTION
+NavalProduction = function(self, aiBrain)
+    if Numbers(aiBrain, true, 0, categories.NAVAL * (categories.FACTORY + categories.MOBILE), 'Enemy') and aiBrain.TANavy then
         return 125
-    elseif Factory(aiBrain,  0, PLATFORM) then
-        return 105    
-    elseif aiBrain.Level3 then
+    else
+        return 0
+    end
+end
+
+
+ScoutShipProduction = function(self, aiBrain)
+    if aiBrain.TANavy and PowerGeneration(aiBrain,  1, categories.GATE) then 
+        return 110
+    else
+        return 0
+    end
+end
+
+NavalProductionT2 = function(self, aiBrain)
+    if Numbers(aiBrain, true, 0, categories.NAVAL * (categories.FACTORY + categories.MOBILE), 'Enemy') and aiBrain.TANavy and aiBrain.Level2 then
+        return 160
+    else
+        return 0
+    end
+end
+
+
+
+--AIR Production
+
+AirProduction = function(self, aiBrain)
+    if Factory(aiBrain,  0, categories.GATE) then
+        return 0
+    elseif aiBrain.Level3 then 
+        return 10
+    else
+        return 105
+    end
+end
+
+ProductionT3Air = function(self, aiBrain)
+    if Factory(aiBrain,  0, categories.GATE) and Factory(aiBrain,  0, CLOAKREACT) then
+        return 125
+    elseif Factory(aiBrain,  0, PLATFORM) and Factory(aiBrain,  0, CLOAKREACT) then
+        return 105
+    elseif aiBrain.Level3 and Factory(aiBrain,  2, FUSION) then 
         return 100
     else
         return 0
     end
 end
 
-UnitProduction = function(self, aiBrain)
-    if Factory(aiBrain,  1, PLATFORM) then
-        return 80
-    elseif aiBrain.Level2 then 
-        return 125
-    else
-        return 0
-    end
-end
+---LAND/Generic
 
 UnitProductionT1 = function(self, aiBrain)
     if Factory(aiBrain,  0, categories.GATE) then
@@ -169,6 +144,30 @@ UnitProductionT1 = function(self, aiBrain)
       end
   end
 
+  UnitProduction = function(self, aiBrain)
+    if Factory(aiBrain,  1, PLATFORM) then
+        return 80
+    elseif aiBrain.Level2 then 
+        return 125
+    else
+        return 0
+    end
+end
+
+ProductionT3 = function(self, aiBrain)
+    if Factory(aiBrain,  0, categories.GATE) then
+        return 125
+    elseif Factory(aiBrain,  0, PLATFORM) then
+        return 105    
+    elseif aiBrain.Level3 then
+        return 100
+    else
+        return 0
+    end
+end
+
+
+---ENERGY
 
 HighTechEnergyProduction = function(self, aiBrain)
     if Factory(aiBrain,  2, FUSION) then 
@@ -178,11 +177,43 @@ HighTechEnergyProduction = function(self, aiBrain)
     end
 end
 
+TechEnergyExist = function(self, aiBrain)
+    if Factory(aiBrain,  1, FUSION) then 
+        return 125
+    else
+        return 0
+    end
+end
+
+----IEXIST
+
+AirCarrierExist = function(self, aiBrain)
+    if Factory(aiBrain,  0, categories.NAVALCARRIER) then 
+        return 200
+    else
+        return 0
+    end
+end
+
+
+UnitProductionField = function(self, aiBrain)
+    if Factory(aiBrain,  0, categories.FIELDENGINEER) then
+        return 200
+    else
+        return 0
+    end
+end
 
 ----GANTRYSPECIFIC
 
 
-
+GantryProduction = function(self, aiBrain)
+    if Factory(aiBrain,  0, categories.GATE) then
+        return 200
+    else
+        return 0
+    end
+end
 
 GateBeingBuilt = function(self, aiBrain)
     if MoreProduct(aiBrain,  0, categories.GATE) then 
@@ -195,13 +226,6 @@ end
 
 --ENERGYMIDTECH
 
-NothingBuilt = function(self, aiBrain)
-    if MoreProduct(aiBrain,  0, FUSION) then 
-        return 200
-    else
-        return 0
-    end
-end
 
 GantryUnitBuilding = function(self, aiBrain)
     if LessProduct(aiBrain,  1, categories.EXPERIMENTAL * categories.MOBILE) and Factory(aiBrain,  0, categories.GATE) then 
@@ -219,45 +243,8 @@ GantryUnitBuildingDecoy = function(self, aiBrain)
     end
 end
 
-TechEnergyExist = function(self, aiBrain)
-    if Factory(aiBrain,  1, FUSION) then 
-        return 125
-    else
-        return 0
-    end
-end
-
-GantryConstruction = function(self, aiBrain)
-    if Factory(aiBrain,  1, PLATFORM) and Factory(aiBrain,  2, FUSION) then
-        return 200
-    elseif aiBrain.Level3 and Factory(aiBrain,  2, FUSION) then
-        return 100
-    else
-        return 0
-    end
-end
 
 
-UnitProductionField = function(self, aiBrain)
-    if Factory(aiBrain,  0, categories.FIELDENGINEER) then
-        return 200
-    else
-        return 0
-    end
-end
 
-UnitProductionLab = function(self, aiBrain)
-    if Factory(aiBrain,  0, RAIDER) then
-        return 200
-    else
-        return 0
-    end
-end
 
-GantryProduction = function(self, aiBrain)
-    if Factory(aiBrain,  0, categories.GATE) then
-        return 200
-    else
-        return 0
-    end
-end
+

@@ -228,6 +228,7 @@ BuilderGroup {
             { TAutils, 'LessMassStorageMaxTA',  { 0.2}},   
         },
         BuilderData = {
+            Layer = 'Land', 
             LocationType = 'LocationType',
             ReclaimTime = 30,
         },
@@ -241,7 +242,7 @@ BuilderGroup {
         Priority = 50,
         InstanceCount = 10,
         BuilderConditions = {
-            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.LAND - categories.COMMAND}},
+            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER - categories.COMMAND}},
             { UCBC, 'HaveGreaterThanUnitsInCategoryBeingBuilt', { 0, categories.FACTORY - categories.TECH1, 'LocationType', }},
             { UCBC, 'LocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, categories.FACTORY - categories.TECH1}},
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
@@ -265,7 +266,7 @@ BuilderGroup {
         InstanceCount = 10,
         BuilderConditions = {
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.LAND - categories.COMMAND}},
-            { UCBC, 'FactoryGreaterAtLocation', { 'LocationType', 2, LAB + PLATFORM + categories.GATE } },
+            { UCBC, 'FactoryGreaterAtLocation', { 'LocationType', 2, categories.FACTORY - categories.TECH1 } },
             { UCBC, 'HaveGreaterThanUnitsInCategoryBeingBuilt', { 0, categories.MOBILE, 'LocationType', }},
             { UCBC, 'LocationFactoriesBuildingGreater', { 'LocationType', 0, categories.MOBILE }},
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },

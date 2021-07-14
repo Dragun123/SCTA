@@ -5,7 +5,7 @@ local TAutils = '/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua'
 local TASlow = '/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua'
 PLANT = (categories.FACTORY * categories.TECH1)
 LAB = (categories.FACTORY * categories.TECH2)
-FUSION = (categories.ENERGYPRODUCTION * (categories.TECH2 + categories.TECH3)) * categories.STRUCTURE
+FUSION = (categories.ENERGYPRODUCTION * categories.STRUCTURE * (categories.TECH2 + categories.TECH3))
 WIND = (categories.armwin + categories.corwin)
 SOLAR = (categories.armsolar + categories.corsolar)
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
@@ -62,7 +62,7 @@ BuilderGroup {
         InstanceCount = 10,
         BuilderConditions = {
             { MIBC, 'GreaterThanGameTime', { 240 } },
-            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER - categories.COMMAND - categories.NAVAL}},
+            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.LAND - categories.COMMAND}},
             { TASlow, 'TAReclaimablesInArea', { 'LocationType', }},  
             { TAutils, 'LessMassStorageMaxTA',  { 0.2}},
         },
@@ -100,7 +100,7 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'Unfinished', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Unfinished' }},
-            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, (categories.ENGINEER * categories.LAND) - categories.COMMAND}},
+            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.LAND - categories.COMMAND}},
             { UCBC, 'UnfinishedUnits', { 'LocationType', categories.STRUCTURE}},
         },
         BuilderData = {
