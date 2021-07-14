@@ -3,6 +3,7 @@ local TASlow = '/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua'
 local TAutils = '/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua'
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
 TIDAL = (categories.cortide + categories.armtide)
+SKY = categories.AIR * categories.MOBILE
 
 BuilderGroup {
     BuilderGroupName = 'SCTANavalFormer',
@@ -14,7 +15,7 @@ BuilderGroup {
         InstanceCount = 4,
         BuilderType = 'SeaForm',
         BuilderConditions = {
-            { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 0, categories.LIGHTBOAT } },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, categories.LIGHTBOAT} },
          },
          BuilderData = {
             LocationType = 'LocationType',
@@ -40,7 +41,7 @@ BuilderGroup {
         InstanceCount = 25,
         BuilderType = 'SeaForm',
         BuilderConditions = {
-            { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 1, categories.LIGHTBOAT } },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, categories.LIGHTBOAT} },
          },
          BuilderData = {
             LocationType = 'LocationType',
@@ -66,7 +67,7 @@ BuilderGroup {
         InstanceCount = 5,
         BuilderType = 'SeaForm',
         BuilderConditions = {
-            { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 1, categories.NAVAL * categories.SUBMERSIBLE * categories.MOBILE - categories.ENGINEER} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2,  categories.NAVAL * categories.SUBMERSIBLE * categories.MOBILE - categories.ENGINEER} },
          },
          BuilderData = {
             LocationType = 'LocationType',
@@ -95,7 +96,7 @@ BuilderGroup {
             LocationType = 'LocationType',
             UseFormation = 'AttackFormation',
             ThreatWeights = {
-                IgnoreStrongerTargetsRatio = 100.0,  #DUNCAN - uncommented, was 100
+                IgnoreStrongerTargetsRatio = 100.0,
                 PrimaryThreatTargetType = 'Naval',
                 SecondaryThreatTargetType = 'Economy',
                 SecondaryThreatWeight = 0.1,
@@ -107,7 +108,7 @@ BuilderGroup {
             },
         },
         BuilderConditions = {
-            { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 2, categories.NAVAL * categories.MOBILE * categories.MOBILE - categories.ENGINEER } },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2,  categories.NAVAL * categories.MOBILE - categories.ENGINEER} },
         },
     },
     Builder {
@@ -120,7 +121,7 @@ BuilderGroup {
         BuilderData = {
         },        
         BuilderConditions = { 
-            --{ TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, SKY * categories.BOMBER} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, SKY * categories.BOMBER} },
             },
         },
     Builder {
@@ -136,7 +137,7 @@ BuilderGroup {
             Energy = true,
         },        
         BuilderConditions = { 
-            { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 1,  (categories.ANTIAIR * categories.MOBILE * categories.AIR) - categories.BOMBER - categories.GROUNDATTACK} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, SKY * categories.ANTIAIR - categories.BOMBER - categories.GROUNDATTACK} },
         },
     },
     Builder {
@@ -154,7 +155,7 @@ BuilderGroup {
             UseFormation = 'AttackFormation',
         },        
         BuilderConditions = {
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2,  categories.MOBILE * categories.HOVER} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2,  categories.MOBILE * categories.HOVER - categories.TRANSPORTFOCUS} },
          },
     },
     Builder {
@@ -206,7 +207,7 @@ BuilderGroup {
         Priority = 111,
         InstanceCount = 2,
         BuilderConditions = {
-            { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 0, categories.NAVALCARRIER} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, categories.NAVALCARRIER} },
             },
         BuilderType = 'SeaForm',
     },

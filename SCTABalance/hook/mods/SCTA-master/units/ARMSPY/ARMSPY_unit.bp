@@ -4,19 +4,6 @@
 #Blueprint created by Raevn
 UnitBlueprint {
     Merge = true,
-    Categories = {
-        'SELECTABLE',
-        'BOT',
-        'TECH2',
-        'VISIBLETORECON',
-        'RECLAIMABLE',
-        'MOBILE',
-        'LAND',
-        'ARM',
-        'SCOUT',
-        'RADAR',
-        'OVERLAYRADAR',
-    },
     Display = {
         UniformScale = 0.12,
     },
@@ -38,7 +25,6 @@ UnitBlueprint {
           RadarRadius = 30,
           RadarStealth = true,
     },
-    StrategicIconName = 'icon_land2_counterintel',
     SizeX = 1.2,
     SizeY = 1.2,
     SizeZ = 1.2,

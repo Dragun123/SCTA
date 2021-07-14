@@ -111,13 +111,17 @@ TABuildRestrictions = function(self)
     or self.FindHQType(aiBrain, PlantsCat * (categories.TECH3 + categories.EXPERIMENTAL)) then
                 self:RemoveBuildRestriction(categories.TECH2)
                 self:RemoveBuildRestriction(categories.TECH3)
+                if not aiBrain.Level3 then
                 aiBrain.Level3 = true
+                end
                 self.TARestrict = nil
         return  
     elseif aiBrain.Level2 or NumberOfPlantsT1(aiBrain, PlantsCat * (categories.TECH1)) > 10
     or self.FindHQType(aiBrain, PlantsCat * (categories.TECH2 + categories.EXPERIMENTAL)) then
                 self:RemoveBuildRestriction(categories.TECH2)
+                if not aiBrain.Level2 then
                 aiBrain.Level2 = true
+                end
                 self.TARestrict = nil
         return    
     end
@@ -127,26 +131,26 @@ end
 
 NumberOfPlantsT2 = function(aiBrain, category)
     -- Returns number of extractors upgrading
-    aiBrain.DevelopmentCount = aiBrain:GetCurrentUnits(categories.RESEARCH * category)
+    local DevelopmentCount = aiBrain:GetCurrentUnits(categories.RESEARCH * category)
     --LOG('*SCTADeveloment', aiBrain.DevelopmentCount)
-    aiBrain.LabCount = aiBrain:GetCurrentUnits(categories.SUPPORTFACTORY * category)
+    local LabCount = aiBrain:GetCurrentUnits(categories.SUPPORTFACTORY * category)
     --LOG('*SCTALabsCount', aiBrain.LabCount)
-    aiBrain.LabBuilding = aiBrain:NumCurrentlyBuilding(categories.ENGINEER, categories.SUPPORTFACTORY * category)
+    local LabBuilding = aiBrain:NumCurrentlyBuilding(categories.ENGINEER, categories.SUPPORTFACTORY * category)
     --LOG('*SCTALabuilding', aiBrain.LabBuilding)
-    aiBrain.DevelopmentBuilding = aiBrain:NumCurrentlyBuilding(categories.FACTORY, categories.RESEARCH * category)
+    local DevelopmentBuilding = aiBrain:NumCurrentlyBuilding(categories.FACTORY, categories.RESEARCH * category)
     --LOG('*SCTADevelomentBuilding', aiBrain.DevelopmentBuilding)
-    aiBrain.Labs = ((aiBrain.LabCount) + (aiBrain.DevelopmentCount * 2)) - aiBrain.LabBuilding - (aiBrain.DevelopmentBuilding * 2)
+    aiBrain.Labs = ((LabCount) + (DevelopmentCount * 2)) - LabBuilding - (DevelopmentBuilding * 2)
     --LOG('*SCTALabsOG', aiBrain.Labs)
     return aiBrain.Labs
 end
 
 NumberOfPlantsT1 = function(aiBrain, category)
     -- Returns number of extractors upgrading
-    aiBrain.PlantCount = aiBrain:GetCurrentUnits(category)
+    local PlantCount = aiBrain:GetCurrentUnits(category)
     --LOG('*SCTAPlantCount', aiBrain.PlantCount)
-    aiBrain.PlantBuilding = aiBrain:NumCurrentlyBuilding(categories.ENGINEER, category)
+    local PlantBuilding = aiBrain:NumCurrentlyBuilding(categories.ENGINEER, category)
     --LOG('*SCTAPlantBuilding', aiBrain.PlantBuilding)
-    aiBrain.Plants = aiBrain.PlantCount - aiBrain.PlantBuilding
+    aiBrain.Plants = PlantCount - PlantBuilding
     --LOG('*SCTAPlants', aiBrain.Plants)
     return aiBrain.Plants
 end

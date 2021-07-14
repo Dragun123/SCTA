@@ -28,7 +28,7 @@ BuilderGroup {
         BuilderData = {
         },        
         BuilderConditions = { 
-            --{ TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, SKY * categories.BOMBER} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, SKY * categories.BOMBER} },
             },
         },
     Builder {

@@ -69,7 +69,7 @@ BuilderGroup {
             },
         },        
         BuilderConditions = {
-            --{ UCBC, 'PoolGreaterAtLocation', { 'LocationType', 1, GROUND - SPECIAL - RANGE - TACATS}},
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, categories.DIRECTFIRE * GROUND - categories.ENGINEER} },
         },
     },
     Builder {
@@ -89,7 +89,7 @@ BuilderGroup {
         },        
         BuilderConditions = {
         { MIBC, 'GreaterThanGameTime', {600} },
-        --{ UCBC, 'PoolGreaterAtLocation', { 'LocationType', 4,  GROUND - SPECIAL - categories.BOMB}},
+        { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 4, categories.DIRECTFIRE * GROUND - categories.ENGINEER} },
         },
     },
     Builder {
@@ -111,7 +111,7 @@ BuilderGroup {
         },        
         BuilderConditions = {
             { MIBC, 'GreaterThanGameTime', {1200} },
-            --{ UCBC, 'PoolGreaterAtLocation', { 'LocationType', 4,  GROUND - SPECIAL - categories.BOMB}},
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 6, categories.DIRECTFIRE * GROUND - categories.ENGINEER} },
         },
     },
     ----AggressivePlatoons
@@ -136,7 +136,7 @@ BuilderGroup {
             },
         },        
         BuilderConditions = {
-            --{ UCBC, 'PoolGreaterAtLocation', { 'LocationType', 1, GROUND * RANGE} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, (categories.SILO + categories.ARTILLERY + categories.SNIPER) * GROUND - categories.ENGINEER} },
          },
     },
     Builder {
@@ -162,7 +162,7 @@ BuilderGroup {
             },
         },        
         BuilderConditions = {
-            --{ UCBC, 'PoolGreaterAtLocation', { 'LocationType', 4, GROUND * RANGE } },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 3, (categories.SILO + categories.ARTILLERY + categories.SNIPER) * GROUND - categories.ENGINEER} },
             { MIBC, 'GreaterThanGameTime', {480} },
          },
     },
@@ -181,7 +181,7 @@ BuilderGroup {
             UseFormation = 'AttackFormation',
         },        
         BuilderConditions = {
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2,  GROUND * (categories.HOVER + categories.AMPHIBIOUS) - categories.COMMAND} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2,  GROUND * (categories.HOVER + categories.AMPHIBIOUS) - categories.COMMAND - categories.TRANSPORTFOCUS} },
          },
     },
 }
