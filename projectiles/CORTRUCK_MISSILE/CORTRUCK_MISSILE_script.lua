@@ -3,9 +3,9 @@
 #
 #Script created by Raevn
 
-local TARocketProjectile = import('/mods/SCTA-master/lua/TAprojectiles.lua').TARocketProjectile
+local TASAMProjectile = import('/mods/SCTA-master/lua/TAprojectiles.lua').TASAMProjectile
 
-CORTRUCK_MISSILE = Class(TARocketProjectile) 
+CORTRUCK_MISSILE = Class(TASAMProjectile) 
 {
 }
 

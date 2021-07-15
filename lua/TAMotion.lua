@@ -10,7 +10,7 @@ TASea = Class(TAunit)
      
 	OnMotionHorzEventChange = function(self, new, old )
 		TAunit.OnMotionHorzEventChange(self, new, old)
-		ForkThread(self.TAMovementThread, self)
+		self.CreateTAMovementEffects(self)
 	end,
 }
 
@@ -92,7 +92,7 @@ TASeaWalking = Class(TAWalking)
      
 	OnMotionHorzEventChange = function(self, new, old )
 		TAWalking.OnMotionHorzEventChange(self, new, old)
-		ForkThread(self.TAMovementThread, self)
+		self.CreateTAMovementEffects(self)
 	end,
 }
 

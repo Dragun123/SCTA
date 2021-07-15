@@ -3,9 +3,9 @@
 #
 #Script created by Raevn
 
-local TARocketProjectile = import('/mods/SCTA-master/lua/TAprojectiles.lua').TARocketProjectile
+local TASAMProjectile = import('/mods/SCTA-master/lua/TAprojectiles.lua').TASAMProjectile
 
-AH_WEAPON = Class(TARocketProjectile) 
+AH_WEAPON = Class(TASAMProjectile) 
 {}
 
 TypeClass = AH_WEAPON

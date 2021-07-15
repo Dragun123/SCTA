@@ -83,16 +83,20 @@ TAunit = Class(Unit)
 		end
     end,
 
-	TAMovementThread = function(self, EffectsBag, TypeSuffix)
+	CreateTAMovementEffects = function(self)
 		if not IsDestroyed(self) then
-			local bp = self:GetBlueprint()
-			if bp.Display.MovementEffects.TAMovement then
-				for k, v in bp.Display.MovementEffects.TAMovement.Bones do
+		--TAunit.CreateMovementEffects(self, EffectsBag, TypeSuffix)
+		local bp = self:GetBlueprint()
+		if self:IsUnitState('Moving') and bp.Display.MovementEffects.TAMovement then
+			for k, v in bp.Display.MovementEffects.TAMovement.Bones do
 				self.FxMovement:Add(CreateAttachedEmitter(self, v, self:GetArmy(), bp.Display.MovementEffects.TAMovement.Emitter ):ScaleEmitter(bp.Display.MovementEffects.TAMovement.Scale))
-				WaitSeconds(3)
-				self.FxMovement:Destroy()
-				end
 			end
+		end
+		if not self:IsUnitState('Moving') or table.getn(self:GetCommandQueue()) <= 1 then
+			for k,v in self.FxMovement do
+				v:Destroy()
+			end
+		end
 		end
 	end,
 

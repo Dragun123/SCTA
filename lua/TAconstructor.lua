@@ -153,7 +153,7 @@ TASeaConstructor = Class(TAconstructor)
      
 	OnMotionHorzEventChange = function(self, new, old )
 		TAconstructor.OnMotionHorzEventChange(self, new, old)
-        ForkThread(self.TAMovementThread, self)
+        self.CreateTAMovementEffects(self)
 	end,
 
 

@@ -143,7 +143,7 @@ TechLevel = 'RULEUTL_Basic',
             MaxRadius = 36.875,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
-            MuzzleVelocity = 28.125,
+            MuzzleVelocity = 28,
             ProjectileId = '/mods/SCTA-master/projectiles/CORKBOT_MISSILE/CORKBOT_MISSILE_proj.bp',
             RackBones = {
                 {

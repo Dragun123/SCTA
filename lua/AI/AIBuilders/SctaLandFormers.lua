@@ -45,7 +45,7 @@ BuilderGroup {
         },        
         BuilderConditions = {
             { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, GROUND * (categories.ANTISHIELD + categories.FIELDENGINEER)} },
-            { TAutils, 'GreaterEnergyStorageMaxTA', { 0.2 } },
+            { TAutils, 'GreaterEnergyStorageMaxTA', { 0.1 } },
         },
     },
 ---Defensive/MidGame Platoons
@@ -88,8 +88,8 @@ BuilderGroup {
             LocationType = 'LocationType',
         },        
         BuilderConditions = {
-        { MIBC, 'GreaterThanGameTime', {600} },
-        { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 4, categories.DIRECTFIRE * GROUND - categories.ENGINEER} },
+        --{ MIBC, 'GreaterThanGameTime', {600} },
+        { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, categories.DIRECTFIRE * GROUND - categories.ENGINEER} },
         },
     },
     Builder {
@@ -110,8 +110,8 @@ BuilderGroup {
             Sniper = true,
         },        
         BuilderConditions = {
-            { MIBC, 'GreaterThanGameTime', {1200} },
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 6, categories.DIRECTFIRE * GROUND - categories.ENGINEER} },
+            --{ MIBC, 'GreaterThanGameTime', {1200} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 4, categories.DIRECTFIRE * GROUND - categories.ENGINEER} },
         },
     },
     ----AggressivePlatoons
@@ -162,8 +162,8 @@ BuilderGroup {
             },
         },        
         BuilderConditions = {
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 3, (categories.SILO + categories.ARTILLERY + categories.SNIPER) * GROUND - categories.ENGINEER} },
-            { MIBC, 'GreaterThanGameTime', {480} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, (categories.SILO + categories.ARTILLERY + categories.SNIPER) * GROUND - categories.ENGINEER} },
+            --{ MIBC, 'GreaterThanGameTime', {480} },
          },
     },
     Builder {

@@ -202,7 +202,7 @@ PlatoonTemplate {
     }
 }
 
-PlatoonTemplate {
+--[[PlatoonTemplate {
     Name = 'T3HOVERTransportSCTA',
     FactionSquads = {
         Arm = {
@@ -212,7 +212,7 @@ PlatoonTemplate {
             { 'corthovr', 1, 1, 'Support', 'GrowthFormation' }
         },
     }
-}
+}]]
 
 PlatoonTemplate {
     Name = 'T3HOVERMISSILESCTA',

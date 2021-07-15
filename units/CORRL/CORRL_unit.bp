@@ -130,7 +130,7 @@ TechLevel = 'RULEUTL_Advanced',
             MaxRadius = 43.75,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
-            MuzzleVelocity = 28.75,
+            MuzzleVelocity = 28,
             ProjectileId = '/mods/SCTA-master/projectiles/CORRL_MISSILE/CORRL_MISSILE_proj.bp',
             RackBones = {
                 {
