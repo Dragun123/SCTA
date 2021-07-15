@@ -56,7 +56,7 @@ PlatoonTemplate {
     Plan = 'HuntAILABSCTA', -- The platoon function to use.
     ---PlatoonType = 'Scout',
     GlobalSquads = {
-        {RAIDER + RAIDAIR + ((categories.AMPHIBIOUS + categories.HOVER) - SPECIAL),
+        {RAIDER + RAIDAIR + ((categories.AMPHIBIOUS + categories.HOVER) - SPECIAL - categories.NAVAL),
           1, -- Min number of units.
           1, -- Max number of units.
           'Attack', -- platoon ---PlatoonTypes: 'support', 'Attack', 'scout',
@@ -202,7 +202,7 @@ PlatoonTemplate {
     }
 }
 
-PlatoonTemplate {
+--[[PlatoonTemplate {
     Name = 'T3HOVERTransportSCTA',
     FactionSquads = {
         Arm = {
@@ -212,7 +212,7 @@ PlatoonTemplate {
             { 'corthovr', 1, 1, 'Support', 'GrowthFormation' }
         },
     }
-}
+}]]
 
 PlatoonTemplate {
     Name = 'T3HOVERMISSILESCTA',

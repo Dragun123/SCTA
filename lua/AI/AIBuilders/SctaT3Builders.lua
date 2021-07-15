@@ -48,7 +48,7 @@ BuilderGroup {
         },
         BuilderType = 'Hover',
     },
-    Builder {
+    --[[Builder {
         BuilderName = 'SCTAAi FactoryT3 Hover Transport',
         PlatoonTemplate = 'T3HOVERTransportSCTA',
         Priority = 50,
@@ -59,7 +59,7 @@ BuilderGroup {
             { TAutils, 'EcoManagementTA', { 0.75, 0.5} },
         },
         BuilderType = 'Hover',
-    },
+    },]]
     Builder {
         BuilderName = 'SCTAAI Factory Seaplane Fighter',
         PlatoonTemplate = 'T3AirFighterSCTA',

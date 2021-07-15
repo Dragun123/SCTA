@@ -87,7 +87,7 @@ ScoutShipProduction = function(self, aiBrain)
 end
 
 NavalProductionT2 = function(self, aiBrain)
-    if Numbers(aiBrain, true, 0, categories.NAVAL * (categories.FACTORY + categories.MOBILE), 'Enemy') and aiBrain.TANavy and aiBrain.Level2 then
+    if aiBrain.TANavy and aiBrain.Labs >= 2 and Numbers(aiBrain, true, 0, categories.NAVAL * (categories.FACTORY + categories.MOBILE), 'Enemy') then
         return 160
     else
         return 0

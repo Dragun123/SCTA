@@ -46,6 +46,7 @@ BuilderGroup {
             { UCBC, 'PoolGreaterAtLocation', { 'LocationType', 0, WIND + SOLAR}},
             { TAutils, 'GreaterThanEconEnergyTAEfficiency', {1.05 }},
             { TAutils, 'LessMassStorageMaxTA',  { 0.2}},
+            { TAutils, 'GreaterEnergyStorageMaxTA',  { 0.75}},
             },
         BuilderData = {
             Location = 'LocationType',

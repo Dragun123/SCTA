@@ -270,11 +270,23 @@ TARocketProjectile = Class(TAAntiRocketProjectile) {
 	self:ForkThread( self.TrackingThread, self )
 end,
 
-TrackingThread = function(self)
-	WaitSeconds(self.TrackTime)
-	self:TrackTarget(false)
-end,
+	TrackingThread = function(self)
+		WaitSeconds(self.TrackTime)
+		self:TrackTarget(false)
+	end,
 }
+
+TASAMProjectile = Class(TARocketProjectile) {
+	OnCreate = function(self)
+		TARocketProjectile.OnCreate(self)
+		local target = self:GetTrackingTarget()
+		if target and EntityCategoryContains(categories.AIR, target) then
+		self:SetAcceleration(self:GetBlueprint().Physics.AirAccel)
+			--LOG('TATarget', )
+		end
+	end,
+}
+
 
 TAMissileProjectile = Class(TARocketProjectile) {
 	OnCreate = function(self)

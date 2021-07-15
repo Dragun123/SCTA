@@ -140,7 +140,7 @@ TechLevel = 'RULEUTL_Basic',
             MaxRadius = 37.5,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
-            MuzzleVelocity = 28.125,
+            MuzzleVelocity = 28,
             ProjectileId = '/mods/SCTA-master/projectiles/ARMTRUCK_MISSILE/ARMTRUCK_MISSILE_proj.bp',
             RackBones = {
                 {
