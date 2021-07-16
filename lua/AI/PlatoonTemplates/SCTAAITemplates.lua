@@ -47,7 +47,7 @@ PlatoonTemplate {
     ---PlatoonType = 'Scout',
     GlobalSquads = {
         { ((GROUND * categories.ANTISHIELD) - categories.AMPHIBIOUS) - SPECIAL, 2, 10, 'Artillery', 'none' }, 
-        { categories.FIELDENGINEER, 0, 2, 'Support', 'none' },
+        { categories.FIELDENGINEER, 0, 2, 'Guard', 'none' },
     },
 }
 
@@ -93,7 +93,7 @@ PlatoonTemplate {
     Plan = 'AttackSCTAForceAI',
     GlobalSquads = {
         { (GROUND * RANGE) - categories.AMPHIBIOUS, 5, 20, 'Artillery', 'none' },
-        { categories.FIELDENGINEER, 0, 2, 'Support', 'none' },
+        { categories.FIELDENGINEER, 0, 2, 'Guard', 'none' },
     },
 }
 
@@ -114,7 +114,7 @@ PlatoonTemplate {
         { GROUND - SPECIAL - RANGE, 5, 20, 'Attack', 'none' },
         { (GROUND * RANGE) - categories.ANTIAIR, 0, 10, 'Artillery', 'none' },
         { (GROUND * categories.ANTIAIR) - categories.ANTISHIELD, 0, 10, 'Scout', 'none' },
-        { categories.FIELDENGINEER, 0, 2, 'Support', 'none' },
+        { categories.FIELDENGINEER, 0, 2, 'Guard', 'none' },
     },
 }
 
@@ -125,7 +125,7 @@ PlatoonTemplate {
         { GROUND - SPECIAL - RANGE, 5, 30, 'Attack', 'none' },
         { (GROUND * RANGE) - categories.ANTIAIR, 0, 15, 'Artillery', 'none' },
         { (GROUND * categories.ANTIAIR) - categories.ANTISHIELD, 0, 15, 'Scout', 'none' },
-        { categories.FIELDENGINEER, 0, 2, 'Support', 'none' },
+        { categories.FIELDENGINEER, 0, 2, 'Guard', 'none' },
     },
 }
 

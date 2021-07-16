@@ -1621,6 +1621,7 @@ Platoon = Class(SCTAAIPlatoon) {
             WaitSeconds(2)
             self.EcoCheck = nil
             local position = AIUtils.RandomLocation(self.Center[1],self.Center[3])
+            self:Stop()
             self:MoveToLocation(position, false)
             WaitSeconds(2)
         end
@@ -1704,6 +1705,7 @@ Platoon = Class(SCTAAIPlatoon) {
                     if path then
                     local pathLength = table.getn(path)
                     for i=1, pathLength-1 do
+                        self:Stop()
                         self:MoveToLocation(path[i], false)
                         self:SetPlatoonFormationOverride('Block')
                     end
@@ -1719,7 +1721,11 @@ Platoon = Class(SCTAAIPlatoon) {
     end,
 
     SCTAStrikeForceAI = function(self)
+        self:Stop()
         local aiBrain = self:GetBrain()
+        if not self:GatherUnitsSCTA() then
+            return
+        end
         local armyIndex = aiBrain:GetArmyIndex()
         local categoryListA = {}
         local categoryListArt = {}
@@ -1734,7 +1740,7 @@ Platoon = Class(SCTAAIPlatoon) {
         end]] 
         local Artillery = self:GetSquadUnits('Artillery')
         local AntiAir = self:GetSquadUnits('Scout')
-        local Support = self:GetSquadUnits('Support')
+        local Support = self:GetSquadUnits('Guard')
         if AntiAir > 0 then
             table.insert( atkPriA, 'AIR' )
             table.insert( categoryListA, categories.MOBILE * categories.AIR)
@@ -1794,7 +1800,7 @@ Platoon = Class(SCTAAIPlatoon) {
                             end
                             local threat = target:GetPosition()
                             if Support > 0 then
-                                self:AggressiveMoveToLocation(table.copy(threat), 'Support')
+                                self:AggressiveMoveToLocation(table.copy(threat), 'Guard')
                             end 
                                 if AntiAir > 0 and targetAir then
                                     self:AttackTarget(targetAir, 'Scout')
@@ -1815,6 +1821,7 @@ Platoon = Class(SCTAAIPlatoon) {
                     for k,v in AIUtils.AIGetSortedMassLocations(aiBrain, 10, nil, nil, nil, nil, self:GetPlatoonPosition()) do
                         if v[1] < 0 or v[3] < 0 or v[1] > ScenarioInfo.size[1] or v[3] > ScenarioInfo.size[2] then
                         end
+                        self:Stop()
                         self:MoveToLocation( (v), false )
                     end
                 end
@@ -1839,7 +1846,7 @@ Platoon = Class(SCTAAIPlatoon) {
             if v.Dead then continue end
             v:SetCustomName('AttackHuntSCTA')
         end]]
-        local Support = self:GetSquadUnits('Support')
+        local Support = self:GetSquadUnits('Guard')
         local Artillery = self:GetSquadUnits('Artillery')
         local AntiAir = self:GetSquadUnits('Scout')
         if AntiAir > 0 then
@@ -1905,7 +1912,7 @@ Platoon = Class(SCTAAIPlatoon) {
                     self:Stop()
                     local threat = target:GetPosition()
                         if Support > 0 then
-                            self:AggressiveMoveToLocation(table.copy(threat), 'Support')
+                            self:AggressiveMoveToLocation(table.copy(threat), 'Guard')
                         end 
                             if AntiAir > 0 and targetAir then
                                 self:AttackTarget(targetAir, 'Scout')
@@ -1926,6 +1933,7 @@ Platoon = Class(SCTAAIPlatoon) {
                     for k,v in AIUtils.AIGetSortedMassLocations(aiBrain, 10, nil, nil, nil, nil, self:GetPlatoonPosition()) do
                         if v[1] < 0 or v[3] < 0 or v[1] > ScenarioInfo.size[1] or v[3] > ScenarioInfo.size[2] then
                         end
+                        self:Stop()
                         self:MoveToLocation( (v), false )
                     end
                 end
@@ -1994,7 +2002,7 @@ Platoon = Class(SCTAAIPlatoon) {
                     'Scout',
                     'Attack',
                     'Artillery',
-                    'Support',
+                    'Guard',
                 }
                 for _, squad in squads do
                     local units = aPlat:GetSquadUnits(squad)
@@ -2048,6 +2056,7 @@ Platoon = Class(SCTAAIPlatoon) {
             end
             WaitSeconds(2)
             local position = AIUtils.RandomLocation(self.Center[1],self.Center[3])
+            self:Stop()
             self:MoveToLocation(position, false)
             WaitSeconds(2)
             if aiBrain.Level2 then
@@ -2061,7 +2070,7 @@ Platoon = Class(SCTAAIPlatoon) {
         local aiBrain = self:GetBrain()
 
         -- get units together
-        if not self:GatherUnits() then
+        if not self:GatherUnitsSCTA() then
             return
         end
         local platoonUnits = self:GetPlatoonUnits()
@@ -2208,6 +2217,37 @@ Platoon = Class(SCTAAIPlatoon) {
             --else
                 -- wait a little longer if we're stuck so that we have a better chance to move
                 WaitSeconds(Random(5,11) + 2 * stuckCount)
+        end
+    end,
+
+    GatherUnitsSCTA = function(self)
+        local platoonUnits = self:GetPlatoonUnits()
+        local numberOfUnitsInPlatoon = table.getn(platoonUnits)
+        if numberOfUnitsInPlatoon > 15 then
+            return true 
+        else 
+        local pos = self:GetPlatoonPosition()
+        local unitsSet = true
+        for k,v in platoonUnits do
+            if VDist2(v:GetPosition()[1], v:GetPosition()[3], pos[1], pos[3]) > 40 then
+               unitsSet = false
+               break
+            end
+        end
+        local aiBrain = self:GetBrain()
+        if not unitsSet then
+            AIUtils.AIGetClosestMarkerLocation(aiBrain, 'Defensive Point', pos[1], pos[3])
+            local cmd = self:MoveToLocation(self:GetPlatoonPosition(), false)
+            local counter = 0
+            repeat
+                WaitSeconds(1)
+                counter = counter + 1
+                if not aiBrain:PlatoonExists(self) then
+                    return false
+                end
+            until not self:IsCommandsActive(cmd) or counter >= 30
+        end
+        return true
         end
     end,
 
