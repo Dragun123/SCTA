@@ -26,11 +26,11 @@ Physics = {
     },
     Weapon = {
         [1] = {
-            RateOfFire = 1,
-            Damage = 20,
+            Damage = 4,
         },
         [2] = {
-            Damage = 4,
+            RateOfFire = 1,
+            Damage = 20,
         },
         [3] = {
         },

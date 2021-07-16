@@ -69,7 +69,7 @@ BuilderGroup {
             },
         },        
         BuilderConditions = {
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, categories.DIRECTFIRE * GROUND - categories.ENGINEER} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, categories.DIRECTFIRE * categories.TECH1 * GROUND - categories.ENGINEER} },
         },
     },
     Builder {
@@ -89,7 +89,7 @@ BuilderGroup {
         },        
         BuilderConditions = {
         --{ MIBC, 'GreaterThanGameTime', {600} },
-        { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, categories.DIRECTFIRE * GROUND - categories.ENGINEER} },
+        { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, categories.DIRECTFIRE * GROUND * categories.TECH2 - categories.ENGINEER} },
         },
     },
     Builder {
