@@ -9,6 +9,7 @@ TAunit = Class(Unit)
 {
 
     --LOGDBG = function(self, msg)
+	----AxleCodeUsedForDebugging
         --LOG(self._UnitName .. "(" .. self.Sync.id .. "):" .. msg)
    ---end,
 
@@ -19,6 +20,8 @@ TAunit = Class(Unit)
 			if self:GetAIBrain().SCTAAI then
 				self:SetFireState(FireState.RETURN_FIRE)
 				self.SCTAAIBrain = true
+				----SCTAAIBrain is used for carious functions to check criteria including but not limited:
+				--Radar Targeting, Capturing Self Destruct, and otherwise 
 			else
 				self:SetFireState(FireState.GROUND_FIRE)
 			end
@@ -28,6 +31,7 @@ TAunit = Class(Unit)
 	OnStopBeingBuilt = function(self,builder,layer)
         ---self:LOGDBG('TAUnit.OnStopBeingBuilt')
 		Unit.OnStopBeingBuilt(self,builder,layer)
+		--Otherwise Memes with certain units (Roach and Invader through all SCTA Units get memed without this)
 		self:SetDeathWeaponEnabled(true)
 	end,
 
@@ -101,12 +105,14 @@ TAunit = Class(Unit)
 	end,
 
 	CloakDetection = function(self)
+		-----Thanks To Balth. This code Allows me to TA Proper Coding functions 
 		local GetUnitsAroundPoint = moho.aibrain_methods.GetUnitsAroundPoint
 		local brain = moho.entity_methods.GetAIBrain(self)
 		local cat = categories.SELECTABLE * categories.MOBILE
 		local getpos = moho.entity_methods.GetPosition
 		while not self.Dead do
 			coroutine.yield(11)
+			----1 Second
 			local dudes = GetUnitsAroundPoint(brain, cat, getpos(self), 4, 'Enemy')
 			if self.CloakOn and self:IsUnitState('Building') then
 				self:DisableIntel('Cloak')
@@ -124,6 +130,7 @@ TAunit = Class(Unit)
 				end
 			elseif not dudes[1] and self.CloakOn then
 				self:EnableIntel('Cloak')
+				----CLOAKField only SCTABalance
 				self:EnableIntel('CloakField')
 				self:SetMesh(self:GetBlueprint().Display.CloakMeshBlueprint, true)
 				if self:IsIdleState() or self:IsUnitState('Attacking') then
@@ -169,6 +176,7 @@ TAunit = Class(Unit)
 	end,
 
 	OnScriptBitClear = function(self, bit)
+		---SpecIntel for not Cloaking CounterIntel Motion 
 		if self.SpecIntel and (bit == 2 or bit == 5) then
 			--self:SetMaintenanceConsumptionInactive()
 			if self.TAIntelThread then

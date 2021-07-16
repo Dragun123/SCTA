@@ -28,10 +28,10 @@ end,
 
         OnStartBuild = function(self, unitBeingBuilt, order )
             if not self.TABuildingUnit then
-            self:Open()
-            ForkThread(self.FactoryStartBuild, self, unitBeingBuilt, order )
-            self.TABuildingUnit = true
-            return
+                self:Open()
+                ForkThread(self.FactoryStartBuild, self, unitBeingBuilt, order )
+                self.TABuildingUnit = true
+                return
             end
             FactoryUnit.OnStartBuild(self, unitBeingBuilt, order )
 		end,
@@ -77,8 +77,10 @@ end,
                 self:SetBlockCommandQueue(false)
             end
             if table.getn(self:GetCommandQueue()) <= 1 then
+                ----ThisCode is used to make sure it open and closes correctly
                 WaitTicks(20)
                 self:Close()
+                ---TABuildingUnit is used by AI to see if it is building or not. 
                 self.TABuildingUnit = nil
             end
         end,
@@ -195,21 +197,28 @@ TACarrier = Class(AircraftCarrier) {
         end,
 
 		OnStartBuild = function(self, unitBuilding, order )
-			self:Open()
-			self.unitBeingBuilt = unitBuilding
-			ForkThread(self.FactoryStartBuild, self, unitBuilding, order )
+            self.unitBeingBuilt = unitBuilding
+                if not self.TABuildingUnit then
+			        self:Open()
+			        ForkThread(self.FactoryStartBuild, self, unitBuilding, order )
+                    self.TABuildingUnit = true
+                return
+            end
+            AircraftCarrier.OnStartBuild(self, unitBuilding, order)
+            ChangeState(self, self.BuildingState)
 		end,
 
 		FactoryStartBuild = function(self, unitBuilding, order )
 			WaitFor(self.AnimManip)
-            AircraftCarrier.OnStartBuild(self, unitBuilding, order)
-            ChangeState(self, self.BuildingState)
+            if not self.Dead and not IsDestroyed(unitBuilding) then
+                AircraftCarrier.OnStartBuild(self, unitBuilding, order)
+                ChangeState(self, self.BuildingState)
+            end
 		end,
 		
 		Open = function(self)
 			self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationBuild)
 			self.AnimManip:SetRate(1 * (self:GetBlueprint().Display.AnimationBuildRate or 0.2))
-            self.TABuildingUnit = true
         end,
 	
     },
@@ -226,17 +235,9 @@ TACarrier = Class(AircraftCarrier) {
 
         OnStopBuild = function(self, unitBeingBuilt)
             AircraftCarrier.OnStopBuild(self, unitBeingBuilt)
-            self:Close()
             ChangeState(self, self.FinishedBuildingState)
         end,
-		
-		Close = function(self)
-			self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationBuild)
-			self.AnimManip:SetRate(-1 * (self:GetBlueprint().Display.AnimationBuildRate or 0.2))
-			self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationPower)
-			self.AnimManip:SetRate(1 * (self:GetBlueprint().Display.AnimationPowerRate or 0.2))
-            self.TABuildingUnit = nil
-        end,
+	
     },
 
     FinishedBuildingState = State {
@@ -252,9 +253,22 @@ TACarrier = Class(AircraftCarrier) {
                 IssueMoveOffFactory({unitBuilding}, worldPos)
                 unitBuilding:ShowBone(0,true)
             end
+            if table.getn(self:GetCommandQueue()) <= 1 then
+                ----ThisCode is used to make sure it open and closes correctly
+                WaitTicks(20)
+                self:Close()
+                self.TABuildingUnit = nil
+            end
             self:SetBusy(false)
 			self:RequestRefreshUI()
 			ChangeState(self, self.IdleState)
+        end,
+
+        Close = function(self)
+			self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationBuild)
+			self.AnimManip:SetRate(-1 * (self:GetBlueprint().Display.AnimationBuildRate or 0.2))
+			self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationPower)
+			self.AnimManip:SetRate(1 * (self:GetBlueprint().Display.AnimationPowerRate or 0.2))
         end,
 	},
 }
