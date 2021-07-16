@@ -1,5 +1,6 @@
 local util = import('/lua/utilities.lua')
-
+----This Code Here represents the various TA Building effects. 
+----Furthermore unlike the basegame code I test if I am dead. It might be worthwhile to removed it. That test things to consider. 
 CreateTABuildingEffects = function(builder, unitBeingBuilt, BuildEffectBones, BuildEffectsBag)
     WaitSeconds(0.75)
     local selfPosition = builder:GetPosition()
@@ -105,6 +106,10 @@ updateBuildRestrictions = function(self)
 end
 
 TABuildRestrictions = function(self)
+    --GetListOfUnits, there is a bug regarding removing BeingBuilt Unitss
+    ---GetCurrentUnits - GetUnitsBuilding somehow results in game thinking you have two less than you actually do
+    ---NumberOfPlantsX returns Number of Units. The checks associated with it such as Level3, Level2 and number of constructed factories are used for AI
+    ----Find HQ Type is used primarily so that Supcom FAF players can work off gut instinct
     local aiBrain = self:GetAIBrain()
     local PlantsCat = ((categories.FACTORY + categories.GATE) * (categories.ARM + categories.CORE))
     if aiBrain.Level3 or NumberOfPlantsT2(aiBrain, PlantsCat * (categories.TECH2)) > 4 
