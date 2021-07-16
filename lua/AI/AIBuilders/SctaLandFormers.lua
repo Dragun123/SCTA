@@ -44,7 +44,7 @@ BuilderGroup {
             },
         },        
         BuilderConditions = {
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, GROUND * (categories.ANTISHIELD + categories.FIELDENGINEER)} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, GROUND * (categories.ANTISHIELD + categories.FIELDENGINEER)} },
             { TAutils, 'GreaterEnergyStorageMaxTA', { 0.1 } },
         },
     },
@@ -69,7 +69,7 @@ BuilderGroup {
             },
         },        
         BuilderConditions = {
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, categories.DIRECTFIRE * GROUND - categories.ENGINEER} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, categories.DIRECTFIRE * GROUND - categories.ENGINEER} },
         },
     },
     Builder {
@@ -89,7 +89,7 @@ BuilderGroup {
         },        
         BuilderConditions = {
         --{ MIBC, 'GreaterThanGameTime', {600} },
-        { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, categories.DIRECTFIRE * GROUND - categories.ENGINEER} },
+        { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 4, categories.DIRECTFIRE * GROUND - categories.ENGINEER} },
         },
     },
     Builder {
@@ -111,7 +111,7 @@ BuilderGroup {
         },        
         BuilderConditions = {
             --{ MIBC, 'GreaterThanGameTime', {1200} },
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 4, categories.DIRECTFIRE * GROUND - categories.ENGINEER} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 5, categories.DIRECTFIRE * GROUND - categories.ENGINEER} },
         },
     },
     ----AggressivePlatoons
