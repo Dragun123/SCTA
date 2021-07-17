@@ -45,22 +45,6 @@ BuilderGroup {
         },
     },
     Builder {
-        BuilderName = 'SCTAAI Guard',
-        PlatoonTemplate = 'GuardSCTA',
-        PlatoonAIPlan = 'GuardEngineer',
-        Priority = 100,
-        InstanceCount = 5,
-        BuilderType = 'LandForm',
-        BuilderData = {
-            NeverGuardBases = true,
-            LocationType = 'LocationType',
-        },        
-        BuilderConditions = {
-            { UCBC, 'EngineersNeedGuard', { 'LocationType' } },
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.MOBILE * categories.ANTIAIR * categories.LAND} },
-         },
-    },
-    Builder {
         BuilderName = 'SCTAAI Air Hunt',
         PlatoonTemplate = 'LABSCTA',
         PlatoonAIPlan = 'HuntAirAISCTA',

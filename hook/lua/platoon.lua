@@ -48,7 +48,7 @@ Platoon = Class(SCTAAIPlatoon) {
         eng.AssistPlatoon = nil
         eng.UnitBeingAssist = nil
         self:Stop()
-        self:PlatoonDisband()
+        self:PlatoonDisbandTA()
         --[[coroutine.yield(1)
        return self:SCTAEngineerTypeAI()]]
     end,
@@ -88,7 +88,7 @@ Platoon = Class(SCTAAIPlatoon) {
         self.AssistPlatoon = nil
         eng.UnitBeingAssist = nil
         self:Stop()
-        self:PlatoonDisband()
+        self:PlatoonDisbandTA()
         --[[coroutine.yield(1)
        return self:SCTAEngineerTypeAI()]]
     end,
@@ -103,11 +103,11 @@ Platoon = Class(SCTAAIPlatoon) {
         local eng
         --LOG('*SCTAEXPANSIONTA', self.PlatoonData.LocationType)
         for k, v in platoonUnits do
-            if not v.Dead then --DUNCAN - was construction
-                IssueClearCommands({v})
+            if not v.Dead and EntityCategoryContains(categories.ENGINEER, v) then
                 if not eng then
                     eng = v
                 else
+                    IssueClearCommands({v})
                     IssueGuard({v}, eng)
                 end
             end
@@ -115,7 +115,7 @@ Platoon = Class(SCTAAIPlatoon) {
 
         if not eng or eng.Dead then
             coroutine.yield(1)
-            self:PlatoonDisband()
+            self:PlatoonDisbandTA()
             return
         end
 
@@ -135,9 +135,6 @@ Platoon = Class(SCTAAIPlatoon) {
 
         --LOG('*AI DEBUG: EngineerBuild AI ' .. eng.Sync.id)
 
-        if self.PlatoonData.NeedGuard then
-            eng.NeedGuard = true
-        end
 
         -------- CHOOSE APPROPRIATE BUILD FUNCTION AND SETUP BUILD VARIABLES --------
         local reference = false
@@ -160,7 +157,7 @@ Platoon = Class(SCTAAIPlatoon) {
             end
             else]]
         coroutine.yield(1)
-        self:PlatoonDisband()
+        self:PlatoonDisbandTA()
         return
         end
         if cons.NearUnitCategory then
@@ -215,7 +212,7 @@ Platoon = Class(SCTAAIPlatoon) {
                                                 cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType,
                                                 cons.MarkerUnitCount, cons.MarkerUnitCategory, cons.MarkerRadius)
             if not reference or not refName then
-                self:PlatoonDisband()
+                self:PlatoonDisbandTA()
                 return
             end
 
@@ -228,11 +225,11 @@ Platoon = Class(SCTAAIPlatoon) {
                         (cons.LocationRadius or 100), cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType)
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             else
@@ -251,7 +248,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 end
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             end
@@ -367,7 +364,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         end
                     else
                         if aiBrain:PlatoonExists(self) then
-                            self:PlatoonDisband()
+                            self:PlatoonDisbandTA()
                             return
                         end
                     end
@@ -409,7 +406,7 @@ Platoon = Class(SCTAAIPlatoon) {
 
         if not eng or eng.Dead then
             coroutine.yield(1)
-            self:PlatoonDisband()
+            self:PlatoonDisbandTA()
             return
         end
 
@@ -427,9 +424,6 @@ Platoon = Class(SCTAAIPlatoon) {
             baseTmpl = baseTmplFile[(cons.BaseTemplate or 'NavalBaseTemplates')][factionIndex]
         --LOG('*AI DEBUG: EngineerBuild AI ' .. eng.Sync.id)
 
-        if self.PlatoonData.NeedGuard then
-            eng.NeedGuard = true
-        end
 
         -------- CHOOSE APPROPRIATE BUILD FUNCTION AND SETUP BUILD VARIABLES --------
         local reference = false
@@ -452,7 +446,7 @@ Platoon = Class(SCTAAIPlatoon) {
             end
             else]]
         coroutine.yield(1)
-        self:PlatoonDisband()
+        self:PlatoonDisbandTA()
         return
         end
         if cons.NearUnitCategory then
@@ -510,7 +504,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         (cons.LocationRadius or 100), cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType)
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
                 -- didn't find a location to build at
@@ -612,7 +606,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         end
                     else
                         if aiBrain:PlatoonExists(self) then
-                            self:PlatoonDisband()
+                            self:PlatoonDisbandTA()
                             return
                         end
                     end
@@ -654,7 +648,7 @@ Platoon = Class(SCTAAIPlatoon) {
 
         if not eng or eng.Dead then
             coroutine.yield(1)
-            self:PlatoonDisband()
+            self:PlatoonDisbandTA()
             return
         end
 
@@ -672,10 +666,6 @@ Platoon = Class(SCTAAIPlatoon) {
             baseTmpl = baseTmplFile[(cons.BaseTemplate or 'BaseTemplates')][factionIndex]
 
         --LOG('*AI DEBUG: EngineerBuild AI ' .. eng.Sync.id)
-
-        if self.PlatoonData.NeedGuard then
-            eng.NeedGuard = true
-        end
 
         -------- CHOOSE APPROPRIATE BUILD FUNCTION AND SETUP BUILD VARIABLES --------
         local reference = false
@@ -698,7 +688,7 @@ Platoon = Class(SCTAAIPlatoon) {
             end
             else]]
         coroutine.yield(1)
-        self:PlatoonDisband()
+        self:PlatoonDisbandTA()
         return
         end
         if cons.NearUnitCategory then
@@ -753,7 +743,7 @@ Platoon = Class(SCTAAIPlatoon) {
                                                 cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType,
                                                 cons.MarkerUnitCount, cons.MarkerUnitCategory, cons.MarkerRadius)
             if not reference or not refName then
-                self:PlatoonDisband()
+                self:PlatoonDisbandTA()
                 return
             end
 
@@ -766,7 +756,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         (cons.LocationRadius or 100), cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType)
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             elseif cons.NearMarkerType == 'Naval Area' then
@@ -774,7 +764,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         (cons.LocationRadius or 100), cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType)
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             else
@@ -793,7 +783,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 end
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             end
@@ -925,7 +915,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         end
                     else
                         if aiBrain:PlatoonExists(self) then
-                            self:PlatoonDisband()
+                            self:PlatoonDisbandTA()
                             return
                         end
                     end
@@ -954,11 +944,11 @@ Platoon = Class(SCTAAIPlatoon) {
         local buildingTmpl, buildingTmplFile, baseTmpl, baseTmplFile, baseTmplDefault
         local eng
         for k, v in platoonUnits do
-            if not v.Dead then --DUNCAN - was construction
-                IssueClearCommands({v})
+            if not v.Dead and EntityCategoryContains(categories.ENGINEER, v) then
                 if not eng then
                     eng = v
                 else
+                    IssueClearCommands({v})
                     IssueGuard({v}, eng)
                 end
             end
@@ -966,7 +956,7 @@ Platoon = Class(SCTAAIPlatoon) {
 
         if not eng or eng.Dead then
             coroutine.yield(1)
-            self:PlatoonDisband()
+            self:PlatoonDisbandTA()
             return
         end
 
@@ -985,9 +975,6 @@ Platoon = Class(SCTAAIPlatoon) {
 
         --LOG('*AI DEBUG: EngineerBuild AI ' .. eng.Sync.id)
 
-        if self.PlatoonData.NeedGuard then
-            eng.NeedGuard = true
-        end
 
         -------- CHOOSE APPROPRIATE BUILD FUNCTION AND SETUP BUILD VARIABLES --------
         local reference = false
@@ -999,7 +986,7 @@ Platoon = Class(SCTAAIPlatoon) {
 
         if not cons.BuildStructures then
             coroutine.yield(1)
-            self:PlatoonDisband()
+            self:PlatoonDisbandTA()
             return
         end
         if cons.NearUnitCategory then
@@ -1054,7 +1041,7 @@ Platoon = Class(SCTAAIPlatoon) {
                                                 cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType,
                                                 cons.MarkerUnitCount, cons.MarkerUnitCategory, cons.MarkerRadius)
             if not reference or not refName then
-                self:PlatoonDisband()
+                self:PlatoonDisbandTA()
                 return
             end
 
@@ -1067,7 +1054,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         (cons.LocationRadius or 100), cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType)
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             elseif cons.NearMarkerType == 'Naval Area' then
@@ -1075,7 +1062,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         (cons.LocationRadius or 100), cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType)
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             else
@@ -1094,7 +1081,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 end
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             end
@@ -1226,7 +1213,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         end
                     else
                         if aiBrain:PlatoonExists(self) then
-                            self:PlatoonDisband()
+                            self:PlatoonDisbandTA()
                             return
                         end
                     end
@@ -1488,7 +1475,7 @@ Platoon = Class(SCTAAIPlatoon) {
             end
         end
         if not upgradeIssued then
-            self:PlatoonDisband()
+            self:PlatoonDisbandTA()
             return
         end
         local upgrading = true
@@ -1505,7 +1492,7 @@ Platoon = Class(SCTAAIPlatoon) {
             return
         end
         WaitTicks(1)
-        self:PlatoonDisband()
+        self:PlatoonDisbandTA()
     end,
 
     UnitUpgradeAISCTA = function(self)
@@ -1535,14 +1522,11 @@ Platoon = Class(SCTAAIPlatoon) {
             return
         end
         WaitTicks(1)
-        self:PlatoonDisband()
+        self:PlatoonDisbandTA()
     end,
 
-    PlatoonDisband = function(self)
+    PlatoonDisbandTA = function(self)
         local aiBrain = self:GetBrain()
-        if not aiBrain.SCTAAI then
-            return SCTAAIPlatoon.PlatoonDisband(self)
-        end
         if self.BuilderHandle then
             self.BuilderHandle:RemoveHandle(self)
         end
@@ -1646,7 +1630,7 @@ Platoon = Class(SCTAAIPlatoon) {
             v:SetScriptBit('RULEUTC_ProductionToggle', false)
             end
         end
-        self:PlatoonDisband()
+        self:PlatoonDisbandTA()
     end,
 
     SCTAStrikeForceAIEarly = function(self)
@@ -2156,7 +2140,7 @@ Platoon = Class(SCTAAIPlatoon) {
             --Disband platoon if it's all air units, so they can be picked up by another platoon
             local mySurfaceThreat = AIAttackUtils.GetSurfaceThreatOfUnits(self)
             if mySurfaceThreat == 0 and AIAttackUtils.GetAirThreatOfUnits(self) > 0 then
-                self:PlatoonDisband()
+                self:PlatoonDisbandTA()
                 return
             end
 
@@ -2292,7 +2276,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 platPos = self:GetPlatoonPosition()
                 local distSq = VDist2Sq(platPos[1], platPos[3], bestBase.Position[1], bestBase.Position[3])
                 if distSq < 10 then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
                 if (distSq - oldDistSq) < 5 then
@@ -2301,7 +2285,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 oldDistSq = distSq      
             end
         end
-        return self:PlatoonDisband()
+        return self:PlatoonDisbandTA()
     end,
 
     
@@ -2755,7 +2739,7 @@ Platoon = Class(SCTAAIPlatoon) {
             local eng = self:GetPlatoonUnits()[1]
             local createTick = GetGameTick()
             if not eng then
-                self:PlatoonDisband()
+                self:PlatoonDisbandTA()
                 return
             end
             --LOG('*SCTAEXPANSIONTA', locationType)
@@ -2765,7 +2749,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 local ents = TAReclaim.TAAIGetReclaimablesAroundLocation(brain, self.PlatoonData.LocationType) or {}
                 if not ents[1] or not self:GetPlatoonPosition() then
                     WaitTicks(1)
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             if not self.PlatoonData.Layer or self.PlatoonData.Layer and AIAttackUtils.CanGraphAreaToSCTA(eng:GetPosition(), ents[1]:GetPosition(), self.PlatoonData.Layer) then
@@ -2782,7 +2766,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 self:MoveToLocation(AIUtils.RandomLocation(basePosition[1],basePosition[3]), false)
                 WaitSeconds(1)
             end
-                self:PlatoonDisband()
+                self:PlatoonDisbandTA()
             end
         end,
 

@@ -32,7 +32,7 @@ BuilderGroup {
         },
         BuilderType = 'StructureForm',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
         }
     },
@@ -51,7 +51,7 @@ BuilderGroup {
         },
         BuilderType = 'StructureForm',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
         }
     },
@@ -71,7 +71,7 @@ BuilderGroup {
         },
         BuilderType = 'StructureForm',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
         }
     },

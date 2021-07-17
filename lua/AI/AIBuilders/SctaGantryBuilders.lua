@@ -117,7 +117,7 @@ BuilderGroup {
         },
         BuilderType = 'OmniLand',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -141,7 +141,7 @@ BuilderGroup {
             },		
         BuilderType = 'T3TA',	-- Add a behaviour to the Commander unit once its done with it's BO.	 -- Flag this builder to be only run once.	
         BuilderData = {	
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 4,
             Construction = {
@@ -165,7 +165,7 @@ BuilderGroup {
         },
         BuilderType = 'T3TA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 4,
             Construction = {

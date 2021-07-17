@@ -98,7 +98,7 @@ BuilderGroup {
         },
         BuilderType = 'SeaTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
                 Location = 'LocationType',
@@ -123,7 +123,7 @@ BuilderGroup {
         },
         BuilderType = 'SeaTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
                 Location = 'LocationType',
@@ -253,7 +253,7 @@ BuilderGroup {
         BuilderType = 'SeaTA',
         BuilderData = {
             DesiresAssist = false,
-            NeedGuard = false,
+            ---NeedGuard = false,
             Construction = {
                 Location = 'LocationType',
                 NearMarkerType = 'Naval Area',
@@ -275,7 +275,7 @@ BuilderGroup {
         },
         BuilderType = 'SeaTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
             Location = 'LocationType',
@@ -311,7 +311,7 @@ BuilderGroup {
         },
         BuilderType = 'SeaTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
             Location = 'LocationType',
@@ -334,7 +334,7 @@ BuilderGroup {
         },
         BuilderType = 'SeaTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
             Location = 'LocationType',
@@ -357,7 +357,7 @@ BuilderGroup {
         },
         BuilderType = 'SeaTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
             Location = 'LocationType',
@@ -381,7 +381,7 @@ BuilderGroup {
         },
         BuilderType = 'SeaTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
             Location = 'LocationType',

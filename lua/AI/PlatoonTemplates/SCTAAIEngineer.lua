@@ -54,6 +54,7 @@ PlatoonTemplate {
     ---PlatoonType = 'EngineerForm',
     GlobalSquads = {
         { (categories.ENGINEER * categories.TECH1 * TA) - WEIRD, 1, 1, 'support', 'None' }
+        { categories.LAND * categories.MOBILE - categories.ENGINEER - categories.SCOUT, 0, 1, 'Guard', 'none' }
     },
 }
 

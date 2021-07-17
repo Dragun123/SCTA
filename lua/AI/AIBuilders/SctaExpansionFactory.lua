@@ -27,7 +27,7 @@ BuilderGroup {
         },
         BuilderType = 'LandTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -53,7 +53,7 @@ BuilderGroup {
         },
         BuilderType = 'LandTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -79,7 +79,7 @@ BuilderGroup {
         },
         BuilderType = 'OmniLand',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -105,7 +105,7 @@ BuilderGroup {
         },
         BuilderType = 'OmniLand',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -133,7 +133,7 @@ BuilderGroup {
         },
         BuilderType = 'AirTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -159,7 +159,7 @@ BuilderGroup {
         },
         BuilderType = 'OmniAir',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -184,7 +184,7 @@ BuilderGroup {
         },
         BuilderType = 'NotACU',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -207,7 +207,7 @@ BuilderGroup {
         },
         BuilderType = 'NotACU',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -229,7 +229,7 @@ BuilderGroup {
         },
         BuilderType = 'OmniLand',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -252,7 +252,7 @@ BuilderGroup {
         },
         BuilderType = 'OmniAir',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
