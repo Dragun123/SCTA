@@ -264,6 +264,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             elseif EntityCategoryContains(categories.FACTORY, finishedUnit) then
                 self:AddFactory(finishedUnit)
             end
+            factory.TAAIFactoryBuilding = nil
             self:TAAssignBuildOrder(factory, factory.BuilderManagerData.BuilderType)
         end,
 
@@ -272,13 +273,14 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             if factory.Dead then
                 return
             end
-            if table.getn(factory:GetCommandQueue()) <= 1 and factory.TABuildingUnit then
+            if table.getn(factory:GetCommandQueue()) <= 1 and (factory.TAAIFactoryBuilding or factory.TABuildingUnit) then
                 return self:ForkThread(self.TADelayBuildOrder, factory, bType, true)
             end
             local builder = self:GetHighestBuilder(bType,{factory})
             --LOG('*TAIEXIST2', factory)
-                if builder and not factory.TABuildingUnit then
+                if builder and not (factory.TAAIFactoryBuilding or factory.TABuildingUnit) then
                 ---LOG('*TAIEXIST3', factory)
+                factory.TAAIFactoryBuilding = true
                 local template = self:GetFactoryTemplate(builder:GetPlatoonTemplate(), factory)
                 --LOG('*TAAI DEBUG: ARMY ', repr(self.Brain:GetArmyIndex()),': Factory Builder Manager Building - ',repr(builder.BuilderName))
 
