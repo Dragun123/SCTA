@@ -1618,10 +1618,10 @@ Platoon = Class(SCTAAIPlatoon) {
                     end
                 end]]
             end
+            --self:Stop()
             WaitSeconds(2)
             self.EcoCheck = nil
             local position = AIUtils.RandomLocation(self.Center[1],self.Center[3])
-            self:Stop()
             self:MoveToLocation(position, false)
             WaitSeconds(2)
         end
@@ -2054,9 +2054,9 @@ Platoon = Class(SCTAAIPlatoon) {
                     end
                 end
             end
+            ---self:Stop()
             WaitSeconds(2)
             local position = AIUtils.RandomLocation(self.Center[1],self.Center[3])
-            self:Stop()
             self:MoveToLocation(position, false)
             WaitSeconds(2)
             if aiBrain.Level2 then
