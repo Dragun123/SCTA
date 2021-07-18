@@ -63,7 +63,9 @@ TAweapon = Class(DefaultWeapon) {
             if (self.unit.SCTAAIBrain or
             TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
             self:OnGotTargetCheck() == true) then
-                DefaultWeapon.WeaponUnpackingState.Main(self)
+                if not self.unit.Dead and not IsDestroyed(self.unit) then
+                    DefaultWeapon.WeaponUnpackingState.Main(self)
+                end
             end
         end,
 
@@ -92,7 +94,9 @@ TAweapon = Class(DefaultWeapon) {
             if (self.unit:GetAIBrain().SCTAAI or
             TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
             self:OnGotTargetCheck() == true) then
+                if not self.unit.Dead and not IsDestroyed(self.unit) then
                 DefaultWeapon.WeaponPackingState.OnGotTarget(self)
+                end
             end
         end,
     },
