@@ -12,7 +12,7 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTA Engineer Assist Gantry Field Production',
         PlatoonTemplate = 'EngineerBuilderSCTAField',
-        Plan = 'ManagerEngineerAssistAI',
+        Plan = 'ManagerEngineerAssistAISCTA',
         PriorityFunction = TAPrior.GateBeingBuilt,
         Priority = 200,
         InstanceCount = 2,
@@ -35,7 +35,7 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTA Engineer Assist Field Gantry',
         PlatoonTemplate = 'EngineerBuilderSCTAField',
-        Plan = 'ManagerEngineerAssistAI',
+        Plan = 'ManagerEngineerAssistAISCTA',
         PriorityFunction = TAPrior.GantryProduction,
         Priority = 200,
         InstanceCount = 4,
@@ -58,7 +58,7 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTA Commander Assist Gantry Construction',
         PlatoonTemplate = 'CommanderBuilderSCTA',
-        PlatoonAIPlan = 'ManagerEngineerAssistAI',
+        PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
         PriorityFunction = TAPrior.GateBeingBuilt,
         Priority = 126,
         InstanceCount = 2,
@@ -81,7 +81,7 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTA CDR Assist Structure',
         PlatoonTemplate = 'CommanderBuilderSCTA',
-        PlatoonAIPlan = 'ManagerEngineerAssistAI',
+        PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
         PriorityFunction = TAPrior.UnitProduction,
         Priority = 111,
         InstanceCount = 2,
@@ -117,7 +117,7 @@ BuilderGroup {
         },
         BuilderType = 'OmniLand',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -141,7 +141,7 @@ BuilderGroup {
             },		
         BuilderType = 'T3TA',	-- Add a behaviour to the Commander unit once its done with it's BO.	 -- Flag this builder to be only run once.	
         BuilderData = {	
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 4,
             Construction = {
@@ -165,7 +165,7 @@ BuilderGroup {
         },
         BuilderType = 'T3TA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 4,
             Construction = {

@@ -25,7 +25,7 @@ BuilderGroup {
         },
         BuilderType = 'LandTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
                 BuildStructures = {
@@ -46,7 +46,7 @@ BuilderGroup {
         },
         BuilderType = 'LandTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
                 BuildStructures = {
@@ -67,7 +67,7 @@ BuilderGroup {
         },
         BuilderType = 'LandTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
                 BuildStructures = {
@@ -88,7 +88,7 @@ BuilderGroup {
         },
         BuilderType = 'LandTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
                 BuildStructures = {
@@ -110,7 +110,7 @@ BuilderGroup {
         },
         BuilderType = 'NotACU',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
                 BuildStructures = {
@@ -132,7 +132,7 @@ BuilderGroup {
         },
         BuilderType = 'OmniAir',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
                 BuildStructures = {
@@ -154,7 +154,7 @@ BuilderGroup {
         },
         BuilderType = 'NotACU',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -176,7 +176,7 @@ BuilderGroup {
         },
         BuilderType = 'AirTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
                 BuildStructures = {
@@ -197,7 +197,7 @@ BuilderGroup {
         },
         BuilderType = 'LandTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
                 BuildClose = true,
@@ -218,7 +218,7 @@ BuilderGroup {
         },
         BuilderType = 'LandTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
                 BuildClose = true,
@@ -242,7 +242,7 @@ BuilderGroup {
         BuilderData = {
             DesiresAssist = true,
             NumAssistees = 6,
-            NeedGuard = false,
+            ---NeedGuard = false,
             Construction = {
                 BuildStructures = {
                     'T2EnergyProduction',
@@ -262,7 +262,7 @@ BuilderGroup {
         },
         BuilderType = 'T3TA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 6,
             Construction = {
@@ -285,7 +285,7 @@ BuilderGroup {
             },
         BuilderType = 'AirTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
                 BuildStructures = {
@@ -305,7 +305,7 @@ BuilderGroup {
         },
         BuilderType = 'AirTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
                 BuildClose = true,
@@ -328,7 +328,7 @@ BuilderGroup {
         BuilderType = 'NotACU',
         BuilderData = {
             DesiresAssist = true,
-            NeedGuard = false,
+            ---NeedGuard = false,
             NumAssistees = 2,
             Construction = {
                 BuildClose = true,

@@ -185,7 +185,7 @@ BuilderGroup {
         BuilderName = 'SCTA Engineer Reclaim Energy Naval',
         PlatoonTemplate = 'EngineerBuilderSCTANaval',
         PriorityFunction = TAPrior.TechEnergyExist,
-        PlatoonAIPlan = 'ReclaimStructuresAI',
+        PlatoonAIPlan = 'ReclaimStructuresAITA',
         Priority = 111,
         InstanceCount = 8,
         BuilderConditions = {

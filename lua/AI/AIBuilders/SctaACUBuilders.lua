@@ -51,7 +51,7 @@ BuilderGroup {
         },
         BuilderType = 'Command',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
                 BuildClose = true,
@@ -74,7 +74,7 @@ BuilderGroup {
         },
         BuilderType = 'Command',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
                 BuildClose = true,
@@ -95,7 +95,7 @@ BuilderGroup {
         },
         BuilderType = 'Command',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
                 BuildClose = true,
@@ -117,7 +117,7 @@ BuilderGroup {
         },
         BuilderType = 'Command',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
                 BuildStructures = {
@@ -140,7 +140,7 @@ BuilderGroup {
         BuilderData = {
             DesiresAssist = true,
             NumAssistees = 2,
-            NeedGuard = false,
+            ---NeedGuard = false,
             Construction = {
                 BuildClose = true,
                 BuildStructures = {
@@ -160,7 +160,7 @@ BuilderGroup {
         },
         BuilderType = 'Command',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
                 BuildClose = true,
@@ -185,7 +185,7 @@ BuilderGroup {
         BuilderType = 'Command',
         BuilderData = {
             DesiresAssist = false,
-            NeedGuard = false,
+            ---NeedGuard = false,
             Construction = {
                 BuildStructures = {
                     'T1LandFactory2',
@@ -206,7 +206,7 @@ BuilderGroup {
         },
         BuilderType = 'Command',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = false,
             Construction = {
                 BuildStructures = {

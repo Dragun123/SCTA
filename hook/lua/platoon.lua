@@ -16,7 +16,7 @@ Platoon = Class(SCTAAIPlatoon) {
         local aiBrain = self:GetBrain()
         local eng = self:GetPlatoonUnits()[1]
         local guardedUnit
-        self:EconUnfinishedBody()
+        self:TAEconUnfinishedBody()
         WaitTicks(10)
         -- do we assist until the building is finished ?
         if self.PlatoonData.Assist.AssistUntilFinished then
@@ -48,49 +48,203 @@ Platoon = Class(SCTAAIPlatoon) {
         eng.AssistPlatoon = nil
         eng.UnitBeingAssist = nil
         self:Stop()
-        self:PlatoonDisband()
+        self:PlatoonDisbandTA()
         --[[coroutine.yield(1)
        return self:SCTAEngineerTypeAI()]]
     end,
 
     ManagerEngineerAssistAISCTA = function(self)
         local aiBrain = self:GetBrain()
+        local assistData = self.PlatoonData.Assist
+        local beingBuilt = false
+        self:TAEconAssistBody()
+        WaitSeconds(assistData.Time or 60)
         local eng = self:GetPlatoonUnits()[1]
-        self:EconAssistBody()
-        WaitTicks(10)
-        -- do we assist until the building is finished ?
-        if self.PlatoonData.Assist.AssistUntilFinished then
-            local guardedUnit
-            if eng.UnitBeingAssist then
-                guardedUnit = eng.UnitBeingAssist
-            else 
-                guardedUnit = eng:GetGuardedUnit()
-            end
-            -- loop as long as we are not dead and not idle
-            while eng and not eng.Dead and aiBrain:PlatoonExists(self) and not eng:IsIdleState() do
-                if not guardedUnit or guardedUnit.Dead or guardedUnit:BeenDestroyed() then
-                    break
-                end
-                -- stop if our target is finished
-                if guardedUnit:GetFractionComplete() == 1 and not guardedUnit:IsUnitState('Upgrading') then
-                    --LOG('* ManagerEngineerAssistAI: Engineer Builder ['..self.BuilderName..'] - ['..self.PlatoonData.Assist.AssisteeType..'] - Target unit ['..guardedUnit:GetBlueprint().BlueprintId..'] ('..guardedUnit:GetBlueprint().Description..') is finished')
-                    break
-                end
-                -- wait 1.5 seconds until we loop again
-                WaitTicks(15)
-            end
-        else
-            WaitSeconds(self.PlatoonData.Assist.Time or 60)
+        if eng:GetGuardedUnit() then
+            beingBuilt = eng:GetGuardedUnit()
         end
-        if not aiBrain:PlatoonExists(self) then
+        if beingBuilt and assistData.AssistUntilFinished then
+            while beingBuilt:IsUnitState('Building') or beingBuilt:IsUnitState('Upgrading') do
+                WaitSeconds(5)
+            end
+        end
+        if not aiBrain:PlatoonExists(self) then --or assistData.PermanentAssist then
+            LOG('*AI DEBUG: Engie perma assisting')
+            SUtils.AISendPing(eng:GetPosition(), 'move', aiBrain:GetArmyIndex())
             return
         end
-        self.AssistPlatoon = nil
-        eng.UnitBeingAssist = nil
+        self:PlatoonDisbandTA()
+    end,
+
+    TAEconAssistBody = function(self)
+        local eng = self:GetPlatoonUnits()[1]
+        if not eng then
+            self:PlatoonDisbandTA()
+            return
+        end
+        local aiBrain = self:GetBrain()
+        local assistData = self.PlatoonData.Assist
+        local assistee = false
+
+        eng.AssistPlatoon = self
+
+        if not assistData.AssistLocation or not assistData.AssisteeType then
+            WARN('*AI WARNING: Disbanding Assist platoon that does not have either AssistLocation or AssisteeType')
+            self:PlatoonDisbandTA()
+        end
+
+        local beingBuilt = assistData.BeingBuiltCategories or { 'ALLUNITS' }
+
+        local assisteeCat = assistData.AssisteeCategory or categories.ALLUNITS
+        if type(assisteeCat) == 'string' then
+            assisteeCat = ParseEntityCategory(assisteeCat)
+        end
+
+        -- loop through different categories we are looking for
+        for _,catString in beingBuilt do
+            -- Track all valid units in the assist list so we can load balance for factories
+
+            local category = ParseEntityCategory(catString)
+
+            local assistList = AIUtils.GetAssisteesSorian(aiBrain, assistData.AssistLocation, assistData.AssisteeType, category, assisteeCat)
+
+            if not table.empty(assistList) then
+                -- only have one unit in the list; assist it
+                if table.getn(assistList) == 1
+                and (not assistData.AssistRange or SUtils.XZDistanceTwoVectorsSq(eng:GetPosition(), assistList[1]:GetPosition()) < assistData.AssistRange) then
+                    assistee = assistList[1]
+                    break
+                else
+                    -- Find the unit with the least number of assisters; assist it
+                    local lowNum = false
+                    local lowUnit = false
+                    for k,v in assistList do
+                        if (not lowNum or table.getn(v:GetGuards()) < lowNum) and
+                        (not assistData.AssistRange or SUtils.XZDistanceTwoVectorsSq(eng:GetPosition(), v:GetPosition()) < assistData.AssistRange) then
+                            lowNum = v:GetGuards()
+                            lowUnit = v
+                        end
+                    end
+                    assistee = lowUnit
+                    break
+                end
+            end
+        end
+        -- assist unit
+        if assistee then
+            self:Stop()
+            eng.AssistSet = true
+            IssueGuard({eng}, assistee)
+        else
+            self:PlatoonDisbandTA()
+        end
+    end,
+
+    TAEconUnfinishedBody = function(self)
+        local aiBrain = self:GetBrain()
+        local eng = self:GetPlatoonUnits()[1]
+        if not eng then
+            self:PlatoonDisbandTA()
+            return
+        end
+        local assistData = self.PlatoonData.Assist
+        local assistee = false
+
+        eng.AssistPlatoon = self
+
+        if not assistData.AssistLocation then
+            WARN('*AI WARNING: Disbanding EconUnfinishedBody platoon that does not AssistLocation')
+            self:PlatoonDisbandTA()
+            return
+        end
+
+        local beingBuilt = assistData.BeingBuiltCategories or { 'ALLUNITS' }
+
+        -- loop through different categories we are looking for
+        for _,catString in beingBuilt do
+
+            local category = ParseEntityCategory(catString)
+
+            local assistList = SUtils.FindUnfinishedUnits(aiBrain, assistData.AssistLocation, category)
+
+            if assistList then
+                assistee = assistList
+                break
+            end
+        end
+        -- assist unit
+        if assistee then
+            self:Stop()
+            eng.AssistSet = true
+            eng.UnitBeingAssist = assistee.UnitBeingBuilt or assistee.UnitBeingAssist or assistee
+            --LOG('* EconUnfinishedBody: Assisting now: ['..eng.UnitBeingBuilt:GetBlueprint().BlueprintId..'] ('..eng.UnitBeingBuilt:GetBlueprint().Description..')')
+            IssueGuard({eng}, assistee)
+        else
+            self.AssistPlatoon = nil
+            eng.UnitBeingAssist = nil
+            -- stop the platoon from endless assisting
+            self:PlatoonDisbandTA()
+        end
+    end,
+
+    ReclaimStructuresAITA = function(self)
         self:Stop()
-        self:PlatoonDisband()
-        --[[coroutine.yield(1)
-       return self:SCTAEngineerTypeAI()]]
+        local aiBrain = self:GetBrain()
+        local data = self.PlatoonData
+        local radius = aiBrain:PBMGetLocationRadius(data.Location)
+        local categories = data.Reclaim
+        local counter = 0
+        local reclaimcat
+        local reclaimables
+        local unitPos
+        local reclaimunit
+        local distance
+        local allIdle
+        while aiBrain:PlatoonExists(self) do
+            unitPos = self:GetPlatoonPosition()
+            reclaimunit = false
+            distance = false
+            for num,cat in categories do
+                if type(cat) == 'string' then
+                    reclaimcat = ParseEntityCategory(cat)
+                else
+                    reclaimcat = cat
+                end
+                reclaimables = aiBrain:GetListOfUnits(reclaimcat, false)
+                for k,v in reclaimables do
+                    if not v.Dead and (not reclaimunit or VDist3(unitPos, v:GetPosition()) < distance) and unitPos then
+                        reclaimunit = v
+                        distance = VDist3(unitPos, v:GetPosition())
+                    end
+                end
+                if reclaimunit then break end
+            end
+            if reclaimunit and not reclaimunit.Dead then
+                counter = 0
+                -- Set ReclaimInProgress to prevent repairing (see RepairAI)
+                reclaimunit.ReclaimInProgress = true
+                IssueReclaim(self:GetPlatoonUnits(), reclaimunit)
+                repeat
+                    WaitSeconds(2)
+                    if not aiBrain:PlatoonExists(self) then
+                        return
+                    end
+                    allIdle = true
+                    for k,v in self:GetPlatoonUnits() do
+                        if not v.Dead and not v:IsIdleState() then
+                            allIdle = false
+                            break
+                        end
+                    end
+                until allIdle
+            elseif not reclaimunit or counter >= 5 then
+                self:PlatoonDisbandTA()
+                return
+            else
+                counter = counter + 1
+                WaitSeconds(5)
+            end
+        end
     end,
 
     EngineerBuildAISCTA = function(self)
@@ -103,11 +257,11 @@ Platoon = Class(SCTAAIPlatoon) {
         local eng
         --LOG('*SCTAEXPANSIONTA', self.PlatoonData.LocationType)
         for k, v in platoonUnits do
-            if not v.Dead then --DUNCAN - was construction
-                IssueClearCommands({v})
+            if not v.Dead and EntityCategoryContains(categories.ENGINEER, v) then
                 if not eng then
                     eng = v
                 else
+                    IssueClearCommands({v})
                     IssueGuard({v}, eng)
                 end
             end
@@ -115,7 +269,7 @@ Platoon = Class(SCTAAIPlatoon) {
 
         if not eng or eng.Dead then
             coroutine.yield(1)
-            self:PlatoonDisband()
+            self:PlatoonDisbandTA()
             return
         end
 
@@ -135,9 +289,6 @@ Platoon = Class(SCTAAIPlatoon) {
 
         --LOG('*AI DEBUG: EngineerBuild AI ' .. eng.Sync.id)
 
-        if self.PlatoonData.NeedGuard then
-            eng.NeedGuard = true
-        end
 
         -------- CHOOSE APPROPRIATE BUILD FUNCTION AND SETUP BUILD VARIABLES --------
         local reference = false
@@ -160,7 +311,7 @@ Platoon = Class(SCTAAIPlatoon) {
             end
             else]]
         coroutine.yield(1)
-        self:PlatoonDisband()
+        self:PlatoonDisbandTA()
         return
         end
         if cons.NearUnitCategory then
@@ -215,7 +366,7 @@ Platoon = Class(SCTAAIPlatoon) {
                                                 cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType,
                                                 cons.MarkerUnitCount, cons.MarkerUnitCategory, cons.MarkerRadius)
             if not reference or not refName then
-                self:PlatoonDisband()
+                self:PlatoonDisbandTA()
                 return
             end
 
@@ -228,11 +379,11 @@ Platoon = Class(SCTAAIPlatoon) {
                         (cons.LocationRadius or 100), cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType)
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             else
@@ -251,7 +402,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 end
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             end
@@ -261,7 +412,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 local guards = eng:GetGuards()
                 for k,v in guards do
                     if not v.Dead and v.PlatoonHandle then
-                        v.PlatoonHandle:PlatoonDisband()
+                        v.PlatoonHandle:PlatoonDisbandTA()
                     end
                 end
             end
@@ -341,7 +492,7 @@ Platoon = Class(SCTAAIPlatoon) {
             local guards = eng:GetGuards()
             for k,v in guards do
                 if not v.Dead and v.PlatoonHandle and aiBrain:PlatoonExists(v.PlatoonHandle) then
-                    v.PlatoonHandle:PlatoonDisband()
+                    v.PlatoonHandle:PlatoonDisbandTA()
                 end
             end
         end
@@ -367,7 +518,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         end
                     else
                         if aiBrain:PlatoonExists(self) then
-                            self:PlatoonDisband()
+                            self:PlatoonDisbandTA()
                             return
                         end
                     end
@@ -409,7 +560,7 @@ Platoon = Class(SCTAAIPlatoon) {
 
         if not eng or eng.Dead then
             coroutine.yield(1)
-            self:PlatoonDisband()
+            self:PlatoonDisbandTA()
             return
         end
 
@@ -427,9 +578,6 @@ Platoon = Class(SCTAAIPlatoon) {
             baseTmpl = baseTmplFile[(cons.BaseTemplate or 'NavalBaseTemplates')][factionIndex]
         --LOG('*AI DEBUG: EngineerBuild AI ' .. eng.Sync.id)
 
-        if self.PlatoonData.NeedGuard then
-            eng.NeedGuard = true
-        end
 
         -------- CHOOSE APPROPRIATE BUILD FUNCTION AND SETUP BUILD VARIABLES --------
         local reference = false
@@ -452,7 +600,7 @@ Platoon = Class(SCTAAIPlatoon) {
             end
             else]]
         coroutine.yield(1)
-        self:PlatoonDisband()
+        self:PlatoonDisbandTA()
         return
         end
         if cons.NearUnitCategory then
@@ -510,7 +658,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         (cons.LocationRadius or 100), cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType)
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
                 -- didn't find a location to build at
@@ -521,7 +669,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 local guards = eng:GetGuards()
                 for k,v in guards do
                     if not v.Dead and v.PlatoonHandle then
-                        v.PlatoonHandle:PlatoonDisband()
+                        v.PlatoonHandle:PlatoonDisbandTA()
                     end
                 end
             end
@@ -586,7 +734,7 @@ Platoon = Class(SCTAAIPlatoon) {
             local guards = eng:GetGuards()
             for k,v in guards do
                 if not v.Dead and v.PlatoonHandle and aiBrain:PlatoonExists(v.PlatoonHandle) then
-                    v.PlatoonHandle:PlatoonDisband()
+                    v.PlatoonHandle:PlatoonDisbandTA()
                 end
             end
         end
@@ -612,7 +760,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         end
                     else
                         if aiBrain:PlatoonExists(self) then
-                            self:PlatoonDisband()
+                            self:PlatoonDisbandTA()
                             return
                         end
                     end
@@ -654,7 +802,7 @@ Platoon = Class(SCTAAIPlatoon) {
 
         if not eng or eng.Dead then
             coroutine.yield(1)
-            self:PlatoonDisband()
+            self:PlatoonDisbandTA()
             return
         end
 
@@ -672,10 +820,6 @@ Platoon = Class(SCTAAIPlatoon) {
             baseTmpl = baseTmplFile[(cons.BaseTemplate or 'BaseTemplates')][factionIndex]
 
         --LOG('*AI DEBUG: EngineerBuild AI ' .. eng.Sync.id)
-
-        if self.PlatoonData.NeedGuard then
-            eng.NeedGuard = true
-        end
 
         -------- CHOOSE APPROPRIATE BUILD FUNCTION AND SETUP BUILD VARIABLES --------
         local reference = false
@@ -698,7 +842,7 @@ Platoon = Class(SCTAAIPlatoon) {
             end
             else]]
         coroutine.yield(1)
-        self:PlatoonDisband()
+        self:PlatoonDisbandTA()
         return
         end
         if cons.NearUnitCategory then
@@ -753,7 +897,7 @@ Platoon = Class(SCTAAIPlatoon) {
                                                 cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType,
                                                 cons.MarkerUnitCount, cons.MarkerUnitCategory, cons.MarkerRadius)
             if not reference or not refName then
-                self:PlatoonDisband()
+                self:PlatoonDisbandTA()
                 return
             end
 
@@ -766,7 +910,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         (cons.LocationRadius or 100), cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType)
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             elseif cons.NearMarkerType == 'Naval Area' then
@@ -774,7 +918,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         (cons.LocationRadius or 100), cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType)
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             else
@@ -793,7 +937,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 end
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             end
@@ -803,7 +947,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 local guards = eng:GetGuards()
                 for k,v in guards do
                     if not v.Dead and v.PlatoonHandle then
-                        v.PlatoonHandle:PlatoonDisband()
+                        v.PlatoonHandle:PlatoonDisbandTA()
                     end
                 end
             end
@@ -899,7 +1043,7 @@ Platoon = Class(SCTAAIPlatoon) {
             local guards = eng:GetGuards()
             for k,v in guards do
                 if not v.Dead and v.PlatoonHandle and aiBrain:PlatoonExists(v.PlatoonHandle) then
-                    v.PlatoonHandle:PlatoonDisband()
+                    v.PlatoonHandle:PlatoonDisbandTA()
                 end
             end
         end
@@ -925,7 +1069,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         end
                     else
                         if aiBrain:PlatoonExists(self) then
-                            self:PlatoonDisband()
+                            self:PlatoonDisbandTA()
                             return
                         end
                     end
@@ -954,11 +1098,11 @@ Platoon = Class(SCTAAIPlatoon) {
         local buildingTmpl, buildingTmplFile, baseTmpl, baseTmplFile, baseTmplDefault
         local eng
         for k, v in platoonUnits do
-            if not v.Dead then --DUNCAN - was construction
-                IssueClearCommands({v})
+            if not v.Dead and EntityCategoryContains(categories.ENGINEER, v) then
                 if not eng then
                     eng = v
                 else
+                    IssueClearCommands({v})
                     IssueGuard({v}, eng)
                 end
             end
@@ -966,7 +1110,7 @@ Platoon = Class(SCTAAIPlatoon) {
 
         if not eng or eng.Dead then
             coroutine.yield(1)
-            self:PlatoonDisband()
+            self:PlatoonDisbandTA()
             return
         end
 
@@ -985,9 +1129,6 @@ Platoon = Class(SCTAAIPlatoon) {
 
         --LOG('*AI DEBUG: EngineerBuild AI ' .. eng.Sync.id)
 
-        if self.PlatoonData.NeedGuard then
-            eng.NeedGuard = true
-        end
 
         -------- CHOOSE APPROPRIATE BUILD FUNCTION AND SETUP BUILD VARIABLES --------
         local reference = false
@@ -999,7 +1140,7 @@ Platoon = Class(SCTAAIPlatoon) {
 
         if not cons.BuildStructures then
             coroutine.yield(1)
-            self:PlatoonDisband()
+            self:PlatoonDisbandTA()
             return
         end
         if cons.NearUnitCategory then
@@ -1054,7 +1195,7 @@ Platoon = Class(SCTAAIPlatoon) {
                                                 cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType,
                                                 cons.MarkerUnitCount, cons.MarkerUnitCategory, cons.MarkerRadius)
             if not reference or not refName then
-                self:PlatoonDisband()
+                self:PlatoonDisbandTA()
                 return
             end
 
@@ -1067,7 +1208,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         (cons.LocationRadius or 100), cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType)
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             elseif cons.NearMarkerType == 'Naval Area' then
@@ -1075,7 +1216,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         (cons.LocationRadius or 100), cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType)
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             else
@@ -1094,7 +1235,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 end
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             end
@@ -1104,7 +1245,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 local guards = eng:GetGuards()
                 for k,v in guards do
                     if not v.Dead and v.PlatoonHandle then
-                        v.PlatoonHandle:PlatoonDisband()
+                        v.PlatoonHandle:PlatoonDisbandTA()
                     end
                 end
             end
@@ -1200,7 +1341,7 @@ Platoon = Class(SCTAAIPlatoon) {
             local guards = eng:GetGuards()
             for k,v in guards do
                 if not v.Dead and v.PlatoonHandle and aiBrain:PlatoonExists(v.PlatoonHandle) then
-                    v.PlatoonHandle:PlatoonDisband()
+                    v.PlatoonHandle:PlatoonDisbandTA()
                 end
             end
         end
@@ -1226,7 +1367,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         end
                     else
                         if aiBrain:PlatoonExists(self) then
-                            self:PlatoonDisband()
+                            self:PlatoonDisbandTA()
                             return
                         end
                     end
@@ -1329,7 +1470,7 @@ Platoon = Class(SCTAAIPlatoon) {
         if not aiBrain or eng.Dead or not eng.EngineerBuildQueue or table.empty(eng.EngineerBuildQueue) then
             if aiBrain:PlatoonExists(eng.PlatoonHandle) then
                 if not eng.AssistSet and not eng.AssistPlatoon and not eng.UnitBeingAssist then
-                    eng.PlatoonHandle:PlatoonDisband()
+                    eng.PlatoonHandle:PlatoonDisbandTA()
                 end
             end
             if eng then eng.ProcessBuild = nil end
@@ -1403,7 +1544,7 @@ Platoon = Class(SCTAAIPlatoon) {
         -- final check for if we should disband
         if not eng or eng.Dead or table.getn(eng.EngineerBuildQueue) <= 0 then
             if eng.PlatoonHandle and aiBrain:PlatoonExists(eng.PlatoonHandle) and not eng.PlatoonHandle.UsingTransport then
-                eng.PlatoonHandle:PlatoonDisband()
+                eng.PlatoonHandle:PlatoonDisbandTA()
             end
         end
         if eng then eng.ProcessBuild = nil end
@@ -1508,6 +1649,63 @@ Platoon = Class(SCTAAIPlatoon) {
         self:PlatoonDisband()
     end,
 
+    NukeAISAITA = function(self)
+        self:Stop()
+        local aiBrain = self:GetBrain()
+        local platoonUnits = self:GetPlatoonUnits()
+        local unit
+        --GET THE Launcher OUT OF THIS PLATOON
+        for k, v in platoonUnits do
+            if EntityCategoryContains(categories.SILO * categories.NUKE, v) then
+                unit = v
+                break
+            end
+        end
+
+        if unit then
+            local bp = unit:GetBlueprint()
+            local weapon = bp.Weapon[1]
+            local maxRadius = weapon.MaxRadius
+            local nukePos, oldTargetLocation
+            unit:SetAutoMode(true)
+            while aiBrain:PlatoonExists(self) do
+                while unit:GetNukeSiloAmmoCount() < 1 do
+                    WaitSeconds(11)
+                    if not  aiBrain:PlatoonExists(self) then
+                        return
+                    end
+                end
+
+                nukePos = import('/lua/ai/aibehaviors.lua').GetHighestThreatClusterLocation(aiBrain, unit)
+                if nukePos then
+                    IssueNuke({unit}, nukePos)
+                    WaitSeconds(12)
+                    IssueClearCommands({unit})
+                end
+                WaitSeconds(1)
+            end
+        end
+        self:PlatoonDisbandTA()
+    end,
+
+    RadarSCTAPauseAI = function(self)
+        local platoonUnits = self:GetPlatoonUnits()
+        local aiBrain = self:GetBrain()
+        for k, v in platoonUnits do
+            v:SetScriptBit('RULEUTC_ProductionToggle', true)
+        end
+        local econ = AIUtils.AIGetEconomyNumbers(aiBrain)
+        while econ.EnergyStorageRatio < 0.4 do
+            WaitSeconds(2)
+            econ = AIUtils.AIGetEconomyNumbers(aiBrain)
+        end
+        for k, v in platoonUnits do
+            v:SetScriptBit('RULEUTC_ProductionToggle', false)
+        end
+        self:PlatoonDisbandTA()
+    end,
+
+
     UnitUpgradeAISCTA = function(self)
         local aiBrain = self:GetBrain()
         local platoonUnits = self:GetPlatoonUnits()
@@ -1535,14 +1733,11 @@ Platoon = Class(SCTAAIPlatoon) {
             return
         end
         WaitTicks(1)
-        self:PlatoonDisband()
+        self:PlatoonDisbandTA()
     end,
 
-    PlatoonDisband = function(self)
+    PlatoonDisbandTA = function(self)
         local aiBrain = self:GetBrain()
-        if not aiBrain.SCTAAI then
-            return SCTAAIPlatoon.PlatoonDisband(self)
-        end
         if self.BuilderHandle then
             self.BuilderHandle:RemoveHandle(self)
         end
@@ -1646,7 +1841,7 @@ Platoon = Class(SCTAAIPlatoon) {
             v:SetScriptBit('RULEUTC_ProductionToggle', false)
             end
         end
-        self:PlatoonDisband()
+        self:PlatoonDisbandTA()
     end,
 
     SCTAStrikeForceAIEarly = function(self)
@@ -2156,7 +2351,7 @@ Platoon = Class(SCTAAIPlatoon) {
             --Disband platoon if it's all air units, so they can be picked up by another platoon
             local mySurfaceThreat = AIAttackUtils.GetSurfaceThreatOfUnits(self)
             if mySurfaceThreat == 0 and AIAttackUtils.GetAirThreatOfUnits(self) > 0 then
-                self:PlatoonDisband()
+                self:PlatoonDisbandTA()
                 return
             end
 
@@ -2292,7 +2487,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 platPos = self:GetPlatoonPosition()
                 local distSq = VDist2Sq(platPos[1], platPos[3], bestBase.Position[1], bestBase.Position[3])
                 if distSq < 10 then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
                 if (distSq - oldDistSq) < 5 then
@@ -2301,7 +2496,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 oldDistSq = distSq      
             end
         end
-        return self:PlatoonDisband()
+        return self:PlatoonDisbandTA()
     end,
 
     
@@ -2755,7 +2950,7 @@ Platoon = Class(SCTAAIPlatoon) {
             local eng = self:GetPlatoonUnits()[1]
             local createTick = GetGameTick()
             if not eng then
-                self:PlatoonDisband()
+                self:PlatoonDisbandTA()
                 return
             end
             --LOG('*SCTAEXPANSIONTA', locationType)
@@ -2765,7 +2960,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 local ents = TAReclaim.TAAIGetReclaimablesAroundLocation(brain, self.PlatoonData.LocationType) or {}
                 if not ents[1] or not self:GetPlatoonPosition() then
                     WaitTicks(1)
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             if not self.PlatoonData.Layer or self.PlatoonData.Layer and AIAttackUtils.CanGraphAreaToSCTA(eng:GetPosition(), ents[1]:GetPosition(), self.PlatoonData.Layer) then
@@ -2782,7 +2977,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 self:MoveToLocation(AIUtils.RandomLocation(basePosition[1],basePosition[3]), false)
                 WaitSeconds(1)
             end
-                self:PlatoonDisband()
+                self:PlatoonDisbandTA()
             end
         end,
 
@@ -3035,15 +3230,19 @@ Platoon = Class(SCTAAIPlatoon) {
         end,
 
         ExperimentalAIHubTA = function(self)
-            local experimental = self:GetPlatoonUnits()
+            local aiBrain = self:GetBrain()
+            local behaviors = import('/lua/ai/AIBehaviors.lua')
+    
+            local experimental = self:GetPlatoonUnits()[1]
             if not experimental or experimental.Dead then
                 return
             end
-            local behaviors = import('/lua/ai/AIBehaviors.lua')
-            if EntityCategoryContains(categories.EXPERIMENTAL * categories.MOBILE - categories.SUBCOMMANDER, experimental) then
+            local ID = experimental.UnitId
+            self:SetPlatoonFormationOverride('AttackFormation')
+            if ID == 'corkrog' or 'armdrake' then
                 return behaviors.BehemothBehaviorTotal(self)
             else
-                return behaviors.CommanderThreadSCTADecoy(self)
+                return behaviors.CommanderBehaviorSCTADecoy(self)
             end
         end,
 

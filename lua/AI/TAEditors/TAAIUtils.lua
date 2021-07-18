@@ -72,6 +72,20 @@ function TAHaveGreaterThanArmyPoolWithCategory(aiBrain, unitCount, unitCategory)
     return TAHavePoolUnitInArmy(aiBrain, unitCount, unitCategory, '>=')
 end
 
+function TAFindUnfinishedUnits(aiBrain, locationType, buildCat)
+    local engineerManager = aiBrain.BuilderManagers[locationType].EngineerManager
+    local unfinished = aiBrain:GetUnitsAroundPoint(buildCat, engineerManager:GetLocationCoords(), engineerManager.Radius, 'Ally')
+    local retUnfinished = false
+    for num, unit in unfinished do
+        donePercent = unit:GetFractionComplete()
+        if donePercent < 1 and GetGuards(aiBrain, unit) < 1 and not unit:IsUnitState('Upgrading') then
+            retUnfinished = unit
+            break
+        end
+    end
+    return retUnfinished
+end
+
 --TA Build Conditions
 
 function TAAIGetEconomyNumbersStorageRatio(aiBrain)

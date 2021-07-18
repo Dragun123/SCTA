@@ -30,7 +30,7 @@ BuilderGroup {
         },
         BuilderType = 'LandTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             LocationType = 'LocationType',
             NumAssistees = 2,
@@ -58,7 +58,7 @@ BuilderGroup {
         },
         BuilderType = 'LandTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             LocationType = 'LocationType',
@@ -86,7 +86,7 @@ BuilderGroup {
         },
         BuilderType = 'OmniLand',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             LocationType = 'LocationType',
             NumAssistees = 2,
@@ -113,7 +113,7 @@ BuilderGroup {
         },
         BuilderType = 'OmniLand',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             LocationType = 'LocationType',
             NumAssistees = 2,
@@ -144,7 +144,7 @@ BuilderGroup {
         },
         BuilderType = 'LandTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -171,7 +171,7 @@ BuilderGroup {
         },
         BuilderType = 'OmniAir',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -197,7 +197,7 @@ BuilderGroup {
         },
         BuilderType = 'OmniLand',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -223,7 +223,7 @@ BuilderGroup {
         },
         BuilderType = 'OmniAir',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -247,7 +247,7 @@ BuilderGroup {
         },
         BuilderType = 'T3TA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 4,
             Construction = {
@@ -269,7 +269,7 @@ BuilderGroup {
         },
         BuilderType = 'T3TA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 4,
             Construction = {
@@ -293,7 +293,7 @@ BuilderGroup {
         BuilderData = {
             DesiresAssist = true,
             NumAssistees = 6,
-            NeedGuard = false,
+            ---NeedGuard = false,
             Construction = {
                 BuildClose = true,
                 BuildStructures = {

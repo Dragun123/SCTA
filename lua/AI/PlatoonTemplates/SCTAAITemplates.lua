@@ -20,15 +20,6 @@ PlatoonTemplate {
 }
 
 PlatoonTemplate {
-    Name = 'GuardSCTA',
-    Plan = 'None',
-    ---PlatoonType = 'Scout',
-    GlobalSquads = {
-        { GROUND - SPECIAL, 1, 1, 'Guard', 'none' }
-    },
-}
-
-PlatoonTemplate {
     Name = 'StrikeForceSCTATerrain',
     Plan = 'SCTAArtyHuntAI', -- The platoon function to use.
     ---PlatoonType = 'Scout',
@@ -132,10 +123,10 @@ PlatoonTemplate {
 
 PlatoonTemplate {
     Name = 'T4ExperimentalSCTA',
-    Plan = 'ExperimentalAIHubSorian', 
+    Plan = 'ExperimentalAIHubTA', 
     ---PlatoonType = 'CommandTA',
     GlobalSquads = {
-        { (categories.EXPERIMENTAL * categories.MOBILE) - categories.SUBCOMMANDER, 1, 1, 'Attack', 'none' }
+        { (categories.EXPERIMENTAL * categories.MOBILE), 1, 1, 'Attack', 'none' }
     },
 }
 
