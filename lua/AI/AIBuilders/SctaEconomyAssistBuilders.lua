@@ -17,7 +17,7 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTA Engineer Reclaim Excess PLANTS',
         PlatoonTemplate = 'EngineerBuilderSCTAALL',
-        PlatoonAIPlan = 'ReclaimStructuresAI',
+        PlatoonAIPlan = 'ReclaimStructuresAITA',
         PriorityFunction = TAPrior.FactoryReclaim,
         Priority = 100,
         InstanceCount = 5,
@@ -38,7 +38,7 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTA Engineer Reclaim Energy',
         PlatoonTemplate = 'EngineerBuilderSCTAALL',
-        PlatoonAIPlan = 'ReclaimStructuresAI',
+        PlatoonAIPlan = 'ReclaimStructuresAITA',
         PriorityFunction = TAPrior.TechEnergyExist,
         Priority = 85,
         InstanceCount = 4,
@@ -118,7 +118,7 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTA PGen Field Assist',
         PlatoonTemplate = 'EngineerBuilderSCTAField',
-        PlatoonAIPlan = 'ManagerEngineerAssistAI',
+        PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
         PriorityFunction = TAPrior.UnitProductionField,
         Priority = 75,
         InstanceCount = 2,
@@ -164,7 +164,7 @@ BuilderGroup {
         PlatoonTemplate = 'EngineerBuilderSCTAField',
         PriorityFunction = TAPrior.UnitProductionField,
         --DelayEqualBuildPlattons = 3,
-        PlatoonAIPlan = 'ManagerEngineerFindUnfinished',
+        PlatoonAIPlan = 'ManagerEngineerFindUnfinishedSCTA',
         Priority = 125,
         InstanceCount = 2,
         DelayEqualBuildPlattons = {'Unfinished', 2},
@@ -187,7 +187,7 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTA Assist Production Field',
         PlatoonTemplate = 'EngineerBuilderSCTAField',
-        PlatoonAIPlan = 'ManagerEngineerAssistAI',
+        PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
         PriorityFunction = TAPrior.UnitProductionField,
         --DelayEqualBuildPlattons = 2,
         Priority = 100,

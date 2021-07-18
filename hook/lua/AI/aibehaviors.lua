@@ -181,7 +181,7 @@ function BehemothBehaviorTotal(self)
     local airUnit = false
     local useMove = true
     local farTarget = false
-    local aiBrain = self:GetBrain()
+    local aiBrain = self:GetAIBrain()
     local platoonUnits = self:GetPlatoonUnits()
     local cmd 
     while aiBrain:PlatoonExists(self) do

@@ -123,10 +123,10 @@ PlatoonTemplate {
 
 PlatoonTemplate {
     Name = 'T4ExperimentalSCTA',
-    Plan = 'ExperimentalAIHubSorian', 
+    Plan = 'ExperimentalAIHubTA', 
     ---PlatoonType = 'CommandTA',
     GlobalSquads = {
-        { (categories.EXPERIMENTAL * categories.MOBILE) - categories.SUBCOMMANDER, 1, 1, 'Attack', 'none' }
+        { (categories.EXPERIMENTAL * categories.MOBILE), 1, 1, 'Attack', 'none' }
     },
 }
 
