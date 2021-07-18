@@ -172,67 +172,115 @@ function CDRSCTADGunDecoy(aiBrain, cdr)
 end
 
 function BehemothBehaviorTotal(self)
-    AssignExperimentalPrioritiesSorian(self)
+if not self:GatherUnitsSorian() then
+    return
+end
+AssignExperimentalPrioritiesSorian(self)
 
-    -- Find target loop
-    local experimental
-    local targetUnit = false
-    local lastBase = false
-    local airUnit = false
-    local useMove = true
-    local farTarget = false
-    local aiBrain = self:GetAIBrain()
-    local platoonUnits = self:GetPlatoonUnits()
-    local cmd 
-    while aiBrain:PlatoonExists(self) do
-        self:MergeWithNearbyPlatoonsSCTA('ExperimentalAIHubTA', 'ExperimentalAIHubTA', 50)
+-- Find target loop
+local experimental
+local targetUnit = false
+local lastBase = false
+local airUnit = false
+local useMove = true
+local farTarget = false
+local aiBrain = self:GetBrain()
+local platoonUnits = self:GetPlatoonUnits()
+local cmd
+TAReclaim.TAAIRandomizeTaunt(aiBrain)
+while aiBrain:PlatoonExists(self) do
+    self:MergeWithNearbyPlatoonsSorian('ExperimentalAIHubTA', 50, true)
+    useMove = InWaterCheck(self)
+    if lastBase then
+        targetUnit, lastBase = WreckBaseSorian(self, lastBase)
+    end
+
+    if not lastBase then
+        targetUnit, lastBase = FindExperimentalTargetSorian(self)
+    end
+
+    farTarget = false
+    if targetUnit and SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), targetUnit:GetPosition()) >= 40000 then
+        farTarget = true
+    end
+
+    if targetUnit then
+        IssueClearCommands(platoonUnits)
+        if useMove or not farTarget then
+            cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', targetUnit:GetPosition(), false)
+        else
+            cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', targetUnit:GetPosition(), 'AttackMove')
+        end
+    end
+
+    -- Walk to and kill target loop
+    local nearCommander = CommanderOverrideCheckSorian(self)
+    local ACUattack = false
+    while aiBrain:PlatoonExists(self) and targetUnit and not targetUnit.Dead and useMove == InWaterCheck(self) and
+    self:IsCommandsActive(cmd) and (nearCommander or ((farTarget and SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), targetUnit:GetPosition()) >= 40000) or
+    (not farTarget and SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), targetUnit:GetPosition()) < 40000))) do
+        self:MergeWithNearbyPlatoonsSorian('ExperimentalAIHubTA', 50, true)
         useMove = InWaterCheck(self)
-        if lastBase then
-            targetUnit, lastBase = WreckBaseSorian(self, lastBase)
-        end
+        nearCommander = CommanderOverrideCheckSorian(self)
 
-        if not lastBase then
-            targetUnit, lastBase = FindExperimentalTarget(self)
-        end
-
-        farTarget = false
-        if targetUnit and SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), targetUnit:GetPosition()) >= 40000 then
-            farTarget = true
-        end
-
-        if targetUnit then
+        if nearCommander and (nearCommander ~= targetUnit or
+        (not ACUattack and SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), nearCommander:GetPosition()) < 40000)) then
             IssueClearCommands(platoonUnits)
-            if useMove or not farTarget then
-                cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', targetUnit:GetPosition(), false)
+            if useMove then
+                cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', nearCommander:GetPosition(), false)
             else
-                cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', targetUnit:GetPosition(), 'AttackMove')
+                cmd = self:AttackTarget(targetUnit)
+                ACUattack = true
+            end
+            targetUnit = nearCommander
+        end
+
+        -- Check if we or the target are under a shield
+        local closestBlockingShield = false
+        for k, v in platoonUnits do
+            if not v.Dead then
+                experimental = v
+                break
             end
         end
 
-        -- Walk to and kill target loop
-        local nearCommander = CommanderOverrideCheckSorian(self)
-        local ACUattack = false
-        while aiBrain:PlatoonExists(self) and targetUnit and not targetUnit.Dead and useMove == InWaterCheck(self) and
-        self:IsCommandsActive(cmd) and (nearCommander or ((farTarget and SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), targetUnit:GetPosition()) >= 40000) or
-        (not farTarget and SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), targetUnit:GetPosition()) < 40000))) do
-            self:MergeWithNearbyPlatoonsSCTA('ExperimentalAIHubTA', 'ExperimentalAIHubTA', 50)
-            useMove = InWaterCheck(self)
-            nearCommander = CommanderOverrideCheckSorian(self)
+        if not airUnit then
+            closestBlockingShield = GetClosestShieldProtectingTargetSorian(experimental, experimental)
+        end
+        closestBlockingShield = closestBlockingShield or GetClosestShieldProtectingTargetSorian(experimental, targetUnit)
 
-            if nearCommander and (nearCommander ~= targetUnit or
-            (not ACUattack and SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), nearCommander:GetPosition()) < 40000)) then
-                IssueClearCommands(platoonUnits)
-                if useMove then
-                    cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', nearCommander:GetPosition(), false)
-                else
-                    cmd = self:AttackTarget(targetUnit)
-                    ACUattack = true
-                end
-                targetUnit = nearCommander
+        -- Kill shields loop
+        local oldTarget = false
+        while closestBlockingShield do
+            oldTarget = oldTarget or targetUnit
+            targetUnit = false
+            self:MergeWithNearbyPlatoonsSorian('ExperimentalAIHubTA', 50, true)
+            useMove = InWaterCheck(self)
+            IssueClearCommands(platoonUnits)
+            if useMove or SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), closestBlockingShield:GetPosition()) < 40000 then
+                cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', closestBlockingShield:GetPosition(), false)
+            else
+                cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', closestBlockingShield:GetPosition(), 'AttackMove')
             end
 
-            -- Check if we or the target are under a shield
-            local closestBlockingShield = false
+            local farAway = true
+            if SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), closestBlockingShield:GetPosition()) < 40000 then
+                farAway = false
+            end
+
+            -- Wait for shield to die loop
+            while not closestBlockingShield.Dead and aiBrain:PlatoonExists(self) and useMove == InWaterCheck(self)
+            and self:IsCommandsActive(cmd) do
+                self:MergeWithNearbyPlatoonsSorian('ExperimentalAIHubTA', 50, true)
+                useMove = InWaterCheck(self)
+                local targDistSq = SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), closestBlockingShield:GetPosition())
+                if (farAway and targDistSq < 40000) or (not farAway and targDistSq >= 40000) then
+                    break
+                end
+                WaitSeconds(1)
+            end
+
+            closestBlockingShield = false
             for k, v in platoonUnits do
                 if not v.Dead then
                     experimental = v
@@ -240,62 +288,17 @@ function BehemothBehaviorTotal(self)
                 end
             end
 
-            if not airUnit then
-                closestBlockingShield = GetClosestShieldProtectingTargetSorian(experimental, experimental)
-            end
-            closestBlockingShield = closestBlockingShield or GetClosestShieldProtectingTargetSorian(experimental, targetUnit)
-
-            -- Kill shields loop
-            local oldTarget = false
-            while closestBlockingShield do
-                oldTarget = oldTarget or targetUnit
-                targetUnit = false
-                self:MergeWithNearbyPlatoonsSCTA('ExperimentalAIHubTA', 'ExperimentalAIHubTA', 50)
-                useMove = InWaterCheck(self)
-                IssueClearCommands(platoonUnits)
-                if useMove or SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), closestBlockingShield:GetPosition()) < 40000 then
-                    cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', closestBlockingShield:GetPosition(), false)
-                else
-                    cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', closestBlockingShield:GetPosition(), 'AttackMove')
-                end
-
-                local farAway = true
-                if SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), closestBlockingShield:GetPosition()) < 40000 then
-                    farAway = false
-                end
-
-                -- Wait for shield to die loop
-                while not closestBlockingShield.Dead and aiBrain:PlatoonExists(self) and useMove == InWaterCheck(self)
-                and self:IsCommandsActive(cmd) do
-                    self:MergeWithNearbyPlatoonsSCTA('ExperimentalAIHubTA', 'ExperimentalAIHubTA', 50)
-                    useMove = InWaterCheck(self)
-                    local targDistSq = SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), closestBlockingShield:GetPosition())
-                    if (farAway and targDistSq < 40000) or (not farAway and targDistSq >= 40000) then
-                        break
-                    end
-                    WaitSeconds(1)
-                end
-
-                closestBlockingShield = false
-                for k, v in platoonUnits do
-                    if not v.Dead then
-                        experimental = v
-                        break
-                    end
-                end
-
                 if not airUnit then
-                    closestBlockingShield = GetClosestShieldProtectingTargetSorian(experimental, experimental)
+                closestBlockingShield = GetClosestShieldProtectingTargetSorian(experimental, experimental)
                 end
-                closestBlockingShield = closestBlockingShield or GetClosestShieldProtectingTargetSorian(experimental, oldTarget)
-                WaitSeconds(1)
-            end
+            closestBlockingShield = closestBlockingShield or GetClosestShieldProtectingTargetSorian(experimental, oldTarget)
             WaitSeconds(1)
-        end
+            end
         WaitSeconds(1)
+        end
+    WaitSeconds(1)
     end
 end
-
 
 function CommanderThreadSCTA(cdr, platoon)
     --LOG('cdr is '..cdr.UnitId)

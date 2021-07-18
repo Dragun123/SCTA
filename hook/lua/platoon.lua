@@ -3231,16 +3231,19 @@ Platoon = Class(SCTAAIPlatoon) {
 
         ExperimentalAIHubTA = function(self)
             local aiBrain = self:GetBrain()
-            local experimental = self:GetPlatoonUnits()
+            local behaviors = import('/lua/ai/AIBehaviors.lua')
+    
+            local experimental = self:GetPlatoonUnits()[1]
             if not experimental or experimental.Dead then
                 return
             end
-            local behaviors = import('/lua/ai/AIBehaviors.lua')
-            TAReclaim.TAAIRandomizeTaunt(aiBrain)
-            if EntityCategoryContains(categories.EXPERIMENTAL * categories.MOBILE - categories.SUBCOMMANDER, experimental) then
+            local ID = experimental.UnitId
+            self:SetPlatoonFormationOverride('AttackFormation')
+            if ID == 'corkrog' or 'armdrake' then
                 return behaviors.BehemothBehaviorTotal(self)
+            else
+                return behaviors.CommanderBehaviorSCTADecoy(self)
             end
-                return behaviors.CommanderThreadSCTADecoy(self)
         end,
 
 }
