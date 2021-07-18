@@ -21,7 +21,6 @@ CORARAD = Class(TACloser) {
 	OpeningState = State {
 		Main = function(self)
 			self:EnableIntel('Radar')
-			self.IsActive = true
 			--SPIN turret around y-axis  SPEED <20.00>;
 			self.Spinners.turret:ClearGoal()
 			self.Spinners.turret:SetSpeed(20)

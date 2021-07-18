@@ -15,7 +15,6 @@ CORASON = Class(TACloser) {
 	OpeningState = State {
 		Main = function(self)
 			self:EnableIntel('Sonar')
-			self.IsActive = true
 			self.Spinners.dish:SetSpeed(60)
 			TACloser.OpeningState.Main(self)
 	end,

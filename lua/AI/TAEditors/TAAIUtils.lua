@@ -124,7 +124,7 @@ end
 function TAExpansionBaseCheck(aiBrain)
     -- Removed automatic setting of Land-Expasions-allowed. We have a Game-Option for this.
     local checkNum = tonumber(ScenarioInfo.Options.LandExpansionsAllowed)/5 or 1 
-    LOG('*SCTAEXPANSIONTA', checkNum)
+    --LOG('*SCTAEXPANSIONTA', checkNum)
     return TAExpansionBaseCount(aiBrain, '<', checkNum)
 end
 
@@ -139,7 +139,7 @@ end
 function TAStartBaseCheck(aiBrain)
     -- Removed automatic setting of Land-Expasions-allowed. We have a Game-Option for this.
     local checkNum2 = tonumber(ScenarioInfo.Options.LandExpansionsAllowed)/3 or 2 
-    LOG('*SCTAEXPANSIONTA2', checkNum2)
+    --LOG('*SCTAEXPANSIONTA2', checkNum2)
     return TAStartBaseCount(aiBrain, '<', checkNum2)
 end
 

@@ -18,7 +18,6 @@ CORMMKR = Class(TACloser) {
 
 	OpeningState = State {
 		Main = function(self)
-			self.IsActive = true
 			self:SetProductionActive(true)
 			--TURN lid1 to x-axis <35.26> SPEED <45.57>;
 			self.Spinners.lid1:SetGoal(30.40)

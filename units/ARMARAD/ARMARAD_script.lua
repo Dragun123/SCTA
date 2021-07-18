@@ -26,7 +26,6 @@ ARMARAD = Class(TACloser) {
 	OpeningState = State {
 		Main = function(self)
 			self:EnableIntel('Radar')
-			self.IsActive = true
 			self.Sliders.post:SetGoal(0,0,0)
 			self.Sliders.post:SetSpeed(16)
 

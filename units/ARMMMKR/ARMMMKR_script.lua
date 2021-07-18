@@ -28,7 +28,6 @@ ARMMMKR = Class(TACloser) {
 
 	OpeningState = State {
 		Main = function(self)
-			self.IsActive = true
 			self:SetProductionActive(true)
 
 			--TURN mmakercore to y-axis <-30.40> SPEED <39.39>;

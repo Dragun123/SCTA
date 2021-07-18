@@ -21,7 +21,6 @@ ARMSOLAR = Class(TACloser) {
 
 	OpeningState = State {
 		Main = function(self)
-			self.IsActive = true
 			self:SetProductionActive(true)
 			self.Spinners.dish1:SetGoal(90)
 			self.Spinners.dish1:SetSpeed(60)

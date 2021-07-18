@@ -248,6 +248,7 @@ TACloser = Class(TAStructure) {
 	OpeningState = State {
 		Main = function(self)
 			TAStructure.Unfold(self)
+			self.IsActive = true
 			self:PlayUnitSound('Activate')
 			ChangeState(self, self.IdleOpenState)
 		end,

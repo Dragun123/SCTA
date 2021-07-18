@@ -57,7 +57,6 @@ ARMASON = Class(TACloser) {
 			self:EnableIntel('Sonar')
 			self:SetCollisionShape( 'Box', self.bp.CollisionOffsetX or 0,(self.bp.CollisionOffsetY + (self.bp.SizeY*0.5)) or 0,self.bp.CollisionOffsetZ or 0, self.bp.SizeX * self.scale, self.bp.SizeY * self.scale, self.bp.SizeZ * self.scale )
 			self:DisableIntel('RadarStealth')
-			self.IsActive = true
 			self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationUnpack)
 			self.AnimManip:SetRate(1 * (self:GetBlueprint().Display.AnimationUnpackRate or 0.2))
 		--MOVE base to y-axis <0> SPEED <5.00>;
