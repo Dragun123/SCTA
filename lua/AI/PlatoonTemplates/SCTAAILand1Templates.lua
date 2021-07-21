@@ -4,11 +4,11 @@ PlatoonTemplate {
     Name = 'T1LandDFTankSCTA',
     FactionSquads = {
         Arm = {
-            { 'armwar', 1, 2, 'attack', 'none' },
+            { 'armwar', 1, 2, 'Attack', 'none' },
         },
         Core = {
-            { 'corstorm', 1, 3, 'attack', 'none' },
-            { 'corcv', 1, 1, 'support', 'None' },
+            { 'corstorm', 1, 3, 'Attack', 'none' },
+            { 'corcv', 1, 1, 'Support', 'None' },
         },
     }
 }
@@ -17,11 +17,11 @@ PlatoonTemplate {
     Name = 'T1LandDFTankSCTAEarly',
     FactionSquads = {
         Arm = {
-            { 'armwar', 1, 3, 'attack', 'none' },
-            { 'armck', 1, 1, 'support', 'None' },
+            { 'armwar', 1, 3, 'Attack', 'none' },
+            { 'armck', 1, 1, 'Support', 'None' },
         },
         Core = {
-            { 'corstorm', 1, 2, 'attack', 'none' },
+            { 'corstorm', 1, 2, 'Attack', 'none' },
         },
     }
 }
@@ -31,12 +31,12 @@ PlatoonTemplate {
     Name = 'T1LandDFBotSCTA',
         FactionSquads = {
             Arm = {
-                { 'armck', 1, 1, 'support', 'None' },
-                { 'armpw', 1, 2, 'attack', 'none' },
+                { 'armck', 1, 1, 'Support', 'None' },
+                { 'armpw', 1, 2, 'Attack', 'none' },
             },
             Core = {
-                { 'corcv', 1, 1, 'support', 'None' },
-                { 'corak', 1, 2, 'attack', 'none' },
+                { 'corcv', 1, 1, 'Support', 'None' },
+                { 'corak', 1, 2, 'Attack', 'none' },
             },
         }
     } 
@@ -46,10 +46,10 @@ PlatoonTemplate {
     Name = 'T1LandArtillerySCTA',
     FactionSquads = {
         Arm = {
-            { 'armham', 1, 1, 'attack', 'none' }
+            { 'armham', 1, 1, 'Attack', 'none' }
         },
         Core = {
-            { 'corthud', 1, 1, 'attack', 'none' }
+            { 'corthud', 1, 1, 'Attack', 'none' }
         },
     }
 }
@@ -58,12 +58,12 @@ PlatoonTemplate {
     Name = 'T2LandRocketSCTA',
     FactionSquads = {
         Arm = {
-            { 'armrock', 1, 1, 'attack', 'none' },
-            { 'armfast', 1, 2, 'attack', 'none' },
+            { 'armrock', 1, 1, 'Attack', 'none' },
+            { 'armfast', 1, 2, 'Attack', 'none' },
         },
         Core = {
-            { 'corhrk', 1, 1, 'attack', 'none' },
-            { 'corfast', 1, 2, 'attack', 'none' },
+            { 'corhrk', 1, 1, 'Attack', 'none' },
+            { 'corfast', 1, 2, 'Attack', 'none' },
         },
     }
 }
@@ -72,10 +72,10 @@ PlatoonTemplate {
     Name = 'T1LandAASCTABot',
     FactionSquads = {
         Arm = {
-            { 'armjeth', 1, 1, 'attack', 'none' },
+            { 'armjeth', 1, 1, 'Attack', 'none' },
         },
         Core = {
-            { 'corcrash', 1, 1, 'attack', 'none'},
+            { 'corcrash', 1, 1, 'Attack', 'none'},
         },
     }
 }
@@ -84,10 +84,10 @@ PlatoonTemplate {
     Name = 'T2LandAuxFact1',
     FactionSquads = {
         Arm = {
-            { 'armvader', 1, 1, 'attack', 'none' },
+            { 'armvader', 1, 1, 'Attack', 'none' },
         },
         Core = {
-            { 'corroach', 1, 1, 'attack', 'none' },
+            { 'corroach', 1, 1, 'Attack', 'none' },
         },
     }
 }
@@ -109,10 +109,10 @@ PlatoonTemplate {
     Name = 'T2LandDFTankSCTA',
     FactionSquads = {
         Arm = {
-            { 'armfido', 1, 3, 'attack', 'none' },
+            { 'armfido', 1, 3, 'Attack', 'none' },
         },
         Core = {
-            { 'corcan', 1, 3, 'attack', 'none' },
+            { 'corcan', 1, 3, 'Attack', 'none' },
         },
     }
 }
@@ -121,13 +121,13 @@ PlatoonTemplate {
     Name = 'T3LandDFTankSCTA',
     FactionSquads = {
         Arm = {
-            { 'armzeus', 1, 2, 'attack', 'none' },
-            { 'armmav', 1, 1, 'attack', 'none' },
+            { 'armzeus', 1, 2, 'Attack', 'none' },
+            { 'armmav', 1, 1, 'Attack', 'none' },
             
         },
         Core = {
-            { 'corsumo', 1, 2, 'attack', 'none' },   
-            { 'corpyro', 1, 1, 'attack', 'none' },
+            { 'corsumo', 1, 2, 'Attack', 'none' },   
+            { 'corpyro', 1, 1, 'Attack', 'none' },
         },
     }
 }

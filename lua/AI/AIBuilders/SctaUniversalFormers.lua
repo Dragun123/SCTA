@@ -16,7 +16,7 @@ BuilderGroup {
         InstanceCount = 2,
         BuilderType = 'LandForm',
         BuilderData = {
-            AllTerrain = true,
+            Layer = 'Air',
             NeverGuardBases = true,
             NeverGuardEngineers = true,
             UseMoveOrder = true,
