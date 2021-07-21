@@ -2194,6 +2194,7 @@ Platoon = Class(SCTAAIPlatoon) {
          --aiBrain:PlatoonExists(self) do
             --WaitSeconds(3)
             if VDist2Sq(platPos[1], platPos[3], allyPlatPos[1], allyPlatPos[3]) <= radiusSq and aiBrain:PlatoonExists(aPlat) and aiBrain:PlatoonExists(self) then
+                       ----Thank you to Chp
                 local squads = {
                     'Scout',
                     'Attack',
@@ -2222,6 +2223,7 @@ Platoon = Class(SCTAAIPlatoon) {
         if bMergedPlatoons then
                 self:StopAttack()
                 --LOG('IEXIST2')
+                ---Personal Innovation, I'll properly stop contributing to other AI soon kinda pointless at this stage
                 self.BuilderName = newName
                 self:SetAIPlan(newPlatoon)
                 WaitSeconds(5)

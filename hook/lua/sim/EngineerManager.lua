@@ -132,6 +132,7 @@ EngineerManager = Class(SCTAEngineerManager) {
         unit.NumAssistees = nil
         unit.MinNumAssistees = nil
         if unit.bType then
+            ---in case it loops back shomehow
             return self:TAAssignEngineerTask(unit, unit.bType)
         else
             if unit.AssigningTask and unit:IsIdleState() then
@@ -157,6 +158,7 @@ EngineerManager = Class(SCTAEngineerManager) {
                     unit.bType = 'Command'
                     --return self:TAAssignEngineerTask(unit, 'Command')
                 else
+                    ---if Inherit they are used as support engineers 
                     unit.bType = 'FieldTA'                
                 end
                 return self:TAAssignEngineerTask(unit, unit.bType)
@@ -167,6 +169,9 @@ EngineerManager = Class(SCTAEngineerManager) {
     TAAssignEngineerTask = function(self, unit, bType)
         ---LOG('*Brain', self.Brain.SCTAAI)   
         --unit.bType = bType
+        ---Kinda Amazing Did this all on my own yet no recgonization
+        ---I mean all this effort, and Az spent like several hours working on it and no one shout out
+        ---meh eitherway this is such a pointless commenting. Oh yeah, modifying the assign via hooking has interesting and had to seperate it until two different types
         if unit.AssigningTask and unit:IsIdleState() then
             unit.AssigningTask = nil
         elseif unit.AssigningTask and not unit:IsIdleState() then

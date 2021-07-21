@@ -78,7 +78,7 @@ BuilderGroup {
         BuilderName = 'SCTAAi Factory Engineer Early',
         PlatoonTemplate = 'T1BuildEngineerSCTAEarly',
         Priority = 450, -- Top factory priority
-        PriorityFunction = TAPrior.EarlyBO,
+        --PriorityFunction = TAPrior.EarlyBO,
         BuilderConditions = {
             { MIBC, 'LessThanGameTime', {60} }, -- Don't make tanks if we have lots of them.
         },
