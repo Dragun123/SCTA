@@ -5,7 +5,7 @@ local TAutils = '/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua'
 local MIBC = '/lua/editor/MiscBuildConditions.lua'
 LAB = (categories.FACTORY * categories.TECH2)
 PLATFORM = (categories.FACTORY * categories.TECH3)
-FUSION = (categories.ENERGYPRODUCTION * categories.STRUCTURE * (categories.TECH2 + categories.TECH3))
+FUSION = (categories.ENERGYPRODUCTION - categories.TECH1)
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
 
 
