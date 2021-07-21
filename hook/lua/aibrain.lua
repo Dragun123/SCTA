@@ -40,7 +40,7 @@ AIBrain = Class(SCTAAIBrainClass) {
 
         FormManagerSCTA = function(aiBrain)
             ---local aiBrain = self
-            LOG('BEGINNING SCTA FORMMANAGER')
+            --LOG('BEGINNING SCTA FORMMANAGER')
                 aiBrain.SeaForm = 0
                 aiBrain.StructureForm = 0
                 aiBrain.Other = 0
@@ -57,6 +57,16 @@ AIBrain = Class(SCTAAIBrainClass) {
             }
             local GetCurrentUnits = moho.aibrain_methods.GetCurrentUnits
             while (aiBrain.Result ~= 'defeat') do
+                if aiBrain.LandForm < 1 and checks.LandForm < 1 then
+                    aiBrain.LandForm = GetCurrentUnits(aiBrain, (categories.LAND * categories.MOBILE) - categories.ENGINEER - categories.SCOUT)
+                    WaitTicks(1)
+                    checks.LandForm = checks.LandForm + 2
+                end
+                if aiBrain.AirForm < 1 and checks.AirForm < 1 then
+                    aiBrain.AirForm = GetCurrentUnits(aiBrain, (categories.AIR * categories.MOBILE) - categories.ENGINEER - categories.SCOUT)
+                    WaitTicks(1)
+                    checks.AirForm = checks.AirForm + 3
+                end
                 if aiBrain.SeaForm < 1 and checks.SeaForm < 1 and aiBrain.TANavy then
                     aiBrain.SeaForm = GetCurrentUnits(aiBrain, (categories.NAVAL * categories.MOBILE) - categories.ENGINEER)
                     WaitTicks(1)
@@ -71,16 +81,6 @@ AIBrain = Class(SCTAAIBrainClass) {
                     aiBrain.Other = GetCurrentUnits(aiBrain, categories.EXPERIMENTAL * categories.MOBILE)
                     WaitTicks(1)
                     checks.Other = checks.Other + 10
-                end
-                if aiBrain.LandForm < 1 and checks.LandForm < 1 then
-                    aiBrain.LandForm = GetCurrentUnits(aiBrain, (categories.LAND * categories.MOBILE) - categories.ENGINEER - categories.SCOUT)
-                    WaitTicks(1)
-                    checks.LandForm = checks.LandForm + 2
-                end
-                if aiBrain.AirForm < 1 and checks.AirForm < 1 then
-                    aiBrain.AirForm = GetCurrentUnits(aiBrain, (categories.AIR * categories.MOBILE) - categories.ENGINEER - categories.SCOUT)
-                    WaitTicks(1)
-                    checks.AirForm = checks.AirForm + 3
                 end
                 if aiBrain.Scout < 1 and checks.Scout < 1 then
                     aiBrain.Scout = GetCurrentUnits(aiBrain, (categories.armpw + categories.corgator + (categories.SCOUT + categories.AMPHIBIOUS) - categories.ENGINEER - categories.EXPERIMENTAL))
@@ -99,7 +99,9 @@ AIBrain = Class(SCTAAIBrainClass) {
                     checks[k] = checks[k] - 1
                 end
                 --LOG('checks '..repr(checks))
-                WaitSeconds(2)
+                WaitSeconds(1.5)
+                --if aibrain.Scout >= 1 and aibrain.LandForm >= 1 and aibrain.LandForm >= 1
+                ---will add a check in future if every AIBrain is greater than X kill the thread
             end
         end,
 

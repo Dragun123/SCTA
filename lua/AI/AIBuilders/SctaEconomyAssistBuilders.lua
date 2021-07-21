@@ -5,7 +5,7 @@ local TAutils = '/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua'
 local TASlow = '/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua'
 PLANT = (categories.FACTORY * categories.TECH1)
 LAB = (categories.FACTORY * categories.TECH2)
-FUSION = (categories.ENERGYPRODUCTION * categories.STRUCTURE * (categories.TECH2 + categories.TECH3))
+FUSION = (categories.ENERGYPRODUCTION - categories.TECH1)
 WIND = (categories.armwin + categories.corwin)
 SOLAR = (categories.armsolar + categories.corsolar)
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
@@ -60,7 +60,7 @@ BuilderGroup {
         PlatoonTemplate = 'EngineerBuilderSCTA123',
         PlatoonAIPlan = 'SCTAReclaimAI',
         Priority = 75,
-        InstanceCount = 10,
+        InstanceCount = 5,
         BuilderConditions = {
             { MIBC, 'GreaterThanGameTime', { 240 } },
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.LAND - categories.COMMAND}},
@@ -79,7 +79,7 @@ BuilderGroup {
         PlatoonTemplate = 'EngineerBuilderSCTAEco123',
         PlatoonAIPlan = 'SCTAReclaimAI',
         Priority = 75,
-        InstanceCount = 10,
+        InstanceCount = 5,
         BuilderConditions = {
             { MIBC, 'GreaterThanGameTime', { 240 } },
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.AIR}},

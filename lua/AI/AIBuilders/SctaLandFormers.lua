@@ -26,7 +26,7 @@ BuilderGroup {
         PlatoonTemplate = 'AttackForceSCTALaser', -- The platoon template tells the AI what units to include, and how to use them.
         Priority = 200,
         PriorityFunction = TAPrior.UnitProduction,
-        InstanceCount = 25,
+        InstanceCount = 10,
         --DelayEqualBuildPlattons = 5,
         BuilderType = 'LandForm',
         BuilderData = {
@@ -54,7 +54,7 @@ BuilderGroup {
         PlatoonTemplate = 'StrikeForceSCTAEarly',
         PriorityFunction = TAPrior.UnitProductionT1, -- The platoon template tells the AI what units to include, and how to use them.
         Priority = 100,
-        InstanceCount = 50,
+        InstanceCount = 10,
         BuilderType = 'LandForm',
         BuilderData = {
             ThreatSupport = 25,
@@ -77,7 +77,7 @@ BuilderGroup {
         PlatoonTemplate = 'StrikeForceSCTAMid', -- The platoon template tells the AI what units to include, and how to use them.
         PriorityFunction = TAPrior.UnitProduction,
         Priority = 150,
-        InstanceCount = 100,
+        InstanceCount = 10,
         BuilderType = 'LandForm',
         BuilderData = {
             ThreatSupport = 50,
@@ -97,7 +97,7 @@ BuilderGroup {
         PlatoonTemplate = 'StrikeForceSCTAEndgame', -- The platoon template tells the AI what units to include, and how to use them.
         PriorityFunction = TAPrior.StructureProductionT2,
         Priority = 250,
-        InstanceCount = 200,
+        InstanceCount = 10,
         BuilderType = 'LandForm',
         BuilderData = {
             ThreatSupport = 75,
@@ -120,7 +120,7 @@ BuilderGroup {
         PlatoonTemplate = 'LandRocketAttackSCTA', -- The platoon template tells the AI what units to include, and how to use them.
         --PlatoonAddPlans = { 'HighlightSCTAHuntAI' },
         Priority = 125,
-        InstanceCount = 50,
+        InstanceCount = 10,
         BuilderType = 'LandForm',
         BuilderData = {
             TAWeaponRange = 30, 
@@ -145,7 +145,7 @@ BuilderGroup {
         PriorityFunction = TAPrior.UnitProductionT1, -- The platoon template tells the AI what units to include, and how to use them.
         --PlatoonAddPlans = { 'HighlightSCTAHuntAI' },
         Priority = 150,
-        InstanceCount = 50,
+        InstanceCount = 10,
         --DelayEqualBuildPlattons = 5,
         BuilderType = 'LandForm',
         BuilderData = {
@@ -170,7 +170,7 @@ BuilderGroup {
         BuilderName = 'SCTA Hover Strike Land',
         PlatoonTemplate = 'StrikeForceSCTAHover', -- The platoon template tells the AI what units to include, and how to use them.
         Priority = 200,
-        InstanceCount = 25,
+        InstanceCount = 10,
         BuilderType = 'LandForm',
         BuilderData = {
             TAWeaponRange = 30,

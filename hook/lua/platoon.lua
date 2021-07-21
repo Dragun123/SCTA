@@ -1910,7 +1910,8 @@ Platoon = Class(SCTAAIPlatoon) {
             self:SetPlatoonFormationOverride('Attack')
             WaitSeconds(5)
             if aiBrain.Level2 then
-                self:MergeWithNearbyPlatoonsSCTA('SCTAStrikeForceAIEarly', 'SCTAStrikeForceAI', 5)
+                self:MergeWithNearbyPlatoonsSCTA('SCTAStrikeForceAIEarly', 'SCTAStrikeForceAI', 'SCTAAI Strike Mid', 5)
+            ---The third variable allows for proper platoon handle tracking
             end
         end
     end,
@@ -1957,7 +1958,7 @@ Platoon = Class(SCTAAIPlatoon) {
         while aiBrain:PlatoonExists(self) do
             local numberOfUnitsInPlatoon = table.getn(platoonUnits)
             if aiBrain.Level3 and numberOfUnitsInPlatoon < 20 then
-                self:MergeWithNearbyPlatoonsSCTA('SCTAStrikeForceAI', 'SCTAStrikeForceAIEndgame', 10)
+                self:MergeWithNearbyPlatoonsSCTA('SCTAStrikeForceAI', 'SCTAStrikeForceAIEndgame', 'SCTAAI Strike Endgame', 10)
             end
             --self:SetPlatoonFormationOverride('Attack')
             if not target or target:IsDead() then
@@ -2139,7 +2140,7 @@ Platoon = Class(SCTAAIPlatoon) {
     end,
 
 
-    MergeWithNearbyPlatoonsSCTA = function(self, planName, newPlatoon, radius)
+    MergeWithNearbyPlatoonsSCTA = function(self, planName, newPlatoon, newName, radius)
         local aiBrain = self:GetBrain()
         if not aiBrain then
             return
@@ -2193,6 +2194,7 @@ Platoon = Class(SCTAAIPlatoon) {
          --aiBrain:PlatoonExists(self) do
             --WaitSeconds(3)
             if VDist2Sq(platPos[1], platPos[3], allyPlatPos[1], allyPlatPos[3]) <= radiusSq and aiBrain:PlatoonExists(aPlat) and aiBrain:PlatoonExists(self) then
+                       ----Thank you to Chp
                 local squads = {
                     'Scout',
                     'Attack',
@@ -2221,6 +2223,8 @@ Platoon = Class(SCTAAIPlatoon) {
         if bMergedPlatoons then
                 self:StopAttack()
                 --LOG('IEXIST2')
+                ---Personal Innovation, I'll properly stop contributing to other AI soon kinda pointless at this stage
+                self.BuilderName = newName
                 self:SetAIPlan(newPlatoon)
                 WaitSeconds(5)
         end
@@ -2255,7 +2259,7 @@ Platoon = Class(SCTAAIPlatoon) {
             self:MoveToLocation(position, false)
             WaitSeconds(2)
             if aiBrain.Level2 then
-                self:MergeWithNearbyPlatoonsSCTA('HuntSCTAAI', 'AttackSCTAForceAI', 5)
+                self:MergeWithNearbyPlatoonsSCTA('HuntSCTAAI', 'AttackSCTAForceAI', 'SCTAAI Land Attack Mid', 5)
             end
         end
     end,
@@ -2303,7 +2307,7 @@ Platoon = Class(SCTAAIPlatoon) {
             end
             numberOfUnitsInPlatoon = table.getn(platoonUnits)
             if aiBrain.Level3 and numberOfUnitsInPlatoon < 20 then
-                self:MergeWithNearbyPlatoonsSCTA('AttackSCTAForceAI', 'SCTAStrikeForceAIEndgame', 20)
+                self:MergeWithNearbyPlatoonsSCTA('AttackSCTAForceAI', 'SCTAStrikeForceAIEndgame', 'SCTAAI Strike Endgame', 20)
             end
 
             if (oldNumberOfUnitsInPlatoon != numberOfUnitsInPlatoon) then

@@ -38,7 +38,7 @@ BuilderGroup {
         PlatoonTemplate = 'SCTAPatrolBoatHunt',
         PriorityFunction = TAPrior.NavalProduction,
         Priority = 125,
-        InstanceCount = 25,
+        InstanceCount = 5,
         BuilderType = 'SeaForm',
         BuilderConditions = {
             { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, categories.LIGHTBOAT} },
@@ -90,7 +90,7 @@ BuilderGroup {
         PlatoonTemplate = 'SCTANavalAssault',
         PriorityFunction = TAPrior.NavalProduction,
         Priority = 150,
-        InstanceCount = 20,
+        InstanceCount = 10,
         BuilderType = 'SeaForm',
         BuilderData = {
             LocationType = 'LocationType',
@@ -116,7 +116,7 @@ BuilderGroup {
         PlatoonTemplate = 'SCTATorpedosBombers',
         PriorityFunction = TAPrior.NavalProduction,
         Priority = 200,
-        InstanceCount = 50,
+        InstanceCount = 10,
         BuilderType = 'SeaForm',
         BuilderData = {
         },        
@@ -145,7 +145,7 @@ BuilderGroup {
         PlatoonTemplate = 'StrikeForceSCTAHover', -- The platoon template tells the AI what units to include, and how to use them.
         PriorityFunction = TAPrior.ProductionT3,
         Priority = 120,
-        InstanceCount = 25,
+        InstanceCount = 5,
         BuilderType = 'SeaForm',
         BuilderData = {
             LocationType = 'LocationType',

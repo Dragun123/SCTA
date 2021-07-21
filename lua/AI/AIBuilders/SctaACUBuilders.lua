@@ -19,6 +19,7 @@ BuilderGroup {
         BuilderName = 'SCTAAI Initial Commander BO', -- Names need to be GLOBALLY unique.  Prefixing the AI name will help avoid name collisions with other AIs.	
         PlatoonTemplate = 'CommanderBuilderSCTA', -- Specify what platoon template to use, see the PlatoonTemplates folder.	
         Priority = 1000, -- Make this super high priority.  The AI chooses the highest priority builder currently available.	
+        --PriorityFunction = TAPrior.EarlyBO,
         BuilderConditions = { -- The build conditions determine if this builder is available to be used or not.	
                 { IBC, 'NotPreBuilt', {}},
             },	
@@ -43,6 +44,7 @@ BuilderGroup {
         PlatoonTemplate = 'CommanderBuilderSCTA',
         Priority = 950,
         InstanceCount = 1, -- The max number concurrent instances of this builder.
+        --PriorityFunction = TAPrior.EarlyBO,
         BuilderConditions = {
             { MIBC, 'LessThanGameTime', {360} }, -- Don't make tanks if we have lots of them.
             { MIBC, 'GreaterThanGameTime', {90} },
@@ -66,6 +68,7 @@ BuilderGroup {
         PlatoonTemplate = 'CommanderBuilderSCTA',
         Priority = 960,
         InstanceCount = 1, -- The max number concurrent instances of this builder.
+        --PriorityFunction = TAPrior.EarlyBO,
         BuilderConditions = {
             { MIBC, 'LessThanGameTime', {300} }, -- Don't make tanks if we have lots of them.
             { MIBC, 'GreaterThanGameTime', {90} },
@@ -89,6 +92,7 @@ BuilderGroup {
         PlatoonTemplate = 'CommanderBuilderSCTA',
         Priority = 965,
         InstanceCount = 1, -- The max number concurrent instances of this builder.
+        --PriorityFunction = TAPrior.EarlyBO,
         BuilderConditions = {
             { UCBC, 'HaveLessThanUnitsWithCategory', { 3, categories.ENERGYPRODUCTION * categories.STRUCTURE} },
             { MIBC, 'LessThanGameTime', {240} }, -- Don't make tanks if we have lots of them.
@@ -109,6 +113,7 @@ BuilderGroup {
         BuilderName = 'SCTA AI ACU Mex',
         PlatoonTemplate = 'CommanderBuilderSCTA',
         Priority = 975,
+        --PriorityFunction = TAPrior.EarlyBO,
         InstanceCount = 1, -- The max number concurrent instances of this builder.
         BuilderConditions = {
             { MIBC, 'LessThanGameTime', {240} }, -- Don't make tanks if we have lots of them.
@@ -197,6 +202,7 @@ BuilderGroup {
         BuilderName = 'SCTA AI ACU T1Engineer Mex',
         PlatoonTemplate = 'CommanderBuilderSCTA',
         Priority = 101,
+        --PriorityFunction = TAPrior.UnitProductionT1,
         InstanceCount = 1, -- The max number concurrent instances of this builder.
         DelayEqualBuildPlattons = {'MexLand2', 1},
         BuilderConditions = {

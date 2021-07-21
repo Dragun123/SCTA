@@ -243,8 +243,13 @@ GantryUnitBuildingDecoy = function(self, aiBrain)
     end
 end
 
-
-
-
-
+---Misc
+----interesting the function doesn't work as intended 
+--[[EarlyBO = function(self, aiBrain)
+    if LessTime(aiBrain, 360) then
+        return 1000
+    else
+        return 0
+    end
+end]]
 

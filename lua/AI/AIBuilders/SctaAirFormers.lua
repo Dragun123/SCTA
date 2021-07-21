@@ -23,7 +23,7 @@ BuilderGroup {
         BuilderName = 'SCTAAI Bomber Attack',
         PlatoonTemplate = 'SCTABomberAttack',
         Priority = 200,
-        InstanceCount = 50,
+        InstanceCount = 5,
         BuilderType = 'AirForm',
         BuilderData = {
         },        
@@ -36,7 +36,7 @@ BuilderGroup {
         PlatoonTemplate = 'IntieAISCTA',
         Priority = 100,
         PlatoonAddBehaviors = { 'SCTAAirUnitRefit' },                              
-        InstanceCount = 50,
+        InstanceCount = 5,
         BuilderType = 'AirForm', 
         BuilderData = {
         },     
@@ -49,7 +49,7 @@ BuilderGroup {
         PlatoonTemplate = 'IntieAIStealthSCTA',
         PriorityFunction = TAPrior.UnitProduction,
         Priority = 110,
-        InstanceCount = 50,                          
+        InstanceCount = 5,                          
         BuilderType = 'AirForm',
         BuilderData = {
             Energy = true,
@@ -64,7 +64,7 @@ BuilderGroup {
         PlatoonTemplate = 'IntieAISCTAEnd',
         PriorityFunction = TAPrior.GantryConstruction,
         Priority = 110,
-        InstanceCount = 50,
+        InstanceCount = 5,
         PlatoonAddBehaviors = { 'SCTAAirUnitRefit' },                              
         BuilderType = 'AirForm',
         BuilderData = {
