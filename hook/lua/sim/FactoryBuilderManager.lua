@@ -35,6 +35,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
         if not self.Brain.SCTAAI then
             return SCTAFactoryBuilderManager.AddBuilder(self, builderData, locationType)
         end
+        ---testremoving for/end looops in this builder now testingto confirm in log
         local newBuilder = Builder.CreateFactoryBuilder(self.Brain, builderData, locationType)
         if newBuilder:GetBuilderType() == 'All' then
             for k,v in self.BuilderData do
