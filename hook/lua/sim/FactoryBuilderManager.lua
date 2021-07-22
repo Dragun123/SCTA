@@ -41,28 +41,28 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                 self:AddInstancedBuilder(newBuilder, k)
             end
         elseif newBuilder:GetBuilderType() == 'Land' then
-            for __,v in self.BuilderData do
+            --for __,v in self.BuilderData do
                 self:AddInstancedBuilder(newBuilder, 'KBot')
                 self:AddInstancedBuilder(newBuilder, 'Vehicle')
-            end
+            --end
         elseif newBuilder:GetBuilderType() == 'SpecHover' then
-            for __,v in self.BuilderData do
+            --for __,v in self.BuilderData do
                 self:AddInstancedBuilder(newBuilder, 'KBot')
                 self:AddInstancedBuilder(newBuilder, 'Vehicle')
                 self:AddInstancedBuilder(newBuilder, 'Hover')
                 self:AddInstancedBuilder(newBuilder, 'Sea')
-            end
+            --end
         elseif newBuilder:GetBuilderType() == 'SpecAir' then
-            for __,v in self.BuilderData do
+            --for __,v in self.BuilderData do
                 self:AddInstancedBuilder(newBuilder, 'Air')
                 self:AddInstancedBuilder(newBuilder, 'Seaplane')
-            end
+            --end
         elseif newBuilder:GetBuilderType() == 'Field' then
-            for __,v in self.BuilderData do
+            --for __,v in self.BuilderData do
                 self:AddInstancedBuilder(newBuilder, 'KBot')
                 self:AddInstancedBuilder(newBuilder, 'Vehicle')
                 self:AddInstancedBuilder(newBuilder, 'Air')
-            end
+            --end
         else
             self:AddInstancedBuilder(newBuilder)
         end
