@@ -8,7 +8,12 @@ baseTmplFile = import(cons.BaseTemplateFile or '/lua/BaseTemplates.lua')
 baseTmplDefault = import('/lua/BaseTemplates.lua')
 buildingTmpl = buildingTmplFile[(cons.BuildingTemplate or 'BuildingTemplates')][factionIndex]
 baseTmpl = baseTmplFile[(cons.BaseTemplate or 'BaseTemplates')][factionIndex]]
-
+--[[if EscortUnits then
+    if not EscortUnits.Dead then
+        IssueClearCommands({EscortUnits})
+        IssueGuard({EscortUnits}, eng)
+    end
+end]]
 
 SCTAAIPlatoon = Platoon
 Platoon = Class(SCTAAIPlatoon) {
@@ -17,12 +22,10 @@ Platoon = Class(SCTAAIPlatoon) {
         local eng = self:GetSquadUnits('Support')[1]
         local EscortUnits = self:GetSquadUnits('Guard')[1]
         local guardedUnit
-        if EscortUnits then
-            for k, v in EscortUnits do
-                if not v.Dead then
-                    IssueClearCommands({v})
-                    IssueGuard({v}, eng)
-                end
+        if EscortUnits and eng then
+            if not EscortUnits.Dead and not eng.Dead then
+                IssueClearCommands({EscortUnits})
+                IssueGuard({EscortUnits}, eng)
             end
         end
         self:TAEconUnfinishedBody()
@@ -70,12 +73,10 @@ Platoon = Class(SCTAAIPlatoon) {
         WaitSeconds(assistData.Time or 60)
         local eng = self:GetSquadUnits('Support')[1]
         local EscortUnits = self:GetSquadUnits('Guard')[1]
-        if EscortUnits then
-            for k, v in EscortUnits do
-                if not v.Dead then
-                    IssueClearCommands({v})
-                    IssueGuard({v}, eng)
-                end
+        if EscortUnits and eng then
+            if not EscortUnits.Dead and not eng.Dead then
+                IssueClearCommands({EscortUnits})
+                IssueGuard({EscortUnits}, eng)
             end
         end
         if eng:GetGuardedUnit() then
@@ -97,17 +98,17 @@ Platoon = Class(SCTAAIPlatoon) {
     TAEconAssistBody = function(self)
         local eng = self:GetSquadUnits('Support')[1]
         local EscortUnits = self:GetSquadUnits('Guard')[1]
-        if EscortUnits then
-            for k, v in EscortUnits do
-                if not v.Dead then
-                    IssueClearCommands({v})
-                    IssueGuard({v}, eng)
-                end
-            end
-        end
-        if not eng then
+        if not eng or eng.Dead then
+            coroutine.yield(1)
             self:PlatoonDisbandTA()
             return
+        end
+
+        if EscortUnits and eng then
+            if not EscortUnits.Dead and not eng.Dead then
+                IssueClearCommands({EscortUnits})
+                IssueGuard({EscortUnits}, eng)
+            end
         end
         local aiBrain = self:GetBrain()
         local assistData = self.PlatoonData.Assist
@@ -171,17 +172,17 @@ Platoon = Class(SCTAAIPlatoon) {
         local aiBrain = self:GetBrain()
         local eng = self:GetSquadUnits('Support')[1]
         local EscortUnits = self:GetSquadUnits('Guard')[1]
-        if EscortUnits then
-            for k, v in EscortUnits do
-                if not v.Dead then
-                    IssueClearCommands({v})
-                    IssueGuard({v}, eng)
-                end
-            end
-        end
-        if not eng then
+        if not eng or eng.Dead then
+            coroutine.yield(1)
             self:PlatoonDisbandTA()
             return
+        end
+
+        if EscortUnits and eng then
+            if not EscortUnits.Dead and not eng.Dead then
+                IssueClearCommands({EscortUnits})
+                IssueGuard({EscortUnits}, eng)
+            end
         end
         local assistData = self.PlatoonData.Assist
         local assistee = false
@@ -292,19 +293,17 @@ Platoon = Class(SCTAAIPlatoon) {
         local buildingTmpl, buildingTmplFile, baseTmpl, baseTmplFile, baseTmplDefault
         local eng = self:GetSquadUnits('Support')[1]
         --LOG('*SCTAEXPANSIONTA', self.PlatoonData.LocationType)
-        if EscortUnits then
-        for k, v in EscortUnits do
-            if not v.Dead then
-                IssueClearCommands({v})
-                IssueGuard({v}, eng)
-            end
-        end
-    end
-
         if not eng or eng.Dead then
             coroutine.yield(1)
             self:PlatoonDisbandTA()
             return
+        end
+
+        if EscortUnits and eng then
+            if not EscortUnits.Dead and not eng.Dead then
+                IssueClearCommands({EscortUnits})
+                IssueGuard({EscortUnits}, eng)
+            end
         end
 
         --DUNCAN - added
@@ -574,26 +573,26 @@ Platoon = Class(SCTAAIPlatoon) {
 
     EngineerBuildAISCTANaval = function(self)
         local aiBrain = self:GetBrain()
-        local EscortUnits = self:GetSquadUnits('Guard')[1]
+        --local EscortUnits = self:GetSquadUnits('Guard')[1]
         local armyIndex = aiBrain:GetArmyIndex()
         local x,z = aiBrain:GetArmyStartPos()
         local cons = self.PlatoonData.Construction
         local buildingTmpl, buildingTmplFile, baseTmpl, baseTmplFile, baseTmplDefault
         local eng = self:GetSquadUnits('Support')[1]
         --LOG('*SCTAEXPANSIONTA', self.PlatoonData.LocationType)
-        if EscortUnits then
-            for k, v in EscortUnits do
-                if not v.Dead then
-                    IssueClearCommands({v})
-                    IssueGuard({v}, eng)
-                end
-            end
-        end
+
         if not eng or eng.Dead then
             coroutine.yield(1)
             self:PlatoonDisbandTA()
             return
         end
+
+        --[[if EscortUnits and eng then
+            if not EscortUnits.Dead and not eng.Dead then
+                IssueClearCommands({EscortUnits})
+                IssueGuard({EscortUnits}, eng)
+            end
+        end]]
 
         --DUNCAN - added
         if eng:IsUnitState('Building') then
@@ -814,27 +813,25 @@ Platoon = Class(SCTAAIPlatoon) {
 
     EngineerBuildAISCTAAir = function(self)
         local aiBrain = self:GetBrain()
-        local EscortUnits = self:GetSquadUnits('Guard')[1]
+        --local EscortUnits = self:GetSquadUnits('Guard')[1]
         local armyIndex = aiBrain:GetArmyIndex()
         local x,z = aiBrain:GetArmyStartPos()
         local cons = self.PlatoonData.Construction
         local buildingTmpl, buildingTmplFile, baseTmpl, baseTmplFile, baseTmplDefault
         local eng = self:GetSquadUnits('Support')[1]
         --LOG('*SCTAEXPANSIONTA', self.PlatoonData.LocationType)
-        if EscortUnits then
-            for k, v in EscortUnits do
-                if not v.Dead then
-                    IssueClearCommands({v})
-                    IssueGuard({v}, eng)
-                end
-            end
-        end
-
         if not eng or eng.Dead then
             coroutine.yield(1)
             self:PlatoonDisbandTA()
             return
         end
+
+        --[[if EscortUnits and eng then
+            if not EscortUnits.Dead and not eng.Dead then
+                IssueClearCommands({EscortUnits})
+                IssueGuard({EscortUnits}, eng)
+            end
+        end]]
 
         --DUNCAN - added
         if eng:IsUnitState('Building') then
@@ -1121,27 +1118,25 @@ Platoon = Class(SCTAAIPlatoon) {
 
     EngineerBuildAISCTACommand = function(self)
         local aiBrain = self:GetBrain()
-        local EscortUnits = self:GetSquadUnits('Guard')[1]
+        --local EscortUnits = self:GetSquadUnits('Guard')[1]
         local armyIndex = aiBrain:GetArmyIndex()
         local x,z = aiBrain:GetArmyStartPos()
         local cons = self.PlatoonData.Construction
         local buildingTmpl, buildingTmplFile, baseTmpl, baseTmplFile, baseTmplDefault
         local eng = self:GetSquadUnits('Support')[1]
         --LOG('*SCTAEXPANSIONTA', self.PlatoonData.LocationType)
-        if EscortUnits then
-            for k, v in EscortUnits do
-                if not v.Dead then
-                    IssueClearCommands({v})
-                    IssueGuard({v}, eng)
-                end
-            end
-        end
-
         if not eng or eng.Dead then
             coroutine.yield(1)
             self:PlatoonDisbandTA()
             return
         end
+
+        --[[if EscortUnits and eng then
+            if not EscortUnits.Dead and not eng.Dead then
+                IssueClearCommands({EscortUnits})
+                IssueGuard({EscortUnits}, eng)
+            end
+        end]]
 
         --DUNCAN - added
         if eng:IsUnitState('Building') then
@@ -2971,17 +2966,17 @@ Platoon = Class(SCTAAIPlatoon) {
             local eng = self:GetSquadUnits('Support')[1]
             local EscortUnits = self:GetSquadUnits('Guard')[1]
             local createTick = GetGameTick()
-            if EscortUnits then
-                for k, v in EscortUnits do
-                    if not v.Dead then
-                        IssueClearCommands({v})
-                        IssueGuard({v}, eng)
-                    end
-                end
-            end
-            if not eng then
+            if not eng or eng.Dead then
+                coroutine.yield(1)
                 self:PlatoonDisbandTA()
                 return
+            end
+    
+            if EscortUnits and eng then
+                if not EscortUnits.Dead and not eng.Dead then
+                    IssueClearCommands({EscortUnits})
+                    IssueGuard({EscortUnits}, eng)
+                end
             end
             --LOG('*SCTAEXPANSIONTA', locationType)
             --eng.BadReclaimables = eng.BadReclaimables or {}
@@ -3236,7 +3231,8 @@ Platoon = Class(SCTAAIPlatoon) {
                 --Is there someplace we should scout?
                 if targetData then
                     --Can we get there safely?
-                        local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, self.MovementLayer, scout:GetPosition(), targetData.Position, 400) --DUNCAN - Increase threatwieght from 100                    IssueClearCommands(self)
+                        local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, self.MovementLayer, scout:GetPosition(), targetData.Position, 400) --DUNCAN - Increase threatwieght from 100                    
+                        IssueClearCommands(self)
     
                     if path then
                         local pathLength = table.getn(path)
