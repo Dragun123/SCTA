@@ -15,7 +15,16 @@ Platoon = Class(SCTAAIPlatoon) {
     ManagerEngineerFindUnfinishedSCTA = function(self)
         local aiBrain = self:GetBrain()
         local eng = self:GetSquadUnits('Support')[1]
+        local EscortUnits = self:GetSquadUnits('Guard')[1]
         local guardedUnit
+        if EscortUnits then
+            for k, v in EscortUnits do
+                if not v.Dead then
+                    IssueClearCommands({v})
+                    IssueGuard({v}, eng)
+                end
+            end
+        end
         self:TAEconUnfinishedBody()
         WaitTicks(10)
         -- do we assist until the building is finished ?
@@ -60,6 +69,15 @@ Platoon = Class(SCTAAIPlatoon) {
         self:TAEconAssistBody()
         WaitSeconds(assistData.Time or 60)
         local eng = self:GetSquadUnits('Support')[1]
+        local EscortUnits = self:GetSquadUnits('Guard')[1]
+        if EscortUnits then
+            for k, v in EscortUnits do
+                if not v.Dead then
+                    IssueClearCommands({v})
+                    IssueGuard({v}, eng)
+                end
+            end
+        end
         if eng:GetGuardedUnit() then
             beingBuilt = eng:GetGuardedUnit()
         end
@@ -78,6 +96,15 @@ Platoon = Class(SCTAAIPlatoon) {
 
     TAEconAssistBody = function(self)
         local eng = self:GetSquadUnits('Support')[1]
+        local EscortUnits = self:GetSquadUnits('Guard')[1]
+        if EscortUnits then
+            for k, v in EscortUnits do
+                if not v.Dead then
+                    IssueClearCommands({v})
+                    IssueGuard({v}, eng)
+                end
+            end
+        end
         if not eng then
             self:PlatoonDisbandTA()
             return
@@ -143,6 +170,15 @@ Platoon = Class(SCTAAIPlatoon) {
     TAEconUnfinishedBody = function(self)
         local aiBrain = self:GetBrain()
         local eng = self:GetSquadUnits('Support')[1]
+        local EscortUnits = self:GetSquadUnits('Guard')[1]
+        if EscortUnits then
+            for k, v in EscortUnits do
+                if not v.Dead then
+                    IssueClearCommands({v})
+                    IssueGuard({v}, eng)
+                end
+            end
+        end
         if not eng then
             self:PlatoonDisbandTA()
             return
@@ -249,7 +285,7 @@ Platoon = Class(SCTAAIPlatoon) {
     
     EngineerBuildAISCTA = function(self)
         local aiBrain = self:GetBrain()
-        local EscortUnits = self:GetSquadUnits('Guard')
+        local EscortUnits = self:GetSquadUnits('Guard')[1]
         local armyIndex = aiBrain:GetArmyIndex()
         local x,z = aiBrain:GetArmyStartPos()
         local cons = self.PlatoonData.Construction
@@ -538,7 +574,7 @@ Platoon = Class(SCTAAIPlatoon) {
 
     EngineerBuildAISCTANaval = function(self)
         local aiBrain = self:GetBrain()
-        local EscortUnits = self:GetSquadUnits('Guard')
+        local EscortUnits = self:GetSquadUnits('Guard')[1]
         local armyIndex = aiBrain:GetArmyIndex()
         local x,z = aiBrain:GetArmyStartPos()
         local cons = self.PlatoonData.Construction
@@ -778,7 +814,7 @@ Platoon = Class(SCTAAIPlatoon) {
 
     EngineerBuildAISCTAAir = function(self)
         local aiBrain = self:GetBrain()
-        local EscortUnits = self:GetSquadUnits('Guard')
+        local EscortUnits = self:GetSquadUnits('Guard')[1]
         local armyIndex = aiBrain:GetArmyIndex()
         local x,z = aiBrain:GetArmyStartPos()
         local cons = self.PlatoonData.Construction
@@ -1085,7 +1121,7 @@ Platoon = Class(SCTAAIPlatoon) {
 
     EngineerBuildAISCTACommand = function(self)
         local aiBrain = self:GetBrain()
-        local EscortUnits = self:GetSquadUnits('Guard')
+        local EscortUnits = self:GetSquadUnits('Guard')[1]
         local armyIndex = aiBrain:GetArmyIndex()
         local x,z = aiBrain:GetArmyStartPos()
         local cons = self.PlatoonData.Construction
@@ -2933,7 +2969,16 @@ Platoon = Class(SCTAAIPlatoon) {
             self:Stop()
             local brain = self:GetBrain()
             local eng = self:GetSquadUnits('Support')[1]
+            local EscortUnits = self:GetSquadUnits('Guard')[1]
             local createTick = GetGameTick()
+            if EscortUnits then
+                for k, v in EscortUnits do
+                    if not v.Dead then
+                        IssueClearCommands({v})
+                        IssueGuard({v}, eng)
+                    end
+                end
+            end
             if not eng then
                 self:PlatoonDisbandTA()
                 return

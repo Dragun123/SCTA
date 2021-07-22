@@ -6,8 +6,23 @@
 local TAStructure = import('/mods/SCTA-master/lua/TAStructure.lua').TAStructure
 
 ARMMAKR = Class(TAStructure) {
+
+	OnCreate = function(self)
+		TAStructure.OnCreate(self)
+		self.AnimManip = CreateAnimator(self)
+		self.Trash:Add(self.AnimManip)
+	end,
+
+    OnStopBeingBuilt = function(self,builder,layer)
+        TAStructure.OnStopBeingBuilt(self,builder,layer)
+		self:PlayUnitSound('Activate')
+        if layer == 'Water' then
+			self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationWater)
+			self.AnimManip:SetRate(1 * (self:GetBlueprint().Display.AnimationWaterRate or 0.2))
+		end
+	end,
+
 	OnProductionUnpaused = function(self)
-		TAStructure.Unfold(self)
 		TAStructure.OnProductionUnpaused(self)
 		self:PlayUnitSound('Activate')
 	end,
@@ -15,7 +30,6 @@ ARMMAKR = Class(TAStructure) {
 
 	OnProductionPaused = function(self)
 		TAStructure.OnProductionPaused(self)
-		TAStructure.Fold(self)
 		self:PlayUnitSound('Deactivate')		
 	end,
 }

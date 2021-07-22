@@ -44,7 +44,6 @@ UnitBlueprint {
         'CQUEMOV',
     },
     Defense = {
-        DamageReduction = 1,   
         ArmorType = 'Structure',
         AirThreatLevel = 0,
         EconomyThreatLevel = 50,

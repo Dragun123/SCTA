@@ -184,7 +184,7 @@ EngineerManager = Class(SCTAEngineerManager) {
             -- Fork off the platoon here
             local template = self:GetEngineerPlatoonTemplate(builder:GetPlatoonTemplate())
             local hndl = self.Brain:MakePlatoon(template[1], template[2])
-            self.Brain:AssignUnitsToPlatoon(hndl, {unit}, 'support', 'none')
+            self.Brain:AssignUnitsToPlatoon(hndl, {unit}, 'Support', 'none')
             unit.PlatoonHandle = hndl
 
             --if EntityCategoryContains(categories.COMMAND, unit) then
