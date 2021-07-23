@@ -35,34 +35,36 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
         if not self.Brain.SCTAAI then
             return SCTAFactoryBuilderManager.AddBuilder(self, builderData, locationType)
         end
+        ---testremoving for/end looops in this builder now testingto confirm in log
+        ----testconfirmed suspicisions initial, thanks to Sprouto now onto Engineers
         local newBuilder = Builder.CreateFactoryBuilder(self.Brain, builderData, locationType)
         if newBuilder:GetBuilderType() == 'All' then
             for k,v in self.BuilderData do
                 self:AddInstancedBuilder(newBuilder, k)
             end
         elseif newBuilder:GetBuilderType() == 'Land' then
-            for __,v in self.BuilderData do
+            --for __,v in self.BuilderData do
                 self:AddInstancedBuilder(newBuilder, 'KBot')
                 self:AddInstancedBuilder(newBuilder, 'Vehicle')
-            end
+            --end
         elseif newBuilder:GetBuilderType() == 'SpecHover' then
-            for __,v in self.BuilderData do
+            --for __,v in self.BuilderData do
                 self:AddInstancedBuilder(newBuilder, 'KBot')
                 self:AddInstancedBuilder(newBuilder, 'Vehicle')
                 self:AddInstancedBuilder(newBuilder, 'Hover')
                 self:AddInstancedBuilder(newBuilder, 'Sea')
-            end
+            --end
         elseif newBuilder:GetBuilderType() == 'SpecAir' then
-            for __,v in self.BuilderData do
+            --for __,v in self.BuilderData do
                 self:AddInstancedBuilder(newBuilder, 'Air')
                 self:AddInstancedBuilder(newBuilder, 'Seaplane')
-            end
+            --end
         elseif newBuilder:GetBuilderType() == 'Field' then
-            for __,v in self.BuilderData do
+            --for __,v in self.BuilderData do
                 self:AddInstancedBuilder(newBuilder, 'KBot')
                 self:AddInstancedBuilder(newBuilder, 'Vehicle')
                 self:AddInstancedBuilder(newBuilder, 'Air')
-            end
+            --end
         else
             self:AddInstancedBuilder(newBuilder)
         end

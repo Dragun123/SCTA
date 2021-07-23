@@ -1,8 +1,8 @@
-local TACloser = import('/mods/SCTA-master/lua/TAStructure.lua').TACloser
+local TATarg = import('/mods/SCTA-master/lua/TAStructure.lua').TATarg
 
-ARMXRAD = Class(TACloser) {
+ARMXRAD = Class(TATarg) {
 	OnCreate = function(self)
-		TACloser.OnCreate(self)
+		TATarg.OnCreate(self)
 		self.Spinners = {
 			arm1 = CreateRotator(self, 'dish1', 'x', nil, 0, 0, 0),
 			arm2 = CreateRotator(self, 'dish2', 'x', nil, 0, 0, 0),
@@ -18,11 +18,31 @@ ARMXRAD = Class(TACloser) {
 		end
 	end,
 
-	OpeningState = State {
-		Main = function(self)
-			TACloser.Unfold(self)
+	OnStopBeingBuilt = function(self,builder,layer)
+		TATarg.OnStopBeingBuilt(self,builder,layer)
+		ForkThread(self.StartSpin, self)
+		self:PlayUnitSound('Activate')
+	end,
+
+	OnScriptBitSet = function(self, bit)
+		if bit == 3 then
+			self:PlayUnitSound('Deactivate')
+			self.StopSpin(self)
+		end
+		TATarg.OnScriptBitSet(self, bit)
+	end,
+
+
+	OnScriptBitClear = function(self, bit)
+		if bit == 3 then
 			self:PlayUnitSound('Activate')
-			---self.intelIsActive = true
+			ForkThread(self.StartSpin, self)
+		end
+		TATarg.OnScriptBitClear(self, bit)
+	end,
+
+	StartSpin = function(self)
+			--SPIN turret around y-axis  SPEED <20.00>;
 			self.Sliders.post:SetGoal(0,0,0)
 			self.Sliders.post:SetSpeed(16)
 
@@ -36,20 +56,10 @@ ARMXRAD = Class(TACloser) {
 			--SPIN arm2 around x-axis  SPEED <-100.02>;
 			self.Spinners.arm2:SetSpeed(45)
 			self.Spinners.arm2:ClearGoal()
-			
-			self:EnableIntel('Radar')
-			ChangeState(self, self.IdleOpenState)
-		end,
-	},
+	end,
 
-
-	ClosingState = State {
-		Main = function(self)
-			self:DisableIntel('Radar')
-			TACloser.Fold(self)
-			self:PlayUnitSound('Deactivate')
-			---self.intelIsActive = nil
-			--TURN dish1 to z-axis <0> SPEED <178.70>;
+	StopSpin = function(self)
+			--SPIN turret around y-axis  SPEED <0.00>;
 			self.Spinners.arm1:SetGoal(0)
 
 			--TURN dish2 to z-axis <0> SPEED <178.70>;
@@ -58,15 +68,7 @@ ARMXRAD = Class(TACloser) {
 			--MOVE post to y-axis <0> SPEED <19.00>;
 			self.Sliders.post:SetGoal(0,-9,0)
 			self.Sliders.post:SetSpeed(19)
-
-			--WAIT-FOR-MOVE post along y-axis;
-			WaitFor(self.Sliders.post)
-
-			ChangeState(self, self.IdleClosedState)
-		end,
-
-	},
-
+	end,
 }
 
 TypeClass = ARMXRAD

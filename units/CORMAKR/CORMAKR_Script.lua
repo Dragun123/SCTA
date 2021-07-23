@@ -2,7 +2,6 @@
 #CORMAKR
 #
 #Script created by Raevn
-
 local TAStructure = import('/mods/SCTA-master/lua/TAStructure.lua').TAStructure
 
 CORMAKR = Class(TAStructure) {
@@ -34,7 +33,6 @@ CORMAKR = Class(TAStructure) {
 	end,
 
 	OnProductionUnpaused = function(self)
-		#Open Animation
 		self:PlayUnitSound('Activate')	
 		TAStructure.OnProductionUnpaused(self)
 		if self.Water then
@@ -62,6 +60,5 @@ CORMAKR = Class(TAStructure) {
 		self.Spinners.plug:SetSpeed(60)
 	end,
 }
-
 
 TypeClass = CORMAKR

@@ -91,31 +91,31 @@ EngineerManager = Class(SCTAEngineerManager) {
                 self:AddInstancedBuilder(newBuilder, k)
             end
             elseif newBuilder:GetBuilderType() == 'ACU' then
-            for __,v in self.BuilderData do
+            --for __,v in self.BuilderData do
                 self:AddInstancedBuilder(newBuilder, 'Command')
                 self:AddInstancedBuilder(newBuilder, 'T3TA')
-            end
+            --end
             elseif newBuilder:GetBuilderType() == 'NotACU' then
-            for __,v in self.BuilderData do
+            --for __,v in self.BuilderData do
                 self:AddInstancedBuilder(newBuilder, 'T3TA')
                 self:AddInstancedBuilder(newBuilder, 'AirTA')
                 self:AddInstancedBuilder(newBuilder, 'LandTA')
-            end
+            --end
             elseif newBuilder:GetBuilderType() == 'OmniLand' then
-            for __,v in self.BuilderData do
+            --for __,v in self.BuilderData do
                 self:AddInstancedBuilder(newBuilder, 'T3TA')
                 self:AddInstancedBuilder(newBuilder, 'LandTA')
-            end
+            --end
             elseif newBuilder:GetBuilderType() == 'OmniAir' then
-            for __,v in self.BuilderData do
+            --for __,v in self.BuilderData do
                 self:AddInstancedBuilder(newBuilder, 'T3TA')
                 self:AddInstancedBuilder(newBuilder, 'AirTA')
-            end
+            --end
             elseif newBuilder:GetBuilderType() == 'OmniNaval' then
-            for __,v in self.BuilderData do
+            --for __,v in self.BuilderData do
                 self:AddInstancedBuilder(newBuilder, 'SeaTA')
                 self:AddInstancedBuilder(newBuilder, 'T3TA')
-            end
+            --end
         else
             self:AddInstancedBuilder(newBuilder)
         end
@@ -184,7 +184,14 @@ EngineerManager = Class(SCTAEngineerManager) {
             -- Fork off the platoon here
             local template = self:GetEngineerPlatoonTemplate(builder:GetPlatoonTemplate())
             local hndl = self.Brain:MakePlatoon(template[1], template[2])
-            self.Brain:AssignUnitsToPlatoon(hndl, {unit}, 'support', 'none')
+            self.Brain:AssignUnitsToPlatoon(hndl, {unit}, 'Support', 'none')
+            if bType == 'LandTA' and self.Brain.Plants < 6 then
+                ---LOG('*TABrain', self.Brain.Plants)
+                local Escort = self.Brain:GetUnitsAroundPoint((categories.LAND * categories.MOBILE * (categories.SILO + categories.DIRECTFIRE)) - categories.SCOUT - categories.corak - categories.armpw - categories.armflash - categories.corgator - categories.ENGINEER, unit:GetPosition(), 10, 'Ally')[1] 
+                if Escort then 
+                    self.Brain:AssignUnitsToPlatoon(hndl, {Escort}, 'Guard', 'none')
+                end
+            end
             unit.PlatoonHandle = hndl
 
             --if EntityCategoryContains(categories.COMMAND, unit) then

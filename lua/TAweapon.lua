@@ -3,6 +3,7 @@ local TIFArtilleryWeapon = import('/lua/terranweapons.lua').TIFArtilleryWeapon
 local DefaultWeapon = WeaponFile.DefaultProjectileWeapon
 local KamikazeWeapon = WeaponFile.KamikazeWeapon
 local BareBonesWeapon = WeaponFile.BareBonesWeapon
+local TAMInterceptorWeapon = import('/lua/terranweapons.lua').TAMInterceptorWeapon
 local TAutils = import('/mods/SCTA-master/lua/TAutils.lua')
 
 TAweapon = Class(DefaultWeapon) {
@@ -397,4 +398,40 @@ TADGun = Class(DefaultWeapon) {
                 end
             end,
         }    
+}
+
+TAAntiNukeWeapon = Class(TAMInterceptorWeapon) {
+    PlayFxWeaponUnpackSequence = function(self)
+        self.unit.Pack = 1
+        TAMInterceptorWeapon.PlayFxWeaponUnpackSequence(self)
+    end,
+
+    PlayFxWeaponPackSequence = function(self)
+        self.unit.Pack = 0.5
+        TAMInterceptorWeapon.PlayFxWeaponPackSequence(self)
+    end,
+
+    IdleState = State(TAMInterceptorWeapon.IdleState) {
+    OnGotTarget = function(self)
+        local bp = self:GetBlueprint()
+        if (bp.WeaponUnpackLockMotion != true or (bp.WeaponUnpackLocksMotion == true and not self.unit:IsUnitState('Moving'))) then
+            if (bp.CountedProjectile == false) or self:CanFire() then
+                 nukeFiredOnGotTarget = true
+            end
+        end
+        TAMInterceptorWeapon.IdleState.OnGotTarget(self)
+    end,
+    
+    OnFire = function(self)
+        if not nukeFiredOnGotTarget then
+            TAMInterceptorWeapon.IdleState.OnFire(self)
+        end
+        nukeFiredOnGotTarget = false
+        self:ForkThread(function()
+            self.unit:SetBusy(true)
+            WaitSeconds(1/self.unit:GetBlueprint().Weapon[1].RateOfFire + .2)
+            self.unit:SetBusy(false)
+        end)
+    end,
+    },
 }

@@ -1,5 +1,6 @@
 WEIRD = (categories.NAVAL + categories.COMMAND + categories.FIELDENGINEER + categories.AIR)
 TA = (categories.ARM + categories.CORE)
+RAIDER = (categories.armpw + categories.corak + categories.armflash + categories.corgator + categories.SCOUT)
 
 PlatoonTemplate {
     Name = 'CommanderBuilderSCTA',
@@ -24,7 +25,8 @@ PlatoonTemplate {
     Plan = 'EngineerBuildAISCTA',
     ---PlatoonType = 'EngineerForm',
     GlobalSquads = {
-        { (categories.ENGINEER * TA) - WEIRD, 1, 1, 'Support', 'None' }
+        { (categories.ENGINEER * TA) - WEIRD, 1, 1, 'Support', 'None' },
+        { (categories.LAND * categories.MOBILE * (categories.SILO + categories.DIRECTFIRE)) - RAIDER - categories.ENGINEER, 0, 1, 'Guard', 'none' },
     },
 }
 
@@ -43,7 +45,8 @@ PlatoonTemplate {
     Plan = 'EngineerBuildAISCTA',
     ---PlatoonType = 'EngineerForm',
     GlobalSquads = {
-        { (categories.ENGINEER * TA) * (categories.TECH3 + (categories.TECH2 - WEIRD)), 1, 1, 'Support', 'None' }
+        { (categories.ENGINEER * TA) * (categories.TECH3 + (categories.TECH2 - WEIRD)), 1, 1, 'Support', 'None' },
+        { (categories.LAND * categories.MOBILE * (categories.SILO + categories.DIRECTFIRE)) - RAIDER - categories.ENGINEER, 0, 1, 'Guard', 'none' },
     },
 }
 
@@ -54,7 +57,7 @@ PlatoonTemplate {
     ---PlatoonType = 'EngineerForm',
     GlobalSquads = {
         { (categories.ENGINEER * categories.TECH1 * TA) - WEIRD, 1, 1, 'Support', 'None' },
-        { categories.LAND * categories.MOBILE - categories.ENGINEER - categories.SCOUT, 0, 1, 'Guard', 'none' },
+        { (categories.LAND * categories.MOBILE * (categories.SILO + categories.DIRECTFIRE)) - RAIDER - categories.ENGINEER, 0, 1, 'Guard', 'none' },
     },
 }
 

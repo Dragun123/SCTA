@@ -4,44 +4,25 @@
 #Script created by Raevn
 
 local TAStructure = import('/mods/SCTA-master/lua/TAStructure.lua').TAStructure
-local TAMInterceptorWeapon = import('/lua/terranweapons.lua').TAMInterceptorWeapon
+local TAAntiNukeWeapon = import('/mods/SCTA-master/lua/TAweapon.lua').TAAntiNukeWeapon
 local nukeFiredOnGotTarget = false
 
 CORFMD = Class(TAStructure) {
 
+	OnStopBeingBuilt = function(self,builder,layer)
+        TAStructure.OnStopBeingBuilt(self,builder,layer)
+		TAStructure.Fold(self)
+	end,
+
 	Weapons = {
-		FMD_ROCKET = Class(TAMInterceptorWeapon) {
-				IdleState = State(TAMInterceptorWeapon.IdleState) {
-					OnGotTarget = function(self)
-						local bp = self:GetBlueprint()
-						if (bp.WeaponUnpackLockMotion != true or (bp.WeaponUnpackLocksMotion == true and not self.unit:IsUnitState('Moving'))) then
-							if (bp.CountedProjectile == false) or self:CanFire() then
-								 nukeFiredOnGotTarget = true
-							end
-						end
-						TAMInterceptorWeapon.IdleState.OnGotTarget(self)
-					end,
-					
-					OnFire = function(self)
-						if not nukeFiredOnGotTarget then
-							TAMInterceptorWeapon.IdleState.OnFire(self)
-						end
-						nukeFiredOnGotTarget = false
-						
-						self:ForkThread(function()
-							self.unit:SetBusy(true)
-							WaitSeconds(1/self.unit:GetBlueprint().Weapon[1].RateOfFire + .2)
-							self.unit:SetBusy(false)
-						end)
-					end,
-				},
+		FMD_ROCKET = Class(TAAntiNukeWeapon) {
 				OnWeaponFired = function(self)
-					TAMInterceptorWeapon.OnWeaponFired(self)
+					TAAntiNukeWeapon.OnWeaponFired(self)
 					self.unit:HideBone('dummy', true)
 				end,
 	
 				PlayFxWeaponUnpackSequence = function(self)
-					TAMInterceptorWeapon.PlayFxWeaponUnpackSequence(self)
+					TAAntiNukeWeapon.PlayFxWeaponUnpackSequence(self)
 					self.unit:ShowBone('dummy', true)
 				end,
 		},
