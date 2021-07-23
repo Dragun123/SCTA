@@ -24,7 +24,7 @@ Platoon = Class(SCTAAIPlatoon) {
         local guardedUnit
         if EscortUnits and eng then
             if not EscortUnits.Dead and not eng.Dead then
-                IssueClearCommands({EscortUnits})
+                self:Stop('Guard')
                 IssueGuard({EscortUnits}, eng)
             end
         end
@@ -59,7 +59,7 @@ Platoon = Class(SCTAAIPlatoon) {
         end
         eng.AssistPlatoon = nil
         eng.UnitBeingAssist = nil
-        self:Stop()
+        self:Stop('Support')
         self:PlatoonDisbandTA()
         --[[coroutine.yield(1)
        return self:SCTAEngineerTypeAI()]]
@@ -75,7 +75,7 @@ Platoon = Class(SCTAAIPlatoon) {
         local EscortUnits = self:GetSquadUnits('Guard')[1]
         if EscortUnits and eng then
             if not EscortUnits.Dead and not eng.Dead then
-                IssueClearCommands({EscortUnits})
+                self:Stop('Guard')
                 IssueGuard({EscortUnits}, eng)
             end
         end
@@ -106,7 +106,7 @@ Platoon = Class(SCTAAIPlatoon) {
 
         if EscortUnits and eng then
             if not EscortUnits.Dead and not eng.Dead then
-                IssueClearCommands({EscortUnits})
+                self:Stop('Guard')
                 IssueGuard({EscortUnits}, eng)
             end
         end
@@ -160,7 +160,7 @@ Platoon = Class(SCTAAIPlatoon) {
         end
         -- assist unit
         if assistee then
-            self:Stop()
+            self:Stop('Support')
             eng.AssistSet = true
             IssueGuard({eng}, assistee)
         else
@@ -180,7 +180,7 @@ Platoon = Class(SCTAAIPlatoon) {
 
         if EscortUnits and eng then
             if not EscortUnits.Dead and not eng.Dead then
-                IssueClearCommands({EscortUnits})
+                self:Stop('Guard')
                 IssueGuard({EscortUnits}, eng)
             end
         end
@@ -211,7 +211,7 @@ Platoon = Class(SCTAAIPlatoon) {
         end
         -- assist unit
         if assistee then
-            self:Stop()
+            self:Stop('Support')
             eng.AssistSet = true
             eng.UnitBeingAssist = assistee.UnitBeingBuilt or assistee.UnitBeingAssist or assistee
             --LOG('* EconUnfinishedBody: Assisting now: ['..eng.UnitBeingBuilt:GetBlueprint().BlueprintId..'] ('..eng.UnitBeingBuilt:GetBlueprint().Description..')')
@@ -225,7 +225,7 @@ Platoon = Class(SCTAAIPlatoon) {
     end,
 
     ReclaimStructuresAITA = function(self)
-        self:Stop()
+        self:Stop('Support')
         local aiBrain = self:GetBrain()
         local data = self.PlatoonData
         local radius = aiBrain:PBMGetLocationRadius(data.Location)
@@ -301,7 +301,7 @@ Platoon = Class(SCTAAIPlatoon) {
 
         if EscortUnits and eng then
             if not EscortUnits.Dead and not eng.Dead then
-                IssueClearCommands({EscortUnits})
+                self:Stop('Guard')
                 IssueGuard({EscortUnits}, eng)
             end
         end
@@ -2961,7 +2961,7 @@ Platoon = Class(SCTAAIPlatoon) {
     end,
 
     SCTAReclaimAI = function(self)
-            self:Stop()
+            self:Stop('Support')
             local brain = self:GetBrain()
             local eng = self:GetSquadUnits('Support')[1]
             local EscortUnits = self:GetSquadUnits('Guard')[1]
@@ -2974,7 +2974,7 @@ Platoon = Class(SCTAAIPlatoon) {
     
             if EscortUnits and eng then
                 if not EscortUnits.Dead and not eng.Dead then
-                    IssueClearCommands({EscortUnits})
+                    self:Stop('Guard')
                     IssueGuard({EscortUnits}, eng)
                 end
             end

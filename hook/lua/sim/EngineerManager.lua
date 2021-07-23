@@ -185,15 +185,13 @@ EngineerManager = Class(SCTAEngineerManager) {
             local template = self:GetEngineerPlatoonTemplate(builder:GetPlatoonTemplate())
             local hndl = self.Brain:MakePlatoon(template[1], template[2])
             self.Brain:AssignUnitsToPlatoon(hndl, {unit}, 'Support', 'none')
-            if bType == 'LandTA' and not self.Brain.Level2 then
+            if bType == 'LandTA' and self.Brain.Plants < 6 then
                 ---LOG('*TABrain', self.Brain.Plants)
-                local Escort = self.Brain:GetUnitsAroundPoint(categories.LAND * categories.MOBILE * categories.SILO, unit:GetPosition(), 10, 'Ally') 
-                if Escort[1] then 
-                    self.Brain:AssignUnitsToPlatoon(hndl, {Escort[1]}, 'Guard', 'none') 
-                    IssueClearCommands({Escort[1]})
-                    IssueGuard({Escort[1]}, unit)  
+                local Escort = self.Brain:GetUnitsAroundPoint((categories.LAND * categories.MOBILE * (categories.SILO + categories.DIRECTFIRE)) - categories.SCOUT - categories.corak - categories.armpw - categories.armflash - categories.corgator - categories.ENGINEER, unit:GetPosition(), 10, 'Ally')[1] 
+                if Escort then 
+                    self.Brain:AssignUnitsToPlatoon(hndl, {Escort}, 'Guard', 'none')
                 end
-            end 
+            end
             unit.PlatoonHandle = hndl
 
             --if EntityCategoryContains(categories.COMMAND, unit) then
