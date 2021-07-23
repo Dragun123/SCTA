@@ -11,6 +11,7 @@ ARMMAKR = Class(TAStructure) {
 		self.AnimManip = CreateAnimator(self)
 		self.Trash:Add(self.AnimManip)
 	end,]]
+----Thanks to Balth, need to look into a few other relavent units for code improvement later 
 
 	OnLayerChange = function(self, new, old)
         TAStructure.OnLayerChange(self, new, old)
@@ -19,14 +20,10 @@ ARMMAKR = Class(TAStructure) {
         end
     end,
 
-	--[[OnStopBeingBuilt = function(self,builder,layer)
+	OnStopBeingBuilt = function(self,builder,layer)
         TAStructure.OnStopBeingBuilt(self,builder,layer)
 		self:PlayUnitSound('Activate')
-        if layer == 'Water' then
-			self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationWater)
-			self.AnimManip:SetRate(1 * (self:GetBlueprint().Display.AnimationWaterRate or 0.2))
-		end
-	end,]]
+	end,
 
 
 	OnProductionUnpaused = function(self)
