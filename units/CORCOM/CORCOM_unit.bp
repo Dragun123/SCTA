@@ -309,7 +309,7 @@ UnitBlueprint {
             DamageFriendly = true,
             Damage = 10,
             DGun = 99999,
-            DamageRadius = 1,
+            DamageRadius = 2,
             DamageType = 'DGun',
             DisplayName = 'OverCharge',
             FireTargetLayerCapsTable = {
@@ -373,7 +373,7 @@ UnitBlueprint {
             CollideFriendly = false,
             DamageFriendly = true,
             Damage = 10,
-            DamageRadius = 1,
+            DamageRadius = 2,
             DamageType = 'DGun',
             DisplayName = 'AutoOverCharge',
             FireTargetLayerCapsTable = {

@@ -41,6 +41,7 @@ UnitBlueprint {
         'ARM',
         'TANK',
         'ANTISHIELD',
+        'SILO',
     },
     Defense = {
         ArmorType = 'Normal',

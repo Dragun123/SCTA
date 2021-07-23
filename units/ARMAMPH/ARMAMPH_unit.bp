@@ -36,7 +36,8 @@ UnitBlueprint {
         'DIRECTFIRE',
         'OVERLAYDIRECTFIRE',
         'ANTIAIR',
-        'OVERLAYANTAIR',
+        'OVERLAYANTIAIR',
+        'SILO',
         'BOT',
         'LAND',
         'ARM',
@@ -157,6 +158,7 @@ UnitBlueprint {
             FireTargetLayerCapsTable = {
                 Land = 'Land|Water|Air|Seabed',
                 Water = 'Land|Water|Air|Seabed',
+                Seabed = 'Land|Water|Seabed|Air',
             },
             RangeCategory = 'UWRC_AntiAir',
             WeaponCategory = 'AntiAir',
@@ -220,6 +222,7 @@ UnitBlueprint {
             FireTargetLayerCapsTable = {
                 Land = 'Land|Water|Air|Seabed',
                 Water = 'Land|Water|Air|Seabed',
+                Seabed = 'Land|Water|Seabed|Air',
             },
             RangeCategory = 'UWRC_DirectFire',
             WeaponCategory = 'DirectFire',

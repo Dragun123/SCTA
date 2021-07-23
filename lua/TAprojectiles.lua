@@ -228,7 +228,7 @@ Disintegrator = Class(TALightCannonProjectile) {
 	end,
 
 	OnImpact = function(self, targetType, targetEntity)
-		self.DamageData = 0
+		self.DamageData.DamageAmount = 0
 		TALightCannonProjectile.OnImpact(self, targetType, targetEntity)
 	end,
 }

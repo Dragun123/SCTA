@@ -145,6 +145,7 @@ TechLevel = 'RULEUTL_Advanced',
             DisplayName = 'CORMH_WEAPON',
             FireTargetLayerCapsTable = {
                 Land = 'Land|Water|Air|Seabed',
+                Seabed = 'Land|Water|Seabed|Air',
                 Water = 'Land|Water|Seabed|Air',
             },
 	        RangeCategory = 'UWRC_IndirectFire',
