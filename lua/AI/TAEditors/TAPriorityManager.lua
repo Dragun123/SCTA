@@ -4,6 +4,7 @@ local Numbers = import('/lua/editor/UnitCountBuildConditions.lua').HaveUnitsWith
 local MoreProduct = import('/lua/editor/UnitCountBuildConditions.lua').HaveGreaterThanUnitsInCategoryBeingBuilt
 local LessProduct = import('/lua/editor/UnitCountBuildConditions.lua').HaveLessThanUnitsInCategoryBeingBuilt
 local LessTime = import('/lua/editor/MiscBuildConditions.lua').LessThanGameTime
+local Mass = import('/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua').LessMassStorageMaxTA
 local RAIDER = (categories.armpw + categories.corak + categories.armflash + categories.corgator)
 local LAB = (categories.FACTORY * categories.TECH2)
 local PLATFORM = (categories.FACTORY * categories.TECH3)
@@ -238,6 +239,14 @@ end
 GantryUnitBuildingDecoy = function(self, aiBrain)
     if Factory(aiBrain,  0, categories.EXPERIMENTAL * categories.MOBILE) then 
         return 300
+    else
+        return 0
+    end
+end
+
+TALowEco = function(self, aiBrain)
+    if Mass(aiBrain,  0.2) then 
+        return 110
     else
         return 0
     end

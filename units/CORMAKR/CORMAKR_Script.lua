@@ -45,8 +45,7 @@ CORMAKR = Class(TAStructure) {
 		self.Spinners.plug:SetSpeed(60)
 	end,
 
-	OnProductionPaused = function(self)
-		#Close Animation		
+	OnProductionPaused = function(self)	
 		self:PlayUnitSound('Deactivate')
 		TAStructure.OnProductionPaused(self)
 		--TURN plug to z-axis <0> SPEED <50.01>

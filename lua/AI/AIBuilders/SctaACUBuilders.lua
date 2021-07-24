@@ -225,13 +225,14 @@ BuilderGroup {
         BuilderName = 'SCTA Engineer Reclaim Excess',
         PlatoonTemplate = 'EngineerBuilderSCTA',
         PlatoonAIPlan = 'SCTAReclaimAI',
+        --PriorityFunction = TAPrior.TALowEco,
         Priority = 120,
         InstanceCount = 2,
         BuilderConditions = {
             { MIBC, 'GreaterThanGameTime', { 120 } }, 
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.LAND - categories.COMMAND}},
-            { TASlow, 'TAReclaimablesInArea', { 'LocationType', }},
-            { TAutils, 'LessMassStorageMaxTA',  { 0.2}},   
+            { TASlow, 'TAReclaimablesInArea', { 'LocationType', 0.2}},
+            --{ TAutils, 'LessMassStorageMaxTA',  { 0.2}},   
         },
         BuilderData = {
             Layer = 'Land', 

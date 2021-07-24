@@ -38,6 +38,7 @@ UnitBlueprint {
 	    'ANTIAIR',
 	    'OVERLAYANTIAIR',
         'ARM',
+        'SILO',
     },
     Defense = {
         ArmorType = 'Normal',

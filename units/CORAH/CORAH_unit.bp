@@ -148,6 +148,7 @@ TechLevel = 'RULEUTL_Advanced',
             FireTargetLayerCapsTable = {
                 Land = 'Land|Water|Seabed|Air',
                 Water = 'Land|Water|Seabed|Air',
+                Seabed = 'Land|Water|Seabed|Air',
             },
 	        RangeCategory = 'UWRC_AntiAir',
             WeaponCategory = 'AntiAir',
