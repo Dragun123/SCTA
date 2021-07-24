@@ -142,8 +142,8 @@ BuilderGroup {
         PriorityFunction = TAPrior.TechEnergyExist,
         InstanceCount = 2,
         BuilderConditions = {
-            { TAutils, 'GreaterThanEconEnergyTAEfficiency', {0.9 }},
-            { TAutils, 'LessMassStorageMaxTA',  { 0.2}},
+            { TAutils, 'GreaterThanEconEnergyTAEfficiency', {1.05}},
+            { TAutils, 'LessMassStorageMaxTA',  { 0.3}},
         },
         BuilderType = 'SeaTA',
         BuilderData = {

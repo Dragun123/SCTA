@@ -60,12 +60,13 @@ BuilderGroup {
         PlatoonTemplate = 'EngineerBuilderSCTA123',
         PlatoonAIPlan = 'SCTAReclaimAI',
         Priority = 75,
+        --PriorityFunction = TAPrior.TALowEco,
         InstanceCount = 5,
         BuilderConditions = {
             { MIBC, 'GreaterThanGameTime', { 240 } },
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.LAND - categories.COMMAND}},
-            { TASlow, 'TAReclaimablesInArea', { 'LocationType', }},  
-            { TAutils, 'LessMassStorageMaxTA',  { 0.2}},
+            { TASlow, 'TAReclaimablesInArea', { 'LocationType', 0.2}},  
+            --{ TAutils, 'LessMassStorageMaxTA',  { 0.2}},
         },
         BuilderData = {
             Layer = 'Land', 
@@ -78,13 +79,14 @@ BuilderGroup {
         BuilderName = 'SCTA Engineer Reclaim Idle Air',
         PlatoonTemplate = 'EngineerBuilderSCTAEco123',
         PlatoonAIPlan = 'SCTAReclaimAI',
+        --PriorityFunction = TAPrior.TALowEco,
         Priority = 75,
         InstanceCount = 5,
         BuilderConditions = {
             { MIBC, 'GreaterThanGameTime', { 240 } },
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.AIR}},
-            { TASlow, 'TAReclaimablesInArea', { 'LocationType', }},  
-            { TAutils, 'LessMassStorageMaxTA',  { 0.2}},
+            { TASlow, 'TAReclaimablesInArea', { 'LocationType', 0.2}},  
+            --{ TAutils, 'LessMassStorageMaxTA',  { 0.2}},
         },
         BuilderData = {
             LocationType = 'LocationType',
@@ -150,8 +152,7 @@ BuilderGroup {
         InstanceCount = 5,
         BuilderConditions = {
             { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1,  categories.FIELDENGINEER}},
-            { TASlow, 'TAReclaimablesInArea', { 'LocationType', }},
-            { TAutils, 'LessMassStorageMaxTA',  { 0.2}},
+            { TASlow, 'TAReclaimablesInArea', { 'LocationType', 0.2}},
         },
         BuilderData = {
             ReclaimTime = 30, 

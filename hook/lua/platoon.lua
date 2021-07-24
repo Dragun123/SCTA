@@ -22,12 +22,12 @@ Platoon = Class(SCTAAIPlatoon) {
         local eng = self:GetSquadUnits('Support')[1]
         local EscortUnits = self:GetSquadUnits('Guard')[1]
         local guardedUnit
-        if EscortUnits and eng then
-            if not EscortUnits.Dead and not eng.Dead then
-                self:Stop('Guard')
-                IssueGuard({EscortUnits}, eng)
-            end
+    
+        if (EscortUnits and not EscortUnits.Dead) and not eng.Dead then
+            self:Stop('Guard')
+            IssueGuard({EscortUnits}, eng)
         end
+        
         self:TAEconUnfinishedBody()
         WaitTicks(10)
         -- do we assist until the building is finished ?
@@ -73,12 +73,13 @@ Platoon = Class(SCTAAIPlatoon) {
         WaitSeconds(assistData.Time or 60)
         local eng = self:GetSquadUnits('Support')[1]
         local EscortUnits = self:GetSquadUnits('Guard')[1]
-        if EscortUnits and eng then
-            if not EscortUnits.Dead and not eng.Dead then
-                self:Stop('Guard')
-                IssueGuard({EscortUnits}, eng)
-            end
+
+            
+        if (EscortUnits and not EscortUnits.Dead) and not eng.Dead then
+            self:Stop('Guard')
+            IssueGuard({EscortUnits}, eng)
         end
+        
         if eng:GetGuardedUnit() then
             beingBuilt = eng:GetGuardedUnit()
         end
@@ -103,13 +104,12 @@ Platoon = Class(SCTAAIPlatoon) {
             self:PlatoonDisbandTA()
             return
         end
-
-        if EscortUnits and eng then
-            if not EscortUnits.Dead and not eng.Dead then
-                self:Stop('Guard')
-                IssueGuard({EscortUnits}, eng)
-            end
+    
+        if (EscortUnits and not EscortUnits.Dead) and not eng.Dead then
+            self:Stop('Guard')
+            IssueGuard({EscortUnits}, eng)
         end
+
         local aiBrain = self:GetBrain()
         local assistData = self.PlatoonData.Assist
         local assistee = false
@@ -178,12 +178,12 @@ Platoon = Class(SCTAAIPlatoon) {
             return
         end
 
-        if EscortUnits and eng then
-            if not EscortUnits.Dead and not eng.Dead then
-                self:Stop('Guard')
-                IssueGuard({EscortUnits}, eng)
-            end
+    
+        if (EscortUnits and not EscortUnits.Dead) and not eng.Dead then
+            self:Stop('Guard')
+            IssueGuard({EscortUnits}, eng)
         end
+
         local assistData = self.PlatoonData.Assist
         local assistee = false
 
@@ -299,11 +299,10 @@ Platoon = Class(SCTAAIPlatoon) {
             return
         end
 
-        if EscortUnits and eng then
-            if not EscortUnits.Dead and not eng.Dead then
-                self:Stop('Guard')
-                IssueGuard({EscortUnits}, eng)
-            end
+           
+        if (EscortUnits and not EscortUnits.Dead) and not eng.Dead then
+            self:Stop('Guard')
+            IssueGuard({EscortUnits}, eng)
         end
 
         --DUNCAN - added
@@ -2972,24 +2971,24 @@ Platoon = Class(SCTAAIPlatoon) {
                 return
             end
     
-            if EscortUnits and eng then
-                if not EscortUnits.Dead and not eng.Dead then
+                if (EscortUnits and not EscortUnits.Dead) and not eng.Dead then
                     self:Stop('Guard')
                     IssueGuard({EscortUnits}, eng)
                 end
-            end
             --LOG('*SCTAEXPANSIONTA', locationType)
             --eng.BadReclaimables = eng.BadReclaimables or {}
     
             while brain:PlatoonExists(self) do
-                local ents = TAReclaim.TAAIGetReclaimablesAroundLocation(brain, self.PlatoonData.LocationType) or {}
-                if not ents[1] or not self:GetPlatoonPosition() then
+                local ents = TAReclaim.TAAIReclaimablesAroundEngineer(brain, eng)[1]
+                if not ents or not eng:GetPosition() then
                     WaitTicks(1)
                     self:PlatoonDisbandTA()
                     return
                 end
-            if not self.PlatoonData.Layer or self.PlatoonData.Layer and AIAttackUtils.CanGraphAreaToSCTA(eng:GetPosition(), ents[1]:GetPosition(), self.PlatoonData.Layer) then
-                self:AggressiveMoveToLocation(ents[1]:GetPosition())
+            if not self.PlatoonData.Layer or self.PlatoonData.Layer and AIAttackUtils.CanGraphAreaToSCTA(eng:GetPosition(), ents:GetPosition(), self.PlatoonData.Layer) then
+                ---IssueAggressiveMove({eng}, ents:GetPosition())
+                ---self:MoveToLocation(ents:GetPosition(), false)
+                self:AggressiveMoveToLocation(ents:GetPosition(), 'Support')
                 local reclaiming = not eng:IsIdleState()
                 while reclaiming do
                     WaitSeconds(5)

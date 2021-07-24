@@ -289,22 +289,22 @@ end
 end]]
 ----TAReclaim
 
-function TAReclaimablesInArea(aiBrain, locType)
+function TAReclaimablesInArea(aiBrain, locType, Mass)
     --DUNCAN - was .9. Reduced as dont need to reclaim yet if plenty of mass
-    if aiBrain:GetEconomyStoredRatio('MASS') > 0.5 then
-        return false
-    end
-
+   if aiBrain:GetEconomyStoredRatio('MASS') < Mass then
     --DUNCAN - who cares about energy for reclaming?
     --if aiBrain:GetEconomyStoredRatio('ENERGY') > .5 then
         --return false
     --end
 
     local ents = TAAIGetReclaimablesAroundLocation(aiBrain, locType)
-    if ents and not table.empty(ents) then
-        return true
+        if ents and not table.empty(ents) then
+            return true
+        else
+        return false
+        end
     else
-    return false
+        return false
     end
 end
 
@@ -333,7 +333,18 @@ function TAAIGetReclaimablesAroundLocation(aiBrain, locationType)
     local z2 = position[3] + radius * 2
     local rect = Rect(x1, z1, x2, z2)
 
-    return AIUtils.GetReclaimablesInRect(rect)
+    return GetReclaimablesInRect(rect)
+end
+
+function TAAIReclaimablesAroundEngineer(aiBrain, engineer)
+    local position = engineer:GetPosition()
+    local x1 = position[1] - 20
+    local x2 = position[1] + 20
+    local z1 = position[3] - 20
+    local z2 = position[3] + 20
+    local rect = Rect(x1, z1, x2, z2)
+
+    return GetReclaimablesInRect(rect)
 end
 
 

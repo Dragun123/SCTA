@@ -52,7 +52,7 @@ TAweapon = Class(DefaultWeapon) {
         OnGotTarget = function(self) 
             if (self.unit.SCTAAIBrain or
             TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
-            self:OnGotTargetCheck() == true) then
+            self:OnGotTargetCheck() == true) and not self.unit.Dead then
                 DefaultWeapon.IdleState.OnGotTarget(self)
             end
         end,
@@ -63,17 +63,14 @@ TAweapon = Class(DefaultWeapon) {
             ---LOG('Resulting Table'..repr(TAutils.targetingFacilityData))
             if (self.unit.SCTAAIBrain or
             TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
-            self:OnGotTargetCheck() == true) then
-                if not self.unit.Dead and not IsDestroyed(self.unit) then
-                    DefaultWeapon.WeaponUnpackingState.Main(self)
-                end
+            self:OnGotTargetCheck() == true) and not self.unit.Dead then
+                DefaultWeapon.WeaponUnpackingState.Main(self)
             end
         end,
 
         OnGotTarget = function(self)
-            if (self.unit.SCTAAIBrain or
-            TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
-            self:OnGotTargetCheck() == true) then
+            if (self.unit.SCTAAIBrain or TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
+            self:OnGotTargetCheck() == true) and not self.unit.Dead then
                 DefaultWeapon.WeaponUnpackingState.OnGotTarget(self)
             end
         end,
@@ -83,7 +80,7 @@ TAweapon = Class(DefaultWeapon) {
         OnGotTarget = function(self)      
             if (self.unit.SCTAAIBrain or
             TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
-            self:OnGotTargetCheck() == true) then
+            self:OnGotTargetCheck() == true) and not self.unit.Dead then
                 DefaultWeapon.RackSalvoFireReadyState.OnGotTarget(self)
             end
         end,
@@ -92,12 +89,9 @@ TAweapon = Class(DefaultWeapon) {
 
     WeaponPackingState = State(DefaultWeapon.WeaponPackingState) {        
         OnGotTarget = function(self)
-            if (self.unit:GetAIBrain().SCTAAI or
-            TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
-            self:OnGotTargetCheck() == true) then
-                if not self.unit.Dead and not IsDestroyed(self.unit) then
+            if (self.unit:GetAIBrain().SCTAAI or TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
+            self:OnGotTargetCheck() == true) and not self.unit.Dead then
                 DefaultWeapon.WeaponPackingState.OnGotTarget(self)
-                end
             end
         end,
     },
