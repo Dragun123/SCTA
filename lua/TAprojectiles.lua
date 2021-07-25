@@ -213,10 +213,13 @@ Disintegrator = Class(TALightCannonProjectile) {
 	end,
 
 	MovementThread = function(self)
+		---need to figure out the double hitting code and why
+		---damage adjustment for commanders
 		while not IsDestroyed(self) do
 			local pos = self:GetPosition()
 		if pos.y < GetTerrainHeight(pos.x, pos.z) then
 			self:SetTurnRate(0)
+			self:TrackTarget(false)
 			pos.y = GetTerrainHeight(pos.x, pos.z)
 			DamageArea( self.launcher, pos, self.DamageData.DamageRadius, self.DGunDamage, self.DamageData.DamageType, self.DamageData.DamageFriendly)
 				self:SetPosition(pos, true)

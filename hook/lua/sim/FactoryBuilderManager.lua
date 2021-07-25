@@ -251,8 +251,8 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             factory.DelayThread = false
             if factory.Dead then
                 return
-                elseif factory:IsIdleState() then
-                factory.TABuildingUnit = nil
+                --[[elseif factory:IsIdleState() then
+                factory.TABuildingUnit = nil]]
             end
             self:TAAssignBuildOrder(factory,bType)
         end,
