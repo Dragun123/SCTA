@@ -35,7 +35,7 @@
         'Deathnuke 1.0',
         'AntiAir 0.05',
         'TASpec 0.3',
-        'DGun 0.125',
+        'DGun 0.2',
     },
     {   # Armor Type Name
         'Structure',
@@ -46,7 +46,7 @@
         'TASpec 0.3',
         'Overcharge 0.25',
         'Deathnuke 0.032',
-        'DGun 0.125',
+        'DGun 0.2',
     },
     {
         # Armor Type name
@@ -69,7 +69,7 @@
         'Overcharge 0.25',
         'Deathnuke 0.032',
         'ExperimentalFootfall 0.0',
-        'DGun 0.125',
+        'DGun 0.2',
     },
     {
         # Armor Type name
