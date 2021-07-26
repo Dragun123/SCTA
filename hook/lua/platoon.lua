@@ -2725,9 +2725,11 @@ Platoon = Class(SCTAAIPlatoon) {
             target = self:FindClosestUnit('Attack', 'Enemy', true, categories.MOBILE * categories.COMMAND)
             if not target then
                 if Bomber > 0 then
+                WaitSeconds(0.5)
                 targetBomb = self:FindClosestUnit('Attack', 'Enemy', true, categories.LAND * categories.MOBILE - categories.SCOUT)
                 end
                 if Interceptor > 0 then
+                WaitSeconds(0.5)
                 targetIntie = self:FindClosestUnit('Artillery', 'Enemy', true, categories.MOBILE * categories.AIR)
                 end
             end
