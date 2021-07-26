@@ -229,10 +229,10 @@ EngineerManager = Class(SCTAEngineerManager) {
 
             hndl:SetPlatoonData(builder:GetBuilderData(self.LocationType))
             --LOG('*TABrain', hndl.PlatoonData.TAEscort)
-            if hndl.PlatoonData.TAEscort and self.Brain.Plants < 6 then
+            if hndl.PlatoonData.TAEscort and not self.Brain.Level2 then
                 ---LOG('*TABrain', self.Brain.Plants)
                 --local Escort = self.Brain:GetUnitsAroundPoint((categories.LAND * categories.MOBILE * (categories.SILO + categories.DIRECTFIRE)) - categories.SCOUT - categories.corak - categories.armpw - categories.armflash - categories.corgator - categories.ENGINEER, unit:GetPosition(), 20, 'Ally')[1]
-                local Escorts = self.Brain:GetUnitsAroundPoint(categories.LAND * categories.MOBILE * categories.SILO, unit:GetPosition(), 50, 'Ally') 
+                local Escorts = self.Brain:GetUnitsAroundPoint(categories.LAND * categories.MOBILE * categories.SILO, unit:GetPosition(), 20, 'Ally') 
                 --return
                 --local Escort = table.remove(Escort, Escort.Escorting)
                 for _,Escort in Escorts do
