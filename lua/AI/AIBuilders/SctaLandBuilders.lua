@@ -11,7 +11,7 @@ BuilderGroup {
         BuilderName = 'SCTAAi Factory Kbot Early',
         PlatoonTemplate = 'T1LandDFTankSCTAEarly',
         Priority = 130,
-BuilderConditions = {
+        BuilderConditions = {
             { MIBC, 'LessThanGameTime', {300} }, -- Don't make tanks if we have lots of them.
             { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
         },
@@ -69,6 +69,7 @@ BuilderConditions = {
     Builder {
         BuilderName = 'SCTAAi Factory Tank AntiAir',
         PlatoonTemplate = 'T1LandAASCTA2',
+        PriorityFunction = TAPrior.UnitProductionT1,
         Priority = 120,
         InstanceCount = 2,
         DelayEqualBuildPlattons = {'AntiAirSCTA', 1},
@@ -108,26 +109,13 @@ BuilderConditions = {
         BuilderName = 'SCTAAi FactoryT1 Kbot AntiAir',
         PlatoonTemplate = 'T1LandAASCTABot',
         Priority = 120,
-        InstanceCount = 1,
+        PriorityFunction = TAPrior.UnitProductionT1,
         DelayEqualBuildPlattons = {'AntiAirSCTA', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'AntiAirSCTA' }},
             { TASlow, 'TAHaveUnitRatioGreaterThanLand', {categories.ANTIAIR} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
         },
-        BuilderType = 'KBot',
-    },
-    Builder {
-        BuilderName = 'SCTAAi Factory Kbot Counter',
-        PlatoonTemplate = 'T2LandAuxFact1',
-        Priority = 125,
-        InstanceCount = 1,
-        DelayEqualBuildPlattons = {'AuxSCTA', 1},
-        BuilderConditions = {
-        { UCBC, 'CheckBuildPlattonDelay', { 'AuxSCTA' }}, 
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 4, categories.BOMB} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
-        }, 
         BuilderType = 'KBot',
     },
     ---VEHICLE T2
@@ -146,7 +134,6 @@ BuilderConditions = {
         BuilderName = 'SCTAAi Factory Counter Tank',
         PlatoonTemplate = 'T2LandAuxFact2',
         Priority = 124,
-        InstanceCount = 1,
         DelayEqualBuildPlattons = {'AuxSCTA', 1},
         BuilderConditions = {
         { UCBC, 'CheckBuildPlattonDelay', { 'AuxSCTA' }},   
@@ -159,7 +146,6 @@ BuilderConditions = {
         BuilderName = 'SCTAAi Factory All Tank Terrain T2',
         PlatoonTemplate = 'T2LandAuxTerrain2',
         Priority = 129,
-        InstanceCount = 1,
         DelayEqualBuildPlattons = {'AuxSCTA', 1},
         BuilderConditions = {
         { UCBC, 'CheckBuildPlattonDelay', { 'AuxSCTA' }}, 
@@ -185,7 +171,6 @@ BuilderConditions = {
         BuilderName = 'SCTAAi FactoryT2 Artillery Tank',
         PlatoonTemplate = 'T2LandMissileSCTA2',
         Priority = 127,
-        InstanceCount = 1,
         DelayEqualBuildPlattons = {'ArtillerySCTA', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'ArtillerySCTA' }},
@@ -213,7 +198,6 @@ BuilderConditions = {
     PlatoonTemplate = 'T3LandDFTankSCTA',
     Priority = 150,
     PriorityFunction = TAPrior.ProductionT3,
-    InstanceCount = 1,
     DelayEqualBuildPlattons = {'FactoryProductionSCTA', 1},
     BuilderConditions = {
     { UCBC, 'CheckBuildPlattonDelay', { 'FactoryProductionSCTA' }},
@@ -239,7 +223,6 @@ BuilderConditions = {
         BuilderName = 'SCTAAi FactoryT3 Vehicle Artillery',
         PlatoonTemplate = 'T3LandDFVehicleSCTA',
         Priority = 100,
-        InstanceCount = 1,
         PriorityFunction = TAPrior.ProductionT3,
         DelayEqualBuildPlattons = {'ArtillerySCTA', 1},
         BuilderConditions = {
@@ -254,7 +237,6 @@ BuilderConditions = {
         PlatoonTemplate = 'T3LandDFTank2SCTA',
         Priority = 150,
         PriorityFunction = TAPrior.ProductionT3,
-        InstanceCount = 1,
         DelayEqualBuildPlattons = {'FactoryProductionSCTA', 1},
         BuilderConditions = {
         { UCBC, 'CheckBuildPlattonDelay', { 'FactoryProductionSCTA' }},
