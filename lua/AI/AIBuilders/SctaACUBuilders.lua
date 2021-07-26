@@ -54,7 +54,7 @@ BuilderGroup {
         BuilderType = 'Command',
         BuilderData = {
             ---NeedGuard = false,
-            DesiresAssist = false,
+            ---DesiresAssist = false,
             Construction = {
                 BuildClose = true,
                 BuildStructures = {
@@ -78,7 +78,7 @@ BuilderGroup {
         BuilderType = 'Command',
         BuilderData = {
             ---NeedGuard = false,
-            DesiresAssist = false,
+            ---DesiresAssist = false,
             Construction = {
                 BuildClose = true,
                 BuildStructures = {
@@ -100,7 +100,7 @@ BuilderGroup {
         BuilderType = 'Command',
         BuilderData = {
             ---NeedGuard = false,
-            DesiresAssist = false,
+            ---DesiresAssist = false,
             Construction = {
                 BuildClose = true,
                 BuildStructures = {
@@ -123,7 +123,7 @@ BuilderGroup {
         BuilderType = 'Command',
         BuilderData = {
             ---NeedGuard = false,
-            DesiresAssist = false,
+            ---DesiresAssist = false,
             Construction = {
                 BuildStructures = {
                     'T1Resource',
@@ -166,7 +166,7 @@ BuilderGroup {
         BuilderType = 'Command',
         BuilderData = {
             ---NeedGuard = false,
-            DesiresAssist = false,
+            ---DesiresAssist = false,
             Construction = {
                 BuildClose = true,
                 BuildStructures = {
@@ -189,7 +189,7 @@ BuilderGroup {
         },
         BuilderType = 'Command',
         BuilderData = {
-            DesiresAssist = false,
+            ---DesiresAssist = false,
             ---NeedGuard = false,
             Construction = {
                 BuildStructures = {
@@ -213,7 +213,7 @@ BuilderGroup {
         BuilderType = 'Command',
         BuilderData = {
             ---NeedGuard = false,
-            DesiresAssist = false,
+            ---DesiresAssist = false,
             Construction = {
                 BuildStructures = {
                     'T1Resource',

@@ -179,20 +179,12 @@ EngineerManager = Class(SCTAEngineerManager) {
             return
         end
         local builder = self:GetHighestBuilder(bType, {unit})
-        if builder then
+        if builder and not unit.AssigningTask then
             unit.AssigningTask = true
             -- Fork off the platoon here
             local template = self:GetEngineerPlatoonTemplate(builder:GetPlatoonTemplate())
             local hndl = self.Brain:MakePlatoon(template[1], template[2])
             self.Brain:AssignUnitsToPlatoon(hndl, {unit}, 'Support', 'none')
-            if bType == 'LandTA' and self.Brain.Plants < 6 then
-                ---LOG('*TABrain', self.Brain.Plants)
-                ---local Escort = self.Brain:GetUnitsAroundPoint((categories.LAND * categories.MOBILE * (categories.SILO + categories.DIRECTFIRE)) - categories.SCOUT - categories.corak - categories.armpw - categories.armflash - categories.corgator - categories.ENGINEER, unit:GetPosition(), 10, 'Ally')[1]
-                local Escort = self.Brain:GetUnitsAroundPoint(categories.LAND * categories.MOBILE * categories.SILO, unit:GetPosition(), 10, 'Ally')[1] 
-                if Escort then 
-                    self.Brain:AssignUnitsToPlatoon(hndl, {Escort}, 'Guard', 'none')
-                end
-            end
             unit.PlatoonHandle = hndl
 
             --if EntityCategoryContains(categories.COMMAND, unit) then
@@ -236,6 +228,23 @@ EngineerManager = Class(SCTAEngineerManager) {
             hndl.BuilderName = builder:GetBuilderName()
 
             hndl:SetPlatoonData(builder:GetBuilderData(self.LocationType))
+            --LOG('*TABrain', hndl.PlatoonData.TAEscort)
+            if hndl.PlatoonData.TAEscort and self.Brain.Plants < 6 then
+                ---LOG('*TABrain', self.Brain.Plants)
+                --local Escort = self.Brain:GetUnitsAroundPoint((categories.LAND * categories.MOBILE * (categories.SILO + categories.DIRECTFIRE)) - categories.SCOUT - categories.corak - categories.armpw - categories.armflash - categories.corgator - categories.ENGINEER, unit:GetPosition(), 20, 'Ally')[1]
+                local Escorts = self.Brain:GetUnitsAroundPoint(categories.LAND * categories.MOBILE * categories.SILO, unit:GetPosition(), 50, 'Ally') 
+                --return
+                --local Escort = table.remove(Escort, Escort.Escorting)
+                for _,Escort in Escorts do
+                    if Escort and not Escort.Escorting then 
+                    Escort.Escorting = true
+                    self.Brain:AssignUnitsToPlatoon(hndl, {Escort}, 'Guard', 'none')
+                    break
+                    --WaitSeconds(3)
+                    --Escort.Escorting = nil
+                    end
+                end
+            end
 
             if hndl.PlatoonData.DesiresAssist then
                 unit.DesiresAssist = hndl.PlatoonData.DesiresAssist
@@ -247,7 +256,7 @@ EngineerManager = Class(SCTAEngineerManager) {
 
 
             builder:StoreHandle(hndl)
-            unit.AssigningTask = nil
+            --unit.AssigningTask = nil
             return
         end
         unit.AssigningTask = nil
