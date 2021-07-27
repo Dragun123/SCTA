@@ -1776,6 +1776,8 @@ Platoon = Class(SCTAAIPlatoon) {
             v.UnitBeingBuilt = nil
             v.ReclaimInProgress = nil
             v.CaptureInProgress = nil
+            v.Escort = nil
+            v.AssigningTask = nil
             if v:IsPaused() then
                 v:SetPaused( false )
             end

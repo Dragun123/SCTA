@@ -128,19 +128,10 @@ EngineerManager = Class(SCTAEngineerManager) {
         if not self.Brain.SCTAAI then
             return SCTAEngineerManager.AssignEngineerTask(self, unit)
         end
-        unit.DesiresAssist = false
-        unit.NumAssistees = nil
-        unit.MinNumAssistees = nil
         if unit.bType then
             ---in case it loops back shomehow
             return self:TAAssignEngineerTask(unit, unit.bType)
         else
-            if unit.AssigningTask and unit:IsIdleState() then
-                unit.AssigningTask = nil
-            elseif unit.AssigningTask and not unit:IsIdleState() then
-                self:TADelayAssign(unit, 50)
-                return
-            end
             local bp = unit:GetBlueprint().Economy
                 if bp.Land then
                     unit.bType = 'LandTA'
@@ -172,9 +163,11 @@ EngineerManager = Class(SCTAEngineerManager) {
         ---Kinda Amazing Did this all on my own yet no recgonization
         ---I mean all this effort, and Az spent like several hours working on it and no one shout out
         ---meh eitherway this is such a pointless commenting. Oh yeah, modifying the assign via hooking has interesting and had to seperate it until two different types
-        if unit.AssigningTask and unit:IsIdleState() then
-            unit.AssigningTask = nil
-        elseif unit.AssigningTask and not unit:IsIdleState() then
+        unit.DesiresAssist = false
+        unit.NumAssistees = nil
+        unit.MinNumAssistees = nil
+        ----RealizingProper Assignment In DisbandPlatoon
+        if unit.AssigningTask and not unit:IsIdleState() then
             self:TADelayAssign(unit, 50)
             return
         end
@@ -259,7 +252,7 @@ EngineerManager = Class(SCTAEngineerManager) {
             --unit.AssigningTask = nil
             return
         end
-        unit.AssigningTask = nil
+        --unit.AssigningTask = nil
         self:TADelayAssign(unit)
     end,
 }
