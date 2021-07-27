@@ -31,8 +31,8 @@ BuilderGroup {
         BuilderType = 'LandTA',
         BuilderData = {
             ---NeedGuard = false,
+            TAEscort = true,
             DesiresAssist = true,
-            LocationType = 'LocationType',
             NumAssistees = 2,
             Construction = {
                 BuildClose = true,
@@ -59,9 +59,9 @@ BuilderGroup {
         BuilderType = 'LandTA',
         BuilderData = {
             ---NeedGuard = false,
+            TAEscort = true,
             DesiresAssist = true,
             NumAssistees = 2,
-            LocationType = 'LocationType',
             Construction = {
                 BuildClose = true,
                 BuildStructures = {
@@ -88,7 +88,6 @@ BuilderGroup {
         BuilderData = {
             ---NeedGuard = false,
             DesiresAssist = true,
-            LocationType = 'LocationType',
             NumAssistees = 2,
             Construction = {
                 BuildClose = true,
@@ -115,7 +114,6 @@ BuilderGroup {
         BuilderData = {
             ---NeedGuard = false,
             DesiresAssist = true,
-            LocationType = 'LocationType',
             NumAssistees = 2,
             Construction = {
                 BuildClose = true,

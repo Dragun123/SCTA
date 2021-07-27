@@ -26,7 +26,8 @@ BuilderGroup {
         BuilderType = 'LandTA',
         BuilderData = {
             ---NeedGuard = false,
-            DesiresAssist = false,
+            TAEscort = true,
+            ---DesiresAssist = false,
             Construction = {
                 BuildStructures = {
                     'T1Resource',
@@ -48,7 +49,7 @@ BuilderGroup {
         BuilderType = 'NotACU',
         BuilderData = {
             ---NeedGuard = false,
-            DesiresAssist = false,
+            ---DesiresAssist = false,
             Construction = {
                 BuildStructures = {
                     'T2Resource',
@@ -70,7 +71,7 @@ BuilderGroup {
         BuilderType = 'OmniAir',
         BuilderData = {
             ---NeedGuard = false,
-            DesiresAssist = false,
+            ---DesiresAssist = false,
             Construction = {
                 BuildStructures = {
                     'T2Resource',
@@ -114,7 +115,7 @@ BuilderGroup {
         BuilderType = 'AirTA',
         BuilderData = {
             ---NeedGuard = false,
-            DesiresAssist = false,
+            ---DesiresAssist = false,
             Construction = {
                 BuildStructures = {
                     'T1HydroCarbon',
@@ -135,7 +136,7 @@ BuilderGroup {
         BuilderType = 'LandTA',
         BuilderData = {
             ---NeedGuard = false,
-            DesiresAssist = false,
+            ---DesiresAssist = false,
             Construction = {
                 BuildClose = true,
                 BuildStructures = {
@@ -156,7 +157,7 @@ BuilderGroup {
         BuilderType = 'LandTA',
         BuilderData = {
             ---NeedGuard = false,
-            DesiresAssist = false,
+            ---DesiresAssist = false,
             Construction = {
                 BuildClose = true,
                 BuildStructures = {
@@ -224,7 +225,7 @@ BuilderGroup {
         BuilderType = 'AirTA',
         BuilderData = {
             ---NeedGuard = false,
-            DesiresAssist = false,
+            ---DesiresAssist = false,
             Construction = {
                 BuildStructures = {
                     'T1Resource',
@@ -244,7 +245,7 @@ BuilderGroup {
         BuilderType = 'AirTA',
         BuilderData = {
             ---NeedGuard = false,
-            DesiresAssist = false,
+            ---DesiresAssist = false,
             Construction = {
                 BuildClose = true,
                 BuildStructures = {

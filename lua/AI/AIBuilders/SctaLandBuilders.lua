@@ -11,7 +11,7 @@ BuilderGroup {
         BuilderName = 'SCTAAi Factory Kbot Early',
         PlatoonTemplate = 'T1LandDFTankSCTAEarly',
         Priority = 130,
-BuilderConditions = {
+        BuilderConditions = {
             { MIBC, 'LessThanGameTime', {300} }, -- Don't make tanks if we have lots of them.
             { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
         },
@@ -69,6 +69,7 @@ BuilderConditions = {
     Builder {
         BuilderName = 'SCTAAi Factory Tank AntiAir',
         PlatoonTemplate = 'T1LandAASCTA2',
+        PriorityFunction = TAPrior.UnitProductionT1,
         Priority = 120,
         InstanceCount = 2,
         DelayEqualBuildPlattons = {'AntiAirSCTA', 1},
@@ -109,25 +110,13 @@ BuilderConditions = {
         PlatoonTemplate = 'T1LandAASCTABot',
         Priority = 120,
         InstanceCount = 1,
+        PriorityFunction = TAPrior.UnitProductionT1,
         DelayEqualBuildPlattons = {'AntiAirSCTA', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'AntiAirSCTA' }},
             { TASlow, 'TAHaveUnitRatioGreaterThanLand', {categories.ANTIAIR} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
         },
-        BuilderType = 'KBot',
-    },
-    Builder {
-        BuilderName = 'SCTAAi Factory Kbot Counter',
-        PlatoonTemplate = 'T2LandAuxFact1',
-        Priority = 125,
-        InstanceCount = 1,
-        DelayEqualBuildPlattons = {'AuxSCTA', 1},
-        BuilderConditions = {
-        { UCBC, 'CheckBuildPlattonDelay', { 'AuxSCTA' }}, 
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 4, categories.BOMB} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
-        }, 
         BuilderType = 'KBot',
     },
     ---VEHICLE T2
@@ -253,8 +242,8 @@ BuilderConditions = {
         BuilderName = 'SCTAAi FactoryT3 Tank Vehicle',
         PlatoonTemplate = 'T3LandDFTank2SCTA',
         Priority = 150,
-        PriorityFunction = TAPrior.ProductionT3,
         InstanceCount = 1,
+        PriorityFunction = TAPrior.ProductionT3,
         DelayEqualBuildPlattons = {'FactoryProductionSCTA', 1},
         BuilderConditions = {
         { UCBC, 'CheckBuildPlattonDelay', { 'FactoryProductionSCTA' }},

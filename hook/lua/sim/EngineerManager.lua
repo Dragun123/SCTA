@@ -128,19 +128,10 @@ EngineerManager = Class(SCTAEngineerManager) {
         if not self.Brain.SCTAAI then
             return SCTAEngineerManager.AssignEngineerTask(self, unit)
         end
-        unit.DesiresAssist = false
-        unit.NumAssistees = nil
-        unit.MinNumAssistees = nil
         if unit.bType then
             ---in case it loops back shomehow
             return self:TAAssignEngineerTask(unit, unit.bType)
         else
-            if unit.AssigningTask and unit:IsIdleState() then
-                unit.AssigningTask = nil
-            elseif unit.AssigningTask and not unit:IsIdleState() then
-                self:TADelayAssign(unit, 50)
-                return
-            end
             local bp = unit:GetBlueprint().Economy
                 if bp.Land then
                     unit.bType = 'LandTA'
@@ -172,27 +163,21 @@ EngineerManager = Class(SCTAEngineerManager) {
         ---Kinda Amazing Did this all on my own yet no recgonization
         ---I mean all this effort, and Az spent like several hours working on it and no one shout out
         ---meh eitherway this is such a pointless commenting. Oh yeah, modifying the assign via hooking has interesting and had to seperate it until two different types
-        if unit.AssigningTask and unit:IsIdleState() then
-            unit.AssigningTask = nil
-        elseif unit.AssigningTask and not unit:IsIdleState() then
+        unit.DesiresAssist = false
+        unit.NumAssistees = nil
+        unit.MinNumAssistees = nil
+        ----RealizingProper Assignment In DisbandPlatoon
+        if unit.AssigningTask and not unit:IsIdleState() then
             self:TADelayAssign(unit, 50)
             return
         end
         local builder = self:GetHighestBuilder(bType, {unit})
-        if builder then
+        if builder and not unit.AssigningTask then
             unit.AssigningTask = true
             -- Fork off the platoon here
             local template = self:GetEngineerPlatoonTemplate(builder:GetPlatoonTemplate())
             local hndl = self.Brain:MakePlatoon(template[1], template[2])
             self.Brain:AssignUnitsToPlatoon(hndl, {unit}, 'Support', 'none')
-            if bType == 'LandTA' and self.Brain.Plants < 6 then
-                ---LOG('*TABrain', self.Brain.Plants)
-                ---local Escort = self.Brain:GetUnitsAroundPoint((categories.LAND * categories.MOBILE * (categories.SILO + categories.DIRECTFIRE)) - categories.SCOUT - categories.corak - categories.armpw - categories.armflash - categories.corgator - categories.ENGINEER, unit:GetPosition(), 10, 'Ally')[1]
-                local Escort = self.Brain:GetUnitsAroundPoint(categories.LAND * categories.MOBILE * categories.SILO, unit:GetPosition(), 10, 'Ally')[1] 
-                if Escort then 
-                    self.Brain:AssignUnitsToPlatoon(hndl, {Escort}, 'Guard', 'none')
-                end
-            end
             unit.PlatoonHandle = hndl
 
             --if EntityCategoryContains(categories.COMMAND, unit) then
@@ -236,6 +221,23 @@ EngineerManager = Class(SCTAEngineerManager) {
             hndl.BuilderName = builder:GetBuilderName()
 
             hndl:SetPlatoonData(builder:GetBuilderData(self.LocationType))
+            --LOG('*TABrain', self.Brain.Level2)
+            if hndl.PlatoonData.TAEscort and not self.Brain.Level2 then
+                ---LOG('*TABrain', self.Brain.Plants)
+                --local Escort = self.Brain:GetUnitsAroundPoint((categories.LAND * categories.MOBILE * (categories.SILO + categories.DIRECTFIRE)) - categories.SCOUT - categories.corak - categories.armpw - categories.armflash - categories.corgator - categories.ENGINEER, unit:GetPosition(), 20, 'Ally')[1]
+                local Escorts = self.Brain:GetUnitsAroundPoint(categories.LAND * categories.MOBILE * categories.SILO, unit:GetPosition(), 50, 'Ally') 
+                --return
+                --local Escort = table.remove(Escort, Escort.Escorting)
+                for _,Escort in Escorts do
+                    if Escort and not Escort.Escorting then 
+                    Escort.Escorting = true
+                    self.Brain:AssignUnitsToPlatoon(hndl, {Escort}, 'Guard', 'none')
+                    break
+                    --WaitSeconds(3)
+                    --Escort.Escorting = nil
+                    end
+                end
+            end
 
             if hndl.PlatoonData.DesiresAssist then
                 unit.DesiresAssist = hndl.PlatoonData.DesiresAssist
@@ -247,10 +249,10 @@ EngineerManager = Class(SCTAEngineerManager) {
 
 
             builder:StoreHandle(hndl)
-            unit.AssigningTask = nil
+            --unit.AssigningTask = nil
             return
         end
-        unit.AssigningTask = nil
+        --unit.AssigningTask = nil
         self:TADelayAssign(unit)
     end,
 }

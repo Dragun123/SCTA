@@ -81,12 +81,14 @@ PlatoonTemplate {
 }
 
 PlatoonTemplate {
-    Name = 'T2LandAuxFact1',
+    Name = 'T2LandAntiArtySCTA',
     FactionSquads = {
         Arm = {
+            { 'armamph', 1, 1, 'Attack', 'none' },
             { 'armvader', 1, 1, 'Attack', 'none' },
         },
         Core = {
+            { 'coramph', 1, 1, 'Attack', 'none' },
             { 'corroach', 1, 1, 'Attack', 'none' },
         },
     }

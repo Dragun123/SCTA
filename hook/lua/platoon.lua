@@ -20,13 +20,13 @@ Platoon = Class(SCTAAIPlatoon) {
     ManagerEngineerFindUnfinishedSCTA = function(self)
         local aiBrain = self:GetBrain()
         local eng = self:GetSquadUnits('Support')[1]
-        local EscortUnits = self:GetSquadUnits('Guard')[1]
+        --local EscortUnits = self:GetSquadUnits('Guard')[1]
         local guardedUnit
     
-        if (EscortUnits and not EscortUnits.Dead) and not eng.Dead then
+        --[[if (EscortUnits and not EscortUnits.Dead) and not eng.Dead then
             self:Stop('Guard')
             IssueGuard({EscortUnits}, eng)
-        end
+        end]]
         
         self:TAEconUnfinishedBody()
         WaitTicks(10)
@@ -72,13 +72,14 @@ Platoon = Class(SCTAAIPlatoon) {
         self:TAEconAssistBody()
         WaitSeconds(assistData.Time or 60)
         local eng = self:GetSquadUnits('Support')[1]
-        local EscortUnits = self:GetSquadUnits('Guard')[1]
+        ---local EscortUnits = self:GetSquadUnits('Guard')[1]
 
             
-        if (EscortUnits and not EscortUnits.Dead) and not eng.Dead then
+        --[[if (EscortUnits and not EscortUnits.Dead) and not eng.Dead then
             self:Stop('Guard')
+            EscortUnits.Escorting = true
             IssueGuard({EscortUnits}, eng)
-        end
+        end]]
         
         if eng:GetGuardedUnit() then
             beingBuilt = eng:GetGuardedUnit()
@@ -98,17 +99,18 @@ Platoon = Class(SCTAAIPlatoon) {
 
     TAEconAssistBody = function(self)
         local eng = self:GetSquadUnits('Support')[1]
-        local EscortUnits = self:GetSquadUnits('Guard')[1]
+        --local EscortUnits = self:GetSquadUnits('Guard')[1]
         if not eng or eng.Dead then
             coroutine.yield(1)
             self:PlatoonDisbandTA()
             return
         end
     
-        if (EscortUnits and not EscortUnits.Dead) and not eng.Dead then
+        --[[if (EscortUnits and not EscortUnits.Dead) and not eng.Dead then
             self:Stop('Guard')
+            EscortUnits.Escorting = true
             IssueGuard({EscortUnits}, eng)
-        end
+        end]]
 
         local aiBrain = self:GetBrain()
         local assistData = self.PlatoonData.Assist
@@ -179,10 +181,11 @@ Platoon = Class(SCTAAIPlatoon) {
         end
 
     
-        if (EscortUnits and not EscortUnits.Dead) and not eng.Dead then
+        --[[if (EscortUnits and not EscortUnits.Dead) and not eng.Dead then
             self:Stop('Guard')
+            EscortUnits.Escorting = true
             IssueGuard({EscortUnits}, eng)
-        end
+        end]]
 
         local assistData = self.PlatoonData.Assist
         local assistee = false
@@ -302,6 +305,7 @@ Platoon = Class(SCTAAIPlatoon) {
            
         if (EscortUnits and not EscortUnits.Dead) and not eng.Dead then
             self:Stop('Guard')
+            --EscortUnits.Escorting = true
             IssueGuard({EscortUnits}, eng)
         end
 
@@ -1772,6 +1776,8 @@ Platoon = Class(SCTAAIPlatoon) {
             v.UnitBeingBuilt = nil
             v.ReclaimInProgress = nil
             v.CaptureInProgress = nil
+            v.Escort = nil
+            v.AssigningTask = nil
             if v:IsPaused() then
                 v:SetPaused( false )
             end
@@ -2673,11 +2679,7 @@ Platoon = Class(SCTAAIPlatoon) {
         end
 
         while aiBrain:PlatoonExists(self) do
-            if EntityCategoryContains(categories.BOMBER, self) then
-                target = self:FindClosestUnit('Attack', 'Enemy', true, categories.MOBILE * categories.ENGINEER - categories.COMMAND)
-                else 
-                target = self:FindClosestUnit('Attack', 'Enemy', true, categories.MOBILE * (categories.AIR + categories.ENGINEER) - categories.COMMAND)
-            end
+            target = self:FindClosestUnit('Attack', 'Enemy', true, categories.MOBILE * (categories.AIR + categories.ENGINEER) - categories.COMMAND)
             if not target then
                 WaitSeconds(1)
                 return self:SCTALabAI()
@@ -2708,9 +2710,13 @@ Platoon = Class(SCTAAIPlatoon) {
         self:Stop()
         local aiBrain = self:GetBrain()
         local armyIndex = aiBrain:GetArmyIndex()
+        local Bomber = self:GetSquadUnits('Attack')
+        local Interceptor = self:GetSquadUnits('Artillery')
         local platoonUnits = self:GetPlatoonUnits()
         local target
-        if self.PlatoonData.Energy and EntityCategoryContains(categories.armhawk + categories.corvamp, platoonUnits) then
+        local targetBomb
+        local targetIntie
+        if self.PlatoonData.Energy and EntityCategoryContains(categories.armhawk + categories.corvamp, Interceptor) then
             self.EDrain = true
         end
         while aiBrain:PlatoonExists(self) do
@@ -2720,13 +2726,27 @@ Platoon = Class(SCTAAIPlatoon) {
         end
             target = self:FindClosestUnit('Attack', 'Enemy', true, categories.MOBILE * categories.COMMAND)
             if not target then
-                target = self:FindClosestUnit('Attack', 'Enemy', true, categories.LAND * categories.MOBILE - categories.SCOUT)
-            elseif not EntityCategoryContains(categories.BOMBER + categories.GROUNDATTACK, platoonUnits) then
-                target = self:FindClosestUnit('Attack', 'Enemy', true, categories.AIR * categories.MOBILE)
+                if Bomber > 0 then
+                WaitSeconds(0.5)
+                targetBomb = self:FindClosestUnit('Attack', 'Enemy', true, categories.LAND * categories.MOBILE - categories.SCOUT)
+                end
+                if Interceptor > 0 then
+                WaitSeconds(0.5)
+                targetIntie = self:FindClosestUnit('Artillery', 'Enemy', true, categories.MOBILE * categories.AIR)
+                end
             end
+            self:Stop()
             if target then
-                self:Stop()
                 self:AttackTarget(target)
+            elseif targetIntie and Interceptor > 0 and Bomber < 1 then
+                self:AttackTarget(targetIntie)
+            elseif targetBomb and Bomber > 0 then 
+                if not targetIntie then
+                    self:AttackTarget(targetBomb)
+                elseif Interceptor > 0 and targetIntie then
+                    self:AttackTarget(targetBomb, 'Attack')
+                    self:AttackTarget(targetIntie, 'Artillery')
+                end
             end
             WaitSeconds(5)
             self.EcoCheck = nil
@@ -2973,6 +2993,7 @@ Platoon = Class(SCTAAIPlatoon) {
     
                 if (EscortUnits and not EscortUnits.Dead) and not eng.Dead then
                     self:Stop('Guard')
+                    --EscortUnits.Escorting = true
                     IssueGuard({EscortUnits}, eng)
                 end
             --LOG('*SCTAEXPANSIONTA', locationType)
