@@ -132,11 +132,6 @@ UnitBlueprint {
 	    ProductionPerSecondEnergy = 10,
 	    NaturalProducer = true,
     },
-    Footprint = {
-        MaxSlope = 0.25,
-        SizeX = 1,
-        SizeZ = 1,
-    },
     General = {
         BuildBones = {
             AimBone = 0,

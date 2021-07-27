@@ -20,7 +20,7 @@ UnitBlueprint {
     },
     Weapon = {
         [1] = {
-            Damage = 100,
+            Damage = 30,
         },
         [2] = {
         }, 
