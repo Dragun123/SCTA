@@ -18,11 +18,6 @@ ARMXRAD = Class(TACloser) {
 		end
 	end,
 
-	OnStopBeingBuilt = function(self,builder,layer)
-		TACloser.OnStopBeingBuilt(self,builder,layer)
-		self:PlayUnitSound('Activate')
-	end,
-
 
 	OpeningState = State {
 		Main = function(self)

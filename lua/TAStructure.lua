@@ -261,7 +261,7 @@ TACloser = Class(TATarg) {
 	ClosingState = State {
 		Main = function(self)
 			TATarg.Fold(self)
-			self:PlayUnitSound('Activate')
+			self:PlayUnitSound('Deactivate')
 			ChangeState(self, self.IdleClosedState)
 		end,
 
