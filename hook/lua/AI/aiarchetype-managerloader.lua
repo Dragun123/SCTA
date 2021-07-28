@@ -28,7 +28,7 @@ function ExecutePlan(aiBrain)
 
         SetupMainBase(aiBrain)
 
-        # Get units out of pool and assign them to the managers
+        --Get units out of pool and assign them to the managers
         local mainManagers = aiBrain.BuilderManagers.MAIN
 
         local pool = aiBrain:GetPlatoonUniquelyNamed('ArmyPool')

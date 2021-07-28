@@ -94,23 +94,29 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                 else
                 unit.DesiresAssist = false
               end
-                if unit:GetBlueprint().Economy.KBot then
-                    self:SetupNewFactory(unit, 'KBot')
-                elseif unit:GetBlueprint().Economy.Vehicle then
-                    self:SetupNewFactory(unit, 'Vehicle')
-                elseif unit:GetBlueprint().Economy.Gantry then
-                    self:SetupNewFactory(unit, 'Gate')
-                elseif unit:GetBlueprint().Economy.Seaplane then
-                    self:SetupNewFactory(unit, 'Seaplane')
-                elseif unit:GetBlueprint().Economy.AirFactory then
-                    self:SetupNewFactory(unit, 'Air')
-                elseif unit:GetBlueprint().Economy.NavalFactory then
-                    self:SetupNewFactory(unit, 'Sea')
+              local bp = unit:GetBlueprint().Economy
+                if bp.KBot then
+                    self:SetupTANewFactory(unit, 'KBot')
+                elseif bp.Vehicle then
+                    self:SetupTANewFactory(unit, 'Vehicle')
+                elseif bp.Gantry then
+                    self:SetupTANewFactory(unit, 'Gate')
+                elseif bp.Seaplane then
+                    self:SetupTANewFactory(unit, 'Seaplane')
+                elseif bp.AirFactory then
+                    self:SetupTANewFactory(unit, 'Air')
+                elseif bp.NavalFactory then
+                    self:SetupTANewFactory(unit, 'Sea')
                 else
-                    self:SetupNewFactory(unit, 'Hover')
+                    self:SetupTANewFactory(unit, 'Hover')
                 end
                 self.LocationActive = true
             end
+        end,
+
+        SetupTANewFactory = function(self,unit,bType)
+            self:SetupFactoryCallbacks({unit}, bType)
+            self:ForkThread(self.DelayTARallyPoint, unit)
         end,
 
         GetFactoriesBuildingCategory = function(self, category, facCategory)
@@ -141,11 +147,15 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             return units
         end,
         
-----InitialVersion Below From LOUD
-        SetRallyPoint = function(self, factory)
-            if not self.Brain.SCTAAI then
-                return SCTAFactoryBuilderManager.SetRallyPoint(self, factory)
+        DelayTARallyPoint = function(self, factory)
+            WaitSeconds(1)
+            if not factory.Dead then
+                self:SetTARallyPoint(factory)
             end
+        end,
+
+----InitialVersion Below From LOUD
+        SetTARallyPoint = function(self, factory)
             WaitTicks(20)	  
             if not factory.Dead then
                 local position = factory:GetPosition()     
@@ -161,14 +171,14 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                 end           
                 --IssueClearFactoryCommands( {factory} )
                 IssueFactoryRallyPoint({factory}, rally)         
-                factory:ForkThread(self.TrafficControlThread, position, rally)
+                factory:ForkThread(self.TrafficControlTAThread, position, rally)
             end
         end,
     
         -- thread runs as long as the factory is alive and monitors the units at that
         -- factory rally point - ordering them into formation if they are not in a platoon
         -- this helps alleviate traffic issues and 'stuck' unit problems
-        TrafficControlThread = function(factory, factoryposition, rally)      
+        TrafficControlTAThread = function(factory, factoryposition, rally)      
             WaitTicks(30)   
             local GetOwnUnitsAroundPoint = import('/lua/ai/aiutilities.lua').GetOwnUnitsAroundPoint     
             local category = categories.MOBILE - categories.EXPERIMENTAL - categories.AIR - categories.ENGINEER
@@ -234,7 +244,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             for k,v in guards do
                 if not v.Dead and v.AssistPlatoon then
                     if self.Brain:PlatoonExists(v.AssistPlatoon) then
-                        v.AssistPlatoon:ForkThread(v.AssistPlatoon.EconAssistBody)
+                        v.AssistPlatoon:ForkThread(v.AssistPlatoon.TAEconAssistBody)
                     else
                         v.AssistPlatoon = nil
                     end
@@ -255,6 +265,33 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                 factory.TABuildingUnit = nil
             end
             self:TAAssignBuildOrder(factory,bType)
+        end,
+
+        FactoryDestroyed = function(self, factory)
+            if not self.Brain.SCTAAI then
+                return SCTAFactoryBuilderManager.FactoryDestroyed(self, factory)
+            end
+            local guards = factory:GetGuards()
+            for k,v in guards do
+                if not v.Dead and v.AssistPlatoon then
+                    if self.Brain:PlatoonExists(v.AssistPlatoon) then
+                        v.AssistPlatoon:ForkThread(v.AssistPlatoon.TAEconAssistBody)
+                    else
+                        v.AssistPlatoon = nil
+                    end
+                end
+            end
+            for k,v in self.FactoryList do
+                if v == factory then
+                    self.FactoryList[k] = nil
+                end
+            end
+            for k,v in self.FactoryList do
+                if not v.Dead then
+                    return
+                end
+            end
+            self.LocationActive = false
         end,
 
         FactoryFinishBuilding = function(self,factory,finishedUnit)

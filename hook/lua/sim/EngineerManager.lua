@@ -61,10 +61,68 @@ EngineerManager = Class(SCTAEngineerManager) {
 
     TAWait = function(unit, manager, ticks)
         coroutine.yield(ticks)
-        if unit.bType and not unit.Dead then
+        if not unit.Dead then
+            if unit.bType then
             manager:TAAssignEngineerTask(unit, unit.bType)
-        elseif not unit.Dead then
+            else 
             manager:AssignEngineerTask(unit)
+            end
+        end
+    end,
+
+    RemoveUnit = function(self, unit)
+        if not self.Brain.SCTAAI then
+            return SCTAEngineerManager.RemoveUnit(self, unit)
+        end
+        local guards = unit:GetGuards()
+        for k,v in guards do
+            if not v.Dead and v.AssistPlatoon then
+                if self.Brain:PlatoonExists(v.AssistPlatoon) then
+                    v.AssistPlatoon:ForkThread(v.AssistPlatoon.TAEconAssistBody)
+                else
+                    v.AssistPlatoon = nil
+                end
+            end
+        end
+
+        local found = false
+        for k,v in self.ConsumptionUnits do
+            if EntityCategoryContains(v.Category, unit) then
+                for num,sUnit in v.Units do
+                    if sUnit.Unit == unit then
+                        table.remove(v.Units, num)
+                        table.remove(v.UnitsList, num)
+                        v.Count = v.Count - 1
+                        found = true
+                        break
+                    end
+                end
+            end
+            if found then
+                break
+            end
+        end
+    end,
+
+    UnitConstructionFinished = function(self, unit, finishedUnit)
+        if not self.Brain.SCTAAI then
+            return SCTAEngineerManager.UnitConstructionFinished(self, unit, finishedUnit)
+        end
+        if EntityCategoryContains(categories.FACTORY, finishedUnit) and finishedUnit:GetAIBrain():GetArmyIndex() == self.Brain:GetArmyIndex() then
+            self.Brain.BuilderManagers[self.LocationType].FactoryManager:AddFactory(finishedUnit)
+        end
+        if finishedUnit:GetAIBrain():GetArmyIndex() == self.Brain:GetArmyIndex() then
+            self:AddUnit(finishedUnit)
+        end
+        local guards = unit:GetGuards()
+        for k,v in guards do
+            if not v.Dead and v.AssistPlatoon then
+                if self.Brain:PlatoonExists(v.AssistPlatoon) then
+                    v.AssistPlatoon:ForkThread(v.AssistPlatoon.TAEconAssistBody)
+                else
+                    v.AssistPlatoon = nil
+                end
+            end
         end
     end,
 
