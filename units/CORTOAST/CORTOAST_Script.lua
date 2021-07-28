@@ -19,7 +19,6 @@ CORTOAST = Class(TAPop) {
 			end,	
 
 			PlayFxWeaponPackSequence = function(self)
-				self.unit.Pack = 0.15
 				TAHide.PlayFxWeaponPackSequence(self)
 			end,	
 		},

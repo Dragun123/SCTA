@@ -37,7 +37,7 @@ UnitBlueprint {
         'SNIPEMODE',
     },
     Defense = {
-        DamageModifier = 0.15,
+        DamageModifier = 0.33,
         ArmorType = 'Structure',
         AirThreatLevel = 0,
         EconomyThreatLevel = 3,
@@ -184,6 +184,7 @@ UnitBlueprint {
         ReclaimTimeMultiplier = 1,
         WreckageLayers = {
             Land = true,
+            Water = true,
         },
     },
 }

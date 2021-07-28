@@ -7,20 +7,10 @@ local TAStructure = import('/mods/SCTA-master/lua/TAStructure.lua').TAStructure
 local TAPopLaser = import('/mods/SCTA-master/lua/TAweapon.lua').TAPopLaser
 
 CORDOOM = Class(TAStructure) {
-	OnCreate = function(self)
-		TAStructure.OnCreate(self)
-	end,
-
 	OnStopBeingBuilt = function(self,builder,layer)
 		TAStructure.OnStopBeingBuilt(self,builder,layer)
-		ForkThread(self.Fold, self)
-	end,
-
-	Fold = function(self)
 		TAStructure.Fold(self)
 	end,
-
-
 
 	Weapons = {
 		CORE_DOOMSDAY = Class(TAPopLaser) {

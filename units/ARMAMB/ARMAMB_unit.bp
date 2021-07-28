@@ -38,7 +38,7 @@ UnitBlueprint {
     },
     Defense = {
         ArmorType = 'Structure',
-        DamageModifier = 0.28,
+        DamageModifier = 0.33,
         AirThreatLevel = 0,
         EconomyThreatLevel = 3,
         SubThreatLevel = 0,
@@ -183,6 +183,7 @@ TechLevel = 'RULEUTL_Secret',
         ReclaimTimeMultiplier = 1,
         WreckageLayers = {
             Land = true,
+            Water = true,
         },
     },
 }

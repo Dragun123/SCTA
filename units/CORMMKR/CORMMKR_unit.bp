@@ -46,7 +46,7 @@ UnitBlueprint {
         'CORE',
     },
     Defense = {
-        DamageModifier = 1,
+        DamageModifier = 0.5,
         ArmorType = 'Structure',
         AirThreatLevel = 0,
         EconomyThreatLevel = 5,
@@ -102,7 +102,6 @@ UnitBlueprint {
     Physics = {
         BuildOnLayerCaps = {
             LAYER_Land = true,
-            LAYER_Water = true,
         },
         SkirtSizeX = 3, 
         SkirtSizeZ = 3, 
@@ -118,7 +117,7 @@ UnitBlueprint {
     StrategicIconSortPriority = 0,
     Weapon = {
         { #LARGE_BUILDINGEX
-            Damage = 1250,
+            Damage = 1000,
             DamageFriendly = true,
             DamageRadius = 5,
             DamageType = 'Normal',
@@ -127,12 +126,11 @@ UnitBlueprint {
         },
     },
         Wreckage = {
-Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+        Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/CORMMKR/CORMMKR_dead_prop.bp',
         WreckageLayers = {
             Land = true,
         },

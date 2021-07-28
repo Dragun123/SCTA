@@ -133,6 +133,7 @@ TechLevel = 'RULEUTL_Secret',
         ReclaimTimeMultiplier = 1,
         WreckageLayers = {
             Land = true,
+            Seabed = true,
         },
     },
 }

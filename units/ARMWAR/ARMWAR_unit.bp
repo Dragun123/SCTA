@@ -246,7 +246,6 @@ Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/ARMWAR/ARMWAR_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Seabed = true,

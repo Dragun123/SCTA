@@ -115,22 +115,20 @@ UnitBlueprint {
     StrategicIconSortPriority = 0,
     Weapon = {
         { #SMALL_UNITEX
-        Damage = 30,
+        Damage = 50,
         DamageFriendly = true,
         DamageRadius = 3,
         DamageType = 'Normal',
         DummyWeapon = true,
         Label = 'DeathWeapon',
         },
-
     },
-        Wreckage = {
-Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+    Wreckage = {
+        Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/CORVOYR/CORVOYR_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Seabed = true,

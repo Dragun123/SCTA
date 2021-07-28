@@ -43,7 +43,7 @@ UnitBlueprint {
 	    'SORTINTEL',
     },
     Defense = {
-        DamageModifier = 1,
+        DamageModifier = 0.5,
         ArmorType = 'Structure',
         AirThreatLevel = 0,
         EconomyThreatLevel = 40,
