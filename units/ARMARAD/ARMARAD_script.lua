@@ -1,8 +1,8 @@
-local TATarg = import('/mods/SCTA-master/lua/TAStructure.lua').TATarg
+local TACloser = import('/mods/SCTA-master/lua/TAStructure.lua').TACloser
 
-ARMARAD = Class(TATarg) {
+ARMARAD = Class(TACloser) {
 	OnCreate = function(self)
-		TATarg.OnCreate(self)
+		TACloser.OnCreate(self)
 		self.Spinners = {
 			arm1 = CreateRotator(self, 'dish1', 'x', nil, 0, 0, 0),
 			arm2 = CreateRotator(self, 'dish2', 'x', nil, 0, 0, 0),
@@ -19,29 +19,14 @@ ARMARAD = Class(TATarg) {
 	end,
 
 	OnStopBeingBuilt = function(self,builder,layer)
-		TATarg.OnStopBeingBuilt(self,builder,layer)
-		ForkThread(self.StartSpin, self)
+		TACloser.OnStopBeingBuilt(self,builder,layer)
 		self:PlayUnitSound('Activate')
 	end,
 
-	OnScriptBitSet = function(self, bit)
-		if bit == 3 then
-			self:PlayUnitSound('Deactivate')
-			self.StopSpin(self)
-		end
-		TATarg.OnScriptBitSet(self, bit)
-	end,
 
-
-	OnScriptBitClear = function(self, bit)
-		if bit == 3 then
-			self:PlayUnitSound('Activate')
-			ForkThread(self.StartSpin, self)
-		end
-		TATarg.OnScriptBitClear(self, bit)
-	end,
-
-	StartSpin = function(self)
+	OpeningState = State {
+		Main = function(self)
+			self:EnableIntel('Radar')
 			--SPIN turret around y-axis  SPEED <20.00>;
 			self.Sliders.post:SetGoal(0,0,0)
 			self.Sliders.post:SetSpeed(16)
@@ -56,19 +41,22 @@ ARMARAD = Class(TATarg) {
 			--SPIN arm2 around x-axis  SPEED <-100.02>;
 			self.Spinners.arm2:SetSpeed(45)
 			self.Spinners.arm2:ClearGoal()
+			TACloser.OpeningState.Main(self)
 	end,
+	},
 
-	StopSpin = function(self)
-			--SPIN turret around y-axis  SPEED <0.00>;
+	ClosingState = State {
+		Main = function(self)
+			self:DisableIntel('Radar')
 			self.Spinners.arm1:SetGoal(0)
-
-			--TURN dish2 to z-axis <0> SPEED <178.70>;
 			self.Spinners.arm2:SetGoal(0)
 
 			--MOVE post to y-axis <0> SPEED <19.00>;
 			self.Sliders.post:SetGoal(0,-9,0)
 			self.Sliders.post:SetSpeed(19)
-	end,
+			TACloser.ClosingState.Main(self)
+		end,
+	},
 }
 
 TypeClass = ARMARAD

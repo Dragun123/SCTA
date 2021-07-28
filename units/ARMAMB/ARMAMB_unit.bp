@@ -38,7 +38,7 @@ UnitBlueprint {
     },
     Defense = {
         ArmorType = 'Structure',
-        DamageModifier = 0.28,
+        DamageModifier = 0.33,
         AirThreatLevel = 0,
         EconomyThreatLevel = 3,
         SubThreatLevel = 0,
@@ -174,17 +174,16 @@ TechLevel = 'RULEUTL_Secret',
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-
     },
         Wreckage = {
-Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+        Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/ARMAMB/ARMAMB_dead_prop.bp',
         WreckageLayers = {
             Land = true,
+            Water = true,
         },
     },
 }

@@ -43,10 +43,6 @@ ARMANNI = Class(TAStructure) {
 
 	OnStopBeingBuilt = function(self,builder,layer)
 		TAStructure.OnStopBeingBuilt(self,builder,layer)
-		ForkThread(self.Fold, self)
-	end,
-
-	Fold = function(self)
 		TAStructure.Fold(self)
 	end,
 

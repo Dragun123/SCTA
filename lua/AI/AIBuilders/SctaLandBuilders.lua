@@ -200,7 +200,7 @@ BuilderGroup {
     Builder {
     BuilderName = 'SCTAAi FactoryT3 KBot',
     PlatoonTemplate = 'T3LandDFTankSCTA',
-    Priority = 150,
+    Priority = 155,
     PriorityFunction = TAPrior.ProductionT3,
     InstanceCount = 1,
     DelayEqualBuildPlattons = {'FactoryProductionSCTA', 1},
@@ -213,7 +213,7 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTAAi FactoryT3 Bot Sniper',
         PlatoonTemplate = 'T3LandDFBotSCTA',
-        Priority = 100,
+        Priority = 145,
         PriorityFunction = TAPrior.ProductionT3,
         InstanceCount = 1,
         DelayEqualBuildPlattons = {'ArtillerySCTA', 1},
@@ -227,7 +227,7 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTAAi FactoryT3 Vehicle Artillery',
         PlatoonTemplate = 'T3LandDFVehicleSCTA',
-        Priority = 100,
+        Priority = 140,
         InstanceCount = 1,
         PriorityFunction = TAPrior.ProductionT3,
         DelayEqualBuildPlattons = {'ArtillerySCTA', 1},
@@ -241,7 +241,7 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTAAi FactoryT3 Tank Vehicle',
         PlatoonTemplate = 'T3LandDFTank2SCTA',
-        Priority = 150,
+        Priority = 160,
         InstanceCount = 1,
         PriorityFunction = TAPrior.ProductionT3,
         DelayEqualBuildPlattons = {'FactoryProductionSCTA', 1},

@@ -39,8 +39,8 @@ UnitBlueprint {
     },
     CollisionOffsetY = -0.5,
     Defense = {
-        DamageModifier = 1,
         ArmorType = 'Structure',
+        DamageModifier = 0.5,
         Health = 320,
         MaxHealth = 320,
         AirThreatLevel = 0,
@@ -48,7 +48,6 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    DamageReduction = 0.46,
     Description = 'Extended Sonar',
     Display = {
         Abilities = {

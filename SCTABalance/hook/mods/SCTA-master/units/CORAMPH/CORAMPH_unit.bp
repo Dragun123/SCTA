@@ -6,18 +6,19 @@ UnitBlueprint {
 },
 Economy = {
     BuildCostEnergy = 5000,
-    BuildCostMass = 500,
+    BuildCostMass = 600,
     BuildTime = 9000,
 },
     Weapon = {
         [1] = {
-            Damage = 50,
+            Damage = 120,
+            RateOfFire = 0.66,
             MaxRadius = 24,
             EnergyDrainPerSecond = 40,
             EnergyRequired = 40,
         },   
         [2] = {
-            Damage = 200,
+            Damage = 150,
             MaxRadius = 30,
         },
         [3] = {

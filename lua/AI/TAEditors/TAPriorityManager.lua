@@ -111,11 +111,11 @@ end
 
 ProductionT3Air = function(self, aiBrain)
     if Factory(aiBrain,  0, categories.GATE) and Factory(aiBrain,  0, CLOAKREACT) then
-        return 125
+        return 140
     elseif Factory(aiBrain,  0, PLATFORM) and Factory(aiBrain,  0, CLOAKREACT) then
-        return 105
+        return 130
     elseif aiBrain.Level3 and Factory(aiBrain,  2, FUSION) then 
-        return 100
+        return 125
     else
         return 0
     end
@@ -157,11 +157,11 @@ end
 
 ProductionT3 = function(self, aiBrain)
     if Factory(aiBrain,  0, categories.GATE) then
-        return 125
+        return 140
     elseif Factory(aiBrain,  0, PLATFORM) then
-        return 105    
+        return 125    
     elseif aiBrain.Level3 then
-        return 100
+        return 120
     else
         return 0
     end

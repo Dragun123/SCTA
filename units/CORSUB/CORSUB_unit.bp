@@ -192,20 +192,17 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-
     },
         Wreckage = {
-	---UseCustomMesh = true,
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/CORSUB/CORSUB_dead_prop.bp',
         WreckageLayers = {
             Water = true,
-	    Sub = true,
-	    Seabed = true,
+	        Sub = true,
+	        Seabed = true,
         },
     },
 }

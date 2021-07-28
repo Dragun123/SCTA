@@ -199,11 +199,13 @@ TechLevel = 'RULEUTL_Advanced',
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-
     },
     Wreckage = {
-        ---UseCustomMesh = true,
-        --Blueprint = '/mods/SCTA-master/units/CORSH/CORSH_dead_prop.bp',
+        Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
         WreckageLayers = {
             Land = true,
             Water = true,

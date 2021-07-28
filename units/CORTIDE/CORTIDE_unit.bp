@@ -107,16 +107,13 @@ TechLevel = 'RULEUTL_Basic',
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-         
     },
         Wreckage = {
-	---UseCustomMesh = true,
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/CORTIDE/CORTIDE_dead_prop.bp',
         WreckageLayers = {
             Water = true,
             Seabed = true,

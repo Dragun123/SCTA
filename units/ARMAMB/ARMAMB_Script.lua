@@ -212,8 +212,6 @@ ARMAMB = Class(TAPop) {
 				--TURN door4 to z-axis <-90.36> SPEED <225.96>;
 				self.unit.Spinners.door4:SetGoal(-90)
 				self.unit.Spinners.door4:SetSpeed(226)
-			
-				self.unit.Pack = 0.28
 				TAHide.PlayFxWeaponPackSequence(self)
 			end,	
 		},

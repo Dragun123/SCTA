@@ -273,7 +273,6 @@ TechLevel = 'RULEUTL_Basic',
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-
     },
         Wreckage = {
 	---UseCustomMesh = true,
@@ -282,7 +281,6 @@ TechLevel = 'RULEUTL_Basic',
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/ARMROY/ARMROY_dead_prop.bp',
         WreckageLayers = {
             Water = true,
 	    Sub = true,

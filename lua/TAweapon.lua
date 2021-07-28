@@ -112,6 +112,7 @@ TAHide = Class(TAweapon) {
     end,
 
     PlayFxWeaponPackSequence = function(self)
+        self.unit.Pack = self.bp.Defense.DamageModifier
         self.unit:EnableUnitIntel('RadarStealth')
         TAweapon.PlayFxWeaponPackSequence(self)
         self.unit:SetCollisionShape( 'Box',  self.bp.CollisionOffsetX or 0, self.bp.CollisionOffsetY or 0, self.bp.CollisionOffsetZ or 0, self.bp.SizeX * self.scale, ((self.bp.SizeY/self.bp.SizeY) * self.scale), self.bp.SizeZ * self.scale)
@@ -126,7 +127,7 @@ TAPopLaser = Class(TAweapon) {
     end,
 
     PlayFxWeaponPackSequence = function(self)
-        self.unit.Pack = 0.5
+        self.unit.Pack = self.unit:GetBlueprint().Defense.DamageModifier
         TAweapon.PlayFxWeaponPackSequence(self)
     end,
 }
@@ -401,7 +402,7 @@ TAAntiNukeWeapon = Class(TAMInterceptorWeapon) {
     end,
 
     PlayFxWeaponPackSequence = function(self)
-        self.unit.Pack = 0.5
+        self.unit.Pack = self.unit:GetBlueprint().Defense.DamageModifier
         TAMInterceptorWeapon.PlayFxWeaponPackSequence(self)
     end,
 

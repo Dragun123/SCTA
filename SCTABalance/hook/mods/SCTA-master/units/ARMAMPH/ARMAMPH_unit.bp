@@ -6,7 +6,7 @@ UnitBlueprint {
     },
     Economy = {
         BuildCostEnergy = 5000,
-        BuildCostMass = 500,
+        BuildCostMass = 620,
         BuildTime = 6600,
     },
     Intel = {
@@ -14,10 +14,10 @@ UnitBlueprint {
     },
     Weapon = {
         [1] = {
-            Damage = 105,
-            RateOfFire = 1,
+            Damage = 300,
         },
         [2] = {
+            Damage = 90,
             MaxRadius = 24, 
         },
         [3] = {
