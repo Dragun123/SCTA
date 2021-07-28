@@ -63,7 +63,7 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTAAI Factory Seaplane Fighter',
         PlatoonTemplate = 'T3AirFighterSCTA',
-        PriorityFunction = TAPrior.ProductionT3,
+        PriorityFunction = TAPrior.ProductionT3Air,
         Priority = 140,
         BuilderConditions = { -- Only make inties if the enemy air is strong.
         { TAutils, 'EcoManagementTA', { 0.75, 0.9} },
