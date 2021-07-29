@@ -11,7 +11,6 @@ ARMMH = Class(TASea) {
 		TASea.OnCreate(self)
 		self.Spinners = CreateRotator(self, 'Box', 'x', nil, 0, 0, 0)
 		self.Trash:Add(self.Spinners)
-		end
 	end,
 
 	Weapons = {
