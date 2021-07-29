@@ -45,13 +45,14 @@ UnitBlueprint {
     },
     Description = 'Increases Metal Storage',
     Display = {
+        AnimationWater = '/mods/SCTA-master/units/ARMMSTOR/ARMMSTOR_WaterTransform.sca',
+        AnimationWaterRate = 1, 
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
                 {
                     LODCutoff = 230,
-                    ShaderName = 'AeonCZAR', 
-		    NormalsName = '/mods/SCTA-master/textures/common/normalsTS.dds'
+                    ShaderName = 'Unit', 
                 },
             },
         },

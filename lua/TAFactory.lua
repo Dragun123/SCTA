@@ -110,22 +110,22 @@ end,
     }
     
     TASeaPlat = Class(TAFactory) {
-    OnStopBeingBuilt = function(self,builder,layer)
-        self.Sliders = {
-			chassis = CreateSlider(self, 0),
-		}
-		for k, v in self.Sliders do
-			self.Trash:Add(v)
-		end
-        TAFactory.OnStopBeingBuilt(self,builder,layer)
+    OnCreate = function(self)
+        TAFactory.OnCreate(self)
         self:DisableIntel('RadarStealth')
-        if layer == 'Water' then
+    end,   
+
+    OnLayerChange = function(self, new, old)
+        TAFactory.OnLayerChange(self, new, old)
+        if new == 'Water' then
+            self.Chassis = CreateSlider(self, 0)
+            self.Trash:Add(self.Chassis)
             self.bp = self:GetBlueprint()
             self.scale = 0.5
             self.Water = true
             self:WaterFall()
         end
-    end,   
+    end,
 
     Close = function(self)
 		TAFactory.Close(self)

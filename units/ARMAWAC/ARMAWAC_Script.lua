@@ -11,14 +11,9 @@ ARMAWAC = Class(TAIntelAir) {
 		TAIntelAir.OnCreate(self)
 		self.Spinners = {
 			radar = CreateRotator(self, 'radar', 'y', nil, 0, 0, 0),
-		}
-		self.Sliders = {
 			Rwing = CreateSlider(self, 'Rwing'),
 			Lwing = CreateSlider(self, 'Lwing'),
 		}
-		for k, v in self.Sliders do
-			self.Trash:Add(v)
-		end
 		for k, v in self.Spinners do
 			self.Trash:Add(v)
 		end
@@ -32,24 +27,24 @@ ARMAWAC = Class(TAIntelAir) {
 	OpenWings = function(self)
 
 		--MOVE Rwing to x-axis <4.45> SPEED <3.00>;
-		self.Sliders.Rwing:SetGoal(-3,0,0)
-		self.Sliders.Rwing:SetSpeed(3)
+		self.Spinners.Rwing:SetGoal(-3,0,0)
+		self.Spinners.Rwing:SetSpeed(3)
 
 		--MOVE Lwing to x-axis <-4.45> SPEED <3.00>;
-		self.Sliders.Lwing:SetGoal(3,0,0)
-		self.Sliders.Lwing:SetSpeed(3)
+		self.Spinners.Lwing:SetGoal(3,0,0)
+		self.Spinners.Lwing:SetSpeed(3)
 
 	end,
 
 	CloseWings = function(self)
 
 		--MOVE Rwing to x-axis <0> SPEED <3.00>;
-		self.Sliders.Rwing:SetGoal(0,0,0)
-		self.Sliders.Rwing:SetSpeed(3)
+		self.Spinners.Rwing:SetGoal(0,0,0)
+		self.Spinners.Rwing:SetSpeed(3)
 
 		--MOVE Lwing to x-axis <0> SPEED <3.00>;
-		self.Sliders.Lwing:SetGoal(0,0,0)
-		self.Sliders.Lwing:SetSpeed(3)
+		self.Spinners.Lwing:SetGoal(0,0,0)
+		self.Spinners.Lwing:SetSpeed(3)
 	end,
 }
 

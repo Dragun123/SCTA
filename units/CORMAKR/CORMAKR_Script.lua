@@ -10,14 +10,9 @@ CORMAKR = Class(TAStructure) {
 		TAStructure.OnCreate(self)
 		self.Sliders = {
 			chassis = CreateSlider(self, 0),
-		}
-		self.Spinners = {
 			plug = CreateRotator(self, 'plug', 'z', nil, 0, 0, 0),
 		}
 		for k, v in self.Sliders do
-			self.Trash:Add(v)
-		end
-		for k, v in self.Spinners do
 			self.Trash:Add(v)
 		end
 	end,
@@ -25,7 +20,11 @@ CORMAKR = Class(TAStructure) {
 	OnStopBeingBuilt = function(self,builder,layer)
 		TAStructure.OnStopBeingBuilt(self,builder,layer)
 		self:DisableIntel('RadarStealth')
-		if layer == 'Water' then
+	end,
+
+	OnLayerChange = function(self, new, old)
+		TAStructure.OnLayerChange(self, new, old)
+		if new == 'Water' then
 			self.bp = self:GetBlueprint()
 			self.scale = 0.5
 			self.Water = true
@@ -41,8 +40,8 @@ CORMAKR = Class(TAStructure) {
 			self:SetCollisionShape( 'Box', self.bp.CollisionOffsetX or 0,(self.bp.CollisionOffsetY + (self.bp.SizeY*0.5)) or 0,self.bp.CollisionOffsetZ or 0, self.bp.SizeX * self.scale, self.bp.SizeY * self.scale, self.bp.SizeZ * self.scale )
 			self:DisableIntel('RadarStealth')
 		end
-		self.Spinners.plug:SetGoal(0)
-		self.Spinners.plug:SetSpeed(60)
+		self.Sliders.plug:SetGoal(0)
+		self.Sliders.plug:SetSpeed(60)
 	end,
 
 	OnProductionPaused = function(self)	
@@ -55,8 +54,8 @@ CORMAKR = Class(TAStructure) {
 			self:SetCollisionShape( 'Box', self.bp.CollisionOffsetX or -5,(self.bp.CollisionOffsetY + (self.bp.SizeY*-0.25)) or 0,self.bp.CollisionOffsetZ or -5, self.bp.SizeX * self.scale, self.bp.SizeY * self.scale, self.bp.SizeZ * self.scale )
 			self:EnableIntel('RadarStealth')
 		end
-		self.Spinners.plug:SetGoal(180)
-		self.Spinners.plug:SetSpeed(60)
+		self.Sliders.plug:SetGoal(180)
+		self.Sliders.plug:SetSpeed(60)
 	end,
 }
 

@@ -14,14 +14,9 @@ ARMMMKR = Class(TACloser) {
 			lid3 = CreateRotator(self, 'lid3', 'x', nil, 0, 0, 0),
 			lid4 = CreateRotator(self, 'lid4', 'x', nil, 0, 0, 0),	
 			core = CreateRotator(self, 'Core', 'y', nil, 0, 0, 0),	
-		}
-		self.Sliders = {
-			core = CreateSlider(self, 'Core'),	
+			coreS = CreateSlider(self, 'Core'),	
 		}
 		for k, v in self.Spinners do
-			self.Trash:Add(v)
-		end
-		for k, v in self.Sliders do
 			self.Trash:Add(v)
 		end
 	end,
@@ -54,8 +49,8 @@ ARMMMKR = Class(TACloser) {
 			self.Spinners.core:SetGoal(-60.80)
 			self.Spinners.core:SetSpeed(39.39)
 
-			self.Sliders.core:SetGoal(0,15,0)
-			self.Sliders.core:SetSpeed(15)
+			self.Spinners.coreS:SetGoal(0,15,0)
+			self.Spinners.coreS:SetSpeed(15)
 
 			--TURN mmakercore to y-axis <-90.00> SPEED <37.67>;
 			self.Spinners.core:SetGoal(-90.00)
@@ -75,8 +70,8 @@ ARMMMKR = Class(TACloser) {
 			self.Spinners.core:SetSpeed(42.74)
 
 			--MOVE mmakercore to y-axis <0> SPEED <7.00>;
-			self.Sliders.core:SetGoal(0,0,0)
-			self.Sliders.core:SetSpeed(15)
+			self.Spinners.coreS:SetGoal(0,0,0)
+			self.Spinners.coreS:SetSpeed(15)
 
 			--TURN lid1 to x-axis <0> SPEED <51.35>;
 			self.Spinners.lid1:SetGoal(0)
