@@ -235,6 +235,7 @@ BuilderGroup {
             --{ TAutils, 'LessMassStorageMaxTA',  { 0.2}},   
         },
         BuilderData = {
+            TAEscort = true,
             Layer = 'Land', 
             LocationType = 'LocationType',
             ReclaimTime = 30,

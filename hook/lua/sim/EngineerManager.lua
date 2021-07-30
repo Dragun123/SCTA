@@ -283,13 +283,18 @@ EngineerManager = Class(SCTAEngineerManager) {
             if hndl.PlatoonData.TAEscort and not self.Brain.Level2 then
                 ---LOG('*TABrain', self.Brain.Plants)
                 --local Escort = self.Brain:GetUnitsAroundPoint((categories.LAND * categories.MOBILE * (categories.SILO + categories.DIRECTFIRE)) - categories.SCOUT - categories.corak - categories.armpw - categories.armflash - categories.corgator - categories.ENGINEER, unit:GetPosition(), 20, 'Ally')[1]
-                local Escorts = self.Brain:GetUnitsAroundPoint(categories.LAND * categories.MOBILE * categories.SILO, unit:GetPosition(), 50, 'Ally') 
+                ---This final major fish to fry in terms of ai working correctly
+                ---the code here grabs nearest missile base TA Units (Relavent units are Storms, and the T1 AntiAir Mobile). And have them protect the engineeer
+                ---This will protect the engineer from bombers and labs. 
+                ---Experimenting with the location of the unit vs location of the manager
+                local Escorts = self.Brain:GetUnitsAroundPoint(categories.LAND * categories.MOBILE * categories.SILO, self.Location, 25, 'Ally') 
                 --return
                 --local Escort = table.remove(Escort, Escort.Escorting)
                 for _,Escort in Escorts do
                     if Escort and not Escort.Escorting then 
                     Escort.Escorting = true
                     self.Brain:AssignUnitsToPlatoon(hndl, {Escort}, 'Guard', 'none')
+                    ---break here to ensure only first LEGAL option is the one grabbed 
                     break
                     --WaitSeconds(3)
                     --Escort.Escorting = nil
