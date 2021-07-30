@@ -173,7 +173,7 @@ Platoon = Class(SCTAAIPlatoon) {
     TAEconUnfinishedBody = function(self)
         local aiBrain = self:GetBrain()
         local eng = self:GetSquadUnits('Support')[1]
-        local EscortUnits = self:GetSquadUnits('Guard')[1]
+        --local EscortUnits = self:GetSquadUnits('Guard')[1]
         if not eng or eng.Dead then
             coroutine.yield(1)
             self:PlatoonDisbandTA()
