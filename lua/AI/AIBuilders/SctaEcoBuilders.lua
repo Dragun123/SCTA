@@ -192,7 +192,7 @@ BuilderGroup {
         BuilderName = 'SCTAAI T3Engineer Pgen',
         PlatoonTemplate = 'EngineerBuilderSCTA3',
         Priority = 500,
-        PriorityFunction = TAPrior.GantryConstruction,
+        PriorityFunction = TAPrior.ProductionT3,
         InstanceCount = 2,
         BuilderConditions = {
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, CLOAKREACT} },

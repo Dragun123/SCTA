@@ -173,7 +173,7 @@ Platoon = Class(SCTAAIPlatoon) {
     TAEconUnfinishedBody = function(self)
         local aiBrain = self:GetBrain()
         local eng = self:GetSquadUnits('Support')[1]
-        local EscortUnits = self:GetSquadUnits('Guard')[1]
+        --local EscortUnits = self:GetSquadUnits('Guard')[1]
         if not eng or eng.Dead then
             coroutine.yield(1)
             self:PlatoonDisbandTA()
@@ -300,12 +300,9 @@ Platoon = Class(SCTAAIPlatoon) {
             coroutine.yield(1)
             self:PlatoonDisbandTA()
             return
-        end
-
-           
-        if (EscortUnits and not EscortUnits.Dead) and not eng.Dead then
+        elseif EscortUnits and not EscortUnits.Dead then
             self:Stop('Guard')
-            --EscortUnits.Escorting = true
+            ---EscortUnits.Escorting = true
             IssueGuard({EscortUnits}, eng)
         end
 
@@ -1776,7 +1773,7 @@ Platoon = Class(SCTAAIPlatoon) {
             v.UnitBeingBuilt = nil
             v.ReclaimInProgress = nil
             v.CaptureInProgress = nil
-            v.Escort = nil
+            v.Escorting = nil
             v.AssigningTask = nil
             if v:IsPaused() then
                 v:SetPaused( false )
@@ -2997,13 +2994,11 @@ Platoon = Class(SCTAAIPlatoon) {
                 coroutine.yield(1)
                 self:PlatoonDisbandTA()
                 return
+            elseif EscortUnits and not EscortUnits.Dead then
+                self:Stop('Guard')
+                ---EscortUnits.Escorting = true
+                IssueGuard({EscortUnits}, eng)
             end
-    
-                if (EscortUnits and not EscortUnits.Dead) and not eng.Dead then
-                    self:Stop('Guard')
-                    --EscortUnits.Escorting = true
-                    IssueGuard({EscortUnits}, eng)
-                end
             --LOG('*SCTAEXPANSIONTA', locationType)
             --eng.BadReclaimables = eng.BadReclaimables or {}
     

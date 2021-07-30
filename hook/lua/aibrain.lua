@@ -203,4 +203,12 @@ AIBrain = Class(SCTAAIBrainClass) {
             return SCTAAIBrainClass.InitializeEconomyState(self)
         end
     end,
+
+    OnDefeat = function(self)
+        SCTAAIBrainClass.OnDefeat(self)
+        self.Labs = nil
+        self.Plants = nil
+        self.Level2 = nil
+        self.Level3 = nil
+    end, 
 }

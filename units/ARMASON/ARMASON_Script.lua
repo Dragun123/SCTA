@@ -11,16 +11,11 @@ ARMASON = Class(TACloser) {
 		TACloser.OnCreate(self)
 		self.Spinners = {
 			wheel = CreateRotator(self, 'wheel', 'y', nil, 0, 0, 0),
-		}
-		self.Sliders = {
 			base = CreateSlider(self, 'ARMASON'),
 		}
 		self.AnimManip = CreateAnimator(self)
 		self.Trash:Add(self.AnimManip)
 		for k, v in self.Spinners do
-			self.Trash:Add(v)
-		end
-		for k, v in self.Sliders do
 			self.Trash:Add(v)
 		end
 	end,
@@ -41,8 +36,8 @@ ARMASON = Class(TACloser) {
 			self.AnimManip:SetRate(self:GetBlueprint().Display.AnimationRepackRate)
 		
 				--MOVE base to y-axis <-15.00> SPEED <5.00>;
-				self.Sliders.base:SetGoal(0,-15,0)
-				self.Sliders.base:SetSpeed(5)
+				self.Spinners.base:SetGoal(0,-15,0)
+				self.Spinners.base:SetSpeed(5)
 		
 				--STOP-SPIN wheel around y-axis;
 				self.Spinners.wheel:SetSpeed(0)
@@ -60,8 +55,8 @@ ARMASON = Class(TACloser) {
 			self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationUnpack)
 			self.AnimManip:SetRate(1 * (self:GetBlueprint().Display.AnimationUnpackRate or 0.2))
 		--MOVE base to y-axis <0> SPEED <5.00>;
-		self.Sliders.base:SetGoal(0,0,0)
-		self.Sliders.base:SetSpeed(5)
+		self.Spinners.base:SetGoal(0,0,0)
+		self.Spinners.base:SetSpeed(5)
 
 		--SPIN wheel around y-axis  SPEED <60.01>;
 		self.Spinners.wheel:SetSpeed(60)

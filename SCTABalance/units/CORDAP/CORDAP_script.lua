@@ -6,19 +6,9 @@
 local TAFactory = import('/mods/SCTA-master/lua/TAFactory.lua').TAFactory
 
 CORDAP = Class(TAFactory) {
-	OnCreate = function(self)
-		self.Spinners = {
-			dish = CreateRotator(self, 'dish', 'y', nil, 0, 0, 0),
-		}
-		for k, v in self.Spinners do
-			self.Trash:Add(v)
-		end
-	TAFactory.OnCreate(self)
-	end,
-	
 	OnStopBeingBuilt = function(self,builder,layer)
 		TAFactory.OnStopBeingBuilt(self,builder,layer)
-		self.Spinners.dish:SetSpeed(150)
+		self.Trash:Add(CreateRotator(self, 'dish', 'y', nil, 150, 0, 0))
 	end,
 }
 

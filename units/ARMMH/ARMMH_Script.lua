@@ -9,12 +9,8 @@ local TAweapon = import('/mods/SCTA-master/lua/TAweapon.lua').TAweapon
 ARMMH = Class(TASea) {
 	OnCreate = function(self)
 		TASea.OnCreate(self)
-		self.Spinners = {
-			box = CreateRotator(self, 'Box', 'x', nil, 0, 0, 0),
-		}
-		for k, v in self.Spinners do
-			self.Trash:Add(v)
-		end
+		self.Spinners = CreateRotator(self, 'Box', 'x', nil, 0, 0, 0)
+		self.Trash:Add(self.Spinners)
 	end,
 
 	Weapons = {
@@ -24,9 +20,9 @@ ARMMH = Class(TASea) {
 
 
 				--TURN box to x-axis <-90.00> SPEED <8.91>
-				self.unit.Spinners.box:SetGoal(-90.00)
-				self.unit.Spinners.box:SetSpeed(45)
-				WaitFor(self.unit.Spinners.box)
+				self.unit.Spinners:SetGoal(-90.00)
+				self.unit.Spinners:SetSpeed(45)
+				WaitFor(self.unit.Spinners)
 
 				--SLEEP <16>
 
@@ -34,9 +30,9 @@ ARMMH = Class(TASea) {
 			end,
 
 			PlayFxWeaponPackSequence = function(self)
-				self.unit.Spinners.box:SetGoal(0)
-				self.unit.Spinners.box:SetSpeed(90)
-				WaitFor(self.unit.Spinners.box)
+				self.unit.Spinners:SetGoal(0)
+				self.unit.Spinners:SetSpeed(90)
+				WaitFor(self.unit.Spinners)
 				--SLEEP <13>
 				TAweapon.PlayFxWeaponPackSequence(self)
 			end,

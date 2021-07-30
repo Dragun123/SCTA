@@ -12,16 +12,11 @@ ARMMSHIP = Class(TASea) {
 		TASea.OnCreate(self)
 		self.Spinners = {
 			launcher1 = CreateRotator(self, 'launcher1', 'x', nil, 0, 0, 0),
-		}
-		self.Sliders = {
 			door1 = CreateSlider(self, 'door1'),
 			door2 = CreateSlider(self, 'door2'),
 			plate = CreateSlider(self, 'plate'),
 		}
 		for k, v in self.Spinners do
-			self.Trash:Add(v)
-		end
-		for k, v in self.Sliders do
 			self.Trash:Add(v)
 		end
 		self.currentShot = 0
@@ -49,17 +44,17 @@ ARMMSHIP = Class(TASea) {
 
 			PlayFxWeaponUnpackSequence = function(self)
 				--MOVE door1 to x-axis <4.19> SPEED <6.00>;
-				self.unit.Sliders.door1:SetGoal(-4.19,0,0)
-				self.unit.Sliders.door1:SetSpeed(6)
+				self.unit.Spinners.door1:SetGoal(-4.19,0,0)
+				self.unit.Spinners.door1:SetSpeed(6)
 
 				--MOVE door2 to x-axis <-4.35> SPEED <7.00>;
-				self.unit.Sliders.door2:SetGoal(4.19,0,0)
-				self.unit.Sliders.door2:SetSpeed(6)
+				self.unit.Spinners.door2:SetGoal(4.19,0,0)
+				self.unit.Spinners.door2:SetSpeed(6)
 
 
 				--MOVE plate to y-axis <4.34> SPEED <7.00>;
-				self.unit.Sliders.plate:SetGoal(0,4.34,0)
-				self.unit.Sliders.plate:SetSpeed(7)
+				self.unit.Spinners.plate:SetGoal(0,4.34,0)
+				self.unit.Spinners.plate:SetSpeed(7)
 
 				self.unit:ShowBone('rocket1', true)
 				self.unit:ShowBone('rocket2', true)
@@ -81,19 +76,19 @@ ARMMSHIP = Class(TASea) {
 				self.unit.Spinners.launcher1:SetSpeed(120)
 
 				--MOVE plate to y-axis <0> SPEED <7.00>;
-				self.unit.Sliders.plate:SetGoal(0,0,0)
-				self.unit.Sliders.plate:SetSpeed(7)
+				self.unit.Spinners.plate:SetGoal(0,0,0)
+				self.unit.Spinners.plate:SetSpeed(7)
 
 				--SLEEP <600>;
 				WaitSeconds(1)
 
 				--MOVE door1 to x-axis <0> SPEED <6.00>;
-				self.unit.Sliders.door1:SetGoal(0,0,0)
-				self.unit.Sliders.door1:SetSpeed(6)
+				self.unit.Spinners.door1:SetGoal(0,0,0)
+				self.unit.Spinners.door1:SetSpeed(6)
 
 				--MOVE door2 to x-axis <0> SPEED <7.00>;
-				self.unit.Sliders.door2:SetGoal(0,0,0)
-				self.unit.Sliders.door2:SetSpeed(6)
+				self.unit.Spinners.door2:SetGoal(0,0,0)
+				self.unit.Spinners.door2:SetSpeed(6)
 
 
 				TAweapon.PlayFxWeaponPackSequence(self)

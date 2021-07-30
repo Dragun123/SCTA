@@ -36,11 +36,11 @@ BuilderGroup {
         },
         BuilderType = 'LandTA',
         BuilderData = {
+            TAEscort = true,
             Construction = {
                 BuildClose = false,
                 BaseTemplate = ExBaseTmpl,
                 ExpansionBase = true,
-                TAEscort = true,
                 NearMarkerType = 'Start Location',
                 ExpansionRadius = 100, -- Defines the radius of the builder managers to avoid them intruding on another base if the expansion marker is too close
                 LocationRadius = 1000,
@@ -69,11 +69,11 @@ BuilderGroup {
         },
         BuilderType = 'LandTA',
         BuilderData = {
+            TAEscort = true,
             Construction = {
                 BuildClose = false,
                 BaseTemplate = ExBaseTmpl,
                 ExpansionBase = true,
-                TAEscort = true,
                 NearMarkerType = 'Expansion Area',
                 ExpansionRadius = 100, -- Defines the radius of the builder managers to avoid them intruding on another base if the expansion marker is too close
                 LocationRadius = 1000,
