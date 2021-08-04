@@ -41,6 +41,7 @@ AIBrain = Class(SCTAAIBrainClass) {
         FormManagerSCTA = function(aiBrain)
             ---local aiBrain = self
             --LOG('BEGINNING SCTA FORMMANAGER')
+            --_ALERT('TABrain', aiBrain.SCTAAI)
                 aiBrain.SeaForm = 0
                 aiBrain.StructureForm = 0
                 aiBrain.Other = 0
@@ -77,7 +78,7 @@ AIBrain = Class(SCTAAIBrainClass) {
                     WaitTicks(1)
                     checks.StructureForm = checks.StructureForm + 5
                 end
-                if aiBrain.Other < 1 and checks.Other < 1 and aiBrain.Level3 then
+                if aiBrain.Other < 1 and checks.Other < 1 and (aiBrain.Level3) then
                     aiBrain.Other = GetCurrentUnits(aiBrain, categories.EXPERIMENTAL * categories.MOBILE)
                     WaitTicks(1)
                     checks.Other = checks.Other + 10
@@ -206,9 +207,11 @@ AIBrain = Class(SCTAAIBrainClass) {
 
     OnDefeat = function(self)
         SCTAAIBrainClass.OnDefeat(self)
+        if self.SCTAAI then
         self.Labs = nil
         self.Plants = nil
         self.Level2 = nil
         self.Level3 = nil
+        end
     end, 
 }

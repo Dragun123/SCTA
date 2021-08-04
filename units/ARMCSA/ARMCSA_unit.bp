@@ -71,7 +71,6 @@ UnitBlueprint {
     Categories = {
         'SELECTABLE',
         'AIR',
-        'SELECTION', 
         'ARM',
         'TECH3',
         'ENGINEER',
@@ -128,7 +127,7 @@ UnitBlueprint {
         BuildableCategory = {
             'BUILTBYTIER3ENGINEER ARM',
         },
-        BuildRadius = 8,
+        MaxBuildDistance = 8,
         StorageEnergy = 50,
         StorageMass = 50,
 	ProductionPerSecondEnergy = 10,
@@ -170,7 +169,7 @@ UnitBlueprint {
     LifeBarOffset = 0.25,
     LifeBarSize = 2,
     Physics = {
-        Elevation = 4,
+        Elevation = 3,
         MotionType = 'RULEUMT_Air',
         GroundCollisionOffset = 1.6,
     MaxSpeed = 0.5, 

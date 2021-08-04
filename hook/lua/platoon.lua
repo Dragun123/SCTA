@@ -2417,11 +2417,9 @@ Platoon = Class(SCTAAIPlatoon) {
                 if PlatoonFormation != 'No Formation' then
                     --self:SetPlatoonFormationOverride('AttackFormation')
                     IssueFormAttack(platoonUnits, closestTarget, PlatoonFormation, 0)
-                elseif self.PlatoonData.AggressiveMove then
+                else
                     self:Stop()
                     self:AggressiveMoveToLocation(closestTarget)
-                else
-                    IssueAttack(platoonUnits, closestTarget)
                 end
                 cmdQ = {1}
             -- if we have nothing to do, try finding something to do

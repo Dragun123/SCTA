@@ -81,7 +81,6 @@ UnitBlueprint {
         'MOBILE',
 	    'CONSTRUCTION',
         'AIR',
-        'SELECTION',
         'ARM',
     },
     Defense = {
@@ -127,11 +126,11 @@ UnitBlueprint {
         BuildableCategory = {
             'BUILTBYTIER1FACTORY ARM',
         },
-        BuildRadius = 8,
+        MaxBuildDistance = 6,
         StorageEnergy = 5,
         StorageMass = 5,
-	ProductionPerSecondEnergy = 11,
-	NaturalProducer = true,
+	    ProductionPerSecondEnergy = 11,
+	    NaturalProducer = true,
     },
     General = {
         BuildBones = {
@@ -168,7 +167,7 @@ UnitBlueprint {
     LifeBarOffset = 0.25,
     LifeBarSize = 2,
     Physics = {
-        Elevation = 4,
+        Elevation = 3,
         MotionType = 'RULEUMT_Air',
         GroundCollisionOffset = 1.6,
     MaxSpeed = 0.5, 

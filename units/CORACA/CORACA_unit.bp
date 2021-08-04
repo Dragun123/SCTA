@@ -71,7 +71,6 @@ UnitBlueprint {
     Categories = {
         'SELECTABLE',
         'AIR',      
-        'SELECTION', 
         'CORE',
         'TECH2',
         'ENGINEER',
@@ -123,7 +122,7 @@ UnitBlueprint {
         BuildableCategory = {
             'BUILTBYTIER2FACTORY CORE',
         },
-        BuildRadius = 8,
+        MaxBuildDistance = 7,
         StorageEnergy = 25,
         StorageMass = 25,
 	ProductionPerSecondEnergy = 25,
@@ -165,7 +164,7 @@ TechLevel = 'RULEUTL_Advanced',
     LifeBarOffset = 0.25,
     LifeBarSize = 2,
     Physics = {
-        Elevation = 4,
+        Elevation = 3,
         MotionType = 'RULEUMT_Air',
         GroundCollisionOffset = 1.6,
     MaxSpeed = 0.5, 

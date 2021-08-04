@@ -13,7 +13,6 @@ UnitBlueprint {
         'MOBILE',
 	    'CONSTRUCTION',
 	    'LAND',
-	    'SELECTION', 
         'CORE',
         'BOT',
         'TANK',

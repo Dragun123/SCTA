@@ -58,7 +58,6 @@ UnitBlueprint {
 	},
     },
     Categories = {
-        'SELECTION', 
         'SELECTABLE',
         'VISIBLETORECON',
         'ENGINEER',
@@ -195,10 +194,11 @@ UnitBlueprint {
     LifeBarOffset = 0.5,
     LifeBarSize = 2,
     Physics = {
-	BackUpDistance = 0,
+        Climber = 'Air',
+	    BackUpDistance = 0,
         MaxSpeedReverse = 0,
-        MaxAcceleration = 5.4,
-        MaxBrake = 10.8,
+        MaxAcceleration = 2.25,
+        MaxBrake = 2.25,
         MaxSpeed = 2.25,
         MotionType = 'RULEUMT_Amphibious',
         StandUpright = true,

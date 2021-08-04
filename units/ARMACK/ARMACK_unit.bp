@@ -52,7 +52,6 @@ UnitBlueprint {
         'MOBILE',
 	    'CONSTRUCTION',
 	    'LAND',
-	    'SELECTION', 
     },
     Defense = {
         ArmorType = 'Normal',

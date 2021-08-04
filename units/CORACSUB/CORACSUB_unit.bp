@@ -49,7 +49,6 @@ UnitBlueprint {
         'PATROLHELPER',
         'SHOWQUEUE',
         'MOBILE',
-        'SELECTION',
         'CONSTRUCTION',
         'NAVAL',
         'SUBMERSIBLE',

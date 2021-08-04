@@ -24,11 +24,11 @@ function TAPlatoonAttackVector(aiBrain, platoon, bAggro)
         local usedTransports = false
         local position = platoon:GetPlatoonPosition()
         if (not path and reason == 'NoPath') or bNeedTransports then
-            usedTransports = SendPlatoonWithTransportsNoCheck(aiBrain, platoon, attackPos, true)
+            usedTransports = SendPlatoonWithTransportsNoCheckTA(aiBrain, platoon, attackPos, true)
         elseif VDist2Sq(position[1], position[3], attackPos[1], attackPos[3]) > 512*512 then
-            usedTransports = SendPlatoonWithTransportsNoCheck(aiBrain, platoon, attackPos, true)
+            usedTransports = SendPlatoonWithTransportsNoCheckTA(aiBrain, platoon, attackPos, true)
         elseif VDist2Sq(position[1], position[3], attackPos[1], attackPos[3]) > 256*256 then
-            usedTransports = SendPlatoonWithTransportsNoCheck(aiBrain, platoon, attackPos, false)
+            usedTransports = SendPlatoonWithTransportsNoCheckTA(aiBrain, platoon, attackPos, false)
         end
 
         if not usedTransports then
@@ -112,6 +112,170 @@ function PlatoonGenerateSafePathToSCTAAI(aiBrain, platoonLayer, start, destinati
     table.insert(finalPath, destination)
 
     return finalPath
+end
+
+
+
+function SendPlatoonWithTransportsNoCheckTA(aiBrain, platoon, destination, bRequired, bSkipLastMove)
+
+    GetMostRestrictiveLayer(platoon)
+
+    local units = platoon:GetPlatoonUnits()
+
+    if platoon.MovementLayer == 'Land' or platoon.MovementLayer == 'Amphibious' then
+
+        -- DUNCAN - commented out, why check it?
+        -- UVESO - If we reach this point, then we have either a platoon with Land or Amphibious MovementLayer.
+        --         Both are valid if we have a Land destination point. But if we have a Amphibious destination
+        --         point then we don't want to transport landunits.
+        --         (This only happens on maps without AI path markers. Path graphing would prevent this.)
+        if platoon.MovementLayer == 'Land' then
+            local terrain = GetTerrainHeight(destination[1], destination[2])
+            local surface = GetSurfaceHeight(destination[1], destination[2])
+            if terrain < surface then
+                return false
+            end
+        end
+
+        if not bRequired then
+            if AIUtils.TAGetTransports(platoon) == false then
+                aiBrain.WantTransports = true
+                return false
+            end
+        else
+            local counter = 0
+            local transportsNeeded = AIUtils.GetNumTransports(units)
+            local numTransportsNeeded = math.ceil((transportsNeeded.Small + (transportsNeeded.Medium * 2) + (transportsNeeded.Large * 4)) / 10)
+            if not aiBrain.NeedTransports then
+                aiBrain.NeedTransports = 0
+            end
+            aiBrain.NeedTransports = aiBrain.NeedTransports + numTransportsNeeded
+            if aiBrain.NeedTransports > 10 then
+                aiBrain.NeedTransports = 10
+            end
+            local bUsedTransports, overflowSm, overflowMd, overflowLg = AIUtils.TAGetTransports(platoon)
+            while not bUsedTransports and counter < 9 do #DUNCAN - was 6
+                # if we have overflow, dump the overflow and just send what we can
+                if not bUsedTransports and overflowSm+overflowMd+overflowLg > 0 then
+                    local goodunits, overflow = AIUtils.SplitTransportOverflow(units, overflowSm, overflowMd, overflowLg)
+                    local numOverflow = table.getn(overflow)
+                    if table.getn(goodunits) > numOverflow and numOverflow > 0 then
+                        local pool = aiBrain:GetPlatoonUniquelyNamed('ArmyPool')
+                        for _,v in overflow do
+                            if not v.Dead then
+                                aiBrain:AssignUnitsToPlatoon(pool, {v}, 'Unassigned', 'None')
+                            end
+                        end
+                        units = goodunits
+                    end
+                end
+                bUsedTransports, overflowSm, overflowMd, overflowLg = AIUtils.TAGetTransports(platoon)
+                if bUsedTransports then
+                    break
+                end
+                counter = counter + 1
+                WaitSeconds(10)
+                if not aiBrain:PlatoonExists(platoon) then
+                    aiBrain.NeedTransports = aiBrain.NeedTransports - numTransportsNeeded
+                    if aiBrain.NeedTransports < 0 then
+                        aiBrain.NeedTransports = 0
+                    end
+                    return false
+                end
+
+                local survivors = {}
+                for _,v in units do
+                    if not v.Dead then
+                        table.insert(survivors, v)
+                    end
+                end
+                units = survivors
+
+            end
+
+            aiBrain.NeedTransports = aiBrain.NeedTransports - numTransportsNeeded
+            if aiBrain.NeedTransports < 0 then
+                aiBrain.NeedTransports = 0
+            end
+
+            if bUsedTransports == false then
+                return false
+            end
+        end
+
+        local transportLocation = false
+
+        if bSkipLastMove then
+            transportLocation = destination
+        end
+
+        if not transportLocation then
+            transportLocation = AIUtils.AIGetClosestMarkerLocation(aiBrain, 'Land Path Node', destination[1], destination[3])
+        end
+        if not transportLocation then
+            transportLocation = AIUtils.AIGetClosestMarkerLocation(aiBrain, 'Transport Marker', destination[1], destination[3])
+        end
+
+        local useGraph = 'Land'
+        if not transportLocation then
+            # go directly to destination, do not pass go.  This move might kill you, fyi.
+            transportLocation = AIUtils.RandomLocation(destination[1],destination[3]) #Duncan - was platoon:GetPlatoonPosition()
+            useGraph = 'Air'
+        end
+
+        if transportLocation then
+            local minThreat = aiBrain:GetThreatAtPosition(transportLocation, 0, true)
+            if minThreat > 0 then
+                local threatTable = aiBrain:GetThreatsAroundPosition(transportLocation, 1, true, 'Overall')
+                for threatIdx,threatEntry in threatTable do
+                    if threatEntry[3] < minThreat then
+                        local terrain = GetTerrainHeight(threatEntry[1], threatEntry[2])
+                        local surface = GetSurfaceHeight(threatEntry[1], threatEntry[2])
+                        if terrain >= surface  then
+                           minThreat = threatEntry[3]
+                           transportLocation = {threatEntry[1], 0, threatEntry[2]}
+                       end
+                    end
+                end
+            end
+        end
+        local path, reason = PlatoonGenerateSafePathToSCTAAI(aiBrain, useGraph, transportLocation, destination, 200)
+        AIUtils.UseTransports(units, platoon:GetSquadUnits('Scout'), transportLocation, platoon)
+        for _,v in units do
+            if not v.Dead then
+                if v:IsUnitState('Attached') then
+                   WaitSeconds(2)
+                end
+            end
+        end
+
+        if not platoon or not aiBrain:PlatoonExists(platoon) then
+            return false
+        end
+        if not path then
+            if not bSkipLastMove then
+                platoon:AggressiveMoveToLocation(destination)
+                platoon.LastAttackDestination = {destination}
+            end
+        else
+            platoon.LastAttackDestination = path
+
+            local pathSize = table.getn(path)
+            for wpidx,waypointPath in path do
+                if wpidx == pathSize then
+                    if not bSkipLastMove then
+                        platoon:AggressiveMoveToLocation(waypointPath)
+                    end
+                else
+                    platoon:MoveToLocation(waypointPath, false)
+                end
+            end
+        end
+    else
+        return false
+    end
+
+    return true
 end
 
 function GeneratePathTA(aiBrain, startNode, endNode, threatType, threatWeight, destination, location)
