@@ -10,9 +10,6 @@ TAFactory = Class(FactoryUnit) {
     if __blueprints['armgant'] and not (EntityCategoryContains(categories.TECH3 + categories.GATE, self) or self:GetAIBrain().Level3) then
         TAutils.updateBuildRestrictions(self)
     end
-    if self:GetAIBrain().SCTAAI then
-        self.SCTAAIBrain = true
-    end
 end,
 
     OnStopBeingBuilt = function(self, builder, layer)
@@ -94,13 +91,6 @@ end,
 		CreateBuildEffects = function(self, unitBeingBuilt, order)
 			TAutils.CreateTAFactBuildingEffects( self, unitBeingBuilt, self.BuildEffectBones, self.BuildEffectsBag )
         end,
-
-        OnStopBeingCaptured = function(self, captor)
-            FactoryUnit.OnStopBeingCaptured(self, captor)
-            if self.SCTAAIBrain then
-                self:Kill()
-            end
-        end,
     }
     
     TASeaFactory = Class(TAFactory) {
@@ -169,16 +159,6 @@ TACarrier = Class(AircraftCarrier) {
     OnCreate = function(self)
         AircraftCarrier.OnCreate(self)
         self.BuildEffectBones = self:GetBlueprint().General.BuildBones.BuildEffectBones
-        if self:GetAIBrain().SCTAAI then
-            self.SCTAAIBrain = true
-        end
-    end,
-
-    OnStopBeingCaptured = function(self, captor)
-        AircraftCarrier.OnStopBeingCaptured(self, captor)
-        if self.SCTAAIBrain then
-            self:Kill()
-        end
     end,
 
     CreateBuildEffects = function(self, unitBeingBuilt, order)

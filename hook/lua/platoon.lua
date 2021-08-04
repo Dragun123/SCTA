@@ -3024,8 +3024,8 @@ Platoon = Class(SCTAAIPlatoon) {
                 local basePosition = brain.BuilderManagers[self.PlatoonData.LocationType].Position
                 self:MoveToLocation(AIUtils.RandomLocation(basePosition[1],basePosition[3]), false)
                 WaitSeconds(1)
-            end
                 self:PlatoonDisbandTA()
+                end
             end
         end,
 

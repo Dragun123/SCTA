@@ -279,13 +279,12 @@ TechLevel = 'RULEUTL_Basic',
             TargetRestrictDisallow = 'UNTARGETABLE',
         },
         { #SMALL_UNITEX #was big_unitx
-        Damage = 30,
+        Damage = 50,
         DamageFriendly = true,
         DamageRadius = 3,
         DamageType = 'Normal',
         DummyWeapon = true,
-        Label = 'DeathWeapon',
+        Label = 'DeathImpact',
         },
-
     },
 }

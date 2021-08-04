@@ -291,7 +291,7 @@ EngineerManager = Class(SCTAEngineerManager) {
                 --return
                 --local Escort = table.remove(Escort, Escort.Escorting)
                 for _,Escort in Escorts do
-                    if Escort and not Escort.Escorting then 
+                    if Escort and Escort.SCTAAIBrain and not Escort.Escorting then 
                     Escort.Escorting = true
                     self.Brain:AssignUnitsToPlatoon(hndl, {Escort}, 'Guard', 'none')
                     ---break here to ensure only first LEGAL option is the one grabbed 
