@@ -297,12 +297,16 @@ function TAReclaimablesInArea(aiBrain, locType, Mass)
         --return false
     --end
 
-    local ents = TAAIGetReclaimablesAroundLocation(aiBrain, locType)
-        if ents and not table.empty(ents) then
+    local ent = TAAIGetReclaimablesAroundLocation(aiBrain, locType)
+    if ent and not table.empty(ent) then    
+        for __, ents in ent do
+            if ents and not ents.SCTAAIBrain then
             return true
         else
-        return false
+            return false
+            end
         end
+    end
     else
         return false
     end
