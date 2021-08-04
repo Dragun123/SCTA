@@ -2417,11 +2417,9 @@ Platoon = Class(SCTAAIPlatoon) {
                 if PlatoonFormation != 'No Formation' then
                     --self:SetPlatoonFormationOverride('AttackFormation')
                     IssueFormAttack(platoonUnits, closestTarget, PlatoonFormation, 0)
-                elseif self.PlatoonData.AggressiveMove then
+                else
                     self:Stop()
                     self:AggressiveMoveToLocation(closestTarget)
-                else
-                    IssueAttack(platoonUnits, closestTarget)
                 end
                 cmdQ = {1}
             -- if we have nothing to do, try finding something to do
@@ -3024,8 +3022,8 @@ Platoon = Class(SCTAAIPlatoon) {
                 local basePosition = brain.BuilderManagers[self.PlatoonData.LocationType].Position
                 self:MoveToLocation(AIUtils.RandomLocation(basePosition[1],basePosition[3]), false)
                 WaitSeconds(1)
-            end
                 self:PlatoonDisbandTA()
+                end
             end
         end,
 

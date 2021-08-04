@@ -157,7 +157,7 @@ UnitBlueprint {
         FactionName = 'CORE',
         UnitName = 'Commander',
         Icon = 'land',
-TechLevel = 'RULEUTL_Advanced',
+        TechLevel = 'RULEUTL_Advanced',
     },
     Intel = {
         ActiveIntel = {
@@ -177,6 +177,7 @@ TechLevel = 'RULEUTL_Advanced',
         LayerChangeOffsetHeight = -2.00,
 	    BackUpDistance = 0,
         MaxSpeedReverse = 0,
+        Climber = 'Air',
         MaxAcceleration = 2.25,
         MaxBrake = 2.25,
         MaxSpeed = 2.25,

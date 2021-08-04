@@ -49,13 +49,11 @@ UnitBlueprint {
         'PATROLHELPER',
         'SHOWQUEUE',
         'MOBILE',
-        'SELECTION',
 	    'CONSTRUCTION',
         'NAVAL',
         'SUBMERSIBLE',
         'T2SUBMARINE',
         'OVERLAYSONAR',
-        'SELECTION',
     },
     Defense = {
         ArmorType = 'Normal',

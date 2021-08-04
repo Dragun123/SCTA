@@ -51,7 +51,6 @@ UnitBlueprint {
         'MOBILE',
 	    'CONSTRUCTION',
 	    'LAND',
-	    'SELECTION',
         'CORE',
     },
     Defense = {

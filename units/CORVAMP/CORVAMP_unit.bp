@@ -300,8 +300,7 @@ UnitBlueprint {
             DamageRadius = 3,
             DamageType = 'Normal',
             DummyWeapon = true,
-            Label = 'DeathWeapon',
+            Label = 'DeathImpact',
         }, 
-
     },
 }

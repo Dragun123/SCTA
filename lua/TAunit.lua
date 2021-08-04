@@ -1,6 +1,5 @@
 #Generic TA unit
 local Unit = import('/lua/sim/Unit.lua').Unit
-local FireState = import('/lua/game.lua').FireState
 local TADeath = import('/mods/SCTA-master/lua/TADeath.lua')
 local explosion = import('/lua/defaultexplosions.lua')
 local Wreckage = import('/lua/wreckage.lua')
@@ -13,21 +12,6 @@ TAunit = Class(Unit)
         --LOG(self._UnitName .. "(" .. self.Sync.id .. "):" .. msg)
    ---end,
 
-	OnCreate = function(self)
-        --self._UnitName = bp.General.UnitName
-        ---self:LOGDBG('TAUnit.OnCreate')
-        Unit.OnCreate(self)
-			if self:GetAIBrain().SCTAAI then
-				self:SetFireState(FireState.RETURN_FIRE)
-				self.SCTAAIBrain = true
-				----SCTAAIBrain is used for carious functions to check criteria including but not limited:
-				--Radar Targeting, Capturing Self Destruct, and otherwise 
-			else
-				self:SetFireState(FireState.GROUND_FIRE)
-			end
-		---LOG(self:GetBlueprint().Physics.MotionType)
-        end,
-
 	OnStopBeingBuilt = function(self,builder,layer)
         ---self:LOGDBG('TAUnit.OnStopBeingBuilt')
 		Unit.OnStopBeingBuilt(self,builder,layer)
@@ -38,13 +22,6 @@ TAunit = Class(Unit)
 	OnDamage = function(self, instigator, amount, vector, damageType)
 		Unit.OnDamage(self, instigator, amount * (self.Pack or 1), vector, damageType)
 	end,
-
-	OnStopBeingCaptured = function(self, captor)
-        Unit.OnStopBeingCaptured(self, captor)
-        if self.SCTAAIBrain then
-            self:Kill()
-        end
-    end,
 
 	OnIntelDisabled = function(self)
 		Unit.OnIntelDisabled(self)

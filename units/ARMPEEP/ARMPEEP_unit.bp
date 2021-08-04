@@ -169,8 +169,7 @@ TechLevel = 'RULEUTL_Basic',
             DamageRadius = 2,
             DamageType = 'Normal',
             DummyWeapon = true,
-            Label = 'DeathWeapon',
+            Label = 'DeathImpact',
         },
-
     },
 }

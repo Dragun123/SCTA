@@ -53,7 +53,6 @@ UnitBlueprint {
         'RECLAIMABLE',
         'PATROLHELPER',
         'SHOWQUEUE',
-        'SELECTION',
         'MOBILE',
 	    'CONSTRUCTION',
 	    'LAND',

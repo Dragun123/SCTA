@@ -10,6 +10,29 @@ local SyncroniseThread = function(self, interval, event, data)
     end
 end
 
+
+
+TAWeather = Class(TAStructure) 
+{
+OnKilled = function(self, instigator, type, overKillRatio)
+    ---felt might be needed to do this to stop threads from staying after death 
+    if self.ControlThread then
+    KillThread(self.ControlThread)
+    end
+    TAStructure.OnKilled(self, instigator, type, overKillRatio)
+end,
+
+OnStopBeingBuilt = function(self,builder,layer)
+    TAStructure.OnStopBeingBuilt(self,builder,layer)
+    ------------------------------------------------------------------------
+    -- Pre-setup
+    ------------------------------------------------------------------------
+    ---Both Tidals and Winds do this so creating shared function
+    self:SetProductionPerSecondEnergy(0)
+    --_ALERT(repr(self.Buffs))
+end,
+}
+--------------------------------------------------------------------------------
 local GetEstimateMapWaterRatioFromGrid = function(grid)
     --aibrain:GetMapWaterRatio()
     if not grid then grid = 4 end
@@ -29,19 +52,17 @@ local GetEstimateMapWaterRatioFromGrid = function(grid)
     end
     return watergrids / totalgrids
 end
-
 --------------------------------------------------------------------------------
 local TidalEnergyMin = false
 local TidalEnergyRange = false
 
-TATidal = Class(TAStructure) 
+TATidal = Class(TAWeather) 
 {
         OnStopBeingBuilt = function(self,builder,layer)
-        TAStructure.OnStopBeingBuilt(self,builder,layer)
+        TAWeather.OnStopBeingBuilt(self,builder,layer)
         ------------------------------------------------------------------------
         -- Pre-setup
         ------------------------------------------------------------------------
-        self:SetProductionPerSecondEnergy(0)
         ------------------------------------------------------------------------
         -- Calculate energy values
         ------------------------------------------------------------------------
@@ -76,15 +97,28 @@ TATidal = Class(TAStructure)
         ------------------------------------------------------------------------
         -- Run the thread
         ------------------------------------------------------------------------
-        self:SetProductionPerSecondEnergy(TidalEnergyMin)
+        self:SetProductionPerSecondEnergy(TidalEnergyMin *
+        (self.EnergyProdAdjMod or 1))
+        ---EnergyProdAdjMod is EnergyProductionAdjustModifier not EnergyProductionAdjacencyModifier 
+        ---Not Having it here meant no benefits from cheat modifiers 
+        ---->< Okay moving. Thankfully its an easish fix. Just So very angry at myself
+        ---Got to make sure everything works correclty now.
         if TidalEnergyRange >= 0.1 then
-            self:ForkThread(SyncroniseThread,60,self.OnWeatherInterval,self)
+            self.ControlThread = self:ForkThread(SyncroniseThread,60,self.OnWeatherInterval,self)
         end
     end,
 
     OnWeatherInterval = function(self)
+        if not self.Dead then
         local power = TidalEnergyMin + ((math.sin(GetGameTimeSeconds()) + 1) * TidalEnergyRange * 0.5)
-        self:SetProductionPerSecondEnergy( power )
+        --[[if self:GetAIBrain().CheatEnabled then
+            self:SetProductionPerSecondEnergy ( power * tonumber(ScenarioInfo.Options.CheatMult))
+        else]]
+            self:SetProductionPerSecondEnergy( power *
+            (self.EnergyProdAdjMod or 1) )
+        --end 
+        self.Spinners.wheel:SetSpeed(self:GetProductionPerSecondEnergy())
+        end
     end,
 
 }
@@ -94,11 +128,10 @@ TATidal = Class(TAStructure)
 local WindEnergyMin = false
 local WindEnergyRange = false
 
-TAWin = Class(TAStructure) 
+TAWin = Class(TAWeather) 
 {
     OnStopBeingBuilt = function(self,builder,layer)
-        TAStructure.OnStopBeingBuilt(self,builder,layer)
-        self:SetProductionPerSecondEnergy(0)
+        TAWeather.OnStopBeingBuilt(self,builder,layer)
         if not WindEnergyMin and not WindEnergyRange then
         --LOG("Defining wind turbine energy output value range.")
             local bp = self:GetBlueprint().Economy
@@ -119,17 +152,25 @@ TAWin = Class(TAStructure)
     ------------------------------------------------------------------------
     -- Run the thread
     ------------------------------------------------------------------------
-        self:ForkThread(SyncroniseThread,30,self.OnWeatherInterval,self)
+       self.ControlThread = self:ForkThread(SyncroniseThread,30,self.OnWeatherInterval,self)
     end,
 
     OnWeatherInterval = function(self)
     ---LOG('Wind Being Ran')
-    self:SetProductionPerSecondEnergy (
-        (WindEnergyMin + WindEnergyRange * ScenarioInfo.WindStats.Power)
-    )
+        if not self.Dead then
+            --[[if self:GetAIBrain().CheatEnabled then
+                ---This is brute forced method just checking if cheatmods enabled provided benefit
+            self:SetProductionPerSecondEnergy (((WindEnergyMin + WindEnergyRange * ScenarioInfo.WindStats.Power) * tonumber(ScenarioInfo.Options.CheatMult)))
+            else]]
+                ----WHYISCHEATMODTIEDENERGYPRODADJ. 
+            self:SetProductionPerSecondEnergy (
+                (WindEnergyMin + WindEnergyRange * ScenarioInfo.WindStatsTA.Power) *
+                (self.EnergyProdAdjMod or 1))
+            --end
     ---local Wind = 
     ---LOG(Wind)
-    self.Spinners.post:SetSpeed(self:GetProductionPerSecondEnergy())
-    self.Spinners.blades:SetSpeed((self:GetProductionPerSecondEnergy()) * 2)
+        self.Spinners.post:SetSpeed(self:GetProductionPerSecondEnergy())
+        self.Spinners.blades:SetSpeed((self:GetProductionPerSecondEnergy()) * 2)
+        end
     end,
     }

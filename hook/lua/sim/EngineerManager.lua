@@ -287,11 +287,11 @@ EngineerManager = Class(SCTAEngineerManager) {
                 ---the code here grabs nearest missile base TA Units (Relavent units are Storms, and the T1 AntiAir Mobile). And have them protect the engineeer
                 ---This will protect the engineer from bombers and labs. 
                 ---Experimenting with the location of the unit vs location of the manager
-                local Escorts = self.Brain:GetUnitsAroundPoint(categories.LAND * categories.MOBILE * categories.SILO, self.Location, 25, 'Ally') 
+                local Escorts = self.Brain:GetUnitsAroundPoint(categories.LAND * categories.MOBILE * categories.SILO - categories.ENGINEER, self.Location, 25, 'Ally') 
                 --return
                 --local Escort = table.remove(Escort, Escort.Escorting)
                 for _,Escort in Escorts do
-                    if Escort and not Escort.Escorting then 
+                    if Escort and Escort.SCTAAIBrain and not Escort.Escorting then 
                     Escort.Escorting = true
                     self.Brain:AssignUnitsToPlatoon(hndl, {Escort}, 'Guard', 'none')
                     ---break here to ensure only first LEGAL option is the one grabbed 

@@ -49,7 +49,6 @@ UnitBlueprint {
         'RECLAIMABLE',
         'PATROLHELPER',
         'SHOWQUEUE',
-        'SELECTION',
         'MOBILE',
         'CONSTRUCTION',
         'DEFENSIVEBOAT',

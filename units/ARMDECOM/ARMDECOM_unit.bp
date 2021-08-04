@@ -168,6 +168,7 @@ UnitBlueprint {
     LifeBarOffset = 0.5,
     LifeBarSize = 2,
     Physics = {
+        Climber = 'Air',
         LayerChangeOffsetHeight = -2.00,
 	    BackUpDistance = 0,
         MaxSpeedReverse = 0,

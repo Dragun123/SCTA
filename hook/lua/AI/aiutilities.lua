@@ -1,12 +1,6 @@
 WARN('['..string.gsub(debug.getinfo(1).source, ".*\\(.*.lua)", "%1")..', line:'..debug.getinfo(1).currentline..'] * SCTAAI: offset ATUtils.lua' )
 
-SCTAGetTransports = GetTransports
-TASetupCheat = SetupCheat
-function GetTransports(platoon, units)
-    local aiBrain = platoon:GetBrain()
-    if not aiBrain.SCTAAI then
-        return SCTAGetTransports(platoon, units)
-    end
+function TAGetTransports(platoon, units)
     if not units then
         units = platoon:GetPlatoonUnits()
     end
@@ -122,7 +116,7 @@ function SCTAEngineerMoveWithSafePath(aiBrain, unit, destination)
     if not destination then
         return false
     end
-
+    --_ALERT('TAMove', unit:GetBlueprint().Physics.Climber)
     local result, bestPos = false
     result, bestPos = AIAttackUtils.CanGraphAreaToSCTA(unit:GetPosition(), destination, 'Land')
     if not result then
@@ -133,23 +127,7 @@ function SCTAEngineerMoveWithSafePath(aiBrain, unit, destination)
         end
     -- If we're here, we haven't used transports and we can path to the destination
     if result then
-        if EntityCategoryContains(categories.AMPHIBIOUS, unit) then
-        local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, 'Air', unit:GetPosition(), destination, 10)
-        if path then
-            local pathSize = table.getn(path)
-            -- Move to way points (but not to destination... leave that for the final command)
-            for widx, waypointPath in path do
-                if pathSize ~= widx then
-                    IssueMove({unit}, waypointPath)
-                end
-            end
-        end
-        -- If there wasn't a *safe* path (but dest was pathable), then the last move would have been to go there directly
-        -- so don't bother... the build/capture/reclaim command will take care of that after we return
-        return true
-        end
-    else
-        local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, 'Amphibious', unit:GetPosition(), destination, 10)
+        local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, unit:GetBlueprint().Physics.Climber or 'Amphibious', unit:GetPosition(), destination, 10)
         if path then
             local pathSize = table.getn(path)
             -- Move to way points (but not to destination... leave that for the final command)
@@ -251,32 +229,4 @@ function SCTAEngineerMoveWithSafePathLand(aiBrain, unit, destination)
         return true
     end
     return false
-end
-
-function SetupCheat(aiBrain, cheatBool)
-    if not aiBrain.SCTAAI then
-        return TASetupCheat(aiBrain, cheatBool)
-    end
-
-    if cheatBool then
-        aiBrain.CheatEnabled = true
-
-        local buffDef = Buffs['CheatBuildRate']
-        local buffAffects = buffDef.Affects
-        buffAffects.BuildRate.Mult = tonumber(ScenarioInfo.Options.BuildMult)
-
-        buffDef = Buffs['CheatIncome']
-        buffAffects = buffDef.Affects
-        buffAffects.EnergyProduction.Mult = tonumber(ScenarioInfo.Options.CheatMult)
-        buffAffects.MassProduction.Mult = tonumber(ScenarioInfo.Options.CheatMult)
-        buffAffects.ProductionPerSecondEnergyMax.Mult = tonumber(ScenarioInfo.Options.CheatMult)
-        buffAffects.ProductionPerSecondEnergyMin.Mult = tonumber(ScenarioInfo.Options.CheatMult)
-
-        local pool = aiBrain:GetPlatoonUniquelyNamed('ArmyPool')
-        for _, v in pool:GetPlatoonUnits() do
-            -- Apply build rate and income buffs
-            ApplyCheatBuffs(v)
-        end
-
-    end
 end

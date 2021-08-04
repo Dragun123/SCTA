@@ -72,7 +72,6 @@ UnitBlueprint {
         'SELECTABLE',
         'TECH2',
         'AIR',
-        'SELECTION', 
         'ARM',
         'ENGINEER',
         'REPAIR',
@@ -123,16 +122,16 @@ UnitBlueprint {
         BuildCostEnergy = 12096,
         BuildCostMass = 220,
         BuildTime = 24763,        
-	BuildRate = 100,
+	    BuildRate = 100,
         BuildableCategory = {
             'BUILTBYTIER2FACTORY ARM',
         },
-        BuildRadius = 8,
+        MaxBuildDistance = 7,
         StorageEnergy = 25,
         StorageMass = 25,
-	ProductionPerSecondEnergy = 25,
-	ProductionPerSecondMass = 2,
-	NaturalProducer = true,
+	    ProductionPerSecondEnergy = 25,
+	    ProductionPerSecondMass = 2,
+	    NaturalProducer = true,
     },
     General = {        
         BuildBones = {
@@ -174,7 +173,7 @@ UnitBlueprint {
     LifeBarOffset = 0.25,
     LifeBarSize = 2,
     Physics = {
-        Elevation = 4,
+        Elevation = 3,
         MotionType = 'RULEUMT_Air',
         GroundCollisionOffset = 1.6,
     MaxSpeed = 0.5, 
@@ -203,8 +202,7 @@ UnitBlueprint {
             DamageRadius = 3,
             DamageType = 'Normal',
             DummyWeapon = true,
-            Label = 'DeathWeapon',
+            Label = 'DeathImpact',
         }, 
-
     },
 }
