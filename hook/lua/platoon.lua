@@ -2983,49 +2983,52 @@ Platoon = Class(SCTAAIPlatoon) {
     end,
 
     SCTAReclaimAI = function(self)
-            self:Stop('Support')
-            local brain = self:GetBrain()
-            local eng = self:GetSquadUnits('Support')[1]
-            local EscortUnits = self:GetSquadUnits('Guard')[1]
-            local createTick = GetGameTick()
-            if not eng or eng.Dead then
-                coroutine.yield(1)
+        self:Stop('Support')
+        local brain = self:GetBrain()
+        local eng = self:GetSquadUnits('Support')[1]
+        local EscortUnits = self:GetSquadUnits('Guard')[1]
+        local createTick = GetGameTick()
+        if not eng or eng.Dead then
+            coroutine.yield(1)
+            self:PlatoonDisbandTA()
+            return
+        elseif EscortUnits and not EscortUnits.Dead then
+            self:Stop('Guard')
+            ---EscortUnits.Escorting = true
+            IssueGuard({EscortUnits}, eng)
+        end
+        --LOG('*SCTAEXPANSIONTA', locationType)
+        --eng.BadReclaimables = eng.BadReclaimables or {}
+
+        while brain:PlatoonExists(self) do
+            local ents = TAReclaim.TAAIReclaimablesAroundEngineer(brain, eng)[1]
+            if not ents or not eng:GetPosition() then
+                WaitTicks(1)
                 self:PlatoonDisbandTA()
                 return
-            elseif EscortUnits and not EscortUnits.Dead then
-                self:Stop('Guard')
-                ---EscortUnits.Escorting = true
-                IssueGuard({EscortUnits}, eng)
             end
-            --LOG('*SCTAEXPANSIONTA', locationType)
-            --eng.BadReclaimables = eng.BadReclaimables or {}
-    
-            while brain:PlatoonExists(self) do
-                local ents = TAReclaim.TAAIReclaimablesAroundEngineer(brain, eng)[1]
-                if not ents or not eng:GetPosition() then
-                    WaitTicks(1)
-                    self:PlatoonDisbandTA()
-                    return
-                end
-            if not self.PlatoonData.Layer or self.PlatoonData.Layer and AIAttackUtils.CanGraphAreaToSCTA(eng:GetPosition(), ents:GetPosition(), self.PlatoonData.Layer) then
-                ---IssueAggressiveMove({eng}, ents:GetPosition())
-                ---self:MoveToLocation(ents:GetPosition(), false)
-                self:AggressiveMoveToLocation(ents:GetPosition(), 'Support')
-                local reclaiming = not eng:IsIdleState()
-                while reclaiming do
-                    WaitSeconds(5)
-    
+        if not self.PlatoonData.Layer or self.PlatoonData.Layer and AIAttackUtils.CanGraphAreaToSCTA(eng:GetPosition(), ents:GetPosition(), self.PlatoonData.Layer) then
+            ---IssueAggressiveMove({eng}, ents:GetPosition())
+            ---self:MoveToLocation(ents:GetPosition(), false)
+            self:AggressiveMoveToLocation(ents:GetPosition(), 'Support')
+            local reclaiming = not eng:IsIdleState()
+            while reclaiming do
+                WaitSeconds(5)
+                if not eng.Dead then 
                     if eng:IsIdleState() or (self.PlatoonData.ReclaimTime and (GetGameTick() - createTick)*10 > self.PlatoonData.ReclaimTime) then
                         reclaiming = false
                     end
                 end
                 local basePosition = brain.BuilderManagers[self.PlatoonData.LocationType].Position
                 self:MoveToLocation(AIUtils.RandomLocation(basePosition[1],basePosition[3]), false)
+            end
                 WaitSeconds(1)
                 self:PlatoonDisbandTA()
-                end
-            end
-        end,
+            return
+        end
+        self:PlatoonDisbandTA()
+        end
+    end,
 
         NavalHuntSCTAAI = function(self)
             local aiBrain = self:GetBrain()
