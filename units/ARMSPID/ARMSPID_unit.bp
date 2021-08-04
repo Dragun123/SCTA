@@ -10,7 +10,7 @@ UnitBlueprint {
            StopMove = Sound { Bank = 'TA_Sound', Cue = 'SPIDER',   LodCutoff = 'UnitMove_LodCutoff' },
           Destroyed = Sound { Bank = 'TA_Sound', Cue = 'XPLOLRG3', LodCutoff = 'UnitMove_LodCutoff' },
     },
-    BuildIconSortPriority = 2,
+    BuildIconSortPriority = 3,
     Categories = {
         'SELECTABLE',
         'VISIBLETORECON',
