@@ -12,7 +12,7 @@ AIBrain = Class(SCTAAIBrainClass) {
             local initialUnits = nil
             local posX, posY = self:GetArmyStartPos()
     
-            if string.find(per, 'arm') then
+            if string.find(self.TA, 'ARM') then
                 resourceStructures = {'armmex', 'armmex', 'armmex', 'armmex'}
                 initialUnits = {'armlab', 'armsolar', 'armsolar', 'armsolar', 'armsolar'}
             else
@@ -212,6 +212,7 @@ AIBrain = Class(SCTAAIBrainClass) {
         self.Plants = nil
         self.Level2 = nil
         self.Level3 = nil
+        self.TA = nil
         end
     end, 
 }
