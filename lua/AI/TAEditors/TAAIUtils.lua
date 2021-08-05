@@ -295,7 +295,9 @@ function TAReclaimablesInArea(aiBrain, locType, Mass)
     if aiBrain:GetEconomyStoredRatio('MASS') < Mass then
         local ents = TAAIGetReclaimablesAroundLocation(aiBrain, locType)
         if ents and not table.empty(ents) then
-            return true
+            for k,v in ents do
+                if IsProp(v) then return true else return false end
+            end
         else
             return false
         end

@@ -60,6 +60,7 @@ Platoon = Class(SCTAAIPlatoon) {
         eng.AssistPlatoon = nil
         eng.UnitBeingAssist = nil
         self:Stop('Support')
+        --coroutine.yield(1)
         self:PlatoonDisbandTA()
         --[[coroutine.yield(1)
        return self:SCTAEngineerTypeAI()]]
@@ -278,8 +279,7 @@ Platoon = Class(SCTAAIPlatoon) {
                     end
                 until allIdle
             elseif not reclaimunit or counter >= 5 then
-                self:PlatoonDisbandTA()
-                return
+                return self:PlatoonDisbandTA()
             else
                 counter = counter + 1
                 WaitSeconds(5)
@@ -1726,6 +1726,7 @@ Platoon = Class(SCTAAIPlatoon) {
         for k, v in platoonUnits do
             v:SetScriptBit('RULEUTC_ProductionToggle', false)
         end
+        coroutine.yield(1)
         self:PlatoonDisbandTA()
     end,
 
@@ -1867,6 +1868,7 @@ Platoon = Class(SCTAAIPlatoon) {
             v:SetScriptBit('RULEUTC_ProductionToggle', false)
             end
         end
+        coroutine.yield(1)
         self:PlatoonDisbandTA()
     end,
 
@@ -2385,8 +2387,8 @@ Platoon = Class(SCTAAIPlatoon) {
             --Disband platoon if it's all air units, so they can be picked up by another platoon
             local mySurfaceThreat = AIAttackUtils.GetSurfaceThreatOfUnits(self)
             if mySurfaceThreat == 0 and AIAttackUtils.GetAirThreatOfUnits(self) > 0 then
-                self:PlatoonDisbandTA()
-                return
+                coroutine.yield(1)
+                return self:PlatoonDisbandTA()
             end
 
             local cmdQ = {}
@@ -2528,6 +2530,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 oldDistSq = distSq      
             end
         end
+        coroutine.yield(1)
         return self:PlatoonDisbandTA()
     end,
 
@@ -3023,8 +3026,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 local basePosition = brain.BuilderManagers[self.PlatoonData.LocationType].Position
                 self:MoveToLocation(AIUtils.RandomLocation(basePosition[1],basePosition[3]), false)
                 WaitSeconds(1)
-                self:PlatoonDisbandTA()
-                return
+                return self:PlatoonDisbandTA()
             end
             self:PlatoonDisbandTA()
             --self:PlatoonDisbandTA()
