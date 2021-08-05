@@ -5,35 +5,27 @@
 
 UnitBlueprint {
     Merge = true, 
-    Categories = {
-        'SELECTABLE',
-        'TECH3',
-        'VISIBLETORECON',
-        'RECLAIMABLE',
-        'MOBILE',
-        'LAND',
-        'DIRECTFIRE',
-        'OVERLAYDIRECTFIRE',
-        'ARM',
-        'TANK',
-        },
     Defense = {
-        Health = 12000,
-        MaxHealth = 12000,
+        Health = 4000,
+        MaxHealth = 4000,
+    },
+    Display = {
+        UniformScale = 0.12,
     },
         Economy = {
-            BuildCostEnergy = 48000,
-            BuildCostMass = 2400,
-            BuildTime = 18000,
+            BuildCostEnergy = 4500,
+            BuildCostMass = 600,
+    },
+    SelectionSizeX = 1.25,
+    SelectionSizeZ = 1.25,
+    SizeX = 2,
+    SizeY = 1,
+    SizeZ = 2,
+    Weapon = {
+        [1] = {
+            Damage = 120,
         },
-        StrategicIconName = 'icon_land3_directfire',
-        Weapon = {
-            [1] = {
-                Damage = 1000,
-                MaxRadius = 30,
-                RateOfFire = 0.33,
-            },
-            [2] = {
-                },
+        [2] = {
+        },
     },
 }

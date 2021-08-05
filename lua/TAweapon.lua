@@ -87,7 +87,14 @@ TAweapon = Class(DefaultWeapon) {
 
     },
 
-    WeaponPackingState = State(DefaultWeapon.WeaponPackingState) {        
+    WeaponPackingState = State(DefaultWeapon.WeaponPackingState) {
+        Main = function(self)          
+            ---LOG('Resulting Table'..repr(TAutils.targetingFacilityData))
+            if not self.unit.Dead then
+                DefaultWeapon.WeaponPackingState.Main(self)
+            end
+        end,
+
         OnGotTarget = function(self)
             if (self.unit:GetAIBrain().SCTAAI or TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
             self:OnGotTargetCheck() == true) and not self.unit.Dead then

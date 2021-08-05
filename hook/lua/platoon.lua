@@ -60,6 +60,7 @@ Platoon = Class(SCTAAIPlatoon) {
         eng.AssistPlatoon = nil
         eng.UnitBeingAssist = nil
         self:Stop('Support')
+        --coroutine.yield(1)
         self:PlatoonDisbandTA()
         --[[coroutine.yield(1)
        return self:SCTAEngineerTypeAI()]]
@@ -278,8 +279,7 @@ Platoon = Class(SCTAAIPlatoon) {
                     end
                 until allIdle
             elseif not reclaimunit or counter >= 5 then
-                self:PlatoonDisbandTA()
-                return
+                return self:PlatoonDisbandTA()
             else
                 counter = counter + 1
                 WaitSeconds(5)
@@ -1726,6 +1726,7 @@ Platoon = Class(SCTAAIPlatoon) {
         for k, v in platoonUnits do
             v:SetScriptBit('RULEUTC_ProductionToggle', false)
         end
+        coroutine.yield(1)
         self:PlatoonDisbandTA()
     end,
 
@@ -1867,6 +1868,7 @@ Platoon = Class(SCTAAIPlatoon) {
             v:SetScriptBit('RULEUTC_ProductionToggle', false)
             end
         end
+        coroutine.yield(1)
         self:PlatoonDisbandTA()
     end,
 
@@ -2385,8 +2387,8 @@ Platoon = Class(SCTAAIPlatoon) {
             --Disband platoon if it's all air units, so they can be picked up by another platoon
             local mySurfaceThreat = AIAttackUtils.GetSurfaceThreatOfUnits(self)
             if mySurfaceThreat == 0 and AIAttackUtils.GetAirThreatOfUnits(self) > 0 then
-                self:PlatoonDisbandTA()
-                return
+                coroutine.yield(1)
+                return self:PlatoonDisbandTA()
             end
 
             local cmdQ = {}
@@ -2528,6 +2530,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 oldDistSq = distSq      
             end
         end
+        coroutine.yield(1)
         return self:PlatoonDisbandTA()
     end,
 
@@ -2983,49 +2986,52 @@ Platoon = Class(SCTAAIPlatoon) {
     end,
 
     SCTAReclaimAI = function(self)
-            self:Stop('Support')
-            local brain = self:GetBrain()
-            local eng = self:GetSquadUnits('Support')[1]
-            local EscortUnits = self:GetSquadUnits('Guard')[1]
-            local createTick = GetGameTick()
-            if not eng or eng.Dead then
-                coroutine.yield(1)
+        self:Stop('Support')
+        local brain = self:GetBrain()
+        local eng = self:GetSquadUnits('Support')[1]
+        local EscortUnits = self:GetSquadUnits('Guard')[1]
+        local createTick = GetGameTick()
+        if not eng or eng.Dead then
+            coroutine.yield(1)
+            self:PlatoonDisbandTA()
+            return
+        elseif EscortUnits and not EscortUnits.Dead then
+            self:Stop('Guard')
+            ---EscortUnits.Escorting = true
+            IssueGuard({EscortUnits}, eng)
+        end
+        --LOG('*SCTAEXPANSIONTA', locationType)
+        --eng.BadReclaimables = eng.BadReclaimables or {}
+
+        while brain:PlatoonExists(self) do
+            local ents = TAReclaim.TAAIReclaimablesAroundEngineer(brain, eng)[1]
+            if not ents or not eng:GetPosition() then
+                WaitTicks(1)
                 self:PlatoonDisbandTA()
                 return
-            elseif EscortUnits and not EscortUnits.Dead then
-                self:Stop('Guard')
-                ---EscortUnits.Escorting = true
-                IssueGuard({EscortUnits}, eng)
             end
-            --LOG('*SCTAEXPANSIONTA', locationType)
-            --eng.BadReclaimables = eng.BadReclaimables or {}
-    
-            while brain:PlatoonExists(self) do
-                local ents = TAReclaim.TAAIReclaimablesAroundEngineer(brain, eng)[1]
-                if not ents or not eng:GetPosition() then
-                    WaitTicks(1)
-                    self:PlatoonDisbandTA()
-                    return
-                end
             if not self.PlatoonData.Layer or self.PlatoonData.Layer and AIAttackUtils.CanGraphAreaToSCTA(eng:GetPosition(), ents:GetPosition(), self.PlatoonData.Layer) then
-                ---IssueAggressiveMove({eng}, ents:GetPosition())
-                ---self:MoveToLocation(ents:GetPosition(), false)
+            ---IssueAggressiveMove({eng}, ents:GetPosition())
+            ---self:MoveToLocation(ents:GetPosition(), false)
                 self:AggressiveMoveToLocation(ents:GetPosition(), 'Support')
                 local reclaiming = not eng:IsIdleState()
-                while reclaiming do
-                    WaitSeconds(5)
-    
-                    if eng:IsIdleState() or (self.PlatoonData.ReclaimTime and (GetGameTick() - createTick)*10 > self.PlatoonData.ReclaimTime) then
-                        reclaiming = false
+                    while reclaiming do
+                        WaitSeconds(5)
+                        if not eng.Dead then 
+                            if eng:IsIdleState() or (self.PlatoonData.ReclaimTime and (GetGameTick() - createTick)*10 > self.PlatoonData.ReclaimTime) then
+                            reclaiming = false
+                            end
+                        end
                     end
-                end
                 local basePosition = brain.BuilderManagers[self.PlatoonData.LocationType].Position
                 self:MoveToLocation(AIUtils.RandomLocation(basePosition[1],basePosition[3]), false)
                 WaitSeconds(1)
-                self:PlatoonDisbandTA()
-                end
+                return self:PlatoonDisbandTA()
             end
-        end,
+            self:PlatoonDisbandTA()
+            --self:PlatoonDisbandTA()
+        end
+    end,
 
         NavalHuntSCTAAI = function(self)
             local aiBrain = self:GetBrain()
@@ -3117,7 +3123,7 @@ Platoon = Class(SCTAAIPlatoon) {
 
         ScoutingAISCTA = function(self)
             AIAttackUtils.GetMostRestrictiveLayer(self)
-            if self.MovementLayer == 'Air' or EntityCategoryContains(categories.AMPHIBIOUS, self:GetSquadUnits('Scout')) then
+            if self.MovementLayer == 'Air' or EntityCategoryContains(categories.AMPHIBIOUS, self:GetSquadUnits('Scout')[1]) then
             return self:AirScoutingAISCTA()
             else
             return self:LandScoutingAISCTA()

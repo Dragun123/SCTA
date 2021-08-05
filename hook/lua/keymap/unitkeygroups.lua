@@ -286,7 +286,7 @@ TAunitkeygroups = {
         "correap",
     },
     ["T2_Assault_Bot"]= {
-        "armlatnk",
+        "armbull",
         "corcan",
     },
     ["T2_Mobile_AA_Flak_Artillery"]= {
@@ -380,7 +380,7 @@ TAunitkeygroups = {
         "armdrake",
     },
     ["T3_Siege_Assault_Bot"]= {
-        "armbull",
+        "armlatnk",
         "corpyro",
     },
     ["T3_Mobile_Missile_Platform"]= {

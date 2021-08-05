@@ -40,7 +40,6 @@ aStratIconTranslationFull = table.merged(aStratIconTranslationFull, TAStratIconT
         armmmkr = 'structure_massfab',
         armmanni = '2/bot_sniper',
         armscram = '3/ship_counterintel',
-        armbull = '3/bot_armored',
     
         corestor = 'structure_energystorage',
         cormstor = 'structure_massstorage',
