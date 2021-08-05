@@ -29,7 +29,7 @@ TAconstructor = Class(TAWalking) {
             end
         end
         self.BuildingUnit = false
-        if __blueprints['armgant'] and not (EntityCategoryContains(categories.TECH3, self) or self:GetAIBrain().Level3) then
+        if __blueprints['armgant'] and not (EntityCategoryContains(categories.TECH3 + categories.COMMAND + categories.SUBCOMMANDER, self) or self:GetAIBrain().Level3) then
             TAutils.updateBuildRestrictions(self)
         end
         --LOG('*Who', self:GetBlueprint().General.FactionName)
