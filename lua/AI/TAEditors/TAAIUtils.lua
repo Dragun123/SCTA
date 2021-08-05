@@ -289,28 +289,21 @@ end
 end]]
 ----TAReclaim
 
-function TAReclaimablesInArea(aiBrain, locType, Mass)
-    --DUNCAN - was .9. Reduced as dont need to reclaim yet if plenty of mass
-   if aiBrain:GetEconomyStoredRatio('MASS') < Mass then
-    --DUNCAN - who cares about energy for reclaming?
-    --if aiBrain:GetEconomyStoredRatio('ENERGY') > .5 then
-        --return false
-    --end
 
-    local ent = TAAIGetReclaimablesAroundLocation(aiBrain, locType)
-    if ent and not table.empty(ent) then    
-        for __, ents in ent do
-            if ents and not ents.SCTAAIBrain then
+function TAReclaimablesInArea(aiBrain, locType, Mass)
+
+    if aiBrain:GetEconomyStoredRatio('MASS') < Mass then
+        local ents = TAAIGetReclaimablesAroundLocation(aiBrain, locType)
+        if ents and not table.empty(ents) then
             return true
         else
             return false
-            end
         end
-    end
     else
         return false
     end
 end
+
 
 function TAAIGetReclaimablesAroundLocation(aiBrain, locationType)
     local position, radius
