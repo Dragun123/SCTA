@@ -1,4 +1,5 @@
 WARN('['..string.gsub(debug.getinfo(1).source, ".*\\(.*.lua)", "%1")..', line:'..debug.getinfo(1).currentline..'] * SCTAAI: offset FactoryBuilderManager.lua' )
+local Traffic = (categories.MOBILE - categories.EXPERIMENTAL - categories.AIR - categories.CONSTRUCTION)
 
 SCTAFactoryBuilderManager = FactoryBuilderManager
 FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
@@ -112,6 +113,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                 elseif bp.NavalFactory then
                     self:SetupTANewFactory(unit, 'Sea')
                 else
+                    _ALERT('TABrainFactory', bp.Gantry)
                     self:SetupTANewFactory(unit, 'Gate')
                 end
                 self.LocationActive = true
@@ -165,7 +167,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                 local position = factory:GetPosition()     
                 local rally = false           
                 local rallyType = 'Rally Point'            
-                if EntityCategoryContains(categories.NAVAL, factory) then
+                if factory:GetBlueprint().Economy.NavalFactory then
                     rallyType = 'Naval Rally Point'
                 end
                 rally = AIUtils.AIGetClosestMarkerLocation(self, rallyType, position[1], position[3])   
@@ -185,7 +187,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
         TrafficControlTAThread = function(factory, factoryposition, rally)      
             WaitTicks(30)   
             local GetOwnUnitsAroundPoint = import('/lua/ai/aiutilities.lua').GetOwnUnitsAroundPoint     
-            local category = categories.MOBILE - categories.EXPERIMENTAL - categories.AIR - categories.CONSTRUCTION
+            --local category = 
             local rallypoint = { rally[1],rally[2],rally[3] }
             local factorypoint = { factoryposition[1], factoryposition[2], factoryposition[3] }       
             local Direction = import('/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua').TAGetDirectionInDegrees( rallypoint, factorypoint )
@@ -203,7 +205,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                 local unitlist = nil
                 local units = nil           
                 WaitTicks(900)
-                units = GetOwnUnitsAroundPoint( aiBrain, category, rallypoint, 16)                
+                units = GetOwnUnitsAroundPoint( aiBrain, Traffic, rallypoint, 16)                
                 if table.getn(units) > 10 then             
                     local unitlist = {}
                     for _,unit in units do            

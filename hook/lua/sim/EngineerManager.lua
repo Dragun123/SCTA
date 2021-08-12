@@ -197,16 +197,17 @@ EngineerManager = Class(SCTAEngineerManager) {
                 elseif bp.Air then
                     unit.bType = 'AirTA'
                     --return self:TAAssignEngineerTask(unit, 'AirTA')
-                elseif bp.Naval then
-                    unit.bType = 'SeaTA'
-                    --return self:TAAssignEngineerTask(unit, 'SeaTA')
                 elseif bp.TECH3 then
                     unit.bType = 'T3TA'
                     --return self:TAAssignEngineerTask(unit, 'T3TA')
                 elseif bp.Command then
                     unit.bType = 'Command'
                     --return self:TAAssignEngineerTask(unit, 'Command')
+                elseif bp.Naval then
+                    unit.bType = 'SeaTA'
+                    --return self:TAAssignEngineerTask(unit, 'SeaTA')
                 else
+                    --_ALERT('TABrainEngineer', unit.bType)
                     ---if Inherit they are used as support engineers 
                     unit.bType = 'FieldTA'                
                 end
