@@ -113,7 +113,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                 elseif bp.NavalFactory then
                     self:SetupTANewFactory(unit, 'Sea')
                 else
-                    _ALERT('TABrainFactory', bp.Gantry)
+                    --_ALERT('TABrainFactory', bp.Gantry)
                     self:SetupTANewFactory(unit, 'Gate')
                 end
                 self.LocationActive = true
