@@ -145,16 +145,15 @@ TAconstructor = Class(TAWalking) {
 
 TASeaConstructor = Class(TAconstructor) 
 {
-    OnCreate = function(self)
-        TAconstructor.OnCreate(self)
-		self.FxMovement = TrashBag()
-        end,
-
-     
-	OnMotionHorzEventChange = function(self, new, old )
-		TAconstructor.OnMotionHorzEventChange(self, new, old)
-        self.CreateTAMovementEffects(self)
-	end,
+    OnMotionHorzEventChange = function( self, new, old )
+        TAconstructor.OnMotionHorzEventChange(self, new, old)
+        if ( new == 'Cruise' and old == 'Stopped') then
+            self:ForkThread(self.StartMoveFxTA)
+         end
+        if ( new == 'Stopped' ) or ( new == 'Stopped' and old == 'Stopping' ) then
+            self:ForkThread(self.MoveFxStopTA)
+        end
+    end,
 
 
 }

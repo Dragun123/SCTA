@@ -1,6 +1,6 @@
 EmitterBlueprint {
 	BlueprintId = 'boatemit',
-	Lifetime = -1,
+	Lifetime = 5,
 	Repeattime = 50.00,
 	TextureFramecount = 1.00,
 	Blendmode = 0.00,

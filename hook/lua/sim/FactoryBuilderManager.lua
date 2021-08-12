@@ -92,7 +92,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
               if not EntityCategoryContains(categories.TECH1, unit) then
                 unit.DesiresAssist = true
                 else
-                unit.DesiresAssist = false
+                unit.DesiresAssist = nil
               end
               local bp = unit:GetBlueprint().Economy
                 if bp.KBot then
@@ -181,7 +181,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
         TrafficControlTAThread = function(factory, factoryposition, rally)      
             WaitTicks(30)   
             local GetOwnUnitsAroundPoint = import('/lua/ai/aiutilities.lua').GetOwnUnitsAroundPoint     
-            local category = categories.MOBILE - categories.EXPERIMENTAL - categories.AIR - categories.ENGINEER
+            local category = categories.MOBILE - categories.EXPERIMENTAL - categories.AIR - categories.CONSTRUCTION
             local rallypoint = { rally[1],rally[2],rally[3] }
             local factorypoint = { factoryposition[1], factoryposition[2], factoryposition[3] }       
             local Direction = import('/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua').TAGetDirectionInDegrees( rallypoint, factorypoint )

@@ -2,16 +2,15 @@ local TAunit = import('/mods/SCTA-master/lua/TAunit.lua').TAunit
 
 TASea = Class(TAunit) 
 {
-    OnCreate = function(self)
-        TAunit.OnCreate(self)
-		self.FxMovement = TrashBag()
-        end,
-
-     
-	OnMotionHorzEventChange = function(self, new, old )
-		TAunit.OnMotionHorzEventChange(self, new, old)
-		self.CreateTAMovementEffects(self)
-	end,
+    OnMotionHorzEventChange = function( self, new, old )
+        TAunit.OnMotionHorzEventChange(self, new, old)
+        if ( new == 'Cruise' and old == 'Stopped') then
+            self:ForkThread(self.StartMoveFxTA)
+         end
+        if ( new == 'Stopped' ) or ( new == 'Stopped' and old == 'Stopping' ) then
+            self:ForkThread(self.MoveFxStopTA)
+        end
+    end,
 }
 
 TAWalking = Class(TAunit) 
@@ -84,16 +83,15 @@ TACounter = Class(TAWalking)
 
 TASeaWalking = Class(TAWalking) 
 {
-    OnCreate = function(self)
-        TAWalking.OnCreate(self)
-		self.FxMovement = TrashBag()
-        end,
-
-     
-	OnMotionHorzEventChange = function(self, new, old )
-		TAWalking.OnMotionHorzEventChange(self, new, old)
-		self.CreateTAMovementEffects(self)
-	end,
+    OnMotionHorzEventChange = function( self, new, old )
+        TAWalking.OnMotionHorzEventChange(self, new, old)
+        if ( new == 'Cruise' and old == 'Stopped') then
+            self:ForkThread(self.StartMoveFxTA)
+         end
+        if ( new == 'Stopped' ) or ( new == 'Stopped' and old == 'Stopping' ) then
+            self:ForkThread(self.MoveFxStopTA)
+        end
+    end,
 }
 
 TAKamiCounter = Class(TACounter) { 
