@@ -29,9 +29,6 @@ TAconstructor = Class(TAWalking) {
             end
         end
         self.BuildingUnit = false
-        if __blueprints['armgant'] and not (EntityCategoryContains(categories.TECH3 + categories.COMMAND + categories.SUBCOMMANDER, self) or self:GetAIBrain().Level3) then
-            TAutils.updateBuildRestrictions(self)
-        end
         --LOG('*Who', self:GetBlueprint().General.FactionName)
     end,
 
@@ -67,9 +64,12 @@ TAconstructor = Class(TAWalking) {
 
     OnStopBeingBuilt = function(self, builder, layer)
         TAWalking.OnStopBeingBuilt(self, builder, layer)
-        if __blueprints['armgant'] and self.TARestrict then
-            TAutils.TABuildRestrictions(self)
+        if __blueprints['armgant'] and not (EntityCategoryContains(categories.TECH3 + categories.COMMAND + categories.SUBCOMMANDER, self) or self:GetAIBrain().Level3) then
+            TAutils.updateBuildRestrictions(self)
         end
+        --[[if __blueprints['armgant'] and self.TARestrict then
+            TAutils.TABuildRestrictions(self)
+        end]]
     end,  
 
     OnStopBuild = function(self, unitBeingBuilt)

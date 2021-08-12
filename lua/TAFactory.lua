@@ -14,8 +14,8 @@ end,
 
     OnStopBeingBuilt = function(self, builder, layer)
         FactoryUnit.OnStopBeingBuilt(self, builder, layer)
-            if __blueprints['armgant'] then
-                    local aiBrain = GetArmyBrain(self.Army)
+        local aiBrain = GetArmyBrain(self.Army)
+            if __blueprints['armgant'] and not aiBrain.Level3 then
                     local buildRestrictionVictims = aiBrain:GetListOfUnits(categories.FACTORY + categories.ENGINEER, false)
                 for id, unit in buildRestrictionVictims do    
                     TAutils.TABuildRestrictions(unit)
