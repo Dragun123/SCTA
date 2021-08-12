@@ -47,6 +47,7 @@ UnitBlueprint {
         'STRUCTURE',
         'ARM',
         'STRATEGIC',
+        'CONSTRUCTION',
         'SORTCONSTRUCTION',
     },
     Defense = {

@@ -95,20 +95,24 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                 unit.DesiresAssist = nil
               end
               local bp = unit:GetBlueprint().Economy
-                if bp.KBot then
+               if EntityCategoryContains(categories.LAND, unit) then
+                    if bp.KBot then
                     self:SetupTANewFactory(unit, 'KBot')
-                elseif bp.Vehicle then
+                    elseif bp.Vehicle then
                     self:SetupTANewFactory(unit, 'Vehicle')
-                elseif bp.Gantry then
-                    self:SetupTANewFactory(unit, 'Gate')
-                elseif bp.Seaplane then
-                    self:SetupTANewFactory(unit, 'Seaplane')
-                elseif bp.AirFactory then
+                    else
+                    self:SetupTANewFactory(unit, 'Hover')
+                    end
+                elseif EntityCategoryContains(categories.AIR, unit) then
+                    if bp.AirFactory then
                     self:SetupTANewFactory(unit, 'Air')
+                    else
+                    self:SetupTANewFactory(unit, 'Seaplane')
+                    end
                 elseif bp.NavalFactory then
                     self:SetupTANewFactory(unit, 'Sea')
                 else
-                    self:SetupTANewFactory(unit, 'Hover')
+                    self:SetupTANewFactory(unit, 'Gate')
                 end
                 self.LocationActive = true
             end
