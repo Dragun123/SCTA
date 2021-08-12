@@ -41,7 +41,6 @@ UnitBlueprint {
         'LAND', 
         'CONSTRUCTIONSORTDOWN',
 	    'ARM',
-        'RESEARCH',
 	    'SORTCONSTRUCTION',
         'BOT',
     },

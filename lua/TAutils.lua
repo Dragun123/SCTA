@@ -97,7 +97,7 @@ updateBuildRestrictions = function(self)
     if EntityCategoryContains(categories.TECH1 * categories.CONSTRUCTION - categories.FACTORY, self) and aiBrain.Plants < 10 then
         self:AddBuildRestriction(categories.TECH2) 
         return
-    elseif EntityCategoryContains(categories.TECH2 * categories.CONSTRUCTION - categories.RESEARCH, self) and aiBrain.Labs < 4 then
+    elseif EntityCategoryContains(categories.TECH2 * categories.CONSTRUCTION - categories.CONSTRUCTIONSORTDOWN, self) and aiBrain.Labs < 4 then
         self:AddBuildRestriction(categories.TECH3)
         return
     --[[else
@@ -113,7 +113,7 @@ TABuildRestrictions = function(self)
     local aiBrain = self:GetAIBrain()
     local PlantsCat = ((categories.FACTORY + categories.GATE) * (categories.ARM + categories.CORE))
     if aiBrain.Level3 or NumberOfPlantsT2(aiBrain, PlantsCat * (categories.TECH2)) > 4 
-    or self.FindHQType(aiBrain, PlantsCat * (categories.TECH3 + categories.EXPERIMENTAL)) then
+    or TAHQType(aiBrain, PlantsCat * (categories.TECH3 + categories.EXPERIMENTAL)) then
                 self:RemoveBuildRestriction(categories.TECH2)
                 self:RemoveBuildRestriction(categories.TECH3)
                 if not aiBrain.Level3 then
@@ -122,7 +122,7 @@ TABuildRestrictions = function(self)
                 self.TARestrict = nil
         return  
     elseif aiBrain.Level2 or NumberOfPlantsT1(aiBrain, PlantsCat * (categories.TECH1)) > 10
-    or self.FindHQType(aiBrain, PlantsCat * (categories.TECH2 + categories.EXPERIMENTAL)) then
+    or TAHQType(aiBrain, PlantsCat * (categories.TECH2 + categories.EXPERIMENTAL)) then
                 self:RemoveBuildRestriction(categories.TECH2)
                 if not aiBrain.Level2 then
                 aiBrain.Level2 = true
@@ -135,14 +135,17 @@ end
 
 
 NumberOfPlantsT2 = function(aiBrain, category)
+    ----NeedToIncorperateWhatJip Did Here
+    ----Using ConstructionSortDown as its only relavent for the upgraded Factories
+    ---Also apparently this was broken for like a year amazing
     -- Returns number of extractors upgrading
-    local DevelopmentCount = aiBrain:GetCurrentUnits(categories.RESEARCH * category)
+    local DevelopmentCount = aiBrain:GetCurrentUnits(categories.CONSTRUCTIONSORTDOWN * category)
     --LOG('*SCTADeveloment', aiBrain.DevelopmentCount)
-    local LabCount = aiBrain:GetCurrentUnits(categories.SUPPORTFACTORY * category)
+    local LabCount = aiBrain:GetCurrentUnits(category - categories.CONSTRUCTIONSORTDOWN)
     --LOG('*SCTALabsCount', aiBrain.LabCount)
-    local LabBuilding = aiBrain:NumCurrentlyBuilding(categories.ENGINEER, categories.SUPPORTFACTORY * category)
+    local LabBuilding = aiBrain:NumCurrentlyBuilding(categories.ENGINEER, category - categories.CONSTRUCTIONSORTDOWN)
     --LOG('*SCTALabuilding', aiBrain.LabBuilding)
-    local DevelopmentBuilding = aiBrain:NumCurrentlyBuilding(categories.FACTORY, categories.RESEARCH * category)
+    local DevelopmentBuilding = aiBrain:NumCurrentlyBuilding(categories.FACTORY, categories.CONSTRUCTIONSORTDOWN * category)
     --LOG('*SCTADevelomentBuilding', aiBrain.DevelopmentBuilding)
     aiBrain.Labs = ((LabCount) + (DevelopmentCount * 2)) - LabBuilding - (DevelopmentBuilding * 2)
     --LOG('*SCTALabsOG', aiBrain.Labs)
@@ -161,7 +164,7 @@ NumberOfPlantsT1 = function(aiBrain, category)
 end
 
 --self.FindHQType(aiBrain, category)
-FindHQType = function(aiBrain, category)
+TAHQType = function(aiBrain, category)
     for id, unit in aiBrain:GetListOfUnits(category, false, true) do
         if not unit:IsBeingBuilt() then
             return true
