@@ -64,7 +64,34 @@ TAunit = Class(Unit)
 		end
     end,
 
-	CreateTAMovementEffects = function(self)
+	---ThankYouGnio
+	---This Code replaces Raevn modified I used (commented out below). It looks for on motion then it does the things. 
+	---Mostly Minor Editions will be making some of this into self.x variables later
+	StartMoveFxTA = function(self)
+		if not self.MoveFx then
+        self.MoveFx = self:ForkThread(self.TAMoveFxThread)
+		end
+    end,
+
+    TAMoveFxThread = function(self)
+        while self:IsUnitState('Moving') and not self.Dead do
+			local bp = self:GetBlueprint()
+			for k, v in bp.Display.MovementEffects.TAMovement.Bones do
+				self.Trash:Add(CreateAttachedEmitter(self, v, self:GetArmy(), bp.Display.MovementEffects.TAMovement.Emitter ):ScaleEmitter(bp.Display.MovementEffects.TAMovement.Scale))
+			--self.Trash:Add(CreateAttachedEmitter(self,'Back_Wake',self:GetArmy(),'/mods/CTO/effects/emitters/AU_MOVEMENTS/WATER/AU_MOVEMENTS_WATER_drops_emit.bp'):OffsetEmitter(0.0, -0.75, 0.0):ScaleEmitter(0.2))
+			WaitTicks(1)
+			end
+        end
+    end,
+
+    MoveFxStopTA = function(self)
+        if self.TAMoveFxThread then
+            KillThread(self.MoveFx)
+            self.MoveFx = nil
+        end
+    end,
+
+	--[[CreateTAMovementEffects = function(self)
 		if not IsDestroyed(self) then
 		--TAunit.CreateMovementEffects(self, EffectsBag, TypeSuffix)
 		local bp = self:GetBlueprint()
@@ -79,7 +106,7 @@ TAunit = Class(Unit)
 			end
 		end
 		end
-	end,
+	end,]]
 
 	CloakDetection = function(self)
 		-----Thanks To Balth. This code Allows me to TA Proper Coding functions 

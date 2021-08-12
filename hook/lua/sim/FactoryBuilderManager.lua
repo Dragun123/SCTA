@@ -92,23 +92,27 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
               if not EntityCategoryContains(categories.TECH1, unit) then
                 unit.DesiresAssist = true
                 else
-                unit.DesiresAssist = false
+                unit.DesiresAssist = nil
               end
               local bp = unit:GetBlueprint().Economy
-                if bp.KBot then
+               if EntityCategoryContains(categories.LAND, unit) then
+                    if bp.KBot then
                     self:SetupTANewFactory(unit, 'KBot')
-                elseif bp.Vehicle then
+                    elseif bp.Vehicle then
                     self:SetupTANewFactory(unit, 'Vehicle')
-                elseif bp.Gantry then
-                    self:SetupTANewFactory(unit, 'Gate')
-                elseif bp.Seaplane then
-                    self:SetupTANewFactory(unit, 'Seaplane')
-                elseif bp.AirFactory then
+                    else
+                    self:SetupTANewFactory(unit, 'Hover')
+                    end
+                elseif EntityCategoryContains(categories.AIR, unit) then
+                    if bp.AirFactory then
                     self:SetupTANewFactory(unit, 'Air')
+                    else
+                    self:SetupTANewFactory(unit, 'Seaplane')
+                    end
                 elseif bp.NavalFactory then
                     self:SetupTANewFactory(unit, 'Sea')
                 else
-                    self:SetupTANewFactory(unit, 'Hover')
+                    self:SetupTANewFactory(unit, 'Gate')
                 end
                 self.LocationActive = true
             end
@@ -181,7 +185,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
         TrafficControlTAThread = function(factory, factoryposition, rally)      
             WaitTicks(30)   
             local GetOwnUnitsAroundPoint = import('/lua/ai/aiutilities.lua').GetOwnUnitsAroundPoint     
-            local category = categories.MOBILE - categories.EXPERIMENTAL - categories.AIR - categories.ENGINEER
+            local category = categories.MOBILE - categories.EXPERIMENTAL - categories.AIR - categories.CONSTRUCTION
             local rallypoint = { rally[1],rally[2],rally[3] }
             local factorypoint = { factoryposition[1], factoryposition[2], factoryposition[3] }       
             local Direction = import('/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua').TAGetDirectionInDegrees( rallypoint, factorypoint )

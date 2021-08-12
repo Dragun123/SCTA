@@ -28,9 +28,6 @@ TAAirConstructor = Class(TAair) {
             end
         end
         self.BuildingUnit = false
-        if __blueprints['armgant'] and not (EntityCategoryContains(categories.TECH3, self) or self:GetAIBrain().Level3) then
-            TAutils.updateBuildRestrictions(self)
-        end
     end,
 
     OnFailedToBuild = function(self)
@@ -40,8 +37,13 @@ TAAirConstructor = Class(TAair) {
 
     OnStopBeingBuilt = function(self, builder, layer)
         TAair.OnStopBeingBuilt(self, builder, layer)
-        if __blueprints['armgant'] and self.TARestrict then
+        --[[if __blueprints['armgant'] and self.TARestrict then
             TAutils.TABuildRestrictions(self)
+        end]]
+        ---Testing see if desired effect is achieved here 
+        ---Should reduce the raw number of calls as an engineer being built doesn't need this code 
+        if __blueprints['armgant'] and not (EntityCategoryContains(categories.TECH3, self) or self:GetAIBrain().Level3) then
+            TAutils.updateBuildRestrictions(self)
         end
         self:OpenWings(self)
     end,  

@@ -38,7 +38,6 @@ UnitBlueprint {
             RackReloadTimeout = 5,
         },
         [2] = {
-        Damage = 100,
         },
         [3] = {
         }, 

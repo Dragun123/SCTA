@@ -93,7 +93,7 @@ updateBuildRestrictions = function(self)
     --EngiModFinalFORMTA
     ---Basicallys Stop Lower Tech from building UpperTech. Advanced Factories now full access to builds
     ---Will require another rebalancing of Seaplanes and Hovers
-    self.TARestrict = true
+    --self.TARestrict = true
     if EntityCategoryContains(categories.TECH1 * categories.CONSTRUCTION - categories.FACTORY, self) and aiBrain.Plants < 10 then
         self:AddBuildRestriction(categories.TECH2) 
         return
@@ -119,7 +119,7 @@ TABuildRestrictions = function(self)
                 if not aiBrain.Level3 then
                 aiBrain.Level3 = true
                 end
-                self.TARestrict = nil
+                --self.TARestrict = nil
         return  
     elseif aiBrain.Level2 or NumberOfPlantsT1(aiBrain, PlantsCat * (categories.TECH1)) > 10
     or TAHQType(aiBrain, PlantsCat * (categories.TECH2 + categories.EXPERIMENTAL)) then
@@ -127,7 +127,7 @@ TABuildRestrictions = function(self)
                 if not aiBrain.Level2 then
                 aiBrain.Level2 = true
                 end
-                self.TARestrict = nil
+                --self.TARestrict = nil
         return    
     end
 end

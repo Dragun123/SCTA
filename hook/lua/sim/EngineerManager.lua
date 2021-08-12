@@ -218,10 +218,8 @@ EngineerManager = Class(SCTAEngineerManager) {
     TAAssignEngineerTask = function(self, unit, bType)
         ---LOG('*Brain', self.Brain.SCTAAI)   
         --unit.bType = bType
-        ---Kinda Amazing Did this all on my own yet no recgonization
-        ---I mean all this effort, and Az spent like several hours working on it and no one shout out
         ---meh eitherway this is such a pointless commenting. Oh yeah, modifying the assign via hooking has interesting and had to seperate it until two different types
-        unit.DesiresAssist = false
+        --unit.DesiresAssist = nil
         unit.NumAssistees = nil
         unit.MinNumAssistees = nil
         ----RealizingProper Assignment In DisbandPlatoon
