@@ -41,7 +41,6 @@ UnitBlueprint {
 	    'CONSTRUCTION',
         'LAND', 
 	    'CORE',
-        'RESEARCH',
 	    'SORTCONSTRUCTION',
         'TANK',
     },
