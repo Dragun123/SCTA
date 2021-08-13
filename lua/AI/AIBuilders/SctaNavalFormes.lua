@@ -129,12 +129,12 @@ BuilderGroup {
         PlatoonTemplate = 'IntieAISCTAEnd',
         PriorityFunction = TAPrior.GantryConstruction,
         Priority = 110,
-        InstanceCount = 10,
-        PlatoonAddBehaviors = { 'SCTAAirUnitRefit' },                              
+        InstanceCount = 5,
+        PlatoonAddBehaviors = { 'SCTAAirUnitRefit' },                                   
         BuilderType = 'SeaForm',
         BuilderData = {
-            LocationType = 'LocationType',
             Energy = true,
+            Interceptor = true,
         },        
         BuilderConditions = { 
             { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, SKY * categories.ANTIAIR - categories.BOMBER - categories.GROUNDATTACK} },

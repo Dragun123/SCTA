@@ -46,6 +46,29 @@ BuilderGroup {
         BuilderType = 'SpecAir',
     },
     Builder {
+        BuilderName = 'SCTAAI Factory AirCarrier Bomber',
+        PlatoonTemplate = 'T3AirBomberSCTA',
+        Priority = 150,
+        InstanceCount = 1,
+        PriorityFunction = TAPrior.AirCarrierExist,
+        BuilderConditions = {
+            { TASlow, 'TAHaveUnitsWithCategoryAndAllianceFalse', {0, categories.MOBILE * categories.AIR - categories.SCOUT - categories.BOMBER, 'Enemy'}},
+            { TAutils, 'EcoManagementTA', { 0.75, 0.9} },
+        },
+        BuilderType = 'Air',
+    },
+    Builder {
+        BuilderName = 'SCTAAI Factory AirCarrier Fighter',
+        PlatoonTemplate = 'T2AirFighterSCTA',
+        Priority = 150,
+        InstanceCount = 1,
+        PriorityFunction = TAPrior.AirCarrierExist,
+        BuilderConditions = {
+            { TAutils, 'EcoManagementTA', { 0.75, 0.9} },
+        },
+        BuilderType = 'Air',
+    },
+    Builder {
         BuilderName = 'SCTAAi Factory ScoutShip',
         PlatoonTemplate = 'T1ScoutShipSCTA',
         PriorityFunction = TAPrior.ScoutShipProduction,

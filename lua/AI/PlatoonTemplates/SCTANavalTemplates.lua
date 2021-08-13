@@ -52,7 +52,6 @@ PlatoonTemplate {
         {categories.NAVALCARRIER, 1, 1, 'Attack', 'GrowthFormation' }
     },
 }
-
 PlatoonTemplate {
     Name = 'T1ScoutShipSCTA',
     FactionSquads = {
