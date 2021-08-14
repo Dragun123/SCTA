@@ -108,9 +108,9 @@ BuilderGroup {
         Priority = 150,
         InstanceCount = 1,
         PriorityFunction = TAPrior.GantryConstruction,
-        DelayEqualBuildPlattons = {'Factory', 1},
+        DelayEqualBuildPlattons = {'Gantry', 1},
         BuilderConditions = {
-            { UCBC, 'CheckBuildPlattonDelay', { 'Factory' }},
+            { UCBC, 'CheckBuildPlattonDelay', { 'Gantry' }},
             { UCBC, 'HaveLessThanUnitsWithCategory', { 2, categories.GATE} }, -- Stop after 10 facs have been built.
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, categories.GATE} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },

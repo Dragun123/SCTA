@@ -47,10 +47,10 @@ StructureProductionT2Energy = function(self, aiBrain)
 end
 
 GantryConstruction = function(self, aiBrain)
-    if Factory(aiBrain,  1, PLATFORM) and Factory(aiBrain,  2, FUSION) then
+    if Factory(aiBrain,  1, PLATFORM) and Factory(aiBrain,  1, CLOAKREACT) then
         return 200
-    elseif aiBrain.Level3 and Factory(aiBrain,  2, FUSION) then
-        return 100
+    elseif aiBrain.Level3 and Factory(aiBrain,  1, CLOAKREACT) then
+        return 150
     else
         return 0
     end
