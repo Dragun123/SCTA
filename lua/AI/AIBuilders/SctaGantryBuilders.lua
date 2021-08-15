@@ -105,12 +105,12 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTAAI Gantry Factory',
         PlatoonTemplate = 'EngineerBuilderSCTA23',
-        Priority = 150,
+        Priority = 250,
         InstanceCount = 1,
         PriorityFunction = TAPrior.GantryConstruction,
-        DelayEqualBuildPlattons = {'Gantry', 1},
+        --DelayEqualBuildPlattons = {'Gantry', 1},
         BuilderConditions = {
-            { UCBC, 'CheckBuildPlattonDelay', { 'Gantry' }},
+            --{ UCBC, 'CheckBuildPlattonDelay', { 'Gantry' }},
             { UCBC, 'HaveLessThanUnitsWithCategory', { 2, categories.GATE} }, -- Stop after 10 facs have been built.
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, categories.GATE} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
