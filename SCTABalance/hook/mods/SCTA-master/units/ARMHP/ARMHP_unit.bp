@@ -25,9 +25,6 @@ UnitBlueprint {
         SizeX = 7,
         SizeZ = 7,
     },
-        Display = {
-        UniformScale = 0.15,
-    },
     Economy = {
         BuildCostEnergy = 40000,
         BuildCostMass = 2400, 
@@ -39,8 +36,4 @@ UnitBlueprint {
     LifeBarSize = 7,
     SelectionSizeX = 7,
     SelectionSizeZ = 5,
-    SelectionThickness = 0.25,
-    SizeX = 9,
-    SizeY = 1,
-    SizeZ = 9,
 }

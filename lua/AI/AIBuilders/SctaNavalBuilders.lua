@@ -45,7 +45,7 @@ BuilderGroup {
         },
         BuilderType = 'SpecAir',
     },
-    Builder {
+    --[[Builder {
         BuilderName = 'SCTAAI Factory AirCarrier Bomber',
         PlatoonTemplate = 'T3AirBomberSCTA',
         Priority = 150,
@@ -67,7 +67,7 @@ BuilderGroup {
             { TAutils, 'EcoManagementTA', { 0.75, 0.9} },
         },
         BuilderType = 'Air',
-    },
+    },]]
     Builder {
         BuilderName = 'SCTAAi Factory ScoutShip',
         PlatoonTemplate = 'T1ScoutShipSCTA',

@@ -10,6 +10,8 @@ local LAB = (categories.FACTORY * categories.TECH2)
 local PLATFORM = (categories.FACTORY * categories.TECH3)
 local FUSION = (categories.ENERGYPRODUCTION * categories.STRUCTURE * (categories.TECH2 + categories.TECH3))
 local CLOAKREACT = (categories.ENERGYPRODUCTION * categories.TECH3 * categories.STRUCTURE)
+local NAVALFACTORY = (categories.NAVAL * (categories.FACTORY + categories.MOBILE))
+local T2STRUCTURE = (categories.STRUCTURE * categories.TECH2)
 
 
 AssistProduction = function(self, aiBrain)
@@ -29,7 +31,7 @@ end
 StructureProductionT2 = function(self, aiBrain)
     if aiBrain.Level2 then 
         return 120
-    elseif Factory(aiBrain,  0, categories.STRUCTURE * categories.TECH2) then
+    elseif Factory(aiBrain,  0, T2STRUCTURE) then
         return 10
     else
         return 0
@@ -71,7 +73,7 @@ end
 
 ----NAVY PRODUCTION
 NavalProduction = function(self, aiBrain)
-    if Numbers(aiBrain, true, 0, categories.NAVAL * (categories.FACTORY + categories.MOBILE), 'Enemy') and aiBrain.TANavy then
+    if Numbers(aiBrain, true, 0, NAVALFACTORY, 'Enemy') and aiBrain.TANavy then
         return 125
     else
         return 0
@@ -88,7 +90,7 @@ ScoutShipProduction = function(self, aiBrain)
 end
 
 NavalProductionT2 = function(self, aiBrain)
-    if aiBrain.TANavy and aiBrain.Labs >= 2 and Numbers(aiBrain, true, 0, categories.NAVAL * (categories.FACTORY + categories.MOBILE), 'Enemy') then
+    if aiBrain.TANavy and aiBrain.Labs >= 2 and Numbers(aiBrain, true, 0, NAVALFACTORY, 'Enemy') then
         return 160
     else
         return 0
@@ -128,7 +130,7 @@ UnitProductionT1 = function(self, aiBrain)
           return 0
     elseif aiBrain.Labs >= 2 then
               return 5
-    elseif Factory(aiBrain,  0, categories.STRUCTURE * categories.TECH2) then 
+    elseif Factory(aiBrain,  0, T2STRUCTURE) then 
               return 50
       else
           return 100
@@ -138,7 +140,7 @@ UnitProductionT1 = function(self, aiBrain)
   UnitProductionT1Fac = function(self, aiBrain)
     if aiBrain.Labs > 0 then
               return 0
-    elseif Factory(aiBrain,  0, categories.STRUCTURE * categories.TECH2) then 
+    elseif Factory(aiBrain,  0, T2STRUCTURE) then 
               return 50
       else
           return 100

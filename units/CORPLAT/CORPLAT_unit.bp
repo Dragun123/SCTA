@@ -57,10 +57,6 @@ UnitBlueprint {
     Display = {
         AnimationUnpack = '/mods/SCTA-master/units/CORPLAT/CORPLAT_lod0_uNPack.sca',
         AnimationUnpackRate = 1, 
-        --AnimationWater = '/mods/SCTA-master/units/CORPLAT/CORPLAT_lod0_A_drop.sca',
-        --AnimationWaterRate = 1, 
-        ----AnimationLand = '/mods/SCTA-master/units/CORPLAT/CORPLAT_lod0_B_drop.sca',
-        ---AnimationLandRate = 1, 
         Abilities = {
             '<LOC ability_aquatic>Aquatic',
         },
@@ -74,7 +70,7 @@ UnitBlueprint {
                 },
             },
         },
-        UniformScale = 0.16,
+        UniformScale = 0.14,
     },
     Economy = {
         BuildCostEnergy = 5396,
@@ -150,11 +146,10 @@ UnitBlueprint {
     },
     SelectionSizeX = 4.45,
     SelectionSizeZ = 3.4,
-    SelectionCenterOffsetZ = 0.25,
     SelectionThickness = 0.25,
-    SizeX = 7,
-    SizeY = 4,
-    SizeZ = 7,
+    SizeX = 8,
+    SizeY = 2,
+    SizeZ = 8,
     StrategicIconName = 'icon_factory3_air',
     StrategicIconSortPriority = 0,
     Weapon = {

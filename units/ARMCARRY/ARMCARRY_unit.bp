@@ -89,7 +89,7 @@ UnitBlueprint {
         UniformScale = 0.16,
         },
         Economy = {
-        AirFactory = true,
+        Seaplane = true,
         BuildCostEnergy = 11257,
         BuildCostMass = 1372,
         BuildTime = 25394,
@@ -97,10 +97,8 @@ UnitBlueprint {
         MaintenanceConsumptionPerSecondEnergy = 35,
         BuildRate = 200,
         BuildableCategory = {
-            'MOBILE TECH1 AIR ARM ENGINEER',
-            'AIR MOBILE TECH1 ARM HIGHALTAIR', 
-            'AIR MOBILE TECH2 ARM',
-            'ASF ARM',
+            'armcsa',
+            'AIR MOBILE TRANSPORTATION TECH3 ARM',
             },
         },
         Footprint = {

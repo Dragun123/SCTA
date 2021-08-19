@@ -3,6 +3,7 @@ local Unit = import('/lua/sim/Unit.lua').Unit
 local TADeath = import('/mods/SCTA-master/lua/TADeath.lua')
 local explosion = import('/lua/defaultexplosions.lua')
 local Wreckage = import('/lua/wreckage.lua')
+local catCloak = categories.SELECTABLE * categories.MOBILE
 
 TAunit = Class(Unit) 
 {
@@ -15,6 +16,9 @@ TAunit = Class(Unit)
 	OnStopBeingBuilt = function(self,builder,layer)
         ---self:LOGDBG('TAUnit.OnStopBeingBuilt')
 		Unit.OnStopBeingBuilt(self,builder,layer)
+		--[[if EntityCategoryContains(TA, self) then
+			LOG('TAIEXIST')
+		end]]
 		--Otherwise Memes with certain units (Roach and Invader through all SCTA Units get memed without this)
 		self:SetDeathWeaponEnabled(true)
 	end,
@@ -112,12 +116,11 @@ TAunit = Class(Unit)
 		-----Thanks To Balth. This code Allows me to TA Proper Coding functions 
 		local GetUnitsAroundPoint = moho.aibrain_methods.GetUnitsAroundPoint
 		local brain = moho.entity_methods.GetAIBrain(self)
-		local cat = categories.SELECTABLE * categories.MOBILE
 		local getpos = moho.entity_methods.GetPosition
 		while not self.Dead do
 			coroutine.yield(11)
 			----1 Second
-			local dudes = GetUnitsAroundPoint(brain, cat, getpos(self), 4, 'Enemy')
+			local dudes = GetUnitsAroundPoint(brain, catCloak, getpos(self), 4, 'Enemy')
 			if self.CloakOn and self:IsUnitState('Building') then
 				self:DisableIntel('Cloak')
 				self:DisableIntel('CloakField')
