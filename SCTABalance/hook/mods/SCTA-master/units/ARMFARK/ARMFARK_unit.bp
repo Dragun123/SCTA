@@ -15,6 +15,13 @@ UnitBlueprint {
     Physics = {
     MotionType = 'RULEUMT_AmphibiousFloating',
     },
+    Intel = {
+        JamRadius = {
+            Max = 10,
+            Min = 5,
+        },
+        JammerBlips = 3,
+    },
     LifeBarSize = 1,
     SelectionSizeX = 0.6,
     SelectionSizeZ = 0.6,
