@@ -21,9 +21,6 @@ UnitBlueprint {
         Health = 22000,
         MaxHealth = 22000,
         },
-        Display = {
-            UniformScale = 0.14,
-        },
         Footprint = {
             SizeX = 7,
             SizeZ = 7,
@@ -39,8 +36,4 @@ UnitBlueprint {
     },
     SelectionSizeX = 7,
     SelectionSizeZ = 5,
-    SelectionThickness = 0.25,
-    SizeX = 9,
-    SizeY = 1,
-    SizeZ = 9,
  }
