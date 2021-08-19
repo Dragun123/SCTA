@@ -2,6 +2,8 @@ WEIRD = (categories.NAVAL + categories.COMMAND + categories.FIELDENGINEER + cate
 TA = (categories.ARM + categories.CORE)
 RAIDER = (categories.armpw + categories.corak + categories.armflash + categories.corgator + categories.SCOUT)
 
+----These creation of global variations ARE not transferred across files interestingly 
+
 PlatoonTemplate {
     Name = 'CommanderBuilderSCTA',
     Plan = 'EngineerBuildAISCTACommand',
