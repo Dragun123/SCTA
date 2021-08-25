@@ -17,7 +17,7 @@ ARMPLAT = Class(TASeaPlat) {
         TASeaPlat.Open(self)
     end,
 
-    WaterFall = function(self)
+	WaterFall = function(self)
 		if self.Water then
 			self.Chassis:SetSpeed(13)
 			self.Chassis:SetGoal(0,-13,0)

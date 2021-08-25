@@ -103,23 +103,46 @@ end,
     OnCreate = function(self)
         TAFactory.OnCreate(self)
         self:DisableIntel('RadarStealth')
-    end,   
-
-    OnLayerChange = function(self, new, old)
-        TAFactory.OnLayerChange(self, new, old)
-        if new == 'Water' then
+    end,
+    
+    OnStopBeingBuilt = function(self, builder, layer)
+        TAFactory.OnStopBeingBuilt(self, builder, layer)
+            if layer == 'Sub' then
             self.Chassis = CreateSlider(self, 0)
             self.Trash:Add(self.Chassis)
             self.bp = self:GetBlueprint()
             self.scale = 0.5
             self.Water = true
             self:WaterFall()
+            local pos = self:GetPosition()
+            self.GeneratorCollision = CreateUnitHPR('Falling',self:GetArmy(),pos[1],pos[2],pos[3],0,0,0)
+            self.GeneratorCollision.Parent = self
+            end
+        end,
+    
+        OnDestroy = function(self)
+            self.GeneratorCollision:Destroy()
+            TAFactory.OnDestroy(self)
+        end,
+
+    --[[OnLayerChange = function(self, new, old)
+        TAFactory.OnLayerChange(self, new, old)
+
+    end,]]
+
+    --[[GetCurrentLayer = function(self)
+        if self.Water then
+            LOG('TALAYEREXIST2') 
+            return self.Layer
         end
-    end,
+        LOG('TALAYEREXIST') 
+        TAFactory.GetCurrentLayer(self)
+    end,]]
 
     Close = function(self)
 		TAFactory.Close(self)
 		self:WaterFall()
+        LOG('TALayer2', self:GetCurrentLayer())
 	end,
     }
 

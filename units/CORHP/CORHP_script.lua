@@ -7,7 +7,7 @@ local TASeaPlat = import('/mods/SCTA-master/lua/TAFactory.lua').TASeaPlat
 
 CORHP = Class(TASeaPlat) {
 
-    WaterFall = function(self)
+	WaterFall = function(self)
 		if self.Water then
 			self.Chassis:SetSpeed(10)
 			self.Chassis:SetGoal(0,-10,0)

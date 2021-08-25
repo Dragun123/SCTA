@@ -39,7 +39,7 @@ UnitBlueprint {
     Physics = {
         BuildOnLayerCaps = {
             LAYER_Land = true,
-            LAYER_Water = true,
+            LAYER_Sub = true,
         },
     },
     LifeBarHeight = 0.22,
