@@ -24,12 +24,21 @@ CORMAKR = Class(TAStructure) {
 
 	OnLayerChange = function(self, new, old)
 		TAStructure.OnLayerChange(self, new, old)
-		if new == 'Water' then
+			if new == 'Sub' then
 			self.bp = self:GetBlueprint()
 			self.scale = 0.5
 			self.Water = true
-		end
-	end,
+			self:SetCollisionShape( 'Box', self.bp.CollisionOffsetX or -5,(self.bp.CollisionOffsetY + (self.bp.SizeY*-0.25)) or 0,self.bp.CollisionOffsetZ or -5, self.bp.SizeX * self.scale, self.bp.SizeY * self.scale, self.bp.SizeZ * self.scale )
+			end
+		end,
+	
+		OnDestroy = function(self)
+			if self.GeneratorCollision then
+			self.GeneratorCollision:Destroy()
+			self.GeneratorCollision = nil
+			end
+			TAStructure.OnDestroy(self)
+		end,
 
 	OnProductionUnpaused = function(self)
 		self:PlayUnitSound('Activate')	
@@ -37,8 +46,13 @@ CORMAKR = Class(TAStructure) {
 		if self.Water then
 			self.Sliders.chassis:SetSpeed(10)
 			self.Sliders.chassis:SetGoal(0,0,0)
-			self:SetCollisionShape( 'Box', self.bp.CollisionOffsetX or 0,(self.bp.CollisionOffsetY + (self.bp.SizeY*0.5)) or 0,self.bp.CollisionOffsetZ or 0, self.bp.SizeX * self.scale, self.bp.SizeY * self.scale, self.bp.SizeZ * self.scale )
 			self:DisableIntel('RadarStealth')
+			if not self.GeneratorCollision then
+				local pos = self:GetPosition()
+				self.GeneratorCollision = CreateUnitHPR('Falling',self:GetArmy(),pos[1],pos[2],pos[3],0,0,0)
+            	self.GeneratorCollision:SetCollisionShape( 'Box', self.bp.CollisionOffsetX or 0,(self.bp.CollisionOffsetY + (self.bp.SizeY*0.5)) or 0,self.bp.CollisionOffsetZ or 0, self.bp.SizeX * self.scale, self.bp.SizeY * self.scale, self.bp.SizeZ * self.scale )
+				self.GeneratorCollision.Parent = self
+        	end
 		end
 		self.Sliders.plug:SetGoal(0)
 		self.Sliders.plug:SetSpeed(60)
@@ -51,8 +65,12 @@ CORMAKR = Class(TAStructure) {
 		if self.Water then
 			self.Sliders.chassis:SetSpeed(10)
 			self.Sliders.chassis:SetGoal(0,-10,0)
-			self:SetCollisionShape( 'Box', self.bp.CollisionOffsetX or -5,(self.bp.CollisionOffsetY + (self.bp.SizeY*-0.25)) or 0,self.bp.CollisionOffsetZ or -5, self.bp.SizeX * self.scale, self.bp.SizeY * self.scale, self.bp.SizeZ * self.scale )
 			self:EnableIntel('RadarStealth')
+			if self.GeneratorCollision then
+				---if the unit falls then the box is destroyed again
+				self.GeneratorCollision:Destroy()
+				self.GeneratorCollision = nil
+			end
 		end
 		self.Sliders.plug:SetGoal(180)
 		self.Sliders.plug:SetSpeed(60)

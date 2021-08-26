@@ -45,6 +45,7 @@ UnitBlueprint {
 	    'ARM',
 	    'SORTCONSTRUCTION',
     },
+    CollisionOffsetY = -0.25,
     Defense = {
         ArmorType = 'Structure',
         Health = 3005,
@@ -125,7 +126,7 @@ UnitBlueprint {
     Physics = {
         BuildOnLayerCaps = {
             LAYER_Land = true,
-            LAYER_Water = true,
+            LAYER_Sub = true,
         },        
         OccupyRects = {
             -2.5,

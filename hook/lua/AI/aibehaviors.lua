@@ -34,7 +34,7 @@ function CommanderThreadSCTADecoy(cdr, platoon)
         -- Go back to base
         if not cdr.Dead then SCTACDRReturnHome(aiBrain, cdr) end
         WaitTicks(1)
-        if not cdr:IsDead() and cdr:IsIdleState() then
+        if not cdr.Dead and cdr:IsIdleState() then
             if not cdr.EngineerBuildQueue or table.getn(cdr.EngineerBuildQueue) == 0 then
                 local pool = aiBrain:GetPlatoonUniquelyNamed('ArmyPool')
                 aiBrain:AssignUnitsToPlatoon( pool, {cdr}, 'Unassigned', 'None' )
@@ -315,7 +315,7 @@ function CommanderThreadSCTA(cdr, platoon)
         -- Go back to base
         if not cdr.Dead then SCTACDRReturnHome(aiBrain, cdr) end
         WaitTicks(1)
-        if not cdr:IsDead() and cdr:IsIdleState() then
+        if not cdr.Dead and cdr:IsIdleState() then
             if not cdr.EngineerBuildQueue or table.getn(cdr.EngineerBuildQueue) == 0 then
                 local pool = aiBrain:GetPlatoonUniquelyNamed('ArmyPool')
                 aiBrain:AssignUnitsToPlatoon( pool, {cdr}, 'Unassigned', 'None' )

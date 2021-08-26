@@ -44,6 +44,7 @@ UnitBlueprint {
         'AIR',
 	    'SORTCONSTRUCTION',
     },
+    CollisionOffsetY = -0.5,
     Defense = {
         ArmorType = 'Structure',
         Health = 2100,
@@ -125,7 +126,7 @@ UnitBlueprint {
     LifeBarSize = 2,
     Physics = {
         BuildOnLayerCaps = {
-            LAYER_Water = true,
+            LAYER_Sub = true,
         },
         ---SkirtSizeX = 7,
         ---SkirtSizeZ = 7,

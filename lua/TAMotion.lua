@@ -35,9 +35,9 @@ TAWalking = Class(TAunit)
                 self.Animator:SetRate(bpDisplay.AnimationWalkRate or 1)
             end
         elseif ( new == 'Stopped' ) then
-            if(self.IdleAnim and not self:IsDead()) then
+            if(self.IdleAnim and not self.Dead) then
                 self.Animator:PlayAnim(self.IdleAnim, true)
-            elseif(not self.DeathAnim or not self:IsDead()) then
+            elseif(not self.DeathAnim or not self.Dead) then
                 self.Animator:Destroy()
                 self.Animator = false
             end

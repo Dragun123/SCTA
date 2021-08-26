@@ -128,7 +128,7 @@ UnitBlueprint {
     LifeBarSize = 2,
     Physics = {
         BuildOnLayerCaps = {
-            LAYER_Water = true,
+            LAYER_Sub = true,
         },
     },
     SelectionSizeX = 2,

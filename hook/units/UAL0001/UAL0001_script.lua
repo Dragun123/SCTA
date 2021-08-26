@@ -20,7 +20,7 @@ UAL0001 = Class(taUAL0001) {
 
     BlackOps = function (self, builder, layer)
             local position = self:GetPosition()
-            local cdrUnit = CreateUnitHPR('eal0001', self:Getarmy(), (position.x), (position.y+1), (position.z), 0, 0, 0)  
+            local cdrUnit = CreateUnitHPR('eal0001', self:GetArmy(), (position.x), (position.y+1), (position.z), 0, 0, 0)  
             cdrUnit:HideBone(0, true)
             cdrUnit:SetUnSelectable(false)
 		    cdrUnit:SetBlockCommandQueue(true)

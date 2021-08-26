@@ -41,6 +41,7 @@ UnitBlueprint {
 	    'SORTCONSTRUCTION',
         'LAND',
     },
+    CollisionOffsetY = -0.25,
     Defense = {
         ArmorType = 'Structure',
         Health = 3005,
@@ -122,7 +123,7 @@ TechLevel = 'RULEUTL_Advanced',
     Physics = {
         BuildOnLayerCaps = {
             LAYER_Land = true,
-            LAYER_Water = true,
+            LAYER_Sub = true,
         },        
         ---SkirtSizeX = 7,
         ---SkirtSizeZ = 7,

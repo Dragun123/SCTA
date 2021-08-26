@@ -15,6 +15,7 @@ end,
     OnStopBeingBuilt = function(self, builder, layer)
         FactoryUnit.OnStopBeingBuilt(self, builder, layer)
         local aiBrain = GetArmyBrain(self.Army)
+        ----If We are Level 3 stop checking now
             if __blueprints['armgant'] and not aiBrain.Level3 then
                     local buildRestrictionVictims = aiBrain:GetListOfUnits(categories.FACTORY + categories.ENGINEER, false)
                 for id, unit in buildRestrictionVictims do    
@@ -100,27 +101,66 @@ end,
     }
     
     TASeaPlat = Class(TAFactory) {
-    OnCreate = function(self)
-        TAFactory.OnCreate(self)
+    
+    OnStopBeingBuilt = function(self, builder, layer)
+        TAFactory.OnStopBeingBuilt(self, builder, layer)
         self:DisableIntel('RadarStealth')
-    end,   
-
-    OnLayerChange = function(self, new, old)
-        TAFactory.OnLayerChange(self, new, old)
-        if new == 'Water' then
+            if layer == 'Sub' then
             self.Chassis = CreateSlider(self, 0)
             self.Trash:Add(self.Chassis)
             self.bp = self:GetBlueprint()
             self.scale = 0.5
             self.Water = true
+            ---creates a collision box if below surface if unit is on the water
+            ---based on Balth Dummy Code from BrewLan 
+            self:SetCollisionShape( 'Box', self.bp.CollisionOffsetX or -5,(self.bp.CollisionOffsetY + (self.bp.SizeY*-0.5)) or 0,self.bp.CollisionOffsetZ or -5, self.bp.SizeX * self.scale, self.bp.SizeY * self.scale, self.bp.SizeZ * self.scale )
             self:WaterFall()
+            end
+        end,
+    
+        OnDestroy = function(self)
+            if self.GeneratorCollision then
+            self.GeneratorCollision:Destroy()
+            self.GeneratorCollision = nil
+            end
+            TAFactory.OnDestroy(self)
+        end,
+
+    Open = function(self)
+        if self.Water then
+            self:WaterRise()
         end
+        TAFactory.Open(self)
     end,
 
     Close = function(self)
 		TAFactory.Close(self)
+        if self.Water then
 		self:WaterFall()
+        end
+        --LOG('TALayer2', self:GetCurrentLayer())
 	end,
+
+    WaterFall = function(self)
+        self:EnableIntel('RadarStealth')
+        if self.GeneratorCollision then
+            ---if the unit falls then the box is destroyed again
+            self.GeneratorCollision:Destroy()
+            self.GeneratorCollision = nil
+        end
+    end,
+
+    WaterRise = function(self)
+        if not self.GeneratorCollision then
+            local pos = self:GetPosition()
+            ---created by rising code when the factory rises 
+            self.GeneratorCollision = CreateUnitHPR('Falling',self:GetArmy(),pos[1],pos[2],pos[3],0,0,0)
+            self.GeneratorCollision:SetCollisionShape( 'Box', self.bp.CollisionOffsetX or 0,(self.bp.CollisionOffsetY + (self.bp.SizeY*0.5)) or 0,self.bp.CollisionOffsetZ or 0, self.bp.SizeX * self.scale, self.bp.SizeY * self.scale, self.bp.SizeZ * self.scale )
+            --self.GeneratorCollision:
+            self.GeneratorCollision.Parent = self
+            self:DisableIntel('RadarStealth')
+        end
+    end,
     }
 
     TAGantry = Class(TAFactory) {
