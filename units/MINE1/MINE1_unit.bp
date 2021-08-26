@@ -56,7 +56,7 @@ UnitBlueprint {
                 },
             },
         },
-        UniformScale = 0.24,
+        UniformScale = 0.2,
     },
     Economy = {
         BuildCostEnergy = 1200,
@@ -72,14 +72,14 @@ UnitBlueprint {
         },
         InstantDeathOnSelfDestruct = true,
         OrderOverrides = {
-            RULEUTC_ShieldToggle = {
+            RULEUTC_SpecialToggle = {
                 --  more options in textures.scd\textures\ui\common\game\orders
                 bitmapId = 'toggle-weapon',
                 helpText = 'Detonate',
             },
         },
         ToggleCaps = {
-        RULEUTC_ShieldToggle = true,
+        RULEUTC_SpecialToggle = true,
 		RULEUTC_CloakToggle = true,
 	    },
         SelectionPriority = 5,
