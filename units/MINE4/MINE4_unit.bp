@@ -79,7 +79,7 @@ UnitBlueprint {
             },
         },
         ToggleCaps = {
-        RULEUTC_ShieldToggle = true,
+        RULEUTC_SpecialToggle = true,
 		RULEUTC_CloakToggle = true,
 	    },
         FactionName = 'ARM',

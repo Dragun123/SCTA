@@ -90,17 +90,19 @@ UnitBlueprint {
             RULEUCC_Patrol = true,
             RULEUCC_RetaliateToggle = true,
             RULEUCC_Stop = true,
-            RULEUCC_Dive = true,
         },
         FactionName = 'CORE',
         Icon = 'land',
         OrderOverrides = {
-            RULEUCC_Dive = {
+            RULEUTC_SpecialToggle = {
                 --  more options in textures.scd\textures\ui\common\game\orders
                 bitmapId = 'toggle-weapon',
                 helpText = 'Detonate',
             },
         },
+        ToggleCaps = {
+            RULEUTC_SpecialToggle = true,
+	    },
         TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Roach',
     },
