@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
---  Maelstrom core colision model
+--  Original Code/Unit/Dummy from BrewLan/Balthazar
 --------------------------------------------------------------------------------
 local StructureUnit = import('/lua/defaultunits.lua').StructureUnit
 

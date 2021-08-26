@@ -1,11 +1,8 @@
 UnitBlueprint {
+    ----VISIBLETORECON Is what allows these units to be shot at automatically
     Categories = {
         'STRUCTURE',
-        'CIVILIAN',
-        'SELECTABLE',
-        'LAND',
         'VISIBLETORECON',
-        'RECLAIMABLE',
     },
     Defense = {
         ArmorType = 'Normal',
