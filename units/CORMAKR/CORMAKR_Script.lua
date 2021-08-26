@@ -35,6 +35,7 @@ CORMAKR = Class(TAStructure) {
 		OnDestroy = function(self)
 			if self.GeneratorCollision then
 			self.GeneratorCollision:Destroy()
+			self.GeneratorCollision = nil
 			end
 			TAStructure.OnDestroy(self)
 		end,

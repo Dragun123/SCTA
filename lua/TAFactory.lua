@@ -15,6 +15,7 @@ end,
     OnStopBeingBuilt = function(self, builder, layer)
         FactoryUnit.OnStopBeingBuilt(self, builder, layer)
         local aiBrain = GetArmyBrain(self.Army)
+        ----If We are Level 3 stop checking now
             if __blueprints['armgant'] and not aiBrain.Level3 then
                     local buildRestrictionVictims = aiBrain:GetListOfUnits(categories.FACTORY + categories.ENGINEER, false)
                 for id, unit in buildRestrictionVictims do    
@@ -100,13 +101,10 @@ end,
     }
     
     TASeaPlat = Class(TAFactory) {
-    OnCreate = function(self)
-        TAFactory.OnCreate(self)
-        self:DisableIntel('RadarStealth')
-    end,
     
     OnStopBeingBuilt = function(self, builder, layer)
         TAFactory.OnStopBeingBuilt(self, builder, layer)
+        self:DisableIntel('RadarStealth')
             if layer == 'Sub' then
             self.Chassis = CreateSlider(self, 0)
             self.Trash:Add(self.Chassis)
@@ -123,6 +121,7 @@ end,
         OnDestroy = function(self)
             if self.GeneratorCollision then
             self.GeneratorCollision:Destroy()
+            self.GeneratorCollision = nil
             end
             TAFactory.OnDestroy(self)
         end,
@@ -143,6 +142,7 @@ end,
 	end,
 
     WaterFall = function(self)
+        self:EnableIntel('RadarStealth')
         if self.GeneratorCollision then
             ---if the unit falls then the box is destroyed again
             self.GeneratorCollision:Destroy()
@@ -158,6 +158,7 @@ end,
             self.GeneratorCollision:SetCollisionShape( 'Box', self.bp.CollisionOffsetX or 0,(self.bp.CollisionOffsetY + (self.bp.SizeY*0.5)) or 0,self.bp.CollisionOffsetZ or 0, self.bp.SizeX * self.scale, self.bp.SizeY * self.scale, self.bp.SizeZ * self.scale )
             --self.GeneratorCollision:
             self.GeneratorCollision.Parent = self
+            self:DisableIntel('RadarStealth')
         end
     end,
     }

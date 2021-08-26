@@ -11,7 +11,6 @@ ARMPLAT = Class(TASeaPlat) {
 			self.Chassis:SetSpeed(13)
 			self.Chassis:SetGoal(0,0,0)
 			--self:SetCollisionShape( 'Box', self.bp.CollisionOffsetX or 0,(self.bp.CollisionOffsetY + (self.bp.SizeY*0.5)) or 0,self.bp.CollisionOffsetZ or 0, self.bp.SizeX * self.scale, self.bp.SizeY * self.scale, self.bp.SizeZ * self.scale )
-			self:DisableIntel('RadarStealth')
         TASeaPlat.WaterRise(self)
     end,
 
@@ -20,7 +19,6 @@ ARMPLAT = Class(TASeaPlat) {
 			self.Chassis:SetSpeed(13)
 			self.Chassis:SetGoal(0,-13,0)
 			--self:SetCollisionShape( 'Box', self.bp.CollisionOffsetX or -5,(self.bp.CollisionOffsetY + (self.bp.SizeY*-0.5)) or 0,self.bp.CollisionOffsetZ or -5, self.bp.SizeX * self.scale, self.bp.SizeY * self.scale, self.bp.SizeZ * self.scale )
-			self:EnableIntel('RadarStealth')
 	end,
 }
 

@@ -31,6 +31,7 @@ ARMASON = Class(TACloser) {
 	OnDestroy = function(self)
 		if self.GeneratorCollision then
 		self.GeneratorCollision:Destroy()
+		self.GeneratorCollision = nil
 		end
 		TACloser.OnDestroy(self)
 	end,
