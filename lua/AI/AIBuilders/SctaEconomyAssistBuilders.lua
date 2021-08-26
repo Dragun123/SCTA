@@ -108,6 +108,7 @@ BuilderGroup {
         },
         BuilderData = {
             Assist = {
+                AssistRange = 20,
                 AssistLocation = 'LocationType',
                 AssisteeType = 'Engineer',
                 BeingBuiltCategories = {'STRUCTURE'},
