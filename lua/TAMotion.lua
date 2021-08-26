@@ -95,7 +95,14 @@ TASeaWalking = Class(TAWalking)
 }
 
 TAKamiCounter = Class(TACounter) { 
-	EnableShield = function(self)
+	OnScriptBitSet = function(self, bit)
+		TACounter.OnScriptBitSet(self, bit)
+		if bit == 7 then
+			self:ExplodeTA()
+		end
+	end,
+
+	ExplodeTA = function(self)
 		self:DisableUnitIntel('ToggleBit8', 'Cloak')
 		self:GetWeaponByLabel('Suicide'):FireWeapon()
 	end,

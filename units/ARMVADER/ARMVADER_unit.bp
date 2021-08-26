@@ -95,14 +95,14 @@ UnitBlueprint {
         Icon = 'land',
         InstantDeathOnSelfDestruct = true,
         OrderOverrides = {
-            RULEUTC_ShieldToggle = {
+            RULEUTC_SpecialToggle = {
                 --  more options in textures.scd\textures\ui\common\game\orders
                 bitmapId = 'toggle-weapon',
                 helpText = 'Detonate',
             },
         },
         ToggleCaps = {
-            RULEUTC_ShieldToggle = true,
+            RULEUTC_SpecialToggle = true,
 	    },
         TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Invader',

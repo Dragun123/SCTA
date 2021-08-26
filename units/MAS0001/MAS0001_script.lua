@@ -6,8 +6,11 @@ local EffectUtil = import('/lua/EffectUtilities.lua')
 MAS0001 = Class(AWalkingLandUnit) {
 	OnCreate = function(self)
 	AWalkingLandUnit.OnCreate(self)
+	---this is show nomads don't appear in TA only games
 	self:AddBuildRestriction(categories.NOMADS)
-	self:AddBuildRestriction(categories.CYBRAN)
+	---this is likewise just for base game FA Factions. This restriction is applied specifically so that its somewhat easier on my end.
+	---Instead of applying restrictions for 4 different factions I call a single relavent category here. 
+	self:AddBuildRestriction(categories.PRODUCTSC1)
 	self.AnimManip = CreateAnimator(self)
 	self.Trash:Add(self.AnimManip)
 	end,
@@ -16,11 +19,6 @@ MAS0001 = Class(AWalkingLandUnit) {
 		---local army = self:GetArmy()
 		AWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
 		self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationOpen):SetRate(0.25)
-    end,
-
-   GiveInitialResources = function(self)
-        self:GetAIBrain():GiveResource('Energy', self:GetBlueprint().Economy.StorageEnergy)
-        self:GetAIBrain():GiveResource('Mass', self:GetBlueprint().Economy.StorageMass)
     end,
 	
 	OnStartBuild = function(self, unitBeingBuilt, order)

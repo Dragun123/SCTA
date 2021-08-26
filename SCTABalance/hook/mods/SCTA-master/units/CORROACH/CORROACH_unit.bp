@@ -14,7 +14,7 @@ UnitBlueprint {
     General = {
     ToggleCaps = {
         RULEUTC_CloakToggle = true,
-        RULEUTC_ShieldToggle = true,
+        RULEUTC_SpecialToggle = true,
     },
 },
     Intel = {

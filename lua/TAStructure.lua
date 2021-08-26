@@ -311,7 +311,15 @@ TACKFusion = Class(TAStructure) {
 }
 
 TAMine = Class(TACKFusion) {
-	EnableShield = function(self)
+
+	OnScriptBitSet = function(self, bit)
+		TACKFusion.OnScriptBitSet(self, bit)
+		if bit == 7 then
+			self:ExplodeTA()
+		end
+	end,
+
+	ExplodeTA = function(self)
 		self:DisableUnitIntel('ToggleBit8', 'Cloak')
 		self:GetWeaponByLabel('MINE'):FireWeapon()
 	end,

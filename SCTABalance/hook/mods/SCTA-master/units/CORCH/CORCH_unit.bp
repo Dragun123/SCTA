@@ -18,8 +18,8 @@ UnitBlueprint {
         'BOT',
     },
     Defense = {
-        Health = 2080,
-        MaxHealth = 2080,
+        Health = 1500,
+        MaxHealth = 1500,
         },
         Display = {
             UniformScale = 0.1,
