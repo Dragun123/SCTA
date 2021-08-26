@@ -1,5 +1,7 @@
 WARN('['..string.gsub(debug.getinfo(1).source, ".*\\(.*.lua)", "%1")..', line:'..debug.getinfo(1).currentline..'] * SCTAAI: offset EngineerManager.lua' )
 
+local PROTECTION = (categories.LAND * categories.MOBILE * categories.SILO - categories.ENGINEER)
+
 SCTAEngineerManager = EngineerManager
 EngineerManager = Class(SCTAEngineerManager) {
     Create = function(self, brain, lType, location, radius)
@@ -286,7 +288,7 @@ EngineerManager = Class(SCTAEngineerManager) {
                 ---the code here grabs nearest missile base TA Units (Relavent units are Storms, and the T1 AntiAir Mobile). And have them protect the engineeer
                 ---This will protect the engineer from bombers and labs. 
                 ---Experimenting with the location of the unit vs location of the manager
-                local Escorts = self.Brain:GetUnitsAroundPoint(categories.LAND * categories.MOBILE * categories.SILO - categories.ENGINEER, self.Location, 25, 'Ally') 
+                local Escorts = self.Brain:GetUnitsAroundPoint(PROTECTION, self.Location, 25, 'Ally') 
                 --return
                 --local Escort = table.remove(Escort, Escort.Escorting)
                 for _,Escort in Escorts do

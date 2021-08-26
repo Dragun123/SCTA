@@ -24,7 +24,6 @@ UnitBlueprint {
     BuildIconSortPriority = 200,
     Categories = {
         'SELECTABLE',
-        'CYBRAN',
         'MOBILE',
         'ECONOMIC',
         'COMMAND',

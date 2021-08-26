@@ -104,7 +104,6 @@ TAunitkeygroups = {
     },
     ["Strategic_Missile_Launcher"]= {
         "armsilo",
-   
         "corsilo",
     },
     ["Radar_System"]= {
