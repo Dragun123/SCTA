@@ -1581,7 +1581,7 @@ Platoon = Class(SCTAAIPlatoon) {
     SCTAWatchForNotBuilding = function(eng)
         WaitTicks(5)
         local aiBrain = eng:GetAIBrain()
-        while not eng:IsDead() and eng.GoingHome or eng:IsUnitState("Building") or 
+        while not eng.Dead and eng.GoingHome or eng:IsUnitState("Building") or 
                   eng:IsUnitState("Attacking") or eng:IsUnitState("Repairing") or 
                   eng:IsUnitState("Reclaiming") or eng:IsUnitState("Capturing") or eng.ProcessBuild != nil do
                   
@@ -1589,7 +1589,7 @@ Platoon = Class(SCTAAIPlatoon) {
             --if eng.CDRHome then eng:PrintCommandQueue() end
         end
         eng.NotBuildingThread = nil
-        if not eng:IsDead() and eng:IsIdleState() and table.getn(eng.EngineerBuildQueue) != 0 and eng.PlatoonHandle then
+        if not eng.Dead and eng:IsIdleState() and table.getn(eng.EngineerBuildQueue) != 0 and eng.PlatoonHandle then
             eng.PlatoonHandle.SetupEngineerCallbacksSCTA(eng)
             if not eng.ProcessBuild then
                 eng.ProcessBuild = eng:ForkThread(eng.PlatoonHandle.SCTAProcessBuildCommand, true)
@@ -1753,7 +1753,7 @@ Platoon = Class(SCTAAIPlatoon) {
             WaitSeconds(3)
             upgrading = false
             for k, v in platoonUnits do
-                if v and not v:IsDead() then
+                if v and not v.Dead then
                     upgrading = true
                 end
             end
@@ -1992,7 +1992,7 @@ Platoon = Class(SCTAAIPlatoon) {
         while aiBrain:PlatoonExists(self) do
             local numberOfUnitsInPlatoon = table.getn(platoonUnits)
             --self:SetPlatoonFormationOverride('Attack')
-            if not target or target:IsDead() then
+            if not target or target.Dead then
                 if aiBrain:GetCurrentEnemy() and aiBrain:GetCurrentEnemy():IsDefeated() then
                     aiBrain:PickEnemyLogic()
                 end
@@ -2109,7 +2109,7 @@ Platoon = Class(SCTAAIPlatoon) {
                     WaitSeconds(1)
                     self:CheckEnergySCTAEco()
                 end
-            if not target or target:IsDead() then
+            if not target or target.Dead then
                 if aiBrain:GetCurrentEnemy() and aiBrain:GetCurrentEnemy():IsDefeated() then
                     aiBrain:PickEnemyLogic()
                 end
@@ -3064,7 +3064,7 @@ Platoon = Class(SCTAAIPlatoon) {
             local blip = false
             local maxRadius = self.PlatoonData.SearchRadius or 50
             while aiBrain:PlatoonExists(self) do
-                if not target or target:IsDead() then
+                if not target or target.Dead then
                     if aiBrain:GetCurrentEnemy() and aiBrain:GetCurrentEnemy():IsDefeated() then
                         aiBrain:PickEnemyLogic()
                     end

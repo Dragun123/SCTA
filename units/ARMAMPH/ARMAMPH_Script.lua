@@ -21,7 +21,7 @@ ARMAMPH = Class(TASeaWalking) {
 
 	OnMotionHorzEventChange = function(self, new, old)
         TASeaWalking.OnMotionHorzEventChange(self, new, old)
-        if self:IsDead() then return end
+        if self.Dead then return end
         if( not self.IsWaiting ) then
             if( self.Swim ) then
                 if( old == 'Stopped' ) then
