@@ -3122,7 +3122,7 @@ Platoon = Class(SCTAAIPlatoon) {
             local armyIndex = aiBrain:GetArmyIndex()
             local target
             while aiBrain:PlatoonExists(self) do
-                target = structure = self:FindClosestUnit('Attack', 'Enemy', true, categories.STRUCTURE - categories.WALL)
+                target = self:FindClosestUnit('Attack', 'Enemy', true, categories.STRUCTURE - categories.WALL)
                 if target then
                     blip = target:GetBlip(armyIndex)
                     self:Stop()
