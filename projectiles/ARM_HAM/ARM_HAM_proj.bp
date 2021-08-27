@@ -57,6 +57,7 @@ ProjectileBlueprint {
         InitialSpeedRange = 3,
         InitialSpeedReduceDistance = 30,
         LeadTarget = false,
+        Lifetime = 10,
         TurnRate = 360,
         VelocityAlign = true,
     },

@@ -51,7 +51,6 @@ ProjectileBlueprint {
         Faction = 'ARM',
         Weapon = 'GAUSS',
     },
-
     Physics = {
         DestroyOnWater = true,
         InitialSpeed = 28,

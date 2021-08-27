@@ -4,6 +4,7 @@ local TAutils = '/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua'
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
 TIDAL = (categories.cortide + categories.armtide)
 SKY = categories.AIR * categories.MOBILE
+NAVY = (categories.NAVAL * categories.MOBILE) - categories.ENGINEER
 
 BuilderGroup {
     BuilderGroupName = 'SCTANavalFormer',
@@ -67,7 +68,7 @@ BuilderGroup {
         InstanceCount = 5,
         BuilderType = 'SeaForm',
         BuilderConditions = {
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2,  categories.NAVAL * categories.SUBMERSIBLE * categories.MOBILE - categories.ENGINEER} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, categories.SUBMERSIBLE * NAVY} },
          },
          BuilderData = {
             LocationType = 'LocationType',
@@ -89,7 +90,7 @@ BuilderGroup {
         BuilderName = 'SCTA T1 Naval Assault',
         PlatoonTemplate = 'SCTANavalAssault',
         PriorityFunction = TAPrior.NavalProduction,
-        Priority = 150,
+        Priority = 200,
         InstanceCount = 10,
         BuilderType = 'SeaForm',
         BuilderData = {
@@ -108,7 +109,33 @@ BuilderGroup {
             },
         },
         BuilderConditions = {
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2,  categories.NAVAL * categories.MOBILE - categories.ENGINEER} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2,  NAVY - categories.TECH3} },
+        },
+    },
+    Builder {
+        BuilderName = 'SCTA Battleship Assault',
+        PlatoonTemplate = 'SCTABattleshipNaval',
+        PriorityFunction = TAPrior.ProductionT3,
+        Priority = 150,
+        InstanceCount = 5,
+        BuilderType = 'SeaForm',
+        BuilderData = {
+            LocationType = 'LocationType',
+            UseFormation = 'AttackFormation',
+            ThreatWeights = {
+                IgnoreStrongerTargetsRatio = 100.0,
+                PrimaryThreatTargetType = 'Naval',
+                SecondaryThreatTargetType = 'Economy',
+                SecondaryThreatWeight = 0.1,
+                WeakAttackThreatWeight = 1,
+                VeryNearThreatWeight = 10,
+                NearThreatWeight = 5,
+                MidThreatWeight = 1,
+                FarThreatWeight = 1,
+            },
+        },
+        BuilderConditions = {
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1,  NAVY * categories.TECH3} },
         },
     },
     Builder {

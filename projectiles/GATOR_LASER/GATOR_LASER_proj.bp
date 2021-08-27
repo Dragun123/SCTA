@@ -44,7 +44,6 @@ ProjectileBlueprint {
         Faction = 'ARM',
         Weapon = 'ARM_LASER',
     },
-
     Physics = {
         DestroyOnWater = true,
         InitialSpeed = 25,

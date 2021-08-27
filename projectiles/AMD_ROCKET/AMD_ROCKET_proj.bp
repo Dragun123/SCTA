@@ -59,6 +59,7 @@ ProjectileBlueprint {
         Weapon = 'AMD_ROCKET',
     },
     Physics = {
+        Lifetime = 600,
         Acceleration = 30,
         DestroyOnWater = false,
         HitAssignedTarget = true,

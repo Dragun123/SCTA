@@ -51,7 +51,6 @@ ProjectileBlueprint {
         Faction = 'CORE',
         Weapon = 'CORE_LIGHTCANNON',
     },
-
     Physics = {
         DestroyOnWater = true,
         InitialSpeed = 22,

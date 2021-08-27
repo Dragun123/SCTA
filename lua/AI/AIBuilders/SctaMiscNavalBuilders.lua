@@ -264,73 +264,14 @@ BuilderGroup {
         }
     },
     Builder {
-        BuilderName = 'SCTA Defensive Point Naval',
-        PlatoonTemplate = 'EngineerBuilderSCTANaval2',
-        Priority = 76,
-        PriorityFunction = TAPrior.TechEnergyExist,
-        InstanceCount = 2,
-        BuilderConditions = {
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 4, categories.ANTISHIELD * categories.TECH2 - categories.MOBILE} }, 
-            { TAutils, 'GreaterTAStorageRatio', { 0.2, 0.5}}, 
-        },
-        BuilderType = 'SeaTA',
-        BuilderData = {
-            ---NeedGuard = false,
-            ---DesiresAssist = false,
-            Construction = {
-            Location = 'LocationType',
-            NearMarkerType = 'Naval Area',
-            BuildClose = true,
-            OrderedTemplate = true,
-            NearBasePatrolPoints = false,
-                BaseTemplateFile = '/mods/SCTA-master/lua/AI/TAMiscBaseTemplates/TA2TowerTemplates.lua',
-                BaseTemplate = 'T2TowerTemplate',
-                BuildStructures = {
-                    'T2GroundDefense',
-                    'Wall2',
-                    'Wall2',
-                    'Wall2',
-                    'Wall2',
-                    'Wall2',
-                    'Wall2',
-                    'Wall2',
-                    'Wall2',
-                },
-            },
-        }
-    },
-    Builder {
-        BuilderName = 'SCTAAI T1Engineer Naval Mex 25',
-        PlatoonTemplate = 'EngineerBuilderSCTANaval',
-        Priority = 105,
-        InstanceCount = 1, -- The max number concurrent instances of this builder.
-        DelayEqualBuildPlattons = {'MexLand2', 1},
-        BuilderConditions = {
-            { UCBC, 'CheckBuildPlattonDelay', { 'MexLand2' }},
-            { MABC, 'CanBuildOnMassLessThanDistance', { 'Naval Area', 25, -500, 1000, 0, 'StructuresNotMex', 1 }},
-        },
-        BuilderType = 'SeaTA',
-        BuilderData = {
-            ---NeedGuard = false,
-            ---DesiresAssist = false,
-            Construction = {
-            Location = 'LocationType',
-            NearMarkerType = 'Naval Area',
-                BuildStructures = {
-                    'T1Resource',
-                }
-            }
-        }
-    },
-    Builder {
-        BuilderName = 'SCTAAI T1Engineer Naval Mex 150',
+        BuilderName = 'SCTAAI T1Engineer Naval Mex 500',
         PlatoonTemplate = 'EngineerBuilderSCTANaval',
         Priority = 150,
-        InstanceCount = 1, -- The max number concurrent instances of this builder.
-        DelayEqualBuildPlattons = {'MexLand2', 1},
+        InstanceCount = 3, 
+        DelayEqualBuildPlattons = {'MexLand2', 1},-- The max number concurrent instances of this builder.
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'MexLand2' }},
-            { MABC, 'CanBuildOnMassLessThanDistance', { 'Naval Area', 150, -500, 1000, 0, 'StructuresNotMex', 1 }},
+            { MABC, 'CanBuildOnMassLessThanDistance', { 'Naval Area', 500, -500, 1000, 0, 'StructuresNotMex', 1 }},
         },
         BuilderType = 'SeaTA',
         BuilderData = {
@@ -345,29 +286,6 @@ BuilderGroup {
             }
         }
     },
-    Builder {
-        BuilderName = 'SCTAAI T1Engineer 300 Mex Naval',
-        PlatoonTemplate = 'EngineerBuilderSCTANaval',
-        Priority = 125,
-        InstanceCount = 1,
-        DelayEqualBuildPlattons = {'MexLand2', 1},
-        BuilderConditions = {
-            { UCBC, 'CheckBuildPlattonDelay', { 'MexLand2' }},
-            { MABC, 'CanBuildOnMassLessThanDistance', { 'Naval Area', 300, -500, 500, 0, 'StructuresNotMex', 1 }},
-        },
-        BuilderType = 'SeaTA',
-        BuilderData = {
-            ---NeedGuard = false,
-            ---DesiresAssist = false,
-            Construction = {
-            Location = 'LocationType',
-            NearMarkerType = 'Naval Area',
-                BuildStructures = {
-                    'T1Resource',
-                    }
-                }
-            }
-        },
     Builder {
         BuilderName = 'SCTAAI T2Engineer 300 Mex Naval',
         PlatoonTemplate = 'EngineerBuilderSCTANaval2',

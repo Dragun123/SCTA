@@ -48,10 +48,9 @@ ProjectileBlueprint {
             'PROJECTILE',
             'INDIRECTFIRE',
         },
-        Faction = 'CORE',
-        Weapon = 'CORE_ARTILLERY',
-    },
-
+            Faction = 'CORE',
+            Weapon = 'CORE_ARTILLERY',
+        },
         Physics = {
             DestroyOnWater = true,
             InitialSpeed = 50,
