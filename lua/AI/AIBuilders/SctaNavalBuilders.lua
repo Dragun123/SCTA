@@ -25,26 +25,6 @@ BuilderGroup {
         },
         BuilderType = 'Sea',
     },
-    Builder {
-        BuilderName = 'SCTAAi FactoryT3 Hover Naval Engineer',
-        PlatoonTemplate = 'T3BuildEngineerSCTA',
-        Priority = 200, -- Top factory priority
-        PriorityFunction = TAPrior.ProductionT3,
-        BuilderConditions = {
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 2, categories.ENGINEER * categories.TECH3 * categories.HOVER} }, -- Build engies until we have 4 of them.
-        },
-        BuilderType = 'SpecHover',
-    },
-    Builder {
-        BuilderName = 'SCTAAi FactoryT3 Engineer Naval Air',
-        PlatoonTemplate = 'T3BuildEngineerAirSCTA',
-        Priority = 200, -- Top factory priority
-        PriorityFunction = TAPrior.ProductionT3,
-        BuilderConditions = {
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 2, categories.ENGINEER * categories.TECH3 * categories.AIR} }, -- Build engies until we have 4 of them.
-        },
-        BuilderType = 'SpecAir',
-    },
     --[[Builder {
         BuilderName = 'SCTAAI Factory AirCarrier Bomber',
         PlatoonTemplate = 'T3AirBomberSCTA',

@@ -51,7 +51,6 @@ ProjectileBlueprint {
         Faction = 'CORE',
         Weapon = 'CORPLAS_WEAPON',
     },
-
     Physics = {
         DestroyOnWater = true,
         InitialSpeed = 25,

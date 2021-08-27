@@ -34,8 +34,8 @@ ProjectileBlueprint {
     Categories = {
         'ARM',
         'PROJECTILE',
-	'STRATEGIC',
-	'ANTIMISSILE',
+	    'STRATEGIC',
+	    'ANTIMISSILE',
     },
     Display = {
         MeshBlueprint = '/mods/SCTA-master/meshes/projectiles/amdrocket_mesh.bp',
@@ -52,8 +52,8 @@ ProjectileBlueprint {
         EntityCategory = {
        	    'ARM',
             'PROJECTILE',
-	    'STRATEGIC',
-	    'ANTIMISSILE',
+	        'STRATEGIC',
+	        'ANTIMISSILE',
         },
         Faction = 'ARM',
     },
@@ -62,6 +62,7 @@ ProjectileBlueprint {
     },
     DesiredShooterCap = 1,
     Physics = {
+        Lifetime = 600,
         Acceleration = 30,
         DestroyOnWater = false,
         HitAssignedTarget = true,

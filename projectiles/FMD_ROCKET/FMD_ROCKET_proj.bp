@@ -63,6 +63,7 @@ ProjectileBlueprint {
     },
     Physics = {
         Acceleration = 30,
+        Lifetime = 600,
         DestroyOnWater = false,
         HitAssignedTarget = true,
         LeadTarget = true,

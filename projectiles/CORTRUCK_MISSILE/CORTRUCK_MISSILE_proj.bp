@@ -52,7 +52,6 @@ ProjectileBlueprint {
         Faction = 'CORE',
         Weapon = 'CORTRUCK_MISSILE',
     },
-
     Physics = {
         Acceleration = 6,
         AirAccel = 18,

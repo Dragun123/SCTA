@@ -217,9 +217,9 @@ BuilderGroup {
         Priority = 105,
         PriorityFunction = TAPrior.UnitProductionT1,
         InstanceCount = 2,
-        DelayEqualBuildPlattons = {'MexLand2', 1},
+        DelayEqualBuildPlattons = {'MexAir', 1},
         BuilderConditions = {
-            { UCBC, 'CheckBuildPlattonDelay', { 'MexLand2' }},
+            { UCBC, 'CheckBuildPlattonDelay', { 'MexAir' }},
                 { MABC, 'CanBuildOnMassLessThanDistance', { 'LocationType', 1000, -500, 500, 0, 'AntiAir', 1 }},
             },
         BuilderType = 'AirTA',

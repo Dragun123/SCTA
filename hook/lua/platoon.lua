@@ -3115,6 +3115,25 @@ Platoon = Class(SCTAAIPlatoon) {
                 WaitSeconds(17)
             end
         end,
+
+        BattleshipSCTAAI = function(self)
+            self:Stop()
+            local aiBrain = self:GetBrain()
+            local armyIndex = aiBrain:GetArmyIndex()
+            local target
+            while aiBrain:PlatoonExists(self) do
+                target = self:FindClosestUnit('Attack', 'Enemy', true, categories.STRUCTURE - categories.WALL)
+                if target then
+                    blip = target:GetBlip(armyIndex)
+                    self:Stop()
+                    self:AttackTarget(target)
+                    --DUNCAN - added to try and stop AI getting stuck.
+                    local position = AIUtils.RandomLocation(target:GetPosition()[1],target:GetPosition()[3])
+                    self:MoveToLocation(position, false)
+                end
+                WaitSeconds(17)
+            end
+        end,
             
         CheckEnergySCTAEco = function(self)
             self.EcoCheck = true

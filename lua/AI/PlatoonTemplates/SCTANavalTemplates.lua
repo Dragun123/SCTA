@@ -31,7 +31,7 @@ PlatoonTemplate {
     Plan = 'SubHuntSCTAAI',
     --Type = 'SeaForm',
     GlobalSquads = {
-        { NAVY * categories.SUBMERSIBLE - categories.ENGINEER, 1, 2, 'Attack', 'GrowthFormation' },
+        { NAVY * categories.SUBMERSIBLE - categories.ENGINEER, 1, 2, 'Attack', 'AttackFormation' },
     }
 }
 
@@ -40,7 +40,16 @@ PlatoonTemplate {
     Plan = 'NavalForceAI',
     --Type = 'SeaForm',
     GlobalSquads = {
-        {NAVY - categories.ENGINEER - categories.NAVALCARRIER, 2, 10, 'Attack', 'GrowthFormation' },
+        {NAVY - categories.ENGINEER - categories.TECH3, 2, 10, 'Attack', 'AttackFormation' },
+    },
+}
+
+PlatoonTemplate {
+    Name = 'SCTABattleshipNaval',
+    Plan = 'BattleshipSCTAAI',
+    --Type = 'SeaForm',
+    GlobalSquads = {
+        {NAVY * categories.TECH3 - categories.NAVALCARRIER, 1, 2, 'Attack', 'AttackFormation' },
     },
 }
 

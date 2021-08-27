@@ -51,7 +51,6 @@ ProjectileBlueprint {
         Faction = 'CORE',
         Weapon = 'CORE_REAP',
     },
-
     Physics = {
         DestroyOnWater = true,
         InitialSpeed = 25,

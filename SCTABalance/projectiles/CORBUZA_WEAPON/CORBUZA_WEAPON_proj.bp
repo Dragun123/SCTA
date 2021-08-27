@@ -52,8 +52,8 @@ ProjectileBlueprint {
         Faction = 'CORE',
         Weapon = 'CORBUZZ_WEAPON',
     },
-
     Physics = {
+        Lifetime = 1000,
         DestroyOnWater = true,
         InitialSpeed = 125,
         UseGravity = true,

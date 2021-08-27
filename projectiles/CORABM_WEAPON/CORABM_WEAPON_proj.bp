@@ -49,6 +49,7 @@ ProjectileBlueprint {
         Faction = 'CORE',
     },
     Physics = {
+        Lifetime = 10,
         Acceleration = 0,
         CollideEntity = true,
         CollideSurface = true,
