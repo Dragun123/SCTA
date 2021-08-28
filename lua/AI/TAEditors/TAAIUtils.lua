@@ -1,4 +1,5 @@
 local AIUtils = import('/lua/ai/AIUtilities.lua')
+local AIAttackUtils = import('/lua/AI/aiattackutilities.lua')
 
 ------AIUTILITIES FUNCTIONS (RNG, NUTCTACKER, and RECLAIM MY OW
 function CheckBuildPlatoonDelaySCTA(aiBrain, PlatoonName)
@@ -224,7 +225,6 @@ end
 
 function TAAttackNaval(aiBrain, bool)
     local startX, startZ = aiBrain:GetArmyStartPos()
-    local AIAttackUtils = import('/lua/AI/aiattackutilities.lua')
     local enemyX, enemyZ
     if aiBrain:GetCurrentEnemy() then
         enemyX, enemyZ = aiBrain:GetCurrentEnemy():GetArmyStartPos()
@@ -382,6 +382,20 @@ function TACanBuildOnMassLessThanDistanceLand(aiBrain, locationType, distance, t
     local position = engineerManager:GetLocationCoords()
     local markerTable = AIUtils.AIGetSortedMassLocations(aiBrain, maxNum, threatMin, threatMax, threatRings, threatType, position)
     if markerTable[1] and VDist3( markerTable[1], position ) < distance then
+        local dist = VDist3( markerTable[1], position )
+        return true
+    end
+    return false
+end
+
+function TACanBuildOnMassLessThanDistanceNaval(aiBrain, locationType, distance, threatMin, threatMax, threatRings, threatType, maxNum )
+    local engineerManager = aiBrain.BuilderManagers[locationType].EngineerManager
+    if not (locationType == 'Naval Area' or engineerManager) then
+        return false
+    end
+    local position = engineerManager:GetLocationCoords()
+    local markerTable = AIUtils.AIGetSortedMassLocationsNavalSCTA(aiBrain, maxNum, threatMin, threatMax, threatRings, threatType, position)
+    if markerTable[1] and AIAttackUtils.CanGraphAreaToSCTA(position, markerTable[1], 'Water') and VDist3( markerTable[1], position ) < distance then
         local dist = VDist3( markerTable[1], position )
         return true
     end

@@ -29,6 +29,7 @@ BuilderGroup {
             TAEscort = true,
             ---DesiresAssist = false,
             Construction = {
+                Location = 'LocationType',
                 BuildStructures = {
                     'T1Resource',
                 }
@@ -51,6 +52,7 @@ BuilderGroup {
             ---NeedGuard = false,
             ---DesiresAssist = false,
             Construction = {
+                Location = 'LocationType',
                 BuildStructures = {
                     'T2Resource',
                 }
@@ -58,7 +60,7 @@ BuilderGroup {
         }
     },
     Builder {
-        BuilderName = 'SCTAAI T2Engineer 250 Mex',
+        BuilderName = 'SCTAAI T2Engineer 250 Air Mex',
         PlatoonTemplate = 'EngineerBuilderSCTAEco23',
         Priority = 200,
         InstanceCount = 1, -- The max number concurrent instances of this builder.
@@ -73,6 +75,7 @@ BuilderGroup {
             ---NeedGuard = false,
             ---DesiresAssist = false,
             Construction = {
+                Location = 'LocationType',
                 BuildStructures = {
                     'T2Resource',
                 }
@@ -227,6 +230,7 @@ BuilderGroup {
             ---NeedGuard = false,
             ---DesiresAssist = false,
             Construction = {
+                Location = 'LocationType',
                 BuildStructures = {
                     'T1Resource',
                 }

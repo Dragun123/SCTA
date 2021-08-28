@@ -3,6 +3,7 @@ local MABC = '/lua/editor/MarkerBuildConditions.lua'
 local TAutils = '/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua'
 local TASlow = '/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua'
 LAB = (categories.FACTORY * categories.TECH2)
+TIDAL = (categories.cortide + categories.armtide)
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
 
 BuilderGroup {
@@ -263,15 +264,15 @@ BuilderGroup {
             }
         }
     },
-    Builder {
-        BuilderName = 'SCTAAI T1Engineer Naval Mex 500',
+    --[[Builder {
+        BuilderName = 'SCTAAI T1Engineer Naval Mex',
         PlatoonTemplate = 'EngineerBuilderSCTANaval',
         Priority = 150,
-        InstanceCount = 3, 
-        DelayEqualBuildPlattons = {'MexLand2', 1},-- The max number concurrent instances of this builder.
+        InstanceCount = 1, 
+        DelayEqualBuildPlattons = {'MexSea', 1},-- The max number concurrent instances of this builder.
         BuilderConditions = {
-            { UCBC, 'CheckBuildPlattonDelay', { 'MexLand2' }},
-            { MABC, 'CanBuildOnMassLessThanDistance', { 'Naval Area', 500, -500, 1000, 0, 'StructuresNotMex', 1 }},
+            { UCBC, 'CheckBuildPlattonDelay', { 'MexSea' }},
+            { TASlow, 'TACanBuildOnMassLessThanDistanceNaval', { 'LocationType', 250, -500, 1000, 0, 'StructuresNotMex', 1 }},
         },
         BuilderType = 'SeaTA',
         BuilderData = {
@@ -292,10 +293,10 @@ BuilderGroup {
         PriorityFunction = TAPrior.UnitProduction,
         Priority = 125,
         InstanceCount = 1,
-        DelayEqualBuildPlattons = {'MexLand2', 1},
+        DelayEqualBuildPlattons = {'MexSea', 1},
         BuilderConditions = {
-            { UCBC, 'CheckBuildPlattonDelay', { 'MexLand2' }},
-            { MABC, 'CanBuildOnMassLessThanDistance', { 'Naval Area', 300, -500, 500, 0, 'StructuresNotMex', 1 }},
+            { UCBC, 'CheckBuildPlattonDelay', { 'MexSea' }},
+            { TASlow, 'TACanBuildOnMassLessThanDistanceNaval', { 'LocationType', 300, -500, 500, 0, 'StructuresNotMex', 1 }},
         },
         BuilderType = 'SeaTA',
         BuilderData = {
@@ -309,5 +310,48 @@ BuilderGroup {
                     }
                 }
             }
+        },]]
+        --[[Builder {
+            BuilderName = 'SCTA Engineer Finish Navy',
+            PlatoonTemplate = 'EngineerBuilderSCTANaval',
+            PlatoonAIPlan = 'ManagerEngineerFindUnfinishedSCTA',
+            Priority = 500,
+            InstanceCount = 2,
+            DelayEqualBuildPlattons = {'Unfinished', 2},
+            BuilderConditions = {
+                { TASlow, 'CheckBuildPlatoonDelaySCTA', { 'Unfinished' }},
+                { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, categories.ENGINEER * categories.NAVAL} },
+                { UCBC, 'UnfinishedUnits', { 'LocationType', categories.STRUCTURE}},
+            },
+            BuilderData = {
+                Assist = {
+                    NearMarkerType = 'Naval Area',
+                    BeingBuiltCategories = {'STRUCTURE'},
+                    AssistLocation = 'LocationType',
+                    AssistUntilFinished = true,
+                    AssisteeType = 'Engineer',
+                    Time = 20,
+                },
+            },
+            BuilderType = 'SeaTA',
+        },]]
+        Builder {
+            BuilderName = 'SCTA Engineer Reclaim Energy Naval',
+            PlatoonTemplate = 'EngineerBuilderSCTANaval',
+            PriorityFunction = TAPrior.TechEnergyExist,
+            PlatoonAIPlan = 'ReclaimStructuresAITA',
+            Priority = 111,
+            InstanceCount = 8,
+            BuilderConditions = {
+                { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1,  TIDAL}},
+                { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1,  categories.ENGINEER * categories.NAVAL} },
+                { TAutils, 'LessMassStorageMaxTA',  { 0.3}},
+                },
+            BuilderData = {
+                Location = 'LocationType',
+                Reclaim = {'cortide, armtide,'},
+                ReclaimTime = 30,
+            },
+            BuilderType = 'SeaTA',
         },
 }
