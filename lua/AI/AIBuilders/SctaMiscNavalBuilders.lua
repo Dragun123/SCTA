@@ -264,10 +264,10 @@ BuilderGroup {
             }
         }
     },
-    --[[Builder {
+    Builder {
         BuilderName = 'SCTAAI T1Engineer Naval Mex',
         PlatoonTemplate = 'EngineerBuilderSCTANaval',
-        Priority = 150,
+        Priority = 50,
         InstanceCount = 1, 
         DelayEqualBuildPlattons = {'MexSea', 1},-- The max number concurrent instances of this builder.
         BuilderConditions = {
@@ -291,7 +291,7 @@ BuilderGroup {
         BuilderName = 'SCTAAI T2Engineer 300 Mex Naval',
         PlatoonTemplate = 'EngineerBuilderSCTANaval2',
         PriorityFunction = TAPrior.UnitProduction,
-        Priority = 125,
+        Priority = 75,
         InstanceCount = 1,
         DelayEqualBuildPlattons = {'MexSea', 1},
         BuilderConditions = {
@@ -310,7 +310,7 @@ BuilderGroup {
                     }
                 }
             }
-        },]]
+        },
         --[[Builder {
             BuilderName = 'SCTA Engineer Finish Navy',
             PlatoonTemplate = 'EngineerBuilderSCTANaval',
