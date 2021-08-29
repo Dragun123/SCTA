@@ -230,3 +230,22 @@ function SCTAEngineerMoveWithSafePathLand(aiBrain, unit, destination)
     end
     return false
 end
+
+
+--[[function AIGetSortedMassLocationsNavalSCTA(aiBrain, maxNum, tMin, tMax, tRings, tType, position)
+    local markerList = AIGetMarkerLocations(aiBrain, 'Mass')
+    local newList = {}
+    for _, v in markerList do
+        local height = GetTerrainHeight(v.Position[1], v.Position[3])
+        local surfHeight = GetSurfaceHeight(v.Position[1], v.Position[3])
+        -- check distance to map border. (game engine can't build mass closer then 8 mapunits to the map border.) 
+        if v.Position[1] <= 8 or v.Position[1] >= ScenarioInfo.size[1] - 8 or v.Position[3] <= 8 or v.Position[3] >= ScenarioInfo.size[2] - 8 or v.Height > v.surfHeight then
+            -- mass marker is too close to border, skip it.
+            continue
+        end
+        if aiBrain:CanBuildStructureAt('ueb1103', v.Position) then
+            table.insert(newList, v)
+        end
+    end
+    return AISortMarkersFromLastPos(aiBrain, newList, maxNum, tMin, tMax, tRings, tType, position)
+end]]

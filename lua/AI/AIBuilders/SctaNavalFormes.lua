@@ -186,48 +186,6 @@ BuilderGroup {
          },
     },
     Builder {
-        BuilderName = 'SCTA Engineer Finish Navy',
-        PlatoonTemplate = 'EngineerBuilderSCTANaval',
-        PlatoonAIPlan = 'ManagerEngineerFindUnfinishedSCTA',
-        Priority = 500,
-        InstanceCount = 2,
-        DelayEqualBuildPlattons = {'Unfinished', 2},
-        BuilderConditions = {
-            { TASlow, 'CheckBuildPlatoonDelaySCTA', { 'Unfinished' }},
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, categories.ENGINEER * categories.NAVAL} },
-            { UCBC, 'UnfinishedUnits', { 'LocationType', categories.STRUCTURE}},
-        },
-        BuilderData = {
-            Assist = {
-                BeingBuiltCategories = {'STRUCTURE'},
-                AssistLocation = 'LocationType',
-                AssistUntilFinished = true,
-                AssisteeType = 'Engineer',
-                Time = 20,
-            },
-        },
-        BuilderType = 'SeaForm',
-    },
-    Builder {
-        BuilderName = 'SCTA Engineer Reclaim Energy Naval',
-        PlatoonTemplate = 'EngineerBuilderSCTANaval',
-        PriorityFunction = TAPrior.TechEnergyExist,
-        PlatoonAIPlan = 'ReclaimStructuresAITA',
-        Priority = 111,
-        InstanceCount = 8,
-        BuilderConditions = {
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1,  TIDAL}},
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1,  categories.ENGINEER * categories.NAVAL} },
-            { TAutils, 'LessMassStorageMaxTA',  { 0.3}},
-            },
-        BuilderData = {
-            Location = 'LocationType',
-            Reclaim = {'cortide, armtide,'},
-            ReclaimTime = 30,
-        },
-        BuilderType = 'SeaForm',
-    },
-    Builder {
         BuilderName = 'SCTA Aircraft Carrier',
         PlatoonTemplate = 'SCTAAirCarrier',
         PriorityFunction = TAPrior.AirCarrierExist,
