@@ -388,7 +388,7 @@ function TACanBuildOnMassLessThanDistanceLand(aiBrain, locationType, distance, t
     return false
 end
 
-function TACanBuildOnMassLessThanDistanceNaval(aiBrain, locationType, distance, threatMin, threatMax, threatRings, threatType, maxNum )
+--[[function TACanBuildOnMassLessThanDistanceNaval(aiBrain, locationType, distance, threatMin, threatMax, threatRings, threatType, maxNum )
     local engineerManager = aiBrain.BuilderManagers[locationType].EngineerManager
     if not (locationType == 'Naval Area' or engineerManager) then
         return false
@@ -400,7 +400,7 @@ function TACanBuildOnMassLessThanDistanceNaval(aiBrain, locationType, distance, 
         return true
     end
     return false
-end
+end]]
 
 function TAKite(vec1, vec2, distance)
     -- Courtesy of chp2001

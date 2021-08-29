@@ -272,7 +272,7 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'MexSea', 1},-- The max number concurrent instances of this builder.
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'MexSea' }},
-            { TASlow, 'TACanBuildOnMassLessThanDistanceNaval', { 'LocationType', 250, -500, 1000, 0, 'StructuresNotMex', 1 }},
+            { MABC, 'CanBuildOnMassLessThanDistance', { 'LocationType', 500, -500, 1000, 0, 'StructuresNotMex', 1 }},
         },
         BuilderType = 'SeaTA',
         BuilderData = {
@@ -296,7 +296,7 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'MexSea', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'MexSea' }},
-            { TASlow, 'TACanBuildOnMassLessThanDistanceNaval', { 'LocationType', 300, -500, 500, 0, 'StructuresNotMex', 1 }},
+            { MABC, 'CanBuildOnMassLessThanDistance', { 'LocationType', 500, -500, 1000, 0, 'StructuresNotMex', 1 }},
         },
         BuilderType = 'SeaTA',
         BuilderData = {
