@@ -57,6 +57,7 @@ BuilderGroup {
         InstanceCount = 10,
         BuilderType = 'LandForm',
         BuilderData = {
+            SearchRadius = 50,
             ThreatSupport = 25,
             NeverGuardBases = true,
             NeverGuardEngineers = true,
@@ -80,6 +81,7 @@ BuilderGroup {
         InstanceCount = 10,
         BuilderType = 'LandForm',
         BuilderData = {
+            SearchRadius = 100,
             ThreatSupport = 50,
             UseMoveOrder = true,
             NeverGuardBases = false,
@@ -100,6 +102,7 @@ BuilderGroup {
         InstanceCount = 10,
         BuilderType = 'LandForm',
         BuilderData = {
+            SearchRadius = 100,
             ThreatSupport = 75,
             UseMoveOrder = true,
             NeverGuardBases = false,
@@ -123,6 +126,7 @@ BuilderGroup {
         InstanceCount = 10,
         BuilderType = 'LandForm',
         BuilderData = {
+            SearchRadius = 50,
             TAWeaponRange = 30, 
             ThreatSupport = 50,
             NeverGuardBases = true,
@@ -148,6 +152,7 @@ BuilderGroup {
         --DelayEqualBuildPlattons = 5,
         BuilderType = 'LandForm',
         BuilderData = {
+            SearchRadius = 50,
             ThreatSupport = 75,
             TAWeaponRange = 30,
             NeverGuardBases = true,

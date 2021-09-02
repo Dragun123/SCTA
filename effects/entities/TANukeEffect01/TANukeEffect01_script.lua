@@ -22,6 +22,7 @@ TANukeEffect01 = Class(NullShell) {
 		
 		
 		WaitSeconds(4)
+		--coroutine.yield(40)
 		CreateEmitterAtEntity(self, army, '/mods/SCTA-master/effects/emitters/EMPBOOM_emit.bp'):ScaleEmitter(10)
 
 		self:SetVelocity(0,3,0)

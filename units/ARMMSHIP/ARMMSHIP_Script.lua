@@ -32,7 +32,8 @@ ARMMSHIP = Class(TASea) {
 				else
 					self.unit:HideBone('rocket2', true)
 					--SLEEP <750>;
-					WaitSeconds(0.5)
+				--WaitSeconds(0.5)
+				coroutine.yield(6)
 
 					self.unit:ShowBone('rocket1', true)
 					self.unit:ShowBone('rocket2', true)
@@ -59,14 +60,16 @@ ARMMSHIP = Class(TASea) {
 				self.unit:ShowBone('rocket1', true)
 				self.unit:ShowBone('rocket2', true)
 				--SLEEP <600>;
-				WaitSeconds(1)
+				--WaitSeconds(1)
+				coroutine.yield(11)
 
 				--TURN launcher1 to x-axis <-90.00> SPEED <120.02>;
 				self.unit.Spinners.launcher1:SetGoal(-90)
 				self.unit.Spinners.launcher1:SetSpeed(120)
 
 				self.unit.currentShot = 0
-				WaitSeconds(1)
+				--WaitSeconds(1)
+				coroutine.yield(11)
 				TAweapon.PlayFxWeaponUnpackSequence(self)
 			end,	
 
@@ -80,7 +83,8 @@ ARMMSHIP = Class(TASea) {
 				self.unit.Spinners.plate:SetSpeed(7)
 
 				--SLEEP <600>;
-				WaitSeconds(1)
+				--WaitSeconds(1)
+				coroutine.yield(11)
 
 				--MOVE door1 to x-axis <0> SPEED <6.00>;
 				self.unit.Spinners.door1:SetGoal(0,0,0)

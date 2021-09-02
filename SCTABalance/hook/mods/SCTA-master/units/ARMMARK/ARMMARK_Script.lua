@@ -9,7 +9,8 @@ ARMMARK = Class(oldARMMARK) {
 
     CloakDelayed = function(self)
         if not self.Dead then
-            WaitSeconds(2)
+            --WaitSeconds(2)
+            coroutine.yield(21)
             self.IntelDisables['RadarStealth']['ToggleBit5'] = true
             self.IntelDisables['CloakField']['ToggleBit8'] = true
 			self:EnableUnitIntel('ToggleBit5', 'RadarStealth')

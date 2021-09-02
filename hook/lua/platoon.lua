@@ -33,7 +33,8 @@ Platoon = Class(SCTAAIPlatoon) {
         end]]
         
         self:TAEconUnfinishedBody()
-        WaitTicks(10)
+        --WaitTicks(10)
+        coroutine.yield(8)
         -- do we assist until the building is finished ?
         if self.PlatoonData.Assist.AssistUntilFinished then
             local guardedUnit
@@ -53,10 +54,12 @@ Platoon = Class(SCTAAIPlatoon) {
                     break
                 end
                 -- wait 1.5 seconds until we loop again
-                WaitTicks(15)
+                --WaitTicks(15)
+                coroutine.yield(16)
             end
         else
-            WaitSeconds(10)
+            --WaitSeconds(10)
+            coroutine.yield(50)
         end
         if not aiBrain:PlatoonExists(self) then
             return
@@ -91,7 +94,8 @@ Platoon = Class(SCTAAIPlatoon) {
         end
         if beingBuilt and assistData.AssistUntilFinished then
             while beingBuilt:IsUnitState('Building') or beingBuilt:IsUnitState('Upgrading') do
-                WaitSeconds(5)
+                --WaitSeconds(5)
+                coroutine.yield(30)
             end
         end
         if not aiBrain:PlatoonExists(self) then --or assistData.PermanentAssist then
@@ -270,7 +274,8 @@ Platoon = Class(SCTAAIPlatoon) {
                 reclaimunit.ReclaimInProgress = true
                 IssueReclaim(self:GetPlatoonUnits(), reclaimunit)
                 repeat
-                    WaitSeconds(2)
+                    --WaitSeconds(2)
+                    coroutine.yield(18)
                     if not aiBrain:PlatoonExists(self) then
                         return
                     end
@@ -286,7 +291,8 @@ Platoon = Class(SCTAAIPlatoon) {
                 return self:PlatoonDisbandTA()
             else
                 counter = counter + 1
-                WaitSeconds(5)
+                --WaitSeconds(5)
+                coroutine.yield(50)
             end
         end
     end,
@@ -1579,13 +1585,15 @@ Platoon = Class(SCTAAIPlatoon) {
     end,
 
     SCTAWatchForNotBuilding = function(eng)
-        WaitTicks(5)
+        --WaitTicks(5)
+        coroutine.yield(5)
         local aiBrain = eng:GetAIBrain()
         while not eng.Dead and eng.GoingHome or eng:IsUnitState("Building") or 
                   eng:IsUnitState("Attacking") or eng:IsUnitState("Repairing") or 
                   eng:IsUnitState("Reclaiming") or eng:IsUnitState("Capturing") or eng.ProcessBuild != nil do
                   
-            WaitSeconds(3)
+            --WaitSeconds(3)
+            coroutine.yield(30)
             --if eng.CDRHome then eng:PrintCommandQueue() end
         end
         eng.NotBuildingThread = nil
@@ -1699,6 +1707,7 @@ Platoon = Class(SCTAAIPlatoon) {
             while aiBrain:PlatoonExists(self) do
                 while unit:GetNukeSiloAmmoCount() < 1 do
                     WaitSeconds(11)
+                    --coroutine.yield(80)
                     if not  aiBrain:PlatoonExists(self) then
                         return
                     end
@@ -1710,7 +1719,8 @@ Platoon = Class(SCTAAIPlatoon) {
                     WaitSeconds(12)
                     IssueClearCommands({unit})
                 end
-                WaitSeconds(1)
+                --WaitSeconds(1)
+                coroutine.yield(11)
             end
         end
         self:PlatoonDisbandTA()
@@ -1724,13 +1734,14 @@ Platoon = Class(SCTAAIPlatoon) {
         end
         local econ = AIUtils.AIGetEconomyNumbers(aiBrain)
         while econ.EnergyStorageRatio < 0.4 do
-            WaitSeconds(2)
+            --WaitSeconds(2)
+            coroutine.yield(21)
             econ = AIUtils.AIGetEconomyNumbers(aiBrain)
         end
         for k, v in platoonUnits do
             v:SetScriptBit('RULEUTC_ProductionToggle', false)
         end
-        coroutine.yield(1)
+        coroutine.yield(2)
         self:PlatoonDisbandTA()
     end,
 
@@ -1750,7 +1761,8 @@ Platoon = Class(SCTAAIPlatoon) {
         end
         local upgrading = true
         while aiBrain:PlatoonExists(self) and upgrading do
-            WaitSeconds(3)
+            --WaitSeconds(3)
+            coroutine.yield(20)
             upgrading = false
             for k, v in platoonUnits do
                 if v and not v.Dead then
@@ -1761,7 +1773,8 @@ Platoon = Class(SCTAAIPlatoon) {
         if not aiBrain:PlatoonExists(self) then
             return
         end
-        WaitTicks(1)
+        --WaitTicks(1)
+        coroutine.yield(2)
         self:PlatoonDisbandTA()
     end,
 
@@ -1822,7 +1835,8 @@ Platoon = Class(SCTAAIPlatoon) {
             self:MergeWithNearbyPlatoonsSCTA('TAHunt', 'TAHunt', 5)
             end]]
             if self.EDrain and not self.EcoCheck then
-                WaitSeconds(1)
+                --WaitSeconds(1)
+                coroutine.yield(11)
                 self:CheckEnergySCTAEco()
             end
             target = self:FindClosestUnit('Artillery', 'Enemy', true, categories.ALLUNITS - categories.WALL)
@@ -1845,11 +1859,13 @@ Platoon = Class(SCTAAIPlatoon) {
                 end]]
             end
             --self:Stop()
-            WaitSeconds(2)
+            ---WaitSeconds(2)
+            coroutine.yield(21)
             self.EcoCheck = nil
             local position = AIUtils.RandomLocation(self.Center[1],self.Center[3])
             self:MoveToLocation(position, false)
-            WaitSeconds(2)
+            --WaitSeconds(2)
+            coroutine.yield(21)
         end
     end,
 
@@ -1864,7 +1880,8 @@ Platoon = Class(SCTAAIPlatoon) {
         end
         local econ = AIUtils.AIGetEconomyNumbers(aiBrain)
         while ((econ.EnergyStorageRatio < 0.4) or (econ.MassStorageRatio > 0.8)) do
-            WaitSeconds(2)
+            --WaitSeconds(2)
+            coroutine.yield(21)
             econ = AIUtils.AIGetEconomyNumbers(aiBrain)
         end
         for k, v in platoonUnits do
@@ -1872,7 +1889,7 @@ Platoon = Class(SCTAAIPlatoon) {
             v:SetScriptBit('RULEUTC_ProductionToggle', false)
             end
         end
-        coroutine.yield(1)
+        coroutine.yield(2)
         self:PlatoonDisbandTA()
     end,
 
@@ -1939,8 +1956,9 @@ Platoon = Class(SCTAAIPlatoon) {
                 end
                 end
             end
-            self:SetPlatoonFormationOverride('Attack')
-            WaitSeconds(5)
+            self:SetPlatoonFormationOverride('AttackFormation')
+            --WaitSeconds(5)
+            coroutine.yield(25)
             if aiBrain.Level2 then
                 self:MergeWithNearbyPlatoonsSCTA('SCTAStrikeForceAIEarly', 'SCTAStrikeForceAI', 'SCTAAI Strike Mid', 5)
             ---The third variable allows for proper platoon handle tracking
@@ -1997,12 +2015,14 @@ Platoon = Class(SCTAAIPlatoon) {
                     aiBrain:PickEnemyLogic()
                 end
                 if Artillery > 0 then
-                    WaitSeconds(0.25)
-                    targetArt = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Artillery', 100, atkPriArt, aiBrain:GetCurrentEnemy())
+                    --WaitSeconds(0.25)
+                    coroutine.yield(3)
+                    targetArt = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Artillery', maxRadius, atkPriArt, aiBrain:GetCurrentEnemy())
                 end
                 if AntiAir > 0 then
-                    WaitSeconds(0.25)
-                    targetAir = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Scout', 50, atkPriA, aiBrain:GetCurrentEnemy())
+                    --WaitSeconds(0.25)
+                    coroutine.yield(3)
+                    targetAir = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Scout', maxRadius, atkPriA, aiBrain:GetCurrentEnemy())
                 end
                 local mult = { 1, 5, 10 }
                 for _,i in mult do
@@ -2010,7 +2030,8 @@ Platoon = Class(SCTAAIPlatoon) {
                     if target then
                         break
                     end
-                    WaitSeconds(3)
+                    --WaitSeconds(3)
+                    coroutine.yield(31)
                     if not aiBrain:PlatoonExists(self) then
                         return
                     end
@@ -2023,34 +2044,39 @@ Platoon = Class(SCTAAIPlatoon) {
                 targetArt = self:FindPrioritizedUnit('Artillery', 'Enemy', true, self:GetSquadPosition('Artillery'), 50)
                 end]]
                 self:Stop()
-                WaitSeconds(1)
+                --WaitSeconds(1)
+                coroutine.yield(11)
                 if target and not target.Dead then
                         if numberOfUnitsInPlatoon < 20 then
                             self:SetPlatoonFormationOverride('AttackFormation')
                         end
                             local threat = target:GetPosition()
-                            if Support > 0 then
-                                self:AggressiveMoveToLocation(table.copy(threat), 'Guard')
-                            end 
-                                if AntiAir > 0 and targetAir and not targetAir.Dead then
+                            self:MoveToLocation( table.copy(threat), false, 'Attack')
+                                if AntiAir > 0 then
+                                    if targetAir and not targetAir.Dead then
                                     self:AttackTarget(targetAir, 'Scout')
-                                else
+                                    else
                                     self:AggressiveMoveToLocation(table.copy(threat), 'Scout')
+                                    end
                                 end
-                                if Artillery > 0 and targetArt and not targetArt.Dead then
+                                if Artillery > 0 then
+                                    if targetArt and not targetArt.Dead then
                                     self:AggressiveMoveToLocation(table.copy(targetArt:GetPosition()), 'Artillery')
-                                    self:MoveToLocation( table.copy(threat), false, 'Attack')    
-                                elseif Artillery < 1 then
-                                    self:AttackTarget(target, 'Attack')
-                                else
-                                    self:MoveToLocation( table.copy(threat), false, 'Attack')
+                                    --self:MoveToLocation( table.copy(threat), false, 'Attack')    
+                                    else
+                                    --self:MoveToLocation( table.copy(threat), false, 'Attack')
                                     self:AggressiveMoveToLocation(table.copy(threat), 'Artillery')
+                                    end
                                 end
+                                if Support > 0 then
+                                    self:AggressiveMoveToLocation(table.copy(threat), 'Guard')
+                                end 
                 else
                     for k,v in AIUtils.AIGetSortedMassLocations(aiBrain, 10, nil, nil, nil, nil, self:GetPlatoonPosition()) do
                         if v[1] < 0 or v[3] < 0 or v[1] > ScenarioInfo.size[1] or v[3] > ScenarioInfo.size[2] then
                         end
-                        WaitSeconds(1)
+                        --WaitSeconds(1)
+                        coroutine.yield(11)
                         self:Stop()
                         self:MoveToLocation( (v), false )
                     end
@@ -2090,7 +2116,7 @@ Platoon = Class(SCTAAIPlatoon) {
         end
         if Artillery > 0 then
             table.insert( atkPriArt, 'LAND' )
-            table.insert( categoryListArt, (categories.STRUCTURE - categories.WALL - categories.NAVAL) + (SCTALAND))
+            table.insert( categoryListArt, (categories.STRUCTURE - categories.WALL - categories.NAVAL))
             self:SetPrioritizedTargetList( 'Artillery', categoryListArt)
         end
         table.insert( atkPri, 'LAND' )
@@ -2106,7 +2132,8 @@ Platoon = Class(SCTAAIPlatoon) {
         end
         while aiBrain:PlatoonExists(self) do
                 if self.EDrain and not self.EcoCheck then
-                    WaitSeconds(1)
+                    --WaitSeconds(1)
+                    coroutine.yield(11)
                     self:CheckEnergySCTAEco()
                 end
             if not target or target.Dead then
@@ -2114,12 +2141,14 @@ Platoon = Class(SCTAAIPlatoon) {
                     aiBrain:PickEnemyLogic()
                 end
                 if Artillery > 0 then
-                    WaitSeconds(0.25)
-                    targetArt = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Artillery', 100, atkPriArt, aiBrain:GetCurrentEnemy())
+                    --WaitSeconds(0.25)
+                    coroutine.yield(3)
+                    targetArt = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Artillery', maxRadius, atkPriArt, aiBrain:GetCurrentEnemy())
                 end
                 if AntiAir > 0 then
-                    WaitSeconds(0.25)
-                    targetAir = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Scout', 100, atkPriA, aiBrain:GetCurrentEnemy())
+                    --WaitSeconds(0.25)
+                    coroutine.yield(3)
+                    targetAir = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Scout', maxRadius, atkPriA, aiBrain:GetCurrentEnemy())
                 end
                 local mult = { 1,10,20 }
                 for _,i in mult do
@@ -2127,7 +2156,8 @@ Platoon = Class(SCTAAIPlatoon) {
                     if target then
                         break
                     end
-                    WaitSeconds(3)
+                    --WaitSeconds(3)
+                    coroutine.yield(30)
                     if not aiBrain:PlatoonExists(self) then
                         return
                     end
@@ -2142,34 +2172,37 @@ Platoon = Class(SCTAAIPlatoon) {
                 local numberOfUnitsInPlatoon = table.getn(platoonUnits)
                 if numberOfUnitsInPlatoon < 20 then
                     self:SetPlatoonFormationOverride('AttackFormation')
-                    else
-                    self:SetPlatoonFormationOverride('GrowthFormation')
                 end
                 self:Stop()
-                WaitSeconds(1)
-                    if target and not target.Dead then
+                --WaitSeconds(1)
+                coroutine.yield(11)
+                if target and not target.Dead then
                     local threat = target:GetPosition()
-                        if Support > 0 then
-                            self:AggressiveMoveToLocation(table.copy(threat), 'Guard')
-                        end 
-                            if AntiAir > 0 and targetAir and not targetAir.Dead then
-                                self:AttackTarget(targetAir, 'Scout')
-                            else
-                                self:AggressiveMoveToLocation(table.copy(threat), 'Scout')
-                            end
-                            if Artillery > 0 and targetArt and not targetArt.Dead then
-                                self:AggressiveMoveToLocation(table.copy(targetArt:GetPosition()), 'Artillery')
-                                self:MoveToLocation( table.copy(threat), false, 'Attack')    
-                            elseif Artillery < 1 then
-                                self:AttackTarget(target, 'Attack')
-                            else
-                                self:MoveToLocation( table.copy(threat), false, 'Attack')
-                                self:AggressiveMoveToLocation(table.copy(threat), 'Artillery')
-                            end
+                    self:MoveToLocation( table.copy(threat), false, 'Attack')
+                    if AntiAir > 0 then
+                        if targetAir and not targetAir.Dead then
+                        self:AttackTarget(targetAir, 'Scout')
+                        else
+                        self:AggressiveMoveToLocation(table.copy(threat), 'Scout')
+                        end
+                    end
+                    if Artillery > 0 then
+                        if targetArt and not targetArt.Dead then
+                        self:AggressiveMoveToLocation(table.copy(targetArt:GetPosition()), 'Artillery')
+                        --self:MoveToLocation( table.copy(threat), false, 'Attack')    
+                        else
+                        --self:MoveToLocation( table.copy(threat), false, 'Attack')
+                        self:AggressiveMoveToLocation(table.copy(threat), 'Artillery')
+                        end
+                    end
+                    if Support > 0 then
+                        self:AggressiveMoveToLocation(table.copy(threat), 'Guard')
+                    end 
                 else
                     for k,v in AIUtils.AIGetSortedMassLocations(aiBrain, 10, nil, nil, nil, nil, self:GetPlatoonPosition()) do
                         if v[1] < 0 or v[3] < 0 or v[1] > ScenarioInfo.size[1] or v[3] > ScenarioInfo.size[2] then
                         end
+                        ---coroutine.yield(30)
                         self:Stop()
                         self:MoveToLocation( (v), false )
                     end
@@ -2246,7 +2279,7 @@ Platoon = Class(SCTAAIPlatoon) {
                     local units = aPlat:GetSquadUnits(squad)
                     local svalid = false
                     local validsquad = {}
-                    if units > 0 then
+                    if units and units > 0 then
                         for _,v in units do
                             if not v.Dead and not v:IsUnitState('Attached') then
                                 table.insert(validsquad, v)
@@ -2268,6 +2301,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 self.BuilderName = newName
                 self:SetAIPlan(newPlatoon)
                 WaitSeconds(5)
+                --coroutine.yield(50)
         end
     end,
     
@@ -2286,7 +2320,8 @@ Platoon = Class(SCTAAIPlatoon) {
                 self:AggressiveMoveToLocation(table.copy(threat))
                 local targetDist = VDist2Sq(threat[1],threat[3], self.Center[1], self.Center[3])
                 if targetDist < self.PlatoonData.TAWeaponRange then
-                    WaitSeconds(2)
+                    --WaitSeconds(2)
+                    coroutine.yield(22)
                     for _,v in Squad do
                         local smartPos = TAReclaim.TAKite({self.Center[1] + math.random(-2,2), self.Center[2], self.Center[3] + math.random(-2,2)}, threat, {targetDist, targetDist - self.PlatoonData.TAWeaponRange})
                         smartPos = {smartPos[1] + math.random(-1,1), smartPos[2], smartPos[3] + math.random(-1,1)}
@@ -2296,10 +2331,12 @@ Platoon = Class(SCTAAIPlatoon) {
                 end
             end
             ---self:Stop()
-            WaitSeconds(2)
+            --WaitSeconds(2)
+            coroutine.yield(22)
             local position = AIUtils.RandomLocation(self.Center[1],self.Center[3])
             self:MoveToLocation(position, false)
-            WaitSeconds(2)
+            --WaitSeconds(2)
+            coroutine.yield(22)
             if aiBrain.Level2 then
                 self:MergeWithNearbyPlatoonsSCTA('HuntSCTAAI', 'AttackSCTAForceAI', 'SCTAAI Land Attack Mid', 5)
             elseif table.getn(Squad) < 2 and not target then
@@ -2482,7 +2519,8 @@ Platoon = Class(SCTAAIPlatoon) {
             local cmd = self:MoveToLocation(self:GetPlatoonPosition(), false)
             local counter = 0
             repeat
-                WaitSeconds(1)
+                --WaitSeconds(1)
+                coroutine.yield(11)
                 counter = counter + 1
                 if not aiBrain:PlatoonExists(self) then
                     return false
@@ -2573,7 +2611,8 @@ Platoon = Class(SCTAAIPlatoon) {
         while aiBrain:PlatoonExists(self) do
             target = self:FindClosestUnit('Attack', 'Enemy', true, categories.ENGINEER - categories.COMMAND)
             if not target then
-                WaitSeconds(1)
+                --WaitSeconds(1)
+                coroutine.yield(11)
                 return self:SCTALabAI()
             end
             if target and target:GetFractionComplete() == 1 then
@@ -2696,7 +2735,8 @@ Platoon = Class(SCTAAIPlatoon) {
         while aiBrain:PlatoonExists(self) do
             target = self:FindClosestUnit('Attack', 'Enemy', true, categories.MOBILE * (categories.AIR + categories.ENGINEER) - categories.COMMAND)
             if not target then
-                WaitSeconds(1)
+                --WaitSeconds(1)
+                coroutine.yield(11)
                 return self:SCTALabAI()
             end
             if target and target:GetFractionComplete() == 1 then
@@ -2737,17 +2777,20 @@ Platoon = Class(SCTAAIPlatoon) {
         end
         while aiBrain:PlatoonExists(self) do
             if self.EDrain and not self.EcoCheck then
-            WaitSeconds(1)
+            --WaitSeconds(1)
+            coroutine.yield(11)
             self:CheckEnergySCTAEco()
         end
             target = self:FindClosestUnit('Attack', 'Enemy', true, categories.COMMAND)
             if not target then
                 if Bomber > 0 then
-                WaitSeconds(0.5)
+                --WaitSeconds(0.5)
+                coroutine.yield(6)
                 targetBomb = self:FindClosestUnit('Attack', 'Enemy', true, SCTALAND - categories.SCOUT)
                 end
                 if Interceptor > 0 then
-                WaitSeconds(0.5)
+                --WaitSeconds(0.5)
+                coroutine.yield(6)
                 targetIntie = self:FindClosestUnit('Artillery', 'Enemy', true, SCTAAIR)
                 end
             end
@@ -2850,7 +2893,8 @@ Platoon = Class(SCTAAIPlatoon) {
 
         while aiBrain:PlatoonExists(self) do
             if self.EDrain and not self.EcoCheck then
-                WaitSeconds(1)
+                --WaitSeconds(1)
+                coroutine.yield(11)
                 self:CheckEnergySCTAEco()
             end
             target = self:FindClosestUnit('Attack', 'Enemy', true, categories.AIR * categories.ANTIAIR)
@@ -2938,7 +2982,8 @@ Platoon = Class(SCTAAIPlatoon) {
         while aiBrain:PlatoonExists(self) do
             structure = self:FindClosestUnit('Attack', 'Enemy', true, categories.STRUCTURE * (categories.ENERGYPRODUCTION + categories.MASSEXTRACTION))
             if not structure then
-                WaitSeconds(1)
+                --WaitSeconds(1)
+                coroutine.yield(11)
                 return self:SCTALabAI()
             end
             if structure and structure:GetFractionComplete() == 1 then
@@ -3019,7 +3064,8 @@ Platoon = Class(SCTAAIPlatoon) {
         while brain:PlatoonExists(self) do
             local ents = TAReclaim.TAAIReclaimablesAroundEngineer(brain, eng)[1]
             if not ents or not eng:GetPosition() then
-                WaitTicks(1)
+                --WaitTicks(1)
+                coroutine.yield(2)
                 self:PlatoonDisbandTA()
                 return
             end
@@ -3038,7 +3084,8 @@ Platoon = Class(SCTAAIPlatoon) {
                     end
                 local basePosition = brain.BuilderManagers[self.PlatoonData.LocationType].Position
                 self:MoveToLocation(AIUtils.RandomLocation(basePosition[1],basePosition[3]), false)
-                WaitSeconds(1)
+                --WaitSeconds(1)
+                coroutine.yield(11)
                 return self:PlatoonDisbandTA()
             end
             self:PlatoonDisbandTA()
@@ -3074,7 +3121,8 @@ Platoon = Class(SCTAAIPlatoon) {
                         if target then
                             break
                         end
-                        WaitSeconds(3)
+                        --WaitSeconds(3)
+                        coroutine.yield(30)
                         if not aiBrain:PlatoonExists(self) then
                             return
                         end
@@ -3247,9 +3295,11 @@ Platoon = Class(SCTAAIPlatoon) {
                         WaitSeconds(5)
                     end
                 else
-                    WaitSeconds(1)
+                    --WaitSeconds(1)
+                    coroutine.yield(11)
                 end
-                WaitTicks(1)
+                ---WaitTicks(1)
+                coroutine.yield(2)
             end
         end,
 
@@ -3306,7 +3356,8 @@ Platoon = Class(SCTAAIPlatoon) {
                         WaitSeconds(2.5)
                     end
                 end
-                WaitSeconds(1)
+                --WaitSeconds(1)
+                coroutine.yield(11)
             end
         end,
 

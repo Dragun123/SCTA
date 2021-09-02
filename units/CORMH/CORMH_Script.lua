@@ -31,7 +31,8 @@ CORMH = Class(TASea) {
 				self.unit.Spinners.box:SetSpeed(57.93)
 
 				--SLEEP <352>
-				WaitSeconds(0.35)
+				--WaitSeconds(0.35)
+				coroutine.yield(4)
 
 				--TURN base to x-axis <0> SPEED <2.97>
 				self.unit.Spinners.base:SetGoal(0)
@@ -42,7 +43,8 @@ CORMH = Class(TASea) {
 				self.unit.Spinners.box:SetSpeed(141.05)
 
 				--SLEEP <354>
-				WaitSeconds(0.35)
+				--WaitSeconds(0.35)
+				coroutine.yield(4)
 
 				--TURN base to x-axis <-3.15> SPEED <8.96>
 				self.unit.Spinners.base:SetGoal(-3.15)
@@ -76,7 +78,8 @@ CORMH = Class(TASea) {
 				self.unit.Spinners.box:SetSpeed(12.07)
 
 				--SLEEP <262>
-				WaitSeconds(0.25)
+				--WaitSeconds(0.35)
+				coroutine.yield(3)
 
 				--TURN base to x-axis <0> SPEED <11.89>
 				self.unit.Spinners.base:SetGoal(0)
@@ -87,7 +90,8 @@ CORMH = Class(TASea) {
 				self.unit.Spinners.box:SetSpeed(85.92)
 
 				--SLEEP <266>
-				WaitSeconds(0.25)
+				--WaitSeconds(0.25)
+				coroutine.yield(3)
 
 				--TURN base to x-axis <1.05> SPEED <3.99>
 				self.unit.Spinners.base:SetGoal(1.05)
@@ -98,7 +102,8 @@ CORMH = Class(TASea) {
 				self.unit.Spinners.box:SetSpeed(189.14)
 
 				--SLEEP <264>
-				WaitSeconds(0.25)
+				--WaitSeconds(0.25)
+				coroutine.yield(3)
 
 				--TURN base to x-axis <0> SPEED <3.95>
 				self.unit.Spinners.base:SetGoal(0)

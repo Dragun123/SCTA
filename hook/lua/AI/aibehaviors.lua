@@ -148,7 +148,8 @@ function CDRSCTADGunDecoy(aiBrain, cdr)
 
             if overCharging then
                 while target and not target.Dead and not cdr.Dead and counter <= 5 do
-                    WaitSeconds(0.5)
+                    --WaitSeconds(0.5)
+                    coroutine.yield(5)
                     counter = counter + 0.5
                 end
             else
@@ -277,7 +278,8 @@ while aiBrain:PlatoonExists(self) do
                 if (farAway and targDistSq < 40000) or (not farAway and targDistSq >= 40000) then
                     break
                 end
-                WaitSeconds(1)
+                --WaitSeconds(1)
+                coroutine.yield(11)
             end
 
             closestBlockingShield = false
@@ -292,11 +294,14 @@ while aiBrain:PlatoonExists(self) do
                 closestBlockingShield = GetClosestShieldProtectingTargetSorian(experimental, experimental)
                 end
             closestBlockingShield = closestBlockingShield or GetClosestShieldProtectingTargetSorian(experimental, oldTarget)
-            WaitSeconds(1)
+            --WaitSeconds(1)
+            coroutine.yield(11)
             end
-        WaitSeconds(1)
+        --WaitSeconds(1)
+        coroutine.yield(11)
         end
-    WaitSeconds(1)
+    --WaitSeconds(1)
+    coroutine.yield(11)
     end
 end
 
@@ -428,7 +433,8 @@ function CDRSCTADGun(aiBrain, cdr)
 
             if overCharging then
                 while target and not target.Dead and not cdr.Dead and counter <= 5 do
-                    WaitSeconds(0.5)
+                    --WaitSeconds(0.5)
+                    coroutine.yield(6)
                     counter = counter + 0.5
                 end
             else
@@ -535,7 +541,8 @@ function SCTAAirUnitRefitThread(unit, plan, data)
                 end
             end
         end
-        WaitSeconds(1)
+        --WaitSeconds(1)
+        coroutine.yield(11)
     end
 end
 
@@ -555,7 +562,8 @@ function SCTAAirStagingThread(unit)
             local pos = unit:GetPosition()
             IssueClearCommands({unit})
             IssueTransportUnload({unit}, {pos[1] + 5, pos[2], pos[3] + 5})
-            WaitSeconds(2)
+            --WaitSeconds(2)
+            coroutine.yield(21)
             for _, v in unit.Refueling do
                 if not v.Dead then
                     v.Loading = false

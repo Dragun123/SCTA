@@ -3,7 +3,8 @@ local PlantsCat = ((categories.FACTORY + categories.GATE) * (categories.ARM + ca
 ----This Code Here represents the various TA Building effects. 
 ----Furthermore unlike the basegame code I test if I am dead. It might be worthwhile to removed it. That test things to consider. 
 CreateTABuildingEffects = function(builder, unitBeingBuilt, BuildEffectBones, BuildEffectsBag)
-    WaitSeconds(0.75)
+    --WaitSeconds(0.75)
+    coroutine.yield(8)
     local selfPosition = builder:GetPosition()
     local targetPosition = unitBeingBuilt:GetPosition()
     local distance = util.GetDistanceBetweenTwoVectors(selfPosition, targetPosition)
@@ -14,7 +15,8 @@ end
     
 
 CreateTAAirBuildingEffects = function(builder, unitBeingBuilt, BuildEffectBones, BuildEffectsBag)
-    WaitSeconds(0.75)
+    --WaitSeconds(0.75)
+    coroutine.yield(8)
     for _, vBone in BuildEffectBones do
         BuildEffectsBag:Add(CreateAttachedEmitter(builder, vBone, builder.Army, '/mods/SCTA-master/effects/emitters/nanolathe.bp' ):ScaleEmitter(0.1))
         end
@@ -23,21 +25,24 @@ CreateTAAirBuildingEffects = function(builder, unitBeingBuilt, BuildEffectBones,
 
 
 CreateTAFactBuildingEffects = function(builder, unitBeingBuilt, BuildEffectBones, BuildEffectsBag)
-    WaitSeconds(0.5)
+    --WaitSeconds(0.5)
+    coroutine.yield(6)
     for _, vBone in BuildEffectBones do
         BuildEffectsBag:Add(CreateAttachedEmitter(builder, vBone, builder.Army, '/mods/SCTA-master/effects/emitters/nanolathe.bp' ):ScaleEmitter(0.05))
         end
     end
 
 CreateTASeaFactBuildingEffects = function(builder, unitBeingBuilt, BuildEffectBones, BuildEffectsBag)
-    WaitSeconds(0.1)
+    --WaitSeconds(0.1)
+    coroutine.yield(2)
     for _, vBone in BuildEffectBones do
         BuildEffectsBag:Add(CreateAttachedEmitter(builder, vBone, builder.Army, '/mods/SCTA-master/effects/emitters/nanolathe.bp' ):ScaleEmitter(0.08):SetEmitterCurveParam('LIFETIME_CURVE',10,0))
         end
     end
 
 CreateTAGantBuildingEffects = function(builder, unitBeingBuilt, BuildEffectBones, BuildEffectsBag)
-    WaitSeconds(0.75)
+    --WaitSeconds(0.75)
+    coroutine.yield(8)
     for _, vBone in BuildEffectBones do
         BuildEffectsBag:Add( CreateAttachedEmitter( builder, vBone, builder.Army,  '/mods/SCTA-master/effects/emitters/nanolathe.bp' ):ScaleEmitter(0.18):OffsetEmitter(0,0,-0.2))
         end
@@ -45,7 +50,8 @@ CreateTAGantBuildingEffects = function(builder, unitBeingBuilt, BuildEffectBones
 
 
 TAReclaimEffects = function(reclaimer, reclaimed, BuildEffectBones, ReclaimEffectsBag)
-    WaitSeconds(1)
+    --WaitSeconds(1)
+    coroutine.yield(11)
     local selfPosition = reclaimer:GetPosition()
     local targetPosition = reclaimed:GetPosition()
     local distance = util.GetDistanceBetweenTwoVectors(selfPosition, targetPosition)
@@ -55,7 +61,8 @@ TAReclaimEffects = function(reclaimer, reclaimed, BuildEffectBones, ReclaimEffec
     end
 
 TACommanderReclaimEffects = function(reclaimer, reclaimed, BuildEffectBones, ReclaimEffectsBag)
-        WaitSeconds(1)
+        --WaitSeconds(1)
+        coroutine.yield(11)
         local selfPosition = reclaimer:GetPosition()
         local targetPosition = reclaimed:GetPosition()
         local distance = util.GetDistanceBetweenTwoVectors(selfPosition, targetPosition)
@@ -67,7 +74,8 @@ TACommanderReclaimEffects = function(reclaimer, reclaimed, BuildEffectBones, Rec
 
 
 TAAirReclaimEffects = function(reclaimer, reclaimed, BuildEffectBones, ReclaimEffectsBag)
-    WaitSeconds(1)
+    --WaitSeconds(1)
+    coroutine.yield(11)
     local selfPosition = reclaimer:GetPosition()
     local targetPosition = reclaimed:GetPosition()
     local distance = util.GetDistanceBetweenTwoVectors(selfPosition, targetPosition)
@@ -78,7 +86,8 @@ TAAirReclaimEffects = function(reclaimer, reclaimed, BuildEffectBones, ReclaimEf
 
 
 TACaptureEffect = function(capturer, captive, BuildEffectBones, CaptureEffectsBag)  
-    WaitSeconds(0.75)
+    --WaitSeconds(0.75)
+    coroutine.yield(8)
     local selfPosition = capturer:GetPosition()
     local targetPosition = captive:GetPosition()
     local distance = util.GetDistanceBetweenTwoVectors(selfPosition, targetPosition)

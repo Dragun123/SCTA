@@ -37,7 +37,8 @@ CORMSHIP = Class(TASea) {
 					self.unit:HideBone('rocket6', true)
 					self.unit:ShowBone('rocket3', true)
 					self.unit:ShowBone('rocket4', true)
-				WaitSeconds(0.5)
+				--WaitSeconds(0.5)
+				coroutine.yield(6)
 					self.unit:ShowBone('rocket5', true)
 					self.unit:ShowBone('rocket6', true)
 					self.unit.currentShot = 0	

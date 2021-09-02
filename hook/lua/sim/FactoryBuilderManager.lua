@@ -154,7 +154,8 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
         end,
         
         DelayTARallyPoint = function(self, factory)
-            WaitSeconds(1)
+            --WaitSeconds(1)
+            coroutine.yield(11)
             if not factory.Dead then
                 self:SetTARallyPoint(factory)
             end

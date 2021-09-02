@@ -41,7 +41,8 @@ ARMJETH = Class(TAWalking) {
 				self.unit.Spinners.ruparm:SetGoal(-75.5)
 				self.unit.Spinners.ruparm:SetSpeed(218.50)
 				--SLEEP <346>
-				WaitSeconds(0.5)
+				--WaitSeconds(0.5)
+				coroutine.yield(6)
 				TAweapon.PlayFxWeaponUnpackSequence(self)
 			end,
 

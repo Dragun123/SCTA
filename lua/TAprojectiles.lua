@@ -226,7 +226,8 @@ Disintegrator = Class(TALightCannonProjectile) {
 				self:PlaySound(Sound({Cue = 'XPLOMAS2', Bank = 'TA_Sound', LodCutoff = 'Weapon_LodCutoff'}))
 				CreateEmitterAtEntity(self, self:GetArmy(), '/mods/SCTA-master/effects/emitters/ta_missile_hit_04_emit.bp' ):ScaleEmitter(0.5)
 			end
-			WaitSeconds(0.1)
+			--WaitSeconds(0.1)
+			coroutine.yield(2)
 		end
 	end,
 
@@ -250,7 +251,8 @@ FlameProjectile = Class(TAFlame) {
 		while not IsDestroyed(self) do
 			local pos = self:GetPosition()
 			DamageArea(self.launcher, pos, 1, self.DamageData.DamageAmount, self.DamageData.DamageType, self.DamageData.DamageFriendly)
-			WaitSeconds(0.1)
+			--WaitSeconds(0.1)
+			coroutine.yield(2)
 		end
 	end,
 

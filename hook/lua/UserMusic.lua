@@ -31,7 +31,8 @@ function StartBattleMusic()
     battleWatch = ForkThread(
         function ()
             while GameTick() - LastBattleNotify < PeaceTimer do
-                WaitSeconds(1)
+                --WaitSeconds(1)
+                coroutine.yield(11)
             end
 
             StartPeaceMusic()
