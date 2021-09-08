@@ -39,14 +39,16 @@ ARMMERL = Class(TAunit) {
 				self.unit.Spinners.arm:SetSpeed(175.41)
 
 				--SLEEP <512>;
-				WaitSeconds(0.5)
+				--WaitSeconds(0.5)
+				coroutine.yield(6)
 
 				--MOVE plate to y-axis <0> SPEED <5.00>;
 				self.unit.Sliders.plate:SetGoal(0,0,0)
 				self.unit.Sliders.plate:SetSpeed(5)
 
 				--SLEEP <518>;
-				WaitSeconds(0.5)
+				--WaitSeconds(0.5)
+				coroutine.yield(6)
 
 				--MOVE door1 to y-axis <0> SPEED <4.00>;
 				self.unit.Sliders.door1:SetGoal(0,0,0)
@@ -57,7 +59,8 @@ ARMMERL = Class(TAunit) {
 				self.unit.Sliders.door2:SetSpeed(4)
 
 				--SLEEP <520>;
-				WaitSeconds(0.5)
+				--WaitSeconds(0.5)
+				coroutine.yield(6)
 
 				--TURN door1 to z-axis <0> SPEED <171.71>;
 				self.unit.Spinners.door1:SetGoal(0)
@@ -68,7 +71,8 @@ ARMMERL = Class(TAunit) {
 				self.unit.Spinners.door2:SetSpeed(172)
 
 				--SLEEP <519>;
-				WaitSeconds(0.5)
+				--WaitSeconds(0.5)
+				coroutine.yield(6)
 
 				self.unit:ShowBone('Muzzle', true)
 
@@ -81,7 +85,8 @@ ARMMERL = Class(TAunit) {
 				self.unit.Spinners.door2:SetSpeed(145)
 
 				--SLEEP <621>;
-				WaitSeconds(0.6)
+				--WaitSeconds(0.5)
+				coroutine.yield(7)
 
 				--MOVE door1 to y-axis <-2.55> SPEED <4.00>;
 				self.unit.Sliders.door1:SetGoal(-2.6,0,0)
@@ -92,21 +97,24 @@ ARMMERL = Class(TAunit) {
 				self.unit.Sliders.door2:SetSpeed(4)
 
 				--SLEEP <627>;
-				WaitSeconds(0.65)
+				--WaitSeconds(0.5)
+				coroutine.yield(7)
 
 				--MOVE plate to y-axis <3.10> SPEED <4.00>;
 				self.unit.Sliders.plate:SetGoal(0,3.1,0)
 				self.unit.Sliders.plate:SetSpeed(4)
 
 				--SLEEP <628>;
-				WaitSeconds(0.65)
+				--WaitSeconds(0.5)
+				coroutine.yield(7)
 
 				--TURN arm to x-axis <-89.98> SPEED <143.31>;
 				self.unit.Spinners.arm:SetGoal(-90)
 				self.unit.Spinners.arm:SetSpeed(143.31)
 
 				--SLEEP <628>;
-				WaitSeconds(0.65)
+				--WaitSeconds(0.5)
+				coroutine.yield(7)
 
 				TAweapon.PlayFxRackReloadSequence(self)
 			end,
@@ -121,7 +129,8 @@ ARMMERL = Class(TAunit) {
 				self.unit.Spinners.door2:SetSpeed(145)
 
 				--SLEEP <621>;
-				WaitSeconds(0.6)
+				--WaitSeconds(0.5)
+				coroutine.yield(7)
 
 				--MOVE door1 to y-axis <-2.55> SPEED <4.00>;
 				self.unit.Sliders.door1:SetGoal(-2.6,0,0)
@@ -132,21 +141,24 @@ ARMMERL = Class(TAunit) {
 				self.unit.Sliders.door2:SetSpeed(4)
 
 				--SLEEP <627>;
-				WaitSeconds(0.65)
+				--WaitSeconds(0.5)
+				coroutine.yield(7)
 
 				--MOVE plate to y-axis <3.10> SPEED <4.00>;
 				self.unit.Sliders.plate:SetGoal(0,3.1,0)
 				self.unit.Sliders.plate:SetSpeed(4)
 
 				--SLEEP <628>;
-				WaitSeconds(0.65)
+				--WaitSeconds(0.5)
+				coroutine.yield(7)
 
 				--TURN arm to x-axis <-89.98> SPEED <143.31>;
 				self.unit.Spinners.arm:SetGoal(-90)
 				self.unit.Spinners.arm:SetSpeed(143.31)
 
 				--SLEEP <628>;
-				WaitSeconds(0.65)
+				--WaitSeconds(0.5)
+				coroutine.yield(7)
 				TAweapon.PlayFxWeaponUnpackSequence(self)
 			end,
 
@@ -156,14 +168,16 @@ ARMMERL = Class(TAunit) {
 				self.unit.Spinners.arm:SetSpeed(175.41)
 
 				--SLEEP <512>;
-				WaitSeconds(0.5)
+				--WaitSeconds(0.5)
+				coroutine.yield(6)
 
 				--MOVE plate to y-axis <0> SPEED <5.00>;
 				self.unit.Sliders.plate:SetGoal(0,0,0)
 				self.unit.Sliders.plate:SetSpeed(5)
 
 				--SLEEP <518>;
-				WaitSeconds(0.5)
+				--WaitSeconds(0.5)
+				coroutine.yield(6)
 
 				--MOVE door1 to y-axis <0> SPEED <4.00>;
 				self.unit.Sliders.door1:SetGoal(0,0,0)
@@ -174,7 +188,8 @@ ARMMERL = Class(TAunit) {
 				self.unit.Sliders.door2:SetSpeed(4)
 
 				--SLEEP <520>;
-				WaitSeconds(0.5)
+				--WaitSeconds(0.5)
+				coroutine.yield(6)
 
 				--TURN door1 to z-axis <0> SPEED <171.71>;
 				self.unit.Spinners.door1:SetGoal(0)
@@ -185,7 +200,8 @@ ARMMERL = Class(TAunit) {
 				self.unit.Spinners.door2:SetSpeed(172)
 
 				--SLEEP <519>;
-				WaitSeconds(0.5)
+				--WaitSeconds(0.5)
+				coroutine.yield(6)
 
 				--SLEEP <25>;
 

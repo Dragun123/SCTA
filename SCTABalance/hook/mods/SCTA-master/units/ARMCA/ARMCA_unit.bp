@@ -5,8 +5,8 @@ UnitBlueprint {
         MinAirspeed = 3,
     },    
     Defense = {
-        Health = 380,
-        MaxHealth = 380,
+        Health = 220,
+        MaxHealth = 220,
         },
         Display = {
             UniformScale = 0.09,

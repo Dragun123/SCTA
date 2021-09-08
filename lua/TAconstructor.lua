@@ -410,7 +410,8 @@ TARealCommander = Class(TACommander) {
         self:SetCustomName( ArmyBrains[self:GetArmy()].Nickname )
         self:SetUnSelectable(false)
         self:SetBlockCommandQueue(true)
-        WaitSeconds(1)
+        --WaitSeconds(1)
+        coroutine.yield(11)
 		self.PlayCommanderWarpInEffectFlag = true
         self:ForkThread(self.ExplosionInEffectThread)
     end,

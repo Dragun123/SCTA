@@ -193,7 +193,8 @@ TALightLaser = Class(TAweapon) {
         self.WeaponCanFire = true
 
         -- To prevent weapon getting stuck targeting something out of fire range but withing tracking radius
-        WaitSeconds(2)
+        --WaitSeconds(2)
+        coroutine.yield(21)
         -- Check if there is a better target nearby
         self:ResetTarget()
     end,
@@ -285,7 +286,8 @@ end,
         self.WeaponCanFire = true
 
         -- To prevent weapon getting stuck targeting something out of fire range but withing tracking radius
-        WaitSeconds(2)
+        --WaitSeconds(2)
+        coroutine.yield(21)
         -- Check if there is a better target nearby
         self:ResetTarget()
     end,
@@ -327,7 +329,8 @@ TADGun = Class(DefaultWeapon) {
 
         AutoEnable = function(self)
             while not self:CanOvercharge() do
-                WaitSeconds(1)
+                --WaitSeconds(1)
+                coroutine.yield(10)
             end
             if self.AutoMode then
                 self.unit:SetWeaponEnabledByLabel('AutoOverCharge', true)
@@ -375,7 +378,8 @@ TADGun = Class(DefaultWeapon) {
                 else
                     self:ForkThread(function()
                         while not self:CanOvercharge() do
-                            WaitSeconds(0.1)
+                            --WaitSeconds(0.1)
+                            coroutine.yield(2)
                         end
                         DefaultWeapon.IdleState.OnGotTarget(self)
                     end)

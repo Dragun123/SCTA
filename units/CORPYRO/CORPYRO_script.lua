@@ -38,7 +38,8 @@ CORPYRO = Class(TAWalking) {
 			if self.lastSound > 0 then
 				self.lastSound = self.lastSound - 1
 			end
-			WaitSeconds(0.1)
+			--WaitSeconds(0.1)
+			coroutine.yield(2)
 		end
 	end,
 }

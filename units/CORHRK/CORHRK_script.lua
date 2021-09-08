@@ -12,14 +12,16 @@ CORHRK = Class(TAWalking) {
 
 				PlayFxRackReloadSequence = function(self)
 					self.unit:ShowBone('Missile1', true)
-					WaitSeconds(0.025)
+					--WaitSeconds(0.025)
+					coroutine.yield(2)
 					self.unit:ShowBone('Missile2', true)
 				TAweapon.PlayFxRackReloadSequence(self)
 			end,
 
 			PlayFxWeaponUnpackSequence = function(self)
 				self.unit:ShowBone('Missile1', true)
-				WaitSeconds(0.025)
+				---WaitSeconds(0.025)
+				coroutine.yield(2)
 				self.unit:ShowBone('Missile2', true)
 				TAweapon.PlayFxWeaponUnpackSequence(self)
 			end,

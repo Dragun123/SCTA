@@ -9,7 +9,8 @@ ACUUnit = Class(oldtaACUUnit) {
         self:SetCustomName( ArmyBrains[self:GetArmy()].Nickname )
         self:SetUnSelectable(false)
         self:SetBlockCommandQueue(true)
-        WaitSeconds(2)
+        --WaitSeconds(2)
+        coroutine.yield(21)
         self:ForkThread(self.WarpInEffectThread, bones)
     end,
 

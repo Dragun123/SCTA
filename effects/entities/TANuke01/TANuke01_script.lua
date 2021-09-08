@@ -15,7 +15,8 @@ TANuke01 = Class(NullShell) {
 
         -- Create full-screen glow flash
         CreateLightParticle(self, -1, self.Army, 35, 4, 'glow_02', 'ramp_red_02')
-        WaitSeconds(0.25)
+        --WaitSeconds(0.25)
+        coroutine.yield(3)
         CreateLightParticle(self, -1, self.Army, 80, 20, 'glow_03', 'ramp_fire_06')
 
         -- Create initial fireball dome effect
@@ -35,8 +36,8 @@ TANuke01 = Class(NullShell) {
         --self:ForkThread(self.CreateHeadConvectionSpinners)
         --self:ForkThread(self.CreateFlavorPlumes)
 
-        WaitSeconds(0.55)
-
+        --WaitSeconds(0.55)
+        coroutine.yield(6)
         CreateLightParticle(self, -1, self.Army, 300, 250, 'glow_03', 'ramp_nuke_04')
       
         -- Create ground decals
@@ -46,6 +47,7 @@ TANuke01 = Class(NullShell) {
         CreateDecal(position, orientation, 'nuke_scorch_003_albedo', '', 'Albedo', 60, 60, 1200, 0, self.Army)
 
         WaitSeconds(8.9)
+        --coroutine.yield(90)
         self:CreateGroundPlumeConvectionEffects(self.Army)
     end,
 
@@ -65,7 +67,7 @@ TANuke01 = Class(NullShell) {
         end
 
         WaitSeconds(3)
-
+        --coroutine.yield(30)
         -- Slow projectiles down to normal speed
         for k, v in projectiles do
             v:SetAcceleration(-0.45)

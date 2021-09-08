@@ -244,7 +244,8 @@ function SendPlatoonWithTransportsNoCheckTA(aiBrain, platoon, destination, bRequ
         for _,v in units do
             if not v.Dead then
                 if v:IsUnitState('Attached') then
-                   WaitSeconds(2)
+                   --WaitSeconds(2)
+                   coroutine.yield(21)
                 end
             end
         end

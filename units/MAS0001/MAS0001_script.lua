@@ -44,7 +44,8 @@ MAS0001 = Class(AWalkingLandUnit) {
 		--self:CreateProjectile( '/effects/entities/UnitTeleport01/UnitTeleport01_proj.bp', 0, 1.35, 0, nil, nil, nil):SetCollision(false)
 		local gtime = GetGameTimeSeconds()
 		while gtime < 9 do
-			WaitSeconds(0.2)
+			--WaitSeconds(0.2)
+			coroutine.yield(3)
 			gtime = GetGameTimeSeconds()
 		end
 		---AWalkingLandUnit.OnStartBuild(self, unitBeingBuilt, order)

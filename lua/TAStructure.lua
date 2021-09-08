@@ -197,7 +197,7 @@ TATarg = Class(TAStructure) {
 
 	OnIntelDisabled = function(self)
 		TAStructure.OnIntelDisabled()
-			if EntityCategoryContains(categories.OPTICS, self) and (not self:IsIntelEnabled('Radar') or not self:IsIntelEnabled('Sonar')) then
+			if EntityCategoryContains(categories.OPTICS, self) and not (self:IsIntelEnabled('Radar') or self:IsIntelEnabled('Sonar')) then
 			import('/mods/SCTA-master/lua/TAutils.lua').unregisterTargetingFacility(self:GetArmy())
 		end
 	end,
@@ -215,7 +215,8 @@ TACloser = Class(TATarg) {
 		Main = function(self)
 			if self.closeDueToDamage then 
 				while self.DamageSeconds > 0 do
-					WaitSeconds(1)
+					--WaitSeconds(1)
+					coroutine.yield(11)
 					self.DamageSeconds = self.DamageSeconds - 1
 				end
 

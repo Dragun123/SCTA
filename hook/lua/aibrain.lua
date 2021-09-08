@@ -60,18 +60,21 @@ AIBrain = Class(SCTAAIBrainClass) {
             while (aiBrain.Result ~= 'defeat') do
                 if aiBrain.LandForm < 1 and checks.LandForm < 1 then
                     aiBrain.LandForm = GetCurrentUnits(aiBrain, (categories.LAND * categories.MOBILE) - categories.ENGINEER - categories.SCOUT)
-                    WaitTicks(1)
+                    --WaitTicks(1)
+                    coroutine.yield(2)
                     checks.LandForm = checks.LandForm + 2
                 end
                 if aiBrain.AirForm < 1 and checks.AirForm < 1 then
                     aiBrain.AirForm = GetCurrentUnits(aiBrain, (categories.AIR * categories.MOBILE) - categories.ENGINEER - categories.SCOUT)
-                    WaitTicks(1)
+                    --WaitTicks(1)
+                    coroutine.yield(2)
                     checks.AirForm = checks.AirForm + 3
                 end
                 if aiBrain.SeaForm < 1 and checks.SeaForm < 1 and aiBrain.TANavy then
                     aiBrain.SeaForm = GetCurrentUnits(aiBrain, (categories.NAVAL * categories.MOBILE) - categories.ENGINEER)
-                    WaitTicks(1)
-                    checks.SeaForm = checks.SeaForm + 5
+                    --WaitTicks(1)
+                    coroutine.yield(2)
+                    checks.SeaForm = checks.SeaForm + 4
                 end
                 if aiBrain.StructureForm < 3 and checks.StructureForm < 1 and (aiBrain.Level2) then
                     aiBrain.StructureForm = GetCurrentUnits(aiBrain, categories.STRUCTURE * (categories.CQUEMOV + categories.MASSFABRICATION))
@@ -80,12 +83,14 @@ AIBrain = Class(SCTAAIBrainClass) {
                 end
                 if aiBrain.Other < 1 and checks.Other < 1 and (aiBrain.Level3) then
                     aiBrain.Other = GetCurrentUnits(aiBrain, categories.EXPERIMENTAL * categories.MOBILE)
-                    WaitTicks(1)
+                    ---WaitTicks(1)
+                    coroutine.yield(2)
                     checks.Other = checks.Other + 10
                 end
                 if aiBrain.Scout < 1 and checks.Scout < 1 then
                     aiBrain.Scout = GetCurrentUnits(aiBrain, (categories.armpw + categories.corgator + (categories.SCOUT + categories.AMPHIBIOUS) - categories.ENGINEER - categories.EXPERIMENTAL))
-                    WaitTicks(1)
+                    --WaitTicks(1)
+                    coroutine.yield(2)
                     checks.Scout = checks.Scout + 4
                 end
                 --[[LOG('formmanagerdata')
@@ -100,9 +105,20 @@ AIBrain = Class(SCTAAIBrainClass) {
                     checks[k] = checks[k] - 1
                 end
                 --LOG('checks '..repr(checks))
-                WaitSeconds(1.5)
+                --WaitSeconds(1.5)
+                coroutine.yield(16)
+                if aiBrain.Level3 and aiBrain.Other > 0 then
+                    aiBrain:ForkThread(aiBrain.KillTAFormer)
+                end
                 --if aibrain.Scout >= 1 and aibrain.LandForm >= 1 and aibrain.LandForm >= 1
                 ---will add a check in future if every AIBrain is greater than X kill the thread
+            end
+        end,
+
+        KillTAFormer = function(aiBrain)
+            if aiBrain.SCTAFormCounter then
+                KillThread(aiBrain.SCTAFormCounter)
+                aiBrain.SCTAFormCounter = nil
             end
         end,
 
@@ -139,7 +155,9 @@ AIBrain = Class(SCTAAIBrainClass) {
             --LOG('* AI-SCTA: This is SCTA')
             self.SCTAAI = true
             --self.ForkThread(TAReclaim.MassFabManagerThreadSCTAI, self)
-            ForkThread(self.FormManagerSCTA, self)
+            if not self.SCTAFormCounter then
+            self.SCTAFormCounter = ForkThread(self.FormManagerSCTA, self)
+            end
         end
     end,
 
