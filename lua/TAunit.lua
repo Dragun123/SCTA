@@ -1,7 +1,6 @@
 #Generic TA unit
 local Unit = import('/lua/sim/Unit.lua').Unit
 local TADeath = import('/mods/SCTA-master/lua/TADeath.lua')
-local explosion = import('/lua/defaultexplosions.lua')
 local Wreckage = import('/lua/wreckage.lua')
 local catCloak = categories.SELECTABLE * categories.MOBILE
 
