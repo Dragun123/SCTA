@@ -11,18 +11,15 @@ AIBrain = Class(SCTAAIBrainClass) {
         OnPlayNoStagingPlatformsVO =   {timeout = 5, bank = 'XGG_Computer_CV01_04756'},
         OnPlayBusyStagingPlatformsVO = {timeout = 5, bank = 'XGG_Computer_CV01_04755'},
         OnPlayCommanderUnderAttackVO = {timeout = 15, bank = 'Computer_Computer_Commanders_01314'},
-        TECH3TAchieve = {timeout = 15,  bank = 'Computer_Computer_UnitRevalation_01370'},
-        TECH2TAchieve = {timeout = 15,  bank = 'Computer_Computer_UnitRevalation_01372'},
+        TECHAchievedTA = {timeout = 15,  bank = 'Computer_Computer_UnitRevalation_01370'},
     },
 
-    TECH3TAchieve = function(self)
-        self:PlayVOSound('TECH3TAchieve')
-        --self:PlayVOSound('TECH3TAchieve', Sound {Bank = 'COMPUTER_UEF_VO', Cue = 'UEFComputer_Basic_Orders_01169'})
-    end,
-
-    TECH2TAchieve = function(self)
-        self:PlayVOSound('TECH2TAchieve')
-        --self:PlayVOSound('TECH3TAchieve', Sound {Bank = 'COMPUTER_UEF_VO', Cue = 'UEFComputer_Basic_Orders_01169'})
+    ---base game unlock
+    ---Computer_Computer_UnitRevalation_01370
+    ---Computer_Computer_UnitRevalation_01372
+    TECHTAchieve = function(self)
+        self:PlayVOSound('TECHAchievedTA')
+    --self:PlayVOSound('TECH3TAchieve', Sound {Bank = 'TA_Sound', Cue = 'VICTORY4'})
     end,
 
         OnSpawnPreBuiltUnits = function(self)

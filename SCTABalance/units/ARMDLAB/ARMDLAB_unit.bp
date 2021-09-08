@@ -60,7 +60,7 @@ UnitBlueprint {
         },
         BuildAttachBone = 'BasePlate',
         AnimationUnpack = '/mods/SCTA-master/units/ARMLAB/ARMLAB_lod0_aopen.sca',
-        AnimationUnpackRate = 1.5, 
+        AnimationUnpackRate = 1, 
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {

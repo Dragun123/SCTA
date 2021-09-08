@@ -56,7 +56,7 @@ UnitBlueprint {
     Description = 'Produces Kbots',
     Display = {
         AnimationUnpack = '/mods/SCTA-master/units/ARMLAB/ARMLAB_lod0_aopen.sca',
-        AnimationUnpackRate = 1.5, 
+        AnimationUnpackRate = 1, 
         BuildAttachBone = 'BasePlate',
         Mesh = {
             IconFadeInZoom = 130,
