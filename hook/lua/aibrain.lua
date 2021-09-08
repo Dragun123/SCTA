@@ -3,6 +3,28 @@ WARN('['..string.gsub(debug.getinfo(1).source, ".*\\(.*.lua)", "%1")..', line:'.
 
 SCTAAIBrainClass = AIBrain
 AIBrain = Class(SCTAAIBrainClass) {
+    VOSounds = {
+        -- {timeout delay, default cue, observers}
+        NuclearLaunchDetected =        {timeout = 1, bank = nil, obs = true},
+        OnTransportFull =              {timeout = 1, bank = nil},
+        OnFailedUnitTransfer =         {timeout = 10, bank = 'Computer_Computer_CommandCap_01298'},
+        OnPlayNoStagingPlatformsVO =   {timeout = 5, bank = 'XGG_Computer_CV01_04756'},
+        OnPlayBusyStagingPlatformsVO = {timeout = 5, bank = 'XGG_Computer_CV01_04755'},
+        OnPlayCommanderUnderAttackVO = {timeout = 15, bank = 'Computer_Computer_Commanders_01314'},
+        TECH3TAchieve = {timeout = 15,  bank = 'Computer_Computer_UnitRevalation_01370'},
+        TECH2TAchieve = {timeout = 15,  bank = 'Computer_Computer_UnitRevalation_01372'},
+    },
+
+    TECH3TAchieve = function(self)
+        self:PlayVOSound('TECH3TAchieve')
+        --self:PlayVOSound('TECH3TAchieve', Sound {Bank = 'COMPUTER_UEF_VO', Cue = 'UEFComputer_Basic_Orders_01169'})
+    end,
+
+    TECH2TAchieve = function(self)
+        self:PlayVOSound('TECH2TAchieve')
+        --self:PlayVOSound('TECH3TAchieve', Sound {Bank = 'COMPUTER_UEF_VO', Cue = 'UEFComputer_Basic_Orders_01169'})
+    end,
+
         OnSpawnPreBuiltUnits = function(self)
             if not self.SCTAAI then
                 return SCTAAIBrainClass.OnSpawnPreBuiltUnits(self)

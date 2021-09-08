@@ -121,12 +121,13 @@ TABuildRestrictions = function(self)
     ---NumberOfPlantsX returns Number of Units. The checks associated with it such as Level3, Level2 and number of constructed factories are used for AI
     ----Find HQ Type is used primarily so that Supcom FAF players can work off gut instinct
     local aiBrain = self:GetAIBrain()
-    if aiBrain.Level3 or NumberOfPlantsT2(aiBrain, PlantsCat * (categories.TECH2)) > 4 
+    if aiBrain.Level3 or NumberOfPlantsT2(aiBrain, PlantsCat * (categories.TECH2)) > 1 
     or TAHQType(aiBrain, PlantsCat * (categories.TECH3 + categories.EXPERIMENTAL)) then
                 self:RemoveBuildRestriction(categories.TECH2)
                 self:RemoveBuildRestriction(categories.TECH3)
                 if not aiBrain.Level3 then
                 aiBrain.Level3 = true
+                aiBrain:TECH3TAchieve()
                 end
                 --self.TARestrict = nil
         return  
@@ -135,6 +136,7 @@ TABuildRestrictions = function(self)
                 self:RemoveBuildRestriction(categories.TECH2)
                 if not aiBrain.Level2 then
                 aiBrain.Level2 = true
+                aiBrain:TECH2TAchieve()
                 end
                 --self.TARestrict = nil
         return    
