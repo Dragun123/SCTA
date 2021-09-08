@@ -127,6 +127,7 @@ TABuildRestrictions = function(self)
                 self:RemoveBuildRestriction(categories.TECH3)
                 if not aiBrain.Level3 then
                 aiBrain.Level3 = true
+                aiBrain:TECHTAchieve()
                 end
                 --self.TARestrict = nil
         return  
@@ -135,6 +136,7 @@ TABuildRestrictions = function(self)
                 self:RemoveBuildRestriction(categories.TECH2)
                 if not aiBrain.Level2 then
                 aiBrain.Level2 = true
+                aiBrain:TECHTAchieve()
                 end
                 --self.TARestrict = nil
         return    
