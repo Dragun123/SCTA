@@ -7,6 +7,7 @@ UnitBlueprint {
         'VISIBLETORECON',
         'RECLAIMABLE',
         'MOBILE',
+        'T2SUBMARINE',
 	    'MOBILESONAR',
         'NAVAL',
 	    'INTELLIGENCE',
@@ -25,8 +26,8 @@ UnitBlueprint {
     General = {
         OrderOverrides = {
             RULEUTC_CloakToggle = {
-                bitmapId = 'stealth-field',
-                helpText = 'toggle_stealth_field',
+                bitmapId = 'intel-counter',
+                helpText = 'Cloak Field',
             },
         },
         ToggleCaps = {

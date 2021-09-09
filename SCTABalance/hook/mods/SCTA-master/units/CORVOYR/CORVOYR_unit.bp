@@ -18,7 +18,7 @@ UnitBlueprint {
         'OVERLAYRADAR',
         'OVERLAYCOUNTERINTEL',
         'SORTINTEL',
-        'SCOUT',
+        'COUNTERINTELLIGENCE',
     },
     Description = 'Vision Jammer',
     Display = {
@@ -37,8 +37,8 @@ UnitBlueprint {
     General = {
     OrderOverrides = {
         RULEUTC_CloakToggle = {
-            bitmapId = 'stealth-field',
-            helpText = 'toggle_cloak_field',
+            bitmapId = 'intel-counter',
+            helpText = 'Cloak Field',
         },
     },
     ToggleCaps = {

@@ -17,7 +17,7 @@ UnitBlueprint {
         'CQUEMOV',
         'STEALTHFIELD',        
         'SORTINTEL',
-        'SCOUT',
+        'COUNTERINTELLIGENCE',
     },
     Display = {
         Abilities = {
