@@ -63,7 +63,7 @@ UnitBlueprint {
         MinAirspeed = 10,
         StartTurnDistance = 5,
         TightTurnMultiplier = 1.02,
-        TurnSpeed = 1.5,
+        TurnSpeed = 1,
         Winged = true,
     },
     BuildIconSortPriority = 3,

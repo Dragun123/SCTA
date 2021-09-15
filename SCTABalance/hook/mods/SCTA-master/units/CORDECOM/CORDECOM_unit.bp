@@ -70,9 +70,13 @@ UnitBlueprint {
     Weapon = {
         [1] = {},
         [2] = {
+            EnergyRequired = 750,
+            EnergyDrainPerSecond = 750,
             DGun = 2500,
         },
         [3] = {
+            EnergyRequired = 750,
+            EnergyDrainPerSecond = 750,
         },
         [4] = {
         },

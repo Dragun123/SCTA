@@ -50,6 +50,7 @@ UnitBlueprint {
         'COUNTERINTELLIGENCE',  
         'DEFENSIVEBOAT',
         'ARM',
+        'T2SUBMARINE',
         'SUBMERSIBLE',
     },
     Defense = {
