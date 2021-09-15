@@ -40,8 +40,8 @@ UnitBlueprint {
     General = {
     OrderOverrides = {
         RULEUTC_CloakToggle = {
-            bitmapId = 'intel-counter',
-            helpText = 'Cloak Field',
+            bitmapId = 'shield',
+            helpText = 'Cloaking Field',
         },
     },
     ToggleCaps = {
