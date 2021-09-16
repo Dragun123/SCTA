@@ -204,7 +204,7 @@ Disintegrator = Class(TALightCannonProjectile) {
 		self.launcher = self:GetLauncher()
 		self.launcher.Disintegrator = self
 		--self.Econ = self:GetWeaponEnergyRequired()
-		self.launcher.EconDrain = CreateEconomyEvent(self.launcher, self:GetWeaponEnergyRequired(), 0, 0)
+		self.launcher.EconDrain = CreateEconomyEvent(self.launcher, self.launcher:GetWeaponByLabel('OverCharge'):GetWeaponEnergyRequired(), 0, 0)
 		self.DGunDamage = self.launcher:GetWeaponByLabel('OverCharge'):GetBlueprint().DGun
 		self.launcher:ForkThread(function()
                 WaitFor(self.launcher.EconDrain)
