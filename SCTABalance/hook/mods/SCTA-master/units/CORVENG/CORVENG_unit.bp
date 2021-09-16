@@ -13,11 +13,13 @@ UnitBlueprint {
     },
     Weapon = {
         [1] = {
-            RateOfFire = 0.25,
+            Damage = 70,
+            RateOfFire = 0.3,
             DamageType = 'AntiAir',
         },
         [2] = {
-            RateOfFire = 0.25,
+            Damage = 70,
+            RateOfFire = 0.3,
             DamageType = 'AntiAir',
         },
         [3] = {

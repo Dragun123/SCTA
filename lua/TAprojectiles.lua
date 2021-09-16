@@ -304,6 +304,23 @@ end,
 	end,
 }
 
+
+TAVTolProjectile = Class(TARocketProjectile) {
+	TrackingThread = function(self)
+		local target = self:GetTrackingTarget()
+		if target and not EntityCategoryContains(categories.AIR, target) then
+			--self:SetTurnRate((self:GetBlueprint().Physics.TurnRate) * 0.5)
+			self:SetVelocity((self:GetBlueprint().Physics.InitialSpeed) * 0.25)
+			coroutine.yield(11)
+			self:TrackTarget(false)
+				--LOG('TATarget', )
+		else
+		TARocketProjectile.TrackingThread(self)
+		end
+	end,
+
+}
+
 TASAMProjectile = Class(TARocketProjectile) {
 	OnCreate = function(self)
 		TARocketProjectile.OnCreate(self)
@@ -313,6 +330,7 @@ TASAMProjectile = Class(TARocketProjectile) {
 			--LOG('TATarget', )
 		end
 	end,
+	
 }
 
 

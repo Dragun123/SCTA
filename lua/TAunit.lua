@@ -80,9 +80,11 @@ TAunit = Class(Unit)
         while self:IsUnitState('Moving') and not self.Dead do
 			local bp = self:GetBlueprint()
 			for k, v in bp.Display.MovementEffects.TAMovement.Bones do
-				self.Trash:Add(CreateAttachedEmitter(self, v, self:GetArmy(), bp.Display.MovementEffects.TAMovement.Emitter ):ScaleEmitter(bp.Display.MovementEffects.TAMovement.Scale))
-			--LOG('TAIEXIST', self.Trash)
-            coroutine.yield(2)
+				self.TAMove = CreateAttachedEmitter(self, v, self:GetArmy(), bp.Display.MovementEffects.TAMovement.Emitter ):ScaleEmitter(bp.Display.MovementEffects.TAMovement.Scale)
+			---LOG('TAIEXIST', self.Trash)
+                --self.Trash:Add(CreateAttachedEmitter(self,'Back_Wake',self:GetArmy(),'/mods/CTO/effects/emitters/AU_MOVEMENTS/WATER/AU_MOVEMENTS_WATER_drops_emit.bp'):OffsetEmitter(0.0, -0.75, 0.0):ScaleEmitter(0.2))
+			coroutine.yield(11)
+            self.TAMove:Destroy()
 			end
         end
     end,
