@@ -162,7 +162,6 @@ UnitBlueprint {
         Classification = 'RULEUC_MilitaryVehicle',
         CommandCaps = {
             RULEUCC_Attack = true,
-            RULEUCC_CallTransport = true,
             RULEUCC_Guard = true,
             RULEUCC_Move = true,
             RULEUCC_Patrol = true,

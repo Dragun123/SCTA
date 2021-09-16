@@ -62,7 +62,6 @@ UnitBlueprint {
                 },
             },
         },
-	---SmokeBone = 'belly',
         UniformScale = 0.16,
     },
     Economy = {
@@ -84,7 +83,7 @@ UnitBlueprint {
         },
         FactionName = 'CORE',
         Icon = 'land',
-TechLevel = 'RULEUTL_Advanced',
+        TechLevel = 'RULEUTL_Advanced',
         UnitName = 'The Can',
     },
     Intel = {
@@ -111,7 +110,7 @@ TechLevel = 'RULEUTL_Advanced',
     SizeX = 2,
     SizeY = 2,
     SizeZ = 2,
-    StrategicIconName = 'icon_land2_directfire',
+    StrategicIconName = 'icon_bot2_armored',
     StrategicIconSortPriority = 0,
     Transport = {
         TransportClass = 2,

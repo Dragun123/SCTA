@@ -184,7 +184,7 @@ UnitBlueprint {
     SizeX = 1,
     SizeY = 0.2,
     SizeZ = 1,
-    StrategicIconName = 'icon_bot1_engineer',
+    StrategicIconName = 'icon_fighter1_engineer',
     ---TAStrategicIconName = '1/land_engineer',
     StrategicIconSortPriority = 0,
     Transport = {

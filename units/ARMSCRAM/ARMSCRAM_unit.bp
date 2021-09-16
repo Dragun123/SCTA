@@ -143,7 +143,7 @@ UnitBlueprint {
     SizeX = 2,
     SizeY = 1,
     SizeZ = 2,
-    StrategicIconName = 'icon_sub3_intel',
+    StrategicIconName = 'icon_sub3_counterintel',
     ---TAStrategicIconName = '3/ship_counterintel',
     StrategicIconSortPriority = 20,
     Weapon = {

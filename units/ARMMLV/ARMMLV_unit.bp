@@ -140,7 +140,7 @@ UnitBlueprint {
     SizeX = 3,
     SizeY = 1.25,
     SizeZ = 3,
-    StrategicIconName = 'icon_land1_engineer',
+    StrategicIconName = 'icon_bot1_engineer',
     StrategicIconSortPriority = 0,
     Weapon = {
         { #BIG_UNITEX
