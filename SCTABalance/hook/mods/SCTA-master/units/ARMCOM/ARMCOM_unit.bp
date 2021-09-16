@@ -49,7 +49,10 @@ UnitBlueprint {
    SizeY = 4.3,
    SizeX = 2.8,
    Weapon = {
-    [1] = {},
+    [1] = {
+        Damage = 75,
+        RateOfFire = 1, 
+    },
     [2] = {
         EnergyRequired = 750,
         EnergyDrainPerSecond = 750,

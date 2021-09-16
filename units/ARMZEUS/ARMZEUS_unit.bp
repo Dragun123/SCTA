@@ -142,7 +142,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
 	    MuzzleVelocity = 25,
-        DamageRadius = 2,
+        DamageRadius = 1,
             ProjectileId = '/mods/SCTA-master/projectiles/LIGHTNING/LIGHTNING_proj.bp',
             RackBones = {
                 {

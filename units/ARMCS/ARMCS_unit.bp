@@ -159,7 +159,7 @@ UnitBlueprint {
     SizeX = 2.5,
     SizeY = 2,
     SizeZ = 4,
-    StrategicIconName = 'icon_structure1_engineer', 
+    StrategicIconName = 'icon_ship1_engineer', 
     StrategicIconSortPriority = 0,
     Weapon = {
         { #BIG_UNITEX

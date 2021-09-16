@@ -145,7 +145,7 @@ UnitBlueprint {
             EnergyDrainPerSecond = 75,
             EnergyRequired = 75,
             EnergyChargeForFirstShot = true,
-            DamageRadius = 2, 
+            DamageRadius = 1, 
             RackBones = {
                 {
                     MuzzleBones = {

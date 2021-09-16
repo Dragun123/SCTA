@@ -180,7 +180,7 @@ UnitBlueprint {
             DamageFriendly = false,
             TrackingRadius = 1.15,
             Damage = 75,
-            DamageRadius = 2,
+            DamageRadius = 1,
             DamageType = 'TASpec',
             DisplayName = 'CORVTOL_MISSILE',
             FireTargetLayerCapsTable = {
@@ -238,7 +238,7 @@ UnitBlueprint {
             DamageFriendly = false,
             TrackingRadius = 1.15,
             Damage = 75,
-            DamageRadius = 2,
+            DamageRadius = 1,
             DamageType = 'TASpec',
             DisplayName = 'CORVTOL_MISSILE',
             FireTargetLayerCapsTable = {

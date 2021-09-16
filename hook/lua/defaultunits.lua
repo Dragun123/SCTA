@@ -27,4 +27,12 @@ ACUUnit = Class(oldtaACUUnit) {
             end
             end
         end,
+    
+    DoTakeDamage = function(self, instigator, amount, vector, damageType)
+        oldtaACUUnit.DoTakeDamage(self, instigator, amount, vector, damageType)
+        if damageType == 'DGun' then
+            --LOG('TADGUN', EntityCategoryContains(categories.COMMAND, instigator))
+            instigator.Disintegrator:Destroy()
+        end
+    end,
 }

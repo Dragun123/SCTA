@@ -251,7 +251,6 @@ UnitBlueprint {
             UseFiringSolutionInsteadOfAimBone = true,
             DamageFriendly = false,
             Damage = 50,
-            DamageRadius = 1,
             DamageType = 'Normal',
             DisplayName = 'COMLASER',
             FireTargetLayerCapsTable = {
@@ -310,7 +309,7 @@ UnitBlueprint {
             DamageFriendly = true,
             Damage = 10,
             DGun = 99999,
-            DamageRadius = 1.5,
+            DamageRadius = 1,
             DamageType = 'DGun',
             DisplayName = 'OverCharge',
             FireTargetLayerCapsTable = {

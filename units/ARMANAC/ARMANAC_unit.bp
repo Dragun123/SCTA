@@ -122,7 +122,7 @@ UnitBlueprint {
     SizeX = 3,
     SizeY = 1,
     SizeZ = 3,
-    StrategicIconName = 'icon_bot3_armored',
+    StrategicIconName = 'icon_land3_armored',
     StrategicIconSortPriority = 0,
     Transport = {
         TransportClass = 3,

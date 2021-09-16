@@ -25,6 +25,10 @@ UnitBlueprint {
     Display = {
         UniformScale = 0.2,
     },
+    Economy = {
+        BuildCostEnergy = 6500,
+        BuildTime = 10500,
+    },
     SelectionSizeX = 3,
     SelectionSizeZ = 3,
     SelectionThickness = 0.25,

@@ -129,7 +129,7 @@ TechLevel = 'RULEUTL_Basic',
             ProjectileId = '/mods/SCTA-master/projectiles/CORE_LIGHTLASER/CORE_LIGHTLASER_proj.bp',
             EnergyDrainPerSecond = 10,
             EnergyRequired = 10,
-            DamageRadius = 2,
+            DamageRadius = 1,
             EnergyChargeForFirstShot = true,
             RackBones = {
                 {
