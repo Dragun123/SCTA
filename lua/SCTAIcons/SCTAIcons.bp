@@ -1,15 +1,57 @@
 UnitBlueprint {
     Merge = true,
-    BlueprintId="uea0001", ---ACU Drone
-    StrategicIconName = 'icon_bot1_engineer',
+    BlueprintId = "url0107", ---mantis
+    StrategicIconName = 'icon_bot1_armored',
 }
 UnitBlueprint {
     Merge = true,
-    BlueprintId="uea0003", ---sACU Drone
-    StrategicIconName = 'icon_bot3_engineer',
+    BlueprintId = "uea0001", ---ACU Drone
+    StrategicIconName = 'icon_fighter1_engineer',
 }
 UnitBlueprint {
     Merge = true,
-    BlueprintId="xea3204", ---Kennel Drone
+    BlueprintId = "uea0003", ---sACU Drone
+    StrategicIconName = 'icon_fighter3_engineer',
+}
+UnitBlueprint {
+    Merge = true,
+    BlueprintId = "xea3204", ---Kennel Drone
+    StrategicIconName = 'icon_fighter2_engineer',
+}
+UnitBlueprint {
+    Merge = true,
+    BlueprintId = "ual0202", ---obsidian
+    StrategicIconName = 'icon_land2_armored',
+}
+UnitBlueprint {
+    Merge = true,
+    BlueprintId = "xsl0202", ---illsh
+    StrategicIconName = 'icon_bot2_armored',
+}
+UnitBlueprint {
+    Merge = true,
+    BlueprintId = "xel0209", ---sparky
     StrategicIconName = 'icon_bot2_engineer',
 }
+UnitBlueprint {
+    Merge = true,
+    BlueprintId = "xnl0209", ---scarab
+    StrategicIconName = 'icon_bot2_engineer',
+}
+
+----CustomTA Icons
+---Bot 1-2 Armored
+---Bot 1-2 Counter Intel
+---Bot 1-2 Missile
+---Bot 1-2 Sniper
+---Bot 1-3 Factory
+---Fighter 1-3 Engineer
+---Land 1-3 Armored
+---Land 2-3 Sniper
+---Land 2 Anti Missile
+---Land 3 Transport
+---Structure 1-3 Bomb
+---Structure 2 Sniper
+---Sub 2-3 CounterIntel
+---Sub 2 Engineer
+---Ship 1 Engineer
