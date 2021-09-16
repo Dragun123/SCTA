@@ -113,7 +113,7 @@ UnitBlueprint {
             CollideFriendly = false,
             DamageFriendly = false,
             Damage = 140,
-            DamageRadius = 2, 
+            DamageRadius = 1, 
             DamageType = 'Normal',
             DisplayName = 'ARMAMB_GUN',
             EnergyDrainPerSecond = 25,

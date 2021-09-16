@@ -303,7 +303,7 @@ UnitBlueprint {
             EnergyChargeForFirstShot = true,
             EnergyDrainPerSecond = 750,
             EnergyRequired = 1500,
-            DamageRadius = 2,
+            DamageRadius = 1,
             FireTargetLayerCapsTable = {
                 Land = 'Land|Water|Air|Seabed',
                 Seabed = 'Land|Water|Air|Seabed',
@@ -360,7 +360,7 @@ UnitBlueprint {
             CollideFriendly = false,
            DamageFriendly = false,
             Damage = 300,
-            DamageRadius = 2,
+            DamageRadius = 1,
             DamageType = 'TASpec',
             DisplayName = 'CORKROG_ROCKET',
             FireTargetLayerCapsTable = {

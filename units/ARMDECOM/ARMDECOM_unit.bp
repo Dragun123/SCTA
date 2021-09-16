@@ -203,7 +203,6 @@ UnitBlueprint {
             CollideFriendly = false,
             DamageFriendly = false,
             Damage = 100,
-            DamageRadius = 1,
             DamageType = 'Normal',
             DisplayName = 'COMLASER',
             FireTargetLayerCapsTable = {
@@ -262,7 +261,7 @@ UnitBlueprint {
             DamageFriendly = true,
             Damage = 10,
             DGun = 10,
-            DamageRadius = 1.5,
+            DamageRadius = 1,
             DamageType = 'DGun',
             DisplayName = 'OverCharge',
             FireTargetLayerCapsTable = {
@@ -326,7 +325,7 @@ UnitBlueprint {
             CollideFriendly = false,
             DamageFriendly = true,
             Damage = 10,
-            DamageRadius = 1.5,
+            DamageRadius = 1,
             DamageType = 'DGun',
             DisplayName = 'AutoOverCharge',
             FireTargetLayerCapsTable = {

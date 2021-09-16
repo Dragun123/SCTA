@@ -148,7 +148,7 @@ UnitBlueprint {
             RackSlavedToTurret = false,
             RateOfFire = 2,
             TargetCheckInterval = 1,
-            DamageRadius = 2, 
+            DamageRadius = 1, 
             TargetPriorities = {
                 'ALLUNITS'
             },

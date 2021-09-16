@@ -142,7 +142,7 @@ UnitBlueprint {
         WeaponUnpacks = true,
         WeaponRepackTimeout = 1,
             Damage = 1250,
-	    DamageRadius = 2,
+	    DamageRadius = 1,
             DamageType = 'Normal',
             DisplayName = 'ARM_FAST',
             FireTargetLayerCapsTable = {
