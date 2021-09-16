@@ -202,14 +202,20 @@ Disintegrator = Class(TALightCannonProjectile) {
 	OnCreate = function(self)
 		TALightCannonProjectile.OnCreate(self)
 		self.launcher = self:GetLauncher()
-		self.launcher.EconDrain = CreateEconomyEvent(self.launcher, 500, 0, 0)
+		self.launcher.Disintegrator = self
+		--self.Econ = self:GetWeaponEnergyRequired()
+		self.launcher.EconDrain = CreateEconomyEvent(self.launcher, self:GetWeaponEnergyRequired(), 0, 0)
 		self.DGunDamage = self.launcher:GetWeaponByLabel('OverCharge'):GetBlueprint().DGun
 		self.launcher:ForkThread(function()
                 WaitFor(self.launcher.EconDrain)
                 RemoveEconomyEvent(self.launcher, self.launcher.EconDrain)
 				self.launcher.EconDrain = nil
+				WaitSeconds(2)
+				self.launcher.Disintegrator:Destroy()
 			end)
-		ForkThread(self.MovementThread, self)
+			ForkThread(self.MovementThread, self)
+			---ForkThread(self.DGunImpact, self)
+		--self.DGunThread = self:ForkThread(self.MovementThread)
 	end,
 
 	MovementThread = function(self)
@@ -217,7 +223,7 @@ Disintegrator = Class(TALightCannonProjectile) {
 		---damage adjustment for commanders
 		while not IsDestroyed(self) do
 			local pos = self:GetPosition()
-		if pos.y < GetTerrainHeight(pos.x, pos.z) then
+			if pos.y < GetTerrainHeight(pos.x, pos.z) then
 			self:SetTurnRate(0)
 			self:TrackTarget(false)
 			pos.y = GetTerrainHeight(pos.x, pos.z)
@@ -231,10 +237,27 @@ Disintegrator = Class(TALightCannonProjectile) {
 		end
 	end,
 
+	--[[DoDamage = function(instigator, damageData, targetEntity)
+		TALightCannonProjectile.DoDamage(instigator, damageData, targetEntity)
+		LOG('TADGUN', EntityCategoryContains(categories.COMMAND, instigator))
+		if instigator.DGunThread and EntityCategoryContains(categories.COMMAND, targetEntity) then
+			KillThread(instigator.DGunThread)
+			instigator.DGunThread = nil 
+			_ALERT('TADGUNThread', instigator.DGunThread)
+			instigator:Destroy()
+		end
+	end,]]
+
+
 	OnImpact = function(self, targetType, targetEntity)
-		self.DamageData.DamageAmount = 0
-		TALightCannonProjectile.OnImpact(self, targetType, targetEntity)
+		--targetCats = targetEntity:GetBlueprint().CategoriesHash
+		--_ALERT('TADGUNThread', self.DGunThread)
 	end,
+
+	--[[DGunImpact = function(self)
+		WaitSeconds(2)
+        self:Destroy()
+	end,]]
 }
 TAFlame = Class(TALightCannonProjectile) {
 	FxTrails = {'/mods/SCTA-master/effects/emitters/TAFlamethrower_emit.bp'},
