@@ -394,6 +394,10 @@ TARealCommander = Class(TACommander) {
         if self:GetHealth() < ArmyBrains[self.Army]:GetUnitStat(self.UnitId, "lowest_health") then
             ArmyBrains[self.Army]:SetUnitStat(self.UnitId, "lowest_health", self:GetHealth())
         end
+        if damageType == 'DGun' then
+            --LOG('TADGUN', EntityCategoryContains(categories.COMMAND, instigator))
+            instigator.Disintegrator:Destroy()
+        end
     end,
 
     OnStopBeingBuilt = function(self,builder,layer)
