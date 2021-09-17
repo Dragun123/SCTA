@@ -230,16 +230,26 @@ TACommander = Class(TAconstructor) {
         self.ReclaimEffectsBag:Add(TAutils.TACommanderReclaimEffects(self, target, self.BuildEffectBones or {0, }, self.ReclaimEffectsBag))
     end,
 
-    SetAutoOvercharge = function(self, auto)
-        self:GetWeaponByLabel('AutoOverCharge'):SetAutoOvercharge(auto)
-        self.Sync.AutoOvercharge = auto
+    SetAutoOvercharge = function(self)
+        local wep = self:GetWeaponByLabel('AutoOverCharge')
+        --self:GetWeaponByLabel('AutoOverCharge'):SetAutoOvercharge(auto)
+        LOG('TAIEXIST')
+        if not self.Sync.AutoOvercharge then
+        self.Sync.AutoOvercharge = true
+        self:SetWeaponEnabledByLabel('AutoOverCharge', true)
+        else
+        KillThread(wep.AutoThread)
+        self.Sync.AutoOvercharge = nil
+        self:SetWeaponEnabledByLabel('AutoOverCharge', false)
+        end
     end,
 
     ResetRightArm = function(self)
        self:SetImmobile(false)
        self:SetWeaponEnabledByLabel('OverCharge', true)
         if self.Sync.AutoOvercharge then
-        self:GetWeaponByLabel('AutoOverCharge'):SetAutoOvercharge(wep.AutoMode)
+        self:SetWeaponEnabledByLabel('AutoOverCharge', true)
+        --self:GetWeaponByLabel('AutoOverCharge'):SetAutoOvercharge(wep.AutoMode)
         end
     end,
 

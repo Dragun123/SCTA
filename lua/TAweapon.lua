@@ -296,8 +296,6 @@ end,
 }
 
 TADGun = Class(DefaultWeapon) {
-    AutoMode = false,
-    AutoThread = nil,
     EnergyRequired = nil,
 
     HasEnergy = function(self)
@@ -319,10 +317,10 @@ TADGun = Class(DefaultWeapon) {
     PauseOvercharge = function(self)
         if not self.unit:IsOverchargePaused() then
             self.unit:SetOverchargePaused(true)
-            WaitSeconds(1 / self:GetBlueprint().RateOfFire)
+            WaitSeconds(2)
             self.unit:SetOverchargePaused(false)
         end
-        if self.AutoMode then
+        if self.unit.Sync.AutoOvercharge then
             self.AutoThread = self:ForkThread(self.AutoEnable)
         end
     end,
@@ -330,15 +328,15 @@ TADGun = Class(DefaultWeapon) {
         AutoEnable = function(self)
             while not self:CanOvercharge() do
                 --WaitSeconds(1)
-                coroutine.yield(10)
+                coroutine.yield(31)
             end
-            if self.AutoMode then
+            if self.unit.Sync.AutoOvercharge then
                 self.unit:SetWeaponEnabledByLabel('AutoOverCharge', true)
             end
         end,
     
         
-    SetAutoOvercharge = function(self, auto)
+    --[[SetAutoOvercharge = function(self, auto)
             self.AutoMode = auto
     
             if self.AutoMode then
@@ -349,7 +347,7 @@ TADGun = Class(DefaultWeapon) {
                     self.AutoThread = nil
                 end
             end
-        end,
+        end,]]
 
         StartEconomyDrain = function(self) -- OverchargeWeapon drains energy on impact
         end,
@@ -364,11 +362,12 @@ TADGun = Class(DefaultWeapon) {
 
         OnWeaponFired = function(self)
             DefaultWeapon.OnWeaponFired(self)
+            self.unit:SetWeaponEnabledByLabel('AutoOverCharge', false)
             self:ForkThread(self.PauseOvercharge)
         end,
 
         WaitDGUN = function(self)
-            WaitSeconds(1 / self:GetBlueprint().RateOfFire)
+            WaitSeconds(2)
         end,
 
         IdleState = State(DefaultWeapon.IdleState) {
@@ -378,7 +377,6 @@ TADGun = Class(DefaultWeapon) {
                 else
                     self:ForkThread(function()
                         while not self:CanOvercharge() do
-                            --WaitSeconds(0.1)
                             coroutine.yield(2)
                         end
                         DefaultWeapon.IdleState.OnGotTarget(self)
@@ -388,7 +386,7 @@ TADGun = Class(DefaultWeapon) {
     
             OnFire = function(self)
                 if self:CanOvercharge() then
-                    ChangeState(self, DefaultWeapon.IdleState.RackSalvoFiringState(self))
+                    ChangeState(self, self.RackSalvoFiringState)
                 else
                     self:ForkThread(self.WaitDGUN)
                 end

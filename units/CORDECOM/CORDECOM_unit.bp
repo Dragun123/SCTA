@@ -331,7 +331,7 @@ UnitBlueprint {
             CollideFriendly = false,
             DamageFriendly = true,
             Damage = 10,
-            DamageRadius = 1,
+            DamageRadius = 1.5,
             DamageType = 'DGun',
             DisplayName = 'AutoOverCharge',
             FireTargetLayerCapsTable = {
@@ -363,7 +363,7 @@ UnitBlueprint {
             RackSalvoChargeTime = 0,
             RackSalvoReloadTime = 0,
             RackSalvoSize = 1,
-            RateOfFire = 0.4,
+            RateOfFire = 0.34,
             TargetCheckInterval = 0.1,
             TargetRestrictDisallow = 'UNTARGETABLE',
             AboveWaterTargetsOnly = true,
@@ -380,6 +380,9 @@ UnitBlueprint {
             TurretYawRange = 360,
             TurretYawSpeed = 150,
             Turreted = true,
+            TargetPriorities = {
+                'ALLUNITS',
+            },
         },
         {
             Damage = 1000,
