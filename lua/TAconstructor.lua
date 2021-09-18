@@ -233,23 +233,46 @@ TACommander = Class(TAconstructor) {
     SetAutoOvercharge = function(self)
         local wep = self:GetWeaponByLabel('AutoOverCharge')
         --self:GetWeaponByLabel('AutoOverCharge'):SetAutoOvercharge(auto)
-        LOG('TAIEXIST')
+        --LOG('TAIEXIST')
+        --_ALERT('TAIEXISTINGWEA', wep.AutoThread)
         if not self.Sync.AutoOvercharge then
+            ---_ALERT('TAIEXISTING', self.Sync.AutoOvercharge)
         self.Sync.AutoOvercharge = true
-        self:SetWeaponEnabledByLabel('AutoOverCharge', true)
+        --_ALERT('TAIEXISTING2', self.Sync.AutoOvercharge)
+            if wep.AutoThread then
+                KillThread(wep.AutoThread)
+            end
+        wep.AutoThread = wep:ForkThread(wep.AutoEnable, wep)
+        --self:SetWeaponEnabledByLabel('AutoOverCharge', true)
         else
-        KillThread(wep.AutoThread)
+        --LOG('TAIEXISTKILL')
+        --_ALERT('TAIEXISTINGWEA2', wep.AutoThread)
         self.Sync.AutoOvercharge = nil
+        if wep.AutoThread then
+            KillThread(wep.AutoThread)
+        end
         self:SetWeaponEnabledByLabel('AutoOverCharge', false)
         end
     end,
 
+    --[[DGun = function(self)
+        if self.DGunWeapon:CanOvercharge() then
+            coroutine.yield(5)
+            self:SetWeaponEnabledByLabel('AutoOverCharge', true)
+        else
+            coroutine.yield(21)
+            self:SetWeaponEnabledByLabel('AutoOverCharge', true)
+        end
+    end,]]
+
     ResetRightArm = function(self)
        self:SetImmobile(false)
+       if self.DGunWeapon:CanOvercharge() then
        self:SetWeaponEnabledByLabel('OverCharge', true)
-        if self.Sync.AutoOvercharge then
-        self:SetWeaponEnabledByLabel('AutoOverCharge', true)
+            if self.Sync.AutoOvercharge then
+            self:SetWeaponEnabledByLabel('AutoOverCharge', true)
         --self:GetWeaponByLabel('AutoOverCharge'):SetAutoOvercharge(wep.AutoMode)
+            end
         end
     end,
 
@@ -263,6 +286,7 @@ TACommander = Class(TAconstructor) {
 		TAconstructor.OnCreate(self)
         self:SetCapturable(false)
         self:SetWeaponEnabledByLabel('AutoOverCharge', false)
+        self.DGunWeapon = self:GetWeaponByLabel('OverCharge')
 	end,
     
     CreateCaptureEffects = function( self, target )

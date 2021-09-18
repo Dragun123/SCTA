@@ -304,33 +304,40 @@ TADGun = Class(DefaultWeapon) {
 
     -- Can we use the OC weapon?
     CanOvercharge = function(self)
-        return not self.unit:IsOverchargePaused() and self:HasEnergy() and not
-            self:UnitOccupied() 
+        return not self.unit:IsOverchargePaused()
+         and self:HasEnergy() 
+         and not self:UnitOccupied() 
     end,
 
     UnitOccupied = function(self)
-        return self.unit:IsUnitState('Building') or
-            self.unit:IsUnitState('Repairing') or
-            self.unit:IsUnitState('Reclaiming')
+        return self.unit:IsUnitState('Building') 
+        or self.unit:IsUnitState('Repairing')
+        or self.unit:IsUnitState('Reclaiming')
     end,
 
     PauseOvercharge = function(self)
+        self.unit:SetWeaponEnabledByLabel('AutoOverCharge', false)
         if not self.unit:IsOverchargePaused() then
+            --_ALERT('TAIEXISTINGAUTODGUN', self.unit.DGunWeapon:CanOvercharge())
             self.unit:SetOverchargePaused(true)
             WaitSeconds(2)
             self.unit:SetOverchargePaused(false)
         end
         if self.unit.Sync.AutoOvercharge then
+            ---_ALERT('TAIEXISTINGAUTODGUN', self.unit.DGunWeapon:CanOvercharge())
             self.AutoThread = self:ForkThread(self.AutoEnable)
         end
     end,
 
         AutoEnable = function(self)
-            while not self:CanOvercharge() do
+            while not self.unit.DGunWeapon:CanOvercharge() do
                 --WaitSeconds(1)
-                coroutine.yield(31)
+                --_ALERT('TAIEXISTINGDGUN', self.unit.DGunWeapon:CanOvercharge())
+                coroutine.yield(11)
             end
-            if self.unit.Sync.AutoOvercharge then
+            if self.unit.Sync.AutoOvercharge and self.unit.DGunWeapon:CanOvercharge() then
+                --_ALERT('TAIEXISTFIREDGUN', self.unit.DGunWeapon:CanOvercharge())
+                coroutine.yield(11)
                 self.unit:SetWeaponEnabledByLabel('AutoOverCharge', true)
             end
         end,
@@ -362,7 +369,6 @@ TADGun = Class(DefaultWeapon) {
 
         OnWeaponFired = function(self)
             DefaultWeapon.OnWeaponFired(self)
-            self.unit:SetWeaponEnabledByLabel('AutoOverCharge', false)
             self:ForkThread(self.PauseOvercharge)
         end,
 
@@ -372,11 +378,11 @@ TADGun = Class(DefaultWeapon) {
 
         IdleState = State(DefaultWeapon.IdleState) {
             OnGotTarget = function(self)
-                if self:CanOvercharge() then
+                if self.unit.DGunWeapon:CanOvercharge() then
                     DefaultWeapon.IdleState.OnGotTarget(self)
                 else
                     self:ForkThread(function()
-                        while not self:CanOvercharge() do
+                        while not self.unit.DGunWeapon:CanOvercharge() do
                             coroutine.yield(2)
                         end
                         DefaultWeapon.IdleState.OnGotTarget(self)
@@ -385,7 +391,7 @@ TADGun = Class(DefaultWeapon) {
             end,
     
             OnFire = function(self)
-                if self:CanOvercharge() then
+                if self.unit.DGunWeapon:CanOvercharge() then
                     ChangeState(self, self.RackSalvoFiringState)
                 else
                     self:ForkThread(self.WaitDGUN)
@@ -395,7 +401,7 @@ TADGun = Class(DefaultWeapon) {
     
         RackSalvoFireReadyState = State(DefaultWeapon.RackSalvoFireReadyState) {
             OnFire = function(self)
-                if self:CanOvercharge() then
+                if self.unit.DGunWeapon:CanOvercharge() then
                     DefaultWeapon.RackSalvoFireReadyState.OnFire(self)
                 else
                     self:ForkThread(self.WaitDGUN)
