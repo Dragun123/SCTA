@@ -318,9 +318,10 @@ TADGun = Class(DefaultWeapon) {
     PauseOvercharge = function(self)
         self.unit:SetWeaponEnabledByLabel('AutoOverCharge', false)
         if not self.unit:IsOverchargePaused() then
-            --_ALERT('TAIEXISTINGAUTODGUN', self.unit.DGunWeapon:CanOvercharge())
+            --_ALERT('TAIEXISTINGAUTODGUN', self.unit.DGunWeapon.RateOfFire)
+            --_ALERT('TAIEXISTINGAUTODGUN2', self.unit.DGunWeapon:GetBlueprint().RateOfFire)
             self.unit:SetOverchargePaused(true)
-            WaitSeconds(2)
+            WaitSeconds(1/self.unit.DGunWeapon:GetBlueprint().RateOfFire)
             self.unit:SetOverchargePaused(false)
         end
         if self.unit.Sync.AutoOvercharge then
