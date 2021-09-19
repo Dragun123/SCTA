@@ -236,9 +236,9 @@ TACommander = Class(TAconstructor) {
         --LOG('TAIEXIST')
         --_ALERT('TAIEXISTINGWEA', wep.AutoThread)
         if not self.Sync.AutoOvercharge then
-            _ALERT('TAIEXISTING', self.Sync.AutoOvercharge)
+            --_ALERT('TAIEXISTING', self.Sync.AutoOvercharge)
         self.Sync.AutoOvercharge = true
-        _ALERT('TAIEXISTING2', self.Sync.AutoOvercharge)
+        --_ALERT('TAIEXISTING2', self.Sync.AutoOvercharge)
             if wep.AutoThread then
                 KillThread(wep.AutoThread)
             end
@@ -268,6 +268,7 @@ TACommander = Class(TAconstructor) {
     ResetRightArm = function(self)
        self:SetImmobile(false)
        if self.DGunWeapon:CanOvercharge() then
+        ---LOG('TAIEXIST')
        self:SetWeaponEnabledByLabel('OverCharge', true)
             if self.Sync.AutoOvercharge then
             self:SetWeaponEnabledByLabel('AutoOverCharge', true)
