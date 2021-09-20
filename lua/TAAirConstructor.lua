@@ -43,7 +43,7 @@ TAAirConstructor = Class(TAair) {
         ---Testing see if desired effect is achieved here 
         ---Should reduce the raw number of calls as an engineer being built doesn't need this code 
         if __blueprints['armgant'] and not (EntityCategoryContains(categories.TECH3, self) or self:GetAIBrain().Level3) then
-            TAutils.updateBuildRestrictions(self)
+            TAutils.SCTAupdateBuildRestrictions(self)
         end
         self:OpenWings(self)
     end,  

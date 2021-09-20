@@ -65,7 +65,7 @@ TAconstructor = Class(TAWalking) {
     OnStopBeingBuilt = function(self, builder, layer)
         TAWalking.OnStopBeingBuilt(self, builder, layer)
         if __blueprints['armgant'] and not (EntityCategoryContains(categories.TECH3 + categories.COMMAND + categories.SUBCOMMANDER, self) or self:GetAIBrain().Level3) then
-            TAutils.updateBuildRestrictions(self)
+            TAutils.SCTAupdateBuildRestrictions(self)
         end
         --[[if __blueprints['armgant'] and self.TARestrict then
             TAutils.TABuildRestrictions(self)

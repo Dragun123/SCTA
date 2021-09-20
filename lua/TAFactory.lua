@@ -8,7 +8,7 @@ TAFactory = Class(FactoryUnit) {
     self.AnimManip = CreateAnimator(self)
     self.Trash:Add(self.AnimManip)
     if __blueprints['armgant'] and not (EntityCategoryContains(categories.TECH3 + categories.GATE, self) or self:GetAIBrain().Level3) then
-        TAutils.updateBuildRestrictions(self)
+        TAutils.SCTAupdateBuildRestrictions(self)
     end
 end,
 

@@ -8,6 +8,7 @@
 #****************************************************************************
 TAExecutePlan = ExecutePlan
 TASetupMainBase = SetupMainBase
+--WARN('['..string.gsub(debug.getinfo(1).source, ".*\\(.*.lua)", "%1")..', line:'..debug.getinfo(1).currentline..'] * SCTAAI: offset aiarchtype.lua' )
 
 function ExecutePlan(aiBrain)
     if not aiBrain.SCTAAI then

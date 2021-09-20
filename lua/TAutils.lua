@@ -97,7 +97,7 @@ TACaptureEffect = function(capturer, captive, BuildEffectBones, CaptureEffectsBa
 end
 
 
-updateBuildRestrictions = function(self)
+SCTAupdateBuildRestrictions = function(self)
     local aiBrain = self:GetAIBrain()
     --Add build restrictions
     --EngiModFinalFORMTA
