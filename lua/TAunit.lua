@@ -157,7 +157,7 @@ TAunit = Class(Unit)
         if self:GetFractionComplete() < 0.5 then
             return
         end
-		if overkillRatio and self:GetCurrentLayer() == 'Land' and overkillRatio >= 0.5 then
+		if overkillRatio and self.Layer == 'Land' and overkillRatio >= 0.5 then
     		--LOG('*Scale', self.Scale)
 			return TADeath.CreateHeapProp(self, overkillRatio)
         end

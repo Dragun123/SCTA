@@ -16,7 +16,7 @@ TATransport = Class(AirTransport)
 	end,
 
     OnKilled = function(self, instigator, type, overkillRatio)
-        local layer = self:GetCurrentLayer()
+        local layer = self.Layer
         self.Dead = true
 
 

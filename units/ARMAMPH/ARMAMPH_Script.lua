@@ -14,7 +14,7 @@ ARMAMPH = Class(TASeaWalking) {
         self.Walking = true
         self.SwitchAnims = true
         self.IsWaiting = nil
-        if(self:GetCurrentLayer() == 'Water') then
+        if(self.Layer == 'Water') then
             self.AT1 = self:ForkThread(self.TransformThread, true)
         end
     end,
