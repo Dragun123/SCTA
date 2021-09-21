@@ -108,8 +108,8 @@ function CDRSCTADGunDecoy(aiBrain, cdr)
                     for k, v in priList do
                         target = plat:FindClosestUnit('Support', 'Enemy', true, v)
                         if target and Utilities.XZDistanceTwoVectors(cdrPos, target:GetPosition()) <= searchRadius then
-                            local cdrLayer = cdr:GetCurrentLayer()
-                            local targetLayer = target:GetCurrentLayer()
+                            local cdrLayer = cdr.Layer
+                            local targetLayer = target.Layer
                             if not (cdrLayer == 'Land' and (targetLayer == 'Air' or targetLayer == 'Sub' or targetLayer == 'Seabed')) and
                                not (cdrLayer == 'Seabed' and (targetLayer == 'Air' or targetLayer == 'Water')) then
                                 break
@@ -394,8 +394,8 @@ function CDRSCTADGun(aiBrain, cdr)
                     for k, v in priList do
                         target = plat:FindClosestUnit('Support', 'Enemy', true, v)
                         if target and Utilities.XZDistanceTwoVectors(cdrPos, target:GetPosition()) <= searchRadius then
-                            local cdrLayer = cdr:GetCurrentLayer()
-                            local targetLayer = target:GetCurrentLayer()
+                            local cdrLayer = cdr.Layer
+                            local targetLayer = target.Layer
                             if not (cdrLayer == 'Land' and (targetLayer == 'Air' or targetLayer == 'Sub' or targetLayer == 'Seabed')) and
                                not (cdrLayer == 'Seabed' and (targetLayer == 'Air' or targetLayer == 'Water')) then
                                 break

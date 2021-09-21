@@ -105,7 +105,7 @@ end,
     OnStopBeingBuilt = function(self, builder, layer)
         TAFactory.OnStopBeingBuilt(self, builder, layer)
         self:DisableIntel('RadarStealth')
-            if layer == 'Sub' then
+            if self.Layer == 'Sub' then
             self.Chassis = CreateSlider(self, 0)
             self.Trash:Add(self.Chassis)
             self.bp = self:GetBlueprint()
