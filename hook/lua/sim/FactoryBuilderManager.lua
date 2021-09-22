@@ -205,7 +205,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             while true do         
                 local unitlist = nil
                 local units = nil           
-                WaitTicks(900)
+                WaitTicks(120)
                 units = GetOwnUnitsAroundPoint( aiBrain, Traffic, rallypoint, 16)                
                 if table.getn(units) > 10 then             
                     local unitlist = {}
@@ -217,7 +217,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                     if table.getn(unitlist) > 10 then  
                         --LOG("*AI DEBUG "..aiBrain.Nickname.." TraffMgt of "..table.getn(unitlist).." at "..repr(rallypoint))
                         IssueClearCommands( unitlist )
-                        IssueFormMove( unitlist, rallypoint, 'BlockFormation', Direction )
+                        IssueFormMove( unitlist, rallypoint, 'GrowthFormation', Direction )
                     end
                 end
             end
@@ -264,7 +264,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             if delay then
             WaitTicks(math.random(9,29))
             end
-            WaitTicks(1)
+            coroutine.yield(2)
             factory.DelayThread = false
             if factory.Dead then
                 return

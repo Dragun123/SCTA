@@ -1951,7 +1951,7 @@ Platoon = Class(SCTAAIPlatoon) {
                     for i=1, pathLength-1 do
                         self:Stop()
                         self:MoveToLocation(path[i], false)
-                        self:SetPlatoonFormationOverride('Block')
+                        --self:SetPlatoonFormationOverride('GrowthFormation')
                     end
                 end
                 end
