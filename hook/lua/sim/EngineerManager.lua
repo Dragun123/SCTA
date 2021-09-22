@@ -58,11 +58,11 @@ EngineerManager = Class(SCTAEngineerManager) {
         if unit.ForkedEngineerTask then
             KillThread(unit.ForkedEngineerTask)
         end
-        unit.ForkedEngineerTask = unit:ForkThread(manager.TAWait, manager, delaytime or (math.random(10,30)))
+        unit.ForkedEngineerTask = unit:ForkThread(manager.TAWait, manager, delaytime or (math.random(8,28)))
     end,
 
     TAWait = function(unit, manager, ticks)
-        coroutine.yield(ticks)
+        coroutine.yield(ticks + 2)
         if not unit.Dead then
             if unit.bType then
             manager:TAAssignEngineerTask(unit, unit.bType)
@@ -135,9 +135,9 @@ EngineerManager = Class(SCTAEngineerManager) {
         end
         if unit.ForkedEngineerTask then
             KillThread(unit.ForkedEngineerTask)
-            unit.ForkedEngineerTask = unit:ForkThread(manager.TAWait, manager, 3)
+            unit.ForkedEngineerTask = unit:ForkThread(manager.TAWait, manager, 2)
         else
-            unit.ForkedEngineerTask = unit:ForkThread(manager.TAWait, manager, 20)
+            unit.ForkedEngineerTask = unit:ForkThread(manager.TAWait, manager, 18)
         end
     end,
 
@@ -227,7 +227,7 @@ EngineerManager = Class(SCTAEngineerManager) {
         unit.MinNumAssistees = nil
         ----RealizingProper Assignment In DisbandPlatoon
         if unit.AssigningTask and not unit:IsIdleState() then
-            self:TADelayAssign(unit, 50)
+            self:TADelayAssign(unit, 48)
             return
         end
         local builder = self:GetHighestBuilder(bType, {unit})

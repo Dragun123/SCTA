@@ -29,12 +29,8 @@
             icon_structure3_bomb = 'land_bomb',
             icon_structure2_bomb = 'land_bomb',
             icon_structure1_bomb = 'land_bomb',
-            icon_bot2_bomb = 'land_bomb',
             icon_factory1_bot = 'factory_land',
             icon_factory2_bot = 'factory_land',
-            icon_land2_armored = 'bot_armored',
-            icon_land1_armored = 'bot_armored',
-            icon_land3_armored = 'bot_armored',
             icon_sub3_counterintel = 'ship_counterintel',
     }
     
@@ -65,16 +61,12 @@
             icon_land2_antimissile = '2/land_antimissile',
             icon_structure3_sniper = '3/bot_sniper',
             icon_structure2_sniper = '2/bot_sniper',
-            icon_bot2_bomb = '2/land_bomb',
             icon_land2_sniper = '2/bot_sniper',
             icon_structure3_bomb = '3/land_bomb',
             icon_structure2_bomb = '2/land_bomb',
             icon_structure1_bomb = '1/land_bomb',
             icon_factory1_bot = '1/factory_land',
             icon_factory2_bot = '2/factory_land',
-            icon_land2_armored = '2/bot_armored',
-            icon_land1_armored = '1/bot_armored',
-            icon_land3_armored = '3/bot_armored',
             icon_sub3_counterintel = '3/ship_counterintel',
         }
     

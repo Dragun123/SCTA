@@ -5,11 +5,6 @@ function CreateInitialArmyGroup(strArmy, createCommander)
 		ScenarioInfo.WindStatsTA = {Thread = ForkThread(WindTAThread)}
 	end
 	--[[for index, moddata in __active_mods do
-		if not moddata.name == 'AI-Uveso' then
-			BuildGraphAreasTA()
-		end
-	end]]
-	--[[for index, moddata in __active_mods do
 		if moddata.name == 'All factions FAF BlackOps Nomads' then
 			TACreateInitialArmyGroup(strArmy, createCommander)
 		end

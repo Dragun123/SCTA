@@ -73,3 +73,47 @@ function AIBuildBaseTemplateOrderedSCTAAI(aiBrain, builder, buildingType , close
     end
     return 
 end
+
+function TAAINewExpansionBase(aiBrain, baseName, position, builder, constructionData)
+    local radius = constructionData.ExpansionRadius or 100
+        if not aiBrain.BuilderManagers or aiBrain.BuilderManagers[baseName] or not builder.BuilderManagerData then
+            #LOG('*AI DEBUG: ARMY ' .. aiBrain:GetArmyIndex() .. ': New Engineer for expansion base - ' .. baseName)
+            builder.BuilderManagerData.EngineerManager:RemoveUnit(builder)
+            aiBrain.BuilderManagers[baseName].EngineerManager:AddUnit(builder, true)
+            return
+        end
+
+        aiBrain:AddBuilderManagers(position, radius, baseName, true)
+        builder.BuilderManagerData.EngineerManager:RemoveUnit(builder)
+        aiBrain.BuilderManagers[baseName].EngineerManager:AddUnit(builder, true)
+
+        # Iterate through bases finding the value of each expansion
+        local baseValues = {}
+        local highPri = false
+        for templateName, baseData in BaseBuilderTemplates do
+            local baseValue = baseData.ExpansionFunction(aiBrain, position, constructionData.NearMarkerType)
+            table.insert(baseValues, { Base = templateName, Value = baseValue })
+            --SPEW('*AI DEBUG: AINewExpansionBase(): Scann next Base. baseValue= ' .. repr(baseValue) .. ' ('..repr(templateName)..')')
+            if not highPri or baseValue > highPri then
+                --SPEW('*AI DEBUG: AINewExpansionBase(): Possible next Base. baseValue= ' .. repr(baseValue) .. ' ('..repr(templateName)..')')
+                highPri = baseValue
+            end
+        end
+
+        # Random to get any picks of same value
+        local validNames = {}
+        for k,v in baseValues do
+            if v.Value == highPri then
+                table.insert(validNames, v.Base)
+                --LOG('SCTAExpansion Data'..repr(validNames))
+            end
+        end
+        --SPEW('*AI DEBUG: AINewExpansionBase(): validNames for Expansions ' .. repr(validNames))
+        local pick = validNames[ Random(1, table.getn(validNames)) ]
+        if not pick then
+            LOG('*AI DEBUG: ARMY ' .. aiBrain:GetArmyIndex() .. ': Layer Preference - ' .. per .. ' - yielded no base types at - ' .. locationType)
+        end
+
+        --SPEW('*AI DEBUG: AINewExpansionBase(): ARMY ' .. aiBrain:GetArmyIndex() .. ': Expanding using - ' .. pick .. ' at location ' .. baseName)
+        import('/lua/ai/AIAddBuilderTable.lua').AddGlobalBaseTemplate(aiBrain, baseName, pick)
+end

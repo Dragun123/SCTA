@@ -131,7 +131,6 @@ UnitBlueprint {
     SizeZ = 2,
     SizeY = 1, 
     StrategicIconName = 'icon_land1_directfire',
-    ---TAStrategicIconName = '1/bot_armored',
     StrategicIconSortPriority = 0,
     Weapon = {
         {

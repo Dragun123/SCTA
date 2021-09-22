@@ -21,7 +21,7 @@ UnitBlueprint {
 UnitBlueprint {
     Merge = true,
     BlueprintId = "ual0202", ---obsidian
-    StrategicIconName = 'icon_land2_armored',
+    StrategicIconName = 'icon_bot2_armored',
 }
 UnitBlueprint {
     Merge = true,
@@ -46,7 +46,7 @@ UnitBlueprint {
 ---Bot 1-2 Sniper
 ---Bot 1-3 Factory
 ---Fighter 1-3 Engineer
----Land 1-3 Armored
+---Land 1-3 Armored (removed)
 ---Land 2-3 Sniper
 ---Land 2 Anti Missile
 ---Land 3 Transport
