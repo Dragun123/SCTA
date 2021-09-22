@@ -17,6 +17,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
         for _,v in builderTypes do
 			self:AddBuilderType(v)
 		end
+        --LOG('SCTAExist', brain.Rally)
         self.Location = location
         --LOG('*Location', self.Location)
         self.Radius = radius
@@ -207,14 +208,14 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                 local units = nil           
                 WaitTicks(120)
                 units = GetOwnUnitsAroundPoint( aiBrain, Traffic, rallypoint, 16)                
-                if table.getn(units) > 10 then             
+                if table.getn(units) > aiBrain.Rally then             
                     local unitlist = {}
                     for _,unit in units do            
                         if (unit.PlatoonHandle == aiBrain.ArmyPool) and unit:IsIdleState() then
                             table.insert( unitlist, unit )
                         end
                     end   
-                    if table.getn(unitlist) > 10 then  
+                    if table.getn(unitlist) > aiBrain.Rally then  
                         --LOG("*AI DEBUG "..aiBrain.Nickname.." TraffMgt of "..table.getn(unitlist).." at "..repr(rallypoint))
                         IssueClearCommands( unitlist )
                         IssueFormMove( unitlist, rallypoint, 'GrowthFormation', Direction )

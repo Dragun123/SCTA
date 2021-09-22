@@ -75,7 +75,7 @@ AIBrain = Class(SCTAAIBrainClass) {
                 AirForm = 0,
                 Scout = 0,
             }
-            local GetCurrentUnits = moho.aibrain_methods.GetCurrentUnits
+            local GetCurrentUnits = moho.aibrain_methods.GetCurrentUnits 
             while (aiBrain.Result ~= 'defeat') do
                 if aiBrain.LandForm < 1 and checks.LandForm < 1 then
                     aiBrain.LandForm = GetCurrentUnits(aiBrain, (categories.LAND * categories.MOBILE) - categories.ENGINEER - categories.SCOUT)
@@ -99,12 +99,17 @@ AIBrain = Class(SCTAAIBrainClass) {
                     aiBrain.StructureForm = GetCurrentUnits(aiBrain, categories.STRUCTURE * (categories.CQUEMOV + categories.MASSFABRICATION))
                     coroutine.yield(2)
                     checks.StructureForm = checks.StructureForm + 5
+                    --if aiBrain.Rally < 10 then
+                    --end
                 end
                 if aiBrain.Other < 1 and checks.Other < 1 and (aiBrain.Level3) then
                     aiBrain.Other = GetCurrentUnits(aiBrain, categories.EXPERIMENTAL * categories.MOBILE)
                     ---WaitTicks(1)
                     coroutine.yield(2)
                     checks.Other = checks.Other + 10
+                    --if aiBrain.Rally < 20 then
+                    --aiBrain.Rally = 20
+                    --end
                 end
                 if aiBrain.Scout < 1 and checks.Scout < 1 then
                     aiBrain.Scout = GetCurrentUnits(aiBrain, (categories.armpw + categories.corgator + (categories.SCOUT + categories.AMPHIBIOUS) - categories.ENGINEER - categories.EXPERIMENTAL))
@@ -167,6 +172,7 @@ AIBrain = Class(SCTAAIBrainClass) {
             self.SCTAAI = true
             --self.ForkThread(TAReclaim.MassFabManagerThreadSCTAI, self)
             if not self.SCTAFormCounter then
+                self.Rally = 5
             self.SCTAFormCounter = ForkThread(self.FormManagerSCTA, self)
             end
         end
