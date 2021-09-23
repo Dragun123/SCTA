@@ -413,6 +413,21 @@ function TAKite(vec1, vec2, distance)
     return {x,y,z}
 end
 
+function TAGetAssistees(aiBrain, locationType, assisteeType, buildingCategory, assisteeCategory)
+    if assisteeType == 'Factory' then
+        -- Sift through the factories in the location
+        local manager = aiBrain.BuilderManagers[locationType].FactoryManager
+        return manager:TAGetFactoriesWantingAssistance(buildingCategory, assisteeCategory)
+    elseif assisteeType == 'Engineer' then
+        local manager = aiBrain.BuilderManagers[locationType].EngineerManager
+        return manager:TAGetEngineersWantingAssistance(buildingCategory, assisteeCategory)
+    else
+        WARN('*AI ERROR: Invalid assisteeType - ' .. assisteeType)
+    end
+
+    return false
+end
+
 --[[function MassFabManagerThreadSCTAI(aiBrain)
     while aiBrain.Result ~= "defeat" do
         while math.abs(aiBrain:GetEconomyIncome('ENERGY')-aiBrain:GetEconomyUsage('ENERGY'))<150 and not aiBrain:GetEconomyStoredRatio('ENERGY')<0.9 do

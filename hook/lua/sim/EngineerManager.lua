@@ -128,6 +128,35 @@ EngineerManager = Class(SCTAEngineerManager) {
         end
     end,
 
+    GetNumCategoryBeingBuilt = function(self, category, engCategory)
+        if not self.Brain.SCTAAI then
+            return SCTAEngineerManager.GetNumCategoryBeingBuilt(self, category, engCategory)
+        end
+        return table.getn(self:TAGetEngineersBuildingCategory(category, engCategory))
+    end,
+
+    TAGetEngineersBuildingCategory = function(self, category, engCategory)
+        local engs = self:GetUnits('Engineers', engCategory)
+        local units = {}
+        for k,v in engs do
+            if not (v.Dead or v.UnitBeingBuilt.Dead) and v:IsUnitState('Building') and EntityCategoryContains(category, v.UnitBeingBuilt) then
+            table.insert(units, v)
+            end
+        end
+        return units
+    end,
+
+    TAGetEngineersWantingAssistance = function(self, category, engCategory)
+        local testUnits = self:TAGetEngineersBuildingCategory(category, engCategory)
+        local retUnits = {}
+        for k,v in testUnits do
+            if v.DesiresAssist and v.NumAssistees and not table.getn(v:GetGuards()) >= v.NumAssistees then
+            table.insert(retUnits, v)
+            end
+        end
+        return retUnits
+    end,
+
     ForkEngineerTask = function(manager, unit)
         if not manager.Brain.SCTAAI then
             --LOG('*TABrain', manager.Brain.SCTAAI)

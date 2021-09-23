@@ -145,7 +145,7 @@ Platoon = Class(SCTAAIPlatoon) {
 
             local category = ParseEntityCategory(catString)
 
-            local assistList = AIUtils.GetAssisteesSorian(aiBrain, assistData.AssistLocation, assistData.AssisteeType, category, assisteeCat)
+            local assistList = TAReclaim.TAGetAssistees(aiBrain, assistData.AssistLocation, assistData.AssisteeType, category, assisteeCat)
 
             if not table.empty(assistList) then
                 -- only have one unit in the list; assist it

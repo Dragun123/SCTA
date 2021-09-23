@@ -93,6 +93,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                 table.insert(self.FactoryList, unit)
               if not EntityCategoryContains(categories.TECH1, unit) then
                 unit.DesiresAssist = true
+                unit.NumAssistees = 4
                 else
                 unit.DesiresAssist = nil
               end
@@ -126,32 +127,33 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             self:ForkThread(self.DelayTARallyPoint, unit)
         end,
 
-        GetFactoriesBuildingCategory = function(self, category, facCategory)
+        GetNumCategoryBeingBuilt = function(self, category, facCategory)
             if not self.Brain.SCTAAI then
-                return SCTAFactoryBuilderManager.GetFactoriesBuildingCategory(self, category, facCategory)
+                return SCTAFactoryBuilderManager.GetNumCategoryBeingBuilt(self, category, facCategory)
             end
+            return table.getn(self:TAGetFactoriesBuildingCategory(category, facCategory))
+        end,
+
+        TAGetFactoriesBuildingCategory = function(self, category, facCategory)
             local units = {}
             for k,v in EntityCategoryFilterDown(facCategory, self.FactoryList) do
-                if v.Dead then
-                    continue
+                    if not (v.Dead or v.UnitBeingBuilt.Dead) and v:IsUnitState('Building') and EntityCategoryContains(category, v.UnitBeingBuilt) then
+                    table.insert(units, v)
+                    end
                 end
+                return units
+        end,
     
-                if not v:IsUnitState('Building') then
-                    continue
+        TAGetFactoriesWantingAssistance = function(self, category, facCatgory)
+            local testUnits = self:TAGetFactoriesBuildingCategory(category, facCatgory)
+    
+            local retUnits = {}
+            for k,v in testUnits do
+                if v.DesiresAssist and v.NumAssistees and not table.getn(v:GetGuards()) >= v.NumAssistees then
+                table.insert(retUnits, v)
                 end
-    
-                local beingBuiltUnit = v.UnitBeingBuilt
-                if not beingBuiltUnit or beingBuiltUnit.Dead then
-                    continue
-                end
-    
-                if not EntityCategoryContains(category, beingBuiltUnit) then
-                    continue
-                end
-    
-                table.insert(units, v)
             end
-            return units
+            return retUnits
         end,
         
         DelayTARallyPoint = function(self, factory)
