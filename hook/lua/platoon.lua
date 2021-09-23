@@ -38,6 +38,7 @@ Platoon = Class(SCTAAIPlatoon) {
         -- do we assist until the building is finished ?
         if self.PlatoonData.Assist.AssistUntilFinished then
             local guardedUnit
+            --eng.AssistPlatoon = true
             if eng.UnitBeingAssist then
                 guardedUnit = eng.UnitBeingAssist
             else 
@@ -145,7 +146,7 @@ Platoon = Class(SCTAAIPlatoon) {
 
             local category = ParseEntityCategory(catString)
 
-            local assistList = AIUtils.GetAssisteesSorian(aiBrain, assistData.AssistLocation, assistData.AssisteeType, category, assisteeCat)
+            local assistList = TAReclaim.TAGetAssistees(aiBrain, assistData.AssistLocation, assistData.AssisteeType, category, assisteeCat)
 
             if not table.empty(assistList) then
                 -- only have one unit in the list; assist it
@@ -236,8 +237,136 @@ Platoon = Class(SCTAAIPlatoon) {
         end
     end,
 
+    --[[Commenting out possibly to use in future
+        
+    TAEngineerAssistAI = function(self)
+        self:ForkThread(self.TAAssistBody)
+        local aiBrain = self:GetBrain()
+        WaitSeconds(self.PlatoonData.Assist.Time or 60)
+        if not aiBrain:PlatoonExists(self) then
+            return
+        end
+        coroutine.yield(2)
+        -- stop the platoon from endless assisting
+        self:Stop()
+        self:PlatoonDisbandTA()
+    end,
+
+    TAAssistBody = function(self)
+        local aiBrain = self:GetBrain()
+        coroutine.yield(7)
+        if not aiBrain:PlatoonExists(self) then
+            return
+        end
+        --local platoonUnits = self:GetPlatoonUnits()
+        local eng = self:GetSquadUnits('Support')[1]
+        eng.AssistPlatoon = self
+        local assistData = self.PlatoonData.Assist
+        local platoonPos = self:GetPlatoonPosition()
+        local assistee = false
+        local assistingBool = false
+        if not eng.Dead then
+            local guardedUnit = eng:GetGuardedUnit()
+            if guardedUnit and not guardedUnit.Dead then
+                if eng.AssistSet and assistData.PermanentAssist then
+                    return
+                end
+                eng.AssistSet = false
+                if guardedUnit:IsUnitState('Building') or guardedUnit:IsUnitState('Upgrading') then
+                    return
+                end
+            end
+        end
+        self:Stop()
+        if assistData then
+            local assistRange = assistData.AssistRange or 80
+            -- Check for units being built
+            if assistData.BeingBuiltCategories then
+                local unitsBuilding = aiBrain:GetListOfUnits(categories.CONSTRUCTION, false)
+                for catNum, buildeeCat in assistData.BeingBuiltCategories do
+                    local buildCat = ParseEntityCategory(buildeeCat)
+                    for unitNum, unit in unitsBuilding do
+                        if not unit.Dead and (unit:IsUnitState('Building') or unit:IsUnitState('Upgrading')) then
+                            local buildingUnit = unit.UnitBeingBuilt
+                            if buildingUnit and not buildingUnit.Dead and EntityCategoryContains(buildCat, buildingUnit) then
+                                local unitPos = unit:GetPosition()
+                                if unitPos and platoonPos and VDist2(platoonPos[1], platoonPos[3], unitPos[1], unitPos[3]) < assistRange then
+                                    assistee = unit
+                                    break
+                                end
+                            end
+                        end
+                    end
+                    if assistee then
+                        break
+                    end
+                end
+            end
+            -- Check for builders
+            if not assistee and assistData.BuilderCategories then
+                for catNum, buildCat in assistData.BuilderCategories do
+                    local unitsBuilding = aiBrain:GetListOfUnits(ParseEntityCategory(buildCat), false)
+                    for unitNum, unit in unitsBuilding do
+                        if not unit.Dead and unit:IsUnitState('Building') then
+                            local unitPos = unit:GetPosition()
+                            if unitPos and platoonPos and VDist2(platoonPos[1], platoonPos[3], unitPos[1], unitPos[3]) < assistRange then
+                                assistee = unit
+                                break
+                            end
+                        end
+                    end
+                end
+            end
+            -- If the unit to be assisted is a factory, assist whatever it is assisting or is assisting it
+            -- Makes sure all factories have someone helping out to load balance better
+            if assistee and not assistee.Dead and EntityCategoryContains(categories.FACTORY, assistee) then
+                local guardee = assistee:GetGuardedUnit()
+                if guardee and not guardee.Dead and EntityCategoryContains(categories.FACTORY, guardee) then
+                    local factories = AIUtils.AIReturnAssistingFactories(guardee)
+                    table.insert(factories, assistee)
+                    AIUtils.AIEngineersAssistFactories(aiBrain, eng, factories)
+                    assistingBool = true
+                elseif not table.empty(assistee:GetGuards()) then
+                    local factories = AIUtils.AIReturnAssistingFactories(assistee)
+                    table.insert(factories, assistee)
+                    AIUtils.AIEngineersAssistFactories(aiBrain, eng, factories)
+                    assistingBool = true
+                end
+            end
+        end
+        if assistee and not assistee.Dead then
+            if not assistingBool then
+                eng.AssistSet = true
+                IssueGuard(eng, assistee)
+            end
+        elseif not assistee then
+            if eng.BuilderManagerData then
+                local emLoc = eng.BuilderManagerData.EngineerManager:GetLocationCoords()
+                local dist = assistData.AssistRange or 80
+                if VDist3(eng:GetPosition(), emLoc) > dist then
+                    self:MoveToLocation(emLoc, false)
+                    WaitSeconds(9)
+                end
+            end
+            WaitSeconds(1)
+        end
+    end,]]
+
+    TAPlatoonDisbandNoAssign = function(self)
+        if self.BuilderHandle then
+            self.BuilderHandle:RemoveHandle(self)
+        end
+        for k,v in self:GetPlatoonUnits() do
+            v.TAReclaimer = nil
+            v.Escorting = nil
+            v.AssigningTask = nil
+        end
+        self:GetBrain():DisbandPlatoon(self)
+    end,
+
     ReclaimStructuresAITA = function(self)
         self:Stop('Support')
+        --local eng = self:GetSquadUnits('Support')[1]
         local aiBrain = self:GetBrain()
         local data = self.PlatoonData
         local radius = aiBrain:PBMGetLocationRadius(data.Location)
@@ -1791,6 +1920,7 @@ Platoon = Class(SCTAAIPlatoon) {
             v.UnitBeingBuilt = nil
             v.ReclaimInProgress = nil
             v.CaptureInProgress = nil
+            v.TAReclaimer = nil
             v.Escorting = nil
             v.AssigningTask = nil
             if v:IsPaused() then
@@ -3077,6 +3207,7 @@ Platoon = Class(SCTAAIPlatoon) {
                     while reclaiming do
                         WaitSeconds(5)
                         if not eng.Dead then 
+                            ---eng.Reclaimer = true
                             if eng:IsIdleState() or (self.PlatoonData.ReclaimTime and (GetGameTick() - createTick)*10 > self.PlatoonData.ReclaimTime) then
                             reclaiming = false
                             end

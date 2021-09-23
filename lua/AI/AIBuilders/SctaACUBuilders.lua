@@ -236,9 +236,10 @@ BuilderGroup {
         },
         BuilderData = {
             TAEscort = true,
+            Reclaimer = true,
             Layer = 'Land', 
             LocationType = 'LocationType',
-            ReclaimTime = 30,
+            ReclaimTime = 60,
         },
         BuilderType = 'LandTA',
     },
@@ -247,12 +248,12 @@ BuilderGroup {
         PlatoonTemplate = 'EngineerBuilderSCTAALL',
         PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
         PriorityFunction = TAPrior.AssistProduction,
-        Priority = 50,
+        Priority = 100,
         InstanceCount = 10,
         BuilderConditions = {
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER - categories.COMMAND}},
             { UCBC, 'HaveGreaterThanUnitsInCategoryBeingBuilt', { 0, categories.FACTORY - categories.TECH1, 'LocationType', }},
-            { UCBC, 'LocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, categories.FACTORY - categories.TECH1}},
+            ---{ TASlow, 'TALocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, 'STRUCTURE TECH2, STRUCTURE TECH3, EXPERIMENTAL' }},
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
         BuilderData = {
@@ -260,24 +261,24 @@ BuilderGroup {
                 AssistLocation = 'LocationType',
                 AssisteeType = 'Engineer',
                 BeingBuiltCategories = {'STRUCTURE FACTORY TECH2, STRUCTURE FACTORY TECH3, GATE'},
-                Time = 20,
+                Time = 60,
                 AssistRange = 20,
             },
         },
         BuilderType = 'NotACU',
     },
-    Builder {
+    --[[Builder {
         BuilderName = 'SCTA Assist Unit Production Idle',
         PlatoonTemplate = 'EngineerBuilderSCTA123',
         PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
         PriorityFunction = TAPrior.AssistProduction,
-        Priority = 50,
+        Priority = 80,
         InstanceCount = 10,
         BuilderConditions = {
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.LAND - categories.COMMAND}},
             { UCBC, 'FactoryGreaterAtLocation', { 'LocationType', 2, categories.FACTORY - categories.TECH1 } },
             { UCBC, 'HaveGreaterThanUnitsInCategoryBeingBuilt', { 0, categories.MOBILE, 'LocationType', }},
-            { UCBC, 'LocationFactoriesBuildingGreater', { 'LocationType', 0, categories.MOBILE }},
+            --{ UCBC, 'LocationFactoriesBuildingGreater', { 'LocationType', 0, 'MOBILE' }},
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
         BuilderData = {
@@ -291,7 +292,7 @@ BuilderGroup {
             },
         },
         BuilderType = 'NotACU',
-    },
+    },]]
 }
 
 --{ SIBC, 'EngineerNeedsAssistance', { false, 'LocationType', {'STRUCTURE'} }},

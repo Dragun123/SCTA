@@ -172,7 +172,7 @@ AIBrain = Class(SCTAAIBrainClass) {
             self.SCTAAI = true
             --self.ForkThread(TAReclaim.MassFabManagerThreadSCTAI, self)
             if not self.SCTAFormCounter then
-                self.Rally = 5
+            self.TARally = 5
             self.SCTAFormCounter = ForkThread(self.FormManagerSCTA, self)
             end
         end

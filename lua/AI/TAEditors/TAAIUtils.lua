@@ -86,7 +86,6 @@ function TAFindUnfinishedUnits(aiBrain, locationType, buildCat)
     end
     return retUnfinished
 end
-
 --TA Build Conditions
 
 function TAAIGetEconomyNumbersStorageRatio(aiBrain)
@@ -411,6 +410,21 @@ function TAKite(vec1, vec2, distance)
     y = vec1[2] * (1 - distanceFrac) + vec2[2] * distanceFrac
     z = vec1[3] * (1 - distanceFrac) + vec2[3] * distanceFrac
     return {x,y,z}
+end
+
+function TAGetAssistees(aiBrain, locationType, assisteeType, buildingCategory, assisteeCategory)
+    if assisteeType == 'Factory' then
+        -- Sift through the factories in the location
+        local manager = aiBrain.BuilderManagers[locationType].FactoryManager
+        return manager:TAGetFactoriesWantingAssistance(buildingCategory, assisteeCategory)
+    elseif assisteeType == 'Engineer' then
+        local manager = aiBrain.BuilderManagers[locationType].EngineerManager
+        return manager:TAGetEngineersWantingAssistance(buildingCategory, assisteeCategory)
+    else
+        WARN('*AI ERROR: Invalid assisteeType - ' .. assisteeType)
+    end
+
+    return false
 end
 
 --[[function MassFabManagerThreadSCTAI(aiBrain)

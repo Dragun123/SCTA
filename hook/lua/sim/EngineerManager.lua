@@ -128,6 +128,35 @@ EngineerManager = Class(SCTAEngineerManager) {
         end
     end,
 
+    GetNumCategoryBeingBuilt = function(self, category, engCategory)
+        if not self.Brain.SCTAAI then
+            return SCTAEngineerManager.GetNumCategoryBeingBuilt(self, category, engCategory)
+        end
+        return table.getn(self:TAGetEngineersBuildingCategory(category, engCategory))
+    end,
+
+    TAGetEngineersBuildingCategory = function(self, category, engCategory)
+        local engs = self:GetUnits('Engineers', engCategory)
+        local units = {}
+        for k,v in engs do
+            if not (v.Dead or v.UnitBeingBuilt.Dead) and v:IsUnitState('Building') and EntityCategoryContains(category, v.UnitBeingBuilt) then
+            table.insert(units, v)
+            end
+        end
+        return units
+    end,
+
+    TAGetEngineersWantingAssistance = function(self, category, engCategory)
+        local testUnits = self:TAGetEngineersBuildingCategory(category, engCategory)
+        local retUnits = {}
+        for k,v in testUnits do
+            if v.DesiresAssist and v.NumAssistees and not table.getn(v:GetGuards()) >= v.NumAssistees then
+            table.insert(retUnits, v)
+            end
+        end
+        return retUnits
+    end,
+
     ForkEngineerTask = function(manager, unit)
         if not manager.Brain.SCTAAI then
             --LOG('*TABrain', manager.Brain.SCTAAI)
@@ -306,6 +335,10 @@ EngineerManager = Class(SCTAEngineerManager) {
             if hndl.PlatoonData.DesiresAssist then
                 unit.DesiresAssist = hndl.PlatoonData.DesiresAssist
             end
+            --[[if hndl.PlatoonData.Reclaimer then
+                unit.TAReclaimer = true
+                --LOG('*TABrain', unit.TAReclaimer)
+            end]]
             --[[if hndl.PlatoonData.DesiresTAAssist and (self.Brain.Level2 or hndl.PlatoonData.Hydro) then
                 ---LOG('*TABrain', self.Brain.Plants)
                 --local Escort = self.Brain:GetUnitsAroundPoint((categories.LAND * categories.MOBILE * (categories.SILO + categories.DIRECTFIRE)) - categories.SCOUT - categories.corak - categories.armpw - categories.armflash - categories.corgator - categories.ENGINEER, unit:GetPosition(), 20, 'Ally')[1]

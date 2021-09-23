@@ -1,5 +1,6 @@
 WARN('['..string.gsub(debug.getinfo(1).source, ".*\\(.*.lua)", "%1")..', line:'..debug.getinfo(1).currentline..'] * SCTAAI: offset FactoryBuilderManager.lua' )
 local Traffic = (categories.MOBILE - categories.EXPERIMENTAL - categories.AIR - categories.CONSTRUCTION)
+local TAEco = import('/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua').GreaterTAStorageRatio
 
 SCTAFactoryBuilderManager = FactoryBuilderManager
 FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
@@ -91,11 +92,19 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             end
             if not self:FactoryAlreadyExists(unit) then
                 table.insert(self.FactoryList, unit)
-              if not EntityCategoryContains(categories.TECH1, unit) then
-                unit.DesiresAssist = true
-                else
-                unit.DesiresAssist = nil
-              end
+                if not EntityCategoryContains(categories.TECH1, unit) then
+                    unit.DesiresAssist = true
+                    if EntityCategoryContains(categories.TECH2, unit) then
+                    unit.NumAssistees = 2
+                    --LOG('SCTAT1EXIST', unit.DesiresAssist)
+                    elseif EntityCategoryContains(categories.TECH3, unit) then
+                    unit.NumAssistees = 4
+                    --LOG('SCTAT2EXIST', unit.DesiresAssist)
+                    else
+                    unit.NumAssistees = 6
+                    --LOG('SCTAT3EXIST', unit.DesiresAssist)
+                    end
+                end
               local bp = unit:GetBlueprint().Economy
                if EntityCategoryContains(categories.LAND, unit) then
                     if bp.KBot then
@@ -126,32 +135,33 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             self:ForkThread(self.DelayTARallyPoint, unit)
         end,
 
-        GetFactoriesBuildingCategory = function(self, category, facCategory)
+        GetNumCategoryBeingBuilt = function(self, category, facCategory)
             if not self.Brain.SCTAAI then
-                return SCTAFactoryBuilderManager.GetFactoriesBuildingCategory(self, category, facCategory)
+                return SCTAFactoryBuilderManager.GetNumCategoryBeingBuilt(self, category, facCategory)
             end
+            return table.getn(self:TAGetFactoriesBuildingCategory(category, facCategory))
+        end,
+
+        TAGetFactoriesBuildingCategory = function(self, category, facCategory)
             local units = {}
             for k,v in EntityCategoryFilterDown(facCategory, self.FactoryList) do
-                if v.Dead then
-                    continue
+                    if not (v.Dead or v.UnitBeingBuilt.Dead) and v:IsUnitState('Building') and EntityCategoryContains(category, v.UnitBeingBuilt) then
+                    table.insert(units, v)
+                    end
                 end
+                return units
+        end,
     
-                if not v:IsUnitState('Building') then
-                    continue
+        TAGetFactoriesWantingAssistance = function(self, category, facCatgory)
+            local testUnits = self:TAGetFactoriesBuildingCategory(category, facCatgory)
+    
+            local retUnits = {}
+            for k,v in testUnits do
+                if v.DesiresAssist and v.NumAssistees and not table.getn(v:GetGuards()) >= v.NumAssistees then
+                table.insert(retUnits, v)
                 end
-    
-                local beingBuiltUnit = v.UnitBeingBuilt
-                if not beingBuiltUnit or beingBuiltUnit.Dead then
-                    continue
-                end
-    
-                if not EntityCategoryContains(category, beingBuiltUnit) then
-                    continue
-                end
-    
-                table.insert(units, v)
             end
-            return units
+            return retUnits
         end,
         
         DelayTARallyPoint = function(self, factory)
@@ -186,8 +196,10 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
         -- thread runs as long as the factory is alive and monitors the units at that
         -- factory rally point - ordering them into formation if they are not in a platoon
         -- this helps alleviate traffic issues and 'stuck' unit problems
+        ---This function apparently never actually got ran 
         TrafficControlTAThread = function(factory, factoryposition, rally)      
-            WaitTicks(30)   
+            WaitTicks(30) 
+            --LOG('SCTAIFACTORYEXIST')  
             local GetOwnUnitsAroundPoint = import('/lua/ai/aiutilities.lua').GetOwnUnitsAroundPoint     
             --local category = 
             local rallypoint = { rally[1],rally[2],rally[3] }
@@ -208,10 +220,11 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                 local units = nil           
                 WaitTicks(120)
                 units = GetOwnUnitsAroundPoint( aiBrain, Traffic, rallypoint, 16)                
-                if table.getn(units) > aiBrain.Rally then             
+                if table.getn(units) > aiBrain.TARally then             
                     local unitlist = {}
                     for _,unit in units do            
-                        if (unit.PlatoonHandle == aiBrain.ArmyPool) and unit:IsIdleState() then
+                        if unit:IsIdleState() then
+                            --LOG('SCTAIFACTORYEXIST', aiBrain.SCTAAI)
                             table.insert( unitlist, unit )
                         end
                     end   
@@ -250,12 +263,14 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
         TADelayBuildOrder = function(self,factory,bType, delay)
             local guards = factory:GetGuards()
             for k,v in guards do
-                if not v.Dead and v.AssistPlatoon then
-                    if self.Brain:PlatoonExists(v.AssistPlatoon) then
-                        v.AssistPlatoon:ForkThread(v.AssistPlatoon.TAEconAssistBody)
-                    else
-                        v.AssistPlatoon = nil
-                    end
+                if not v.Dead and v.Escorting and TAEco(self.Brain, 0.5, 0.5) then
+                    --LOG('SCTAIEXIST', v.unitID)
+                        --IssueClearCommands({v})
+                        IssueGuard({v}, factory)
+                    else                    
+                        v.AssigningTask = nil
+                        v.Escorting = nil
+                        self.Brain.BuilderManagers[self.LocationType].EngineerManager:AssignEngineerTask(v)
                 end
             end
             if factory.DelayThread then
@@ -281,12 +296,11 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             end
             local guards = factory:GetGuards()
             for k,v in guards do
-                if not v.Dead and v.AssistPlatoon then
-                    if self.Brain:PlatoonExists(v.AssistPlatoon) then
-                        v.AssistPlatoon:ForkThread(v.AssistPlatoon.TAEconAssistBody)
-                    else
-                        v.AssistPlatoon = nil
-                    end
+                if not v.Dead and v.AssigningTask then
+                    IssueClearCommands({v})
+                    v.AssigningTask = nil
+                    v.Escorting = nil
+                    self.Brain.BuilderManagers[self.LocationType].EngineerManager:AssignEngineerTask(v)
                 end
             end
             for k,v in self.FactoryList do
@@ -312,6 +326,15 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                 self:AddFactory(finishedUnit)
             end
             factory.TAAIFactoryBuilding = nil
+            local guards = factory:GetGuards()
+            for k,v in guards do
+                if not v.Dead and v.AssigningTask then
+                    --IssueClearCommands({v})
+                    v.AssigningTask = nil
+                    v.Escorting = nil
+                    self.Brain.BuilderManagers[self.LocationType].EngineerManager:AssignEngineerTask(v)
+                end
+            end
             self:TAAssignBuildOrder(factory, factory.BuilderManagerData.BuilderType)
         end,
 
@@ -328,6 +351,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                 if builder and not (factory.TAAIFactoryBuilding or factory.TABuildingUnit) then
                 ---LOG('*TAIEXIST3', factory)
                 factory.TAAIFactoryBuilding = true
+                --LOG('TAIEXIST', factory.DesiresAssist)
                 local template = self:GetFactoryTemplate(builder:GetPlatoonTemplate(), factory)
                 --LOG('*TAAI DEBUG: ARMY ', repr(self.Brain:GetArmyIndex()),': Factory Builder Manager Building - ',repr(builder.BuilderName))
 
@@ -337,6 +361,36 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                     end
 
                 --LOG('*Building', template)
+                if factory.DesiresAssist and TAEco(self.Brain, 0.5, 0.5) then
+                    local Escorts = self.Brain:GetUnitsAroundPoint((categories.ENGINEER * categories.LAND * categories.TECH1) + categories.FIELDENGINEER, factory:GetPosition(), 10, 'Ally') 
+                    --return
+                    --local Escort = table.remove(Escort, Escort.Escorting)
+                    for i = 1, factory.NumAssistees do
+                        for _,Escort in Escorts do
+                        if Escort and Escort.SCTAAIBrain and (Escort:IsIdleState() or not (Escort.AssigningTask or Escort.Escorting)) then 
+                            if Escort.PlatoonHandle and self.Brain:PlatoonExists(Escort.PlatoonHandle) then
+                                Escort.PlatoonHandle:Stop()
+                                Escort.PlatoonHandle:TAPlatoonDisbandNoAssign()
+                            end
+                        Escort.AssigningTask = true
+                        Escort.Escorting = true
+                        
+                        --LOG('TAIEXISTAssign', Escort.AssigningTask)
+                        
+                        ---local Assisting = self.Brain:AssignUnitsToPlatoon('SCTAAssisting', {Escort}, 'Guard', 'none')
+                        ---break here to ensure only first LEGAL option is the one grabbed
+                        IssueClearCommands({Escort})
+                        IssueGuard({Escort}, factory) 
+                        --IssueGuard({Escort}, factory)
+                        break
+                        --WaitSeconds(3)
+                        --Escort.Escorting = nil
+                        end
+                        end
+                    end
+                end
+                --local gaurds = factory:GetGuards()
+                --LOG('TAIEXISTAssignGaurds', gaurds > 0)
                 self.Brain:BuildPlatoon(template, {factory}, 1)
                 --LOG('*TACanceling2', template)
                 else

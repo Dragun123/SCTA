@@ -12,7 +12,7 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTA Engineer Assist Gantry Field Production',
         PlatoonTemplate = 'EngineerBuilderSCTAField',
-        Plan = 'ManagerEngineerAssistAISCTA',
+        PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
         PriorityFunction = TAPrior.GateBeingBuilt,
         Priority = 200,
         InstanceCount = 2,
@@ -35,7 +35,7 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTA Engineer Assist Field Gantry',
         PlatoonTemplate = 'EngineerBuilderSCTAField',
-        Plan = 'ManagerEngineerAssistAISCTA',
+        PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
         PriorityFunction = TAPrior.GantryProduction,
         Priority = 200,
         InstanceCount = 4,
