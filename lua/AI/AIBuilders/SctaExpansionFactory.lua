@@ -227,6 +227,7 @@ BuilderGroup {
         InstanceCount = 1,
         BuilderConditions = {
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, PLATFORM * categories.LAND} },
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 4, PLATFORM * categories.LAND} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
         BuilderType = 'OmniLand',
@@ -250,6 +251,7 @@ BuilderGroup {
         InstanceCount = 1,
         BuilderConditions = {
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, PLATFORM * categories.AIR} },
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 4, PLATFORM * categories.AIR} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
         BuilderType = 'OmniAir',
