@@ -367,7 +367,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                     --local Escort = table.remove(Escort, Escort.Escorting)
                     for i = 1, factory.NumAssistees do
                         for _,Escort in Escorts do
-                        if Escort and Escort.SCTAAIBrain and (Escort:IsIdleState() or not (Escort.AssigningTask or Escort.Escorting)) then 
+                        if Escort and Escort.SCTAAIBrain and (Escort:IsIdleState() or Escort:IsUnitState('MakingAttackRun') or not (Escort.AssigningTask or Escort.Escorting)) then 
                             if Escort.PlatoonHandle and self.Brain:PlatoonExists(Escort.PlatoonHandle) then
                                 Escort.PlatoonHandle:Stop()
                                 Escort.PlatoonHandle:TAPlatoonDisbandNoAssign()
