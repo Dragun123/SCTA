@@ -335,10 +335,10 @@ EngineerManager = Class(SCTAEngineerManager) {
             if hndl.PlatoonData.DesiresAssist then
                 unit.DesiresAssist = hndl.PlatoonData.DesiresAssist
             end
-            if hndl.PlatoonData.Reclaimer then
+            --[[if hndl.PlatoonData.Reclaimer then
                 unit.TAReclaimer = true
                 --LOG('*TABrain', unit.TAReclaimer)
-            end
+            end]]
             --[[if hndl.PlatoonData.DesiresTAAssist and (self.Brain.Level2 or hndl.PlatoonData.Hydro) then
                 ---LOG('*TABrain', self.Brain.Plants)
                 --local Escort = self.Brain:GetUnitsAroundPoint((categories.LAND * categories.MOBILE * (categories.SILO + categories.DIRECTFIRE)) - categories.SCOUT - categories.corak - categories.armpw - categories.armflash - categories.corgator - categories.ENGINEER, unit:GetPosition(), 20, 'Ally')[1]
