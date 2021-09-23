@@ -82,7 +82,6 @@ TAAirConstructor = Class(TAair) {
     OnStopBuild = function(self, unitBeingBuilt)
         self.UnitBeingBuilt = nil
         self.UnitBuildOrder = nil
-
         if self.BuildingOpenAnimManip and self.BuildArmManipulator then
             self.StoppedBuilding = true
         elseif self.BuildingOpenAnimManip then

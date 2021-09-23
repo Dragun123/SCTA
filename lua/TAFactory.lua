@@ -1,4 +1,5 @@
 local FactoryUnit = import('/lua/defaultunits.lua').FactoryUnit
+local Unit = import('/lua/sim/Unit.lua').Unit
 local AircraftCarrier = import('/lua/defaultunits.lua').AircraftCarrier
 local TAutils = import('/mods/SCTA-master/lua/TAutils.lua')
 
@@ -25,6 +26,10 @@ end,
         end,
 
         OnStartBuild = function(self, unitBeingBuilt, order )
+            if not Unit.OnStartBuild(self, unitBeingBuilt, order) then
+                return
+            end
+            --self.UnitBeingBuilt = unitBeingBuilt
             if not self.TABuildingUnit then
                 self:Open()
                 ForkThread(self.FactoryStartBuild, self, unitBeingBuilt, order )
@@ -35,6 +40,7 @@ end,
 		end,
 
         FactoryStartBuild = function(self, unitBeingBuilt, order )
+            --self.UnitBeingBuilt = unitBeingBuilt
             WaitFor(self.AnimManip)
             if not self.Dead and not IsDestroyed(unitBeingBuilt) then    
             FactoryUnit.OnStartBuild(self, unitBeingBuilt, order )
@@ -170,6 +176,7 @@ end,
             end,
 
             OnStartBuild = function(self, unitBeingBuilt, order )
+                --self.UnitBeingBuilt = unitBeingBuilt
                 if not self.TABuildingUnit then
                     unitBeingBuilt:HideBone(0, true)
                     self:Open()

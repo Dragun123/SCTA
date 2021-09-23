@@ -86,7 +86,6 @@ function TAFindUnfinishedUnits(aiBrain, locationType, buildCat)
     end
     return retUnfinished
 end
-
 --TA Build Conditions
 
 function TAAIGetEconomyNumbersStorageRatio(aiBrain)
