@@ -1,7 +1,5 @@
 WARN('['..string.gsub(debug.getinfo(1).source, ".*\\(.*.lua)", "%1")..', line:'..debug.getinfo(1).currentline..'] * SCTAAI: offset FactoryBuilderManager.lua' )
 local Traffic = (categories.MOBILE - categories.EXPERIMENTAL - categories.AIR - categories.CONSTRUCTION)
-local TAEco = import('/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua').GreaterTAStorageRatio
-
 SCTAFactoryBuilderManager = FactoryBuilderManager
 FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
     Create = function(self, brain, lType, location, radius, useCenterPoint)
@@ -228,7 +226,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                             table.insert( unitlist, unit )
                         end
                     end   
-                    if table.getn(unitlist) > aiBrain.Rally then  
+                    if table.getn(unitlist) > aiBrain.TARally then  
                         --LOG("*AI DEBUG "..aiBrain.Nickname.." TraffMgt of "..table.getn(unitlist).." at "..repr(rallypoint))
                         IssueClearCommands( unitlist )
                         IssueFormMove( unitlist, rallypoint, 'GrowthFormation', Direction )
@@ -263,14 +261,12 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
         TADelayBuildOrder = function(self,factory,bType, delay)
             local guards = factory:GetGuards()
             for k,v in guards do
-                if not v.Dead and v.Escorting and TAEco(self.Brain, 0.5, 0.5) then
-                    --LOG('SCTAIEXIST', v.unitID)
-                        --IssueClearCommands({v})
-                        IssueGuard({v}, factory)
-                    else                    
-                        v.AssigningTask = nil
-                        v.Escorting = nil
-                        self.Brain.BuilderManagers[self.LocationType].EngineerManager:AssignEngineerTask(v)
+                if not v.Dead and v.AssistPlatoon then
+                    if self.Brain:PlatoonExists(v.AssistPlatoon) then
+                        v.AssistPlatoon:ForkThread(v.AssistPlatoon.TAEconAssistBody)
+                    else
+                        v.AssistPlatoon = nil
+                    end
                 end
             end
             if factory.DelayThread then
@@ -296,11 +292,12 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             end
             local guards = factory:GetGuards()
             for k,v in guards do
-                if not v.Dead and v.AssigningTask then
-                    IssueClearCommands({v})
-                    v.AssigningTask = nil
-                    v.Escorting = nil
-                    self.Brain.BuilderManagers[self.LocationType].EngineerManager:AssignEngineerTask(v)
+                if not v.Dead and v.AssistPlatoon then
+                    if self.Brain:PlatoonExists(v.AssistPlatoon) then
+                        v.AssistPlatoon:ForkThread(v.AssistPlatoon.TAEconAssistBody)
+                    else
+                        v.AssistPlatoon = nil
+                    end
                 end
             end
             for k,v in self.FactoryList do
@@ -326,15 +323,6 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                 self:AddFactory(finishedUnit)
             end
             factory.TAAIFactoryBuilding = nil
-            local guards = factory:GetGuards()
-            for k,v in guards do
-                if not v.Dead and v.AssigningTask then
-                    --IssueClearCommands({v})
-                    v.AssigningTask = nil
-                    v.Escorting = nil
-                    self.Brain.BuilderManagers[self.LocationType].EngineerManager:AssignEngineerTask(v)
-                end
-            end
             self:TAAssignBuildOrder(factory, factory.BuilderManagerData.BuilderType)
         end,
 
@@ -350,6 +338,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             --LOG('*TAIEXIST2', factory)
                 if builder and not (factory.TAAIFactoryBuilding or factory.TABuildingUnit) then
                 ---LOG('*TAIEXIST3', factory)
+                --factory.PlatoonHandle = hndl
                 factory.TAAIFactoryBuilding = true
                 --LOG('TAIEXIST', factory.DesiresAssist)
                 local template = self:GetFactoryTemplate(builder:GetPlatoonTemplate(), factory)
@@ -361,34 +350,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                     end
 
                 --LOG('*Building', template)
-                if factory.DesiresAssist and TAEco(self.Brain, 0.5, 0.5) then
-                    local Escorts = self.Brain:GetUnitsAroundPoint((categories.ENGINEER * categories.LAND * categories.TECH1) + categories.FIELDENGINEER, factory:GetPosition(), 10, 'Ally') 
-                    --return
-                    --local Escort = table.remove(Escort, Escort.Escorting)
-                    for i = 1, factory.NumAssistees do
-                        for _,Escort in Escorts do
-                        if Escort and Escort.SCTAAIBrain and (Escort:IsIdleState() or Escort:IsUnitState('MakingAttackRun') or not (Escort.AssigningTask or Escort.Escorting)) then 
-                            if Escort.PlatoonHandle and self.Brain:PlatoonExists(Escort.PlatoonHandle) then
-                                Escort.PlatoonHandle:Stop()
-                                Escort.PlatoonHandle:TAPlatoonDisbandNoAssign()
-                            end
-                        Escort.AssigningTask = true
-                        Escort.Escorting = true
-                        
-                        --LOG('TAIEXISTAssign', Escort.AssigningTask)
-                        
-                        ---local Assisting = self.Brain:AssignUnitsToPlatoon('SCTAAssisting', {Escort}, 'Guard', 'none')
-                        ---break here to ensure only first LEGAL option is the one grabbed
-                        IssueClearCommands({Escort})
-                        IssueGuard({Escort}, factory) 
-                        --IssueGuard({Escort}, factory)
-                        break
-                        --WaitSeconds(3)
-                        --Escort.Escorting = nil
-                        end
-                        end
-                    end
-                end
+                --if factory.DesiresAssist and TAEco(self.Brain, 0.5, 0.5) then
                 --local gaurds = factory:GetGuards()
                 --LOG('TAIEXISTAssignGaurds', gaurds > 0)
                 self.Brain:BuildPlatoon(template, {factory}, 1)

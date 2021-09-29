@@ -15,10 +15,14 @@ local T2STRUCTURE = (categories.STRUCTURE * categories.TECH2)
 
 
 AssistProduction = function(self, aiBrain)
-    if aiBrain.Level2 then 
-        return 100
-    elseif aiBrain.Plants >= 4 then 
+    if aiBrain.TAFactoryAssistance then
+        if aiBrain.Level3 then 
+        return 150
+        elseif aiBrain.Level2 then
+        return 100 
+        else
         return 50
+        end
     else
         return 0
     end

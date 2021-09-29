@@ -387,6 +387,20 @@ function TACanBuildOnMassLessThanDistanceLand(aiBrain, locationType, distance, t
     return false
 end
 
+function TAFindAssistUnits(aiBrain, locationType, buildCat)
+    local engineerManager = aiBrain.BuilderManagers[locationType].EngineerManager
+    local Assisting = aiBrain:GetUnitsAroundPoint(buildCat, engineerManager:GetLocationCoords(), engineerManager.Radius, 'Ally')
+    local retAssisting = false
+    for num, unit in Assisting do
+        --donePercent = unit:GetFractionComplete()
+        if unit.DesiresAssist and unit:GetGuards() < (unit.NumAssistees or 2) and not unit:IsUnitState('Upgrading') then
+            retAssisting = unit
+            break
+        end
+    end
+    return retAssisting
+end
+
 --[[function TACanBuildOnMassLessThanDistanceNaval(aiBrain, locationType, distance, threatMin, threatMax, threatRings, threatType, maxNum )
     local engineerManager = aiBrain.BuilderManagers[locationType].EngineerManager
     if not (locationType == 'Naval Area' or engineerManager) then
