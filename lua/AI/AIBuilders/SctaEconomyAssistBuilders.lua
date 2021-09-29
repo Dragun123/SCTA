@@ -65,14 +65,14 @@ BuilderGroup {
         BuilderConditions = {
             { MIBC, 'GreaterThanGameTime', { 240 } },
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.LAND - categories.COMMAND}},
-            { TASlow, 'TAReclaimablesInArea', { 'LocationType', 0.2}},  
+            { TASlow, 'TAReclaimablesInArea', { 'LocationType', 0.05}},  
             --{ TAutils, 'LessMassStorageMaxTA',  { 0.2}},
         },
         BuilderData = {
             Reclaimer = true,
             Layer = 'Land', 
             LocationType = 'LocationType',
-            ReclaimTime = 30,
+            ReclaimTime = 60,
         },
         BuilderType = 'OmniLand',
     },
@@ -130,17 +130,17 @@ BuilderGroup {
         BuilderConditions = {
             { UCBC, 'HaveGreaterThanUnitsInCategoryBeingBuilt', { 0, FUSION, 'LocationType', }},
             { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.FIELDENGINEER}},
-            { TAutils, 'EcoManagementTA', { 0.5, 0.5, } },
+            --{ TAutils, 'EcoManagementTA', { 0.5, 0.5, } },
         },
         BuilderType = 'FieldTA',
         BuilderData = {
             Assist = {
-                AssisteeType = 'Engineer',
                 AssistLocation = 'LocationType',
-                BeingBuiltCategories = {'TECH2 ENERGYPRODUCTION STRUCTURE, TECH3 ENERGYPRODUCTION STRUCTURE,'},
-                Time = 20,
-                AssistRange = 120,
+                AssisteeType = 'Engineer',
+                BeingBuiltCategories = {'ENERGYPRODUCTION'},
+                Time = 60,
                 AssistUntilFinished = true,
+                AssistRange = 20,
             },
         }
     },
@@ -182,14 +182,14 @@ BuilderGroup {
             Assist = {
                 AssistLocation = 'LocationType',
                 AssisteeType = 'Engineer',
-                BeingBuiltCategories = {'STRUCTURE STRATEGIC, STRUCTURE ECONOMIC, STRUCTURE'},
+                BeingBuiltCategories = {'STRUCTURE'},
                 Time = 240,
                 AssistUntilFinished = true,
             },
         },
         BuilderType = 'FieldTA',
     },
-    --[[Builder {
+    Builder {
         BuilderName = 'SCTA Assist Production Field',
         PlatoonTemplate = 'EngineerBuilderSCTAField',
         PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
@@ -200,17 +200,18 @@ BuilderGroup {
         BuilderConditions = {
             --{ TASlow, 'TALocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, 'STRUCTURE TECH2, STRUCTURE TECH3, EXPERIMENTAL' }},
             { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.FIELDENGINEER}},
-            { TAutils, 'GreaterTAStorageRatio', { 0.5, 0.5}},
+            ---{ TAutils, 'GreaterTAStorageRatio', { 0.5, 0.5}},
         },
         BuilderData = {
             Assist = {
                 AssistLocation = 'LocationType',
-                AssisteeType = 'Engineer',
-                AssistRange = 120,
-                BeingBuiltCategories = {'STRUCTURE TECH2, STRUCTURE TECH3, GATE'},                                        
+                AssisteeType = 'Factory',
                 AssistUntilFinished = true,
+                BeingBuiltCategories = {'MOBILE'},
+                Time = 60,
+                AssistRange = 20,
             },
         },
         BuilderType = 'FieldTA',
-    },]]
+    },
 }

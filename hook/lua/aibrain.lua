@@ -1,5 +1,6 @@
 WARN('['..string.gsub(debug.getinfo(1).source, ".*\\(.*.lua)", "%1")..', line:'..debug.getinfo(1).currentline..'] * SCTAAI: offset aibrain.lua' )
 --local TAReclaim = import('/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua')
+local TAEco = import('/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua').GreaterTAStorageRatio
 
 SCTAAIBrainClass = AIBrain
 AIBrain = Class(SCTAAIBrainClass) {
@@ -146,6 +147,13 @@ AIBrain = Class(SCTAAIBrainClass) {
             end
         end,
 
+        KillTAAssist = function(aiBrain)
+            if aiBrain.TAAssistThread then
+                KillThread(aiBrain.TAAssistThread)
+                aiBrain.TAAssistThread = nil
+            end
+        end,
+
     AddBuilderManagers = function(self, position, radius, baseName, useCenter)
         -- Only use this with AI-SCTAAI
          if not self.SCTAAI then
@@ -171,12 +179,28 @@ AIBrain = Class(SCTAAIBrainClass) {
             --LOG('* AI-SCTA: This is SCTA')
             self.SCTAAI = true
             --self.ForkThread(TAReclaim.MassFabManagerThreadSCTAI, self)
-            if not self.SCTAFormCounter then
             self.TARally = 5
+            if not self.SCTAFormCounter then
             self.SCTAFormCounter = ForkThread(self.FormManagerSCTA, self)
+            end
+            if not self.TAAssistThread then
+            self.TAAssistThread = ForkThread(self.TAFactoryAssistThread, self)
             end
         end
     end,
+
+    TAFactoryAssistThread = function(aiBrain)
+        while (aiBrain.Result ~= 'defeat') do
+            WaitSeconds(120)
+            if ((aiBrain.Level2 or aiBrain.Level3) and TAEco(aiBrain, 0.5, 0.5)) or TAEco(aiBrain, 0.75, 0.75) then
+                aiBrain.TAFactoryAssistance = true
+            else
+            aiBrain.TAFactoryAssistance = nil
+            end
+            WaitSeconds(60)
+        end
+    end,   
+    
 
     ForceManagerSort = function(self)
         if not self.SCTAAI then
@@ -248,6 +272,13 @@ AIBrain = Class(SCTAAIBrainClass) {
         self.Level2 = nil
         self.Level3 = nil
         self.TA = nil
+        self.TARally = nil
+            if self.SCTAFormCounter then
+                self:ForkThread(self.KillTAFormer, self)
+            end
+            if self.TAAssistThread then
+                self:ForkThread(self.KillTAAssist, self)
+            end
         end
     end, 
 }

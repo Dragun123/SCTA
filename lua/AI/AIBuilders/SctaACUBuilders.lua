@@ -252,47 +252,48 @@ BuilderGroup {
         InstanceCount = 10,
         BuilderConditions = {
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER - categories.COMMAND}},
-            { UCBC, 'HaveGreaterThanUnitsInCategoryBeingBuilt', { 0, categories.FACTORY - categories.TECH1, 'LocationType', }},
+            --{ UCBC, 'HaveGreaterThanUnitsInCategoryBeingBuilt', { 0, categories.FACTORY - categories.TECH1, 'LocationType', }},
             ---{ TASlow, 'TALocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, 'STRUCTURE TECH2, STRUCTURE TECH3, EXPERIMENTAL' }},
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+            --{ TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
         BuilderData = {
             Assist = {
                 AssistLocation = 'LocationType',
                 AssisteeType = 'Engineer',
-                BeingBuiltCategories = {'STRUCTURE FACTORY TECH2, STRUCTURE FACTORY TECH3, GATE'},
+                BeingBuiltCategories = {'FACTORY'},
+                Time = 60,
+                AssistUntilFinished = true,
+                AssistRange = 20,
+            },
+        },
+        BuilderType = 'NotACU',
+    },
+    Builder {
+        BuilderName = 'SCTA Assist Unit Production Idle',
+        PlatoonTemplate = 'EngineerBuilderSCTA123',
+        PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
+        PriorityFunction = TAPrior.AssistProduction,
+        Priority = 100,
+        InstanceCount = 10,
+        BuilderConditions = {
+            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.LAND - categories.COMMAND}},
+            { UCBC, 'FactoryGreaterAtLocation', { 'LocationType', 2, categories.FACTORY - categories.TECH1 } },
+            --{ UCBC, 'HaveGreaterThanUnitsInCategoryBeingBuilt', { 0, categories.MOBILE, 'LocationType', }},
+            --{ UCBC, 'LocationFactoriesBuildingGreater', { 'LocationType', 0, 'MOBILE' }},
+            --{ TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+        },
+        BuilderData = {
+            Assist = {
+                AssistLocation = 'LocationType',
+                AssisteeType = 'Factory',
+                AssistUntilFinished = true,
+                BeingBuiltCategories = {'MOBILE'},
                 Time = 60,
                 AssistRange = 20,
             },
         },
         BuilderType = 'NotACU',
     },
-    --[[Builder {
-        BuilderName = 'SCTA Assist Unit Production Idle',
-        PlatoonTemplate = 'EngineerBuilderSCTA123',
-        PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
-        PriorityFunction = TAPrior.AssistProduction,
-        Priority = 80,
-        InstanceCount = 10,
-        BuilderConditions = {
-            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.LAND - categories.COMMAND}},
-            { UCBC, 'FactoryGreaterAtLocation', { 'LocationType', 2, categories.FACTORY - categories.TECH1 } },
-            { UCBC, 'HaveGreaterThanUnitsInCategoryBeingBuilt', { 0, categories.MOBILE, 'LocationType', }},
-            --{ UCBC, 'LocationFactoriesBuildingGreater', { 'LocationType', 0, 'MOBILE' }},
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
-        },
-        BuilderData = {
-            Assist = {
-                AssistLocation = 'LocationType',
-                AssisteeType = 'Factory',
-                PermanentAssist = false,
-                BeingBuiltCategories = {'MOBILE'},  
-                AssistRange = 20,                                      
-                Time = 60,
-            },
-        },
-        BuilderType = 'NotACU',
-    },]]
 }
 
 --{ SIBC, 'EngineerNeedsAssistance', { false, 'LocationType', {'STRUCTURE'} }},
