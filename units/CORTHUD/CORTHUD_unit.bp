@@ -121,7 +121,7 @@ TechLevel = 'RULEUTL_Basic',
     SizeY = 1.75,
     SizeZ = 2,
     StrategicIconName = 'icon_bot1_artillery',
-    TAStrategicIconName = '1/land_artillery',
+    ---TAStrategicIconName = '1/land_artillery',
     StrategicIconSortPriority = 0,
     Weapon = {
         {

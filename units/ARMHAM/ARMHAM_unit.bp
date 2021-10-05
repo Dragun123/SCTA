@@ -116,7 +116,7 @@ UnitBlueprint {
     SizeY = 2,
     SizeZ = 2,
     StrategicIconName = 'icon_bot1_artillery',
-    TAStrategicIconName = '1/land_artillery',
+    --TAStrategicIconName = '1/bot_artillery',
     StrategicIconSortPriority = 0,
     Weapon = {
         {

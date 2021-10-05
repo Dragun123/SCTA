@@ -39,7 +39,7 @@
     
     
         local TAStratIconTranslationFull = {
-            icon_bot1_artillery = '1/bot_artillery',
+            icon_bot1_artillery = '1/land_artillery',
             icon_bot1_counterintel = '1/bot_counterintel',
             icon_bot2_artillery = '2/bot_artillery',
             icon_bot2_counterintel = '2/bot_counterintel',
