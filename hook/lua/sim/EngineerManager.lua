@@ -76,7 +76,7 @@ EngineerManager = Class(SCTAEngineerManager) {
         if not self.Brain.SCTAAI then
             return SCTAEngineerManager.RemoveUnit(self, unit)
         end
-        local guards = unit:GetGuards()
+        --[[local guards = unit:GetGuards()
         for k,v in guards do
             if not v.Dead and v.AssistPlatoon then
                 if self.Brain:PlatoonExists(v.AssistPlatoon) then
@@ -85,7 +85,7 @@ EngineerManager = Class(SCTAEngineerManager) {
                     v.AssistPlatoon = nil
                 end
             end
-        end
+        end]]
 
         local found = false
         for k,v in self.ConsumptionUnits do
@@ -116,7 +116,7 @@ EngineerManager = Class(SCTAEngineerManager) {
         if finishedUnit:GetAIBrain():GetArmyIndex() == self.Brain:GetArmyIndex() then
             self:AddUnit(finishedUnit)
         end
-        local guards = unit:GetGuards()
+        --[[local guards = unit:GetGuards()
         for k,v in guards do
             if not v.Dead and v.AssistPlatoon then
                 if self.Brain:PlatoonExists(v.AssistPlatoon) then
@@ -125,7 +125,7 @@ EngineerManager = Class(SCTAEngineerManager) {
                     v.AssistPlatoon = nil
                 end
             end
-        end
+        end]]
     end,
 
     GetNumCategoryBeingBuilt = function(self, category, engCategory)
@@ -251,9 +251,10 @@ EngineerManager = Class(SCTAEngineerManager) {
         ---LOG('*Brain', self.Brain.SCTAAI)   
         --unit.bType = bType
         ---meh eitherway this is such a pointless commenting. Oh yeah, modifying the assign via hooking has interesting and had to seperate it until two different types
-        --unit.DesiresAssist = nil
+        if unit.DesiresAssist then
+        unit.DesiresAssist = nil
         unit.NumAssistees = nil
-        unit.MinNumAssistees = nil
+        end
         ----RealizingProper Assignment In DisbandPlatoon
         if unit.AssigningTask and not unit:IsIdleState() then
             self:TADelayAssign(unit, 48)

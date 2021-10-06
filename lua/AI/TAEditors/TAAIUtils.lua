@@ -387,9 +387,13 @@ function TACanBuildOnMassLessThanDistanceLand(aiBrain, locationType, distance, t
     return false
 end
 
-function TAFindAssistUnits(aiBrain, locationType, buildCat)
-    local engineerManager = aiBrain.BuilderManagers[locationType].EngineerManager
-    local Assisting = aiBrain:GetUnitsAroundPoint(buildCat, engineerManager:GetLocationCoords(), engineerManager.Radius, 'Ally')
+function TAFindAssistUnits(aiBrain, eng, buildCat)
+    LOG('Assist', eng:GetBlueprint().Display.UniformScale)
+    local Assisting = aiBrain:GetUnitsAroundPoint(buildCat, eng:GetPosition(), 20, 'Ally')
+    --[[elseif type == 'Factory' then
+        --local factoryManager = aiBrain.BuilderManagers[locationType].factoryManager
+        Assisting = aiBrain:GetUnitsAroundPoint(buildCat, eng:GetPosition(), factoryManager.Radius, 'Ally')
+    end]]
     local retAssisting = false
     for num, unit in Assisting do
         --donePercent = unit:GetFractionComplete()

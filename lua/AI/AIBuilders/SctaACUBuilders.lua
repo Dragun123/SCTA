@@ -271,13 +271,13 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTA Assist Unit Production Idle',
         PlatoonTemplate = 'EngineerBuilderSCTA123',
-        PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
+        PlatoonAIPlan = 'ManagerFactoryAssistAISCTA',
         PriorityFunction = TAPrior.AssistProduction,
         Priority = 100,
         InstanceCount = 10,
         BuilderConditions = {
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.LAND - categories.COMMAND}},
-            { UCBC, 'FactoryGreaterAtLocation', { 'LocationType', 2, categories.FACTORY - categories.TECH1 } },
+            { UCBC, 'FactoryGreaterAtLocation', { 'LocationType', 2, categories.FACTORY - categories.TECH1} },
             --{ UCBC, 'HaveGreaterThanUnitsInCategoryBeingBuilt', { 0, categories.MOBILE, 'LocationType', }},
             --{ UCBC, 'LocationFactoriesBuildingGreater', { 'LocationType', 0, 'MOBILE' }},
             --{ TAutils, 'EcoManagementTA', { 0.75, 0.75} },

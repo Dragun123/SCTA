@@ -74,7 +74,7 @@ Platoon = Class(SCTAAIPlatoon) {
        return self:SCTAEngineerTypeAI()]]
     end,
 
-    ManagerEngineerAssistAISCTA = function(self)
+    --[[ManagerEngineerAssistAISCTA = function(self)
         local aiBrain = self:GetBrain()
         local assistData = self.PlatoonData.Assist
         local beingBuilt = false
@@ -111,11 +111,87 @@ Platoon = Class(SCTAAIPlatoon) {
         self:Stop('Support')
         --coroutine.yield(2)
         self:PlatoonDisbandTA()
-        --[[coroutine.yield(2)
-       return self:SCTAEngineerTypeAI()]]
+    end,]]
+
+    ManagerFactoryAssistAISCTA = function(self)
+        local aiBrain = self:GetBrain()
+        --self:TAEconAssistBody()
+        --WaitSeconds(assistData.Time or 60)
+        local eng = self:GetSquadUnits('Support')[1]
+        if not eng or eng.Dead then
+            coroutine.yield(2)
+            self:PlatoonDisbandTA()
+            return
+        end
+        while eng and not eng.Dead and aiBrain:PlatoonExists(self) do
+          local Escort = self:FactoryTAAssist(eng, aiBrain)
+          --_ALERT('TAEscort2', Escort:GetBlueprint().Economy.KBot)
+          if Escort then
+            --_ALERT('TAEscort', Escort:GetBlueprint().Display.UniformScale)
+            self:Stop('Support')    
+            IssueGuard({eng}, Escort) 
+            WaitSeconds(30)
+          end
+            self:Stop('Support')
+            coroutine.yield(2)
+            self:PlatoonDisbandTA()
+        end
     end,
 
-    TAEconAssistBody = function(self)
+    FactoryTAAssist = function(self, eng, aiBrain)
+        local FactoryAssist = aiBrain:GetUnitsAroundPoint(categories.FACTORY - categories.TECH1, eng:GetPosition(), 20, 'Ally')
+            for _, Escort in FactoryAssist do
+                if Escort and Escort.DesiresAssist and Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < Escort.NumAssistees then 
+            ---Escort.Escorting = true
+            ---self.Brain:AssignUnitsToPlatoon(hndl, {Escort}, 'Guard', 'none')
+            ---break here to ensure only first LEGAL option is the one grabbed
+                return Escort
+            --WaitSeconds(3)
+            --Escort.Escorting = nil
+                end
+            end
+        end,
+
+        ManagerEngineerAssistAISCTA = function(self)
+            local aiBrain = self:GetBrain()
+            --self:TAEconAssistBody()
+            --WaitSeconds(assistData.Time or 60)
+            local eng = self:GetSquadUnits('Support')[1]
+            if not eng or eng.Dead then
+                coroutine.yield(2)
+                self:PlatoonDisbandTA()
+                return
+            end
+            while eng and not eng.Dead and aiBrain:PlatoonExists(self) do
+              local Escort = self:EngineerTAAssist(eng, aiBrain)
+              --_ALERT('TAEscort2', Escort:GetBlueprint().Economy.KBot)
+              if Escort then
+                --_ALERT('TAEscort', Escort:GetBlueprint().Display.UniformScale)
+                self:Stop('Support')    
+                IssueGuard({eng}, Escort) 
+                WaitSeconds(30)
+              end
+                self:Stop('Support')
+                coroutine.yield(2)
+                self:PlatoonDisbandTA()
+            end
+        end,
+    
+        EngineerTAAssist = function(self, eng, aiBrain)
+            local EngineerAssist = aiBrain:GetUnitsAroundPoint(categories.ENGINEER - categories.FIELDENGINEER - categories.NAVAL, eng:GetPosition(), 20, 'Ally')
+                for _, Escort in EngineerAssist do
+                    if Escort and Escort.DesiresAssist and Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < Escort.NumAssistees then 
+                ---Escort.Escorting = true
+                ---self.Brain:AssignUnitsToPlatoon(hndl, {Escort}, 'Guard', 'none')
+                ---break here to ensure only first LEGAL option is the one grabbed
+                    return Escort
+                --WaitSeconds(3)
+                --Escort.Escorting = nil
+                    end
+                end
+            end,
+
+    --[[TAEconAssistBody = function(self)
         --local platoonUnits = self:GetPlatoonUnits()
         local eng = self:GetSquadUnits('Support')[1]
         if not eng or eng.Dead then
@@ -153,7 +229,7 @@ Platoon = Class(SCTAAIPlatoon) {
 
             local category = ParseEntityCategory(catString)
 
-            local assistList = TAReclaim.TAFindAssistUnits(aiBrain, assistData.AssistLocation, category - categories.TECH1)
+            local assistList = TAReclaim.TAFindAssistUnits(aiBrain, eng, category)
 
             if assistList then
                 assistee = assistList
@@ -172,7 +248,7 @@ Platoon = Class(SCTAAIPlatoon) {
             -- stop the platoon from endless assisting
             self:PlatoonDisbandTA()
         end
-    end,
+    end,]]
 
 
     TAEconUnfinishedBody = function(self)

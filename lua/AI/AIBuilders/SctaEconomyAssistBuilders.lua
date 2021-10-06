@@ -147,7 +147,7 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTA Engineer Reclaim Field',
         PlatoonTemplate = 'EngineerBuilderSCTAField',
-        PriorityFunction = TAPrior.UnitProductionField,
+        PriorityFunction = TAPrior.UnitProductionFieldReclaim,
         --DelayEqualBuildPlattons = 10,
         PlatoonAIPlan = 'SCTAReclaimAI',
         Priority = 200,
@@ -192,7 +192,7 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTA Assist Production Field',
         PlatoonTemplate = 'EngineerBuilderSCTAField',
-        PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
+        PlatoonAIPlan = 'ManagerFactoryAssistAISCTA',
         PriorityFunction = TAPrior.UnitProductionField,
         --DelayEqualBuildPlattons = 2,
         Priority = 100,

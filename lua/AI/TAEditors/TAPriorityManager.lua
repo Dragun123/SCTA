@@ -204,13 +204,20 @@ end
 
 
 UnitProductionField = function(self, aiBrain)
-    if Factory(aiBrain,  0, categories.FIELDENGINEER) then
-        return 200
-    else
-        return 0
+    if aiBrain.TAFactoryAssistance and Factory(aiBrain,  0, categories.FIELDENGINEER) then
+            return 200
+        else
+            return 0
     end
 end
 
+UnitProductionFieldReclaim = function(self, aiBrain)
+    if Factory(aiBrain,  0, categories.FIELDENGINEER) then
+            return 200
+        else
+            return 0
+    end
+end
 ----GANTRYSPECIFIC
 
 
