@@ -183,7 +183,8 @@ UnitBlueprint {
     SizeY = 0.2,
     SizeZ = 1,
     StrategicIconName = 'icon_fighter3_engineer',
-    ---TAStrategicIconName = '3/land_engineer',
+    TAStrategicIconName2 = '3/land_engineer',
+    TAStrategicIconName = 'land_engineer',
     StrategicIconSortPriority = 0,
     Transport = {
         AirClass = true,

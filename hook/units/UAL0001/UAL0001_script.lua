@@ -26,7 +26,7 @@ UAL0001 = Class(taUAL0001) {
 		    cdrUnit:SetBlockCommandQueue(true)
             --WaitSeconds(2)
             coroutine.yield(21)
-		    cdrUnit:ForkThread(cdrUnit.PlayCommanderWarpInEffect, bones)
+		    cdrUnit:ForkThread(cdrUnit.PlayCommanderWarpInEffect)
     end,
 }
 

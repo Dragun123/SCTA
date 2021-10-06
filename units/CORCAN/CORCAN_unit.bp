@@ -111,6 +111,8 @@ UnitBlueprint {
     SizeY = 2,
     SizeZ = 2,
     StrategicIconName = 'icon_bot2_armored',
+    TAStrategicIconName = 'bot_armored',
+    TAStrategicIconName2 = '2/bot_armored',
     StrategicIconSortPriority = 0,
     Transport = {
         TransportClass = 2,

@@ -162,6 +162,8 @@ UnitBlueprint {
     SizeY = 1.5,
     SizeZ = 4,
     StrategicIconName = 'icon_sub2_engineer',  --'icon_sub2_engineer',
+    TAStrategicIconName2 = '2/land_engineer',
+    TAStrategicIconName = 'land_engineer',
     StrategicIconSortPriority = 0,
     Weapon = {
         { #SMALL_UNITEX

@@ -2,31 +2,43 @@ UnitBlueprint {
     Merge = true,
     BlueprintId = "url0107", ---mantis
     StrategicIconName = 'icon_bot1_armored',
+    TAStrategicIconName = 'bot_armored',
+    TAStrategicIconName2 = '1/bot_armored',
 }
 UnitBlueprint {
     Merge = true,
     BlueprintId = "uea0001", ---ACU Drone
     StrategicIconName = 'icon_fighter1_engineer',
+    TAStrategicIconName2 = '1/land_engineer',
+    TAStrategicIconName = 'land_engineer',
 }
 UnitBlueprint {
     Merge = true,
     BlueprintId = "uea0003", ---sACU Drone
     StrategicIconName = 'icon_fighter3_engineer',
+    TAStrategicIconName2 = '3/land_engineer',
+    TAStrategicIconName = 'land_engineer',
 }
 UnitBlueprint {
     Merge = true,
     BlueprintId = "xea3204", ---Kennel Drone
     StrategicIconName = 'icon_fighter2_engineer',
+    TAStrategicIconName2 = '2/land_engineer',
+    TAStrategicIconName = 'land_engineer',
 }
 UnitBlueprint {
     Merge = true,
     BlueprintId = "ual0202", ---obsidian
     StrategicIconName = 'icon_bot2_armored',
+    TAStrategicIconName = 'bot_armored',
+    TAStrategicIconName2 = '2/bot_armored',
 }
 UnitBlueprint {
     Merge = true,
     BlueprintId = "xsl0202", ---illsh
     StrategicIconName = 'icon_bot2_armored',
+    TAStrategicIconName = 'bot_armored',
+    TAStrategicIconName2 = '2/bot_armored',
 }
 UnitBlueprint {
     Merge = true,

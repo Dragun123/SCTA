@@ -1,19 +1,19 @@
     do
-
+LOG('TAIEXIST1')
         local TAStratIconTranslation = {
-            icon_bot1_artillery = 'bot_artillery',
+            icon_bot1_artillery = 'land_artillery',
             icon_bot1_counterintel = 'bot_counterintel',
             icon_bot1_missile = 'land_missile',
             icon_bot2_missile = 'land_missile',
-            icon_bot2_artillery = 'bot_artillery',
-            icon_bot2_counterintel = 'bot_counterintel',
-            icon_bot3_artillery = 'bot_artillery',
-            icon_bot3_counterintel = 'bot_counterintel',
-            icon_fighter1_missile = 'fighter_missile',
-            icon_fighter2_missile = 'fighter_missile',
-            icon_fighter3_missile = 'fighter_missile',
-            icon_land2_antimissile = 'land_antimissile',
-            icon_land1_antimissile = 'land_antimissile',
+            icon_bot2_artillery = 'land_artillery',
+            icon_bot2_counterintel = 'land_counterintel',
+            icon_bot3_artillery = 'land_artillery',
+            icon_bot3_counterintel = 'land_counterintel',
+            icon_fighter1_missile = 'fighter_antiair',
+            icon_fighter2_missile = 'fighter_antiair',
+            icon_fighter3_missile = 'fighter_antiair',
+            icon_land2_antimissile = 'structure_antimissile',
+            icon_land1_antimissile = 'structure_antimissile',
             icon_fighter1_engineer = 'land_engineer',
             icon_fighter2_engineer = 'land_engineer',
             icon_fighter3_engineer = 'land_engineer',
@@ -33,23 +33,23 @@
             icon_factory2_bot = 'factory_land',
             icon_sub3_counterintel = 'ship_counterintel',
     }
-    
+    LOG('TAIEXIST2')
     aStratIconTranslation = table.merged(aStratIconTranslation, TAStratIconTranslation)
     
     
     
         local TAStratIconTranslationFull = {
-            icon_bot1_artillery = '1/bot_artillery',
+            icon_bot1_artillery = '1/land_artillery',
             icon_bot1_counterintel = '1/bot_counterintel',
-            icon_bot2_artillery = '2/bot_artillery',
-            icon_bot2_counterintel = '2/bot_counterintel',
-            icon_bot3_artillery = '3/bot_artillery',
-            icon_bot3_counterintel = '3/bot_counterintel',
+            icon_bot2_artillery = '2/land_artillery',
+            icon_bot2_counterintel = '2/land_counterintel',
+            icon_bot3_artillery = '3/land_artillery',
+            icon_bot3_counterintel = '3/land_counterintel',
             icon_bot1_missile = '1/land_missile',
             icon_bot2_missile = '2/land_missile',
-            icon_fighter1_missile = '1/fighter_missile',
-            icon_fighter2_missile = '2/fighter_missile',
-            icon_fighter3_missile = '3/fighter_missile',
+            icon_fighter1_missile = '1/fighter_antiair',
+            icon_fighter2_missile = '2/fighter_antiair',
+            icon_fighter3_missile = '3/fighter_antiair',
             icon_land3_transport = '3/structure_transport',
             icon_fighter1_engineer = '1/land_engineer',
             icon_fighter2_engineer = '2/land_engineer',
@@ -58,7 +58,7 @@
             icon_bot2_engineer = '2/land_engineer',
             icon_ship1_engineer = '1/land_engineer',
             icon_sub2_engineer= '2/land_engineer',
-            icon_land2_antimissile = '2/land_antimissile',
+            icon_land2_antimissile = '2/structure_antimissile',
             icon_structure3_sniper = '3/bot_sniper',
             icon_structure2_sniper = '2/bot_sniper',
             icon_land2_sniper = '2/bot_sniper',
@@ -69,7 +69,7 @@
             icon_factory2_bot = '2/factory_land',
             icon_sub3_counterintel = '3/ship_counterintel',
         }
-    
+        LOG('TAIEXIST3')
     aStratIconTranslationFull = table.merged(aStratIconTranslationFull, TAStratIconTranslationFull)
     
     
@@ -84,7 +84,7 @@
             cormakr = 'structure_massfab',
             cormmmkr = 'structure_massfab',
         }
-    
+        LOG('TAIEXIST4')
     aSpecificStratIcons = table.merged(aSpecificStratIcons, TASpecificStratIcons)
 
 end
