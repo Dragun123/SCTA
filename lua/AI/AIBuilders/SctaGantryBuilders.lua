@@ -17,7 +17,7 @@ BuilderGroup {
         Priority = 200,
         InstanceCount = 2,
         BuilderConditions = {
-            { UCBC, 'LocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, categories.GATE }},
+            --{ UCBC, 'LocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, categories.GATE }},
             { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.FIELDENGINEER} },
             ---{ TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
@@ -25,6 +25,7 @@ BuilderGroup {
             Assist = {
                 AssistLocation = 'LocationType',
                 AssisteeType = 'Engineer',
+                Time = 240,
                 AssistRange = 120,
                 BeingBuiltCategories = {'GATE'},                                                  
                 AssistUntilFinished = true,
@@ -33,28 +34,28 @@ BuilderGroup {
         BuilderType = 'FieldTA',
     },
     Builder {
-        BuilderName = 'SCTA Engineer Assist Field Gantry',
-        PlatoonTemplate = 'EngineerBuilderSCTAField',
+        BuilderName = 'SCTA Engineer Assist Gantry',
+        PlatoonTemplate = 'EngineerBuilderSCTAALL',
         PlatoonAIPlan = 'ManagerFactoryAssistAISCTA',
-        PriorityFunction = TAPrior.GantryProduction,
+        PriorityFunction = TAPrior.GantryProductionAssist,
         Priority = 200,
-        InstanceCount = 4,
+        InstanceCount = 10,
         BuilderConditions = {
-            { UCBC, 'LocationFactoriesBuildingGreater', { 'LocationType', 0, categories.BUILTBYQUANTUMGATE}},
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.FIELDENGINEER} },
+            ---{ UCBC, 'LocationFactoriesBuildingGreater', { 'LocationType', 0, categories.BUILTBYQUANTUMGATE}},
+            { UCBC, 'HaveGreaterThanUnitsWithCategory', { 0,  categories.GATE} },
             --{ TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
         BuilderData = {
             Assist = {
                 AssistLocation = 'LocationType',
                 AssisteeType = 'Factory',
+                Time = 240,
                 AssistRange = 120,
                 AssistUntilFinished = true,
-                BeingBuiltCategories = {'BUILTBYQUANTUMGATE'},                                                       
-                Time = 60,
+                BeingBuiltCategories = {'GATE'},                                                       
             },
         },
-        BuilderType = 'FieldTA',
+        BuilderType = 'NotACU',
     },
     Builder {
         BuilderName = 'SCTA Commander Assist Gantry Construction',
@@ -64,14 +65,15 @@ BuilderGroup {
         Priority = 130,
         InstanceCount = 2,
         BuilderConditions = {
-            { UCBC, 'LocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, categories.GATE }},
+            --{ UCBC, 'LocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, categories.GATE }},
             { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.COMMAND + categories.SUBCOMMANDER} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+            ---{ TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
         BuilderData = {
             Assist = {
                 AssistLocation = 'LocationType',
                 AssisteeType = 'Engineer',
+                Time = 240,
                 AssistRange = 120,
                 BeingBuiltCategories = {'GATE'},                                                   
                 AssistUntilFinished = true,
@@ -83,11 +85,11 @@ BuilderGroup {
         BuilderName = 'SCTA CDR Assist Structure',
         PlatoonTemplate = 'CommanderBuilderSCTA',
         PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
-        PriorityFunction = TAPrior.UnitProduction,
-        Priority = 111,
+        PriorityFunction = TAPrior.AssistProduction,
+        Priority = 85,
         InstanceCount = 2,
         BuilderConditions = {
-            { UCBC, 'LocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, categories.STRUCTURE }},
+            --{ UCBC, 'LocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, categories.STRUCTURE }},
             { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.COMMAND + categories.SUBCOMMANDER} },
             --{ TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
@@ -95,6 +97,7 @@ BuilderGroup {
         BuilderData = {
             Assist = {
                 AssistLocation = 'LocationType',
+                Time = 240,
                 AssisteeType = 'Engineer',
                 AssistRange = 120,
                 BeingBuiltCategories = {'STRUCTURE'},                                        

@@ -334,7 +334,7 @@ EngineerManager = Class(SCTAEngineerManager) {
             end
 
             if hndl.PlatoonData.DesiresAssist then
-                unit.DesiresAssist = hndl.PlatoonData.DesiresAssist
+                unit.DesiresAssist = true
             end
             --[[if hndl.PlatoonData.Reclaimer then
                 unit.TAReclaimer = true

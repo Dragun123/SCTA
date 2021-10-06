@@ -117,6 +117,7 @@ Platoon = Class(SCTAAIPlatoon) {
         local aiBrain = self:GetBrain()
         --self:TAEconAssistBody()
         --WaitSeconds(assistData.Time or 60)
+        local assistData = self.PlatoonData.Assist
         local eng = self:GetSquadUnits('Support')[1]
         if not eng or eng.Dead then
             coroutine.yield(2)
@@ -124,13 +125,15 @@ Platoon = Class(SCTAAIPlatoon) {
             return
         end
         while eng and not eng.Dead and aiBrain:PlatoonExists(self) do
-          local Escort = self:FactoryTAAssist(eng, aiBrain)
+            local beingBuilt = assistData.BeingBuiltCategories or { 'ALLUNITS' }  
+            local category = ParseEntityCategory(beingBuilt)
+          local Escort = self:FactoryTAAssist(eng, aiBrain, category, assistData)
           --_ALERT('TAEscort2', Escort:GetBlueprint().Economy.KBot)
           if Escort then
             --_ALERT('TAEscort', Escort:GetBlueprint().Display.UniformScale)
             self:Stop('Support')    
             IssueGuard({eng}, Escort) 
-            WaitSeconds(30)
+            WaitSeconds(assistData.Time)
           end
             self:Stop('Support')
             coroutine.yield(2)
@@ -138,8 +141,8 @@ Platoon = Class(SCTAAIPlatoon) {
         end
     end,
 
-    FactoryTAAssist = function(self, eng, aiBrain)
-        local FactoryAssist = aiBrain:GetUnitsAroundPoint(categories.FACTORY - categories.TECH1, eng:GetPosition(), 20, 'Ally')
+    FactoryTAAssist = function(self, eng, aiBrain, category, data)
+        local FactoryAssist = aiBrain:GetUnitsAroundPoint(category - categories.TECH1, eng:GetPosition(), data.AssistRange, 'Ally')
             for _, Escort in FactoryAssist do
                 if Escort and Escort.DesiresAssist and Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < Escort.NumAssistees then 
             ---Escort.Escorting = true
@@ -156,6 +159,7 @@ Platoon = Class(SCTAAIPlatoon) {
             local aiBrain = self:GetBrain()
             --self:TAEconAssistBody()
             --WaitSeconds(assistData.Time or 60)
+            local assistData = self.PlatoonData.Assist
             local eng = self:GetSquadUnits('Support')[1]
             if not eng or eng.Dead then
                 coroutine.yield(2)
@@ -163,13 +167,15 @@ Platoon = Class(SCTAAIPlatoon) {
                 return
             end
             while eng and not eng.Dead and aiBrain:PlatoonExists(self) do
-              local Escort = self:EngineerTAAssist(eng, aiBrain)
+            local beingBuilt = assistData.BeingBuiltCategories or { 'ALLUNITS' }  
+            local category = ParseEntityCategory(beingBuilt)
+              local Escort = self:EngineerTAAssist(eng, aiBrain, category, assistData)
               --_ALERT('TAEscort2', Escort:GetBlueprint().Economy.KBot)
-              if Escort then
+              if Escort and not Escort.Dead then
                 --_ALERT('TAEscort', Escort:GetBlueprint().Display.UniformScale)
                 self:Stop('Support')    
                 IssueGuard({eng}, Escort) 
-                WaitSeconds(30)
+                WaitSeconds(assistData.Time)
               end
                 self:Stop('Support')
                 coroutine.yield(2)
@@ -177,13 +183,10 @@ Platoon = Class(SCTAAIPlatoon) {
             end
         end,
     
-        EngineerTAAssist = function(self, eng, aiBrain)
-            local EngineerAssist = aiBrain:GetUnitsAroundPoint(categories.ENGINEER - categories.FIELDENGINEER - categories.NAVAL, eng:GetPosition(), 20, 'Ally')
+        EngineerTAAssist = function(self, eng, aiBrain, category, data)
+            local EngineerAssist = aiBrain:GetUnitsAroundPoint(categories.ENGINEER - categories.FIELDENGINEER - categories.NAVAL, eng:GetPosition(), data.AssistRange, 'Ally')
                 for _, Escort in EngineerAssist do
-                    if Escort and Escort.DesiresAssist and Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < Escort.NumAssistees then 
-                ---Escort.Escorting = true
-                ---self.Brain:AssignUnitsToPlatoon(hndl, {Escort}, 'Guard', 'none')
-                ---break here to ensure only first LEGAL option is the one grabbed
+                    if Escort and Escort.DesiresAssist and Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < Escort.NumAssistees and EntityCategoryContains(category, Escort.UnitBeingBuilt) then 
                     return Escort
                 --WaitSeconds(3)
                 --Escort.Escorting = nil
