@@ -124,6 +124,8 @@ TechLevel = 'RULEUTL_Basic',
     SizeY = 2,
     SizeZ = 2,
     StrategicIconName = 'icon_bot1_missile',
+    TAStrategicIconName = 'land_missile',
+    TAStrategicIconName2 = '1/land_missile',
     StrategicIconSortPriority = 0,
     Weapon = {
         {

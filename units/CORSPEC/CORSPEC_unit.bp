@@ -138,6 +138,8 @@ UnitBlueprint {
     SizeY = 1.5,
     SizeZ = 2,
     StrategicIconName = 'icon_bot2_counterintel',
+    TAStrategicIconName = 'land_counterintel',
+    TAStrategicIconName2 = '2/land_counterintel',
     StrategicIconSortPriority = 20,
     Weapon = {
         { #BIG_UNITEX

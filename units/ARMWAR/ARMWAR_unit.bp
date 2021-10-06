@@ -114,6 +114,8 @@ TechLevel = 'RULEUTL_Basic',
     SizeY = 2,
     SizeZ = 2,
     StrategicIconName = 'icon_bot1_armored',
+    TAStrategicIconName = 'bot_armored',
+    TAStrategicIconName2 = '1/bot_armored',
     StrategicIconSortPriority = 0,
     Weapon = {
         {

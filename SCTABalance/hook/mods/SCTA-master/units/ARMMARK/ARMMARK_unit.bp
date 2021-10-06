@@ -62,6 +62,8 @@ UnitBlueprint {
     SelectionSizeZ = 2,
     LifeBarSize = 3,
     StrategicIconName = 'icon_bot3_counterintel',
+    TAStrategicIconName = 'land_counterintel',
+    TAStrategicIconName2 = '3/land_counterintel',
     SizeX = 4,
     SizeY = 4,
     SizeZ = 4,

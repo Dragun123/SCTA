@@ -144,7 +144,8 @@ UnitBlueprint {
     SizeY = 1,
     SizeZ = 2,
     StrategicIconName = 'icon_sub3_counterintel',
-    ---TAStrategicIconName = '3/ship_counterintel',
+    TAStrategicIconName = 'ship_counterintel',
+    TAStrategicIconName2 = '3/ship_counterintel',
     StrategicIconSortPriority = 20,
     Weapon = {
         { #BIG_UNITEX

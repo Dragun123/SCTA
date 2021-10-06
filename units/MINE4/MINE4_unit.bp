@@ -106,6 +106,8 @@ UnitBlueprint {
     SizeY = 1,
     SelectionCenterOffsetZ = 0.02,
     StrategicIconName = 'icon_structure3_bomb', --'icon_structure2_bomb',
+    TAStrategicIconName = 'land_bomb',
+    TAStrategicIconName2 = '3/land_bomb', 
     StrategicIconSortPriority = 0,
     Weapon = {
         {

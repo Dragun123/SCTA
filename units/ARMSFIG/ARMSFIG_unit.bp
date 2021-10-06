@@ -158,7 +158,8 @@ UnitBlueprint {
     SizeY = 0.3,
     SizeZ = 1.2,
     StrategicIconName = 'icon_fighter3_missile',
-    ---TAStrategicIconName = '3/fighter_directfire',
+    --TAStrategicIconName = 'fighter_antiair',
+    --TAStrategicIconName2 = '3/fighter_antiair',
     StrategicIconSortPriority = 0,
     Transport = {
         AirClass = true,
