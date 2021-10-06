@@ -36,11 +36,14 @@
     --LOG('TAIEXIST2')
     aStratIconTranslation = table.merged(aStratIconTranslation, TAStratIconTranslation)
     
-    
+    ----icon here not in base game i.e. factory(x)_bot, structure(x)_bomb, and several bot icons are only here for completionist and do not translate
+    ----All Engineers given the Land Engineer Build Icon
+    ----Bot CIntel given Land CIntel Icon. Several others as well as such as artillery
+    ----missiles given AA icon to indicate intended targets
     
         local TAStratIconTranslationFull = {
             icon_bot1_artillery = '1/land_artillery',
-            icon_bot1_counterintel = '1/bot_counterintel',
+            icon_bot1_counterintel = '1/land_counterintel',
             icon_bot2_artillery = '2/land_artillery',
             icon_bot2_counterintel = '2/land_counterintel',
             icon_bot3_artillery = '3/land_artillery',
