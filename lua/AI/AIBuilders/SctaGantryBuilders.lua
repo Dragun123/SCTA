@@ -97,9 +97,9 @@ BuilderGroup {
         BuilderData = {
             Assist = {
                 AssistLocation = 'LocationType',
-                Time = 240,
+                Time = 30,
                 AssisteeType = 'Engineer',
-                AssistRange = 120,
+                AssistRange = 20,
                 BeingBuiltCategories = {'STRUCTURE'},                                        
                 AssistUntilFinished = true,
             },
