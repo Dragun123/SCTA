@@ -259,7 +259,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
         end,
 
         TADelayBuildOrder = function(self,factory,bType, delay)
-            local guards = factory:GetGuards()
+            --[[local guards = factory:GetGuards()
             for k,v in guards do
                 if not v.Dead and v.AssistPlatoon then
                     if self.Brain:PlatoonExists(v.AssistPlatoon) then
@@ -268,7 +268,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                         v.AssistPlatoon = nil
                     end
                 end
-            end
+            end]]
             if factory.DelayThread then
                 return
             end
@@ -290,7 +290,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             if not self.Brain.SCTAAI then
                 return SCTAFactoryBuilderManager.FactoryDestroyed(self, factory)
             end
-            local guards = factory:GetGuards()
+            --[[local guards = factory:GetGuards()
             for k,v in guards do
                 if not v.Dead and v.AssistPlatoon then
                     if self.Brain:PlatoonExists(v.AssistPlatoon) then
@@ -299,7 +299,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                         v.AssistPlatoon = nil
                     end
                 end
-            end
+            end]]
             for k,v in self.FactoryList do
                 if v == factory then
                     self.FactoryList[k] = nil

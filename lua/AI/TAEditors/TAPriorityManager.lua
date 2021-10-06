@@ -204,13 +204,20 @@ end
 
 
 UnitProductionField = function(self, aiBrain)
-    if Factory(aiBrain,  0, categories.FIELDENGINEER) then
-        return 200
-    else
-        return 0
+    if aiBrain.TAFactoryAssistance and Factory(aiBrain,  0, categories.FIELDENGINEER) then
+            return 200
+        else
+            return 0
     end
 end
 
+UnitProductionFieldReclaim = function(self, aiBrain)
+    if Factory(aiBrain,  0, categories.FIELDENGINEER) then
+            return 200
+        else
+            return 0
+    end
+end
 ----GANTRYSPECIFIC
 
 
@@ -222,8 +229,16 @@ GantryProduction = function(self, aiBrain)
     end
 end
 
+GantryProductionAssist = function(self, aiBrain)
+    if aiBrain.TAFactoryAssistance and Factory(aiBrain,  0, categories.GATE) then
+        return 200
+    else
+        return 0
+    end
+end
+
 GateBeingBuilt = function(self, aiBrain)
-    if MoreProduct(aiBrain,  0, categories.GATE) then 
+    if aiBrain.TAFactoryAssistance and MoreProduct(aiBrain,  0, categories.GATE) then 
         return 125
     else
         return 0

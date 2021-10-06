@@ -21,216 +21,138 @@ end]]
 
 SCTAAIPlatoon = Platoon
 Platoon = Class(SCTAAIPlatoon) {
-    ManagerEngineerFindUnfinishedSCTA = function(self)
-        local aiBrain = self:GetBrain()
-        local eng = self:GetSquadUnits('Support')[1]
-        --local EscortUnits = self:GetSquadUnits('Guard')[1]
-        local guardedUnit
-    
-        --[[if (EscortUnits and not EscortUnits.Dead) and not eng.Dead then
-            self:Stop('Guard')
-            IssueGuard({EscortUnits}, eng)
-        end]]
-        
-        self:TAEconUnfinishedBody()
-        --WaitTicks(10)
-        coroutine.yield(8)
-        -- do we assist until the building is finished ?
-        if self.PlatoonData.Assist.AssistUntilFinished then
-            local guardedUnit
-            --eng.AssistPlatoon = true
-            if eng.UnitBeingAssist then
-                guardedUnit = eng.UnitBeingAssist
-            else 
-                guardedUnit = eng:GetGuardedUnit()
-            end
-            -- loop as long as we are not dead and not idle
-            while eng and not eng.Dead and aiBrain:PlatoonExists(self) and not eng:IsIdleState() do
-                if not guardedUnit or guardedUnit.Dead or guardedUnit:BeenDestroyed() then
-                    break
-                end
-                -- stop if our target is finished
-                if guardedUnit:GetFractionComplete() == 1 and not guardedUnit:IsUnitState('Upgrading') then
-                    --LOG('* ManagerEngineerAssistAI: Engineer Builder ['..self.BuilderName..'] - ['..self.PlatoonData.Assist.AssisteeType..'] - Target unit ['..guardedUnit:GetBlueprint().BlueprintId..'] ('..guardedUnit:GetBlueprint().Description..') is finished')
-                    break
-                end
-                -- wait 1.5 seconds until we loop again
-                --WaitTicks(15)
-                coroutine.yield(16)
-            end
-        else
-            --WaitSeconds(10)
-            coroutine.yield(50)
-        end
-        if not aiBrain:PlatoonExists(self) then
-            return
-        end
-        eng.AssistPlatoon = nil
-        eng.UnitBeingAssist = nil
-        self:Stop('Support')
-        --coroutine.yield(2)
-        self:PlatoonDisbandTA()
-        --[[coroutine.yield(2)
-       return self:SCTAEngineerTypeAI()]]
-    end,
+   
 
-    ManagerEngineerAssistAISCTA = function(self)
+    ManagerFactoryAssistAISCTA = function(self)
         local aiBrain = self:GetBrain()
+        --self:TAEconAssistBody()
+        --WaitSeconds(assistData.Time or 60)
         local assistData = self.PlatoonData.Assist
-        local beingBuilt = false
-        self:TAEconAssistBody()
-        WaitSeconds(assistData.Time or 60)
-        local eng = self:GetSquadUnits('Support')[1]
-        if self.PlatoonData.Assist.AssistUntilFinished then
-            local guardedUnit
-            --eng.AssistPlatoon = true
-            if eng.UnitBeingAssist then
-                guardedUnit = eng.UnitBeingAssist
-            else 
-                guardedUnit = eng:GetGuardedUnit()
-            end
-            -- loop as long as we are not dead and not idle
-            while eng and not eng.Dead and aiBrain:PlatoonExists(self) and not eng:IsIdleState() do
-                if not guardedUnit or guardedUnit.Dead or guardedUnit:BeenDestroyed() then
-                    break
-                end
-                -- stop if our target is finished
-                -- wait 1.5 seconds until we loop again
-                --WaitTicks(15)
-                coroutine.yield(16)
-            end
-        else
-            --WaitSeconds(10)
-            coroutine.yield(50)
-        end
-        if not aiBrain:PlatoonExists(self) then
-            return
-        end
-        eng.AssistPlatoon = nil
-        eng.UnitBeingAssist = nil
-        self:Stop('Support')
-        --coroutine.yield(2)
-        self:PlatoonDisbandTA()
-        --[[coroutine.yield(2)
-       return self:SCTAEngineerTypeAI()]]
-    end,
-
-    TAEconAssistBody = function(self)
-        --local platoonUnits = self:GetPlatoonUnits()
         local eng = self:GetSquadUnits('Support')[1]
         if not eng or eng.Dead then
             coroutine.yield(2)
             self:PlatoonDisbandTA()
             return
         end
-        local aiBrain = self:GetBrain()
-        eng.AssistPlatoon = self
-        local assistData = self.PlatoonData.Assist
-        local platoonPos = self:GetPlatoonPosition()
-        local assistee = false
-        local assistingBool = false
-        --local AssistedUnits = assistData.BeingBuiltCategories
-        --LOG('TAAASSIST', AssistedUnits)
-        if not eng.Dead then
-            local guardedUnit = eng:GetGuardedUnit()
-            if guardedUnit and not guardedUnit.Dead then
-                if eng.AssistSet and assistData.PermanentAssist then
+        while eng and not eng.Dead and aiBrain:PlatoonExists(self) do
+            local beingBuilt = assistData.BeingBuiltCategories 
+            --local category = ParseEntityCategory(beingBuilt)
+          local Escort = self:FactoryTAAssist(eng, aiBrain, beingBuilt, assistData)
+          --_ALERT('TAEscort2F', Escort:GetBlueprint().Display.UniformScale)
+          self:Stop('Support')
+            while Escort and not (Escort.Dead or eng.Dead) do
+            _ALERT('TAEscortF', Escort:GetBlueprint().Display.UniformScale) 
+                eng.Escorting = true   
+                IssueGuard({eng}, Escort) 
+                if not assistData.Gantry then
+                WaitSeconds(assistData.Time + 30)
+                --coroutine.yield(2)
+                self:Stop('Support')
+                coroutine.yield(2)
+                return self:PlatoonDisbandTA()
+                end
+            end
+            self:Stop('Support')
+            coroutine.yield(2)
+            self:PlatoonDisbandTA()
+            --self:Stop('Support')
+        end
+    end,
+
+    FactoryTAAssist = function(self, eng, aiBrain, category, data)
+        local FactoryAssist = aiBrain:GetUnitsAroundPoint(category - categories.TECH1, eng:GetPosition(), data.AssistRange, 'Ally')
+            for _, Escort in FactoryAssist do
+                if Escort and Escort.DesiresAssist and Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < Escort.NumAssistees then 
+            ---Escort.Escorting = true
+            ---self.Brain:AssignUnitsToPlatoon(hndl, {Escort}, 'Guard', 'none')
+            ---break here to ensure only first LEGAL option is the one grabbed
+                return Escort
+            --WaitSeconds(3)
+            --Escort.Escorting = nil
+                end
+            end
+        end,
+
+        ManagerEngineerAssistAISCTA = function(self)
+            local aiBrain = self:GetBrain()
+            --self:TAEconAssistBody()
+            --WaitSeconds(assistData.Time or 60)
+            local assistData = self.PlatoonData.Assist
+            local eng = self:GetSquadUnits('Support')[1]
+            if not eng or eng.Dead then
+                coroutine.yield(2)
+                self:PlatoonDisbandTA()
+                return
+            end
+            while eng and not eng.Dead and aiBrain:PlatoonExists(self) do
+            local beingBuilt = assistData.BeingBuiltCategories  
+            ---local category = categories.beingBuilt
+              local Escort = self:EngineerTAAssist(eng, aiBrain, beingBuilt, assistData)
+              --_ALERT('TAEscortE2', Escort:GetBlueprint().Display.UniformScale)
+              self:Stop('Support')
+              while Escort and Escort.UnitBeingBuilt and not (Escort.Dead or eng.Dead) do
+                --_ALERT('TAEscortE', Escort:GetBlueprint().Display.UniformScale)  
+                eng.Escorting = true
+                --self:Stop('Support')
+                IssueGuard({eng}, Escort) 
+                WaitSeconds(assistData.Time + 30)
+              end
+                self:Stop('Support')
+                coroutine.yield(2)
+                self:PlatoonDisbandTA()
+            end
+        end,
+    
+        EngineerTAAssist = function(self, eng, aiBrain, category, data)
+            local EngineerAssist = aiBrain:GetUnitsAroundPoint(categories.ENGINEER - categories.FIELDENGINEER - categories.NAVAL, eng:GetPosition(), data.AssistRange, 'Ally')
+                for _, Escort in EngineerAssist do
+                    if Escort and Escort.DesiresAssist and Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < Escort.NumAssistees and EntityCategoryContains(category, Escort.UnitBeingBuilt) then 
+                    return Escort
+                --WaitSeconds(3)
+                --Escort.Escorting = nil
+                    end
+                end
+            end,
+
+
+            ManagerEngineerFindUnfinishedSCTA = function(self)
+                local aiBrain = self:GetBrain()
+                --self:TAEconAssistBody()
+                --WaitSeconds(assistData.Time or 60)
+                local assistData = self.PlatoonData.Assist
+                local eng = self:GetSquadUnits('Support')[1]
+                if not eng or eng.Dead then
+                    coroutine.yield(2)
+                    self:PlatoonDisbandTA()
                     return
                 end
-                eng.AssistSet = false
-            end
-        end
-        self:Stop()
-        -- loop through different categories we are looking for
-        --for _,catString in beingBuilt do
-
-        --local category = ParseEntityCategory(beingBuilt)
-        --local Assisted = TAReclaim:GetUnitsAroundPoint(category - categories.TECH1, platoonPos, assistData.AssistRange, 'Ally')
-        local beingBuilt = assistData.BeingBuiltCategories or { 'ALLUNITS' }
-
-        -- loop through different categories we are looking for
-        for _,catString in beingBuilt do
-
-            local category = ParseEntityCategory(catString)
-
-            local assistList = TAReclaim.TAFindAssistUnits(aiBrain, assistData.AssistLocation, category - categories.TECH1)
-
-            if assistList then
-                assistee = assistList
-                break
-            end
-        end
-        if assistee then
-            self:Stop('Support')
-            eng.AssistSet = true
-            eng.UnitBeingAssist = assistee.UnitBeingBuilt or assistee.UnitBeingAssist or assistee
-            --LOG('* EconUnfinishedBody: Assisting now: ['..eng.UnitBeingBuilt:GetBlueprint().BlueprintId..'] ('..eng.UnitBeingBuilt:GetBlueprint().Description..')')
-            IssueGuard({eng}, assistee)
-        else
-            self.AssistPlatoon = nil
-            eng.UnitBeingAssist = nil
-            -- stop the platoon from endless assisting
-            self:PlatoonDisbandTA()
-        end
-    end,
-
-
-    TAEconUnfinishedBody = function(self)
-        local aiBrain = self:GetBrain()
-        local eng = self:GetSquadUnits('Support')[1]
-        --local EscortUnits = self:GetSquadUnits('Guard')[1]
-        if not eng or eng.Dead then
-            coroutine.yield(2)
-            self:PlatoonDisbandTA()
-            return
-        end
-
-    
-        --[[if (EscortUnits and not EscortUnits.Dead) and not eng.Dead then
-            self:Stop('Guard')
-            EscortUnits.Escorting = true
-            IssueGuard({EscortUnits}, eng)
-        end]]
-
-        local assistData = self.PlatoonData.Assist
-        local assistee = false
-
-        eng.AssistPlatoon = self
-
-        if not assistData.AssistLocation then
-            WARN('*AI WARNING: Disbanding EconUnfinishedBody platoon that does not AssistLocation')
-            self:PlatoonDisbandTA()
-            return
-        end
-
-        local beingBuilt = assistData.BeingBuiltCategories or { 'ALLUNITS' }
-
-        -- loop through different categories we are looking for
-        for _,catString in beingBuilt do
-
-            local category = ParseEntityCategory(catString)
-
-            local assistList = SUtils.FindUnfinishedUnits(aiBrain, assistData.AssistLocation, category)
-
-            if assistList then
-                assistee = assistList
-                break
-            end
-        end
-        -- assist unit
-        if assistee then
-            self:Stop('Support')
-            eng.AssistSet = true
-            eng.UnitBeingAssist = assistee.UnitBeingBuilt or assistee.UnitBeingAssist or assistee
-            --LOG('* EconUnfinishedBody: Assisting now: ['..eng.UnitBeingBuilt:GetBlueprint().BlueprintId..'] ('..eng.UnitBeingBuilt:GetBlueprint().Description..')')
-            IssueGuard({eng}, assistee)
-        else
-            self.AssistPlatoon = nil
-            eng.UnitBeingAssist = nil
-            -- stop the platoon from endless assisting
-            self:PlatoonDisbandTA()
-        end
-    end,
+                while eng and not eng.Dead and aiBrain:PlatoonExists(self) do
+                  local Escort = self:EngineerTAUnfinished(eng, aiBrain, assistData)
+                  --_ALERT('TAEscort2', Escort:GetBlueprint().Display.UniformScale)
+                  self:Stop('Support')
+                  while Escort and Escort:GetFractionComplete() < 1 and not (Escort.Dead or eng.Dead) do
+                    --_ALERT('TAEscort', Escort:GetBlueprint().Display.UniformScale)
+                    ---self:Stop('Support')   
+                    eng.Escorting = true 
+                    IssueGuard({eng}, Escort) 
+                    WaitSeconds(assistData.Time)
+                  end
+                  --self:Stop('Support')
+                  coroutine.yield(2)
+                  self:PlatoonDisbandTA()
+                end
+            end,
+        
+            EngineerTAUnfinished = function(self, eng, aiBrain, data)
+                local Unfinished = aiBrain:GetUnitsAroundPoint(categories.STRUCTURE + categories.NEEDMOBILEBUILD, eng:GetPosition(), data.AssistRange, 'Ally')
+                    for _, Escort in Unfinished do
+                        if Escort and Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < 3 and Escort:GetFractionComplete() < 1 then 
+                        return Escort
+                    --WaitSeconds(3)
+                    --Escort.Escorting = nil
+                        end
+                    end
+                end,
 
     ReclaimStructuresAITA = function(self)
         self:Stop('Support')
