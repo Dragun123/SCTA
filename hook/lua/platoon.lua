@@ -35,19 +35,27 @@ Platoon = Class(SCTAAIPlatoon) {
             return
         end
         while eng and not eng.Dead and aiBrain:PlatoonExists(self) do
-            local beingBuilt = assistData.BeingBuiltCategories or { 'ALLUNITS' }  
-            local category = ParseEntityCategory(beingBuilt)
-          local Escort = self:FactoryTAAssist(eng, aiBrain, category, assistData)
-          --_ALERT('TAEscort2', Escort:GetBlueprint().Economy.KBot)
-          if Escort then
-            --_ALERT('TAEscort', Escort:GetBlueprint().Display.UniformScale)
-            self:Stop('Support')    
-            IssueGuard({eng}, Escort) 
-            WaitSeconds(assistData.Time)
-          end
+            local beingBuilt = assistData.BeingBuiltCategories 
+            --local category = ParseEntityCategory(beingBuilt)
+          local Escort = self:FactoryTAAssist(eng, aiBrain, beingBuilt, assistData)
+          --_ALERT('TAEscort2F', Escort:GetBlueprint().Display.UniformScale)
+          self:Stop('Support')
+            while Escort and not (Escort.Dead or eng.Dead) do
+            _ALERT('TAEscortF', Escort:GetBlueprint().Display.UniformScale) 
+                eng.Escorting = true   
+                IssueGuard({eng}, Escort) 
+                if not assistData.Gantry then
+                WaitSeconds(assistData.Time + 30)
+                --coroutine.yield(2)
+                self:Stop('Support')
+                coroutine.yield(2)
+                return self:PlatoonDisbandTA()
+                end
+            end
             self:Stop('Support')
             coroutine.yield(2)
             self:PlatoonDisbandTA()
+            --self:Stop('Support')
         end
     end,
 
@@ -77,15 +85,17 @@ Platoon = Class(SCTAAIPlatoon) {
                 return
             end
             while eng and not eng.Dead and aiBrain:PlatoonExists(self) do
-            local beingBuilt = assistData.BeingBuiltCategories or { 'ALLUNITS' }  
-            local category = ParseEntityCategory(beingBuilt)
-              local Escort = self:EngineerTAAssist(eng, aiBrain, category, assistData)
-              --_ALERT('TAEscort2', Escort:GetBlueprint().Economy.KBot)
-              if Escort and not Escort.Dead then
-                --_ALERT('TAEscort', Escort:GetBlueprint().Display.UniformScale)
-                self:Stop('Support')    
+            local beingBuilt = assistData.BeingBuiltCategories  
+            ---local category = categories.beingBuilt
+              local Escort = self:EngineerTAAssist(eng, aiBrain, beingBuilt, assistData)
+              --_ALERT('TAEscortE2', Escort:GetBlueprint().Display.UniformScale)
+              self:Stop('Support')
+              while Escort and Escort.UnitBeingBuilt and not (Escort.Dead or eng.Dead) do
+                --_ALERT('TAEscortE', Escort:GetBlueprint().Display.UniformScale)  
+                eng.Escorting = true
+                --self:Stop('Support')
                 IssueGuard({eng}, Escort) 
-                WaitSeconds(assistData.Time)
+                WaitSeconds(assistData.Time + 30)
               end
                 self:Stop('Support')
                 coroutine.yield(2)
@@ -118,23 +128,25 @@ Platoon = Class(SCTAAIPlatoon) {
                 end
                 while eng and not eng.Dead and aiBrain:PlatoonExists(self) do
                   local Escort = self:EngineerTAUnfinished(eng, aiBrain, assistData)
-                  --_ALERT('TAEscort2', Escort:GetBlueprint().Economy.KBot)
-                  if Escort and not Escort.Dead then
+                  --_ALERT('TAEscort2', Escort:GetBlueprint().Display.UniformScale)
+                  self:Stop('Support')
+                  while Escort and Escort:GetFractionComplete() < 1 and not (Escort.Dead or eng.Dead) do
                     --_ALERT('TAEscort', Escort:GetBlueprint().Display.UniformScale)
-                    self:Stop('Support')    
+                    ---self:Stop('Support')   
+                    eng.Escorting = true 
                     IssueGuard({eng}, Escort) 
                     WaitSeconds(assistData.Time)
                   end
-                    self:Stop('Support')
-                    coroutine.yield(2)
-                    self:PlatoonDisbandTA()
+                  --self:Stop('Support')
+                  coroutine.yield(2)
+                  self:PlatoonDisbandTA()
                 end
             end,
         
             EngineerTAUnfinished = function(self, eng, aiBrain, data)
                 local Unfinished = aiBrain:GetUnitsAroundPoint(categories.STRUCTURE + categories.NEEDMOBILEBUILD, eng:GetPosition(), data.AssistRange, 'Ally')
                     for _, Escort in Unfinished do
-                        if Escort and Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < 2 and Escort:GetFractionComplete() < 1 then 
+                        if Escort and Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < 3 and Escort:GetFractionComplete() < 1 then 
                         return Escort
                     --WaitSeconds(3)
                     --Escort.Escorting = nil

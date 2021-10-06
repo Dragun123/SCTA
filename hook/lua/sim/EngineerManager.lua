@@ -335,6 +335,7 @@ EngineerManager = Class(SCTAEngineerManager) {
 
             if hndl.PlatoonData.DesiresAssist then
                 unit.DesiresAssist = true
+                unit.NumAssistees = hndl.PlatoonData.NumAssistees
             end
             --[[if hndl.PlatoonData.Reclaimer then
                 unit.TAReclaimer = true
@@ -361,10 +362,6 @@ EngineerManager = Class(SCTAEngineerManager) {
                     end
                 end
             end]]
-
-            if hndl.PlatoonData.NumAssistees then
-                unit.NumAssistees = hndl.PlatoonData.NumAssistees
-            end
 
 
             builder:StoreHandle(hndl)

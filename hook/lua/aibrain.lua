@@ -1,6 +1,7 @@
 WARN('['..string.gsub(debug.getinfo(1).source, ".*\\(.*.lua)", "%1")..', line:'..debug.getinfo(1).currentline..'] * SCTAAI: offset aibrain.lua' )
 --local TAReclaim = import('/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua')
 local TAEco = import('/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua').GreaterTAStorageRatio
+local TANomic = import('/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua').EcoManagementTA
 
 SCTAAIBrainClass = AIBrain
 AIBrain = Class(SCTAAIBrainClass) {
@@ -180,6 +181,7 @@ AIBrain = Class(SCTAAIBrainClass) {
             self.SCTAAI = true
             --self.ForkThread(TAReclaim.MassFabManagerThreadSCTAI, self)
             self.TARally = 5
+            self.TAEcoCycle = 45
             if not self.SCTAFormCounter then
             self.SCTAFormCounter = ForkThread(self.FormManagerSCTA, self)
             end
@@ -191,13 +193,13 @@ AIBrain = Class(SCTAAIBrainClass) {
 
     TAFactoryAssistThread = function(aiBrain)
         while (aiBrain.Result ~= 'defeat') do
-            WaitSeconds(120)
-            if ((aiBrain.Level2 or aiBrain.Level3) and TAEco(aiBrain, 0.5, 0.5)) or TAEco(aiBrain, 0.75, 0.75) then
+            WaitSeconds(aiBrain.TAEcoCycle)
+            if ((aiBrain.Level2 or aiBrain.Level3) and TANomic(aiBrain, 0.8, 0.8)) or TAEco(aiBrain, 0.75, 0.75) then
                 aiBrain.TAFactoryAssistance = true
             else
             aiBrain.TAFactoryAssistance = nil
             end
-            WaitSeconds(60)
+            coroutine.yield(11)
         end
     end,   
     

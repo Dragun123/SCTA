@@ -252,7 +252,7 @@ BuilderGroup {
         InstanceCount = 10,
         BuilderConditions = {
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER - categories.COMMAND}},
-            --{ UCBC, 'HaveGreaterThanUnitsInCategoryBeingBuilt', { 0, categories.FACTORY - categories.TECH1, 'LocationType', }},
+            { UCBC, 'HaveGreaterThanUnitsInCategoryBeingBuilt', { 1, categories.FACTORY, 'LocationType', }},
             ---{ TASlow, 'TALocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, 'STRUCTURE TECH2, STRUCTURE TECH3, EXPERIMENTAL' }},
             --{ TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
@@ -260,7 +260,7 @@ BuilderGroup {
             Assist = {
                 AssistLocation = 'LocationType',
                 AssisteeType = 'Engineer',
-                BeingBuiltCategories = {'FACTORY'},
+                BeingBuiltCategories = categories.FACTORY,
                 Time = 60,
                 AssistUntilFinished = true,
                 AssistRange = 20,
@@ -287,7 +287,7 @@ BuilderGroup {
                 AssistLocation = 'LocationType',
                 AssisteeType = 'Factory',
                 AssistUntilFinished = true,
-                BeingBuiltCategories = {'FACTORY'},
+                BeingBuiltCategories = categories.FACTORY,
                 Time = 30,
                 AssistRange = 20,
             },

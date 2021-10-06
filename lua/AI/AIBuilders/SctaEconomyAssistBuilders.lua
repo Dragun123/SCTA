@@ -121,15 +121,39 @@ BuilderGroup {
         BuilderType = 'NotACU',
     },
     Builder {
+        BuilderName = 'SCTA PGen Assist',
+        PlatoonTemplate = 'EngineerBuilderSCTAALL',
+        PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
+        PriorityFunction = TAPrior.AssistProduction,
+        Priority = 200,
+        InstanceCount = 2,
+        BuilderConditions = {
+            { UCBC, 'HaveGreaterThanUnitsInCategoryBeingBuilt', { 0, FUSION, 'LocationType', }},
+            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER - categories.COMMAND}},
+            --{ TAutils, 'EcoManagementTA', { 0.5, 0.5, } },
+        },
+        BuilderType = 'NotACU',
+        BuilderData = {
+            Assist = {
+                AssistLocation = 'LocationType',
+                AssisteeType = 'Engineer',
+                BeingBuiltCategories = categories.ENERGYPRODUCTION - categories.TECH1,
+                Time = 60,
+                AssistUntilFinished = true,
+                AssistRange = 20,
+            },
+        }
+    },
+    Builder {
         BuilderName = 'SCTA PGen Field Assist',
         PlatoonTemplate = 'EngineerBuilderSCTAField',
         PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
         PriorityFunction = TAPrior.UnitProductionField,
         Priority = 75,
-        InstanceCount = 2,
+        InstanceCount = 4,
         BuilderConditions = {
             { UCBC, 'HaveGreaterThanUnitsInCategoryBeingBuilt', { 0, FUSION, 'LocationType', }},
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.FIELDENGINEER}},
+            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 0, categories.FIELDENGINEER}},
             --{ TAutils, 'EcoManagementTA', { 0.5, 0.5, } },
         },
         BuilderType = 'FieldTA',
@@ -137,7 +161,7 @@ BuilderGroup {
             Assist = {
                 AssistLocation = 'LocationType',
                 AssisteeType = 'Engineer',
-                BeingBuiltCategories = {'ENERGYPRODUCTION'},
+                BeingBuiltCategories = categories.ENERGYPRODUCTION - categories.TECH1,
                 Time = 60,
                 AssistUntilFinished = true,
                 AssistRange = 20,
@@ -200,7 +224,7 @@ BuilderGroup {
         InstanceCount = 5,
         BuilderConditions = {
             --{ TASlow, 'TALocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, 'STRUCTURE TECH2, STRUCTURE TECH3, EXPERIMENTAL' }},
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.FIELDENGINEER}},
+            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 0, categories.FIELDENGINEER}},
             ---{ TAutils, 'GreaterTAStorageRatio', { 0.5, 0.5}},
         },
         BuilderData = {
@@ -208,7 +232,7 @@ BuilderGroup {
                 AssistLocation = 'LocationType',
                 AssisteeType = 'Factory',
                 AssistUntilFinished = true,
-                BeingBuiltCategories = {'FACTORY'},
+                BeingBuiltCategories = categories.FACTORY,
                 Time = 60,
                 AssistRange = 60,
             },
