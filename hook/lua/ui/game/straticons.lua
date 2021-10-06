@@ -1,8 +1,8 @@
     do
-LOG('TAIEXIST1')
+--LOG('TAIEXIST1')
         local TAStratIconTranslation = {
             icon_bot1_artillery = 'land_artillery',
-            icon_bot1_counterintel = 'bot_counterintel',
+            icon_bot1_counterintel = 'land_counterintel',
             icon_bot1_missile = 'land_missile',
             icon_bot2_missile = 'land_missile',
             icon_bot2_artillery = 'land_artillery',
@@ -33,7 +33,7 @@ LOG('TAIEXIST1')
             icon_factory2_bot = 'factory_land',
             icon_sub3_counterintel = 'ship_counterintel',
     }
-    LOG('TAIEXIST2')
+    --LOG('TAIEXIST2')
     aStratIconTranslation = table.merged(aStratIconTranslation, TAStratIconTranslation)
     
     
@@ -69,7 +69,7 @@ LOG('TAIEXIST1')
             icon_factory2_bot = '2/factory_land',
             icon_sub3_counterintel = '3/ship_counterintel',
         }
-        LOG('TAIEXIST3')
+        --LOG('TAIEXIST3')
     aStratIconTranslationFull = table.merged(aStratIconTranslationFull, TAStratIconTranslationFull)
     
     
@@ -84,7 +84,7 @@ LOG('TAIEXIST1')
             cormakr = 'structure_massfab',
             cormmmkr = 'structure_massfab',
         }
-        LOG('TAIEXIST4')
+        --LOG('TAIEXIST4')
     aSpecificStratIcons = table.merged(aSpecificStratIcons, TASpecificStratIcons)
 
 end
