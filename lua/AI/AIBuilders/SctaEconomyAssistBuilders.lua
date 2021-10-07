@@ -125,10 +125,10 @@ BuilderGroup {
         PlatoonTemplate = 'EngineerBuilderSCTA',
         PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
         PriorityFunction = TAPrior.AssistProduction,
-        Priority = 75,
+        Priority = 150,
         InstanceCount = 2,
         BuilderConditions = {
-            { TAutils, 'HaveGreaterThanUnitsInCategoryBeingBuiltSCTA', { 0, categories.ECONOMIC - categories.TECH1}},
+            { TAutils, 'HaveGreaterThanUnitsInCategoryBeingBuiltSCTA', { 0, categories.MASSEXTRACTION - categories.TECH1}},
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER - categories.COMMAND}},
             --{ TAutils, 'EcoManagementTA', { 0.5, 0.5, } },
         },
@@ -137,7 +137,7 @@ BuilderGroup {
             Assist = {
                 AssistLocation = 'LocationType',
                 AssisteeType = 'Engineer',
-                BeingBuiltCategories = categories.ECONOMIC - categories.TECH1,
+                BeingBuiltCategories = categories.MASSEXTRACTION - categories.TECH1,
                 Time = 60,
                 AssistUntilFinished = true,
                 AssistRange = 20,
