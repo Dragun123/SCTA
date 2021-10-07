@@ -152,7 +152,7 @@ UnitBlueprint {
             CollideFriendly = false,
             DamageFriendly = false,
             Damage = 120,
-            DamageRadius = 1,
+            DamageRadius = 2,
             DamageType = 'TASpec',
             DisplayName = 'armamph_weapon1',
             FireTargetLayerCapsTable = {

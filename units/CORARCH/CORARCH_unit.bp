@@ -142,7 +142,7 @@ UnitBlueprint {
             CollideFriendly = false,
             DamagesFriendly = true,
             Damage = 180,
-            DamageRadius = 1,
+            DamageRadius = 2,
             DamageType = 'TASpec',
             DisplayName = 'ARMAAS_WEAPON1',
 	        FiringTolerance = 10,
@@ -223,7 +223,7 @@ UnitBlueprint {
             CollideFriendly = false,
             DamagesFriendly = true,
             Damage = 180,
-            DamageRadius = 1,
+            DamageRadius = 2,
             DamageType = 'TASpec',
             DisplayName = 'ARMAAS_WEAPON1',
             FireTargetLayerCapsTable = {
@@ -304,7 +304,7 @@ UnitBlueprint {
             CollideFriendly = false,
             DamageFriendly = false,
             Damage = 120,
-            DamageRadius = 1,
+            DamageRadius = 3,
             DamageType = 'Normal',
             DisplayName = 'ARMAAS_WEAPON3',
             FireTargetLayerCapsTable = {
