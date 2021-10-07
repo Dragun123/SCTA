@@ -107,7 +107,7 @@ UnitBlueprint {
     },
     Economy = {
         BuildCostEnergy = 3181,
-        BuildCostMass = 101,
+        BuildCostMass = 100,
         BuildTime = 9196,
     },
     Footprint = {
@@ -180,7 +180,7 @@ TechLevel = 'RULEUTL_Basic',
             DamageFriendly = false,
             TrackingRadius = 1.15,
             Damage = 80,
-            DamageRadius = 1,
+            DamageRadius = 2,
             DamageType = 'TASpec',
             DisplayName = 'CORVTOL_MISSILE',
             FireTargetLayerCapsTable = {
@@ -237,7 +237,7 @@ TechLevel = 'RULEUTL_Basic',
             DamageFriendly = false,
             TrackingRadius = 1.15,
             Damage = 80,
-            DamageRadius = 1,
+            DamageRadius = 2,
             DamageType = 'TASpec',
             DisplayName = 'CORVTOL_MISSILE',
             FireTargetLayerCapsTable = {

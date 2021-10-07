@@ -13,18 +13,18 @@ UnitBlueprint {
     VisionRadius = 28,
     }, 
     Economy = {
-        BuildCostEnergy = 6000,
+        BuildCostEnergy = 8000,
         BuildTime = 4500,
     },
     Weapon = {
         [1] = {
-            Damage = 60,
-            RateOfFire = 0.34,
+            Damage = 75,
+            RateOfFire = 0.27,
             DamageType = 'AntiAir',
         },
         [2] = {
-            Damage = 60,
-            RateOfFire = 0.34,
+            Damage = 75,
+            RateOfFire = 0.27,
             DamageType = 'AntiAir',
         },
         [3] = {

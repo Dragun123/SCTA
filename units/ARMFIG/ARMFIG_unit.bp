@@ -113,7 +113,7 @@ UnitBlueprint {
     },
     Economy = {
         BuildCostEnergy = 3234,
-        BuildCostMass = 99,
+        BuildCostMass = 100,
         BuildTime = 9182,
     },
     General = {
@@ -180,7 +180,7 @@ UnitBlueprint {
             DamageFriendly = false,
             TrackingRadius = 1.15,
             Damage = 75,
-            DamageRadius = 1,
+            DamageRadius = 2,
             DamageType = 'TASpec',
             DisplayName = 'ARMVTOL_MISSILE',
             FireTargetLayerCapsTable = {
@@ -237,7 +237,7 @@ UnitBlueprint {
             DamageFriendly = false,
             TrackingRadius = 1.15,
             Damage = 75,
-            DamageRadius = 1,
+            DamageRadius = 2,
             DamageType = 'TASpec',
             DisplayName = 'ARMVTOL_MISSILE',
             FireTargetLayerCapsTable = {

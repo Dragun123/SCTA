@@ -220,7 +220,7 @@ UnitBlueprint {
             TurretBoneDualPitch = 'weapon2',
             TurretBoneYaw = 'armbrawl',
             TurretDualManipulators = true,
-            DamageRadius = 1,
+            DamageRadius = 2,
             TurretPitch = -40,
             TurretPitchRange = 70,
             TurretPitchSpeed = 90,

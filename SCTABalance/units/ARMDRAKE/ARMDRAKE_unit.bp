@@ -360,7 +360,7 @@ UnitBlueprint {
             CollideFriendly = false,
            DamageFriendly = false,
             Damage = 300,
-            DamageRadius = 1,
+            DamageRadius = 2,
             DamageType = 'TASpec',
             DisplayName = 'CORKROG_ROCKET',
             FireTargetLayerCapsTable = {
