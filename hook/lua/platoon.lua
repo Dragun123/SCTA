@@ -94,8 +94,7 @@ Platoon = Class(SCTAAIPlatoon) {
               local Escort = self:EngineerTAAssist(eng, aiBrain, beingBuilt, assistData)
               --_ALERT('TAEscortE2', Escort:GetBlueprint().Display.UniformScale)
               --self:Stop('Support')
-              while Escort and not (Escort.Dead or eng.Dead) and
-              (Escort.UnitBeingBuilt or Escort:IsUnitState('Upgrading')) do
+              while Escort and not (Escort.Dead or eng.Dead) and (Escort.UnitBeingBuilt or Escort:IsUnitState('Upgrading')) do
                 --_ALERT('TAEscortE', Escort:GetBlueprint().Display.UniformScale)  
                 self:Stop('Support')
                 IssueGuard({eng}, Escort) 
@@ -107,14 +106,14 @@ Platoon = Class(SCTAAIPlatoon) {
                 self:PlatoonDisbandTA()
             end
         end,
-    
+
         EngineerTAAssist = function(self, eng, aiBrain, category, data)
-            local EngineerAssist = aiBrain:GetUnitsAroundPoint((categories.ENGINEER * categories.LAND) + categories.STRUCTURE - categories.FACTORY, eng:GetPosition(), data.AssistRange, 'Ally')
+            local EngineerAssist = aiBrain:GetUnitsAroundPoint((categories.ENGINEER - categories.LAND) + categories.STRUCTURE, eng:GetPosition(), data.AssistRange, 'Ally')
                 for _, Escort in EngineerAssist do
-                    if Escort and Escort.DesiresAssist and Escort.SCTAAIBrain and
-                    table.getn(Escort:GetGuards()) < Escort.NumAssistees and not Escort.Dead and
+                    if Escort and Escort.DesiresAssist and 
+                    Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < Escort.NumAssistees and 
                     (EntityCategoryContains(category, Escort.UnitBeingBuilt) or Escort:IsUnitState('Upgrading')) and 
-                    not Escort.Escorting then 
+                    not Escort.Escorting then
                     return Escort
                 --WaitSeconds(3)
                 --Escort.Escorting = nil
@@ -153,10 +152,10 @@ Platoon = Class(SCTAAIPlatoon) {
             end,
         
             EngineerTAUnfinished = function(self, eng, aiBrain, data)
-                local Unfinished = aiBrain:GetUnitsAroundPoint(categories.STRUCTURE + categories.NEEDMOBILEBUILD, eng:GetPosition(), data.AssistRange, 'Ally')
+                local Unfinished = aiBrain:GetUnitsAroundPoint(categories.STRUCTURE, eng:GetPosition(), data.AssistRange, 'Ally')
                     for _, Escort in Unfinished do
                         if Escort and Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < 3 and 
-                        Escort:GetFractionComplete() < 1 and not Escort.Escorting then 
+                            Escort:GetFractionComplete() < 1 and not Escort.Escorting then 
                         return Escort
                     --WaitSeconds(3)
                     --Escort.Escorting = nil
@@ -164,7 +163,14 @@ Platoon = Class(SCTAAIPlatoon) {
                     end
                 end,
 
-            ---EscortCheck = function(Escort, Assist, aiBrain, data)
+        --[[EscortCheck = function(Escort, Assist, aiBrain, data)
+            if Escort and Escort.SCTAAIBrain and 
+                table.getn(Escort:GetGuards()) < Assist and 
+                not (Escort.Dead and Escort.Escorting) then
+            return true
+            end
+        end,]]
+                
                 
 
     ReclaimStructuresAITA = function(self)
