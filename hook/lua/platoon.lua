@@ -40,19 +40,20 @@ Platoon = Class(SCTAAIPlatoon) {
           local Escort = self:FactoryTAAssist(eng, aiBrain, beingBuilt, assistData)
           --_ALERT('TAEscort2F', Escort:GetBlueprint().Display.UniformScale)
           self:Stop('Support')
-            while Escort and not (Escort.Dead or eng.Dead) do
-            _ALERT('TAEscortF', Escort:GetBlueprint().Display.UniformScale) 
+            while Escort and Escort.UnitBeingBuilt and not (Escort.Dead or eng.Dead) do
+            --_ALERT('TAEscortF', Escort:GetBlueprint().Display.UniformScale) 
                 eng.Escorting = true   
                 IssueGuard({eng}, Escort) 
-                if not assistData.Gantry then
-                WaitSeconds(assistData.Time + 30)
+                WaitSeconds(assistData.Time)
                 --coroutine.yield(2)
-                self:Stop('Support')
-                coroutine.yield(2)
-                return self:PlatoonDisbandTA()
+                if not (assistData.Gantry or Escort.UnitBeingBuilt) then
+                    self:Stop('Support')
+                    coroutine.yield(2)
+                    return self:PlatoonDisbandTA()
                 end
+                self:Stop('Support')
             end
-            self:Stop('Support')
+            --self:Stop('Support')
             coroutine.yield(2)
             self:PlatoonDisbandTA()
             --self:Stop('Support')
@@ -96,8 +97,9 @@ Platoon = Class(SCTAAIPlatoon) {
                 --self:Stop('Support')
                 IssueGuard({eng}, Escort) 
                 WaitSeconds(assistData.Time + 30)
-              end
                 self:Stop('Support')
+              end
+              --IssueClearCommands({eng})
                 coroutine.yield(2)
                 self:PlatoonDisbandTA()
             end
@@ -132,12 +134,13 @@ Platoon = Class(SCTAAIPlatoon) {
                   self:Stop('Support')
                   while Escort and Escort:GetFractionComplete() < 1 and not (Escort.Dead or eng.Dead) do
                     --_ALERT('TAEscort', Escort:GetBlueprint().Display.UniformScale)
-                    ---self:Stop('Support')   
+                    ---IssueClearCommands({eng})  
                     eng.Escorting = true 
                     IssueGuard({eng}, Escort) 
-                    WaitSeconds(assistData.Time)
+                    WaitSeconds(assistData.Time + 15)
+                    self:Stop('Support')
                   end
-                  --self:Stop('Support')
+                  --IssueClearCommands({eng})
                   coroutine.yield(2)
                   self:PlatoonDisbandTA()
                 end
