@@ -197,9 +197,10 @@ AIBrain = Class(SCTAAIBrainClass) {
             if ((aiBrain.Level2 or aiBrain.Level3) and TANomic(aiBrain, 0.8, 0.8)) or TAEco(aiBrain, 0.75, 0.75) then
                 aiBrain.TAFactoryAssistance = true
             else
+            coroutine.yield(2)
             aiBrain.TAFactoryAssistance = nil
+            coroutine.yield(31)
             end
-            coroutine.yield(11)
         end
     end,   
     

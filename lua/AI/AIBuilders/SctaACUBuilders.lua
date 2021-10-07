@@ -248,7 +248,7 @@ BuilderGroup {
         PlatoonTemplate = 'EngineerBuilderSCTAALL',
         PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
         PriorityFunction = TAPrior.AssistProduction,
-        Priority = 100,
+        Priority = 50,
         InstanceCount = 10,
         BuilderConditions = {
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER - categories.COMMAND}},
@@ -270,10 +270,10 @@ BuilderGroup {
     },
     Builder {
         BuilderName = 'SCTA Assist Unit Production Idle',
-        PlatoonTemplate = 'EngineerBuilderSCTA123',
+        PlatoonTemplate = 'EngineerBuilderSCTA',
         PlatoonAIPlan = 'ManagerFactoryAssistAISCTA',
         PriorityFunction = TAPrior.AssistProduction,
-        Priority = 100,
+        Priority = 50,
         InstanceCount = 10,
         BuilderConditions = {
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.LAND - categories.COMMAND}},

@@ -122,10 +122,10 @@ BuilderGroup {
     },
     Builder {
         BuilderName = 'SCTA PGen Assist',
-        PlatoonTemplate = 'EngineerBuilderSCTAALL',
+        PlatoonTemplate = 'EngineerBuilderSCTA',
         PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
         PriorityFunction = TAPrior.AssistProduction,
-        Priority = 120,
+        Priority = 75,
         InstanceCount = 2,
         BuilderConditions = {
             { UCBC, 'HaveGreaterThanUnitsInCategoryBeingBuilt', { 0, FUSION, 'LocationType', }},
@@ -149,8 +149,8 @@ BuilderGroup {
         PlatoonTemplate = 'EngineerBuilderSCTAField',
         PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
         PriorityFunction = TAPrior.UnitProductionField,
-        Priority = 200,
-        InstanceCount = 4,
+        Priority = 100,
+        InstanceCount = 2,
         BuilderConditions = {
             { UCBC, 'HaveGreaterThanUnitsInCategoryBeingBuilt', { 0, FUSION, 'LocationType', }},
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 0, categories.FIELDENGINEER}},
