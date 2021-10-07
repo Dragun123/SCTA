@@ -108,7 +108,7 @@ Platoon = Class(SCTAAIPlatoon) {
         end,
 
         EngineerTAAssist = function(self, eng, aiBrain, category, data)
-            local EngineerAssist = aiBrain:GetUnitsAroundPoint((categories.ENGINEER - categories.LAND) + categories.STRUCTURE, eng:GetPosition(), data.AssistRange, 'Ally')
+            local EngineerAssist = aiBrain:GetUnitsAroundPoint((categories.ENGINEER * categories.LAND - categories.FIELDENGINEER) + categories.STRUCTURE, eng:GetPosition(), data.AssistRange, 'Ally')
                 for _, Escort in EngineerAssist do
                     if Escort and Escort.DesiresAssist and 
                     Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < Escort.NumAssistees and 
@@ -162,6 +162,11 @@ Platoon = Class(SCTAAIPlatoon) {
                         end
                     end
                 end,
+
+        ---I Remove most of the helper and made assisting driving by engineer not the manager
+        ---This allows more fine tuning and more reliable assisting 
+        ---Additionally I have a thread that checks my eco stability at this point in time 
+        ---Below function is a function intended to show the generic checks
 
         --[[EscortCheck = function(Escort, Assist, aiBrain, data)
             if Escort and Escort.SCTAAIBrain and 
