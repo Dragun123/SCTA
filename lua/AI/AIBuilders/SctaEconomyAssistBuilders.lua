@@ -121,14 +121,14 @@ BuilderGroup {
         BuilderType = 'NotACU',
     },
     Builder {
-        BuilderName = 'SCTA PGen Assist',
+        BuilderName = 'SCTA Economy Assist',
         PlatoonTemplate = 'EngineerBuilderSCTA',
         PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
         PriorityFunction = TAPrior.AssistProduction,
         Priority = 75,
         InstanceCount = 2,
         BuilderConditions = {
-            { UCBC, 'HaveGreaterThanUnitsInCategoryBeingBuilt', { 0, FUSION, 'LocationType', }},
+            { TAutils, 'HaveGreaterThanUnitsInCategoryBeingBuiltSCTA', { 0, categories.ECONOMIC - categories.TECH1}},
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER - categories.COMMAND}},
             --{ TAutils, 'EcoManagementTA', { 0.5, 0.5, } },
         },
@@ -137,7 +137,7 @@ BuilderGroup {
             Assist = {
                 AssistLocation = 'LocationType',
                 AssisteeType = 'Engineer',
-                BeingBuiltCategories = categories.ENERGYPRODUCTION - categories.TECH1,
+                BeingBuiltCategories = categories.ECONOMIC - categories.TECH1,
                 Time = 60,
                 AssistUntilFinished = true,
                 AssistRange = 20,
@@ -152,7 +152,7 @@ BuilderGroup {
         Priority = 100,
         InstanceCount = 2,
         BuilderConditions = {
-            { UCBC, 'HaveGreaterThanUnitsInCategoryBeingBuilt', { 0, FUSION, 'LocationType', }},
+            { TAutils, 'HaveGreaterThanUnitsInCategoryBeingBuiltSCTA', { 0, FUSION}},
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 0, categories.FIELDENGINEER}},
             --{ TAutils, 'EcoManagementTA', { 0.5, 0.5, } },
         },
@@ -223,6 +223,7 @@ BuilderGroup {
         Priority = 100,
         InstanceCount = 5,
         BuilderConditions = {
+            { UCBC, 'FactoryGreaterAtLocation', { 'LocationType', 1, categories.FACTORY - categories.TECH1} },
             --{ TASlow, 'TALocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, 'STRUCTURE TECH2, STRUCTURE TECH3, EXPERIMENTAL' }},
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 0, categories.FIELDENGINEER}},
             ---{ TAutils, 'GreaterTAStorageRatio', { 0.5, 0.5}},
@@ -232,8 +233,8 @@ BuilderGroup {
                 AssistLocation = 'LocationType',
                 AssisteeType = 'Factory',
                 AssistUntilFinished = true,
-                BeingBuiltCategories = categories.FACTORY,
-                Time = 60,
+                BeingBuiltCategories = categories.FACTORY - categories.TECH1,
+                Time = 30,
                 AssistRange = 60,
             },
         },

@@ -225,6 +225,23 @@ function TARandomLocation(x,z, value)
     return { finalX, height, finalZ }
 end
 
+function HaveGreaterThanUnitsInCategoryBeingBuiltSCTA(aiBrain, numunits, category)
+    local unitsBuilding = aiBrain:GetListOfUnits(categories.CONSTRUCTION + categories.CQUEMOV, false)
+    local numBuilding = 0
+    for unitNum, unit in unitsBuilding do
+        if not unit.Dead and (unit:IsUnitState('Building') or unit:IsUnitState('Upgrading')) then
+            local buildingUnit = unit.UnitBeingBuilt
+            if buildingUnit and not buildingUnit.Dead and EntityCategoryContains(category, buildingUnit) then
+                numBuilding = numBuilding + 1
+            end
+        end
+        if numunits < numBuilding then
+            return true
+        end
+    end
+    return false
+end
+
 --[[function TAUnfinishedUnits(aiBrain, locationType, category)
     local engineerManager = aiBrain.BuilderManagers[locationType].EngineerManager
     if not engineerManager then

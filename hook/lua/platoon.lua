@@ -37,16 +37,16 @@ Platoon = Class(SCTAAIPlatoon) {
         while eng and not eng.Dead and aiBrain:PlatoonExists(self) do
             local beingBuilt = assistData.BeingBuiltCategories 
             --local category = ParseEntityCategory(beingBuilt)
+            eng.Escorting = true
           local Escort = self:FactoryTAAssist(eng, aiBrain, beingBuilt, assistData)
           --_ALERT('TAEscort2F', Escort:GetBlueprint().Display.UniformScale)
           self:Stop('Support')
-            while Escort and Escort.UnitBeingBuilt and not (Escort.Dead or eng.Dead) do
+            while Escort and Escort.TABuildingUnit and not (Escort.Dead or eng.Dead) do
             --_ALERT('TAEscortF', Escort:GetBlueprint().Display.UniformScale) 
-                eng.Escorting = true   
                 IssueGuard({eng}, Escort) 
                 WaitSeconds(assistData.Time + 30)
                 --coroutine.yield(2)
-                if not (assistData.Gantry or Escort.UnitBeingBuilt) then
+                if not (assistData.Gantry or Escort.TABuildingUnit) then
                     self:Stop('Support')
                     coroutine.yield(2)
                     return self:PlatoonDisbandTA()
@@ -63,7 +63,7 @@ Platoon = Class(SCTAAIPlatoon) {
     FactoryTAAssist = function(self, eng, aiBrain, category, data)
         local FactoryAssist = aiBrain:GetUnitsAroundPoint(category - categories.TECH1, eng:GetPosition(), data.AssistRange, 'Ally')
             for _, Escort in FactoryAssist do
-                if Escort and Escort.DesiresAssist and Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < Escort.NumAssistees then 
+                if Escort and Escort.DesiresAssist and Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < Escort.NumAssistees and Escort.TABuildingUnit and not Escort.Escorting then 
             ---Escort.Escorting = true
             ---self.Brain:AssignUnitsToPlatoon(hndl, {Escort}, 'Guard', 'none')
             ---break here to ensure only first LEGAL option is the one grabbed
@@ -88,12 +88,12 @@ Platoon = Class(SCTAAIPlatoon) {
             while eng and not eng.Dead and aiBrain:PlatoonExists(self) do
             local beingBuilt = assistData.BeingBuiltCategories  
             ---local category = categories.beingBuilt
+            eng.Escorting = true
               local Escort = self:EngineerTAAssist(eng, aiBrain, beingBuilt, assistData)
               --_ALERT('TAEscortE2', Escort:GetBlueprint().Display.UniformScale)
               --self:Stop('Support')
               while Escort and Escort.UnitBeingBuilt and not (Escort.Dead or eng.Dead) do
                 --_ALERT('TAEscortE', Escort:GetBlueprint().Display.UniformScale)  
-                eng.Escorting = true
                 self:Stop('Support')
                 IssueGuard({eng}, Escort) 
                 WaitSeconds(assistData.Time + 30)
@@ -106,9 +106,9 @@ Platoon = Class(SCTAAIPlatoon) {
         end,
     
         EngineerTAAssist = function(self, eng, aiBrain, category, data)
-            local EngineerAssist = aiBrain:GetUnitsAroundPoint(categories.ENGINEER - categories.FIELDENGINEER - categories.NAVAL, eng:GetPosition(), data.AssistRange, 'Ally')
+            local EngineerAssist = aiBrain:GetUnitsAroundPoint((categories.ENGINEER * categories.LAND - categories.FIELDENGINEER) + categories.CQUEMOV, eng:GetPosition(), data.AssistRange, 'Ally')
                 for _, Escort in EngineerAssist do
-                    if Escort and Escort.DesiresAssist and Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < Escort.NumAssistees and EntityCategoryContains(category, Escort.UnitBeingBuilt) then 
+                    if Escort and Escort.DesiresAssist and Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < Escort.NumAssistees and EntityCategoryContains(category, Escort.UnitBeingBuilt) and not Escort.Escorting then 
                     return Escort
                 --WaitSeconds(3)
                 --Escort.Escorting = nil
@@ -129,16 +129,16 @@ Platoon = Class(SCTAAIPlatoon) {
                     return
                 end
                 while eng and not eng.Dead and aiBrain:PlatoonExists(self) do
+                    eng.Escorting = true
                   local Escort = self:EngineerTAUnfinished(eng, aiBrain, assistData)
                   --_ALERT('TAEscort2', Escort:GetBlueprint().Display.UniformScale)
-                  --self:Stop('Support')
+                  self:Stop('Support')
                   while Escort and Escort:GetFractionComplete() < 1 and not (Escort.Dead or eng.Dead) do
                     --_ALERT('TAEscort', Escort:GetBlueprint().Display.UniformScale)
-                    IssueClearCommands({eng})  
-                    eng.Escorting = true 
+                    --IssueClearCommands({eng})  
                     IssueGuard({eng}, Escort) 
                     WaitSeconds(assistData.Time + 15)
-                    --self:Stop('Support')
+                    self:Stop('Support')
                   end
                   IssueClearCommands({eng})
                   coroutine.yield(2)
@@ -149,7 +149,7 @@ Platoon = Class(SCTAAIPlatoon) {
             EngineerTAUnfinished = function(self, eng, aiBrain, data)
                 local Unfinished = aiBrain:GetUnitsAroundPoint(categories.STRUCTURE + categories.NEEDMOBILEBUILD, eng:GetPosition(), data.AssistRange, 'Ally')
                     for _, Escort in Unfinished do
-                        if Escort and Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < 3 and Escort:GetFractionComplete() < 1 then 
+                        if Escort and Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < 3 and Escort:GetFractionComplete() < 1 and not Escort.Escorting then 
                         return Escort
                     --WaitSeconds(3)
                     --Escort.Escorting = nil
@@ -1678,12 +1678,14 @@ Platoon = Class(SCTAAIPlatoon) {
             UnitBeingUpgradeFactionIndex = FactionToIndex[v.factionCategory] or factionIndex
                 upgradeID = aiBrain:FindUpgradeBP(v:GetUnitId(), StructureUpgradeTemplates[UnitBeingUpgradeFactionIndex])
             if upgradeID then
+                v.DesiresAssist = true
+                v.NumAssistees = 2
                 IssueUpgrade({v}, upgradeID)
             end
         end
         local upgrading = true
         while aiBrain:PlatoonExists(self) and upgrading do
-            --WaitSeconds(3)
+            --WaitSeconds(3) 
             coroutine.yield(20)
             upgrading = false
             for k, v in platoonUnits do
