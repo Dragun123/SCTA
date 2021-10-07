@@ -33,7 +33,8 @@ BuilderGroup {
         BuilderType = 'StructureForm',
         BuilderData = {
             ---NeedGuard = false,
-            ---DesiresAssist = false,
+            DesiresAssist = true,
+            NumAssistees = 2,
         }
     },
     Builder {
@@ -52,7 +53,8 @@ BuilderGroup {
         BuilderType = 'StructureForm',
         BuilderData = {
             ---NeedGuard = false,
-            ---DesiresAssist = false,
+            DesiresAssist = true,
+            NumAssistees = 4,
         }
     },
     Builder {
@@ -72,7 +74,8 @@ BuilderGroup {
         BuilderType = 'StructureForm',
         BuilderData = {
             ---NeedGuard = false,
-            ---DesiresAssist = false,
+            DesiresAssist = true,
+            NumAssistees = 4,
         }
     },
     Builder {
@@ -88,6 +91,11 @@ BuilderGroup {
             { TAutils, 'EcoManagementTA', { 0.75, 1.05} },
         },
         BuilderType = 'StructureForm',
+        BuilderData = {
+            ---NeedGuard = false,
+            DesiresAssist = true,
+            NumAssistees = 4,
+        }
     },
     Builder {
         BuilderName = 'SCTAMetalMakr',

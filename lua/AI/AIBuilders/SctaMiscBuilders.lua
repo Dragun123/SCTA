@@ -14,7 +14,8 @@ BuilderGroup {
         InstanceCount = 2,
         BuilderConditions = {
             { UCBC, 'HaveLessThanUnitsWithCategory', { 10, categories.ANTIAIR - categories.MOBILE} }, 
-            { TAutils, 'GreaterTAStorageRatio', { 0.5, 0.5}}, 
+            { TAutils, 'GreaterTAStorageRatio', { 0.2, 0.5}}, 
+            --{ TAutils, 'EcoManagementTA', { 0.8, 0.8, } },
         },
         BuilderType = 'LandTA',
         BuilderData = {
@@ -34,7 +35,7 @@ BuilderGroup {
         InstanceCount = 1,
         BuilderConditions = {
             { UCBC, 'HaveLessThanUnitsWithCategory', { 2, categories.ANTIMISSILE * categories.TECH2} },
-            { TAutils, 'GreaterTAStorageRatio', { 0.35, 0.35}}, 
+            { TAutils, 'GreaterThanEconEnergyTAEfficiency', {1.05 }},
         },
         BuilderType = 'LandTA',
         BuilderData = {
@@ -78,7 +79,8 @@ BuilderGroup {
         InstanceCount = 1,
         BuilderConditions = {
             { UCBC, 'HaveLessThanUnitsWithCategory', { 4, categories.DIRECTFIRE * categories.TECH3 - categories.MOBILE} }, 
-            { TAutils, 'GreaterTAStorageRatio', { 0.15, 0.25}},  
+            { TAutils, 'GreaterTAStorageRatio', { 0.2, 0.5}}, 
+            --{ TAutils, 'EcoManagementTA', { 0.8, 0.8, } },
         },
         BuilderType = 'NotACU',
         BuilderData = {
@@ -101,7 +103,8 @@ BuilderGroup {
         InstanceCount = 1,
         BuilderConditions = {
             { UCBC, 'HaveLessThanUnitsWithCategory', { 6, categories.ANTIAIR * categories.TECH3 - categories.MOBILE} }, 
-            { TAutils, 'GreaterTAStorageRatio', { 0.15, 0.25}}, 
+            { TAutils, 'GreaterTAStorageRatio', { 0.2, 0.5}}, 
+            --{ TAutils, 'EcoManagementTA', { 0.8, 0.8, } },
         },
         BuilderType = 'NotACU',
         BuilderData = {
@@ -124,6 +127,7 @@ BuilderGroup {
         InstanceCount = 1,
         BuilderConditions = {
             { UCBC, 'HaveLessThanUnitsWithCategory', { 1, categories.AIRSTAGINGPLATFORM} },
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8, } },
         },
         BuilderType = 'LandTA',
         BuilderData = {
@@ -143,7 +147,7 @@ BuilderGroup {
         BuilderConditions = {
             { UCBC, 'HaveLessThanUnitsWithCategory', { 4, categories.ANTISHIELD * categories.TECH1 - categories.MOBILE } }, 
             { MIBC, 'GreaterThanGameTime', {240} },
-            { TAutils, 'GreaterTAStorageRatio', { 0.25, 0.5}}, 
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8, } },
         },
         BuilderType = 'NotACU',
         BuilderData = {
@@ -175,7 +179,7 @@ BuilderGroup {
         PriorityFunction = TAPrior.TechEnergyExist,
         BuilderConditions = {
             { UCBC, 'HaveLessThanUnitsWithCategory', { 8, categories.ANTISHIELD * categories.TECH2 - categories.MOBILE} }, 
-            { TAutils, 'GreaterTAStorageRatio', { 0.2, 0.5}}, 
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8, } }, 
         },
         BuilderType = 'NotACU',
         BuilderData = {
@@ -208,7 +212,7 @@ BuilderGroup {
         PriorityFunction = TAPrior.GantryProduction,
         BuilderConditions = {
             { UCBC, 'HaveLessThanUnitsWithCategory', { 8, categories.ANTISHIELD * categories.TECH3 - categories.MOBILE} }, 
-            { TAutils, 'GreaterTAStorageRatio', { 0.2, 0.5}}, 
+            { TAutils, 'EcoManagementTA', { 0.9, 0.9, } },
         },
         BuilderType = 'T3TA',
         BuilderData = {
