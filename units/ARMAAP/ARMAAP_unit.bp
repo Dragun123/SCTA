@@ -94,7 +94,6 @@ UnitBlueprint {
         BuildBones = {
             BuildEffectBones = {'Nozzle_01', 'Nozzle_02'},
         },    
-                ---RolloffDelay = 1,
         Category = 'Factory',
         Classification = 'RULEUC_Factory',
         CommandCaps = {
@@ -120,8 +119,6 @@ UnitBlueprint {
     LifeBarOffset = 0.5,
     LifeBarSize = 2,
     Physics = {      
-        ---SkirtSizeX = 7,
-        ---SkirtSizeZ = 7,
         RollOffPoints = {
             {
                 UnitSpin = 90,
@@ -155,7 +152,6 @@ UnitBlueprint {
         DummyWeapon = true,
         Label = 'DeathWeapon',
         },
-
     },
         Wreckage = {
         Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',

@@ -5,7 +5,6 @@
 
 UnitBlueprint {
     Merge = true, 
-    BuildIconSortPriority = 1,
     Categories = {
         'BUILTBYTIER2ENGINEER',
         'BUILTBYTIER2FACTORY',
@@ -17,13 +16,13 @@ UnitBlueprint {
 	    'LAND',
         'CORE',
         'RADAR',
-        'CQUEMOV',
-        'NEEDMOBILEBUILD',
         'OVERLAYRADAR',
-        'STEALTHFIELD',
-        'OVERLAYCOUNTERINTEL',        
+        'OVERLAYCOUNTERINTEL',
+        'NEEDMOBILEBUILD',
+        'CQUEMOV',
+        'STEALTHFIELD',        
         'SORTINTEL',
-        'SCOUT',
+        'COUNTERINTELLIGENCE',
     },
     Display = {
         Abilities = {
@@ -61,8 +60,8 @@ UnitBlueprint {
         },
         SelectionSizeX = 2,
         SelectionSizeZ = 2,
+        LifeBarSize = 3,
         SizeX = 4,
         SizeY = 4,
         SizeZ = 4,
-        StrategicIconName = 'icon_structure2_counterintel',
 }

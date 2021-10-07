@@ -26,7 +26,7 @@ UnitBlueprint {
             LodCutoff = 'UnitMove_LodCutoff',
 	},
     },
-    BuildIconSortPriority = 11,
+    BuildIconSortPriority = 15,
     Categories = {
         'SELECTABLE',
         'BOT',
@@ -56,7 +56,7 @@ UnitBlueprint {
         AnimationWalkRate = 2,
         Abilities = {
             '<LOC ability_suicideweapon>Suicide Weapon',
-            'All-Terrain',
+            '<LOC ability_amphibious>Amphibious',
         },
         Mesh = {
             IconFadeInZoom = 130,
@@ -93,7 +93,17 @@ UnitBlueprint {
         },
         FactionName = 'CORE',
         Icon = 'land',
-TechLevel = 'RULEUTL_Advanced',
+        OrderOverrides = {
+            RULEUTC_SpecialToggle = {
+                --  more options in textures.scd\textures\ui\common\game\orders
+                bitmapId = 'toggle-weapon',
+                helpText = 'Detonate',
+            },
+        },
+        ToggleCaps = {
+            RULEUTC_SpecialToggle = true,
+	    },
+        TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Roach',
     },
     Intel = {
@@ -119,7 +129,7 @@ TechLevel = 'RULEUTL_Advanced',
     SizeX = 1,
     SizeZ = 1,
     SizeY = 1, 
-    StrategicIconName = 'icon_land2_bomb', --'icon_bot2_bomb',
+    StrategicIconName = 'icon_land2_bomb', 
     StrategicIconSortPriority = 0,
     Weapon = {
         {

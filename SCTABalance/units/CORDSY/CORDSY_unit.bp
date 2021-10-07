@@ -41,10 +41,9 @@ UnitBlueprint {
 	    'CONSTRUCTION',
 	    'NAVAL',
 	    'CORE',
-        'RESEARCH',
 	    'SORTCONSTRUCTION',
     },
-    CollisionOffsetY = -1,
+    CollisionOffsetY = -0.75,
     CollisionOffsetZ = 0,
     Defense = {
         ArmorType = 'Structure',
@@ -88,6 +87,7 @@ UnitBlueprint {
     BuildableCategory = {
         'NAVAL MOBILE TECH1 CORE',
         'NAVAL MOBILE TECH2 CORE',
+        'cornecro',
         'coradsy',
     },
     StorageMass = 50,
@@ -167,16 +167,13 @@ UnitBlueprint {
         DummyWeapon = true,
         Label = 'DeathWeapon',
         },
-
     },
         Wreckage = {
-	---UseCustomMesh = true,
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/SCTABalance/units/CORDSY/CORDSY_dead_prop.bp',
         WreckageLayers = {
             Water = true,
             Seabed = true,

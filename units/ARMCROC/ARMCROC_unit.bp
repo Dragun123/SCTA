@@ -136,8 +136,8 @@ UnitBlueprint {
             DamageType = 'Normal',
             DisplayName = 'ARM_MEDIUMCANNON',
             FireTargetLayerCapsTable = {
-                Land = 'Land|Water|Seabed',
-                Seabed = 'Land|Water|Seabed',
+                Land = 'Land|Water|Seabed|Air',
+                Seabed = 'Land|Water|Seabed|Air',
             },
 	        RangeCategory = 'UWRC_DirectFire',
             WeaponCategory = 'DirectFire',
@@ -191,12 +191,11 @@ UnitBlueprint {
         },
     },
         Wreckage = {
-Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+        Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/ARMCROC/ARMCROC_dead_prop.bp',
         WreckageLayers = {
             Land = true,
 	    Seabed = true,

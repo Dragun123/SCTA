@@ -1,12 +1,6 @@
 WARN('['..string.gsub(debug.getinfo(1).source, ".*\\(.*.lua)", "%1")..', line:'..debug.getinfo(1).currentline..'] * SCTAAI: offset ATUtils.lua' )
 
-SCTAGetTransports = GetTransports
-TASetupCheat = SetupCheat
-function GetTransports(platoon, units)
-    local aiBrain = platoon:GetBrain()
-    if not aiBrain.SCTAAI then
-        return SCTAGetTransports(platoon, units)
-    end
+function TAGetTransports(platoon, units)
     if not units then
         units = platoon:GetPlatoonUnits()
     end
@@ -122,36 +116,18 @@ function SCTAEngineerMoveWithSafePath(aiBrain, unit, destination)
     if not destination then
         return false
     end
-
+    --_ALERT('TAMove', unit:GetBlueprint().Physics.Climber)
     local result, bestPos = false
-    result, bestPos = AIAttackUtils.CanGraphAreaToSCTA(unit, destination, 'Land')
+    result, bestPos = AIAttackUtils.CanGraphAreaToSCTA(unit:GetPosition(), destination, 'Land')
     if not result then
-            result, bestPos = AIAttackUtils.CanGraphAreaToSCTA(unit, destination, 'Amphibious')
+            result, bestPos = AIAttackUtils.CanGraphAreaToSCTA(unit:GetPosition(), destination, 'Amphibious')
             if not result and not SUtils.CheckForMapMarkers(aiBrain) then
                 result, bestPos = unit:CanPathTo(destination)
             end
         end
-
-    local pos = unit:GetPosition()
     -- If we're here, we haven't used transports and we can path to the destination
     if result then
-        if EntityCategoryContains(categories.AMPHIBIOUS, unit) then
-        local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, 'Air', unit:GetPosition(), destination, 10)
-        if path then
-            local pathSize = table.getn(path)
-            -- Move to way points (but not to destination... leave that for the final command)
-            for widx, waypointPath in path do
-                if pathSize ~= widx then
-                    IssueMove({unit}, waypointPath)
-                end
-            end
-        end
-        -- If there wasn't a *safe* path (but dest was pathable), then the last move would have been to go there directly
-        -- so don't bother... the build/capture/reclaim command will take care of that after we return
-        return true
-        end
-    else
-        local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, 'Amphibious', unit:GetPosition(), destination, 10)
+        local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, unit:GetBlueprint().Physics.Climber or 'Amphibious', unit:GetPosition(), destination, 10)
         if path then
             local pathSize = table.getn(path)
             -- Move to way points (but not to destination... leave that for the final command)
@@ -175,7 +151,7 @@ function SCTAEngineerMoveWithSafePathAir(aiBrain, unit, destination)
     --local PlanName = unit.PlatoonHandle.PlanName
     --LOG('*PlatoonName3', PlanName)
     local result, bestPos = false
-    result, bestPos = AIAttackUtils.CanGraphAreaToSCTA(unit, destination, 'Air')
+    result, bestPos = AIAttackUtils.CanGraphAreaToSCTA(unit:GetPosition(), destination, 'Air')
     -- If we're here, we haven't used transports and we can path to the destination
     if result then
         local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, 'Air', unit:GetPosition(), destination, 10)
@@ -201,7 +177,7 @@ function SCTAEngineerMoveWithSafePathNaval(aiBrain, unit, destination)
         return false
     end
     local result, bestPos = false
-    result, bestPos = AIAttackUtils.CanGraphAreaToSCTA(unit, destination, 'Water')
+    result, bestPos = AIAttackUtils.CanGraphAreaToSCTA(unit:GetPosition(), destination, 'Water')
     if not result and not SUtils.CheckForMapMarkers(aiBrain) then
         result, bestPos = unit:CanPathTo(destination)
     end
@@ -231,16 +207,14 @@ function SCTAEngineerMoveWithSafePathLand(aiBrain, unit, destination)
     --local PlanName = unit.PlatoonHandle.PlanName
     --LOG('*PlatoonName2', PlanName)
     local result, bestPos = false
-    result, bestPos = AIAttackUtils.CanGraphAreaToSCTA(unit, destination, 'Land')
+    result, bestPos = AIAttackUtils.CanGraphAreaToSCTA(unit:GetPosition(), destination, 'Land')
     if not result and not SUtils.CheckForMapMarkers(aiBrain) then
         result, bestPos = unit:CanPathTo(destination)
     end
-    local pos = unit:GetPosition()
-    local result, bestPos = unit:CanPathTo(destination)
 
     -- If we're here, we haven't used transports and we can path to the destination
     if result then
-        local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, 'Land', pos, destination)
+        local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, 'Land', unit:GetPosition(), destination)
         if path then
             local pathSize = table.getn(path)
             -- Move to way points (but not to destination... leave that for the final command)
@@ -257,30 +231,21 @@ function SCTAEngineerMoveWithSafePathLand(aiBrain, unit, destination)
     return false
 end
 
-function SetupCheat(aiBrain, cheatBool)
-    if not aiBrain.SCTAAI then
-        return TASetupCheat(aiBrain, cheatBool)
-    end
 
-    if cheatBool then
-        aiBrain.CheatEnabled = true
-
-        local buffDef = Buffs['CheatBuildRate']
-        local buffAffects = buffDef.Affects
-        buffAffects.BuildRate.Mult = tonumber(ScenarioInfo.Options.BuildMult)
-
-        buffDef = Buffs['CheatIncome']
-        buffAffects = buffDef.Affects
-        buffAffects.EnergyProduction.Mult = tonumber(ScenarioInfo.Options.CheatMult)
-        buffAffects.MassProduction.Mult = tonumber(ScenarioInfo.Options.CheatMult)
-        buffAffects.ProductionPerSecondEnergyMax.Mult = tonumber(ScenarioInfo.Options.CheatMult)
-        buffAffects.ProductionPerSecondEnergyMin.Mult = tonumber(ScenarioInfo.Options.CheatMult)
-
-        local pool = aiBrain:GetPlatoonUniquelyNamed('ArmyPool')
-        for _, v in pool:GetPlatoonUnits() do
-            -- Apply build rate and income buffs
-            ApplyCheatBuffs(v)
+--[[function AIGetSortedMassLocationsNavalSCTA(aiBrain, maxNum, tMin, tMax, tRings, tType, position)
+    local markerList = AIGetMarkerLocations(aiBrain, 'Mass')
+    local newList = {}
+    for _, v in markerList do
+        local height = GetTerrainHeight(v.Position[1], v.Position[3])
+        local surfHeight = GetSurfaceHeight(v.Position[1], v.Position[3])
+        -- check distance to map border. (game engine can't build mass closer then 8 mapunits to the map border.) 
+        if v.Position[1] <= 8 or v.Position[1] >= ScenarioInfo.size[1] - 8 or v.Position[3] <= 8 or v.Position[3] >= ScenarioInfo.size[2] - 8 or v.Height > v.surfHeight then
+            -- mass marker is too close to border, skip it.
+            continue
         end
-
+        if aiBrain:CanBuildStructureAt('ueb1103', v.Position) then
+            table.insert(newList, v)
+        end
     end
-end
+    return AISortMarkersFromLastPos(aiBrain, newList, maxNum, tMin, tMax, tRings, tType, position)
+end]]

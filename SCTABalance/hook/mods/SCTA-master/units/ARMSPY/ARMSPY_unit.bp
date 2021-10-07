@@ -4,18 +4,6 @@
 #Blueprint created by Raevn
 UnitBlueprint {
     Merge = true,
-    Categories = {
-        'SELECTABLE',
-        'BOT',
-        'TECH3',
-        'VISIBLETORECON',
-        'RECLAIMABLE',
-        'MOBILE',
-        'LAND',
-        'ARM',
-        'SCOUT',
-        'OVERLAYOMNI',
-    },
     Display = {
         UniformScale = 0.12,
     },
@@ -26,7 +14,7 @@ UnitBlueprint {
     },
     Intel = {
         ActiveIntel = {
-            Omni = true,
+            Radar = true,
         },    
         JamRadius = {
             Max = 10,
@@ -34,10 +22,9 @@ UnitBlueprint {
           },
           VisionRadius = 10,
           JammerBlips = 5,
-          OmniRadius = 30,
+          RadarRadius = 30,
           RadarStealth = true,
     },
-    StrategicIconName = 'icon_land3_counterintel',
     SizeX = 1.2,
     SizeY = 1.2,
     SizeZ = 1.2,

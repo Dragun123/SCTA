@@ -166,11 +166,10 @@ TechLevel = 'RULEUTL_Basic',
         { #SMALL_UNITEX
             Damage = 25,
             DamageFriendly = true,
-            DamageRadius = 2,
+            DamageRadius = 3,
             DamageType = 'Normal',
             DummyWeapon = true,
-            Label = 'DeathWeapon',
+            Label = 'DeathImpact',
         },
-
     },
 }

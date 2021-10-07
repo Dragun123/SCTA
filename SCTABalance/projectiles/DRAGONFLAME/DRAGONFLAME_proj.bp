@@ -1,0 +1,32 @@
+#CORE Pyro Flamethrower
+#FLAMETHROWER
+#
+#Blueprint created by Raevn
+
+ProjectileBlueprint {
+    Categories = {
+        'ARM',
+        'PROJECTILE',
+        'DIRECTFIRE',
+    },
+    Display = {
+        StrategicIconSize = 1,
+    },
+    General = {
+        Category = 'Direct Fire',
+        EntityCategory = {
+            'ARM',
+            'PROJECTILE',
+            'DIRECTFIRE',
+        },
+        Faction = 'ARM',
+    },
+    Physics = {
+        DestroyOnWater = true,
+        InitialSpeed = 20,
+        Acceleration = 5,
+        MaxSpeed = 40,
+        Lifetime = 4,
+        UseGravity = false,
+    },
+}

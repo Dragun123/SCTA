@@ -148,7 +148,9 @@ TechLevel = 'RULEUTL_Advanced',
     SizeX = 7,
     SizeY = 2.5,
     SizeZ = 6,
-    StrategicIconName = 'icon_factory2_land', --'icon_factory2_bot',
+    StrategicIconName = 'icon_factory2_bot', --'icon_factory2_bot',
+    TAStrategicIconName = 'factory_land',
+    TAStrategicIconName2 = '2/factory_land',
     StrategicIconSortPriority = 0,
     Weapon = {
         { #LARGE_BUILDINGEX
@@ -159,15 +161,13 @@ TechLevel = 'RULEUTL_Advanced',
         DummyWeapon = true,
         Label = 'DeathWeapon',
         },
-
     },
-        Wreckage = {
-Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+    Wreckage = {
+        Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/CORALAB/CORALAB_dead_prop.bp',
         WreckageLayers = {
             Land = true,
         },

@@ -6,14 +6,14 @@
 #**
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
-NAVY = categories.NAVAL * categories.MOBILE
+NAVY = (categories.NAVAL * categories.MOBILE)
 
 PlatoonTemplate {
     Name = 'SCTAPatrolBoatAttack',
     Plan = 'ScoutingAISCTA',
     ---Type = 'SeaForm',
     GlobalSquads = {
-        { NAVY * categories.LIGHTBOAT, 1, 1, 'Attack', 'GrowthFormation' },
+        { NAVY * categories.LIGHTBOAT, 1, 1, 'Scout', 'GrowthFormation' },
     }
 }
 
@@ -31,28 +31,36 @@ PlatoonTemplate {
     Plan = 'SubHuntSCTAAI',
     --Type = 'SeaForm',
     GlobalSquads = {
-        { NAVY * categories.SUBMERSIBLE - categories.ENGINEER, 1, 2, 'Attack', 'GrowthFormation' },
+        { NAVY * categories.SUBMERSIBLE - categories.ENGINEER, 1, 2, 'Attack', 'AttackFormation' },
     }
 }
 
 PlatoonTemplate {
     Name = 'SCTANavalAssault',
-    Plan = 'NavalForceAISorian',
+    Plan = 'NavalForceAI',
     --Type = 'SeaForm',
     GlobalSquads = {
-        {NAVY - categories.ENGINEER, 4, 10, 'Attack', 'GrowthFormation' },
+        {NAVY - categories.ENGINEER - categories.TECH3, 2, 10, 'Attack', 'AttackFormation' },
+    },
+}
+
+PlatoonTemplate {
+    Name = 'SCTABattleshipNaval',
+    Plan = 'BattleshipSCTAAI',
+    --Type = 'SeaForm',
+    GlobalSquads = {
+        {NAVY * categories.TECH3 - categories.NAVALCARRIER, 1, 2, 'Attack', 'AttackFormation' },
     },
 }
 
 PlatoonTemplate {
     Name = 'SCTAAirCarrier',
-    Plan = 'CarrierAI',
+    Plan = 'None',
     --Type = 'SeaForm',
     GlobalSquads = {
         {categories.NAVALCARRIER, 1, 1, 'Attack', 'GrowthFormation' }
     },
 }
-
 PlatoonTemplate {
     Name = 'T1ScoutShipSCTA',
     FactionSquads = {
@@ -137,12 +145,12 @@ PlatoonTemplate {
         Arm = {
             { 'armbats', 1, 1, 'Attack', 'GrowthFormation'},
             { 'armpt', 1, 4, 'Attack', 'GrowthFormation' },
-            { 'armacsub', 1, 1, 'support', 'None' },
+            { 'armacsub', 1, 1, 'Support', 'None' },
         },
         Core = {
             { 'corbats', 1, 1, 'Attack', 'GrowthFormation'},
             { 'corpt', 1, 4, 'Attack', 'GrowthFormation' },
-            { 'coracsub', 1, 1, 'support', 'None' },
+            { 'coracsub', 1, 1, 'Support', 'None' },
         },
     }
 }

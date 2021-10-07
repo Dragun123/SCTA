@@ -74,6 +74,7 @@ UnitBlueprint {
         'TRANSPORTATION',
         'TRANSPORTFOCUS',
         'CANTRANSPORTCOMMANDER',
+        'CANNOTUSEAIRSTAGING',
         'CORE',
     },
     Defense = {
@@ -123,8 +124,7 @@ UnitBlueprint {
         Classification = 'RULEUC_MilitaryAircraft',
         CommandCaps = {
             RULEUCC_Attack = true,
-            RULEUCC_Dock = true,
-            RULEUCC_CallTransport = true,
+            RULEUCC_CallTransport = false,
             RULEUCC_Capture = false,
             RULEUCC_Ferry = true,
             RULEUCC_Guard = true,
@@ -137,7 +137,7 @@ UnitBlueprint {
             RULEUCC_Stop = true,
             RULEUCC_Transport = true,
         },
-        SelectionPriority = 4,
+        SelectionPriority = 2,
         FactionName = 'CORE',
         Icon = 'land',
 TechLevel = 'RULEUTL_Basic',
@@ -180,8 +180,7 @@ TechLevel = 'RULEUTL_Basic',
         DamageRadius = 3,
         DamageType = 'Normal',
         DummyWeapon = true,
-        Label = 'DeathWeapon',
-        }, 
-
+        Label = 'DeathImpact',
+        },
     },
 }

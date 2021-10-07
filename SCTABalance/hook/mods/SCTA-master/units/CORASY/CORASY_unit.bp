@@ -17,7 +17,6 @@ UnitBlueprint {
 	    'NAVAL',
 	    'CORE',
 	    'SORTCONSTRUCTION',
-        'SUPPORTFACTORY',
     },
     Defense = {
         Health = 7000,
@@ -39,6 +38,7 @@ UnitBlueprint {
             'NAVAL MOBILE TECH2 CORE',
             'NAVAL MOBILE TECH3 CORE',
             'corch',
+            'cornecro',
         },
         BuildRate = 360,
     },

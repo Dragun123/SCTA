@@ -6,18 +6,15 @@ UnitBlueprint {
         SurfaceThreatLevel = 12,
     },
     Economy = {
-        BuildCostEnergy = 36000,
+        BuildCostEnergy = 18000,
         BuildCostMass = 1000,
         BuildTime = 28000,
     },
     SizeY = 1.4,
     Weapon = {
         [1] = {
-            Damage = 100,
-            MaxRadius = 30,
-            MuzzleSalvoSize = 1,
-            RackSalvoSize = 1,
-            RateOfFire = 2,
+            Damage = 150,
+            MaxRadius = 30
         },
         [2] = {
         }, 

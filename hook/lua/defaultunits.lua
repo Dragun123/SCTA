@@ -9,7 +9,8 @@ ACUUnit = Class(oldtaACUUnit) {
         self:SetCustomName( ArmyBrains[self:GetArmy()].Nickname )
         self:SetUnSelectable(false)
         self:SetBlockCommandQueue(true)
-        WaitSeconds(2)
+        --WaitSeconds(2)
+        coroutine.yield(21)
         self:ForkThread(self.WarpInEffectThread, bones)
     end,
 
@@ -26,4 +27,12 @@ ACUUnit = Class(oldtaACUUnit) {
             end
             end
         end,
+    
+    DoTakeDamage = function(self, instigator, amount, vector, damageType)
+        oldtaACUUnit.DoTakeDamage(self, instigator, amount, vector, damageType)
+        if damageType == 'DGun' then
+            --LOG('TADGUN', EntityCategoryContains(categories.COMMAND, instigator))
+            instigator.Disintegrator:Destroy()
+        end
+    end,
 }

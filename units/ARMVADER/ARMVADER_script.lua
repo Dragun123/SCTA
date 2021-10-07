@@ -3,25 +3,14 @@
 #
 #Script created by Raevn
 
-local TACounter = import('/mods/SCTA-master/lua/TAMotion.lua').TACounter
+local TAKamiCounter = import('/mods/SCTA-master/lua/TAMotion.lua').TAKamiCounter
 local TABomb = import('/mods/SCTA-master/lua/TAweapon.lua').TABomb
 local TAKami = import('/mods/SCTA-master/lua/TAweapon.lua').TAKami
 
-ARMVADER = Class(TACounter) {
-	OnCreate = function(self)
-		TACounter.OnCreate(self)
-		self.attacked = false
-	end,
-
+ARMVADER = Class(TAKamiCounter) {
 	Weapons = {
 		DeathWeapon = Class(TABomb) {},
-		Suicide = Class(TAKami) {        
-			OnFire = function(self)			
-				#disable death weapon
-				self.unit:SetDeathWeaponEnabled(false)
-				TAKami.OnFire(self)
-			end,
-		},
+		Suicide = Class(TAKami) {},
 	},
 }
 TypeClass = ARMVADER

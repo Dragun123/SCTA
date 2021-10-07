@@ -113,14 +113,6 @@ end
 
 --TA Build Conditions
 
-function TAAIEcoConditionStorage(aiBrain)
-    local econStore = {}
-    econStore.MassStorageRatio = aiBrain:GetEconomyStoredRatio('MASS')
-    econStore.EnergyStorageRatio = aiBrain:GetEconomyStoredRatio('ENERGY')
-
-    return econStore
-end
-
 function TAAIEcoConditionEfficiency(aiBrain)
     local econEff = {}
     econEff.EnergyIncome = aiBrain:GetEconomyIncome('ENERGY')
@@ -131,33 +123,18 @@ function TAAIEcoConditionEfficiency(aiBrain)
     if aiBrain.EconomyMonitorThread then
         local econTime = aiBrain:GetEconomyOverTime()
 
-        econEff.EnergyEfficiencyOverTime = math.min(econTime.EnergyIncome / econTime.EnergyRequested, 30)
+        econEff.EnergyEfficiencyOverTime = math.min(econTime.EnergyIncome / econTime.EnergyRequested, 40)
         econEff.MassEfficiencyOverTime = math.min(econTime.MassIncome / econTime.MassRequested, 10)
     end
 
     return econEff
 end
 
-function TAEnergyEfficiency(aiBrain)
-    local econ = {}
-    econ.EnergyIncome = aiBrain:GetEconomyIncome('ENERGY')
-    econ.EnergyRequested = aiBrain:GetEconomyRequested('ENERGY')
-    econ.MassIncome = aiBrain:GetEconomyIncome('MASS')
-    econ.MassRequested = aiBrain:GetEconomyRequested('MASS')
-    if aiBrain.EconomyMonitorThread then
-        local econTime = aiBrain:GetEconomyOverTime()
-        econ.EnergyEfficiencyOverTime = math.min(econTime.EnergyIncome / econTime.EnergyRequested, 40)
-        econ.MassEfficiencyOverTime = math.min(econTime.MassIncome / econTime.MassRequested, 10)
-    end
-
-    return econ
-end
-
 function EcoManagementTA(aiBrain, MassEfficiency, EnergyEfficiency)
     local econEff = TAAIEcoConditionEfficiency(aiBrain)
     if ((aiBrain:GetEconomyStored('MASS') >= 125) and (aiBrain:GetEconomyStored('ENERGY') >= 350)) then
-        if (econEff.MassEfficiencyOverTime >= MassEfficiency and econEff.EnergyEfficiencyOverTime >= EnergyEfficiency) or
-        (aiBrain:GetEconomyStoredRatio('Mass').MassStorageRatio >= 0.5 and aiBrain:GetEconomyStoredRatio('ENERGY').EnergyStorageRatio >= 0.5) then
+        if ((econEff.MassEfficiencyOverTime >= MassEfficiency) and (econEff.EnergyEfficiencyOverTime >= EnergyEfficiency)) or
+        ((aiBrain:GetEconomyStoredRatio('Mass').MassStorageRatio >= 0.5) and (aiBrain:GetEconomyStoredRatio('ENERGY').EnergyStorageRatio >= 0.5)) then
             return true
         else
             return false
@@ -185,9 +162,9 @@ end
 
 
 function GreaterTAStorageRatio(aiBrain, mStorageRatio, eStorageRatio)
-    local econ = TAEnergyEfficiency(aiBrain)
-    if (econ.EnergyEfficiencyOverTime >= 0.5 and econ.MassEfficiencyOverTime >= 0.3) then
-        if (aiBrain:GetEconomyStoredRatio('ENERGY').EnergyStorageRatio >= eStorageRatio and aiBrain:GetEconomyStoredRatio('MASS').MassStorageRatio >= mStorageRatio) then
+    local econ = TAAIEcoConditionEfficiency(aiBrain)
+    if ((econ.EnergyEfficiencyOverTime >= 0.9) and (econ.MassEfficiencyOverTime >= 0.5)) then
+        if ((aiBrain:GetEconomyStoredRatio('ENERGY').EnergyStorageRatio >= eStorageRatio) and (aiBrain:GetEconomyStoredRatio('MASS').MassStorageRatio >= mStorageRatio)) then
             return true
         else
             return false
@@ -198,7 +175,7 @@ function GreaterTAStorageRatio(aiBrain, mStorageRatio, eStorageRatio)
 end
 
 function LessThanEconEnergyTAEfficiency(aiBrain, EnergyEfficiency)
-    local econ = TAEnergyEfficiency(aiBrain)
+    local econ = TAAIEcoConditionEfficiency(aiBrain)
     if (econ.EnergyEfficiencyOverTime <= EnergyEfficiency) and (econ.MassEfficiencyOverTime >= 0.5) then
         return true
     else
@@ -207,8 +184,8 @@ function LessThanEconEnergyTAEfficiency(aiBrain, EnergyEfficiency)
 end
 
 function GreaterThanEconEnergyTAEfficiency(aiBrain, EnergyEfficiency)
-    local econ = TAEnergyEfficiency(aiBrain)
-    if (econ.EnergyEfficiencyOverTime >= EnergyEfficiency) then
+    local econ = TAAIEcoConditionEfficiency(aiBrain)
+    if (econ.EnergyEfficiencyOverTime >= EnergyEfficiency) and (econ.MassEfficiencyOverTime >= 0.5) then
         return true
     else
     return false
@@ -246,6 +223,23 @@ function TARandomLocation(x,z, value)
     end
 	
     return { finalX, height, finalZ }
+end
+
+function HaveGreaterThanUnitsInCategoryBeingBuiltSCTA(aiBrain, numunits, category)
+    local unitsBuilding = aiBrain:GetListOfUnits(categories.CONSTRUCTION + categories.CQUEMOV, false)
+    local numBuilding = 0
+    for unitNum, unit in unitsBuilding do
+        if not unit.Dead and (unit:IsUnitState('Building') or unit:IsUnitState('Upgrading')) then
+            local buildingUnit = unit.UnitBeingBuilt
+            if buildingUnit and not buildingUnit.Dead and EntityCategoryContains(category, buildingUnit) then
+                numBuilding = numBuilding + 1
+            end
+        end
+        if numunits < numBuilding then
+            return true
+        end
+    end
+    return false
 end
 
 --[[function TAUnfinishedUnits(aiBrain, locationType, category)

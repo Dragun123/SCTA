@@ -70,6 +70,10 @@ TASeaair = Class(TAair)
 
 	OnMotionVertEventChange = function(self, new, old )
 		---TAair.OnMotionVertEventChange(self, new, old)
+		if self.Dead then
+            return
+        end
+		self.Layer = new
 			if (new == 'Down' or new == 'Bottom') then
 				self:PlayUnitSound('Landing')
 				self:CloseWings(self)
@@ -84,6 +88,10 @@ TASeaair = Class(TAair)
 
 	OnLayerChange = function(self, new, old)
 		--TAair.OnLayerChange(self, new, old)
+		if self.Dead then
+            return
+        end
+		self.Layer = new
 		if( old != 'None' ) then
             if( self.AT1 ) then
                 self.AT1:Destroy()

@@ -51,9 +51,9 @@ ProjectileBlueprint {
         Faction = 'CORE',
         Weapon = 'CORLEVLR_WEAPON',
     },
-
     Physics = {
         DestroyOnWater = true,
+        Lifetime = 20,
         InitialSpeed = 34,
         InitialSpeedReduceDistance = 200,
         LeadTarget = false,

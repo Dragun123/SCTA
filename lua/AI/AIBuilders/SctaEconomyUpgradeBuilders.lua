@@ -9,15 +9,9 @@
 
 local UCBC = '/lua/editor/UnitCountBuildConditions.lua'
 local MIBC = '/lua/editor/MiscBuildConditions.lua'
-local IBC = '/lua/editor/InstantBuildConditions.lua'
 local EBC = '/lua/editor/EconomyBuildConditions.lua'
 local TAutils = '/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua'
-local SAI = '/lua/ScenarioPlatoonAI.lua'
 local TASlow = '/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua'
-local FUSION = (categories.ENERGYPRODUCTION * (categories.TECH2 + categories.TECH3)) * categories.STRUCTURE
-local PLANT = (categories.FACTORY * categories.TECH1)
-local LAB = (categories.FACTORY * categories.TECH2)
-local PLATFORM = (categories.FACTORY * categories.TECH3)
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
 
 BuilderGroup {
@@ -38,8 +32,9 @@ BuilderGroup {
         },
         BuilderType = 'StructureForm',
         BuilderData = {
-            NeedGuard = false,
-            DesiresAssist = false,
+            ---NeedGuard = false,
+            DesiresAssist = true,
+            NumAssistees = 2,
         }
     },
     Builder {
@@ -57,8 +52,9 @@ BuilderGroup {
         },
         BuilderType = 'StructureForm',
         BuilderData = {
-            NeedGuard = false,
-            DesiresAssist = false,
+            ---NeedGuard = false,
+            DesiresAssist = true,
+            NumAssistees = 4,
         }
     },
     Builder {
@@ -77,8 +73,9 @@ BuilderGroup {
         },
         BuilderType = 'StructureForm',
         BuilderData = {
-            NeedGuard = false,
-            DesiresAssist = false,
+            ---NeedGuard = false,
+            DesiresAssist = true,
+            NumAssistees = 4,
         }
     },
     Builder {
@@ -94,6 +91,11 @@ BuilderGroup {
             { TAutils, 'EcoManagementTA', { 0.75, 1.05} },
         },
         BuilderType = 'StructureForm',
+        BuilderData = {
+            ---NeedGuard = false,
+            DesiresAssist = true,
+            NumAssistees = 4,
+        }
     },
     Builder {
         BuilderName = 'SCTAMetalMakr',
@@ -103,7 +105,6 @@ BuilderGroup {
         PriorityFunction = TAPrior.TechEnergyExist,
         BuilderConditions = {
             { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.MASSFABRICATION} },
-                { UCBC, 'HaveGreaterThanUnitsWithCategory', { 0, categories.MASSFABRICATION}},
             },
         BuilderType = 'StructureForm',
     },
@@ -115,7 +116,6 @@ BuilderGroup {
         PriorityFunction = TAPrior.TechEnergyExist,
         BuilderConditions = {
             { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.ARTILLERY * categories.STRUCTURE} },
-            { UCBC, 'HaveGreaterThanUnitsWithCategory', { 0, categories.ARTILLERY * categories.STRUCTURE}},
             },
         BuilderType = 'StructureForm',
     },
@@ -125,7 +125,6 @@ BuilderGroup {
         Priority = 300,
         BuilderConditions = {
             { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.TACTICALMISSILEPLATFORM * categories.STRUCTURE} },
-            { UCBC, 'HaveGreaterThanUnitsWithCategory', { 0, categories.TACTICALMISSILEPLATFORM * categories.STRUCTURE}},
             },
         BuilderType = 'StructureForm',
     },

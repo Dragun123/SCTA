@@ -16,7 +16,7 @@ TATransport = Class(AirTransport)
 	end,
 
     OnKilled = function(self, instigator, type, overkillRatio)
-        local layer = self:GetCurrentLayer()
+        local layer = self.Layer
         self.Dead = true
 
 
@@ -66,28 +66,43 @@ TATransport = Class(AirTransport)
 
     end,
 
-    CreateMovementEffects = function(self, EffectsBag, TypeSuffix)
-		if not IsDestroyed(self) then
-		AirTransport.CreateMovementEffects(self, EffectsBag, TypeSuffix)
-		local bp = self:GetBlueprint()
-		if self:IsUnitState('Moving') and bp.Display.MovementEffects.TAMovement then
+    StartMoveFxTA = function(self)
+        if not self.MoveFx then
+            self.MoveFx = self:ForkThread(self.TAMoveFxThread)
+        end
+    end,
+
+    TAMoveFxThread = function(self)
+        while self:IsUnitState('Moving') and not self.Dead do
+			local bp = self:GetBlueprint()
 			for k, v in bp.Display.MovementEffects.TAMovement.Bones do
-				self.FxMovement:Add(CreateAttachedEmitter(self, v, self:GetArmy(), bp.Display.MovementEffects.TAMovement.Emitter ):ScaleEmitter(bp.Display.MovementEffects.TAMovement.Scale))
+				self.TAMove = CreateAttachedEmitter(self, v, self:GetArmy(), bp.Display.MovementEffects.TAMovement.Emitter ):ScaleEmitter(bp.Display.MovementEffects.TAMovement.Scale)
+			---LOG('TAIEXIST', self.Trash)
+                --self.Trash:Add(CreateAttachedEmitter(self,'Back_Wake',self:GetArmy(),'/mods/CTO/effects/emitters/AU_MOVEMENTS/WATER/AU_MOVEMENTS_WATER_drops_emit.bp'):OffsetEmitter(0.0, -0.75, 0.0):ScaleEmitter(0.2))
+			coroutine.yield(11)
+            self.TAMove:Destroy()
 			end
-			elseif not self:IsUnitState('Moving') then
-			for k,v in self.FxMovement do
-				v:Destroy()
-			end
-		end
-		end
-	end,
+        end
+    end,
+
+    MoveFxStopTA = function(self)
+        if self.TAMoveFxThread then
+            KillThread(self.MoveFx)
+            self.MoveFx = nil
+        end
+    end,
 
 }
 
 TATransportSea = Class(TATransport) {
     OnMotionHorzEventChange = function(self, new, old )
 		TATransport.OnMotionHorzEventChange(self, new, old)
-		self.CreateMovementEffects(self)
+        if ( new == 'Cruise' and old == 'Stopped') then
+            self:ForkThread(self.StartMoveFxTA)
+         end
+        if ( new == 'Stopped' ) or ( new == 'Stopped' and old == 'Stopping' ) then
+            self:ForkThread(self.MoveFxStopTA)
+        end
 	end,
 }
 
@@ -110,11 +125,13 @@ TATransportAir = Class(TATransport) {
         if (new == 'Down' or new == 'Bottom') then
 			self:CloseWings()
 			self:PlayUnitSound('Landing')
+            self:ForkThread(self.MoveFxStopTA)
 			local vis = self:GetBlueprint().Intel.VisionRadius / 2
             self:SetIntelRadius('Vision', vis)
         elseif (new == 'Up' or new == 'Top') then
 			self:OpenWings()
 			self:PlayUnitSound('TakeOff')
+            self:ForkThread(self.StartMoveFxTA)
 			local bpVision = self:GetBlueprint().Intel.VisionRadius
             if bpVision then
                 self:SetIntelRadius('Vision', bpVision)

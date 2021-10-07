@@ -5,20 +5,16 @@
 
 UnitBlueprint {
     Merge = true, 
+    Display = {
+        UniformScale = 0.16,
+    },
     Defense = {
-        Health = 1100,
-        MaxHealth = 1100,
+        Health = 1000,
+        MaxHealth = 1000,
     },
     Economy = {
         BuildCostEnergy = 2500,
         BuildCostMass = 250,
         BuildTime = 4800,
-    },
-    Weapon = {
-        [1] = {
-            RateOfFire = 2,
-        },
-        [2] = {
-        },
     },
 }

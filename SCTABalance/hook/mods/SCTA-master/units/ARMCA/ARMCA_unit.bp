@@ -5,8 +5,8 @@ UnitBlueprint {
         MinAirspeed = 3,
     },    
     Defense = {
-        Health = 380,
-        MaxHealth = 380,
+        Health = 220,
+        MaxHealth = 220,
         },
         Display = {
             UniformScale = 0.09,
@@ -15,7 +15,6 @@ UnitBlueprint {
         BuildCostMass = 60,
         BuildCostEnergy = 2800,
         ProductionPerSecondEnergy = 2,
-        MaxBuildDistance = 5,
         BuildTime = 2000,
     },
     Physics = {

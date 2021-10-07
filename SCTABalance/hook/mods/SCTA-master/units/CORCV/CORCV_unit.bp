@@ -10,7 +10,6 @@ UnitBlueprint {
         'RECLAIMABLE',
         'PATROLHELPER',
         'SHOWQUEUE',
-	    'SELECTION',
         'MOBILE',
 	    'CONSTRUCTION',
         'LAND',
@@ -19,8 +18,8 @@ UnitBlueprint {
         'TANK',
     },
     Defense = {
-        Health = 440,
-        MaxHealth = 440,
+        Health = 300,
+        MaxHealth = 300,
         },
         Display = {
             UniformScale = 0.085,

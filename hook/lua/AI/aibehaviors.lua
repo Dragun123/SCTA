@@ -1,5 +1,5 @@
 WARN('['..string.gsub(debug.getinfo(1).source, ".*\\(.*.lua)", "%1")..', line:'..debug.getinfo(1).currentline..'] * SCTAAI: offset aibehaviors.lua' )
-
+--local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
 local TAReclaim = import('/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua')
 
 function CommanderBehaviorSCTA(platoon)
@@ -28,13 +28,13 @@ function CommanderThreadSCTADecoy(cdr, platoon)
     SetCDRHome(cdr, platoon)
     while not cdr.Dead do
         -- Overcharge
-        if not cdr.Dead and table.getn(cdr.EngineerBuildQueue) == 0 and cdr.BuildingUnit == false then CDRSCTADGun(aiBrain, cdr) end
+        if not cdr.Dead then CDRSCTADGunDecoy(aiBrain, cdr) end
         WaitTicks(1)
 
         -- Go back to base
         if not cdr.Dead then SCTACDRReturnHome(aiBrain, cdr) end
         WaitTicks(1)
-        if not cdr:IsDead() and cdr:IsIdleState() then
+        if not cdr.Dead and cdr:IsIdleState() then
             if not cdr.EngineerBuildQueue or table.getn(cdr.EngineerBuildQueue) == 0 then
                 local pool = aiBrain:GetPlatoonUniquelyNamed('ArmyPool')
                 aiBrain:AssignUnitsToPlatoon( pool, {cdr}, 'Unassigned', 'None' )
@@ -46,7 +46,7 @@ function CommanderThreadSCTADecoy(cdr, platoon)
         end
         WaitTicks(1)        
         if not cdr.Dead and GetGameTimeSeconds() > WaitTaunt and (not aiBrain.LastVocTaunt or GetGameTimeSeconds() - aiBrain.LastVocTaunt > WaitTaunt) then
-            TAReclaim.TAAIRandomizeTaunt(aiBrain)
+            SUtils.AIRandomizeTaunt(aiBrain)
             WaitTaunt = 600 + Random(1, 900)
         end
     end
@@ -63,18 +63,19 @@ function CDRSCTADGunDecoy(aiBrain, cdr)
             break
         end
     end
-    
 
+    -- Increase distress on non-water maps
+
+    -- Take away engineers too
     local cdrPos = cdr.CDRHome
-    local numUnits = aiBrain:GetNumUnitsAroundPoint(categories.LAND * categories.MOBILE - categories.SCOUT, cdrPos, (maxRadius), 'Enemy')
-    local distressLoc = aiBrain:BaseMonitorDistressLocation(cdrPos)
+    local numUnits = aiBrain:GetNumUnitsAroundPoint(categories.LAND * categories.MOBILE - categories.SCOUT, cdrPos, 100, 'Enemy')
     local overCharging = false
     cdr.UnitBeingBuiltBehavior = false
-    if Utilities.XZDistanceTwoVectors(cdrPos, cdr:GetPosition()) > maxRadius then
+    if Utilities.XZDistanceTwoVectors(cdrPos, cdr:GetPosition()) > 100 then
         return
     end
 
-    if numUnits > 0 or (not cdr.DistressCall and distressLoc and Utilities.XZDistanceTwoVectors(distressLoc, cdrPos) < distressRange) then
+    if numUnits > 0 then
         if cdr.UnitBeingBuilt then
             cdr.UnitBeingBuiltBehavior = cdr.UnitBeingBuilt
         end
@@ -99,7 +100,7 @@ function CDRSCTADGunDecoy(aiBrain, cdr)
         local enemyThreat
         repeat
             overCharging = false
-            if counter >= 5 or not target or target.Dead or Utilities.XZDistanceTwoVectors(cdrPos, target:GetPosition()) > maxRadius then
+            if counter >= 5 or not target or target.Dead or Utilities.XZDistanceTwoVectors(cdrPos, target:GetPosition()) > 100 then
                 counter = 0
                 searchRadius = 30
                 repeat
@@ -107,8 +108,8 @@ function CDRSCTADGunDecoy(aiBrain, cdr)
                     for k, v in priList do
                         target = plat:FindClosestUnit('Support', 'Enemy', true, v)
                         if target and Utilities.XZDistanceTwoVectors(cdrPos, target:GetPosition()) <= searchRadius then
-                            local cdrLayer = cdr:GetCurrentLayer()
-                            local targetLayer = target:GetCurrentLayer()
+                            local cdrLayer = cdr.Layer
+                            local targetLayer = target.Layer
                             if not (cdrLayer == 'Land' and (targetLayer == 'Air' or targetLayer == 'Sub' or targetLayer == 'Seabed')) and
                                not (cdrLayer == 'Seabed' and (targetLayer == 'Air' or targetLayer == 'Water')) then
                                 break
@@ -116,7 +117,7 @@ function CDRSCTADGunDecoy(aiBrain, cdr)
                         end
                         target = false
                     end
-                until target or searchRadius >= maxRadius
+                until target or searchRadius >= 100
 
                 if target then
                     local targetPos = target:GetPosition()
@@ -124,8 +125,9 @@ function CDRSCTADGunDecoy(aiBrain, cdr)
                     -- If inside base dont check threat, just shoot!
                     if Utilities.XZDistanceTwoVectors(cdr.CDRHome, cdr:GetPosition()) > 45 then
                         enemyThreat = aiBrain:GetThreatAtPosition(targetPos, 1, true, 'AntiSurface')
+                        enemyCdrThreat = aiBrain:GetThreatAtPosition(targetPos, 1, true, 'Commander')
                         friendlyThreat = aiBrain:GetThreatAtPosition(targetPos, 1, true, 'AntiSurface', aiBrain:GetArmyIndex())
-                        if enemyThreat >= friendlyThreat + cdrThreat then
+                        if enemyThreat - enemyCdrThreat >= friendlyThreat + (cdrThreat / 1.5) then
                             break
                         end
                     end
@@ -133,6 +135,7 @@ function CDRSCTADGunDecoy(aiBrain, cdr)
                     if aiBrain:GetEconomyStored('ENERGY') >= weapon.EnergyRequired and target and not target.Dead then
                         overCharging = true
                         IssueClearCommands({cdr})
+                        --IssueMove({cdr}, targetPos)
                         ---TAReclaim.TAAIRandomizeTaunt(aiBrain)
                         IssueOverCharge({cdr}, target)
                     elseif target and not target.Dead then -- Commander attacks even if not enough energy for overcharge
@@ -140,41 +143,23 @@ function CDRSCTADGunDecoy(aiBrain, cdr)
                         IssueMove({cdr}, targetPos)
                         IssueMove({cdr}, cdr.CDRHome)
                     end
-                elseif distressLoc then
-                    enemyThreat = aiBrain:GetThreatAtPosition(distressLoc, 1, true, 'AntiSurface')
-                    enemyCdrThreat = aiBrain:GetThreatAtPosition(distressLoc, 1, true, 'Commander')
-                    friendlyThreat = aiBrain:GetThreatAtPosition(distressLoc, 1, true, 'AntiSurface', aiBrain:GetArmyIndex())
-                    if enemyThreat - enemyCdrThreat >= friendlyThreat + (cdrThreat / 3) then
-                        break
-                    end
-                    if distressLoc and (Utilities.XZDistanceTwoVectors(distressLoc, cdrPos) < distressRange) then
-                        IssueClearCommands({cdr})
-                        IssueMove({cdr}, distressLoc)
-                        IssueMove({cdr}, cdr.CDRHome)
-                    end
                 end
             end
 
             if overCharging then
                 while target and not target.Dead and not cdr.Dead and counter <= 5 do
-                    WaitSeconds(0.5)
+                    --WaitSeconds(0.5)
+                    coroutine.yield(5)
                     counter = counter + 0.5
                 end
             else
-                WaitSeconds(5)
-                counter = counter + 5
-            end
-
-            distressLoc = aiBrain:BaseMonitorDistressLocation(cdrPos)
-            if cdr.Dead then
-                return
-            end
-
-            if aiBrain:GetNumUnitsAroundPoint(categories.LAND * categories.MOBILE - categories.SCOUT, cdrPos, maxRadius, 'Enemy') <= 0
-                and (not distressLoc or Utilities.XZDistanceTwoVectors(distressLoc, cdrPos) > distressRange) then
-                continueFighting = false
+                WaitSeconds(3)
+                counter = counter + 3
             end
             -- If com is down to yellow then dont keep fighting
+            if (cdr:GetHealthPercent() < 0.75) and Utilities.XZDistanceTwoVectors(cdr.CDRHome, cdr:GetPosition()) > 30 then
+                continueFighting = false
+            end
         until not continueFighting or not aiBrain:PlatoonExists(plat)
 
         IssueClearCommands({cdr})
@@ -188,67 +173,116 @@ function CDRSCTADGunDecoy(aiBrain, cdr)
 end
 
 function BehemothBehaviorTotal(self)
-    AssignExperimentalPrioritiesSorian(self)
+if not self:GatherUnitsSorian() then
+    return
+end
+AssignExperimentalPrioritiesSorian(self)
 
-    -- Find target loop
-    local experimental
-    local targetUnit = false
-    local lastBase = false
-    local airUnit = false
-    local useMove = true
-    local farTarget = false
-    local aiBrain = self:GetBrain()
-    local platoonUnits = self:GetPlatoonUnits()
-    local cmd 
-    while aiBrain:PlatoonExists(self) do
-        self:MergeWithNearbyPlatoonsSCTA('ExperimentalAIHubTA', 'ExperimentalAIHubTA', 50)
+-- Find target loop
+local experimental
+local targetUnit = false
+local lastBase = false
+local airUnit = false
+local useMove = true
+local farTarget = false
+local aiBrain = self:GetBrain()
+local platoonUnits = self:GetPlatoonUnits()
+local cmd
+TAReclaim.TAAIRandomizeTaunt(aiBrain)
+while aiBrain:PlatoonExists(self) do
+    self:MergeWithNearbyPlatoonsSorian('ExperimentalAIHubTA', 50, true)
+    useMove = InWaterCheck(self)
+    if lastBase then
+        targetUnit, lastBase = WreckBaseSorian(self, lastBase)
+    end
+
+    if not lastBase then
+        targetUnit, lastBase = FindExperimentalTargetSorian(self)
+    end
+
+    farTarget = false
+    if targetUnit and SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), targetUnit:GetPosition()) >= 40000 then
+        farTarget = true
+    end
+
+    if targetUnit then
+        IssueClearCommands(platoonUnits)
+        if useMove or not farTarget then
+            cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', targetUnit:GetPosition(), false)
+        else
+            cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', targetUnit:GetPosition(), 'AttackMove')
+        end
+    end
+
+    -- Walk to and kill target loop
+    local nearCommander = CommanderOverrideCheckSorian(self)
+    local ACUattack = false
+    while aiBrain:PlatoonExists(self) and targetUnit and not targetUnit.Dead and useMove == InWaterCheck(self) and
+    self:IsCommandsActive(cmd) and (nearCommander or ((farTarget and SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), targetUnit:GetPosition()) >= 40000) or
+    (not farTarget and SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), targetUnit:GetPosition()) < 40000))) do
+        self:MergeWithNearbyPlatoonsSorian('ExperimentalAIHubTA', 50, true)
         useMove = InWaterCheck(self)
-        if lastBase then
-            targetUnit, lastBase = WreckBaseSorian(self, lastBase)
-        end
+        nearCommander = CommanderOverrideCheckSorian(self)
 
-        if not lastBase then
-            targetUnit, lastBase = FindExperimentalTarget(self)
-        end
-
-        farTarget = false
-        if targetUnit and SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), targetUnit:GetPosition()) >= 40000 then
-            farTarget = true
-        end
-
-        if targetUnit then
+        if nearCommander and (nearCommander ~= targetUnit or
+        (not ACUattack and SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), nearCommander:GetPosition()) < 40000)) then
             IssueClearCommands(platoonUnits)
-            if useMove or not farTarget then
-                cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', targetUnit:GetPosition(), false)
+            if useMove then
+                cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', nearCommander:GetPosition(), false)
             else
-                cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', targetUnit:GetPosition(), 'AttackMove')
+                cmd = self:AttackTarget(targetUnit)
+                ACUattack = true
+            end
+            targetUnit = nearCommander
+        end
+
+        -- Check if we or the target are under a shield
+        local closestBlockingShield = false
+        for k, v in platoonUnits do
+            if not v.Dead then
+                experimental = v
+                break
             end
         end
 
-        -- Walk to and kill target loop
-        local nearCommander = CommanderOverrideCheckSorian(self)
-        local ACUattack = false
-        while aiBrain:PlatoonExists(self) and targetUnit and not targetUnit.Dead and useMove == InWaterCheck(self) and
-        self:IsCommandsActive(cmd) and (nearCommander or ((farTarget and SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), targetUnit:GetPosition()) >= 40000) or
-        (not farTarget and SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), targetUnit:GetPosition()) < 40000))) do
-            self:MergeWithNearbyPlatoonsSCTA('ExperimentalAIHubTA', 'ExperimentalAIHubTA', 50)
-            useMove = InWaterCheck(self)
-            nearCommander = CommanderOverrideCheckSorian(self)
+        if not airUnit then
+            closestBlockingShield = GetClosestShieldProtectingTargetSorian(experimental, experimental)
+        end
+        closestBlockingShield = closestBlockingShield or GetClosestShieldProtectingTargetSorian(experimental, targetUnit)
 
-            if nearCommander and (nearCommander ~= targetUnit or
-            (not ACUattack and SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), nearCommander:GetPosition()) < 40000)) then
-                IssueClearCommands(platoonUnits)
-                if useMove then
-                    cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', nearCommander:GetPosition(), false)
-                else
-                    cmd = self:AttackTarget(targetUnit)
-                    ACUattack = true
-                end
-                targetUnit = nearCommander
+        -- Kill shields loop
+        local oldTarget = false
+        while closestBlockingShield do
+            oldTarget = oldTarget or targetUnit
+            targetUnit = false
+            self:MergeWithNearbyPlatoonsSorian('ExperimentalAIHubTA', 50, true)
+            useMove = InWaterCheck(self)
+            IssueClearCommands(platoonUnits)
+            if useMove or SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), closestBlockingShield:GetPosition()) < 40000 then
+                cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', closestBlockingShield:GetPosition(), false)
+            else
+                cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', closestBlockingShield:GetPosition(), 'AttackMove')
             end
 
-            -- Check if we or the target are under a shield
-            local closestBlockingShield = false
+            local farAway = true
+            if SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), closestBlockingShield:GetPosition()) < 40000 then
+                farAway = false
+            end
+
+            -- Wait for shield to die loop
+            while not closestBlockingShield.Dead and aiBrain:PlatoonExists(self) and useMove == InWaterCheck(self)
+            and self:IsCommandsActive(cmd) do
+                self:MergeWithNearbyPlatoonsSorian('ExperimentalAIHubTA', 50, true)
+                useMove = InWaterCheck(self)
+                local targDistSq = SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), closestBlockingShield:GetPosition())
+                if (farAway and targDistSq < 40000) or (not farAway and targDistSq >= 40000) then
+                    break
+                end
+                --WaitSeconds(1)
+                coroutine.yield(11)
+            end
+
+            closestBlockingShield = false
             for k, v in platoonUnits do
                 if not v.Dead then
                     experimental = v
@@ -256,62 +290,20 @@ function BehemothBehaviorTotal(self)
                 end
             end
 
-            if not airUnit then
-                closestBlockingShield = GetClosestShieldProtectingTargetSorian(experimental, experimental)
-            end
-            closestBlockingShield = closestBlockingShield or GetClosestShieldProtectingTargetSorian(experimental, targetUnit)
-
-            -- Kill shields loop
-            local oldTarget = false
-            while closestBlockingShield do
-                oldTarget = oldTarget or targetUnit
-                targetUnit = false
-                self:MergeWithNearbyPlatoonsSCTA('ExperimentalAIHubTA', 'ExperimentalAIHubTA', 50)
-                useMove = InWaterCheck(self)
-                IssueClearCommands(platoonUnits)
-                if useMove or SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), closestBlockingShield:GetPosition()) < 40000 then
-                    cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', closestBlockingShield:GetPosition(), false)
-                else
-                    cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', closestBlockingShield:GetPosition(), 'AttackMove')
-                end
-
-                local farAway = true
-                if SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), closestBlockingShield:GetPosition()) < 40000 then
-                    farAway = false
-                end
-
-                -- Wait for shield to die loop
-                while not closestBlockingShield.Dead and aiBrain:PlatoonExists(self) and useMove == InWaterCheck(self)
-                and self:IsCommandsActive(cmd) do
-                    self:MergeWithNearbyPlatoonsSCTA('ExperimentalAIHubTA', 'ExperimentalAIHubTA', 50)
-                    useMove = InWaterCheck(self)
-                    local targDistSq = SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), closestBlockingShield:GetPosition())
-                    if (farAway and targDistSq < 40000) or (not farAway and targDistSq >= 40000) then
-                        break
-                    end
-                    WaitSeconds(1)
-                end
-
-                closestBlockingShield = false
-                for k, v in platoonUnits do
-                    if not v.Dead then
-                        experimental = v
-                        break
-                    end
-                end
-
                 if not airUnit then
-                    closestBlockingShield = GetClosestShieldProtectingTargetSorian(experimental, experimental)
+                closestBlockingShield = GetClosestShieldProtectingTargetSorian(experimental, experimental)
                 end
-                closestBlockingShield = closestBlockingShield or GetClosestShieldProtectingTargetSorian(experimental, oldTarget)
-                WaitSeconds(1)
+            closestBlockingShield = closestBlockingShield or GetClosestShieldProtectingTargetSorian(experimental, oldTarget)
+            --WaitSeconds(1)
+            coroutine.yield(11)
             end
-            WaitSeconds(1)
+        --WaitSeconds(1)
+        coroutine.yield(11)
         end
-        WaitSeconds(1)
+    --WaitSeconds(1)
+    coroutine.yield(11)
     end
 end
-
 
 function CommanderThreadSCTA(cdr, platoon)
     --LOG('cdr is '..cdr.UnitId)
@@ -322,13 +314,13 @@ function CommanderThreadSCTA(cdr, platoon)
     SetCDRHome(cdr, platoon)
     while not cdr.Dead do
         -- Overcharge
-        if not cdr.Dead and table.getn(cdr.EngineerBuildQueue) == 0 and cdr.BuildingUnit == false then CDRSCTADGun(aiBrain, cdr) end
+        if not cdr.Dead and aiBrain.Plants > 4 then CDRSCTADGun(aiBrain, cdr) end
         WaitTicks(1)
 
         -- Go back to base
         if not cdr.Dead then SCTACDRReturnHome(aiBrain, cdr) end
         WaitTicks(1)
-        if not cdr:IsDead() and cdr:IsIdleState() then
+        if not cdr.Dead and cdr:IsIdleState() then
             if not cdr.EngineerBuildQueue or table.getn(cdr.EngineerBuildQueue) == 0 then
                 local pool = aiBrain:GetPlatoonUniquelyNamed('ArmyPool')
                 aiBrain:AssignUnitsToPlatoon( pool, {cdr}, 'Unassigned', 'None' )
@@ -357,40 +349,19 @@ function CDRSCTADGun(aiBrain, cdr)
             break
         end
     end
-    
-    -- Added for ACUs starting near each other
-    if GetGameTimeSeconds() < 180 then
-        return
-    end
 
     -- Increase distress on non-water maps
-    local distressRange = 60
-    if cdr:GetHealthPercent() > 0.8 and aiBrain:GetMapWaterRatio() < 0.4 then
-        distressRange = 100
-    end
-
-    -- Increase attack range for a few mins on small maps
-    local maxRadius = weapon.MaxRadius + 10
-    local mapSizeX, mapSizeZ = GetMapSize()
-    if cdr:GetHealthPercent() > 0.8
-        and GetGameTimeSeconds() < 360
-        and GetGameTimeSeconds() > 120
-        and mapSizeX <= 512 and mapSizeZ <= 512
-        then
-        maxRadius = 256
-    end
 
     -- Take away engineers too
     local cdrPos = cdr.CDRHome
-    local numUnits = aiBrain:GetNumUnitsAroundPoint(categories.LAND * categories.MOBILE - categories.SCOUT, cdrPos, (maxRadius), 'Enemy')
-    local distressLoc = aiBrain:BaseMonitorDistressLocation(cdrPos)
+    local numUnits = aiBrain:GetNumUnitsAroundPoint(categories.LAND * categories.MOBILE - categories.SCOUT, cdrPos, 100, 'Enemy')
     local overCharging = false
     cdr.UnitBeingBuiltBehavior = false
-    if Utilities.XZDistanceTwoVectors(cdrPos, cdr:GetPosition()) > maxRadius then
+    if Utilities.XZDistanceTwoVectors(cdrPos, cdr:GetPosition()) > 100 then
         return
     end
 
-    if numUnits > 0 or (not cdr.DistressCall and distressLoc and Utilities.XZDistanceTwoVectors(distressLoc, cdrPos) < distressRange) then
+    if numUnits > 0 then
         if cdr.UnitBeingBuilt then
             cdr.UnitBeingBuiltBehavior = cdr.UnitBeingBuilt
         end
@@ -415,7 +386,7 @@ function CDRSCTADGun(aiBrain, cdr)
         local enemyThreat
         repeat
             overCharging = false
-            if counter >= 5 or not target or target.Dead or Utilities.XZDistanceTwoVectors(cdrPos, target:GetPosition()) > maxRadius then
+            if counter >= 5 or not target or target.Dead or Utilities.XZDistanceTwoVectors(cdrPos, target:GetPosition()) > 30 then
                 counter = 0
                 searchRadius = 30
                 repeat
@@ -423,8 +394,8 @@ function CDRSCTADGun(aiBrain, cdr)
                     for k, v in priList do
                         target = plat:FindClosestUnit('Support', 'Enemy', true, v)
                         if target and Utilities.XZDistanceTwoVectors(cdrPos, target:GetPosition()) <= searchRadius then
-                            local cdrLayer = cdr:GetCurrentLayer()
-                            local targetLayer = target:GetCurrentLayer()
+                            local cdrLayer = cdr.Layer
+                            local targetLayer = target.Layer
                             if not (cdrLayer == 'Land' and (targetLayer == 'Air' or targetLayer == 'Sub' or targetLayer == 'Seabed')) and
                                not (cdrLayer == 'Seabed' and (targetLayer == 'Air' or targetLayer == 'Water')) then
                                 break
@@ -432,7 +403,7 @@ function CDRSCTADGun(aiBrain, cdr)
                         end
                         target = false
                     end
-                until target or searchRadius >= maxRadius
+                until target or searchRadius >= 100
 
                 if target then
                     local targetPos = target:GetPosition()
@@ -446,27 +417,15 @@ function CDRSCTADGun(aiBrain, cdr)
                             break
                         end
                     end
-
+                    IssueClearCommands({cdr})
                     if aiBrain:GetEconomyStored('ENERGY') >= weapon.EnergyRequired and target and not target.Dead then
                         overCharging = true
+                        IssueMove({cdr}, targetPos)
                         IssueClearCommands({cdr})
-                        ---TAReclaim.TAAIRandomizeTaunt(aiBrain)
                         IssueOverCharge({cdr}, target)
                     elseif target and not target.Dead then -- Commander attacks even if not enough energy for overcharge
-                        IssueClearCommands({cdr})
                         IssueMove({cdr}, targetPos)
-                        IssueMove({cdr}, cdr.CDRHome)
-                    end
-                elseif distressLoc then
-                    enemyThreat = aiBrain:GetThreatAtPosition(distressLoc, 1, true, 'AntiSurface')
-                    enemyCdrThreat = aiBrain:GetThreatAtPosition(distressLoc, 1, true, 'Commander')
-                    friendlyThreat = aiBrain:GetThreatAtPosition(distressLoc, 1, true, 'AntiSurface', aiBrain:GetArmyIndex())
-                    if enemyThreat - enemyCdrThreat >= friendlyThreat + (cdrThreat / 3) then
-                        break
-                    end
-                    if distressLoc and (Utilities.XZDistanceTwoVectors(distressLoc, cdrPos) < distressRange) then
-                        IssueClearCommands({cdr})
-                        IssueMove({cdr}, distressLoc)
+                    elseif target.Dead then
                         IssueMove({cdr}, cdr.CDRHome)
                     end
                 end
@@ -474,25 +433,16 @@ function CDRSCTADGun(aiBrain, cdr)
 
             if overCharging then
                 while target and not target.Dead and not cdr.Dead and counter <= 5 do
-                    WaitSeconds(0.5)
+                    --WaitSeconds(0.5)
+                    coroutine.yield(6)
                     counter = counter + 0.5
                 end
             else
-                WaitSeconds(5)
-                counter = counter + 5
-            end
-
-            distressLoc = aiBrain:BaseMonitorDistressLocation(cdrPos)
-            if cdr.Dead then
-                return
-            end
-
-            if aiBrain:GetNumUnitsAroundPoint(categories.LAND * categories.MOBILE - categories.SCOUT, cdrPos, maxRadius, 'Enemy') <= 0
-                and (not distressLoc or Utilities.XZDistanceTwoVectors(distressLoc, cdrPos) > distressRange) then
-                continueFighting = false
+                WaitSeconds(3)
+                counter = counter + 3
             end
             -- If com is down to yellow then dont keep fighting
-            if (cdr:GetHealthPercent() < 0.75) and Utilities.XZDistanceTwoVectors(cdr.CDRHome, cdr:GetPosition()) > 30 then
+            if (cdr:GetHealthPercent() < 0.5) and Utilities.XZDistanceTwoVectors(cdr.CDRHome, cdr:GetPosition()) > 30 then
                 continueFighting = false
             end
         until not continueFighting or not aiBrain:PlatoonExists(plat)
@@ -591,7 +541,8 @@ function SCTAAirUnitRefitThread(unit, plan, data)
                 end
             end
         end
-        WaitSeconds(1)
+        --WaitSeconds(1)
+        coroutine.yield(11)
     end
 end
 
@@ -611,7 +562,8 @@ function SCTAAirStagingThread(unit)
             local pos = unit:GetPosition()
             IssueClearCommands({unit})
             IssueTransportUnload({unit}, {pos[1] + 5, pos[2], pos[3] + 5})
-            WaitSeconds(2)
+            --WaitSeconds(2)
+            coroutine.yield(21)
             for _, v in unit.Refueling do
                 if not v.Dead then
                     v.Loading = false

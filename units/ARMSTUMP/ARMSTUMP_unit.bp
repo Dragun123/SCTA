@@ -131,7 +131,6 @@ UnitBlueprint {
     SizeZ = 2,
     SizeY = 1, 
     StrategicIconName = 'icon_land1_directfire',
-    TAStrategicIconName = '1/bot_armored',
     StrategicIconSortPriority = 0,
     Weapon = {
         {
@@ -144,13 +143,13 @@ UnitBlueprint {
             },
             BallisticArc = 'RULEUBA_None',
             CollideFriendly = false,
-	    DamageFriendly = true,
+            DamageFriendly = false,
             Damage = 60,
             DamageType = 'Normal',
             DisplayName = 'ARM_LIGHTCANNON',
             FireTargetLayerCapsTable = {
-                Land = 'Land|Water|Seabed',
-                Seabed = 'Land|Water|Seabed',
+                Land = 'Land|Water|Seabed|Air',
+                Seabed = 'Land|Water|Seabed|Air',
             },
 	    RangeCategory = 'UWRC_DirectFire',
      WeaponCategory = 'DirectFire',
@@ -202,16 +201,14 @@ UnitBlueprint {
             DamageType = 'Normal',
             DummyWeapon = true,
             Label = 'DeathWeapon',
-        }, 
-
+        },
     },
         Wreckage = {
-Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
-        EnergyMult = 0,
-        HealthMult = 0.9,
-        MassMult = 0.9,
-        ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/ARMSTUMP/ARMSTUMP_dead_prop.bp',
+            Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+            EnergyMult = 0,
+            HealthMult = 0.9,
+            MassMult = 0.9,
+            ReclaimTimeMultiplier = 1,
         WreckageLayers = {
             Land = true,
             Seabed = true,

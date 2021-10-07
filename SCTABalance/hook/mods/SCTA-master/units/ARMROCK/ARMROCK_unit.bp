@@ -22,7 +22,7 @@ UnitBlueprint {
     },
     Economy = {
         BuildCostEnergy = 5000,
-        BuildCostMass = 300,
+        BuildCostMass = 350,
         BuildTime = 6000,
     },
     Intel = {
@@ -33,7 +33,9 @@ UnitBlueprint {
     SizeX = 1.5,
     SizeY = 1.5,
     SizeZ = 1.5,
-    StrategicIconName = 'icon_land2_missile',
+    StrategicIconName = 'icon_bot2_missile',
+    TAStrategicIconName = 'land_missile',
+    TAStrategicIconName2 = '2/land_missile',
     Weapon = {
         [1] = {
             BallisticArc = 'RULEUBA_LowArc',

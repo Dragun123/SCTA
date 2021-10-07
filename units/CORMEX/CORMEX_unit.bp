@@ -73,7 +73,7 @@ UnitBlueprint {
         BuildCostMass = 51,
         BuildTime = 1874,
         MaintenanceConsumptionPerSecondEnergy = 2,
-        ProductionPerSecondMass = 1,
+        ProductionPerSecondMass = 1.5,
     },
     Footprint = {
         SizeX = 1,
@@ -146,17 +146,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-         
     },
         Wreckage = {
-Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
-        EnergyMult = 0,
-        HealthMult = 0.9,
-        MassMult = 0.9,
-        ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/CORMEX/CORMEX_dead_prop.bp',
+            Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+            EnergyMult = 0,
+            HealthMult = 0.9,
+            MassMult = 0.9,
+            ReclaimTimeMultiplier = 1,
         WreckageLayers = {
             Land = true,
+            Seabed = true,
         },
     },
 }

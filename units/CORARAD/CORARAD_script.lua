@@ -3,11 +3,11 @@
 #
 #Script created by Raevn
 
-local TACloser = import('/mods/SCTA-master/lua/TAStructure.lua').TACloser
+local TATarg = import('/mods/SCTA-master/lua/TAStructure.lua').TATarg
 
-CORARAD = Class(TACloser) {
+CORARAD = Class(TATarg) {
 	OnCreate = function(self)
-		TACloser.OnCreate(self)
+		TATarg.OnCreate(self)
 		self.Spinners = {
 			dish = CreateRotator(self, 'dish', 'x', nil, 0, 0, 0),
 			turret = CreateRotator(self, 'turret', 'y', nil, 0, 0, 0),
@@ -17,11 +17,30 @@ CORARAD = Class(TACloser) {
 		end
 	end,
 
+	OnStopBeingBuilt = function(self,builder,layer)
+		TATarg.OnStopBeingBuilt(self,builder,layer)
+		self.StartSpin(self)
+		self:PlayUnitSound('Activate')
+	end,
 
-	OpeningState = State {
-		Main = function(self)
-			self:EnableIntel('Radar')
-			self.IsActive = true
+	OnScriptBitSet = function(self, bit)
+		if bit == 3 then
+			self:PlayUnitSound('Deactivate')
+			self.StopSpin(self)
+		end
+		TATarg.OnScriptBitSet(self, bit)
+	end,
+
+
+	OnScriptBitClear = function(self, bit)
+		if bit == 3 then
+			self:PlayUnitSound('Activate')
+			self.StartSpin(self)
+		end
+		TATarg.OnScriptBitClear(self, bit)
+	end,
+
+	StartSpin = function(self)
 			--SPIN turret around y-axis  SPEED <20.00>;
 			self.Spinners.turret:ClearGoal()
 			self.Spinners.turret:SetSpeed(20)
@@ -29,15 +48,9 @@ CORARAD = Class(TACloser) {
 			--SPIN dish around x-axis  SPEED <-200.04>;
 			self.Spinners.dish:ClearGoal()
 			self.Spinners.dish:SetSpeed(-200)
-			TACloser.OpeningState.Main(self)
-		end,
-	},
+	end,
 
-
-	ClosingState = State {
-		Main = function(self)
-			self:DisableIntel('Radar')
-
+	StopSpin = function(self)
 			--SPIN turret around y-axis  SPEED <0.00>;
 			self.Spinners.turret:ClearGoal()
 			self.Spinners.turret:SetSpeed(0)
@@ -45,11 +58,7 @@ CORARAD = Class(TACloser) {
 			--SPIN dish around x-axis  SPEED <0.0>;
 			self.Spinners.dish:ClearGoal()
 			self.Spinners.dish:SetSpeed(0)
-
-			TACloser.ClosingState.Main(self)
-		end,
-
-	},
+	end,
 }
 
 TypeClass = CORARAD

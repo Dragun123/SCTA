@@ -23,8 +23,9 @@ UEL0001 = Class(taUEL0001) {
             cdrUnit:HideBone(0, true)
             cdrUnit:SetUnSelectable(false)
 		    cdrUnit:SetBlockCommandQueue(true)
-            WaitSeconds(2)
-		    cdrUnit:ForkThread(cdrUnit.PlayCommanderWarpInEffect, bones)
+            --WaitSeconds(2)
+            coroutine.yield(21)
+		    cdrUnit:ForkThread(cdrUnit.PlayCommanderWarpInEffect)
     end,
 }
 

@@ -5,20 +5,6 @@
 
 UnitBlueprint {
     Merge = true,
-    Categories = {
-        'SELECTABLE',
-        'BOT',
-        'TECH2',
-        'VISIBLETORECON',
-        'RECLAIMABLE',	
-        'MOBILE',
-	    'LAND',
-	    'DIRECTFIRE',
-        'OVERLAYDIRECTFIRE',
-	    'CORE',
-        'AMPHIBIOUS',
-        'BOMB',
-    },
     Economy = {
         BuildCostEnergy = 4000,
         BuildCostMass = 500,
@@ -28,22 +14,23 @@ UnitBlueprint {
     General = {
     ToggleCaps = {
         RULEUTC_CloakToggle = true,
+        RULEUTC_SpecialToggle = true,
     },
 },
-Intel = {
-    ActiveIntel = {
-        RadarStealth = true,
-    },
+    Intel = {
+        ActiveIntel = {
+            RadarStealth = true,
+        },
     VisionRadius = 16,
     RadarStealth = true,
     Cloak = true,
-},
+    },
     LifeBarOffset = 0,
     LifeBarSize = 1, 
     Weapon = {
         [1] = {
             Damage = 1500,
-	    DamageRadius = 6,
+	        DamageRadius = 6,
         },
         [2] = {
         },

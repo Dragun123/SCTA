@@ -81,6 +81,7 @@ UnitBlueprint {
         UniformScale = 0.16,
     },
     Economy = {
+        FieldEngineer = true,
         BuildCostEnergy = 1031,
         BuildCostMass = 173,
         BuildRate = 100,
@@ -139,7 +140,7 @@ UnitBlueprint {
     SizeX = 3,
     SizeY = 1.25,
     SizeZ = 3,
-    StrategicIconName = 'icon_land1_engineer',
+    StrategicIconName = 'icon_bot1_engineer',
     StrategicIconSortPriority = 0,
     Weapon = {
         { #BIG_UNITEX
@@ -149,16 +150,14 @@ UnitBlueprint {
             DamageType = 'Normal',
             DummyWeapon = true,
             Label = 'DeathWeapon',
-        }, 
-
+        },
     },
         Wreckage = {
-Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
-        EnergyMult = 0,
-        HealthMult = 0.9,
-        MassMult = 0.9,
-        ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/ARMMLV/ARMMLV_dead_prop.bp',
+            Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+            EnergyMult = 0,
+            HealthMult = 0.9,
+            MassMult = 0.9,
+            ReclaimTimeMultiplier = 1,
         WreckageLayers = {
             Land = true,
             Seabed = true,

@@ -13,14 +13,13 @@ UnitBlueprint {
         'MOBILE',
 	    'CONSTRUCTION',
 	    'LAND',
-	    'SELECTION', 
         'CORE',
         'BOT',
         'TANK',
     },
     Defense = {
-        Health = 1200,
-        MaxHealth = 1200,
+        Health = 900,
+        MaxHealth = 900,
         },
         Display = {
             UniformScale = 0.08,

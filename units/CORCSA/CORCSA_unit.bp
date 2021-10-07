@@ -63,7 +63,7 @@ UnitBlueprint {
         KTurn = 3,
         KTurnDamping = 3,
         LiftFactor = 7,
-        MaxAirspeed = 6,
+        MaxAirspeed = 8,
         MinAirspeed = 2,
         StartTurnDistance = 5,
     },
@@ -71,7 +71,6 @@ UnitBlueprint {
     Categories = {
         'SELECTABLE',
         'AIR',
-        'SELECTION', 
         'CORE',
         'TECH3',
         'ENGINEER',
@@ -112,6 +111,11 @@ UnitBlueprint {
         },
         UniformScale = 0.16,
     },
+    Footprint = {
+        MaxSlope = 0.25,
+        SizeX = 1,
+        SizeZ = 1,
+    },
     Economy = {
         TECH3 = true,
         BuildCostEnergy = 5368,
@@ -121,16 +125,11 @@ UnitBlueprint {
         BuildableCategory = {
             'BUILTBYTIER3ENGINEER CORE',
         },
-        MaxBuildDistance = 3.75,
+        MaxBuildDistance = 8,
         StorageEnergy = 50,
         StorageMass = 50,
 	    ProductionPerSecondEnergy = 10,
 	    NaturalProducer = true,
-    },
-    Footprint = {
-        MaxSlope = 0.25,
-        SizeX = 1,
-        SizeZ = 1,
     },
     General = {
         BuildBones = {
@@ -142,8 +141,9 @@ UnitBlueprint {
         Category = 'Construction',
         Classification = 'RULEUC_Engineer',
         CommandCaps = {
+            RULEUCC_CallTransport = true,
             RULEUCC_Dock = true,
-            RULEUCC_CallTransport = false,
+            RULEUCC_Transport = false,
             RULEUCC_Guard = true,
             RULEUCC_Move = true,
             RULEUCC_Patrol = true,
@@ -167,7 +167,7 @@ UnitBlueprint {
     LifeBarOffset = 0.25,
     LifeBarSize = 2,
     Physics = {
-        Elevation = 4,
+        Elevation = 3,
         MotionType = 'RULEUMT_Air',
         GroundCollisionOffset = 1.6,
     MaxSpeed = 0.5, 
@@ -179,11 +179,12 @@ UnitBlueprint {
     SelectionSizeZ = 1.25,
     SizeSphere = 1.6,
     SelectionThickness = 0.25,
-    SizeX = 2,
-    SizeY = 1,
-    SizeZ = 2,
-    StrategicIconName = 'icon_bot3_engineer',
-    TAStrategicIconName = '3/land_engineer',
+    SizeX = 1,
+    SizeY = 0.2,
+    SizeZ = 1,
+    StrategicIconName = 'icon_fighter3_engineer',
+    TAStrategicIconName2 = '3/land_engineer',
+    TAStrategicIconName = 'land_engineer',
     StrategicIconSortPriority = 0,
     Transport = {
         AirClass = true,
@@ -193,10 +194,10 @@ UnitBlueprint {
         { #BIG_UNITEX
             Damage = 50,
             DamageFriendly = true,
-            DamageRadius = 4,
+            DamageRadius = 3,
             DamageType = 'Normal',
             DummyWeapon = true,
-            Label = 'DeathWeapon',
+            Label = 'DeathImpact',
         }, 
 
     },

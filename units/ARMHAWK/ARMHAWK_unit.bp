@@ -196,8 +196,8 @@ UnitBlueprint {
             DamageType = 'TASpec',
             DisplayName = 'ARMVTOL_ADVMISSILE',
             FireTargetLayerCapsTable = {
-                Air = 'Land|Water|Air',
-                Land = 'Land|Water|Air',
+                Land = 'Land|Water|Air|Seabed',
+                Air = 'Land|Water|Air|Seabed',
             },
 	        RangeCategory = 'UWRC_AntiAir',
             WeaponCategory = 'AntiAir',
@@ -254,8 +254,8 @@ UnitBlueprint {
             DamageType = 'TASpec',
             DisplayName = 'ARMVTOL_ADVMISSILE',
             FireTargetLayerCapsTable = {
-                Air = 'Land|Water|Air',
-                Land = 'Land|Water|Air',
+                Land = 'Land|Water|Air|Seabed',
+                Air = 'Land|Water|Air|Seabed',
             },
 	        RangeCategory = 'UWRC_AntiAir',
             WeaponCategory = 'AntiAir',
@@ -300,7 +300,7 @@ UnitBlueprint {
             DamageRadius = 3,
             DamageType = 'Normal',
             DummyWeapon = true,
-            Label = 'DeathWeapon',
+            Label = 'DeathImpact',
         }, 
 
     },

@@ -8,7 +8,7 @@ local TAweapon = import('/mods/SCTA-master/lua/TAweapon.lua').TAweapon
 
 ARMFAST = Class(TAWalking) {
 
-	OnCreate = function(self)
+	--[[OnCreate = function(self)
 		self.Spinners = {
 			rloarm = CreateRotator(self, 'Recoil', 'x', nil, 0, 0, 0),
 		}
@@ -16,11 +16,11 @@ ARMFAST = Class(TAWalking) {
 			self.Trash:Add(v)
 		end
 		TAWalking.OnCreate(self)
-	end,
+	end,]]
 
 	Weapons = {
 		ARM_FAST = Class(TAweapon) {
-			OnWeaponFired = function(self)
+			--[[OnWeaponFired = function(self)
 				TAweapon.OnWeaponFired(self)
 				ForkThread(self.RecoilThread,self)
 			end,
@@ -32,7 +32,7 @@ ARMFAST = Class(TAWalking) {
 				WaitFor(self.unit.Spinners.rloarm)
 				self.unit.Spinners.rloarm:SetGoal(0)
 				self.unit.Spinners.rloarm:SetSpeed(200)
-			end,
+			end,]]
 		},
 	},
 }

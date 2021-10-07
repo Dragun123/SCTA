@@ -44,6 +44,7 @@ UnitBlueprint {
         'AIR',
 	    'SORTCONSTRUCTION',
     },
+    CollisionOffsetY = -0.5,
     Defense = {
         ArmorType = 'Structure',
         Health = 2100,
@@ -57,10 +58,6 @@ UnitBlueprint {
     Display = {
         AnimationUnpack = '/mods/SCTA-master/units/CORPLAT/CORPLAT_lod0_uNPack.sca',
         AnimationUnpackRate = 1, 
-        --AnimationWater = '/mods/SCTA-master/units/CORPLAT/CORPLAT_lod0_A_drop.sca',
-        --AnimationWaterRate = 1, 
-        ----AnimationLand = '/mods/SCTA-master/units/CORPLAT/CORPLAT_lod0_B_drop.sca',
-        ---AnimationLandRate = 1, 
         Abilities = {
             '<LOC ability_aquatic>Aquatic',
         },
@@ -74,7 +71,7 @@ UnitBlueprint {
                 },
             },
         },
-        UniformScale = 0.16,
+        UniformScale = 0.14,
     },
     Economy = {
         BuildCostEnergy = 5396,
@@ -129,7 +126,7 @@ UnitBlueprint {
     LifeBarSize = 2,
     Physics = {
         BuildOnLayerCaps = {
-            LAYER_Water = true,
+            LAYER_Sub = true,
         },
         ---SkirtSizeX = 7,
         ---SkirtSizeZ = 7,
@@ -150,11 +147,10 @@ UnitBlueprint {
     },
     SelectionSizeX = 4.45,
     SelectionSizeZ = 3.4,
-    SelectionCenterOffsetZ = 0.25,
     SelectionThickness = 0.25,
-    SizeX = 7,
-    SizeY = 4,
-    SizeZ = 7,
+    SizeX = 8,
+    SizeY = 2,
+    SizeZ = 8,
     StrategicIconName = 'icon_factory3_air',
     StrategicIconSortPriority = 0,
     Weapon = {
@@ -166,17 +162,17 @@ UnitBlueprint {
         DummyWeapon = true,
         Label = 'DeathWeapon',
         },
-
     },
-        Wreckage = {
-Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+    Wreckage = {
+        Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/CORPLAT/CORPLAT_dead_prop.bp',
         WreckageLayers = {
             Land = true,
+            Seabed = true,
+            Water = true,
         },
     },
 }

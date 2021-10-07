@@ -1,32 +1,24 @@
 #Generic TA unit
 local Unit = import('/lua/sim/Unit.lua').Unit
-local FireState = import('/lua/game.lua').FireState
 local TADeath = import('/mods/SCTA-master/lua/TADeath.lua')
-local explosion = import('/lua/defaultexplosions.lua')
 local Wreckage = import('/lua/wreckage.lua')
+local catCloak = categories.SELECTABLE * categories.MOBILE
 
 TAunit = Class(Unit) 
 {
 
     --LOGDBG = function(self, msg)
+	----AxleCodeUsedForDebugging
         --LOG(self._UnitName .. "(" .. self.Sync.id .. "):" .. msg)
    ---end,
-
-	OnCreate = function(self)
-        --self._UnitName = bp.General.UnitName
-        ---self:LOGDBG('TAUnit.OnCreate')
-        Unit.OnCreate(self)
-		if self:GetAIBrain().SCTAAI then
-			self:SetFireState(FireState.RETURN_FIRE)
-			else
-			self:SetFireState(FireState.GROUND_FIRE)
-			end
-		---LOG(self:GetBlueprint().Physics.MotionType)
-        end,
 
 	OnStopBeingBuilt = function(self,builder,layer)
         ---self:LOGDBG('TAUnit.OnStopBeingBuilt')
 		Unit.OnStopBeingBuilt(self,builder,layer)
+		--[[if EntityCategoryContains(TA, self) then
+			LOG('TAIEXIST')
+		end]]
+		--Otherwise Memes with certain units (Roach and Invader through all SCTA Units get memed without this)
 		self:SetDeathWeaponEnabled(true)
 	end,
 
@@ -75,14 +67,61 @@ TAunit = Class(Unit)
 		end
     end,
 
+	---ThankYouGnio
+	---This Code replaces Raevn modified I used (commented out below). It looks for on motion then it does the things. 
+	---Mostly Minor Editions will be making some of this into self.x variables later
+	StartMoveFxTA = function(self)
+		if not self.MoveFx then
+        self.MoveFx = self:ForkThread(self.TAMoveFxThread)
+		end
+    end,
+
+    TAMoveFxThread = function(self)
+        while self:IsUnitState('Moving') and not self.Dead do
+			local bp = self:GetBlueprint()
+			for k, v in bp.Display.MovementEffects.TAMovement.Bones do
+				self.TAMove = CreateAttachedEmitter(self, v, self:GetArmy(), bp.Display.MovementEffects.TAMovement.Emitter ):ScaleEmitter(bp.Display.MovementEffects.TAMovement.Scale)
+			---LOG('TAIEXIST', self.Trash)
+                --self.Trash:Add(CreateAttachedEmitter(self,'Back_Wake',self:GetArmy(),'/mods/CTO/effects/emitters/AU_MOVEMENTS/WATER/AU_MOVEMENTS_WATER_drops_emit.bp'):OffsetEmitter(0.0, -0.75, 0.0):ScaleEmitter(0.2))
+			coroutine.yield(11)
+            self.TAMove:Destroy()
+			end
+        end
+    end,
+
+    MoveFxStopTA = function(self)
+        if self.TAMoveFxThread then
+            KillThread(self.MoveFx)
+            self.MoveFx = nil
+        end
+    end,
+
+	--[[CreateTAMovementEffects = function(self)
+		if not IsDestroyed(self) then
+		--TAunit.CreateMovementEffects(self, EffectsBag, TypeSuffix)
+		local bp = self:GetBlueprint()
+		if self:IsUnitState('Moving') and bp.Display.MovementEffects.TAMovement then
+			for k, v in bp.Display.MovementEffects.TAMovement.Bones do
+				self.FxMovement:Add(CreateAttachedEmitter(self, v, self:GetArmy(), bp.Display.MovementEffects.TAMovement.Emitter ):ScaleEmitter(bp.Display.MovementEffects.TAMovement.Scale))
+			end
+		end
+		if not self:IsUnitState('Moving') or table.getn(self:GetCommandQueue()) <= 1 then
+			for k,v in self.FxMovement do
+				v:Destroy()
+			end
+		end
+		end
+	end,]]
+
 	CloakDetection = function(self)
+		-----Thanks To Balth. This code Allows me to TA Proper Coding functions 
 		local GetUnitsAroundPoint = moho.aibrain_methods.GetUnitsAroundPoint
 		local brain = moho.entity_methods.GetAIBrain(self)
-		local cat = categories.SELECTABLE * categories.MOBILE
 		local getpos = moho.entity_methods.GetPosition
 		while not self.Dead do
 			coroutine.yield(11)
-			local dudes = GetUnitsAroundPoint(brain, cat, getpos(self), 4, 'Enemy')
+			----1 Second
+			local dudes = GetUnitsAroundPoint(brain, catCloak, getpos(self), 4, 'Enemy')
 			if self.CloakOn and self:IsUnitState('Building') then
 				self:DisableIntel('Cloak')
 				self:DisableIntel('CloakField')
@@ -99,6 +138,7 @@ TAunit = Class(Unit)
 				end
 			elseif not dudes[1] and self.CloakOn then
 				self:EnableIntel('Cloak')
+				----CLOAKField only SCTABalance
 				self:EnableIntel('CloakField')
 				self:SetMesh(self:GetBlueprint().Display.CloakMeshBlueprint, true)
 				if self:IsIdleState() or self:IsUnitState('Attacking') then
@@ -117,7 +157,7 @@ TAunit = Class(Unit)
         if self:GetFractionComplete() < 0.5 then
             return
         end
-		if overkillRatio and self:GetCurrentLayer() == 'Land' and overkillRatio >= 0.5 then
+		if overkillRatio and self.Layer == 'Land' and overkillRatio >= 0.5 then
     		--LOG('*Scale', self.Scale)
 			return TADeath.CreateHeapProp(self, overkillRatio)
         end
@@ -144,6 +184,7 @@ TAunit = Class(Unit)
 	end,
 
 	OnScriptBitClear = function(self, bit)
+		---SpecIntel for not Cloaking CounterIntel Motion 
 		if self.SpecIntel and (bit == 2 or bit == 5) then
 			--self:SetMaintenanceConsumptionInactive()
 			if self.TAIntelThread then

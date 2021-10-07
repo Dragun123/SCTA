@@ -11,7 +11,6 @@ UnitBlueprint {
             'PATROLHELPER',
             'SHOWQUEUE',
             'MOBILE',
-            'SELECTION',
             'CONSTRUCTION',
             'LAND',
             'ARM',
@@ -22,8 +21,8 @@ UnitBlueprint {
         UniformScale = 0.1,
         },
         Defense = {
-            Health = 2000,
-            MaxHealth = 2000,
+            Health = 1300,
+            MaxHealth = 1300,
             },
         Physics = {
             TurnRate = 120,

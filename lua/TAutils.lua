@@ -1,7 +1,10 @@
 local util = import('/lua/utilities.lua')
-
+local PlantsCat = ((categories.FACTORY + categories.GATE) * (categories.ARM + categories.CORE))
+----This Code Here represents the various TA Building effects. 
+----Furthermore unlike the basegame code I test if I am dead. It might be worthwhile to removed it. That test things to consider. 
 CreateTABuildingEffects = function(builder, unitBeingBuilt, BuildEffectBones, BuildEffectsBag)
-    WaitSeconds(0.75)
+    --WaitSeconds(0.75)
+    coroutine.yield(8)
     local selfPosition = builder:GetPosition()
     local targetPosition = unitBeingBuilt:GetPosition()
     local distance = util.GetDistanceBetweenTwoVectors(selfPosition, targetPosition)
@@ -12,7 +15,8 @@ end
     
 
 CreateTAAirBuildingEffects = function(builder, unitBeingBuilt, BuildEffectBones, BuildEffectsBag)
-    WaitSeconds(0.75)
+    --WaitSeconds(0.75)
+    coroutine.yield(8)
     for _, vBone in BuildEffectBones do
         BuildEffectsBag:Add(CreateAttachedEmitter(builder, vBone, builder.Army, '/mods/SCTA-master/effects/emitters/nanolathe.bp' ):ScaleEmitter(0.1))
         end
@@ -21,21 +25,24 @@ CreateTAAirBuildingEffects = function(builder, unitBeingBuilt, BuildEffectBones,
 
 
 CreateTAFactBuildingEffects = function(builder, unitBeingBuilt, BuildEffectBones, BuildEffectsBag)
-    WaitSeconds(0.5)
+    --WaitSeconds(0.5)
+    coroutine.yield(6)
     for _, vBone in BuildEffectBones do
         BuildEffectsBag:Add(CreateAttachedEmitter(builder, vBone, builder.Army, '/mods/SCTA-master/effects/emitters/nanolathe.bp' ):ScaleEmitter(0.05))
         end
     end
 
 CreateTASeaFactBuildingEffects = function(builder, unitBeingBuilt, BuildEffectBones, BuildEffectsBag)
-    WaitSeconds(0.1)
+    --WaitSeconds(0.1)
+    coroutine.yield(2)
     for _, vBone in BuildEffectBones do
         BuildEffectsBag:Add(CreateAttachedEmitter(builder, vBone, builder.Army, '/mods/SCTA-master/effects/emitters/nanolathe.bp' ):ScaleEmitter(0.08):SetEmitterCurveParam('LIFETIME_CURVE',10,0))
         end
     end
 
 CreateTAGantBuildingEffects = function(builder, unitBeingBuilt, BuildEffectBones, BuildEffectsBag)
-    WaitSeconds(0.75)
+    --WaitSeconds(0.75)
+    coroutine.yield(8)
     for _, vBone in BuildEffectBones do
         BuildEffectsBag:Add( CreateAttachedEmitter( builder, vBone, builder.Army,  '/mods/SCTA-master/effects/emitters/nanolathe.bp' ):ScaleEmitter(0.18):OffsetEmitter(0,0,-0.2))
         end
@@ -43,7 +50,8 @@ CreateTAGantBuildingEffects = function(builder, unitBeingBuilt, BuildEffectBones
 
 
 TAReclaimEffects = function(reclaimer, reclaimed, BuildEffectBones, ReclaimEffectsBag)
-    WaitSeconds(1)
+    --WaitSeconds(1)
+    coroutine.yield(11)
     local selfPosition = reclaimer:GetPosition()
     local targetPosition = reclaimed:GetPosition()
     local distance = util.GetDistanceBetweenTwoVectors(selfPosition, targetPosition)
@@ -53,7 +61,8 @@ TAReclaimEffects = function(reclaimer, reclaimed, BuildEffectBones, ReclaimEffec
     end
 
 TACommanderReclaimEffects = function(reclaimer, reclaimed, BuildEffectBones, ReclaimEffectsBag)
-        WaitSeconds(1)
+        --WaitSeconds(1)
+        coroutine.yield(11)
         local selfPosition = reclaimer:GetPosition()
         local targetPosition = reclaimed:GetPosition()
         local distance = util.GetDistanceBetweenTwoVectors(selfPosition, targetPosition)
@@ -65,7 +74,8 @@ TACommanderReclaimEffects = function(reclaimer, reclaimed, BuildEffectBones, Rec
 
 
 TAAirReclaimEffects = function(reclaimer, reclaimed, BuildEffectBones, ReclaimEffectsBag)
-    WaitSeconds(1)
+    --WaitSeconds(1)
+    coroutine.yield(11)
     local selfPosition = reclaimer:GetPosition()
     local targetPosition = reclaimed:GetPosition()
     local distance = util.GetDistanceBetweenTwoVectors(selfPosition, targetPosition)
@@ -76,7 +86,8 @@ TAAirReclaimEffects = function(reclaimer, reclaimed, BuildEffectBones, ReclaimEf
 
 
 TACaptureEffect = function(capturer, captive, BuildEffectBones, CaptureEffectsBag)  
-    WaitSeconds(0.75)
+    --WaitSeconds(0.75)
+    coroutine.yield(8)
     local selfPosition = capturer:GetPosition()
     local targetPosition = captive:GetPosition()
     local distance = util.GetDistanceBetweenTwoVectors(selfPosition, targetPosition)
@@ -86,16 +97,17 @@ TACaptureEffect = function(capturer, captive, BuildEffectBones, CaptureEffectsBa
 end
 
 
-updateBuildRestrictions = function(self)
+SCTAupdateBuildRestrictions = function(self)
     local aiBrain = self:GetAIBrain()
     --Add build restrictions
     --EngiModFinalFORMTA
     ---Basicallys Stop Lower Tech from building UpperTech. Advanced Factories now full access to builds
     ---Will require another rebalancing of Seaplanes and Hovers
+    --self.TARestrict = true
     if EntityCategoryContains(categories.TECH1 * categories.CONSTRUCTION - categories.FACTORY, self) and aiBrain.Plants < 10 then
         self:AddBuildRestriction(categories.TECH2) 
         return
-    elseif EntityCategoryContains(categories.TECH2 * categories.CONSTRUCTION - categories.RESEARCH, self) and aiBrain.Labs < 4 then
+    elseif EntityCategoryContains(categories.TECH2 * categories.CONSTRUCTION - categories.CONSTRUCTIONSORTDOWN, self) and aiBrain.Labs < 4 then
         self:AddBuildRestriction(categories.TECH3)
         return
     --[[else
@@ -104,16 +116,37 @@ updateBuildRestrictions = function(self)
 end
 
 TABuildRestrictions = function(self)
+    --GetListOfUnits, there is a bug regarding removing BeingBuilt Unitss
+    ---GetCurrentUnits - GetUnitsBuilding somehow results in game thinking you have two less than you actually do
+    ---NumberOfPlantsX returns Number of Units. The checks associated with it such as Level3, Level2 and number of constructed factories are used for AI
+    ----Find HQ Type is used primarily so that Supcom FAF players can work off gut instinct
     local aiBrain = self:GetAIBrain()
-    local PlantsCat = ((categories.FACTORY + categories.GATE) * (categories.ARM + categories.CORE))
-    if aiBrain.Labs > 4 or NumberOfPlantsT2(aiBrain, PlantsCat * (categories.TECH2)) > 4 
-    or self.FindHQType(aiBrain, PlantsCat * (categories.TECH3 + categories.EXPERIMENTAL)) then
+    if aiBrain.Level3 or NumberOfPlantsT2(aiBrain, PlantsCat * (categories.TECH2)) > 4 
+    or TAHQType(aiBrain, PlantsCat * (categories.TECH3 + categories.EXPERIMENTAL)) then
                 self:RemoveBuildRestriction(categories.TECH2)
                 self:RemoveBuildRestriction(categories.TECH3)
+                if not aiBrain.Level3 then
+                aiBrain.Level3 = true
+                    if aiBrain.SCTAAI then
+                    aiBrain.TARally = 15
+                    aiBrain.TAEcoCycle = 120
+                    end
+                aiBrain:TECHTAchieve()
+                end
+                --self.TARestrict = nil
         return  
-    elseif aiBrain.Plants > 10 or NumberOfPlantsT1(aiBrain, PlantsCat * (categories.TECH1)) > 10
-    or self.FindHQType(aiBrain, PlantsCat * (categories.TECH2 + categories.EXPERIMENTAL)) then
+    elseif aiBrain.Level2 or NumberOfPlantsT1(aiBrain, PlantsCat * (categories.TECH1)) > 10
+    or TAHQType(aiBrain, PlantsCat * (categories.TECH2 + categories.EXPERIMENTAL)) then
                 self:RemoveBuildRestriction(categories.TECH2)
+                if not aiBrain.Level2 then
+                aiBrain.Level2 = true
+                    if aiBrain.SCTAAI then
+                        aiBrain.TARally = 10
+                        aiBrain.TAEcoCycle = 60
+                    end
+                aiBrain:TECHTAchieve()
+                end
+                --self.TARestrict = nil
         return    
     end
 end
@@ -121,33 +154,36 @@ end
 
 
 NumberOfPlantsT2 = function(aiBrain, category)
+    ----NeedToIncorperateWhatJip Did Here
+    ----Using ConstructionSortDown as its only relavent for the upgraded Factories
+    ---Also apparently this was broken for like a year amazing
     -- Returns number of extractors upgrading
-    aiBrain.DevelopmentCount = aiBrain:GetCurrentUnits(categories.RESEARCH * category)
+    local DevelopmentCount = aiBrain:GetCurrentUnits(categories.CONSTRUCTIONSORTDOWN * category)
     --LOG('*SCTADeveloment', aiBrain.DevelopmentCount)
-    aiBrain.LabCount = aiBrain:GetCurrentUnits(categories.SUPPORTFACTORY * category)
+    local LabCount = aiBrain:GetCurrentUnits(category - categories.CONSTRUCTIONSORTDOWN)
     --LOG('*SCTALabsCount', aiBrain.LabCount)
-    aiBrain.LabBuilding = aiBrain:NumCurrentlyBuilding(categories.ENGINEER, categories.SUPPORTFACTORY * category)
+    local LabBuilding = aiBrain:NumCurrentlyBuilding(categories.ENGINEER, category - categories.CONSTRUCTIONSORTDOWN)
     --LOG('*SCTALabuilding', aiBrain.LabBuilding)
-    aiBrain.DevelopmentBuilding = aiBrain:NumCurrentlyBuilding(categories.FACTORY, categories.RESEARCH * category)
+    local DevelopmentBuilding = aiBrain:NumCurrentlyBuilding(categories.FACTORY, categories.CONSTRUCTIONSORTDOWN * category)
     --LOG('*SCTADevelomentBuilding', aiBrain.DevelopmentBuilding)
-    aiBrain.Labs = ((aiBrain.LabCount) + (aiBrain.DevelopmentCount * 2)) - aiBrain.LabBuilding - (aiBrain.DevelopmentBuilding * 2)
+    aiBrain.Labs = ((LabCount) + (DevelopmentCount * 2)) - LabBuilding - (DevelopmentBuilding * 2)
     --LOG('*SCTALabsOG', aiBrain.Labs)
     return aiBrain.Labs
 end
 
 NumberOfPlantsT1 = function(aiBrain, category)
     -- Returns number of extractors upgrading
-    aiBrain.PlantCount = aiBrain:GetCurrentUnits(category)
+    local PlantCount = aiBrain:GetCurrentUnits(category)
     --LOG('*SCTAPlantCount', aiBrain.PlantCount)
-    aiBrain.PlantBuilding = aiBrain:NumCurrentlyBuilding(categories.ENGINEER, category)
+    local PlantBuilding = aiBrain:NumCurrentlyBuilding(categories.ENGINEER, category)
     --LOG('*SCTAPlantBuilding', aiBrain.PlantBuilding)
-    aiBrain.Plants = aiBrain.PlantCount - aiBrain.PlantBuilding
+    aiBrain.Plants = PlantCount - PlantBuilding
     --LOG('*SCTAPlants', aiBrain.Plants)
     return aiBrain.Plants
 end
 
 --self.FindHQType(aiBrain, category)
-FindHQType = function(aiBrain, category)
+TAHQType = function(aiBrain, category)
     for id, unit in aiBrain:GetListOfUnits(category, false, true) do
         if not unit:IsBeingBuilt() then
             return true

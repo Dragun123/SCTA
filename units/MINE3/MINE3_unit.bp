@@ -70,7 +70,16 @@ UnitBlueprint {
         CommandCaps = {
         	RULEUCC_RetaliateToggle = true,
         },
-	    ToggleCaps = {
+        InstantDeathOnSelfDestruct = true,
+        OrderOverrides = {
+            RULEUTC_SpecialToggle = {
+                --  more options in textures.scd\textures\ui\common\game\orders
+                bitmapId = 'toggle-weapon',
+                helpText = 'Detonate',
+            },
+        },
+        ToggleCaps = {
+        RULEUTC_SpecialToggle = true,
 		RULEUTC_CloakToggle = true,
 	    },
         FactionName = 'CORE',
@@ -95,7 +104,9 @@ UnitBlueprint {
     SizeX = 1,
     SizeZ = 1,
     SizeY = 1,
-    StrategicIconName = 'icon_land2_bomb', --'icon_structure2_bomb',
+    StrategicIconName = 'icon_structure2_bomb', --'icon_structure2_bomb',
+    TAStrategicIconName = 'land_bomb',
+    TAStrategicIconName2 = '2/land_bomb', 
     StrategicIconSortPriority = 0,
     Weapon = {
         {
@@ -112,7 +123,7 @@ UnitBlueprint {
             Damage = 500, #Doubles up with death, so death damage subtracted
 	    DamageRadius = 5,
             DamageType = 'Normal',
-            DisplayName = 'ARMMINE3',
+            DisplayName = 'MINE',
 	    ---EdgeEffectiveness = 0.1,
             FireTargetLayerCapsTable = {
                 Land = 'Land|Water',
@@ -120,7 +131,7 @@ UnitBlueprint {
 	    RangeCategory = 'UWRC_DirectFire',
      WeaponCategory = 'DirectFire',
             FiringTolerance = 360,
-            Label = 'ARMMINE3',
+            Label = 'MINE',
             MaxRadius = 3,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,

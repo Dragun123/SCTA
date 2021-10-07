@@ -1,13 +1,6 @@
 local UCBC = '/lua/editor/UnitCountBuildConditions.lua'
-local EBC = '/lua/editor/EconomyBuildConditions.lua'
-local SAI = '/lua/ScenarioPlatoonAI.lua'
-local MIBC = '/lua/editor/MiscBuildConditions.lua'
-local TBC = '/lua/editor/ThreatBuildConditions.lua'
 local TAutils = '/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua'
 local TASlow = '/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua'
-local PLANT = (categories.FACTORY * categories.TECH1)
-local LAB = (categories.FACTORY * categories.TECH2)
-local PLATFORM = (categories.FACTORY * categories.TECH3)
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
 
 BuilderGroup {
@@ -32,26 +25,29 @@ BuilderGroup {
         },
         BuilderType = 'Sea',
     },
-    Builder {
-        BuilderName = 'SCTAAi FactoryT3 Hover Naval Engineer',
-        PlatoonTemplate = 'T3BuildEngineerSCTA',
-        Priority = 200, -- Top factory priority
-        PriorityFunction = TAPrior.ProductionT3,
+    --[[Builder {
+        BuilderName = 'SCTAAI Factory AirCarrier Bomber',
+        PlatoonTemplate = 'T3AirBomberSCTA',
+        Priority = 150,
+        InstanceCount = 1,
+        PriorityFunction = TAPrior.AirCarrierExist,
         BuilderConditions = {
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 2, categories.ENGINEER * categories.TECH3 * categories.HOVER} }, -- Build engies until we have 4 of them.
+            { TASlow, 'TAHaveUnitsWithCategoryAndAllianceFalse', {0, categories.MOBILE * categories.AIR - categories.SCOUT - categories.BOMBER, 'Enemy'}},
+            { TAutils, 'EcoManagementTA', { 0.75, 0.9} },
         },
-        BuilderType = 'SpecHover',
+        BuilderType = 'Air',
     },
     Builder {
-        BuilderName = 'SCTAAi FactoryT3 Engineer Naval Air',
-        PlatoonTemplate = 'T3BuildEngineerAirSCTA',
-        Priority = 200, -- Top factory priority
-        PriorityFunction = TAPrior.ProductionT3,
+        BuilderName = 'SCTAAI Factory AirCarrier Fighter',
+        PlatoonTemplate = 'T2AirFighterSCTA',
+        Priority = 150,
+        InstanceCount = 1,
+        PriorityFunction = TAPrior.AirCarrierExist,
         BuilderConditions = {
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 2, categories.ENGINEER * categories.TECH3 * categories.AIR} }, -- Build engies until we have 4 of them.
+            { TAutils, 'EcoManagementTA', { 0.75, 0.9} },
         },
-        BuilderType = 'SpecAir',
-    },
+        BuilderType = 'Air',
+    },]]
     Builder {
         BuilderName = 'SCTAAi Factory ScoutShip',
         PlatoonTemplate = 'T1ScoutShipSCTA',
@@ -66,10 +62,11 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTAAi Factory Hover',
         PlatoonTemplate = 'T1ScoutShipSCTA',
-        PriorityFunction = TAPrior.UnitProductionT1,
+        PriorityFunction = TAPrior.ScoutShipProduction,
         Priority = 115,
         BuilderConditions = {
             { TASlow,   'TAAttackNaval', {true}},
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 10, categories.SCOUT * categories.NAVAL } },
             { UCBC, 'HaveUnitsWithCategoryAndAlliance', { true, 0, categories.xsl0103 + categories.ual0201, 'Enemy'}},	
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },

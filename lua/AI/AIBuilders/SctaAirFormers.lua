@@ -1,10 +1,7 @@
-local UCBC = '/lua/editor/UnitCountBuildConditions.lua'
-local SAI = '/lua/ScenarioPlatoonAI.lua'
-local MIBC = '/lua/editor/MiscBuildConditions.lua'
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
 local TASlow = '/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua'
-local SKY = categories.AIR * categories.MOBILE
-local STEALTH = categories.armhawk + categories.corvamp
+SKY = categories.AIR * categories.MOBILE
+STEALTH = categories.armhawk + categories.corvamp
 
 
 BuilderGroup {
@@ -26,12 +23,12 @@ BuilderGroup {
         BuilderName = 'SCTAAI Bomber Attack',
         PlatoonTemplate = 'SCTABomberAttack',
         Priority = 200,
-        InstanceCount = 50,
+        InstanceCount = 5,
         BuilderType = 'AirForm',
         BuilderData = {
         },        
         BuilderConditions = { 
-            --{ TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, SKY * categories.BOMBER} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, SKY * categories.BOMBER} },
             },
         },
     Builder {
@@ -39,7 +36,7 @@ BuilderGroup {
         PlatoonTemplate = 'IntieAISCTA',
         Priority = 100,
         PlatoonAddBehaviors = { 'SCTAAirUnitRefit' },                              
-        InstanceCount = 50,
+        InstanceCount = 5,
         BuilderType = 'AirForm', 
         BuilderData = {
         },     
@@ -52,7 +49,7 @@ BuilderGroup {
         PlatoonTemplate = 'IntieAIStealthSCTA',
         PriorityFunction = TAPrior.UnitProduction,
         Priority = 110,
-        InstanceCount = 50,                          
+        InstanceCount = 5,                          
         BuilderType = 'AirForm',
         BuilderData = {
             Energy = true,
@@ -67,7 +64,7 @@ BuilderGroup {
         PlatoonTemplate = 'IntieAISCTAEnd',
         PriorityFunction = TAPrior.GantryConstruction,
         Priority = 110,
-        InstanceCount = 50,
+        InstanceCount = 5,
         PlatoonAddBehaviors = { 'SCTAAirUnitRefit' },                              
         BuilderType = 'AirForm',
         BuilderData = {

@@ -73,7 +73,7 @@ UnitBlueprint {
 		Bones = {'wake01', 'wake02'},
         },
 	},
-        UniformScale = 0.16,
+        UniformScale = 0.12,
     },
     Economy = {
         BuildCostEnergy = 7500,
@@ -85,9 +85,8 @@ UnitBlueprint {
         Classification = 'RULEUC_MilitaryVehicle',
         CommandCaps = {
             RULEUCC_Attack = true,
-            RULEUCC_CallTransport = true,
+            RULEUCC_CallTransport = false,
             RULEUCC_Capture = false,
-            --RULEUCC_Ferry = true,
             RULEUCC_Guard = true,
             RULEUCC_Move = true,
             RULEUCC_Nuke = false,
@@ -98,7 +97,7 @@ UnitBlueprint {
             RULEUCC_Stop = true,
             RULEUCC_Transport = true,
         },
-        SelectionPriority = 4,
+        SelectionPriority = 2,
         FactionName = 'CORE',
         Icon = 'land',
         TechLevel = 'RULEUTL_Advanced',
@@ -130,9 +129,11 @@ UnitBlueprint {
     SelectionSizeZ = 6,
     SelectionThickness = 0.25,
     SizeX = 9,
+    SizeY = 6,
     SizeZ = 9,
-    SizeZ = 9,
-    StrategicIconName = 'icon_structure3_transport',
+    StrategicIconName = 'icon_land3_transport',
+    TAStrategicIconName = 'structure_transport',
+    TAStrategicIconName2 = '3/structure_transport',
     StrategicIconSortPriority = 0,
     Transport = {
         Class2AttachSize = 2,
@@ -148,7 +149,6 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-
     },
         Wreckage = {
         Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
@@ -156,7 +156,6 @@ UnitBlueprint {
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/CORSNAP/CORSNAP_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Water = true,

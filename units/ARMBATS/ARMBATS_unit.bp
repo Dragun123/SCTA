@@ -293,7 +293,6 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-
     },
         Wreckage = {
 	---UseCustomMesh = true,
@@ -302,7 +301,6 @@ UnitBlueprint {
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/ARMBATS/ARMBATS_dead_prop.bp',
         WreckageLayers = {
             Water = true,
 	    Sub = true,

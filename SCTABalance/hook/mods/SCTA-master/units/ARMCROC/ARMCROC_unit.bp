@@ -13,16 +13,8 @@ UnitBlueprint {
     SizeY = 1,
     SizeZ = 2,
     Economy = {
-        BuildCostEnergy = 6000,
-        BuildCostMass = 600,
+        BuildCostEnergy = 5000,
+        BuildCostMass = 400,
         BuildTime = 9000,
-    },
-    Weapon = {
-        [1] = {
-            Damage = 90,
-            RateOfFire = 1,
-        },
-        [2] = {
-        },
     },
 }

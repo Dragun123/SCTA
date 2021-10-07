@@ -1,16 +1,9 @@
 local UCBC = '/lua/editor/UnitCountBuildConditions.lua'
-local EBC = '/lua/editor/EconomyBuildConditions.lua'
-local SAI = '/lua/ScenarioPlatoonAI.lua'
-local MIBC = '/lua/editor/MiscBuildConditions.lua'
 local MABC = '/lua/editor/MarkerBuildConditions.lua'
 local TAutils = '/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua'
 local TASlow = '/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua'
-local TBC = '/lua/editor/ThreatBuildConditions.lua'
-local PLANT = (categories.FACTORY * categories.TECH1)
-local LAB = (categories.FACTORY * categories.TECH2)
-local PLATFORM = (categories.FACTORY * categories.TECH3)
-local FUSION = (categories.ENERGYPRODUCTION * (categories.TECH2 + categories.TECH3)) * categories.STRUCTURE
-local BaseRestrictedArea, BaseMilitaryArea, BaseDMZArea, BaseEnemyArea = import('/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua').TAGetMOARadii()
+LAB = (categories.FACTORY * categories.TECH2)
+TIDAL = (categories.cortide + categories.armtide)
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
 
 BuilderGroup {
@@ -23,9 +16,9 @@ BuilderGroup {
        ---PriorityFunction = TAPrior.UnitProductionT1,
         Priority = 100,
         InstanceCount = 1,
-        DelayEqualBuildPlattons = {'Factory', 1},
+        DelayEqualBuildPlattons = {'FactoryNavy', 1},
         BuilderConditions = {
-            { UCBC, 'CheckBuildPlattonDelay', { 'Factory' }},
+            { UCBC, 'CheckBuildPlattonDelay', { 'FactoryNavy' }},
             { UCBC, 'FactoryCapCheck', { 'LocationType', 'Sea' } },
             { TASlow,   'TAAttackNaval', {true}},
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, categories.FACTORY * categories.NAVAL} },
@@ -50,6 +43,7 @@ BuilderGroup {
         InstanceCount = 1,
         DelayEqualBuildPlattons = {'Factory', 1},
         BuilderConditions = {
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 3, LAB} },
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory' }},
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, LAB * categories.NAVAL} },
             { UCBC, 'HaveLessThanUnitsWithCategory', { 1, LAB * categories.NAVAL } }, -- Stop after 10 facs have been built.
@@ -72,9 +66,9 @@ BuilderGroup {
         PriorityFunction = TAPrior.NavalProductionT2,
         Priority = 141,
         InstanceCount = 1,
-        DelayEqualBuildPlattons = {'Factory', 1},
+        DelayEqualBuildPlattons = {'FactoryNavy', 1},
         BuilderConditions = {
-            { UCBC, 'CheckBuildPlattonDelay', { 'Factory' }},		
+            { UCBC, 'CheckBuildPlattonDelay', { 'FactoryNavy' }},		
             { TASlow,   'TAAttackNaval', {true}},
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, LAB * categories.NAVAL } },
             { UCBC, 'PoolLessAtLocation', { 'LocationType', 1, LAB * categories.NAVAL}},
@@ -105,8 +99,8 @@ BuilderGroup {
         },
         BuilderType = 'SeaTA',
         BuilderData = {
-            NeedGuard = false,
-            DesiresAssist = false,
+            ---NeedGuard = false,
+            ---DesiresAssist = false,
             Construction = {
                 Location = 'LocationType',
                 NearMarkerType = 'Naval Area',
@@ -130,8 +124,8 @@ BuilderGroup {
         },
         BuilderType = 'SeaTA',
         BuilderData = {
-            NeedGuard = false,
-            DesiresAssist = false,
+            ---NeedGuard = false,
+            ---DesiresAssist = false,
             Construction = {
                 Location = 'LocationType',
                 NearMarkerType = 'Naval Area',
@@ -149,8 +143,8 @@ BuilderGroup {
         PriorityFunction = TAPrior.TechEnergyExist,
         InstanceCount = 2,
         BuilderConditions = {
-            { TAutils, 'GreaterThanEconEnergyTAEfficiency', {0.9 }},
-            { TAutils, 'LessMassStorageMaxTA',  { 0.2}},
+            { TAutils, 'GreaterThanEconEnergyTAEfficiency', {1.05}},
+            { TAutils, 'LessMassStorageMaxTA',  { 0.3}},
         },
         BuilderType = 'SeaTA',
         BuilderData = {
@@ -259,8 +253,8 @@ BuilderGroup {
         },
         BuilderType = 'SeaTA',
         BuilderData = {
-            DesiresAssist = false,
-            NeedGuard = false,
+            ---DesiresAssist = false,
+            ---NeedGuard = false,
             Construction = {
                 Location = 'LocationType',
                 NearMarkerType = 'Naval Area',
@@ -271,55 +265,19 @@ BuilderGroup {
         }
     },
     Builder {
-        BuilderName = 'SCTA Defensive Point Naval',
-        PlatoonTemplate = 'EngineerBuilderSCTANaval2',
-        Priority = 76,
-        PriorityFunction = TAPrior.TechEnergyExist,
-        InstanceCount = 2,
-        BuilderConditions = {
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 4, categories.ANTISHIELD * categories.TECH2 - categories.MOBILE} }, 
-            { TAutils, 'GreaterTAStorageRatio', { 0.2, 0.5}}, 
-        },
-        BuilderType = 'SeaTA',
-        BuilderData = {
-            NeedGuard = false,
-            DesiresAssist = false,
-            Construction = {
-            Location = 'LocationType',
-            NearMarkerType = 'Naval Area',
-            BuildClose = true,
-            OrderedTemplate = true,
-            NearBasePatrolPoints = false,
-                BaseTemplateFile = '/mods/SCTA-master/lua/AI/TAMiscBaseTemplates/TA2TowerTemplates.lua',
-                BaseTemplate = 'T2TowerTemplate',
-                BuildStructures = {
-                    'T2GroundDefense',
-                    'Wall2',
-                    'Wall2',
-                    'Wall2',
-                    'Wall2',
-                    'Wall2',
-                    'Wall2',
-                    'Wall2',
-                    'Wall2',
-                },
-            },
-        }
-    },
-    Builder {
-        BuilderName = 'SCTAAI T1Engineer Naval Mex 25',
+        BuilderName = 'SCTAAI T1Engineer Naval Mex',
         PlatoonTemplate = 'EngineerBuilderSCTANaval',
-        Priority = 105,
-        InstanceCount = 1, -- The max number concurrent instances of this builder.
-        DelayEqualBuildPlattons = {'MexLand2', 1},
+        Priority = 50,
+        InstanceCount = 1, 
+        DelayEqualBuildPlattons = {'MexSea', 1},-- The max number concurrent instances of this builder.
         BuilderConditions = {
-            { UCBC, 'CheckBuildPlattonDelay', { 'MexLand2' }},
-            { MABC, 'CanBuildOnMassLessThanDistance', { 'Naval Area', 25, -500, 1000, 0, 'StructuresNotMex', 1 }},
+            { UCBC, 'CheckBuildPlattonDelay', { 'MexSea' }},
+            { MABC, 'CanBuildOnMassLessThanDistance', { 'LocationType', 500, -500, 1000, 0, 'StructuresNotMex', 1 }},
         },
         BuilderType = 'SeaTA',
         BuilderData = {
-            NeedGuard = false,
-            DesiresAssist = false,
+            ---NeedGuard = false,
+            ---DesiresAssist = false,
             Construction = {
             Location = 'LocationType',
             NearMarkerType = 'Naval Area',
@@ -329,67 +287,21 @@ BuilderGroup {
             }
         }
     },
-    Builder {
-        BuilderName = 'SCTAAI T1Engineer Naval Mex 150',
-        PlatoonTemplate = 'EngineerBuilderSCTANaval',
-        Priority = 150,
-        InstanceCount = 1, -- The max number concurrent instances of this builder.
-        DelayEqualBuildPlattons = {'MexLand2', 1},
-        BuilderConditions = {
-            { UCBC, 'CheckBuildPlattonDelay', { 'MexLand2' }},
-            { MABC, 'CanBuildOnMassLessThanDistance', { 'Naval Area', 150, -500, 1000, 0, 'StructuresNotMex', 1 }},
-        },
-        BuilderType = 'SeaTA',
-        BuilderData = {
-            NeedGuard = false,
-            DesiresAssist = false,
-            Construction = {
-            Location = 'LocationType',
-            NearMarkerType = 'Naval Area',
-                BuildStructures = {
-                    'T1Resource',
-                }
-            }
-        }
-    },
-    Builder {
-        BuilderName = 'SCTAAI T1Engineer 300 Mex Naval',
-        PlatoonTemplate = 'EngineerBuilderSCTANaval',
-        Priority = 125,
-        InstanceCount = 1,
-        DelayEqualBuildPlattons = {'MexLand2', 1},
-        BuilderConditions = {
-            { UCBC, 'CheckBuildPlattonDelay', { 'MexLand2' }},
-            { MABC, 'CanBuildOnMassLessThanDistance', { 'Naval Area', 300, -500, 500, 0, 'StructuresNotMex', 1 }},
-        },
-        BuilderType = 'SeaTA',
-        BuilderData = {
-            NeedGuard = false,
-            DesiresAssist = false,
-            Construction = {
-            Location = 'LocationType',
-            NearMarkerType = 'Naval Area',
-                BuildStructures = {
-                    'T1Resource',
-                    }
-                }
-            }
-        },
     Builder {
         BuilderName = 'SCTAAI T2Engineer 300 Mex Naval',
         PlatoonTemplate = 'EngineerBuilderSCTANaval2',
         PriorityFunction = TAPrior.UnitProduction,
-        Priority = 125,
+        Priority = 75,
         InstanceCount = 1,
-        DelayEqualBuildPlattons = {'MexLand2', 1},
+        DelayEqualBuildPlattons = {'MexSea', 1},
         BuilderConditions = {
-            { UCBC, 'CheckBuildPlattonDelay', { 'MexLand2' }},
-            { MABC, 'CanBuildOnMassLessThanDistance', { 'Naval Area', 300, -500, 500, 0, 'StructuresNotMex', 1 }},
+            { UCBC, 'CheckBuildPlattonDelay', { 'MexSea' }},
+            { MABC, 'CanBuildOnMassLessThanDistance', { 'LocationType', 500, -500, 1000, 0, 'StructuresNotMex', 1 }},
         },
         BuilderType = 'SeaTA',
         BuilderData = {
-            NeedGuard = false,
-            DesiresAssist = false,
+            ---NeedGuard = false,
+            ---DesiresAssist = false,
             Construction = {
             Location = 'LocationType',
             NearMarkerType = 'Naval Area',
@@ -398,5 +310,48 @@ BuilderGroup {
                     }
                 }
             }
+        },
+        --[[Builder {
+            BuilderName = 'SCTA Engineer Finish Navy',
+            PlatoonTemplate = 'EngineerBuilderSCTANaval',
+            PlatoonAIPlan = 'ManagerEngineerFindUnfinishedSCTA',
+            Priority = 500,
+            InstanceCount = 2,
+            DelayEqualBuildPlattons = {'Unfinished', 2},
+            BuilderConditions = {
+                { TASlow, 'CheckBuildPlatoonDelaySCTA', { 'Unfinished' }},
+                { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, categories.ENGINEER * categories.NAVAL} },
+                { UCBC, 'UnfinishedUnits', { 'LocationType', categories.STRUCTURE}},
+            },
+            BuilderData = {
+                Assist = {
+                    NearMarkerType = 'Naval Area',
+                    BeingBuiltCategories = {'STRUCTURE'},
+                    AssistLocation = 'LocationType',
+                    AssistUntilFinished = true,
+                    AssisteeType = 'Engineer',
+                    Time = 20,
+                },
+            },
+            BuilderType = 'SeaTA',
+        },]]
+        Builder {
+            BuilderName = 'SCTA Engineer Reclaim Energy Naval',
+            PlatoonTemplate = 'EngineerBuilderSCTANaval',
+            PriorityFunction = TAPrior.TechEnergyExist,
+            PlatoonAIPlan = 'ReclaimStructuresAITA',
+            Priority = 111,
+            InstanceCount = 8,
+            BuilderConditions = {
+                { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1,  TIDAL}},
+                { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1,  categories.ENGINEER * categories.NAVAL} },
+                { TAutils, 'LessMassStorageMaxTA',  { 0.3}},
+                },
+            BuilderData = {
+                Location = 'LocationType',
+                Reclaim = {'cortide, armtide,'},
+                ReclaimTime = 30,
+            },
+            BuilderType = 'SeaTA',
         },
 }

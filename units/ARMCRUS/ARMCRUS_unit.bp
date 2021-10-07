@@ -154,7 +154,7 @@ UnitBlueprint {
             DamageType = 'Normal',
             DisplayName = 'ARM_CRUS',
             FireTargetLayerCapsTable = {
-                Water = 'Land|Water|Seabed',
+                Water = 'Land|Water|Seabed|Air',
             },
 	        RangeCategory = 'UWRC_DirectFire',
             WeaponCategory = 'DirectFire',

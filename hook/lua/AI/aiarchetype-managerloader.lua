@@ -8,6 +8,7 @@
 #****************************************************************************
 TAExecutePlan = ExecutePlan
 TASetupMainBase = SetupMainBase
+--WARN('['..string.gsub(debug.getinfo(1).source, ".*\\(.*.lua)", "%1")..', line:'..debug.getinfo(1).currentline..'] * SCTAAI: offset aiarchtype.lua' )
 
 function ExecutePlan(aiBrain)
     if not aiBrain.SCTAAI then
@@ -15,7 +16,8 @@ function ExecutePlan(aiBrain)
     end
     aiBrain:SetConstantEvaluate(false)
     local behaviors = import('/lua/ai/AIBehaviors.lua')
-    WaitSeconds(1)
+    --WaitSeconds(1)
+    coroutine.yield(11)
     if not aiBrain.BuilderManagers.MAIN.FactoryManager:HasBuilderList() then
 
         -- Debug for Platoon names. Option can only be true if AI uveso is active. Without AI-Uveso this if-then does nothing.
@@ -28,7 +30,7 @@ function ExecutePlan(aiBrain)
 
         SetupMainBase(aiBrain)
 
-        # Get units out of pool and assign them to the managers
+        --Get units out of pool and assign them to the managers
         local mainManagers = aiBrain.BuilderManagers.MAIN
 
         local pool = aiBrain:GetPlatoonUniquelyNamed('ArmyPool')

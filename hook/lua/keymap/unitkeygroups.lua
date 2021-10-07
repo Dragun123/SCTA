@@ -104,7 +104,6 @@ TAunitkeygroups = {
     },
     ["Strategic_Missile_Launcher"]= {
         "armsilo",
-   
         "corsilo",
     },
     ["Radar_System"]= {
@@ -132,7 +131,8 @@ TAunitkeygroups = {
         "cortoast",
     },
     ["Heavy_Shield_Generator"] = {
-        "armaser",
+        "armmark",
+        "corvoyr",
     },
     ["T2_Support_Land_Factory"]= {
         "armalab",
@@ -231,11 +231,10 @@ TAunitkeygroups = {
         "armsh",
         "corfav",
         "corsh", 
-        "corvoyr",
     },
     ["Stealth_Field_Generator"]= {
         "corspec",
-        "armmark",
+        "armaser",
     },
     ["T2_Air_Transport"] = {
         "armthovr",
@@ -286,7 +285,7 @@ TAunitkeygroups = {
         "correap",
     },
     ["T2_Assault_Bot"]= {
-        "armlatnk",
+        "armbull",
         "corcan",
     },
     ["T2_Mobile_AA_Flak_Artillery"]= {
@@ -380,7 +379,7 @@ TAunitkeygroups = {
         "armdrake",
     },
     ["T3_Siege_Assault_Bot"]= {
-        "armbull",
+        "armlatnk",
         "corpyro",
     },
     ["T3_Mobile_Missile_Platform"]= {

@@ -58,7 +58,6 @@ ProjectileBlueprint {
         Faction = 'CORE',
         Weapon = 'CORMSHIP_ROCKET',
     },
-
     Physics = {
         Acceleration = 5,
         TrackTime = 4,

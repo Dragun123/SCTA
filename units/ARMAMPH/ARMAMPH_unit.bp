@@ -36,7 +36,8 @@ UnitBlueprint {
         'DIRECTFIRE',
         'OVERLAYDIRECTFIRE',
         'ANTIAIR',
-        'OVERLAYANTAIR',
+        'OVERLAYANTIAIR',
+        'SILO',
         'BOT',
         'LAND',
         'ARM',
@@ -155,8 +156,9 @@ UnitBlueprint {
             DamageType = 'TASpec',
             DisplayName = 'armamph_weapon1',
             FireTargetLayerCapsTable = {
-                Land = 'Land|Water|Air',
-                Water = 'Land|Water|Air',
+                Land = 'Land|Water|Air|Seabed',
+                Water = 'Land|Water|Air|Seabed',
+                Seabed = 'Land|Water|Seabed|Air',
             },
             RangeCategory = 'UWRC_AntiAir',
             WeaponCategory = 'AntiAir',
@@ -165,7 +167,7 @@ UnitBlueprint {
             MaxRadius = 43.75,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
-            MuzzleVelocity = 29.375,
+            MuzzleVelocity = 29,
             ProjectileId = '/mods/SCTA-master/projectiles/ARMRL_MISSILE/ARMRL_MISSILE_proj.bp',
             RackBones = {
                 {
@@ -218,8 +220,9 @@ UnitBlueprint {
             DamageType = 'Normal',
             DisplayName = 'armamph_weapon2',
             FireTargetLayerCapsTable = {
-                Land = 'Land|Water|Air',
-                Water = 'Land|Water|Air',
+                Land = 'Land|Water|Air|Seabed',
+                Water = 'Land|Water|Air|Seabed',
+                Seabed = 'Land|Water|Seabed|Air',
             },
             RangeCategory = 'UWRC_DirectFire',
             WeaponCategory = 'DirectFire',
@@ -273,11 +276,13 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-
     },
     Wreckage = {
-        ---UseCustomMesh = true,
-        --Blueprint = '/mods/SCTA-master/units/ARMAMPH/ARMAMPH_dead_prop.bp',
+        Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
         WreckageLayers = {
             Land = true,
             Water = true,

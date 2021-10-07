@@ -130,8 +130,8 @@ UnitBlueprint {
             DamageType = 'Normal',
             DisplayName = 'ARM_LASERH1',
             FireTargetLayerCapsTable = {
-                Land = 'Land|Water|Air',
-                Water = 'Land|Water|Air',
+                Land = 'Land|Water|Seabed|Air',
+                Water = 'Land|Water|Seabed|Air',
             },
 	    RangeCategory = 'UWRC_DirectFire',
      WeaponCategory = 'DirectFire',
@@ -145,7 +145,7 @@ UnitBlueprint {
             EnergyDrainPerSecond = 75,
             EnergyRequired = 75,
             EnergyChargeForFirstShot = true,
-            DamageRadius = 2, 
+            DamageRadius = 1, 
             RackBones = {
                 {
                     MuzzleBones = {
@@ -195,15 +195,13 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-
     },
         Wreckage = {
-Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
-        EnergyMult = 0,
-        HealthMult = 0.9,
-        MassMult = 0.9,
-        ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/ARMHLT/ARMHLT_dead_prop.bp',
+            Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+            EnergyMult = 0,
+            HealthMult = 0.9,
+            MassMult = 0.9,
+            ReclaimTimeMultiplier = 1,
         WreckageLayers = {
             Land = true,
             Water = true,

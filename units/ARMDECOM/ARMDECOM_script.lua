@@ -7,7 +7,7 @@ local TACommander = import('/mods/SCTA-master/lua/TAconstructor.lua').TACommande
 local TAweapon = import('/mods/SCTA-master/lua/TAweapon.lua').TAweapon
 
 local TADGun = import('/mods/SCTA-master/lua/TAweapon.lua').TADGun
-local TACommanderDeathWeapon = import('/mods/SCTA-master/lua/TAweapon.lua').TACommanderDeathWeapon
+local BareBonesWeapon = import('/lua/sim/DefaultWeapons.lua').BareBonesWeapon
 
 ARMDECOM = Class(TACommander) {
 	Weapons = {
@@ -17,7 +17,7 @@ ARMDECOM = Class(TACommander) {
 		},		
 		AutoOverCharge = Class(TADGun) {
 		},
-		DeathWeapon = Class(TACommanderDeathWeapon) {},
+		DeathWeapon = Class(BareBonesWeapon) {},
 	},
 
 }

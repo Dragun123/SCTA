@@ -5,15 +5,15 @@ UnitBlueprint {
     },
     Economy = {
         BuildCostEnergy = 360,
-        BuildCostMass = 70,
+        BuildCostMass = 80,
         BuildTime = 660,
     },
     Intel = {
         VisionRadius = 12,
     },
     Defense = {
-        Health = 160,
-        MaxHealth = 160,
+        Health = 140,
+        MaxHealth = 140,
     },
     Physics = {
         MaxSpeed = 3.375,

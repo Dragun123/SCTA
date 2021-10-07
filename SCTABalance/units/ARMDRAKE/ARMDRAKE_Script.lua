@@ -9,20 +9,32 @@ local TAweapon = TAWeaponFile.TAweapon
 local TARotatingWeapon = TAWeaponFile.TARotatingWeapon
 
 ARMDRAKE = Class(TAWalking) {
+	OnCreate = function(self)
+		self.Spinners = {
+			nozzle1 = CreateRotator(self, 'lbarrel', 'z', nil, 0, 0, 0),
+			nozzle2 = CreateRotator(self, 'rbarrel', 'z', nil, 0, 0, 0),
+		}
+		for k, v in self.Spinners do
+			self.Trash:Add(v)
+		end
+		TAWalking.OnCreate(self)
+	end,
+	
 	Weapons = {
-		CORKROG_FIRE = Class(TARotatingWeapon) {
-				PlayRackRecoil = function(self, rackList) 
-					if not self.Rotator then
-						self.Rotator = CreateRotator(self.unit, 'lbarrel', 'z')
-						self.Rotator2 = CreateRotator(self.unit, 'rbarrel', 'z')
-					end
-					self.MaxRound = 4
-					self.Rotation = -90
-					self.Speed = 480
-					TARotatingWeapon.PlayRackRecoil(self, rackList)
-				end, 
+		CORKROG_FIRE = Class(TAweapon) {
+			PlayFxWeaponUnpackSequence = function(self)
+				self.unit.Spinners.nozzle1:SetSpeed(180)
+				self.unit.Spinners.nozzle2:SetSpeed(180)
+				TAweapon.PlayFxWeaponUnpackSequence(self)
+			end,
+		
+			PlayFxWeaponPackSequence = function(self)
+				self.unit.Spinners.nozzle1:SetSpeed(0)
+				self.unit.Spinners.nozzle2:SetSpeed(0)
+				TAweapon.PlayFxWeaponPackSequence(self)
+			end,
 			},
-		CORKROG_HEAD = Class(TAweapon) {
+		ARMDRAK_LASER = Class(TAweapon) {
 		},
 		CORKROG_ROCKET = Class(TAweapon) {},
 	},

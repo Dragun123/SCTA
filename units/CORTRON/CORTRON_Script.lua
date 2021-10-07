@@ -8,7 +8,8 @@ local TIFStrategicMissileWeapon = import('/lua/terranweapons.lua').TIFStrategicM
 
 CORTRON = Class(TAStructure) {
 	Weapons = {
-		EMBMSSL = Class(TIFStrategicMissileWeapon ) {},
+		EMBMSSL = Class(TIFStrategicMissileWeapon ) {
+		},
 	},
 }
 

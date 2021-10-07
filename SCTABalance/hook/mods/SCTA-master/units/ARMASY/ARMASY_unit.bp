@@ -17,7 +17,6 @@ UnitBlueprint {
 	    'NAVAL',
 	    'ARM',
 	    'SORTCONSTRUCTION',
-        'SUPPORTFACTORY',
     },
     Defense = {
         Health = 5000,
@@ -38,6 +37,7 @@ UnitBlueprint {
             'NAVAL MOBILE TECH1 ARM',
             'NAVAL MOBILE TECH2 ARM',
             'NAVAL MOBILE TECH3 ARM',
+            'armfark',
             'armch',
         },
         BuildRate = 360,

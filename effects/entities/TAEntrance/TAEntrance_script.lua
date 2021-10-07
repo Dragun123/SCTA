@@ -26,14 +26,16 @@ TAEntrance = Class(NullShell) {
 
         CreateEmitterOnEntity( self, army, '/mods/SCTA-master/effects/emitters/ENTRANCE_emit.bp')
        
-        WaitSeconds(0.3)
+        --WaitSeconds(0.3)
+        coroutine.yield(4)
         CreateLightParticleIntel( self, -1, army, 35, 10, 'flare_lens_add_02', 'ramp_blue_13' )
 
 		#self:CreateEnergySpinner()
         self:CreateEntrance(army)
 
 		# Wait till we want the commander to appear visibily
-		WaitSeconds(1.8)
+		--WaitSeconds(1.8)
+        coroutine.yield(19)
         CreateLightParticleIntel( self, -1, army, 35, 10, 'glow_02', 'ramp_blue_13' )
         DamageRing(self, pos, .1, 11, 100, 'Force', false, false)
 
@@ -45,14 +47,18 @@ TAEntrance = Class(NullShell) {
         CreateDecal(self:GetPosition(), decalOrient, 'Crater05_normals', '', 'Normals', 28, 28, 500, 600, army)
         CreateDecal(self:GetPosition(), decalOrient, 'Crater05_normals', '', 'Normals', 12, 12, 500, 600, army)
 
-		WaitSeconds(0.1)
+		--WaitSeconds(0.1)
+        coroutine.yield(2)
         DamageRing(self, pos, .1, 11, 100, 'Force', false, false)
-        WaitSeconds(0.39)
+        --WaitSeconds(0.39)
+        coroutine.yield(4)
         DamageRing(self, pos, 11, 20, 1, 'Force', false, false)
-        WaitSeconds(0.1)
+        --WaitSeconds(0.1)
+        coroutine.yield(2)
         DamageRing(self, pos, 11, 20, 1, 'Force', false, false)
-        WaitSeconds(0.5)
-        WaitSeconds(0.3)
+        --WaitSeconds(0.5)
+        --WaitSeconds(0.3)
+        coroutine.yield(10)
         DamageRing(self, pos, 20, 27, 1, 'Fire', false, false)
     end,
 
@@ -107,7 +113,8 @@ TAEntrance = Class(NullShell) {
             table.insert( projectileList, proj )
         end
 
-        WaitSeconds( 2.5 )
+        --WaitSeconds( 2.5 )
+        coroutine.yield(25)
         for k, v in projectileList do
             v:SetAcceleration(0)
         end

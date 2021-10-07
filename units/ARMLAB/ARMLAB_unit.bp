@@ -61,7 +61,7 @@ UnitBlueprint {
     Display = {
         BuildAttachBone = 'BasePlate',
         AnimationUnpack = '/mods/SCTA-master/units/ARMLAB/ARMLAB_lod0_aopen.sca',
-        AnimationUnpackRate = 1.5, 
+        AnimationUnpackRate = 1, 
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -153,7 +153,9 @@ InitialRallyZ = 7,
     SizeX = 6,
     SizeY = 2.5,
     SizeZ = 6,
-    StrategicIconName = 'icon_factory1_land',
+    StrategicIconName = 'icon_factory1_bot',
+    TAStrategicIconName = 'factory_land',
+    TAStrategicIconName2 = '1/factory_land',
     StrategicIconSortPriority = 0,
     Weapon = {
         { #LARGE_BUILDINGEX
@@ -164,15 +166,13 @@ InitialRallyZ = 7,
         DummyWeapon = true,
         Label = 'DeathWeapon',
         },
-
     },
-        Wreckage = {
-Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+    Wreckage = {
+        Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/ARMLAB/ARMLAB_dead_prop.bp',
         WreckageLayers = {
             Land = true,
         },

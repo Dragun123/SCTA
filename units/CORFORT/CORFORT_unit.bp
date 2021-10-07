@@ -77,17 +77,15 @@ TechLevel = 'RULEUTL_Secret',
     SizeY = 2,
     SizeZ = 2,
     StrategicIconName = 'icon_structure_wall',
-    TAStrategicIconName = '2/structure_wall',
     StrategicIconSortPriority = 0,
         Wreckage = {
             UseCustomMesh = true,
-            --Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
             EnergyMult = 0,
             HealthMult = 0.9,
             MassMult = 0.9,
             ReclaimTimeMultiplier = 1,
             Blueprint = '/mods/SCTA-master/meshes/DRAGON/DRAGON_prop.bp',
-        WreckageLayers = {
+            WreckageLayers = {
             Land = true,
         },
     },

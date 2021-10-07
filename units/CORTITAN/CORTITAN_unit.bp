@@ -76,6 +76,7 @@ UnitBlueprint {
         'OVERLAYSONAR',
         'CORE',
         'SNIPEMODE',
+        'BOMBER',
     },
     Defense = {
         ArmorType = 'Light',
@@ -175,7 +176,7 @@ TechLevel = 'RULEUTL_Advanced',
             AutoInitiateAttackCommand = true,
             BallisticArc = 'RULEUBA_None',
             CollideFriendly = false,
-            Damage = 600,
+            Damage = 250,
             DamageType = 'Normal',
             DisplayName = 'CORAIR_TORPEDO',
             FireTargetLayerCapsTable = {
@@ -231,8 +232,7 @@ TechLevel = 'RULEUTL_Advanced',
             DamageRadius = 3,
             DamageType = 'Normal',
             DummyWeapon = true,
-            Label = 'DeathWeapon',
+            Label = 'DeathImpact',
         },
-        
     },
 }

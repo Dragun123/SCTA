@@ -5,8 +5,8 @@ UnitBlueprint {
     MinAirspeed = 3,
     },
    Defense = {
-    Health = 900,
-    MaxHealth = 900,
+    Health = 460,
+    MaxHealth = 460,
     },
     Display = {
         UniformScale = 0.12,
@@ -21,9 +21,7 @@ UnitBlueprint {
             'BUILTBYTIER2FACTORY CORE',
             'BUILTBYTIER2ENGINEER CORE',
         },
-        MaxBuildDistance = 5,
-        ProductionPerSecondEnergy = 4,
-        ProductionPerSecondMass = 1,
+        ProductionPerSecondEnergy = 5,
     },
     Physics = {
         FuelRechargeRate = 888888,

@@ -56,7 +56,7 @@ UnitBlueprint {
         AnimationWalkRate = 2,
         Abilities = {
             '<LOC ability_suicideweapon>Suicide Weapon',
-            'All-Terrain',
+            '<LOC ability_amphibious>Amphibious',
         },
         Mesh = {
             IconFadeInZoom = 130,
@@ -93,7 +93,18 @@ UnitBlueprint {
         },
         FactionName = 'ARM',
         Icon = 'land',
-TechLevel = 'RULEUTL_Advanced',
+        InstantDeathOnSelfDestruct = true,
+        OrderOverrides = {
+            RULEUTC_SpecialToggle = {
+                --  more options in textures.scd\textures\ui\common\game\orders
+                bitmapId = 'toggle-weapon',
+                helpText = 'Detonate',
+            },
+        },
+        ToggleCaps = {
+            RULEUTC_SpecialToggle = true,
+	    },
+        TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Invader',
     },
     Intel = {
@@ -134,7 +145,7 @@ TechLevel = 'RULEUTL_Advanced',
             CollideFriendly = false,
 	        DamageFriendly = true,
             Damage = 2000, #Doubles up with death, so death damage subtracted
-	        DamageRadius = 5,
+	        DamageRadius = 6,
             FireOnSelfDestruct = true,
             DamageType = 'Normal',
             RackBones = {

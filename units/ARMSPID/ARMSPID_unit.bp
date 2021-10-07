@@ -10,7 +10,7 @@ UnitBlueprint {
            StopMove = Sound { Bank = 'TA_Sound', Cue = 'SPIDER',   LodCutoff = 'UnitMove_LodCutoff' },
           Destroyed = Sound { Bank = 'TA_Sound', Cue = 'XPLOLRG3', LodCutoff = 'UnitMove_LodCutoff' },
     },
-    BuildIconSortPriority = 2,
+    BuildIconSortPriority = 3,
     Categories = {
         'SELECTABLE',
         'VISIBLETORECON',
@@ -38,7 +38,7 @@ UnitBlueprint {
         AnimationWalkRate = 6.5,
         Abilities = {
             '<LOC ability_stun>EMP Weapon',
-            'All-Terrain',
+            '<LOC ability_amphibious>Amphibious',
         },
         MovementEffects = {
             Land = {
@@ -162,8 +162,8 @@ UnitBlueprint {
             DamageType = 'Normal',
             DisplayName = 'ARM_PARALYZER',
             FireTargetLayerCapsTable = {
-                Land = 'Land|Water|Seabed',
-                Seabed = 'Land|Water|Seabed',
+                Land = 'Land|Water|Seabed|Air',
+                Seabed = 'Land|Water|Seabed|Air',
             },
             RangeCategory = 'UWRC_DirectFire',
             FiringTolerance = 0,

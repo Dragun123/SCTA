@@ -29,9 +29,6 @@ TAconstructor = Class(TAWalking) {
             end
         end
         self.BuildingUnit = false
-        if __blueprints['armgant'] and not EntityCategoryContains(categories.TECH3, self) then
-            TAutils.updateBuildRestrictions(self)
-        end
         --LOG('*Who', self:GetBlueprint().General.FactionName)
     end,
 
@@ -67,15 +64,17 @@ TAconstructor = Class(TAWalking) {
 
     OnStopBeingBuilt = function(self, builder, layer)
         TAWalking.OnStopBeingBuilt(self, builder, layer)
-        if __blueprints['armgant'] then
-            TAutils.TABuildRestrictions(self)
+        if __blueprints['armgant'] and not (EntityCategoryContains(categories.TECH3 + categories.COMMAND + categories.SUBCOMMANDER, self) or self:GetAIBrain().Level3) then
+            TAutils.SCTAupdateBuildRestrictions(self)
         end
+        --[[if __blueprints['armgant'] and self.TARestrict then
+            TAutils.TABuildRestrictions(self)
+        end]]
     end,  
 
     OnStopBuild = function(self, unitBeingBuilt)
         self.UnitBeingBuilt = nil
         self.UnitBuildOrder = nil
-
         if self.BuildingOpenAnimManip and self.BuildArmManipulator then
             self.StoppedBuilding = true
         elseif self.BuildingOpenAnimManip then
@@ -145,41 +144,22 @@ TAconstructor = Class(TAWalking) {
 
 TASeaConstructor = Class(TAconstructor) 
 {
-    OnCreate = function(self)
-        TAconstructor.OnCreate(self)
-		self.FxMovement = TrashBag()
-        end,
-
-     
-	OnMotionHorzEventChange = function(self, new, old )
-		TAconstructor.OnMotionHorzEventChange(self, new, old)
-		self.CreateMovementEffects(self)
-	end,
-    
-    
-	CreateMovementEffects = function(self, EffectsBag, TypeSuffix)
-		if not IsDestroyed(self) then
-		TAconstructor.CreateMovementEffects(self, EffectsBag, TypeSuffix)
-        local bp = self:GetBlueprint()
-		if self:IsUnitState('Moving') and bp.Display.MovementEffects.TAMovement then
-			for k, v in bp.Display.MovementEffects.TAMovement.Bones do
-				self.FxMovement:Add(CreateAttachedEmitter(self, v, self:GetArmy(), bp.Display.MovementEffects.TAMovement.Emitter ):ScaleEmitter(bp.Display.MovementEffects.TAMovement.Scale))
-			end
-		end
-		if not self:IsUnitState('Moving') then
-			for k,v in self.FxMovement do
-				v:Destroy()
-			end
-		end
-		end
-	end,
+    OnMotionHorzEventChange = function( self, new, old )
+        TAconstructor.OnMotionHorzEventChange(self, new, old)
+        if ( new == 'Cruise' and old == 'Stopped') then
+            self:ForkThread(self.StartMoveFxTA)
+         end
+        if ( new == 'Stopped' ) or ( new == 'Stopped' and old == 'Stopping' ) then
+            self:ForkThread(self.MoveFxStopTA)
+        end
+    end,
 
 
 }
 
 
 TANecro = Class(TAconstructor) {
-    OnStartReclaim = function(self, target, oldPosition)
+    OnStartReclaim = function(self, target)
         if self:GetBlueprint().Economy.Necro then
             if not target.ReclaimInProgress and not target.NecroingInProgress and not target:GetBlueprint().Economy.Heap then
                 --LOG('* Necro: OnStartReclaim:  I am a necro! no ReclaimInProgress; starting Necroing')
@@ -210,11 +190,11 @@ TANecro = Class(TAconstructor) {
                 return
             end
         end
-        TAconstructor.OnStartReclaim(self, target, oldPosition)
+        TAconstructor.OnStartReclaim(self, target)
     end,
 
-    OnStopReclaim = function(self, target, oldPosition)
-        TAconstructor.OnStopReclaim(self, target, oldPosition)
+    OnStopReclaim = function(self, target)
+        TAconstructor.OnStopReclaim(self, target)
         if not target then
             if self.RecBP and self:GetBlueprint().Economy.Necro and oldPosition ~= self.RecPosition and self.spawnUnit then
                 --LOG('* Necro: OnStopReclaim:  I am a necro! and RecBP = true ')
@@ -239,6 +219,7 @@ TANecro = Class(TAconstructor) {
         WaitTicks(3)
         local newUnit = CreateUnitHPR(RecBP, army, pos[1], pos[2], pos[3], 0, 0, 0)
         newUnit:SetHealth(nil, 100)
+        newUnit.Necro = true
     end,
 }
 
@@ -248,16 +229,50 @@ TACommander = Class(TAconstructor) {
         self.ReclaimEffectsBag:Add(TAutils.TACommanderReclaimEffects(self, target, self.BuildEffectBones or {0, }, self.ReclaimEffectsBag))
     end,
 
-    SetAutoOvercharge = function(self, auto)
-        self:GetWeaponByLabel('AutoOverCharge'):SetAutoOvercharge(auto)
-        self.Sync.AutoOvercharge = auto
+    SetAutoOvercharge = function(self)
+        local wep = self:GetWeaponByLabel('AutoOverCharge')
+        --self:GetWeaponByLabel('AutoOverCharge'):SetAutoOvercharge(auto)
+        --LOG('TAIEXIST')
+        --_ALERT('TAIEXISTINGWEA', wep.AutoThread)
+        if not self.Sync.AutoOvercharge then
+            --_ALERT('TAIEXISTING', self.Sync.AutoOvercharge)
+        self.Sync.AutoOvercharge = true
+        --_ALERT('TAIEXISTING2', self.Sync.AutoOvercharge)
+            if wep.AutoThread then
+                KillThread(wep.AutoThread)
+            end
+        wep.AutoThread = wep:ForkThread(wep.AutoEnable, wep)
+        --self:SetWeaponEnabledByLabel('AutoOverCharge', true)
+        else
+        --LOG('TAIEXISTKILL')
+        --_ALERT('TAIEXISTINGWEA2', wep.AutoThread)
+        self.Sync.AutoOvercharge = nil
+        if wep.AutoThread then
+            KillThread(wep.AutoThread)
+        end
+        self:SetWeaponEnabledByLabel('AutoOverCharge', false)
+        end
     end,
+
+    --[[DGun = function(self)
+        if self.DGunWeapon:CanOvercharge() then
+            coroutine.yield(5)
+            self:SetWeaponEnabledByLabel('AutoOverCharge', true)
+        else
+            coroutine.yield(21)
+            self:SetWeaponEnabledByLabel('AutoOverCharge', true)
+        end
+    end,]]
 
     ResetRightArm = function(self)
        self:SetImmobile(false)
+       if self.DGunWeapon:CanOvercharge() then
+        ---LOG('TAIEXIST')
        self:SetWeaponEnabledByLabel('OverCharge', true)
-        if self.Sync.AutoOvercharge then
-        self:GetWeaponByLabel('AutoOverCharge'):SetAutoOvercharge(wep.AutoMode)
+            if self.Sync.AutoOvercharge then
+            self:SetWeaponEnabledByLabel('AutoOverCharge', true)
+        --self:GetWeaponByLabel('AutoOverCharge'):SetAutoOvercharge(wep.AutoMode)
+            end
         end
     end,
 
@@ -271,6 +286,7 @@ TACommander = Class(TAconstructor) {
 		TAconstructor.OnCreate(self)
         self:SetCapturable(false)
         self:SetWeaponEnabledByLabel('AutoOverCharge', false)
+        self.DGunWeapon = self:GetWeaponByLabel('OverCharge')
 	end,
     
     CreateCaptureEffects = function( self, target )
@@ -412,6 +428,10 @@ TARealCommander = Class(TACommander) {
         if self:GetHealth() < ArmyBrains[self.Army]:GetUnitStat(self.UnitId, "lowest_health") then
             ArmyBrains[self.Army]:SetUnitStat(self.UnitId, "lowest_health", self:GetHealth())
         end
+        if damageType == 'DGun' then
+            --LOG('TADGUN', EntityCategoryContains(categories.COMMAND, instigator))
+            instigator.Disintegrator:Destroy()
+        end
     end,
 
     OnStopBeingBuilt = function(self,builder,layer)
@@ -428,7 +448,8 @@ TARealCommander = Class(TACommander) {
         self:SetCustomName( ArmyBrains[self:GetArmy()].Nickname )
         self:SetUnSelectable(false)
         self:SetBlockCommandQueue(true)
-        WaitSeconds(1)
+        --WaitSeconds(1)
+        coroutine.yield(11)
 		self.PlayCommanderWarpInEffectFlag = true
         self:ForkThread(self.ExplosionInEffectThread)
     end,

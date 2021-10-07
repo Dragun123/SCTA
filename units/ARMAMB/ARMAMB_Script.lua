@@ -51,7 +51,8 @@ ARMAMB = Class(TAPop) {
 			self.Sliders.turret:SetSpeed(44)
 	
 			--SLEEP <321>;
-			WaitSeconds(1)
+			--WaitSeconds(1)
+			coroutine.yield(11)
 
 		--MOVE door1 to y-axis <0> SPEED <6.00>;
 		self.Sliders.door1:SetGoal(0,0,0)
@@ -75,7 +76,8 @@ ARMAMB = Class(TAPop) {
 		self.Spinners.stand:SetGoal(295)
 		self.Spinners.stand:SetSpeed(353)
 		--SLEEP <509>;
-		WaitSeconds(1)
+		--WaitSeconds(1)
+		coroutine.yield(11)
 
 		--TURN door1 to x-axis <90.36> SPEED <225.96>;
 		self.Spinners.door1:SetGoal(90)
@@ -153,7 +155,9 @@ ARMAMB = Class(TAPop) {
 				self.unit.Sliders.barrel:SetGoal(0,0,0)
 				self.unit.Sliders.barrel:SetSpeed(22)
 
-				WaitSeconds(1)
+				--WaitSeconds(1)
+				coroutine.yield(11)
+
 				TAHide.PlayFxWeaponUnpackSequence(self)
 			end,	
 
@@ -195,7 +199,8 @@ ARMAMB = Class(TAPop) {
 				self.unit.Spinners.stand:SetSpeed(353)
 
 				--SLEEP <509>;
-				WaitSeconds(1)
+				--WaitSeconds(1)
+				coroutine.yield(11)
 
 				--TURN door1 to x-axis <-90.36> SPEED <225.96>;
 				self.unit.Spinners.door1:SetGoal(90)
@@ -212,8 +217,6 @@ ARMAMB = Class(TAPop) {
 				--TURN door4 to z-axis <-90.36> SPEED <225.96>;
 				self.unit.Spinners.door4:SetGoal(-90)
 				self.unit.Spinners.door4:SetSpeed(226)
-			
-				self.unit.Pack = 0.28
 				TAHide.PlayFxWeaponPackSequence(self)
 			end,	
 		},

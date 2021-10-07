@@ -1,11 +1,12 @@
 UnitBlueprint {
     Merge = true,
     Economy = {
+        BuildCostEnergy = 4000,
         BuildTime = 5500,
     },
     Defense = {
-        Health = 1500,
-        MaxHealth = 1500,
+        Health = 1000,
+        MaxHealth = 1000,
     },
     Intel = {
         VisionRadius = 16,
@@ -18,6 +19,7 @@ UnitBlueprint {
     SizeZ = 1,
     Weapon = {
         [1] = {
+            Damage = 40,
             EnergyRequired = 20,
         },
         [2] = {

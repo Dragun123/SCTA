@@ -6,15 +6,8 @@
 UnitBlueprint {
     Merge = true,
     Economy = {
-        BuildCostEnergy = 8500,
-        BuildCostMass = 400,
+        BuildCostEnergy = 17000,
+        BuildCostMass = 600,
         BuildTime = 12000,
-    },
-    Weapon = {
-        [1] = {
-            Damage = 10,
-        },
-        [2] = {
-        }, 
     },
 }

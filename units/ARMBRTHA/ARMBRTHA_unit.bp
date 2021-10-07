@@ -125,7 +125,7 @@ UnitBlueprint {
 	        FiringRandomness = 0.25,
             Label = 'ARM_BERTHACANNON',
             RenderFireClock = true,
-            MaxRadius = 450,
+            MaxRadius = 850,
             MuzzleSalvoDelay = 0, 
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 75,
@@ -173,15 +173,13 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-        
     },
         Wreckage = {
-Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+        Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/ARMBRTHA/ARMBRTHA_dead_prop.bp',
         WreckageLayers = {
             Land = true,
         },

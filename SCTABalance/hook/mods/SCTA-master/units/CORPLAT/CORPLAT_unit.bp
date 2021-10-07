@@ -27,9 +27,6 @@ UnitBlueprint {
         Health = 14000,
         MaxHealth = 14000,
     },
-    Display = {
-        UniformScale = 0.20,
-    },
     Footprint = {
         SizeX = 7,
         SizeZ = 7,
@@ -47,16 +44,12 @@ UnitBlueprint {
     Physics = {
         BuildOnLayerCaps = {
             LAYER_Land = true,
-            LAYER_Water = true,
+            LAYER_Sub = true,
         },
     },
     LifeBarHeight = 0.22,
-    LifeBarOffset = 3,
+    LifeBarOffset = 2,
     LifeBarSize = 7,
     SelectionSizeX = 7,
     SelectionSizeZ = 5,
-    SelectionThickness = 0.25,
-    SizeX = 9,
-    SizeY = 3,
-    SizeZ = 9,
 }

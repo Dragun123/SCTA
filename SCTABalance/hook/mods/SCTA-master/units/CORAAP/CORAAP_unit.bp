@@ -18,7 +18,6 @@ UnitBlueprint {
         'AIR', 
     	'CORE',
 	    'SORTCONSTRUCTION',
-        'SUPPORTFACTORY',
     },
     Defense = {
         Health = 10000,

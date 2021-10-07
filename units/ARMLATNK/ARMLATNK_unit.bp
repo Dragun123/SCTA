@@ -41,6 +41,7 @@ UnitBlueprint {
         'ARM',
         'TANK',
         'ANTISHIELD',
+        'SILO',
     },
     Defense = {
         ArmorType = 'Normal',
@@ -111,7 +112,7 @@ UnitBlueprint {
     SelectionSizeZ = 1,
     SelectionThickness = 0.25,
     SizeX = 2,
-    SizeY = 2,
+    SizeY = 1,
     SizeZ = 2,
     StrategicIconName = 'icon_land2_directfire',
     StrategicIconSortPriority = 0,
@@ -134,8 +135,8 @@ UnitBlueprint {
             DamageType = 'Normal',
             DisplayName = 'ARMLATNK_WEAPON',
             FireTargetLayerCapsTable = {
-                Land = 'Land|Water|Seabed',
-                Seabed = 'Land|Water|Seabed',
+                Land = 'Land|Water|Seabed|Air',
+                Seabed = 'Land|Water|Seabed|Air',
             },
 	    RangeCategory = 'UWRC_DirectFire',
      WeaponCategory = 'DirectFire',
@@ -194,8 +195,8 @@ UnitBlueprint {
             DamageType = 'TASpec',
             DisplayName = 'ARMKBOT_MISSILE',
             FireTargetLayerCapsTable = {
-                Land = 'Land|Water|Air',
-                Seabed = 'Land|Water|Air',
+                Land = 'Land|Water|Seabed|Air',
+                Seabed = 'Land|Water|Seabed|Air',
             },
 	        RangeCategory = 'UWRC_AntiAir',
             WeaponCategory = 'AntiAir',
@@ -204,7 +205,7 @@ UnitBlueprint {
             MaxRadius = 37.75,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
-            MuzzleVelocity = 28.125,
+            MuzzleVelocity = 28,
             ProjectileId = '/mods/SCTA-master/projectiles/ARMKBOT_MISSILE/ARMKBOT_MISSILE_proj.bp',
             RackBones = {
                 {
@@ -255,15 +256,13 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-
     },
         Wreckage = {
-Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+        Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/ARMLATNK/ARMLATNK_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Seabed = true,

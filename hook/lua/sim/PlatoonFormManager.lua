@@ -1,5 +1,5 @@
 WARN('['..string.gsub(debug.getinfo(1).source, ".*\\(.*.lua)", "%1")..', line:'..debug.getinfo(1).currentline..'] * SCTAAI: offset PlatoonForm.lua' )
-local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
+--local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
 SCTAPlatoonFormManager = PlatoonFormManager
 PlatoonFormManager = Class(SCTAPlatoonFormManager) {
     Create = function(self, brain, lType, location, radius)
@@ -7,7 +7,7 @@ PlatoonFormManager = Class(SCTAPlatoonFormManager) {
             --LOG('*self.template2', brain.SCTAAI)
             return SCTAPlatoonFormManager.Create(self, brain, lType, location, radius)
         end
-        BuilderManager.Create(self,brain)
+        BuilderManager.Create(self, brain)
         --LOG('IEXIST2')
         if not lType or not location or not radius then
             error('*PLATOOM FORM MANAGER ERROR: Invalid parameters; requires locationType, location, and radius')
@@ -17,11 +17,12 @@ PlatoonFormManager = Class(SCTAPlatoonFormManager) {
 
         self.Location = location
         self.Radius = radius
-        self.OriginalRadius = self.Radius
+        ---self.OriginalRadius = self.Radius
         self.LocationType = lType
         --LOG('*TALocation', lType)
         if string.find(lType, 'Naval') then
             self.Naval = true
+            brain.TANavy = true
             --LOG('*TALocation3', self.LocationType)
             elseif lType == 'MAIN' then
             self.Main = true
@@ -60,46 +61,25 @@ PlatoonFormManager = Class(SCTAPlatoonFormManager) {
         BuilderManager.ManagerLoopBody(self,builder,bType)
         ---local builder = self:GetHighestBuilder(bType, {builder})
             --local pool = self.Brain:GetPlatoonUniquelyNamed('ArmyPool')
-            local GetUnitsAroundPoint = moho.aibrain_methods.GetUnitsAroundPoint
-        if not self.Naval then
-            if TAPrior.TechEnergyExist >= 75 and (bType == 'StructureForm' or TAPrior.GantryProduction >= 200 and bType == 'Other') then
-               if bType == 'StructureForm' then
-                    self.StructureForm = GetUnitsAroundPoint(self.Brain, categories.STRUCTURE * (categories.CQUEMOV + categories.MASSFABRICATION), self.Location, self.Radius, 'Ally')
-                    if self.StructureForm > 0 then 
-                        self:SCTAManagerLoopBody(builder, bType)
+        if self.Brain.BuilderManagers[self.LocationType] and builder.Priority >= 1 and builder:CheckInstanceCount() then
+            --LOG('*TATerrain3', self.Main)
+            if bType == 'LandForm' and self.Brain.LandForm > 0 then 
+                return self:SCTAManagerLoopBody(builder, 'LandForm')
+            elseif bType == 'AirForm' and self.Brain.AirForm > 0 then 
+                return self:SCTAManagerLoopBody(builder, 'AirForm')
+            elseif bType == 'Scout' and self.Brain.Scout > 0 then
+                    if not self.Main then
+                        return self:SCTAManagerLoopBody(builder, 'Scout')
+                    elseif self.Main and (self.Brain.Plants <= 4) then 
+                        return self:SCTAManagerLoopBody(builder, 'Scout')
                     end
-                elseif self.Main and bType == 'Other' then
-                    self.Other = GetUnitsAroundPoint(self.Brain, categories.EXPERIMENTAL, self.Location, self.Radius, 'Ally')
-                    if self.Other > 0 then
-                        self:SCTAManagerLoopBody(builder, bType)
-                    end
-                end 
-                --LOG('*TATerrain3', self.Main)
-            elseif bType == 'LandForm' then 
-                    self.LandForm = GetUnitsAroundPoint(self.Brain, categories.LAND * categories.MOBILE - categories.ENGINEER - categories.SCOUT, self.Location, self.Radius, 'Ally')
-                    if self.LandForm > 0 then
-                        self:SCTAManagerLoopBody(builder, bType)
-                    end    
-            elseif bType == 'AirForm' then 
-                    self.AirForm = GetUnitsAroundPoint(self.Brain, categories.AIR * categories.MOBILE - categories.ENGINEER - categories.SCOUT, self.Location, self.Radius, 'Ally')
-                    if self.AirForm > 0 then
-                        self:SCTAManagerLoopBody(builder, bType)
-                    end
-            elseif bType == 'Scout' then
-                    self.Scout = GetUnitsAroundPoint(self.Brain, (categories.armpw + categories.corgator + categories.SCOUT + categories.AMPHIBIOUS) - categories.ENGINEER, self.Location, self.Radius, 'Ally')
-                    if self.Scout > 0 then
-                        if not self.Main then
-                            self:SCTAManagerLoopBody(builder, bType)
-                        elseif self.Main and TAPrior.UnitProductionT1 >= 75 then 
-                            self:SCTAManagerLoopBody(builder, bType)
-                        end
-                    end
-            end    
-            elseif self.Naval and bType == 'SeaForm' then 
-                self.SeaForm = GetUnitsAroundPoint(self.Brain, categories.NAVAL * categories.MOBILE, self.Location, self.Radius, 'Ally')
-                --LOG('*TATerrain', self.LocationType)
-            if self.SeaForm > 0 then
-                self:SCTAManagerLoopBody(builder, 'SeaForm')
+            elseif self.Brain.Level2 and bType == 'StructureForm' and self.Brain.StructureForm > 3 then
+                    return self:SCTAManagerLoopBody(builder, 'StructueForm')
+            elseif self.Brain.Level3 and bType == 'Other' and self.Main and self.Brain.Other > 0 then
+                    return self:SCTAManagerLoopBody(builder, 'Other')    
+            end
+            if self.Naval and bType == 'SeaForm' and self.Brain.SeaForm > 0 then 
+                return self:SCTAManagerLoopBody(builder, 'SeaForm')
             end
         end
     end,
@@ -108,7 +88,6 @@ PlatoonFormManager = Class(SCTAPlatoonFormManager) {
 
     SCTAManagerLoopBody = function(self,builder,bType)
         --BuilderManager.ManagerLoopBody(self,builder,bType)
-        if self.Brain.BuilderManagers[self.LocationType] and builder.Priority >= 1 and builder:CheckInstanceCount() then
                 local personality = self.Brain:GetPersonality()
                 local poolPlatoon = self.Brain:GetPlatoonUniquelyNamed('ArmyPool')
                 local template = self:GetPlatoonTemplate(builder:GetPlatoonTemplate())
@@ -170,7 +149,6 @@ PlatoonFormManager = Class(SCTAPlatoonFormManager) {
             builder:StoreHandle(hndl)
             end
             --self.Radius = self.OriginalRadius
-        end
     end,
 
 }

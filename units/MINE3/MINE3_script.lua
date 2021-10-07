@@ -3,18 +3,13 @@
 #
 #Script created by Raevn
 local TAMine = import('/mods/SCTA-master/lua/TAStructure.lua').TAMine
-local Projectile = import('/lua/sim/DefaultWeapons.lua').DefaultProjectileWeapon
+local TAKami = import('/mods/SCTA-master/lua/TAweapon.lua').TAKami
+local TABomb = import('/mods/SCTA-master/lua/TAweapon.lua').TABomb
 
 MINE3 = Class(TAMine) {
-
-
 	Weapons = {
-		ARMMINE3 = Class(Projectile) {
-			OnWeaponFired = function(self)
-				self.unit.attacked = true
-				self.unit:Kill()
-			end,
-		},
+		MINE = Class(TAKami) {},
+		DeathWeapon = Class(TABomb) {},
 	},
 }
 TypeClass = MINE3

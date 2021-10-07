@@ -50,7 +50,6 @@ UnitBlueprint {
     CollisionOffsetY = -0.3,
     CollisionOffsetX = 0.1,
     Defense = {
-        DamageModifier = 0.5,
         ArmorType = 'Structure',
         AirThreatLevel = 0,
         EconomyThreatLevel = 2,
@@ -64,13 +63,14 @@ UnitBlueprint {
         Abilities = {
             '<LOC ability_aquatic>Aquatic',
         },
+        AnimationWater = '/mods/SCTA-master/units/ARMMAKR/ARMMAKR_WaterTransform.sca',
+        AnimationWaterRate = 1, 
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
                 {
                     LODCutoff = 230,
-                    ShaderName = 'AeonCZAR', 
-		    NormalsName = '/mods/SCTA-master/textures/common/normalsTS.dds'
+                    ShaderName = 'Unit', 
                 },
             },
         },
@@ -115,7 +115,7 @@ UnitBlueprint {
     SizeY = 2,
     SizeZ = 2.5,
     StrategicIconName = 'icon_structure2_mass',
-    TAStrategicIconName = '2/structure_massfab',
+    ---TAStrategicIconName = '2/structure_massfab',
     StrategicIconSortPriority = 0,
     Weapon = {
         { #SMALL_BUILDINGEX
@@ -126,17 +126,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-         
     },
         Wreckage = {
-Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+        Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/ARMMAKR/ARMMAKR_dead_prop.bp',
         WreckageLayers = {
             Land = true,
+            Water = true,
         },
     },
 }

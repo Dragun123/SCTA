@@ -2,34 +2,15 @@ local TAunit = import('/mods/SCTA-master/lua/TAunit.lua').TAunit
 
 TASea = Class(TAunit) 
 {
-    OnCreate = function(self)
-        TAunit.OnCreate(self)
-		self.FxMovement = TrashBag()
-        end,
-
-     
-	OnMotionHorzEventChange = function(self, new, old )
-		TAunit.OnMotionHorzEventChange(self, new, old)
-		self.CreateMovementEffects(self)
-	end,
-    
-    
-	CreateMovementEffects = function(self, EffectsBag, TypeSuffix)
-		if not IsDestroyed(self) then
-		TAunit.CreateMovementEffects(self, EffectsBag, TypeSuffix)
-		local bp = self:GetBlueprint()
-		if self:IsUnitState('Moving') and bp.Display.MovementEffects.TAMovement then
-			for k, v in bp.Display.MovementEffects.TAMovement.Bones do
-				self.FxMovement:Add(CreateAttachedEmitter(self, v, self:GetArmy(), bp.Display.MovementEffects.TAMovement.Emitter ):ScaleEmitter(bp.Display.MovementEffects.TAMovement.Scale))
-			end
-		end
-		if not self:IsUnitState('Moving') then
-			for k,v in self.FxMovement do
-				v:Destroy()
-			end
-		end
-		end
-	end,
+    OnMotionHorzEventChange = function( self, new, old )
+        TAunit.OnMotionHorzEventChange(self, new, old)
+        if ( new == 'Cruise' and old == 'Stopped') then
+            self:ForkThread(self.StartMoveFxTA)
+         end
+        if ( new == 'Stopped' ) or ( new == 'Stopped' and old == 'Stopping' ) then
+            self:ForkThread(self.MoveFxStopTA)
+        end
+    end,
 }
 
 TAWalking = Class(TAunit) 
@@ -54,9 +35,9 @@ TAWalking = Class(TAunit)
                 self.Animator:SetRate(bpDisplay.AnimationWalkRate or 1)
             end
         elseif ( new == 'Stopped' ) then
-            if(self.IdleAnim and not self:IsDead()) then
+            if(self.IdleAnim and not self.Dead) then
                 self.Animator:PlayAnim(self.IdleAnim, true)
-            elseif(not self.DeathAnim or not self:IsDead()) then
+            elseif(not self.DeathAnim or not self.Dead) then
                 self.Animator:Destroy()
                 self.Animator = false
             end
@@ -102,33 +83,35 @@ TACounter = Class(TAWalking)
 
 TASeaWalking = Class(TAWalking) 
 {
-    OnCreate = function(self)
-        TAWalking.OnCreate(self)
-		self.FxMovement = TrashBag()
-        end,
+    OnMotionHorzEventChange = function( self, new, old )
+        TAWalking.OnMotionHorzEventChange(self, new, old)
+        if ( new == 'Cruise' and old == 'Stopped') then
+            self:ForkThread(self.StartMoveFxTA)
+         end
+        if ( new == 'Stopped' ) or ( new == 'Stopped' and old == 'Stopping' ) then
+            self:ForkThread(self.MoveFxStopTA)
+        end
+    end,
+}
 
-     
-	OnMotionHorzEventChange = function(self, new, old )
-		TAWalking.OnMotionHorzEventChange(self, new, old)
-		self.CreateMovementEffects(self)
+TAKamiCounter = Class(TACounter) { 
+	OnScriptBitSet = function(self, bit)
+		TACounter.OnScriptBitSet(self, bit)
+		if bit == 7 then
+			self:ExplodeTA()
+		end
 	end,
-    
-    
-	CreateMovementEffects = function(self, EffectsBag, TypeSuffix)
-		if not IsDestroyed(self) then
-			TAWalking.CreateMovementEffects(self, EffectsBag, TypeSuffix)
-		local bp = self:GetBlueprint()
-		if self:IsUnitState('Moving') and bp.Display.MovementEffects.TAMovement then
-			for k, v in bp.Display.MovementEffects.TAMovement.Bones do
-				self.FxMovement:Add(CreateAttachedEmitter(self, v, self:GetArmy(), bp.Display.MovementEffects.TAMovement.Emitter ):ScaleEmitter(bp.Display.MovementEffects.TAMovement.Scale))
-			end
+
+	ExplodeTA = function(self)
+		self:DisableUnitIntel('ToggleBit8', 'Cloak')
+		self:GetWeaponByLabel('Suicide'):FireWeapon()
+	end,
+
+	OnKilled = function(self, instigator, type, overkillRatio)
+		if self.attacked then
+			instigator = self
 		end
-			if not self:IsUnitState('Moving') then
-			for k,v in self.FxMovement do
-				v:Destroy()
-			end
-		end
-		end
+		TACounter.OnKilled(self, instigator, type, overkillRatio)
 	end,
 }
 

@@ -17,8 +17,8 @@ UnitBlueprint {
         'ASF',
     },
     Defense = {
-        Health = 800,
-        MaxHealth = 800,
+        Health = 1600,
+        MaxHealth = 1600,
     },
     Display = {
         Abilities = {

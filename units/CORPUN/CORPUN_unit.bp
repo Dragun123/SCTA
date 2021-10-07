@@ -122,8 +122,8 @@ UnitBlueprint {
             DamageType = 'Normal',
             DisplayName = 'CORFIXED_GUN',
             FireTargetLayerCapsTable = {
-                Land = 'Land|Water|Seabed',
-                Water = 'Land|Water|Seabed',
+                Land = 'Land|Water|Seabed|Air',
+                Water = 'Land|Water|Seabed|Air',
             },
 	    RangeCategory = 'UWRC_IndirectFire',
             Label = 'CORFIXED_GUN',
@@ -177,15 +177,13 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-
     },
         Wreckage = {
-Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
-        EnergyMult = 0,
-        HealthMult = 0.9,
-        MassMult = 0.9,
-        ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/CORPUN/CORPUN_dead_prop.bp',
+            Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+            EnergyMult = 0,
+            HealthMult = 0.9,
+            MassMult = 0.9,
+            ReclaimTimeMultiplier = 1,
         WreckageLayers = {
             Land = true,
         },

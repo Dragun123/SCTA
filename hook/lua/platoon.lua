@@ -1,6 +1,10 @@
 local TAutils = import('/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua')
 local TAReclaim = import('/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua')
-local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
+local SCTALAND = (categories.MOBILE * categories.LAND)
+local SCTAAIR = (categories.MOBILE * categories.AIR)
+local SCTANAVY = (categories.MOBILE * categories.NAVAL)
+local TASTEALTHFIGHTER = (categories.armhawk + categories.corvamp)
+--local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
 WARN('['..string.gsub(debug.getinfo(1).source, ".*\\(.*.lua)", "%1")..', line:'..debug.getinfo(1).currentline..'] * SCTAAI: offset platoon.lua' )
 
 --[[buildingTmplFile = import(cons.BuildingTemplateFile or '/lua/BuildingTemplates.lua')
@@ -8,115 +12,251 @@ baseTmplFile = import(cons.BaseTemplateFile or '/lua/BaseTemplates.lua')
 baseTmplDefault = import('/lua/BaseTemplates.lua')
 buildingTmpl = buildingTmplFile[(cons.BuildingTemplate or 'BuildingTemplates')][factionIndex]
 baseTmpl = baseTmplFile[(cons.BaseTemplate or 'BaseTemplates')][factionIndex]]
-
+--[[if EscortUnits then
+    if not EscortUnits.Dead then
+        IssueClearCommands({EscortUnits})
+        IssueGuard({EscortUnits}, eng)
+    end
+end]]
 
 SCTAAIPlatoon = Platoon
 Platoon = Class(SCTAAIPlatoon) {
-    ManagerEngineerFindUnfinishedSCTA = function(self)
+   
+
+    ManagerFactoryAssistAISCTA = function(self)
         local aiBrain = self:GetBrain()
-        local eng = self:GetPlatoonUnits()[1]
-        local guardedUnit
-        self:EconUnfinishedBody()
-        WaitTicks(10)
-        -- do we assist until the building is finished ?
-        if self.PlatoonData.Assist.AssistUntilFinished then
-            local guardedUnit
-            if eng.UnitBeingAssist then
-                guardedUnit = eng.UnitBeingAssist
-            else 
-                guardedUnit = eng:GetGuardedUnit()
-            end
-            -- loop as long as we are not dead and not idle
-            while eng and not eng.Dead and aiBrain:PlatoonExists(self) and not eng:IsIdleState() do
-                if not guardedUnit or guardedUnit.Dead or guardedUnit:BeenDestroyed() then
-                    break
-                end
-                -- stop if our target is finished
-                if guardedUnit:GetFractionComplete() == 1 and not guardedUnit:IsUnitState('Upgrading') then
-                    --LOG('* ManagerEngineerAssistAI: Engineer Builder ['..self.BuilderName..'] - ['..self.PlatoonData.Assist.AssisteeType..'] - Target unit ['..guardedUnit:GetBlueprint().BlueprintId..'] ('..guardedUnit:GetBlueprint().Description..') is finished')
-                    break
-                end
-                -- wait 1.5 seconds until we loop again
-                WaitTicks(15)
-            end
-        else
-            WaitSeconds(10)
-        end
-        if not aiBrain:PlatoonExists(self) then
+        --self:TAEconAssistBody()
+        --WaitSeconds(assistData.Time or 60)
+        local assistData = self.PlatoonData.Assist
+        local eng = self:GetSquadUnits('Support')[1]
+        if not eng or eng.Dead then
+            coroutine.yield(2)
+            self:PlatoonDisbandTA()
             return
         end
-        eng.AssistPlatoon = nil
-        eng.UnitBeingAssist = nil
-        self:Stop()
-        self:PlatoonDisband()
-        --[[coroutine.yield(1)
-       return self:SCTAEngineerTypeAI()]]
+        while eng and not eng.Dead and aiBrain:PlatoonExists(self) do
+            local beingBuilt = assistData.BeingBuiltCategories 
+            --local category = ParseEntityCategory(beingBuilt)
+            eng.Escorting = true
+          local Escort = self:FactoryTAAssist(eng, aiBrain, beingBuilt, assistData)
+          --_ALERT('TAEscort2F', Escort:GetBlueprint().Display.UniformScale)
+          self:Stop('Support')
+            while Escort and Escort.TABuildingUnit and not (Escort.Dead or eng.Dead) do
+            --_ALERT('TAEscortF', Escort:GetBlueprint().Display.UniformScale) 
+                IssueGuard({eng}, Escort) 
+                WaitSeconds(assistData.Time + 30)
+                --coroutine.yield(2)
+                if not (assistData.Gantry or Escort.TABuildingUnit) then
+                    self:Stop('Support')
+                    coroutine.yield(2)
+                    return self:PlatoonDisbandTA()
+                end
+                self:Stop('Support')
+            end
+            --self:Stop('Support')
+            coroutine.yield(2)
+            self:PlatoonDisbandTA()
+            --self:Stop('Support')
+        end
     end,
 
-    ManagerEngineerAssistAISCTA = function(self)
+    FactoryTAAssist = function(self, eng, aiBrain, category, data)
+        local FactoryAssist = aiBrain:GetUnitsAroundPoint(category - categories.TECH1, eng:GetPosition(), data.AssistRange, 'Ally')
+            for _, Escort in FactoryAssist do
+                if Escort and Escort.DesiresAssist and Escort.SCTAAIBrain and
+                table.getn(Escort:GetGuards()) < Escort.NumAssistees and
+                Escort.TABuildingUnit and not Escort.Escorting then 
+            ---Escort.Escorting = true
+            ---self.Brain:AssignUnitsToPlatoon(hndl, {Escort}, 'Guard', 'none')
+            ---break here to ensure only first LEGAL option is the one grabbed
+                return Escort
+            --WaitSeconds(3)
+            --Escort.Escorting = nil
+                end
+            end
+        end,
+
+        ManagerEngineerAssistAISCTA = function(self)
+            local aiBrain = self:GetBrain()
+            --self:TAEconAssistBody()
+            --WaitSeconds(assistData.Time or 60)
+            local assistData = self.PlatoonData.Assist
+            local eng = self:GetSquadUnits('Support')[1]
+            if not eng or eng.Dead then
+                coroutine.yield(2)
+                self:PlatoonDisbandTA()
+                return
+            end
+            while eng and not eng.Dead and aiBrain:PlatoonExists(self) do
+            local beingBuilt = assistData.BeingBuiltCategories  
+            ---local category = categories.beingBuilt
+            eng.Escorting = true
+              local Escort = self:EngineerTAAssist(eng, aiBrain, beingBuilt, assistData)
+              --_ALERT('TAEscortE2', Escort:GetBlueprint().Display.UniformScale)
+              --self:Stop('Support')
+              while Escort and not (Escort.Dead or eng.Dead) and (Escort.UnitBeingBuilt or Escort:IsUnitState('Upgrading')) do
+                --_ALERT('TAEscortE', Escort:GetBlueprint().Display.UniformScale)  
+                self:Stop('Support')
+                IssueGuard({eng}, Escort) 
+                WaitSeconds(assistData.Time + 30)
+                --self:Stop('Support')
+              end
+                IssueClearCommands({eng})
+                coroutine.yield(2)
+                self:PlatoonDisbandTA()
+            end
+        end,
+
+        EngineerTAAssist = function(self, eng, aiBrain, category, data)
+            local EngineerAssist = aiBrain:GetUnitsAroundPoint((categories.ENGINEER * categories.LAND - categories.FIELDENGINEER) + categories.STRUCTURE, eng:GetPosition(), data.AssistRange, 'Ally')
+                for _, Escort in EngineerAssist do
+                    if Escort and Escort.DesiresAssist and 
+                    Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < Escort.NumAssistees and 
+                    (EntityCategoryContains(category, Escort.UnitBeingBuilt) or Escort:IsUnitState('Upgrading')) and 
+                    not Escort.Escorting then
+                    return Escort
+                --WaitSeconds(3)
+                --Escort.Escorting = nil
+                    end
+                end
+            end,
+
+
+            ManagerEngineerFindUnfinishedSCTA = function(self)
+                local aiBrain = self:GetBrain()
+                --self:TAEconAssistBody()
+                --WaitSeconds(assistData.Time or 60)
+                local assistData = self.PlatoonData.Assist
+                local eng = self:GetSquadUnits('Support')[1]
+                if not eng or eng.Dead then
+                    coroutine.yield(2)
+                    self:PlatoonDisbandTA()
+                    return
+                end
+                while eng and not eng.Dead and aiBrain:PlatoonExists(self) do
+                    eng.Escorting = true
+                  local Escort = self:EngineerTAUnfinished(eng, aiBrain, assistData)
+                  --_ALERT('TAEscort2', Escort:GetBlueprint().Display.UniformScale)
+                  self:Stop('Support')
+                  while Escort and Escort:GetFractionComplete() < 1 and not (Escort.Dead or eng.Dead) do
+                    --_ALERT('TAEscort', Escort:GetBlueprint().Display.UniformScale)
+                    --IssueClearCommands({eng})  
+                    IssueGuard({eng}, Escort) 
+                    WaitSeconds(assistData.Time + 15)
+                    self:Stop('Support')
+                  end
+                  IssueClearCommands({eng})
+                  coroutine.yield(2)
+                  self:PlatoonDisbandTA()
+                end
+            end,
+        
+            EngineerTAUnfinished = function(self, eng, aiBrain, data)
+                local Unfinished = aiBrain:GetUnitsAroundPoint(categories.STRUCTURE, eng:GetPosition(), data.AssistRange, 'Ally')
+                    for _, Escort in Unfinished do
+                        if Escort and Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < 3 and 
+                            Escort:GetFractionComplete() < 1 and not Escort.Escorting then 
+                        return Escort
+                    --WaitSeconds(3)
+                    --Escort.Escorting = nil
+                        end
+                    end
+                end,
+
+        ---I Remove most of the helper and made assisting driving by engineer not the manager
+        ---This allows more fine tuning and more reliable assisting 
+        ---Additionally I have a thread that checks my eco stability at this point in time 
+        ---Below function is a function intended to show the generic checks
+
+        --[[EscortCheck = function(Escort, Assist, aiBrain, data)
+            if Escort and Escort.SCTAAIBrain and 
+                table.getn(Escort:GetGuards()) < Assist and 
+                not (Escort.Dead and Escort.Escorting) then
+            return true
+            end
+        end,]]
+                
+                
+
+    ReclaimStructuresAITA = function(self)
+        self:Stop('Support')
+        --local eng = self:GetSquadUnits('Support')[1]
         local aiBrain = self:GetBrain()
-        local eng = self:GetPlatoonUnits()[1]
-        self:EconAssistBody()
-        WaitTicks(10)
-        -- do we assist until the building is finished ?
-        if self.PlatoonData.Assist.AssistUntilFinished then
-            local guardedUnit
-            if eng.UnitBeingAssist then
-                guardedUnit = eng.UnitBeingAssist
-            else 
-                guardedUnit = eng:GetGuardedUnit()
-            end
-            -- loop as long as we are not dead and not idle
-            while eng and not eng.Dead and aiBrain:PlatoonExists(self) and not eng:IsIdleState() do
-                if not guardedUnit or guardedUnit.Dead or guardedUnit:BeenDestroyed() then
-                    break
+        local data = self.PlatoonData
+        local radius = aiBrain:PBMGetLocationRadius(data.Location)
+        local categories = data.Reclaim
+        local counter = 0
+        local reclaimcat
+        local reclaimables
+        local unitPos
+        local reclaimunit
+        local distance
+        local allIdle
+        while aiBrain:PlatoonExists(self) do
+            unitPos = self:GetPlatoonPosition()
+            reclaimunit = false
+            distance = false
+            for num,cat in categories do
+                if type(cat) == 'string' then
+                    reclaimcat = ParseEntityCategory(cat)
+                else
+                    reclaimcat = cat
                 end
-                -- stop if our target is finished
-                if guardedUnit:GetFractionComplete() == 1 and not guardedUnit:IsUnitState('Upgrading') then
-                    --LOG('* ManagerEngineerAssistAI: Engineer Builder ['..self.BuilderName..'] - ['..self.PlatoonData.Assist.AssisteeType..'] - Target unit ['..guardedUnit:GetBlueprint().BlueprintId..'] ('..guardedUnit:GetBlueprint().Description..') is finished')
-                    break
+                reclaimables = aiBrain:GetListOfUnits(reclaimcat, false)
+                for k,v in reclaimables do
+                    if not v.Dead and (not reclaimunit or VDist3(unitPos, v:GetPosition()) < distance) and unitPos then
+                        reclaimunit = v
+                        distance = VDist3(unitPos, v:GetPosition())
+                    end
                 end
-                -- wait 1.5 seconds until we loop again
-                WaitTicks(15)
+                if reclaimunit then break end
             end
-        else
-            WaitSeconds(self.PlatoonData.Assist.Time or 60)
+            if reclaimunit and not reclaimunit.Dead then
+                counter = 0
+                -- Set ReclaimInProgress to prevent repairing (see RepairAI)
+                reclaimunit.ReclaimInProgress = true
+                IssueReclaim(self:GetPlatoonUnits(), reclaimunit)
+                repeat
+                    --WaitSeconds(2)
+                    coroutine.yield(18)
+                    if not aiBrain:PlatoonExists(self) then
+                        return
+                    end
+                    allIdle = true
+                    for k,v in self:GetPlatoonUnits() do
+                        if not v.Dead and not v:IsIdleState() then
+                            allIdle = false
+                            break
+                        end
+                    end
+                until allIdle
+            elseif not reclaimunit or counter >= 5 then
+                return self:PlatoonDisbandTA()
+            else
+                counter = counter + 1
+                --WaitSeconds(5)
+                coroutine.yield(50)
+            end
         end
-        if not aiBrain:PlatoonExists(self) then
-            return
-        end
-        self.AssistPlatoon = nil
-        eng.UnitBeingAssist = nil
-        self:Stop()
-        self:PlatoonDisband()
-        --[[coroutine.yield(1)
-       return self:SCTAEngineerTypeAI()]]
     end,
-
+    
     EngineerBuildAISCTA = function(self)
         local aiBrain = self:GetBrain()
-        local platoonUnits = self:GetPlatoonUnits()
+        local EscortUnits = self:GetSquadUnits('Guard')[1]
         local armyIndex = aiBrain:GetArmyIndex()
         local x,z = aiBrain:GetArmyStartPos()
         local cons = self.PlatoonData.Construction
         local buildingTmpl, buildingTmplFile, baseTmpl, baseTmplFile, baseTmplDefault
-        local eng
+        local eng = self:GetSquadUnits('Support')[1]
         --LOG('*SCTAEXPANSIONTA', self.PlatoonData.LocationType)
-        for k, v in platoonUnits do
-            if not v.Dead then --DUNCAN - was construction
-                IssueClearCommands({v})
-                if not eng then
-                    eng = v
-                else
-                    IssueGuard({v}, eng)
-                end
-            end
-        end
-
         if not eng or eng.Dead then
-            coroutine.yield(1)
-            self:PlatoonDisband()
+            coroutine.yield(2)
+            self:PlatoonDisbandTA()
             return
+        elseif EscortUnits and not EscortUnits.Dead then
+            self:Stop('Guard')
+            ---EscortUnits.Escorting = true
+            IssueGuard({EscortUnits}, eng)
         end
 
         --DUNCAN - added
@@ -135,9 +275,6 @@ Platoon = Class(SCTAAIPlatoon) {
 
         --LOG('*AI DEBUG: EngineerBuild AI ' .. eng.Sync.id)
 
-        if self.PlatoonData.NeedGuard then
-            eng.NeedGuard = true
-        end
 
         -------- CHOOSE APPROPRIATE BUILD FUNCTION AND SETUP BUILD VARIABLES --------
         local reference = false
@@ -155,17 +292,17 @@ Platoon = Class(SCTAAIPlatoon) {
             local ents = TAutils.TAAIGetReclaimablesAroundLocation(aiBrain, locationType) or {}
             local econ = AIUtils.AIGetEconomyNumbers(aiBrain)
             if ents and econ.MassStorageRatio < 0.5 then
-                coroutine.yield(1)
+                coroutine.yield(2)
                 return self:IdleEngineerSCTA()
             end
             else]]
-        coroutine.yield(1)
-        self:PlatoonDisband()
+        coroutine.yield(2)
+        self:PlatoonDisbandTA()
         return
         end
         if cons.NearUnitCategory then
-            self:SetPrioritizedTargetList('support', {ParseEntityCategory(cons.NearUnitCategory)})
-            local unitNearBy = self:FindPrioritizedUnit('support', 'Ally', false, self:GetPlatoonPosition(), cons.NearUnitRadius or 50)
+            self:SetPrioritizedTargetList('Support', {ParseEntityCategory(cons.NearUnitCategory)})
+            local unitNearBy = self:FindPrioritizedUnit('Support', 'Ally', false, self:GetPlatoonPosition(), cons.NearUnitRadius or 50)
             --LOG("ENGINEER BUILD: " .. cons.BuildStructures[1] .." attempt near: ", cons.NearUnitCategory)
             if unitNearBy then
                 reference = table.copy(unitNearBy:GetPosition())
@@ -215,7 +352,7 @@ Platoon = Class(SCTAAIPlatoon) {
                                                 cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType,
                                                 cons.MarkerUnitCount, cons.MarkerUnitCategory, cons.MarkerRadius)
             if not reference or not refName then
-                self:PlatoonDisband()
+                self:PlatoonDisbandTA()
                 return
             end
 
@@ -228,11 +365,11 @@ Platoon = Class(SCTAAIPlatoon) {
                         (cons.LocationRadius or 100), cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType)
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             else
@@ -251,7 +388,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 end
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             end
@@ -261,12 +398,12 @@ Platoon = Class(SCTAAIPlatoon) {
                 local guards = eng:GetGuards()
                 for k,v in guards do
                     if not v.Dead and v.PlatoonHandle then
-                        v.PlatoonHandle:PlatoonDisband()
+                        v.PlatoonHandle:PlatoonDisbandTA()
                     end
                 end
             end
             if cons.ExpansionBase and refName then
-                AIBuildStructures.AINewExpansionBase(aiBrain, refName, reference, eng, cons)
+                AIBuildStructures.TAAINewExpansionBase(aiBrain, refName, reference, eng, cons)
             end
             relative = false
             if reference and aiBrain:GetThreatAtPosition(reference , 1, true, 'AntiSurface') > 0 then
@@ -319,7 +456,7 @@ Platoon = Class(SCTAAIPlatoon) {
             reference, refName = AIUtils.AIGetClosestThreatMarkerLoc(aiBrain, cons.NearMarkerType, pos[1], pos[3],
                                                             cons.ThreatMin, cons.ThreatMax, cons.ThreatRings)
             if cons.ExpansionBase and refName then
-                AIBuildStructures.AINewExpansionBase(aiBrain, refName, reference, (cons.ExpansionRadius or 100), cons.ExpansionTypes, nil, cons)
+                AIBuildStructures.TAAINewExpansionBase(aiBrain, refName, reference, (cons.ExpansionRadius or 100), cons.ExpansionTypes, nil, cons)
             end
             if reference and aiBrain:GetThreatAtPosition(reference, 1, true) > 0 then
                 --aiBrain:ExpansionHelp(eng, reference)
@@ -341,7 +478,7 @@ Platoon = Class(SCTAAIPlatoon) {
             local guards = eng:GetGuards()
             for k,v in guards do
                 if not v.Dead and v.PlatoonHandle and aiBrain:PlatoonExists(v.PlatoonHandle) then
-                    v.PlatoonHandle:PlatoonDisband()
+                    v.PlatoonHandle:PlatoonDisbandTA()
                 end
             end
         end
@@ -367,7 +504,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         end
                     else
                         if aiBrain:PlatoonExists(self) then
-                            self:PlatoonDisband()
+                            self:PlatoonDisbandTA()
                             return
                         end
                     end
@@ -389,29 +526,26 @@ Platoon = Class(SCTAAIPlatoon) {
 
     EngineerBuildAISCTANaval = function(self)
         local aiBrain = self:GetBrain()
-        local platoonUnits = self:GetPlatoonUnits()
+        --local EscortUnits = self:GetSquadUnits('Guard')[1]
         local armyIndex = aiBrain:GetArmyIndex()
         local x,z = aiBrain:GetArmyStartPos()
         local cons = self.PlatoonData.Construction
         local buildingTmpl, buildingTmplFile, baseTmpl, baseTmplFile, baseTmplDefault
-        local eng
+        local eng = self:GetSquadUnits('Support')[1]
         --LOG('*SCTAEXPANSIONTA', self.PlatoonData.LocationType)
-        for k, v in platoonUnits do
-            if not v.Dead then --DUNCAN - was construction
-                IssueClearCommands({v})
-                if not eng then
-                    eng = v
-                else
-                    IssueGuard({v}, eng)
-                end
-            end
-        end
 
         if not eng or eng.Dead then
-            coroutine.yield(1)
-            self:PlatoonDisband()
+            coroutine.yield(2)
+            self:PlatoonDisbandTA()
             return
         end
+
+        --[[if EscortUnits and eng then
+            if not EscortUnits.Dead and not eng.Dead then
+                IssueClearCommands({EscortUnits})
+                IssueGuard({EscortUnits}, eng)
+            end
+        end]]
 
         --DUNCAN - added
         if eng:IsUnitState('Building') then
@@ -427,9 +561,6 @@ Platoon = Class(SCTAAIPlatoon) {
             baseTmpl = baseTmplFile[(cons.BaseTemplate or 'NavalBaseTemplates')][factionIndex]
         --LOG('*AI DEBUG: EngineerBuild AI ' .. eng.Sync.id)
 
-        if self.PlatoonData.NeedGuard then
-            eng.NeedGuard = true
-        end
 
         -------- CHOOSE APPROPRIATE BUILD FUNCTION AND SETUP BUILD VARIABLES --------
         local reference = false
@@ -447,17 +578,17 @@ Platoon = Class(SCTAAIPlatoon) {
             local ents = TAutils.TAAIGetReclaimablesAroundLocation(aiBrain, locationType) or {}
             local econ = AIUtils.AIGetEconomyNumbers(aiBrain)
             if ents and econ.MassStorageRatio < 0.5 then
-                coroutine.yield(1)
+                coroutine.yield(2)
                 return self:IdleEngineerSCTA()
             end
             else]]
-        coroutine.yield(1)
-        self:PlatoonDisband()
+        coroutine.yield(2)
+        self:PlatoonDisbandTA()
         return
         end
         if cons.NearUnitCategory then
-            self:SetPrioritizedTargetList('support', {ParseEntityCategory(cons.NearUnitCategory)})
-            local unitNearBy = self:FindPrioritizedUnit('support', 'Ally', false, self:GetPlatoonPosition(), cons.NearUnitRadius or 50)
+            self:SetPrioritizedTargetList('Support', {ParseEntityCategory(cons.NearUnitCategory)})
+            local unitNearBy = self:FindPrioritizedUnit('Support', 'Ally', false, self:GetPlatoonPosition(), cons.NearUnitRadius or 50)
             --LOG("ENGINEER BUILD: " .. cons.BuildStructures[1] .." attempt near: ", cons.NearUnitCategory)
             if unitNearBy then
                 reference = table.copy(unitNearBy:GetPosition())
@@ -510,7 +641,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         (cons.LocationRadius or 100), cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType)
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
                 -- didn't find a location to build at
@@ -521,7 +652,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 local guards = eng:GetGuards()
                 for k,v in guards do
                     if not v.Dead and v.PlatoonHandle then
-                        v.PlatoonHandle:PlatoonDisband()
+                        v.PlatoonHandle:PlatoonDisbandTA()
                     end
                 end
             end
@@ -530,7 +661,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 baseTmpl = baseTmplFile['NavalBaseTemplates'][factionIndex]
             end
             if cons.ExpansionBase and refName then
-                AIBuildStructures.AINewExpansionBase(aiBrain, refName, reference, eng, cons)
+                AIBuildStructures.TAAINewExpansionBase(aiBrain, refName, reference, eng, cons)
             end
             relative = false
             if reference and aiBrain:GetThreatAtPosition(reference , 1, true, 'AntiSub') > 0 then
@@ -564,7 +695,7 @@ Platoon = Class(SCTAAIPlatoon) {
             reference, refName = AIUtils.AIGetClosestThreatMarkerLoc(aiBrain, cons.NearMarkerType, pos[1], pos[3],
                                                             cons.ThreatMin, cons.ThreatMax, cons.ThreatRings)
             if cons.ExpansionBase and refName then
-                AIBuildStructures.AINewExpansionBase(aiBrain, refName, reference, (cons.ExpansionRadius or 100), cons.ExpansionTypes, nil, cons)
+                AIBuildStructures.TAAINewExpansionBase(aiBrain, refName, reference, (cons.ExpansionRadius or 100), cons.ExpansionTypes, nil, cons)
             end
             if reference and aiBrain:GetThreatAtPosition(reference, 1, true) > 0 then
                 --aiBrain:ExpansionHelp(eng, reference)
@@ -586,7 +717,7 @@ Platoon = Class(SCTAAIPlatoon) {
             local guards = eng:GetGuards()
             for k,v in guards do
                 if not v.Dead and v.PlatoonHandle and aiBrain:PlatoonExists(v.PlatoonHandle) then
-                    v.PlatoonHandle:PlatoonDisband()
+                    v.PlatoonHandle:PlatoonDisbandTA()
                 end
             end
         end
@@ -612,7 +743,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         end
                     else
                         if aiBrain:PlatoonExists(self) then
-                            self:PlatoonDisband()
+                            self:PlatoonDisbandTA()
                             return
                         end
                     end
@@ -635,28 +766,25 @@ Platoon = Class(SCTAAIPlatoon) {
 
     EngineerBuildAISCTAAir = function(self)
         local aiBrain = self:GetBrain()
-        local platoonUnits = self:GetPlatoonUnits()
+        --local EscortUnits = self:GetSquadUnits('Guard')[1]
         local armyIndex = aiBrain:GetArmyIndex()
         local x,z = aiBrain:GetArmyStartPos()
         local cons = self.PlatoonData.Construction
         local buildingTmpl, buildingTmplFile, baseTmpl, baseTmplFile, baseTmplDefault
-        local eng
-        for k, v in platoonUnits do
-            if not v.Dead then --DUNCAN - was construction
-                IssueClearCommands({v})
-                if not eng then
-                    eng = v
-                else
-                    IssueGuard({v}, eng)
-                end
-            end
-        end
-
+        local eng = self:GetSquadUnits('Support')[1]
+        --LOG('*SCTAEXPANSIONTA', self.PlatoonData.LocationType)
         if not eng or eng.Dead then
-            coroutine.yield(1)
-            self:PlatoonDisband()
+            coroutine.yield(2)
+            self:PlatoonDisbandTA()
             return
         end
+
+        --[[if EscortUnits and eng then
+            if not EscortUnits.Dead and not eng.Dead then
+                IssueClearCommands({EscortUnits})
+                IssueGuard({EscortUnits}, eng)
+            end
+        end]]
 
         --DUNCAN - added
         if eng:IsUnitState('Building') then
@@ -672,10 +800,6 @@ Platoon = Class(SCTAAIPlatoon) {
             baseTmpl = baseTmplFile[(cons.BaseTemplate or 'BaseTemplates')][factionIndex]
 
         --LOG('*AI DEBUG: EngineerBuild AI ' .. eng.Sync.id)
-
-        if self.PlatoonData.NeedGuard then
-            eng.NeedGuard = true
-        end
 
         -------- CHOOSE APPROPRIATE BUILD FUNCTION AND SETUP BUILD VARIABLES --------
         local reference = false
@@ -693,17 +817,17 @@ Platoon = Class(SCTAAIPlatoon) {
             local ents = TAutils.TAAIGetReclaimablesAroundLocation(aiBrain, locationType) or {}
             local econ = AIUtils.AIGetEconomyNumbers(aiBrain)
             if ents and econ.MassStorageRatio < 0.5 then
-                coroutine.yield(1)
+                coroutine.yield(2)
                 return self:IdleEngineerSCTA()
             end
             else]]
-        coroutine.yield(1)
-        self:PlatoonDisband()
+        coroutine.yield(2)
+        self:PlatoonDisbandTA()
         return
         end
         if cons.NearUnitCategory then
-            self:SetPrioritizedTargetList('support', {ParseEntityCategory(cons.NearUnitCategory)})
-            local unitNearBy = self:FindPrioritizedUnit('support', 'Ally', false, self:GetPlatoonPosition(), cons.NearUnitRadius or 50)
+            self:SetPrioritizedTargetList('Support', {ParseEntityCategory(cons.NearUnitCategory)})
+            local unitNearBy = self:FindPrioritizedUnit('Support', 'Ally', false, self:GetPlatoonPosition(), cons.NearUnitRadius or 50)
             --LOG("ENGINEER BUILD: " .. cons.BuildStructures[1] .." attempt near: ", cons.NearUnitCategory)
             if unitNearBy then
                 reference = table.copy(unitNearBy:GetPosition())
@@ -753,7 +877,7 @@ Platoon = Class(SCTAAIPlatoon) {
                                                 cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType,
                                                 cons.MarkerUnitCount, cons.MarkerUnitCategory, cons.MarkerRadius)
             if not reference or not refName then
-                self:PlatoonDisband()
+                self:PlatoonDisbandTA()
                 return
             end
 
@@ -766,7 +890,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         (cons.LocationRadius or 100), cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType)
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             elseif cons.NearMarkerType == 'Naval Area' then
@@ -774,7 +898,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         (cons.LocationRadius or 100), cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType)
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             else
@@ -793,7 +917,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 end
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             end
@@ -803,7 +927,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 local guards = eng:GetGuards()
                 for k,v in guards do
                     if not v.Dead and v.PlatoonHandle then
-                        v.PlatoonHandle:PlatoonDisband()
+                        v.PlatoonHandle:PlatoonDisbandTA()
                     end
                 end
             end
@@ -812,7 +936,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 baseTmpl = baseTmplFile['ExpansionBaseTemplates'][factionIndex]
             end
             if cons.ExpansionBase and refName then
-                AIBuildStructures.AINewExpansionBase(aiBrain, refName, reference, eng, cons)
+                AIBuildStructures.TAAINewExpansionBase(aiBrain, refName, reference, eng, cons)
             end
             relative = false
             if reference and aiBrain:GetThreatAtPosition(reference , 1, true, 'AntiAir') > 0 then
@@ -877,7 +1001,7 @@ Platoon = Class(SCTAAIPlatoon) {
             reference, refName = AIUtils.AIGetClosestThreatMarkerLoc(aiBrain, cons.NearMarkerType, pos[1], pos[3],
                                                             cons.ThreatMin, cons.ThreatMax, cons.ThreatRings)
             if cons.ExpansionBase and refName then
-                AIBuildStructures.AINewExpansionBase(aiBrain, refName, reference, (cons.ExpansionRadius or 100), cons.ExpansionTypes, nil, cons)
+                AIBuildStructures.TAAINewExpansionBase(aiBrain, refName, reference, (cons.ExpansionRadius or 100), cons.ExpansionTypes, nil, cons)
             end
             if reference and aiBrain:GetThreatAtPosition(reference, 1, true) > 0 then
                 --aiBrain:ExpansionHelp(eng, reference)
@@ -899,7 +1023,7 @@ Platoon = Class(SCTAAIPlatoon) {
             local guards = eng:GetGuards()
             for k,v in guards do
                 if not v.Dead and v.PlatoonHandle and aiBrain:PlatoonExists(v.PlatoonHandle) then
-                    v.PlatoonHandle:PlatoonDisband()
+                    v.PlatoonHandle:PlatoonDisbandTA()
                 end
             end
         end
@@ -925,7 +1049,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         end
                     else
                         if aiBrain:PlatoonExists(self) then
-                            self:PlatoonDisband()
+                            self:PlatoonDisbandTA()
                             return
                         end
                     end
@@ -947,28 +1071,25 @@ Platoon = Class(SCTAAIPlatoon) {
 
     EngineerBuildAISCTACommand = function(self)
         local aiBrain = self:GetBrain()
-        local platoonUnits = self:GetPlatoonUnits()
+        --local EscortUnits = self:GetSquadUnits('Guard')[1]
         local armyIndex = aiBrain:GetArmyIndex()
         local x,z = aiBrain:GetArmyStartPos()
         local cons = self.PlatoonData.Construction
         local buildingTmpl, buildingTmplFile, baseTmpl, baseTmplFile, baseTmplDefault
-        local eng
-        for k, v in platoonUnits do
-            if not v.Dead then --DUNCAN - was construction
-                IssueClearCommands({v})
-                if not eng then
-                    eng = v
-                else
-                    IssueGuard({v}, eng)
-                end
-            end
-        end
-
+        local eng = self:GetSquadUnits('Support')[1]
+        --LOG('*SCTAEXPANSIONTA', self.PlatoonData.LocationType)
         if not eng or eng.Dead then
-            coroutine.yield(1)
-            self:PlatoonDisband()
+            coroutine.yield(2)
+            self:PlatoonDisbandTA()
             return
         end
+
+        --[[if EscortUnits and eng then
+            if not EscortUnits.Dead and not eng.Dead then
+                IssueClearCommands({EscortUnits})
+                IssueGuard({EscortUnits}, eng)
+            end
+        end]]
 
         --DUNCAN - added
         if eng:IsUnitState('Building') then
@@ -985,9 +1106,6 @@ Platoon = Class(SCTAAIPlatoon) {
 
         --LOG('*AI DEBUG: EngineerBuild AI ' .. eng.Sync.id)
 
-        if self.PlatoonData.NeedGuard then
-            eng.NeedGuard = true
-        end
 
         -------- CHOOSE APPROPRIATE BUILD FUNCTION AND SETUP BUILD VARIABLES --------
         local reference = false
@@ -998,13 +1116,13 @@ Platoon = Class(SCTAAIPlatoon) {
         local baseTmplList = {}
 
         if not cons.BuildStructures then
-            coroutine.yield(1)
-            self:PlatoonDisband()
+            coroutine.yield(2)
+            self:PlatoonDisbandTA()
             return
         end
         if cons.NearUnitCategory then
-            self:SetPrioritizedTargetList('support', {ParseEntityCategory(cons.NearUnitCategory)})
-            local unitNearBy = self:FindPrioritizedUnit('support', 'Ally', false, self:GetPlatoonPosition(), cons.NearUnitRadius or 50)
+            self:SetPrioritizedTargetList('Support', {ParseEntityCategory(cons.NearUnitCategory)})
+            local unitNearBy = self:FindPrioritizedUnit('Support', 'Ally', false, self:GetPlatoonPosition(), cons.NearUnitRadius or 50)
             --LOG("ENGINEER BUILD: " .. cons.BuildStructures[1] .." attempt near: ", cons.NearUnitCategory)
             if unitNearBy then
                 reference = table.copy(unitNearBy:GetPosition())
@@ -1054,7 +1172,7 @@ Platoon = Class(SCTAAIPlatoon) {
                                                 cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType,
                                                 cons.MarkerUnitCount, cons.MarkerUnitCategory, cons.MarkerRadius)
             if not reference or not refName then
-                self:PlatoonDisband()
+                self:PlatoonDisbandTA()
                 return
             end
 
@@ -1067,7 +1185,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         (cons.LocationRadius or 100), cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType)
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             elseif cons.NearMarkerType == 'Naval Area' then
@@ -1075,7 +1193,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         (cons.LocationRadius or 100), cons.ThreatMin, cons.ThreatMax, cons.ThreatRings, cons.ThreatType)
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             else
@@ -1094,7 +1212,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 end
                 -- didn't find a location to build at
                 if not reference or not refName then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
             end
@@ -1104,7 +1222,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 local guards = eng:GetGuards()
                 for k,v in guards do
                     if not v.Dead and v.PlatoonHandle then
-                        v.PlatoonHandle:PlatoonDisband()
+                        v.PlatoonHandle:PlatoonDisbandTA()
                     end
                 end
             end
@@ -1113,7 +1231,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 baseTmpl = baseTmplFile['ExpansionBaseTemplates'][factionIndex]
             end
             if cons.ExpansionBase and refName then
-                AIBuildStructures.AINewExpansionBase(aiBrain, refName, reference, eng, cons)
+                AIBuildStructures.TAAINewExpansionBase(aiBrain, refName, reference, eng, cons)
             end
             relative = false
             if reference and aiBrain:GetThreatAtPosition(reference , 1, true, 'AntiSurface') > 0 then
@@ -1178,7 +1296,7 @@ Platoon = Class(SCTAAIPlatoon) {
             reference, refName = AIUtils.AIGetClosestThreatMarkerLoc(aiBrain, cons.NearMarkerType, pos[1], pos[3],
                                                             cons.ThreatMin, cons.ThreatMax, cons.ThreatRings)
             if cons.ExpansionBase and refName then
-                AIBuildStructures.AINewExpansionBase(aiBrain, refName, reference, (cons.ExpansionRadius or 100), cons.ExpansionTypes, nil, cons)
+                AIBuildStructures.TAAINewExpansionBase(aiBrain, refName, reference, (cons.ExpansionRadius or 100), cons.ExpansionTypes, nil, cons)
             end
             if reference and aiBrain:GetThreatAtPosition(reference, 1, true) > 0 then
                 --aiBrain:ExpansionHelp(eng, reference)
@@ -1200,7 +1318,7 @@ Platoon = Class(SCTAAIPlatoon) {
             local guards = eng:GetGuards()
             for k,v in guards do
                 if not v.Dead and v.PlatoonHandle and aiBrain:PlatoonExists(v.PlatoonHandle) then
-                    v.PlatoonHandle:PlatoonDisband()
+                    v.PlatoonHandle:PlatoonDisbandTA()
                 end
             end
         end
@@ -1226,7 +1344,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         end
                     else
                         if aiBrain:PlatoonExists(self) then
-                            self:PlatoonDisband()
+                            self:PlatoonDisbandTA()
                             return
                         end
                     end
@@ -1329,7 +1447,7 @@ Platoon = Class(SCTAAIPlatoon) {
         if not aiBrain or eng.Dead or not eng.EngineerBuildQueue or table.empty(eng.EngineerBuildQueue) then
             if aiBrain:PlatoonExists(eng.PlatoonHandle) then
                 if not eng.AssistSet and not eng.AssistPlatoon and not eng.UnitBeingAssist then
-                    eng.PlatoonHandle:PlatoonDisband()
+                    eng.PlatoonHandle:PlatoonDisbandTA()
                 end
             end
             if eng then eng.ProcessBuild = nil end
@@ -1376,7 +1494,7 @@ Platoon = Class(SCTAAIPlatoon) {
                     if VDist2(PlatoonPos[1] or 0, PlatoonPos[3] or 0, buildLocation[1] or 0, buildLocation[3] or 0) < 12 then
                         break
                     end
-                    coroutine.yield(1)
+                    coroutine.yield(2)
                 end
                 if not eng or eng.Dead or not eng.PlatoonHandle or not aiBrain:PlatoonExists(eng.PlatoonHandle) then
                     if eng then eng.ProcessBuild = nil end
@@ -1403,24 +1521,26 @@ Platoon = Class(SCTAAIPlatoon) {
         -- final check for if we should disband
         if not eng or eng.Dead or table.getn(eng.EngineerBuildQueue) <= 0 then
             if eng.PlatoonHandle and aiBrain:PlatoonExists(eng.PlatoonHandle) and not eng.PlatoonHandle.UsingTransport then
-                eng.PlatoonHandle:PlatoonDisband()
+                eng.PlatoonHandle:PlatoonDisbandTA()
             end
         end
         if eng then eng.ProcessBuild = nil end
     end,
 
     SCTAWatchForNotBuilding = function(eng)
-        WaitTicks(5)
+        --WaitTicks(5)
+        coroutine.yield(5)
         local aiBrain = eng:GetAIBrain()
-        while not eng:IsDead() and eng.GoingHome or eng:IsUnitState("Building") or 
+        while not eng.Dead and eng.GoingHome or eng:IsUnitState("Building") or 
                   eng:IsUnitState("Attacking") or eng:IsUnitState("Repairing") or 
                   eng:IsUnitState("Reclaiming") or eng:IsUnitState("Capturing") or eng.ProcessBuild != nil do
                   
-            WaitSeconds(3)
+            --WaitSeconds(3)
+            coroutine.yield(30)
             --if eng.CDRHome then eng:PrintCommandQueue() end
         end
         eng.NotBuildingThread = nil
-        if not eng:IsDead() and eng:IsIdleState() and table.getn(eng.EngineerBuildQueue) != 0 and eng.PlatoonHandle then
+        if not eng.Dead and eng:IsIdleState() and table.getn(eng.EngineerBuildQueue) != 0 and eng.PlatoonHandle then
             eng.PlatoonHandle.SetupEngineerCallbacksSCTA(eng)
             if not eng.ProcessBuild then
                 eng.ProcessBuild = eng:ForkThread(eng.PlatoonHandle.SCTAProcessBuildCommand, true)
@@ -1504,9 +1624,70 @@ Platoon = Class(SCTAAIPlatoon) {
         if not aiBrain:PlatoonExists(self) then
             return
         end
-        WaitTicks(1)
+        coroutine.yield(2)
         self:PlatoonDisband()
     end,
+
+    NukeAISAITA = function(self)
+        self:Stop()
+        local aiBrain = self:GetBrain()
+        local platoonUnits = self:GetPlatoonUnits()
+        local unit
+        --GET THE Launcher OUT OF THIS PLATOON
+        for k, v in platoonUnits do
+            if EntityCategoryContains(categories.SILO * categories.NUKE, v) then
+                unit = v
+                break
+            end
+        end
+
+        if unit then
+            local bp = unit:GetBlueprint()
+            local weapon = bp.Weapon[1]
+            local maxRadius = weapon.MaxRadius
+            local nukePos, oldTargetLocation
+            unit:SetAutoMode(true)
+            while aiBrain:PlatoonExists(self) do
+                while unit:GetNukeSiloAmmoCount() < 1 do
+                    WaitSeconds(11)
+                    --coroutine.yield(80)
+                    if not  aiBrain:PlatoonExists(self) then
+                        return
+                    end
+                end
+
+                nukePos = import('/lua/ai/aibehaviors.lua').GetHighestThreatClusterLocation(aiBrain, unit)
+                if nukePos then
+                    IssueNuke({unit}, nukePos)
+                    WaitSeconds(12)
+                    IssueClearCommands({unit})
+                end
+                --WaitSeconds(1)
+                coroutine.yield(11)
+            end
+        end
+        self:PlatoonDisbandTA()
+    end,
+
+    RadarSCTAPauseAI = function(self)
+        local platoonUnits = self:GetPlatoonUnits()
+        local aiBrain = self:GetBrain()
+        for k, v in platoonUnits do
+            v:SetScriptBit('RULEUTC_ProductionToggle', true)
+        end
+        local econ = AIUtils.AIGetEconomyNumbers(aiBrain)
+        while econ.EnergyStorageRatio < 0.4 do
+            --WaitSeconds(2)
+            coroutine.yield(21)
+            econ = AIUtils.AIGetEconomyNumbers(aiBrain)
+        end
+        for k, v in platoonUnits do
+            v:SetScriptBit('RULEUTC_ProductionToggle', false)
+        end
+        coroutine.yield(2)
+        self:PlatoonDisbandTA()
+    end,
+
 
     UnitUpgradeAISCTA = function(self)
         local aiBrain = self:GetBrain()
@@ -1518,15 +1699,18 @@ Platoon = Class(SCTAAIPlatoon) {
             UnitBeingUpgradeFactionIndex = FactionToIndex[v.factionCategory] or factionIndex
                 upgradeID = aiBrain:FindUpgradeBP(v:GetUnitId(), StructureUpgradeTemplates[UnitBeingUpgradeFactionIndex])
             if upgradeID then
+                v.DesiresAssist = true
+                v.NumAssistees = 2
                 IssueUpgrade({v}, upgradeID)
             end
         end
         local upgrading = true
         while aiBrain:PlatoonExists(self) and upgrading do
-            WaitSeconds(3)
+            --WaitSeconds(3) 
+            coroutine.yield(20)
             upgrading = false
             for k, v in platoonUnits do
-                if v and not v:IsDead() then
+                if v and not v.Dead then
                     upgrading = true
                 end
             end
@@ -1534,15 +1718,13 @@ Platoon = Class(SCTAAIPlatoon) {
         if not aiBrain:PlatoonExists(self) then
             return
         end
-        WaitTicks(1)
-        self:PlatoonDisband()
+        --WaitTicks(1)
+        coroutine.yield(2)
+        self:PlatoonDisbandTA()
     end,
 
-    PlatoonDisband = function(self)
+    PlatoonDisbandTA = function(self)
         local aiBrain = self:GetBrain()
-        if not aiBrain.SCTAAI then
-            return SCTAAIPlatoon.PlatoonDisband(self)
-        end
         if self.BuilderHandle then
             self.BuilderHandle:RemoveHandle(self)
         end
@@ -1554,6 +1736,8 @@ Platoon = Class(SCTAAIPlatoon) {
             v.UnitBeingBuilt = nil
             v.ReclaimInProgress = nil
             v.CaptureInProgress = nil
+            v.Escorting = nil
+            v.AssigningTask = nil
             if v:IsPaused() then
                 v:SetPaused( false )
             end
@@ -1596,15 +1780,16 @@ Platoon = Class(SCTAAIPlatoon) {
             self:MergeWithNearbyPlatoonsSCTA('TAHunt', 'TAHunt', 5)
             end]]
             if self.EDrain and not self.EcoCheck then
-                WaitSeconds(1)
+                --WaitSeconds(1)
+                coroutine.yield(11)
                 self:CheckEnergySCTAEco()
             end
             target = self:FindClosestUnit('Artillery', 'Enemy', true, categories.ALLUNITS - categories.WALL)
             self.Center = self:GetPlatoonPosition()
             if target then
                 self:Stop()
-                local threat = target:GetPosition() 
-                self:AggressiveMoveToLocation(table.copy(threat))
+                --local threat = target:GetPosition() 
+                self:AggressiveMoveToLocation(table.copy(target:GetPosition()))
                 --self:AttackTarget(target, 'Attack')
                 --DUNCAN - added to try and stop AI getting stuck.
                 --[[local targetDist = VDist2Sq(threat[1],threat[3], self.Center[1], self.Center[3])
@@ -1618,11 +1803,14 @@ Platoon = Class(SCTAAIPlatoon) {
                     end
                 end]]
             end
-            WaitSeconds(2)
+            --self:Stop()
+            ---WaitSeconds(2)
+            coroutine.yield(21)
             self.EcoCheck = nil
             local position = AIUtils.RandomLocation(self.Center[1],self.Center[3])
             self:MoveToLocation(position, false)
-            WaitSeconds(2)
+            --WaitSeconds(2)
+            coroutine.yield(21)
         end
     end,
 
@@ -1631,17 +1819,23 @@ Platoon = Class(SCTAAIPlatoon) {
         local platoonUnits = self:GetPlatoonUnits()
         local aiBrain = self:GetBrain()
         for k, v in platoonUnits do
+            if not v.Dead then
             v:SetScriptBit('RULEUTC_ProductionToggle', true)
+            end
         end
         local econ = AIUtils.AIGetEconomyNumbers(aiBrain)
-        while (econ.EnergyStorageRatio < 0.4 or econ.MassStorageRatio > 0.8) do
-            WaitSeconds(2)
+        while ((econ.EnergyStorageRatio < 0.4) or (econ.MassStorageRatio > 0.8)) do
+            --WaitSeconds(2)
+            coroutine.yield(21)
             econ = AIUtils.AIGetEconomyNumbers(aiBrain)
         end
         for k, v in platoonUnits do
+            if not v.Dead then
             v:SetScriptBit('RULEUTC_ProductionToggle', false)
+            end
         end
-        self:PlatoonDisband()
+        coroutine.yield(2)
+        self:PlatoonDisbandTA()
     end,
 
     SCTAStrikeForceAIEarly = function(self)
@@ -1700,22 +1894,31 @@ Platoon = Class(SCTAAIPlatoon) {
                     if path then
                     local pathLength = table.getn(path)
                     for i=1, pathLength-1 do
+                        self:Stop()
                         self:MoveToLocation(path[i], false)
-                        self:SetPlatoonFormationOverride('Block')
+                        --self:SetPlatoonFormationOverride('GrowthFormation')
                     end
                 end
                 end
             end
-            self:SetPlatoonFormationOverride('Attack')
-            WaitSeconds(5)
-            if aiBrain:PlatoonExists(self) and TAPrior.UnitProduction >= 80 then
-                self:MergeWithNearbyPlatoonsSCTA('SCTAStrikeForceAIEarly', 'SCTAStrikeForceAI', 5)
+            self:SetPlatoonFormationOverride('AttackFormation')
+            --WaitSeconds(5)
+            coroutine.yield(25)
+            if aiBrain.Level2 then
+                self:MergeWithNearbyPlatoonsSCTA('SCTAStrikeForceAIEarly', 'SCTAStrikeForceAI', 'SCTAAI Strike Mid', 5)
+            ---The third variable allows for proper platoon handle tracking
+            elseif table.getn(platoonUnits) < 2 and not target then
+                return self:SCTAReturnToBaseAI()
             end
         end
     end,
 
     SCTAStrikeForceAI = function(self)
+        self:Stop()
         local aiBrain = self:GetBrain()
+        if not self:GatherUnitsSCTA() then
+            return
+        end
         local armyIndex = aiBrain:GetArmyIndex()
         local categoryListA = {}
         local categoryListArt = {}
@@ -1730,18 +1933,19 @@ Platoon = Class(SCTAAIPlatoon) {
         end]] 
         local Artillery = self:GetSquadUnits('Artillery')
         local AntiAir = self:GetSquadUnits('Scout')
+        local Support = self:GetSquadUnits('Guard')
         if AntiAir > 0 then
             table.insert( atkPriA, 'AIR' )
-            table.insert( categoryListA, categories.MOBILE * categories.AIR)
+            table.insert( categoryListA, SCTAAIR)
             self:SetPrioritizedTargetList( 'Scout', categoryListA)
         end
         if Artillery > 0 then
             table.insert( atkPriArt, 'LAND' )
-            table.insert( categoryListArt, (categories.STRUCTURE - categories.WALL - categories.NAVAL) + (categories.MOBILE * categories.LAND))
+            table.insert( categoryListArt, (categories.STRUCTURE - categories.WALL - categories.NAVAL) + (SCTALAND))
             self:SetPrioritizedTargetList( 'Artillery', categoryListArt)
         end
         table.insert( atkPri, 'LAND' )
-        table.insert( categoryList, categories.MOBILE * categories.LAND - categories.AIR)
+        table.insert( categoryList, SCTALAND)
         self:SetPrioritizedTargetList( 'Attack', categoryList )
         local target
         local targetAir
@@ -1751,23 +1955,28 @@ Platoon = Class(SCTAAIPlatoon) {
         while aiBrain:PlatoonExists(self) do
             local numberOfUnitsInPlatoon = table.getn(platoonUnits)
             --self:SetPlatoonFormationOverride('Attack')
-            if not target or target:IsDead() then
+            if not target or target.Dead then
                 if aiBrain:GetCurrentEnemy() and aiBrain:GetCurrentEnemy():IsDefeated() then
                     aiBrain:PickEnemyLogic()
+                end
+                if Artillery > 0 then
+                    --WaitSeconds(0.25)
+                    coroutine.yield(3)
+                    targetArt = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Artillery', maxRadius, atkPriArt, aiBrain:GetCurrentEnemy())
+                end
+                if AntiAir > 0 then
+                    --WaitSeconds(0.25)
+                    coroutine.yield(3)
+                    targetAir = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Scout', maxRadius, atkPriA, aiBrain:GetCurrentEnemy())
                 end
                 local mult = { 1, 5, 10 }
                 for _,i in mult do
                     target = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Attack', maxRadius * i, atkPri, aiBrain:GetCurrentEnemy() )
-                    if Artillery > 0 then
-                    targetArt = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Artillery', 100, atkPriArt, aiBrain:GetCurrentEnemy())
-                    end
-                    if AntiAir > 0 then
-                    targetAir = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Scout', 50, atkPriA, aiBrain:GetCurrentEnemy())
-                    end
                     if target then
                         break
                     end
-                    WaitSeconds(3)
+                    --WaitSeconds(3)
+                    coroutine.yield(31)
                     if not aiBrain:PlatoonExists(self) then
                         return
                     end
@@ -1779,39 +1988,52 @@ Platoon = Class(SCTAAIPlatoon) {
                 if Artillery > 0 then
                 targetArt = self:FindPrioritizedUnit('Artillery', 'Enemy', true, self:GetSquadPosition('Artillery'), 50)
                 end]]
-                if target then
-                    self:Stop()
+                self:Stop()
+                --WaitSeconds(1)
+                coroutine.yield(11)
+                if target and not target.Dead then
                         if numberOfUnitsInPlatoon < 20 then
                             self:SetPlatoonFormationOverride('AttackFormation')
-                            end
-                            if AntiAir > 0 and targetAir then
-                                self:AttackTarget(targetAir, 'Scout')
-                            else
-                                self:AggressiveMoveToLocation(table.copy(target:GetPosition()), 'Scout')
-                            end
-                            if Artillery > 0 and targetArt then
-                                self:AggressiveMoveToLocation(table.copy(targetArt:GetPosition()), 'Artillery')
-                                self:MoveToLocation( table.copy( target:GetPosition() ), false, 'Attack')    
-                            elseif Artillery < 1 then
-                                self:AttackTarget(target, 'Attack')
-                            else
-                                self:MoveToLocation( table.copy( target:GetPosition() ), false, 'Attack')
-                                self:AggressiveMoveToLocation(table.copy(target:GetPosition()), 'Artillery')
-                            end
+                        end
+                            local threat = target:GetPosition()
+                            self:MoveToLocation( table.copy(threat), false, 'Attack')
+                                if AntiAir > 0 then
+                                    if targetAir and not targetAir.Dead then
+                                    self:AttackTarget(targetAir, 'Scout')
+                                    else
+                                    self:AggressiveMoveToLocation(table.copy(threat), 'Scout')
+                                    end
+                                end
+                                if Artillery > 0 then
+                                    if targetArt and not targetArt.Dead then
+                                    self:AggressiveMoveToLocation(table.copy(targetArt:GetPosition()), 'Artillery')
+                                    --self:MoveToLocation( table.copy(threat), false, 'Attack')    
+                                    else
+                                    --self:MoveToLocation( table.copy(threat), false, 'Attack')
+                                    self:AggressiveMoveToLocation(table.copy(threat), 'Artillery')
+                                    end
+                                end
+                                if Support > 0 then
+                                    self:AggressiveMoveToLocation(table.copy(threat), 'Guard')
+                                end 
                 else
-                    self:Stop()
                     for k,v in AIUtils.AIGetSortedMassLocations(aiBrain, 10, nil, nil, nil, nil, self:GetPlatoonPosition()) do
                         if v[1] < 0 or v[3] < 0 or v[1] > ScenarioInfo.size[1] or v[3] > ScenarioInfo.size[2] then
                         end
+                        --WaitSeconds(1)
+                        coroutine.yield(11)
+                        self:Stop()
                         self:MoveToLocation( (v), false )
                     end
                 end
             end
-            if aiBrain:PlatoonExists(self) and TAPrior.ProductionT3 >= 80 and numberOfUnitsInPlatoon < 20 then
-                self:MergeWithNearbyPlatoonsSCTA('SCTAStrikeForceAI', 'SCTAStrikeForceAIEndgame', 10)
-            end
             --self:SetPlatoonFormationOverride('Attack')
             WaitSeconds(7)
+            if aiBrain.Level3 and numberOfUnitsInPlatoon < 20 then
+                self:MergeWithNearbyPlatoonsSCTA('SCTAStrikeForceAI', 'SCTAStrikeForceAIEndgame', 'SCTAAI Strike Endgame', 10)
+            elseif numberOfUnitsInPlatoon < 2 then
+                return self:SCTAReturnToBaseAI()
+            end
         end
     end,
 
@@ -1825,25 +2047,25 @@ Platoon = Class(SCTAAIPlatoon) {
         local atkPriA = {}
         local atkPriArt = {}
         local platoonUnits = self:GetPlatoonUnits()
-        local numberOfUnitsInPlatoon = table.getn(platoonUnits)
         --[[for _,v in platoonUnits do
             if v.Dead then continue end
             v:SetCustomName('AttackHuntSCTA')
         end]]
+        local Support = self:GetSquadUnits('Guard')
         local Artillery = self:GetSquadUnits('Artillery')
         local AntiAir = self:GetSquadUnits('Scout')
         if AntiAir > 0 then
             table.insert( atkPriA, 'AIR' )
-            table.insert( categoryListA, categories.MOBILE * categories.AIR)
+            table.insert( categoryListA, SCTAAIR)
             self:SetPrioritizedTargetList( 'Scout', categoryListA)
         end
         if Artillery > 0 then
             table.insert( atkPriArt, 'LAND' )
-            table.insert( categoryListArt, (categories.STRUCTURE - categories.WALL - categories.NAVAL) + (categories.MOBILE * categories.LAND))
+            table.insert( categoryListArt, (categories.STRUCTURE - categories.WALL - categories.NAVAL))
             self:SetPrioritizedTargetList( 'Artillery', categoryListArt)
         end
         table.insert( atkPri, 'LAND' )
-        table.insert( categoryList, categories.MOBILE * categories.LAND - categories.AIR)
+        table.insert( categoryList, SCTALAND)
         self:SetPrioritizedTargetList( 'Attack', categoryList )
         local target
         local targetAir
@@ -1855,26 +2077,32 @@ Platoon = Class(SCTAAIPlatoon) {
         end
         while aiBrain:PlatoonExists(self) do
                 if self.EDrain and not self.EcoCheck then
-                    WaitSeconds(1)
+                    --WaitSeconds(1)
+                    coroutine.yield(11)
                     self:CheckEnergySCTAEco()
                 end
-            if not target or target:IsDead() then
+            if not target or target.Dead then
                 if aiBrain:GetCurrentEnemy() and aiBrain:GetCurrentEnemy():IsDefeated() then
                     aiBrain:PickEnemyLogic()
+                end
+                if Artillery > 0 then
+                    --WaitSeconds(0.25)
+                    coroutine.yield(3)
+                    targetArt = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Artillery', maxRadius, atkPriArt, aiBrain:GetCurrentEnemy())
+                end
+                if AntiAir > 0 then
+                    --WaitSeconds(0.25)
+                    coroutine.yield(3)
+                    targetAir = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Scout', maxRadius, atkPriA, aiBrain:GetCurrentEnemy())
                 end
                 local mult = { 1,10,20 }
                 for _,i in mult do
                     target = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Attack', maxRadius * i, atkPri, aiBrain:GetCurrentEnemy() )
-                    if Artillery > 0 then
-                    targetArt = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Artillery', 100, atkPriArt, aiBrain:GetCurrentEnemy())
-                    end
-                    if AntiAir > 0 then
-                    targetAir = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Scout', 100, atkPriA, aiBrain:GetCurrentEnemy())
-                    end
                     if target then
                         break
                     end
-                    WaitSeconds(3)
+                    --WaitSeconds(3)
+                    coroutine.yield(30)
                     if not aiBrain:PlatoonExists(self) then
                         return
                     end
@@ -1886,33 +2114,41 @@ Platoon = Class(SCTAAIPlatoon) {
                 if self:GetSquadUnits('Artillery') > 0 then
                 targetArt = self:FindPrioritizedUnit('Artillery', 'Enemy', true, self:GetSquadPosition('Artillery'), 50)
                 end]]
+                local numberOfUnitsInPlatoon = table.getn(platoonUnits)
                 if numberOfUnitsInPlatoon < 20 then
                     self:SetPlatoonFormationOverride('AttackFormation')
-                    else
-                    self:SetPlatoonFormationOverride('GrowthFormation')
                 end
-                    if target then
-                    self:Stop()
-                    local threat = target:GetPosition() 
-                            if AntiAir > 0 and targetAir then
-                                self:AttackTarget(targetAir, 'Scout')
-                            else
-                                self:AggressiveMoveToLocation(table.copy(threat), 'Scout')
-                            end
-                            if Artillery > 0 and targetArt then
-                                self:AggressiveMoveToLocation(table.copy(targetArt:GetPosition()), 'Artillery')
-                                self:MoveToLocation( table.copy(threat), false, 'Attack')    
-                            elseif Artillery < 1 then
-                                self:AttackTarget(target, 'Attack')
-                            else
-                                self:MoveToLocation( table.copy(threat), false, 'Attack')
-                                self:AggressiveMoveToLocation(table.copy(threat), 'Artillery')
-                            end
+                self:Stop()
+                --WaitSeconds(1)
+                coroutine.yield(11)
+                if target and not target.Dead then
+                    local threat = target:GetPosition()
+                    self:MoveToLocation( table.copy(threat), false, 'Attack')
+                    if AntiAir > 0 then
+                        if targetAir and not targetAir.Dead then
+                        self:AttackTarget(targetAir, 'Scout')
+                        else
+                        self:AggressiveMoveToLocation(table.copy(threat), 'Scout')
+                        end
+                    end
+                    if Artillery > 0 then
+                        if targetArt and not targetArt.Dead then
+                        self:AggressiveMoveToLocation(table.copy(targetArt:GetPosition()), 'Artillery')
+                        --self:MoveToLocation( table.copy(threat), false, 'Attack')    
+                        else
+                        --self:MoveToLocation( table.copy(threat), false, 'Attack')
+                        self:AggressiveMoveToLocation(table.copy(threat), 'Artillery')
+                        end
+                    end
+                    if Support > 0 then
+                        self:AggressiveMoveToLocation(table.copy(threat), 'Guard')
+                    end 
                 else
-                    self:Stop()
                     for k,v in AIUtils.AIGetSortedMassLocations(aiBrain, 10, nil, nil, nil, nil, self:GetPlatoonPosition()) do
                         if v[1] < 0 or v[3] < 0 or v[1] > ScenarioInfo.size[1] or v[3] > ScenarioInfo.size[2] then
                         end
+                        ---coroutine.yield(30)
+                        self:Stop()
                         self:MoveToLocation( (v), false )
                     end
                 end
@@ -1923,8 +2159,7 @@ Platoon = Class(SCTAAIPlatoon) {
     end,
 
 
-
-    MergeWithNearbyPlatoonsSCTA = function(self, planName, newPlatoon, radius)
+    MergeWithNearbyPlatoonsSCTA = function(self, planName, newPlatoon, newName, radius)
         local aiBrain = self:GetBrain()
         if not aiBrain then
             return
@@ -1978,65 +2213,40 @@ Platoon = Class(SCTAAIPlatoon) {
          --aiBrain:PlatoonExists(self) do
             --WaitSeconds(3)
             if VDist2Sq(platPos[1], platPos[3], allyPlatPos[1], allyPlatPos[3]) <= radiusSq and aiBrain:PlatoonExists(aPlat) and aiBrain:PlatoonExists(self) then
-                local unitsAntiAir = aPlat:GetSquadUnits('Scout')
-                local units = aPlat:GetSquadUnits('Attack')
-                local unitsArtillery = aPlat:GetSquadUnits('Artillery')
-                local validUnits = {}
-                local bValidUnits = false
-    
-                if unitsArtillery > 0 then
-                    for _,u in unitsArtillery do
-                        if not u.Dead and not u:IsUnitState('Attached') then
-                        table.insert(validUnits, u)
-                        bValidUnits = true
+                       ----Thank you to Chp
+                local squads = {
+                    'Scout',
+                    'Attack',
+                    'Artillery',
+                    'Guard',
+                }
+                for _, squad in squads do
+                    local units = aPlat:GetSquadUnits(squad)
+                    local svalid = false
+                    local validsquad = {}
+                    if units and units > 0 then
+                        for _,v in units do
+                            if not v.Dead and not v:IsUnitState('Attached') then
+                                table.insert(validsquad, v)
+                                svalid = true
+                            end
+                        end
+                        if svalid then
+                            aiBrain:AssignUnitsToPlatoon(self, validsquad, squad, 'GrowthFormation')
                         end
                     end
-                    if not bValidUnits then
-                    continue
-                    end
-                aiBrain:AssignUnitsToPlatoon(self, validUnits, 'Artillery', 'GrowthFormation')
-                bValidUnits = false
-                --WaitSeconds(2)
                 end
-                --LOG("*AI DEBUG: Merging platoons " .. self.BuilderName .. ": (" .. platPos[1] .. ", " .. platPos[3] .. ") and " .. aPlat.BuilderName .. ": (" .. allyPlatPos[1] .. ", " .. allyPlatPos[3] .. ")")
-                            
-                if units > 0 then        
-                    for _,u in units do
-                        if not u.Dead and not u:IsUnitState('Attached') then
-                            table.insert(validUnits, u)
-                            bValidUnits = true
-                        end
-                    end
-                    if not bValidUnits then
-                        continue
-                    end        
-                aiBrain:AssignUnitsToPlatoon(self, validUnits, 'Attack', 'GrowthFormation')
-                bValidUnits = false
-                --WaitSeconds(2)
-                end
-                if unitsAntiAir > 0 then
-                    for _,u in unitsAntiAir do
-                        if not u.Dead and not u:IsUnitState('Attached') then
-                        table.insert(validUnits, u)
-                        bValidUnits = true
-                        end
-                    end
-                    if not bValidUnits then
-                    continue
-                    end
-                --WaitSeconds(1)
-                aiBrain:AssignUnitsToPlatoon(self, validUnits, 'Scout', 'GrowthFormation')
-                bValidUnits = false
-                --WaitSeconds(2)
-                end                    
-                bMergedPlatoons = true
-            end
+            end                  
+            bMergedPlatoons = true
         end
         if bMergedPlatoons then
                 self:StopAttack()
                 --LOG('IEXIST2')
+                ---Personal Innovation, I'll properly stop contributing to other AI soon kinda pointless at this stage
+                self.BuilderName = newName
                 self:SetAIPlan(newPlatoon)
                 WaitSeconds(5)
+                --coroutine.yield(50)
         end
     end,
     
@@ -2045,6 +2255,7 @@ Platoon = Class(SCTAAIPlatoon) {
         local aiBrain = self:GetBrain()
         local Squad = self:GetSquadUnits('Artillery')
         local target
+        --local platoonUnits = self:GetPlatoonUnits()
         while aiBrain:PlatoonExists(self) do
             target = self:FindClosestUnit('Artillery', 'Enemy', true, categories.ALLUNITS - categories.WALL)
             self.Center = self:GetPlatoonPosition()
@@ -2054,7 +2265,8 @@ Platoon = Class(SCTAAIPlatoon) {
                 self:AggressiveMoveToLocation(table.copy(threat))
                 local targetDist = VDist2Sq(threat[1],threat[3], self.Center[1], self.Center[3])
                 if targetDist < self.PlatoonData.TAWeaponRange then
-                    WaitSeconds(2)
+                    --WaitSeconds(2)
+                    coroutine.yield(22)
                     for _,v in Squad do
                         local smartPos = TAReclaim.TAKite({self.Center[1] + math.random(-2,2), self.Center[2], self.Center[3] + math.random(-2,2)}, threat, {targetDist, targetDist - self.PlatoonData.TAWeaponRange})
                         smartPos = {smartPos[1] + math.random(-1,1), smartPos[2], smartPos[3] + math.random(-1,1)}
@@ -2063,12 +2275,17 @@ Platoon = Class(SCTAAIPlatoon) {
                     end
                 end
             end
-            WaitSeconds(2)
+            ---self:Stop()
+            --WaitSeconds(2)
+            coroutine.yield(22)
             local position = AIUtils.RandomLocation(self.Center[1],self.Center[3])
             self:MoveToLocation(position, false)
-            WaitSeconds(2)
-            if TAPrior.UnitProduction >= 80 and aiBrain:PlatoonExists(self) then
-                self:MergeWithNearbyPlatoonsSCTA('HuntSCTAAI', 'AttackSCTAForceAI', 5)
+            --WaitSeconds(2)
+            coroutine.yield(22)
+            if aiBrain.Level2 then
+                self:MergeWithNearbyPlatoonsSCTA('HuntSCTAAI', 'AttackSCTAForceAI', 'SCTAAI Land Attack Mid', 5)
+            elseif table.getn(Squad) < 2 and not target then
+                return self:SCTAReturnToBaseAI()
             end
         end
     end,
@@ -2078,7 +2295,7 @@ Platoon = Class(SCTAAIPlatoon) {
         local aiBrain = self:GetBrain()
 
         -- get units together
-        if not self:GatherUnits() then
+        if not self:GatherUnitsSCTA() then
             return
         end
         local platoonUnits = self:GetPlatoonUnits()
@@ -2115,10 +2332,6 @@ Platoon = Class(SCTAAIPlatoon) {
                 aiBrain:PickEnemyLogic()
             end
             numberOfUnitsInPlatoon = table.getn(platoonUnits)
-            if aiBrain:PlatoonExists(self) and TAPrior.TechEnergyExist >= 80 and numberOfUnitsInPlatoon < 20 then
-                self:MergeWithNearbyPlatoonsSCTA('AttackSCTAForceAI', 'SCTAStrikeForceAIEndgame', 20)
-            end
-
             if (oldNumberOfUnitsInPlatoon != numberOfUnitsInPlatoon) then
                 self:StopAttack()
                 if aiBrain:PlatoonExists(self) and numberOfUnitsInPlatoon < 15 then
@@ -2164,8 +2377,8 @@ Platoon = Class(SCTAAIPlatoon) {
             --Disband platoon if it's all air units, so they can be picked up by another platoon
             local mySurfaceThreat = AIAttackUtils.GetSurfaceThreatOfUnits(self)
             if mySurfaceThreat == 0 and AIAttackUtils.GetAirThreatOfUnits(self) > 0 then
-                self:PlatoonDisband()
-                return
+                coroutine.yield(2)
+                return self:PlatoonDisbandTA()
             end
 
             local cmdQ = {}
@@ -2181,7 +2394,7 @@ Platoon = Class(SCTAAIPlatoon) {
             end
 
             -- if we're on our final push through to the destination, and we find a unit close to our destination
-            local closestTarget = self:FindClosestUnit('Artillery', 'enemy', true, categories.ALLUNITS)
+            local closestTarget = self:FindClosestUnit('Artillery', 'Enemy', true, categories.ALLUNITS)
             --local Center = self:GetPlatoonPosition()
             local nearDest = false
             local oldPathSize = table.getn(self.LastAttackDestination)
@@ -2196,11 +2409,9 @@ Platoon = Class(SCTAAIPlatoon) {
                 if PlatoonFormation != 'No Formation' then
                     --self:SetPlatoonFormationOverride('AttackFormation')
                     IssueFormAttack(platoonUnits, closestTarget, PlatoonFormation, 0)
-                elseif self.PlatoonData.AggressiveMove then
+                else
                     self:Stop()
                     self:AggressiveMoveToLocation(closestTarget)
-                else
-                    IssueAttack(platoonUnits, closestTarget)
                 end
                 cmdQ = {1}
             -- if we have nothing to do, try finding something to do
@@ -2225,6 +2436,43 @@ Platoon = Class(SCTAAIPlatoon) {
             --else
                 -- wait a little longer if we're stuck so that we have a better chance to move
                 WaitSeconds(Random(5,11) + 2 * stuckCount)
+            if aiBrain.Level3 and numberOfUnitsInPlatoon < 20 then
+                self:MergeWithNearbyPlatoonsSCTA('AttackSCTAForceAI', 'SCTAStrikeForceAIEndgame', 'SCTAAI Strike Endgame', 20)
+            elseif numberOfUnitsInPlatoon < 2 then
+                return self:SCTAReturnToBaseAI()
+            end
+        end
+    end,
+
+    GatherUnitsSCTA = function(self)
+        local platoonUnits = self:GetPlatoonUnits()
+        local numberOfUnitsInPlatoon = table.getn(platoonUnits)
+        if numberOfUnitsInPlatoon > 15 then
+            return true 
+        else 
+        local pos = self:GetPlatoonPosition()
+        local unitsSet = true
+        for k,v in platoonUnits do
+            if VDist2(v:GetPosition()[1], v:GetPosition()[3], pos[1], pos[3]) > 40 then
+               unitsSet = false
+               break
+            end
+        end
+        local aiBrain = self:GetBrain()
+        if not unitsSet then
+            AIUtils.AIGetClosestMarkerLocation(aiBrain, 'Defensive Point', pos[1], pos[3])
+            local cmd = self:MoveToLocation(self:GetPlatoonPosition(), false)
+            local counter = 0
+            repeat
+                --WaitSeconds(1)
+                coroutine.yield(11)
+                counter = counter + 1
+                if not aiBrain:PlatoonExists(self) then
+                    return false
+                end
+            until not self:IsCommandsActive(cmd) or counter >= 30
+        end
+        return true
         end
     end,
 
@@ -2252,7 +2500,7 @@ Platoon = Class(SCTAAIPlatoon) {
 
         if bestBase then
             AIAttackUtils.GetMostRestrictiveLayer(self)
-            local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, self.MovementLayer, self:GetPlatoonPosition(), bestBase.Position, 200)
+            local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, self.PlatoonData.Layer or self.MovementLayer, self:GetPlatoonPosition(), bestBase.Position, 200)
             IssueClearCommands(self)
             
             if path then
@@ -2269,7 +2517,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 platPos = self:GetPlatoonPosition()
                 local distSq = VDist2Sq(platPos[1], platPos[3], bestBase.Position[1], bestBase.Position[3])
                 if distSq < 10 then
-                    self:PlatoonDisband()
+                    self:PlatoonDisbandTA()
                     return
                 end
                 if (distSq - oldDistSq) < 5 then
@@ -2278,7 +2526,8 @@ Platoon = Class(SCTAAIPlatoon) {
                 oldDistSq = distSq      
             end
         end
-        return self:PlatoonDisband()
+        coroutine.yield(2)
+        return self:PlatoonDisbandTA()
     end,
 
     
@@ -2307,7 +2556,8 @@ Platoon = Class(SCTAAIPlatoon) {
         while aiBrain:PlatoonExists(self) do
             target = self:FindClosestUnit('Attack', 'Enemy', true, categories.ENGINEER - categories.COMMAND)
             if not target then
-                WaitSeconds(1)
+                --WaitSeconds(1)
+                coroutine.yield(11)
                 return self:SCTALabAI()
             end
             if target and target:GetFractionComplete() == 1 then
@@ -2336,75 +2586,73 @@ Platoon = Class(SCTAAIPlatoon) {
         AIAttackUtils.GetMostRestrictiveLayer(self)
         local aiBrain = self:GetBrain()
         local scout = self:GetPlatoonUnits()[1]
-        local target
-        local structure
-        -- build scoutlocations if not already done.
-        if not aiBrain.InterestList then
-            aiBrain:BuildScoutLocations()
-        end
-
-        --If we have cloaking (are cybran), then turn on our cloaking
-        --DUNCAN - Fixed to use same bits
-
-        while not scout.Dead do
-            --Head towards the the area that has not had a scout sent to it in a while
-            local targetData = false
-
-            --For every scouts we send to all opponents, send one to scout a low pri area.
-            if aiBrain.IntelData.HiPriScouts < aiBrain.NumOpponents and table.getn(aiBrain.InterestList.HighPriority) > 0 then
-                targetData = aiBrain.InterestList.HighPriority[1]
-                aiBrain.IntelData.HiPriScouts = aiBrain.IntelData.HiPriScouts + 1
-                targetData.LastScouted = GetGameTimeSeconds()
-
-                aiBrain:SortScoutingAreas(aiBrain.InterestList.HighPriority)
-
-            elseif table.getn(aiBrain.InterestList.LowPriority) > 0 then
-                targetData = aiBrain.InterestList.LowPriority[1]
-                aiBrain.IntelData.HiPriScouts = 0
-                targetData.LastScouted = GetGameTimeSeconds()
-
-                aiBrain:SortScoutingAreas(aiBrain.InterestList.LowPriority)
-            else
-                --Reset number of scoutings and start over
-                aiBrain.IntelData.HiPriScouts = 0
+        if scout then
+            local scoutPos = scout:GetPosition()
+            local target
+            local structure
+            -- build scoutlocations if not already done.
+            if not aiBrain.InterestList then
+                aiBrain:BuildScoutLocations()
             end
 
-            --Is there someplace we should scout?
-            if targetData then
-                if EntityCategoryContains(categories.AMPHIBIOUS, self) then
-                local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, 'Air', scout:GetPosition() or self:GetPlatoonPosition(), targetData.Position, 400)
+            --If we have cloaking (are cybran), then turn on our cloaking
+            --DUNCAN - Fixed to use same bits
+
+            while scout and not scout.Dead do
+                --Head towards the the area that has not had a scout sent to it in a while
+                local targetData = false
+
+                --For every scouts we send to all opponents, send one to scout a low pri area.
+                if aiBrain.IntelData.HiPriScouts < aiBrain.NumOpponents and table.getn(aiBrain.InterestList.HighPriority) > 0 then
+                    targetData = aiBrain.InterestList.HighPriority[1]
+                    aiBrain.IntelData.HiPriScouts = aiBrain.IntelData.HiPriScouts + 1
+                    targetData.LastScouted = GetGameTimeSeconds()
+
+                    aiBrain:SortScoutingAreas(aiBrain.InterestList.HighPriority)
+
+                elseif table.getn(aiBrain.InterestList.LowPriority) > 0 then
+                    targetData = aiBrain.InterestList.LowPriority[1]
+                    aiBrain.IntelData.HiPriScouts = 0
+                    targetData.LastScouted = GetGameTimeSeconds()
+
+                    aiBrain:SortScoutingAreas(aiBrain.InterestList.LowPriority)
                 else
-                local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, self.MovementLayer, scout:GetPosition() or self:GetPlatoonPosition(), targetData.Position, 400) --DUNCAN - Increase threatwieght from 100
-                
-                IssueClearCommands(self)
-
-                if path then
-                    local pathLength = table.getn(path)
-                    for i=1, pathLength-1 do
-                        self:MoveToLocation(path[i], false)
-                    end
+                    --Reset number of scoutings and start over
+                    aiBrain.IntelData.HiPriScouts = 0
                 end
-            end
+
+                --Is there someplace we should scout?
+                if targetData and targetData.Position and scoutPos and not scout.Dead then
+                        local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, self.PlatoonData.Layer or self.MovementLayer, scoutPos, targetData.Position, 400) --DUNCAN - Increase threatwieght from 100
+                        IssueClearCommands(self)
+
+                        if path and not scout.Dead then
+                            local pathLength = table.getn(path)
+                            for i=1, pathLength-1 do
+                                self:MoveToLocation(path[i], false)
+                            end
+                        end
                 self:MoveToLocation(targetData.Position, false)
+                end
 
                 --Scout until we reach our destination
-                while not scout.Dead and not scout:IsIdleState() do
+                while scout and not scout.Dead and not scout:IsIdleState() do
                     target = self:FindClosestUnit('Attack', 'Enemy', true, categories.ENGINEER - categories.COMMAND)
                     structure = self:FindClosestUnit('Attack', 'Enemy', true, categories.STRUCTURE * (categories.ENERGYPRODUCTION + categories.MASSEXTRACTION) )
                     if target and self.PlatoonData.Lab then
-                        WaitSeconds(1)
+                        coroutine.yield(2)
                         return self:SCTALabType()
-                    elseif structure and self.PlatoonData.AllTerrain then
-                        WaitSeconds(1)
+                    elseif structure and self.PlatoonData.Layer then
+                        coroutine.yield(2)
                         return self:SCTAArtyHuntAI()
                     else
-                        WaitSeconds(2.5)
+                        coroutine.yield(2)
                     end
                 end
+                coroutine.yield(2)
             end
-                WaitSeconds(1)
-            end
-        end,
+        end
+    end,
 
     HuntAirAISCTA = function(self)
         self:Stop()
@@ -2430,13 +2678,10 @@ Platoon = Class(SCTAAIPlatoon) {
         end
 
         while aiBrain:PlatoonExists(self) do
-            if EntityCategoryContains(categories.BOMBER, self) then
-                target = self:FindClosestUnit('Attack', 'Enemy', true, categories.MOBILE * categories.ENGINEER - categories.COMMAND)
-                else 
-                target = self:FindClosestUnit('Attack', 'Enemy', true, categories.MOBILE * (categories.AIR + categories.ENGINEER) - categories.COMMAND)
-            end
+            target = self:FindClosestUnit('Attack', 'Enemy', true, categories.MOBILE * (categories.AIR + categories.ENGINEER) - categories.COMMAND)
             if not target then
-                WaitSeconds(1)
+                --WaitSeconds(1)
+                coroutine.yield(11)
                 return self:SCTALabAI()
             end
             if target and target:GetFractionComplete() == 1 then
@@ -2465,25 +2710,50 @@ Platoon = Class(SCTAAIPlatoon) {
         self:Stop()
         local aiBrain = self:GetBrain()
         local armyIndex = aiBrain:GetArmyIndex()
+        local Bomber = self:GetSquadUnits('Attack')
+        local Interceptor = self:GetSquadUnits('Artillery')
         local platoonUnits = self:GetPlatoonUnits()
+        local blip
         local target
-        if self.PlatoonData.Energy and EntityCategoryContains(categories.armhawk + categories.corvamp, platoonUnits) then
+        local targetBomb
+        local targetIntie
+        if self.PlatoonData.Energy and EntityCategoryContains(TASTEALTHFIGHTER, Interceptor) then
             self.EDrain = true
         end
         while aiBrain:PlatoonExists(self) do
             if self.EDrain and not self.EcoCheck then
-            WaitSeconds(1)
+            --WaitSeconds(1)
+            coroutine.yield(11)
             self:CheckEnergySCTAEco()
         end
-            target = self:FindClosestUnit('Attack', 'Enemy', true, categories.MOBILE * categories.COMMAND)
+            target = self:FindClosestUnit('Attack', 'Enemy', true, categories.COMMAND)
             if not target then
-                target = self:FindClosestUnit('Attack', 'Enemy', true, categories.LAND * categories.MOBILE - categories.SCOUT)
-            elseif not EntityCategoryContains(categories.BOMBER + categories.GROUNDATTACK, platoonUnits) then
-                target = self:FindClosestUnit('Attack', 'Enemy', true, categories.AIR * categories.MOBILE)
+                if Bomber > 0 then
+                --WaitSeconds(0.5)
+                coroutine.yield(6)
+                targetBomb = self:FindClosestUnit('Attack', 'Enemy', true, SCTALAND - categories.SCOUT)
+                end
+                if Interceptor > 0 then
+                --WaitSeconds(0.5)
+                coroutine.yield(6)
+                targetIntie = self:FindClosestUnit('Artillery', 'Enemy', true, SCTAAIR)
+                end
             end
+            self:Stop()
             if target then
-                self:Stop()
+                blip = target:GetBlip(armyIndex)
                 self:AttackTarget(target)
+            elseif targetIntie and Interceptor > 0 and Bomber < 1 and not targetIntie.Dead then
+                blip = targetIntie:GetBlip(armyIndex)
+                self:AttackTarget(targetIntie)
+            elseif targetBomb and Bomber > 0 and not targetBomb.Dead then 
+                blip = targetBomb:GetBlip(armyIndex)
+                if Interceptor > 0 and targetIntie and not targetIntie.Dead then
+                    self:AttackTarget(targetBomb, 'Attack')
+                    self:AttackTarget(targetIntie, 'Artillery')
+                else
+                    self:AttackTarget(targetBomb)
+                end
             end
             WaitSeconds(5)
             self.EcoCheck = nil
@@ -2516,14 +2786,14 @@ Platoon = Class(SCTAAIPlatoon) {
         while aiBrain:PlatoonExists(self) do
             target = self:FindClosestUnit('Attack', 'Enemy', true, categories.AIR * categories.ANTIAIR)
             if not target then
-                target = self:FindClosestUnit('Attack', 'Enemy', true, categories.AIR * categories.MOBILE)
+                target = self:FindClosestUnit('Attack', 'Enemy', true, SCTAAIR)
             end
             if target and target:GetFractionComplete() == 1 then
                 local airThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 1, true, 'Air')
                 --LOG("Air threat: " .. airThreat)
                 local antiAirThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 1, true, 'AntiAir') - airThreat
                 --LOG("AntiAir threat: " .. antiAirThreat)
-                if antiAirThreat < 1.5 then
+                if antiAirThreat < 1.5 and not target.Dead then
                     blip = target:GetBlip(armyIndex)
                     self:Stop()
                     self:AttackTarget(target)
@@ -2549,7 +2819,7 @@ Platoon = Class(SCTAAIPlatoon) {
         local hadtarget = false
         local basePosition = false
         local platoonUnits = self:GetPlatoonUnits()
-        if self.PlatoonData.Energy and EntityCategoryContains(categories.armhawk + categories.corvamp, platoonUnits) then
+        if self.PlatoonData.Energy and EntityCategoryContains(TASTEALTHFIGHTER, platoonUnits) then
             self.EDrain = true
         end
         if self.PlatoonData.LocationType and self.PlatoonData.LocationType != 'NOTMAIN' then
@@ -2568,12 +2838,13 @@ Platoon = Class(SCTAAIPlatoon) {
 
         while aiBrain:PlatoonExists(self) do
             if self.EDrain and not self.EcoCheck then
-                WaitSeconds(1)
+                --WaitSeconds(1)
+                coroutine.yield(11)
                 self:CheckEnergySCTAEco()
             end
             target = self:FindClosestUnit('Attack', 'Enemy', true, categories.AIR * categories.ANTIAIR)
             if not target then
-                target = self:FindClosestUnit('Attack', 'Enemy', true, categories.AIR * categories.MOBILE)
+                target = self:FindClosestUnit('Attack', 'Enemy', true, SCTAAIR)
             end
             if target and target:GetFractionComplete() == 1 then
                 local airThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 1, true, 'Air')
@@ -2606,7 +2877,7 @@ Platoon = Class(SCTAAIPlatoon) {
         local armyIndex = aiBrain:GetArmyIndex()
         local target
         while aiBrain:PlatoonExists(self) do
-            target = self:FindClosestUnit('Attack', 'Enemy', true, categories.MOBILE * categories.LAND - categories.COMMAND)
+            target = self:FindClosestUnit('Attack', 'Enemy', true, SCTALAND - categories.COMMAND)
             if target then
                 self:Stop()
                 self:AttackTarget(target)
@@ -2621,7 +2892,7 @@ Platoon = Class(SCTAAIPlatoon) {
         local armyIndex = aiBrain:GetArmyIndex()
         local target
         while aiBrain:PlatoonExists(self) do
-            target = self:FindClosestUnit('Attack', 'Enemy', true, categories.MOBILE * categories.NAVAL)
+            target = self:FindClosestUnit('Attack', 'Enemy', true, SCTANAVY)
             if target then
                 self:Stop()
                 self:AttackTarget(target)
@@ -2656,7 +2927,8 @@ Platoon = Class(SCTAAIPlatoon) {
         while aiBrain:PlatoonExists(self) do
             structure = self:FindClosestUnit('Attack', 'Enemy', true, categories.STRUCTURE * (categories.ENERGYPRODUCTION + categories.MASSEXTRACTION))
             if not structure then
-                WaitSeconds(1)
+                --WaitSeconds(1)
+                coroutine.yield(11)
                 return self:SCTALabAI()
             end
             if structure and structure:GetFractionComplete() == 1 then
@@ -2706,83 +2978,94 @@ Platoon = Class(SCTAAIPlatoon) {
     end,
 
     SCTALabType = function(self)
-        AIAttackUtils.GetMostRestrictiveLayer(self)
-        
+        AIAttackUtils.GetMostRestrictiveLayer(self)   
         if self.MovementLayer == 'Air' then 
-            WaitTicks(1)
+            coroutine.yield(2)
             return self:HuntAirAISCTA() 
         else
-            WaitTicks(1)
+            coroutine.yield(2)
             return self:HuntAILABSCTA()
         end
     end,
 
     SCTAReclaimAI = function(self)
-            self:Stop()
-            local brain = self:GetBrain()
-            local locationType = self.PlatoonData.LocationType
-            local createTick = GetGameTick()
-            local oldClosest
-            local units = self:GetPlatoonUnits()
-            local eng = units[1]
-            if not eng then
-                self:PlatoonDisband()
+        self:Stop('Support')
+        local brain = self:GetBrain()
+        local eng = self:GetSquadUnits('Support')[1]
+        local EscortUnits = self:GetSquadUnits('Guard')[1]
+        local oldClosest
+        local createTick = GetGameTick()
+        if not eng or eng.Dead then
+            coroutine.yield(2)
+            self:PlatoonDisbandTA()
+            return
+        elseif EscortUnits and not EscortUnits.Dead then
+            self:Stop('Guard')
+            ---EscortUnits.Escorting = true
+            IssueGuard({EscortUnits}, eng)
+        end
+        --LOG('*SCTAEXPANSIONTA', locationType)
+        --eng.BadReclaimables = eng.BadReclaimables or {}
+
+        while brain:PlatoonExists(self) do
+            local ents = TAReclaim.TAAIReclaimablesAroundEngineer(brain, eng)
+            local pos = eng:GetPosition()
+            if not ents or not pos then
+                --WaitTicks(1)
+                coroutine.yield(2)
+                self:PlatoonDisbandTA()
                 return
             end
-            --LOG('*SCTAEXPANSIONTA', locationType)
-            --eng.BadReclaimables = eng.BadReclaimables or {}
-    
-            while brain:PlatoonExists(self) do
-                local ents = TAReclaim.TAAIGetReclaimablesAroundLocation(brain, locationType) or {}
-                local pos = self:GetPlatoonPosition()
-    
-                if not ents[1] or not pos then
-                    WaitTicks(1)
-                    self:PlatoonDisband()
-                    return
-                end
-    
+            if not self.PlatoonData.Layer then
                 local reclaim = {}
-                local needEnergy = brain:GetEconomyStoredRatio('ENERGY') < 0.5
+                --local pos = self:GetPlatoonPosition()
+                --local needEnergy = brain:GetEconomyStoredRatio('ENERGY') < 0.5
     
                 for k,v in ents do
-                    if not IsProp(v) then continue end
-                    if not needEnergy or v.MaxEnergyReclaim then
+                    if IsProp(v) then 
                         local rpos = v:GetCachePosition()
-                        table.insert(reclaim, {entity=v, pos=rpos, distance=VDist2(pos[1], pos[3], rpos[1], rpos[3])})
+                        table.insert(reclaim, {entity = v, pos = rpos, distance = VDist2(pos[1], pos[3], rpos[1], rpos[3])})
                     end
                 end
     
-                --IssueClearCommands(units)
+                IssueClearCommands(eng)
                 table.sort(reclaim, function(a, b) return a.distance < b.distance end)
     
                 local recPos = nil
                 local closest = {}
                 for i, r in reclaim do
-                    if self.PlatoonData.Terrain and AIAttackUtils.CanGraphAreaToSCTA(eng, r.pos, 'Land') then
-                        IssueReclaim(units, r.entity)
-                        if i > 10 then break end
-                    elseif not self.PlatoonData.Terrain then
-                        IssueReclaim(units, r.entity)
-                        if i > 10 then break end
-                    end
+                    IssueReclaim(eng, r.entity)
+                    if i > 10 then break end
                 end
-    
                 local reclaiming = not eng:IsIdleState()
-                local max_time = self.PlatoonData.ReclaimTime
-    
                 while reclaiming do
                     WaitSeconds(5)
-    
-                    if eng:IsIdleState() or (max_time and (GetGameTick() - createTick)*10 > max_time) then
+                    if not eng.Dead then 
+                        ---eng.Reclaimer = true
+                        if eng:IsIdleState() or (self.PlatoonData.ReclaimTime and (GetGameTick() - createTick)*10 > self.PlatoonData.ReclaimTime) then
                         reclaiming = false
+                        end
                     end
                 end
-                WaitSeconds(10)
-                self:PlatoonDisband()
+                local basePosition = brain.BuilderManagers[self.PlatoonData.LocationType].Position
+                self:MoveToLocation(AIUtils.RandomLocation(basePosition[1],basePosition[3]), false)
+            --WaitSeconds(1)
+                coroutine.yield(11)
+                return self:PlatoonDisbandTA()
+            elseif self.PlatoonData.Layer and AIAttackUtils.CanGraphAreaToSCTA(pos, ents[1]:GetPosition(), self.PlatoonData.Layer) then
+            ---IssueAggressiveMove({eng}, ents:GetPosition())
+            ---self:MoveToLocation(ents:GetPosition(), false)
+                self:AggressiveMoveToLocation(ents[1]:GetPosition(), 'Support')
+                coroutine.yield(51)
+                local basePosition = brain.BuilderManagers[self.PlatoonData.LocationType].Position
+                self:MoveToLocation(AIUtils.RandomLocation(basePosition[1],basePosition[3]), false)
+                return self:PlatoonDisbandTA()
             end
-        end,
-
+            coroutine.yield(22)
+            self:PlatoonDisbandTA()
+            --self:PlatoonDisbandTA()
+        end
+    end,
 
         NavalHuntSCTAAI = function(self)
             local aiBrain = self:GetBrain()
@@ -2802,7 +3085,7 @@ Platoon = Class(SCTAAIPlatoon) {
             local blip = false
             local maxRadius = self.PlatoonData.SearchRadius or 50
             while aiBrain:PlatoonExists(self) do
-                if not target or target:IsDead() then
+                if not target or target.Dead then
                     if aiBrain:GetCurrentEnemy() and aiBrain:GetCurrentEnemy():IsDefeated() then
                         aiBrain:PickEnemyLogic()
                     end
@@ -2812,7 +3095,8 @@ Platoon = Class(SCTAAIPlatoon) {
                         if target then
                             break
                         end
-                        WaitSeconds(3)
+                        --WaitSeconds(3)
+                        coroutine.yield(30)
                         if not aiBrain:PlatoonExists(self) then
                             return
                         end
@@ -2854,6 +3138,25 @@ Platoon = Class(SCTAAIPlatoon) {
             end
         end,
 
+        BattleshipSCTAAI = function(self)
+            self:Stop()
+            local aiBrain = self:GetBrain()
+            local armyIndex = aiBrain:GetArmyIndex()
+            local target
+            while aiBrain:PlatoonExists(self) do
+                target = self:FindClosestUnit('Attack', 'Enemy', true, categories.STRUCTURE - categories.WALL)
+                if target then
+                    blip = target:GetBlip(armyIndex)
+                    self:Stop()
+                    self:AttackTarget(target)
+                    --DUNCAN - added to try and stop AI getting stuck.
+                    local position = AIUtils.RandomLocation(target:GetPosition()[1],target:GetPosition()[3])
+                    self:MoveToLocation(position, false)
+                end
+                WaitSeconds(17)
+            end
+        end,
+            
         CheckEnergySCTAEco = function(self)
             self.EcoCheck = true
             if self:GetBrain():GetEconomyStoredRatio('ENERGY').EnergyStorageRatio < 0.1 then
@@ -2874,7 +3177,7 @@ Platoon = Class(SCTAAIPlatoon) {
 
         ScoutingAISCTA = function(self)
             AIAttackUtils.GetMostRestrictiveLayer(self)
-            if self.MovementLayer == 'Air' then
+            if self.MovementLayer == 'Air' or EntityCategoryContains(categories.AMPHIBIOUS, self:GetSquadUnits('Scout')[1]) then
             return self:AirScoutingAISCTA()
             else
             return self:LandScoutingAISCTA()
@@ -2882,7 +3185,7 @@ Platoon = Class(SCTAAIPlatoon) {
         end,
 
         AirScoutingAISCTA = function(self)
-            local scout = self:GetPlatoonUnits()[1]
+            local scout = self:GetSquadUnits('Scout')[1]
             if not scout then
                 return
             end
@@ -2966,9 +3269,11 @@ Platoon = Class(SCTAAIPlatoon) {
                         WaitSeconds(5)
                     end
                 else
-                    WaitSeconds(1)
+                    --WaitSeconds(1)
+                    coroutine.yield(11)
                 end
-                WaitTicks(1)
+                ---WaitTicks(1)
+                coroutine.yield(2)
             end
         end,
 
@@ -2976,7 +3281,7 @@ Platoon = Class(SCTAAIPlatoon) {
             AIAttackUtils.GetMostRestrictiveLayer(self)
 
             local aiBrain = self:GetBrain()
-            local scout = self:GetPlatoonUnits()[1]
+            local scout = self:GetSquadUnits('Scout')[1]
     
             -- build scoutlocations if not already done.
             if not aiBrain.InterestList then
@@ -3009,10 +3314,8 @@ Platoon = Class(SCTAAIPlatoon) {
                 --Is there someplace we should scout?
                 if targetData then
                     --Can we get there safely?
-                    if EntityCategoryContains(categories.AMPHIBIOUS, self) then
-                        local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, 'Air', scout:GetPosition(), targetData.Position, 400)
-                        else
-                        local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, self.MovementLayer, scout:GetPosition(), targetData.Position, 400) --DUNCAN - Increase threatwieght from 100                    IssueClearCommands(self)
+                        local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, self.MovementLayer, scout:GetPosition(), targetData.Position, 400) --DUNCAN - Increase threatwieght from 100                    
+                        IssueClearCommands(self)
     
                     if path then
                         local pathLength = table.getn(path)
@@ -3020,7 +3323,6 @@ Platoon = Class(SCTAAIPlatoon) {
                             self:MoveToLocation(path[i], false)
                         end
                     end
-                end
                     self:MoveToLocation(targetData.Position, false)
     
                     --Scout until we reach our destination
@@ -3028,20 +3330,25 @@ Platoon = Class(SCTAAIPlatoon) {
                         WaitSeconds(2.5)
                     end
                 end
-                WaitSeconds(1)
+                --WaitSeconds(1)
+                coroutine.yield(11)
             end
         end,
 
         ExperimentalAIHubTA = function(self)
-            local experimental = self:GetPlatoonUnits()
+            local aiBrain = self:GetBrain()
+            local behaviors = import('/lua/ai/AIBehaviors.lua')
+    
+            local experimental = self:GetPlatoonUnits()[1]
             if not experimental or experimental.Dead then
                 return
             end
-            local behaviors = import('/lua/ai/AIBehaviors.lua')
-            if EntityCategoryContains(categories.EXPERIMENTAL * categories.MOBILE - categories.SUBCOMMANDER, experimental) then
+            local ID = experimental.UnitId
+            self:SetPlatoonFormationOverride('AttackFormation')
+            if ID == 'corkrog' or 'armdrake' then
                 return behaviors.BehemothBehaviorTotal(self)
             else
-                return behaviors.CommanderThreadSCTADecoy(self)
+                return behaviors.CommanderBehaviorSCTADecoy(self)
             end
         end,
 

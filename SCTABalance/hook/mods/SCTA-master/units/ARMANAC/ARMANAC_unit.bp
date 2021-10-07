@@ -1,5 +1,8 @@
 UnitBlueprint {
     Merge = true,
+    Display = {
+        UniformScale = 0.24,
+    },
     Defense = {
         Health = 14000,
         MaxHealth = 14000,

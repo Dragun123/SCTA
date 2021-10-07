@@ -117,7 +117,7 @@ UnitBlueprint {
             CollideFriendly = false,
             DamageFriendly = false,
             Damage = 125,
-            DamageRadius = 1,
+            DamageRadius = 3,
             DamageType = 'Normal',
             DisplayName = 'ARMFLAK_GUN',
             FireTargetLayerCapsTable = {
@@ -189,17 +189,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-
     },
         Wreckage = {
-Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+        Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/ARMFLAK/ARMFLAK_dead_prop.bp',
         WreckageLayers = {
             Land = true,
+            Water = true,
         },
     },
 }

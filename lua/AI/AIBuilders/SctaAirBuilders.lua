@@ -1,15 +1,9 @@
 local UCBC = '/lua/editor/UnitCountBuildConditions.lua'
-local EBC = '/lua/editor/EconomyBuildConditions.lua'
-local SAI = '/lua/ScenarioPlatoonAI.lua'
 local MIBC = '/lua/editor/MiscBuildConditions.lua'
-local TBC = '/lua/editor/ThreatBuildConditions.lua'
 local TAutils = '/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua'
 local TASlow = '/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua'
-local PLANT = (categories.FACTORY * categories.TECH1)
-local LAB = (categories.FACTORY * categories.TECH2)
-local PLATFORM = (categories.FACTORY * categories.TECH3)
-local FUSION = (categories.ENERGYPRODUCTION * (categories.TECH2 + categories.TECH3)) * categories.STRUCTURE
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
+local BOMBER = (categories.MOBILE * categories.AIR - categories.SCOUT - categories.BOMBER)
 
 BuilderGroup {
     BuilderGroupName = 'SCTAAIAirBuilder',
@@ -30,7 +24,7 @@ BuilderGroup {
         Priority = 115,
         PriorityFunction = TAPrior.TechEnergyExist,
         BuilderConditions = {
-            { TASlow, 'TAHaveUnitsWithCategoryAndAllianceFalse', {0, categories.MOBILE * categories.AIR - categories.SCOUT - categories.BOMBER, 'Enemy'}},
+            { TASlow, 'TAHaveUnitsWithCategoryAndAllianceFalse', {0, BOMBER, 'Enemy'}},
             { TAutils, 'EcoManagementTA', { 0.75, 0.9} },
         },
         BuilderType = 'Air',
@@ -52,7 +46,7 @@ BuilderGroup {
         InstanceCount = 1,
         PriorityFunction = TAPrior.ProductionT3Air,
         BuilderConditions = {
-            { TASlow, 'TAHaveUnitsWithCategoryAndAllianceFalse', {0, categories.MOBILE * categories.AIR - categories.SCOUT - categories.BOMBER, 'Enemy'}},
+            { TASlow, 'TAHaveUnitsWithCategoryAndAllianceFalse', {0, BOMBER, 'Enemy'}},
             { TAutils, 'EcoManagementTA', { 0.75, 0.9} },
         },
         BuilderType = 'Air',
@@ -63,7 +57,7 @@ BuilderGroup {
         Priority = 90,
         PriorityFunction = TAPrior.AirProduction,
         BuilderConditions = {
-            { TASlow, 'TAHaveUnitsWithCategoryAndAllianceFalse', {0, categories.MOBILE * categories.AIR - categories.SCOUT - categories.BOMBER, 'Enemy'}},
+            { TASlow, 'TAHaveUnitsWithCategoryAndAllianceFalse', {0, BOMBER, 'Enemy'}},
             { TAutils, 'EcoManagementTA', { 0.75, 0.9} },
         },
         BuilderType = 'Air',

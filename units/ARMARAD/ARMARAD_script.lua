@@ -1,8 +1,3 @@
-#ARM Advanced Radar Tower - Long Range Radar Tower
-#ARMARAD
-#
-#Script created by Raevn
-
 local TACloser = import('/mods/SCTA-master/lua/TAStructure.lua').TACloser
 
 ARMARAD = Class(TACloser) {
@@ -11,24 +6,23 @@ ARMARAD = Class(TACloser) {
 		self.Spinners = {
 			arm1 = CreateRotator(self, 'dish1', 'x', nil, 0, 0, 0),
 			arm2 = CreateRotator(self, 'dish2', 'x', nil, 0, 0, 0),
-		}
-		self.Sliders = {
 			post = CreateSlider(self, 'radar'),
 		}
 		for k, v in self.Spinners do
 			self.Trash:Add(v)
 		end
-		for k, v in self.Sliders do
-			self.Trash:Add(v)
-		end
 	end,
-	
+
+
 	OpeningState = State {
 		Main = function(self)
 			self:EnableIntel('Radar')
-			self.IsActive = true
-			self.Sliders.post:SetGoal(0,0,0)
-			self.Sliders.post:SetSpeed(16)
+			--SPIN turret around y-axis  SPEED <20.00>;
+			self.Spinners.post:SetGoal(0,0,0)
+			self.Spinners.post:SetSpeed(16)
+
+			--WAIT-FOR-MOVE post along y-axis;
+			WaitFor(self.Spinners.post)
 
 			--SPIN arm1 around x-axis  SPEED <100.02>;
 			self.Spinners.arm1:SetSpeed(45)
@@ -38,9 +32,8 @@ ARMARAD = Class(TACloser) {
 			self.Spinners.arm2:SetSpeed(45)
 			self.Spinners.arm2:ClearGoal()
 			TACloser.OpeningState.Main(self)
-		end,
+	end,
 	},
-
 
 	ClosingState = State {
 		Main = function(self)
@@ -49,11 +42,10 @@ ARMARAD = Class(TACloser) {
 			self.Spinners.arm2:SetGoal(0)
 
 			--MOVE post to y-axis <0> SPEED <19.00>;
-			self.Sliders.post:SetGoal(0,-9,0)
-			self.Sliders.post:SetSpeed(19)
+			self.Spinners.post:SetGoal(0,-9,0)
+			self.Spinners.post:SetSpeed(19)
 			TACloser.ClosingState.Main(self)
 		end,
-
 	},
 }
 

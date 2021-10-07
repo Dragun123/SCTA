@@ -42,9 +42,7 @@ ProjectileBlueprint {
             'DIRECTFIRE',
         },
         Faction = 'ARM',
-        Weapon = 'ARMMINE1',
     },
-
     Physics = {
         DestroyOnWater = true,
         InitialSpeed = 1,

@@ -53,6 +53,7 @@ ProjectileBlueprint {
         CollideSurface = true,
         DestroyOnWater = true,
         InitialSpeed = 60,
+        Lifetime = 600,
         MaxSpeed = 120,
         TrackTarget = true,
         TurnRate = 360,

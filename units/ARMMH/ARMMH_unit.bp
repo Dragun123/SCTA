@@ -123,7 +123,7 @@ UnitBlueprint {
     SelectionThickness = 0.25,
     SizeX = 3,
     SizeZ = 2.5,
-    SizeZ = 3,
+    SizeY = 3,
     StrategicIconName = 'icon_land3_missile',
     StrategicIconSortPriority = 0,
     Transport = {
@@ -142,12 +142,13 @@ UnitBlueprint {
             CollideFriendly = false,
             DamageFriendly = false,
             Damage = 300,
-            DamageRadius = 3,
+            DamageRadius = 1,
             DamageType = 'Normal',
             DisplayName = 'ARMMH_WEAPON',
             FireTargetLayerCapsTable = {
-                Land = 'Land|Water|Air',
-                Water = 'Land|Water|Air',
+                Land = 'Land|Water|Air|Seabed',
+                Water = 'Land|Water|Air|Seabed',
+                Seabed = 'Land|Water|Seabed|Air',
             },
 	        RangeCategory = 'UWRC_IndirectFire',
 	        FiringTolerance = 7,
@@ -191,15 +192,13 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-
     },
         Wreckage = {
-Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+        Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/ARMMH/ARMMH_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Water = true,

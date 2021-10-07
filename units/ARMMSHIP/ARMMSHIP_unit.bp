@@ -210,7 +210,7 @@ UnitBlueprint {
             DamageType = 'Normal',
             DisplayName = 'ARMMSHIP_ROCKET',
             FireTargetLayerCapsTable = {
-                Water = 'Land|Water|Air',
+                Water = 'Land|Water|Air|Seabed',
             },
 	        RangeCategory = 'UWRC_IndirectFire',
             RenderFireClock = true,
@@ -264,16 +264,13 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-
     },
         Wreckage = {
-	---UseCustomMesh = true,
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/ARMMSHIP/ARMMSHIP_dead_prop.bp',
         WreckageLayers = {
             Water = true,
 	    Sub = true,

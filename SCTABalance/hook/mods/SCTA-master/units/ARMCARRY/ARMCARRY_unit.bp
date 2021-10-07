@@ -17,6 +17,7 @@ UnitBlueprint {
         'RECLAIMABLE',
         'FACTORY',
         'NAVALCARRIER',
+        'CONSTRUCTION',
         'SHOWQUEUE',
         'OVERLAYRADAR',
         'OVERLAYSONAR',

@@ -36,7 +36,7 @@ UnitBlueprint {
             LodCutoff = 'UnitMove_LodCutoff',
         },
     },
-    BuildIconSortPriority = 16,
+    BuildIconSortPriority = 21,
     Categories = {
         'SELECTABLE',
         'TECH2',
@@ -137,7 +137,9 @@ UnitBlueprint {
     SizeX = 2,
     SizeY = 1.5,
     SizeZ = 2,
-    StrategicIconName = 'icon_land2_counterintel',
+    StrategicIconName = 'icon_bot2_counterintel',
+    TAStrategicIconName = 'land_counterintel',
+    TAStrategicIconName2 = '2/land_counterintel',
     StrategicIconSortPriority = 20,
     Weapon = {
         { #BIG_UNITEX
@@ -147,16 +149,14 @@ UnitBlueprint {
             DamageType = 'Normal',
             DummyWeapon = true,
             Label = 'DeathWeapon',
-        }, 
-
+        },
     },
         Wreckage = {
-Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
-        EnergyMult = 0,
-        HealthMult = 0.9,
-        MassMult = 0.9,
-        ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/CORSPEC/CORSPEC_dead_prop.bp',
+            Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+            EnergyMult = 0,
+            HealthMult = 0.9,
+            MassMult = 0.9,
+            ReclaimTimeMultiplier = 1,
         WreckageLayers = {
             Land = true,
             Seabed = true,

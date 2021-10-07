@@ -56,7 +56,7 @@ UnitBlueprint {
                 },
             },
         },
-        UniformScale = 0.24,
+        UniformScale = 0.2,
     },
     Economy = {
         BuildCostEnergy = 1200,
@@ -70,13 +70,22 @@ UnitBlueprint {
         CommandCaps = {
         	RULEUCC_RetaliateToggle = true,
         },
-	ToggleCaps = {
+        InstantDeathOnSelfDestruct = true,
+        OrderOverrides = {
+            RULEUTC_SpecialToggle = {
+                --  more options in textures.scd\textures\ui\common\game\orders
+                bitmapId = 'toggle-weapon',
+                helpText = 'Detonate',
+            },
+        },
+        ToggleCaps = {
+        RULEUTC_SpecialToggle = true,
 		RULEUTC_CloakToggle = true,
-	},
+	    },
         SelectionPriority = 5,
         FactionName = 'ARM',
         Icon = 'land',
-TechLevel = 'RULEUTL_Advanced',
+        TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Tiny',
     },
     Intel = {
@@ -95,7 +104,9 @@ TechLevel = 'RULEUTL_Advanced',
     SizeX = 1,
     SizeZ = 1,
     SizeY = 1,
-    StrategicIconName = 'icon_land1_bomb', 
+    StrategicIconName = 'icon_structure1_bomb',
+    TAStrategicIconName = 'land_bomb',
+    TAStrategicIconName2 = '1/land_bomb', 
     StrategicIconSortPriority = 0,
     Weapon = {
         {
@@ -112,7 +123,7 @@ TechLevel = 'RULEUTL_Advanced',
             Damage = 50, #Doubles up with death, so death damage subtracted
 	    DamageRadius = 4,
             DamageType = 'Normal',
-            DisplayName = 'ARMMINE1',
+            DisplayName = 'MINE',
 	    ---EdgeEffectiveness = 0.1,
             FireTargetLayerCapsTable = {
                 Land = 'Land|Water',
@@ -120,7 +131,7 @@ TechLevel = 'RULEUTL_Advanced',
 	    RangeCategory = 'UWRC_DirectFire',
      WeaponCategory = 'DirectFire',
             FiringTolerance = 360,
-            Label = 'ARMMINE1',
+            Label = 'MINE',
             MaxRadius = 4,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,

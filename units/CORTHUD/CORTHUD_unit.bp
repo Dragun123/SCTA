@@ -55,6 +55,9 @@ UnitBlueprint {
     Display = {
         AnimationWalk = '/mods/SCTA-master/units/CORTHUD/CORTHUD_lod0_Awalk.sca',
         AnimationWalkRate = 2,
+        Abilities = {
+            '<LOC ability_amphibious>Amphibious',
+        },
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -118,7 +121,8 @@ TechLevel = 'RULEUTL_Basic',
     SizeY = 1.75,
     SizeZ = 2,
     StrategicIconName = 'icon_bot1_artillery',
-    TAStrategicIconName = '1/land_artillery',
+    ---TAStrategicIconName = 'land_artillery',
+    ---TAStrategicIconName2 = '1/land_artillery',
     StrategicIconSortPriority = 0,
     Weapon = {
         {
@@ -134,7 +138,7 @@ TechLevel = 'RULEUTL_Basic',
             CollideFriendly = false,
             DamageFriendly = false,
             Damage = 125,
-            DamageRadius = 3, 
+            DamageRadius = 1, 
             DamageType = 'Normal',
             DisplayName = 'CORE_THUD',
             FireTargetLayerCapsTable = {
@@ -196,16 +200,14 @@ TechLevel = 'RULEUTL_Basic',
             DamageType = 'Normal',
             DummyWeapon = true,
             Label = 'DeathWeapon',
-        }, 
-
+        },
     },
         Wreckage = {
-Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
-        EnergyMult = 0,
-        HealthMult = 0.9,
-        MassMult = 0.9,
-        ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/CORTHUD/CORTHUD_dead_prop.bp',
+            Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+            EnergyMult = 0,
+            HealthMult = 0.9,
+            MassMult = 0.9,
+            ReclaimTimeMultiplier = 1,
         WreckageLayers = {
             Land = true,
             Seabed = true,

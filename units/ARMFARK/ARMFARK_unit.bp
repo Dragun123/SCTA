@@ -79,10 +79,10 @@ UnitBlueprint {
                 },
             },
         },
-	---SmokeBone = 'pelvis',
         UniformScale = 0.12,
     },
     Economy = {
+        FieldEngineer = true,
         BuildCostEnergy = 3219,
         BuildCostMass = 480,
         BuildRate = 180,
@@ -105,7 +105,7 @@ UnitBlueprint {
         Category = 'Construction',
         Classification = 'RULEUC_Engineer',
         CommandCaps = {
-            RULEUCC_Attack = true,
+            --RULEUCC_Attack = true,
             RULEUCC_CallTransport = true,
             RULEUCC_Guard = true,
             RULEUCC_Move = true,
@@ -146,7 +146,7 @@ UnitBlueprint {
     SizeX = 2,
     SizeY = 1.5,
     SizeZ = 2,
-    StrategicIconName = 'icon_land2_engineer', 
+    StrategicIconName = 'icon_bot2_engineer', 
     StrategicIconSortPriority = 0,
     Weapon = {
         { #BIG_UNITEX
@@ -157,15 +157,13 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-
     },
         Wreckage = {
-Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+        Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/ARMFARK/ARMFARK_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Seabed = true,

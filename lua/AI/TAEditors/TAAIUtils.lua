@@ -1,4 +1,5 @@
 local AIUtils = import('/lua/ai/AIUtilities.lua')
+local AIAttackUtils = import('/lua/AI/aiattackutilities.lua')
 
 ------AIUTILITIES FUNCTIONS (RNG, NUTCTACKER, and RECLAIM MY OW
 function CheckBuildPlatoonDelaySCTA(aiBrain, PlatoonName)
@@ -72,6 +73,19 @@ function TAHaveGreaterThanArmyPoolWithCategory(aiBrain, unitCount, unitCategory)
     return TAHavePoolUnitInArmy(aiBrain, unitCount, unitCategory, '>=')
 end
 
+function TAFindUnfinishedUnits(aiBrain, locationType, buildCat)
+    local engineerManager = aiBrain.BuilderManagers[locationType].EngineerManager
+    local unfinished = aiBrain:GetUnitsAroundPoint(buildCat, engineerManager:GetLocationCoords(), engineerManager.Radius, 'Ally')
+    local retUnfinished = false
+    for num, unit in unfinished do
+        donePercent = unit:GetFractionComplete()
+        if donePercent < 1 and GetGuards(aiBrain, unit) < 1 and not unit:IsUnitState('Upgrading') then
+            retUnfinished = unit
+            break
+        end
+    end
+    return retUnfinished
+end
 --TA Build Conditions
 
 function TAAIGetEconomyNumbersStorageRatio(aiBrain)
@@ -110,6 +124,7 @@ end
 function TAExpansionBaseCheck(aiBrain)
     -- Removed automatic setting of Land-Expasions-allowed. We have a Game-Option for this.
     local checkNum = tonumber(ScenarioInfo.Options.LandExpansionsAllowed)/5 or 1 
+    --LOG('*SCTAEXPANSIONTA', checkNum)
     return TAExpansionBaseCount(aiBrain, '<', checkNum)
 end
 
@@ -124,6 +139,7 @@ end
 function TAStartBaseCheck(aiBrain)
     -- Removed automatic setting of Land-Expasions-allowed. We have a Game-Option for this.
     local checkNum2 = tonumber(ScenarioInfo.Options.LandExpansionsAllowed)/3 or 2 
+    --LOG('*SCTAEXPANSIONTA2', checkNum2)
     return TAStartBaseCount(aiBrain, '<', checkNum2)
 end
 
@@ -161,7 +177,7 @@ end
 
 function TAFactoryCapCheckT1(aiBrain)
     --LOG('*SCTALABs', aiBrain.Plants)
-    if aiBrain.Plants < 10 then
+    if not aiBrain.Level2 then
         return true
     end
     return false
@@ -169,9 +185,18 @@ end
 
 function TAFactoryCapCheckT2(aiBrain)
     --LOG('*SCTALABs', aiBrain.Plants)
-    if aiBrain.Labs < 4 then
+    if not aiBrain.Level3 then
         return true
     end
+    return false
+end
+
+function TAFactoryCapCheckT2Expansion(aiBrain)
+    --LOG('*SCTALABs', aiBrain.Plants)
+    if (aiBrain.Labs + (aiBrain:GetCurrentUnits(categories.TECH2 * categories.FACTORY) - aiBrain.Labs)) < 7 and not aiBrain.CapCheckT2 then
+        return true
+    end
+    aiBrain.CapCheckT2 = true
     return false
 end
 
@@ -199,7 +224,6 @@ end
 
 function TAAttackNaval(aiBrain, bool)
     local startX, startZ = aiBrain:GetArmyStartPos()
-    local AIAttackUtils = import('/lua/AI/aiattackutilities.lua')
     local enemyX, enemyZ
     if aiBrain:GetCurrentEnemy() then
         enemyX, enemyZ = aiBrain:GetCurrentEnemy():GetArmyStartPos()
@@ -254,26 +278,33 @@ function TAHaveUnitRatioGreaterThanNavalT3(aiBrain, Naval)
         return false
     end
 end
+
+--[[function TAFactoryCapCheckExpansion(aiBrain, TECH)
+    local numUnits = aiBrain:GetCurrentUnits(TECH)
+    if numUnits < 4 then
+        return true
+    end
+    return false
+end]]
 ----TAReclaim
 
-function TAReclaimablesInArea(aiBrain, locType)
-    --DUNCAN - was .9. Reduced as dont need to reclaim yet if plenty of mass
-    if aiBrain:GetEconomyStoredRatio('MASS') > 0.5 then
+
+function TAReclaimablesInArea(aiBrain, locType, Mass)
+
+    if aiBrain:GetEconomyStoredRatio('MASS') < Mass then
+        local ents = TAAIGetReclaimablesAroundLocation(aiBrain, locType)
+        if ents and not table.empty(ents) then
+            for k,v in ents do
+                if IsProp(v) then return true else return false end
+            end
+        else
+            return false
+        end
+    else
         return false
     end
-
-    --DUNCAN - who cares about energy for reclaming?
-    --if aiBrain:GetEconomyStoredRatio('ENERGY') > .5 then
-        --return false
-    --end
-
-    local ents = TAAIGetReclaimablesAroundLocation(aiBrain, locType)
-    if ents and not table.empty(ents) then
-        return true
-    else
-    return false
-    end
 end
+
 
 function TAAIGetReclaimablesAroundLocation(aiBrain, locationType)
     local position, radius
@@ -300,7 +331,18 @@ function TAAIGetReclaimablesAroundLocation(aiBrain, locationType)
     local z2 = position[3] + radius * 2
     local rect = Rect(x1, z1, x2, z2)
 
-    return AIUtils.GetReclaimablesInRect(rect)
+    return GetReclaimablesInRect(rect)
+end
+
+function TAAIReclaimablesAroundEngineer(aiBrain, engineer)
+    local position = engineer:GetPosition()
+    local x1 = position[1] - 20
+    local x2 = position[1] + 20
+    local z1 = position[3] - 20
+    local z2 = position[3] + 20
+    local rect = Rect(x1, z1, x2, z2)
+
+    return GetReclaimablesInRect(rect)
 end
 
 
@@ -345,6 +387,38 @@ function TACanBuildOnMassLessThanDistanceLand(aiBrain, locationType, distance, t
     return false
 end
 
+function TAFindAssistUnits(aiBrain, eng, buildCat)
+    LOG('Assist', eng:GetBlueprint().Display.UniformScale)
+    local Assisting = aiBrain:GetUnitsAroundPoint(buildCat, eng:GetPosition(), 20, 'Ally')
+    --[[elseif type == 'Factory' then
+        --local factoryManager = aiBrain.BuilderManagers[locationType].factoryManager
+        Assisting = aiBrain:GetUnitsAroundPoint(buildCat, eng:GetPosition(), factoryManager.Radius, 'Ally')
+    end]]
+    local retAssisting = false
+    for num, unit in Assisting do
+        --donePercent = unit:GetFractionComplete()
+        if unit.DesiresAssist and unit:GetGuards() < (unit.NumAssistees or 2) and not unit:IsUnitState('Upgrading') then
+            retAssisting = unit
+            break
+        end
+    end
+    return retAssisting
+end
+
+--[[function TACanBuildOnMassLessThanDistanceNaval(aiBrain, locationType, distance, threatMin, threatMax, threatRings, threatType, maxNum )
+    local engineerManager = aiBrain.BuilderManagers[locationType].EngineerManager
+    if not (locationType == 'Naval Area' or engineerManager) then
+        return false
+    end
+    local position = engineerManager:GetLocationCoords()
+    local markerTable = AIUtils.AIGetSortedMassLocationsNavalSCTA(aiBrain, maxNum, threatMin, threatMax, threatRings, threatType, position)
+    if markerTable[1] and AIAttackUtils.CanGraphAreaToSCTA(position, markerTable[1], 'Water') and VDist3( markerTable[1], position ) < distance then
+        local dist = VDist3( markerTable[1], position )
+        return true
+    end
+    return false
+end]]
+
 function TAKite(vec1, vec2, distance)
     -- Courtesy of chp2001
     -- note the distance param is {distance, distance - weapon range}
@@ -354,6 +428,21 @@ function TAKite(vec1, vec2, distance)
     y = vec1[2] * (1 - distanceFrac) + vec2[2] * distanceFrac
     z = vec1[3] * (1 - distanceFrac) + vec2[3] * distanceFrac
     return {x,y,z}
+end
+
+function TAGetAssistees(aiBrain, locationType, assisteeType, buildingCategory, assisteeCategory)
+    if assisteeType == 'Factory' then
+        -- Sift through the factories in the location
+        local manager = aiBrain.BuilderManagers[locationType].FactoryManager
+        return manager:TAGetFactoriesWantingAssistance(buildingCategory, assisteeCategory)
+    elseif assisteeType == 'Engineer' then
+        local manager = aiBrain.BuilderManagers[locationType].EngineerManager
+        return manager:TAGetEngineersWantingAssistance(buildingCategory, assisteeCategory)
+    else
+        WARN('*AI ERROR: Invalid assisteeType - ' .. assisteeType)
+    end
+
+    return false
 end
 
 --[[function MassFabManagerThreadSCTAI(aiBrain)

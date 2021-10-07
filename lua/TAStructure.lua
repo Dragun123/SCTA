@@ -187,32 +187,36 @@ TAMass = Class(TAStructure) {
     end,
 	}
 
-TACloser = Class(TAStructure) {
-	OnStopBeingBuilt = function(self,builder,layer)
-		TAStructure.OnStopBeingBuilt(self,builder,layer)
-		self.closeDueToDamage = nil,
-		ChangeState(self, self.OpeningState)
-	end,
-
+TATarg = Class(TAStructure) {
 	OnIntelEnabled = function(self)
 		TAStructure.OnIntelEnabled()
-			if EntityCategoryContains(categories.OPTICS, self) and (self:IsIntelEnabled('Radar') or self:IsIntelEnabled('Sonar')) then
-				import('/mods/SCTA-master/lua/TAutils.lua').registerTargetingFacility(self:GetArmy())
-			end
+		if EntityCategoryContains(categories.OPTICS, self) and (self:IsIntelEnabled('Radar') or self:IsIntelEnabled('Sonar')) then
+			import('/mods/SCTA-master/lua/TAutils.lua').registerTargetingFacility(self:GetArmy())
+		end
 	end,
 
 	OnIntelDisabled = function(self)
-	TAStructure.OnIntelDisabled()
-			if EntityCategoryContains(categories.OPTICS, self) and (not self:IsIntelEnabled('Radar') or not self:IsIntelEnabled('Sonar')) then
-				import('/mods/SCTA-master/lua/TAutils.lua').unregisterTargetingFacility(self:GetArmy())
+		TAStructure.OnIntelDisabled()
+			if EntityCategoryContains(categories.OPTICS, self) and not (self:IsIntelEnabled('Radar') or self:IsIntelEnabled('Sonar')) then
+			import('/mods/SCTA-master/lua/TAutils.lua').unregisterTargetingFacility(self:GetArmy())
 		end
+	end,
+}
+
+
+TACloser = Class(TATarg) {
+	OnStopBeingBuilt = function(self,builder,layer)
+		TATarg.OnStopBeingBuilt(self,builder,layer)
+		self.closeDueToDamage = nil,
+		ChangeState(self, self.OpeningState)
 	end,
 
 	IdleClosedState = State {
 		Main = function(self)
 			if self.closeDueToDamage then 
 				while self.DamageSeconds > 0 do
-					WaitSeconds(1)
+					--WaitSeconds(1)
+					coroutine.yield(11)
 					self.DamageSeconds = self.DamageSeconds - 1
 				end
 
@@ -225,7 +229,7 @@ TACloser = Class(TAStructure) {
 		end,
 
 		OnDamage = function(self, instigator, amount, vector, damageType)
-			TAStructure.OnDamage(self, instigator, amount, vector, damageType) 
+			TATarg.OnDamage(self, instigator, amount, vector, damageType) 
 			self.DamageSeconds = 8
 			ChangeState(self, self.ClosingState)
 		end,
@@ -237,7 +241,7 @@ TACloser = Class(TAStructure) {
 		end,
 
 		OnDamage = function(self, instigator, amount, vector, damageType)
-			TAStructure.OnDamage(self, instigator, amount, vector, damageType)
+			TATarg.OnDamage(self, instigator, amount, vector, damageType)
 			self.DamageSeconds = 8
 			self.closeDueToDamage = true
 			ChangeState(self, self.ClosingState)
@@ -247,7 +251,8 @@ TACloser = Class(TAStructure) {
 
 	OpeningState = State {
 		Main = function(self)
-			TAStructure.Unfold(self)
+			TATarg.Unfold(self)
+			self.IsActive = true
 			self:PlayUnitSound('Activate')
 			ChangeState(self, self.IdleOpenState)
 		end,
@@ -256,8 +261,8 @@ TACloser = Class(TAStructure) {
 
 	ClosingState = State {
 		Main = function(self)
-			TAStructure.Fold(self)
-			self:PlayUnitSound('Activate')
+			TATarg.Fold(self)
+			self:PlayUnitSound('Deactivate')
 			ChangeState(self, self.IdleClosedState)
 		end,
 
@@ -268,7 +273,7 @@ TACloser = Class(TAStructure) {
 			self.IsActive = nil
 			ChangeState(self, self.ClosingState)
 		end
-		TAStructure.OnScriptBitSet(self, bit)
+		TATarg.OnScriptBitSet(self, bit)
 	end,
 
 
@@ -277,17 +282,17 @@ TACloser = Class(TAStructure) {
 			self.IsActive = true
 			ChangeState(self, self.OpeningState)
 		end
-		TAStructure.OnScriptBitClear(self, bit)
+		TATarg.OnScriptBitClear(self, bit)
 	end,
 
 	OnProductionUnpaused = function(self)
-		TAStructure.OnProductionUnpaused(self)
+		TATarg.OnProductionUnpaused(self)
 		self.IsActive = true
 		ChangeState(self, self.OpeningState)
 	end,
 
 	OnProductionPaused = function(self)
-		TAStructure.OnProductionPaused(self)
+		TATarg.OnProductionPaused(self)
 		self.IsActive = nil
 		ChangeState(self, self.ClosingState)
 	end,
@@ -308,12 +313,22 @@ TACKFusion = Class(TAStructure) {
 
 TAMine = Class(TACKFusion) {
 
+	OnScriptBitSet = function(self, bit)
+		TACKFusion.OnScriptBitSet(self, bit)
+		if bit == 7 then
+			self:ExplodeTA()
+		end
+	end,
+
+	ExplodeTA = function(self)
+		self:DisableUnitIntel('ToggleBit8', 'Cloak')
+		self:GetWeaponByLabel('MINE'):FireWeapon()
+	end,
+
 	OnKilled = function(self, instigator, type, overkillRatio)
-		if self.unit.attacked then
+		if self.attacked then
 			instigator = self
 		end
 		TACKFusion.OnKilled(self, instigator, type, overkillRatio)
-		
-	end,	
-
+	end,
 }

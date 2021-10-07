@@ -4,11 +4,11 @@
     Summary :
         Responsible for defining a mapping from AIBuilders keys -> Plans (Plans === platoon.lua functions)
 ]]
-local RAIDAIR = (categories.armfig + categories.corveng + categories.GROUNDATTACK)
-local RAIDER = (categories.armpw + categories.corak + categories.armflash + categories.corgator)
-local SPECIAL = (RAIDER + categories.EXPERIMENTAL + categories.ENGINEER + categories.SCOUT)
-local GROUND = categories.MOBILE * categories.LAND
-local RANGE = (categories.ARTILLERY + categories.SILO + categories.ANTIAIR + categories.SNIPER + categories.BOMB)
+RAIDAIR = (categories.armfig + categories.corveng + categories.GROUNDATTACK)
+RAIDER = (categories.armpw + categories.corak + categories.armflash + categories.corgator)
+SPECIAL = (RAIDER + categories.EXPERIMENTAL + categories.ENGINEER + categories.SCOUT + categories.BOMB)
+GROUND = (categories.MOBILE * categories.LAND - categories.TRANSPORTFOCUS)
+RANGE = (categories.ARTILLERY + categories.SILO + categories.ANTIAIR + categories.SNIPER)
 
 PlatoonTemplate {
     Name = 'T1LandScoutFormSCTA',
@@ -20,24 +20,11 @@ PlatoonTemplate {
 }
 
 PlatoonTemplate {
-    Name = 'GuardSCTA',
-    Plan = 'None',
-    ---PlatoonType = 'Scout',
-    GlobalSquads = {
-        { GROUND - SPECIAL, 1, 1, 'Guard', 'none' }
-    },
-}
-
-PlatoonTemplate {
     Name = 'StrikeForceSCTATerrain',
     Plan = 'SCTAArtyHuntAI', -- The platoon function to use.
     ---PlatoonType = 'Scout',
     GlobalSquads = {
-        { (categories.AMPHIBIOUS + categories.HOVER) * GROUND - SPECIAL, -- ---PlatoonType of units.
-          1, -- Min number of units.
-          5, -- Max number of units.
-          'Attack', -- platoon ---PlatoonTypes: 'support', 'Attack', 'scout',
-          'none' }, -- platoon move formations: 'None', 'AttackFormation', 'GrowthFormation',
+        { ((categories.AMPHIBIOUS * GROUND) - SPECIAL) + categories.BOMB, 1, 5,  'Attack', 'none' },
     },
 }
 
@@ -46,11 +33,8 @@ PlatoonTemplate {
     Plan = 'TAHunt', -- The platoon function to use.
     ---PlatoonType = 'Scout',
     GlobalSquads = {
-        { (GROUND * categories.ANTISHIELD - categories.AMPHIBIOUS - categories.EXPERIMENTAL) + categories.FIELDENGINEER, -- ---PlatoonType of units.
-          2, -- Min number of units.
-          10, -- Max number of units.
-          'Artillery', -- platoon ---PlatoonTypes: 'support', 'Attack', 'scout',
-          'none' }, -- platoon move formations: 'None', 'AttackFormation', 'GrowthFormation',
+        { ((GROUND * categories.ANTISHIELD) - categories.AMPHIBIOUS) - SPECIAL, 2, 10, 'Artillery', 'none' }, 
+        { categories.FIELDENGINEER, 0, 2, 'Guard', 'none' },
     },
 }
 
@@ -59,7 +43,7 @@ PlatoonTemplate {
     Plan = 'HuntAILABSCTA', -- The platoon function to use.
     ---PlatoonType = 'Scout',
     GlobalSquads = {
-        {RAIDER + RAIDAIR + ((categories.AMPHIBIOUS + categories.HOVER) - categories.COMMAND), -- ---PlatoonType of units.
+        {RAIDER + RAIDAIR + ((categories.AMPHIBIOUS + categories.HOVER) - SPECIAL - categories.NAVAL),
           1, -- Min number of units.
           1, -- Max number of units.
           'Attack', -- platoon ---PlatoonTypes: 'support', 'Attack', 'scout',
@@ -78,8 +62,7 @@ PlatoonTemplate {
     Plan = 'TAHunt', -- The platoon function to use.
     ---PlatoonType = 'LandForm',
     GlobalSquads = {
-        { GROUND * (categories.HOVER + categories.AMPHIBIOUS) - categories.COMMAND - categories.BOMB, 2, 10, 'Artillery', 'none' }, -- platoon move formations: 'None', 'AttackFormation', 'GrowthFormation',
-        { categories.BOMB, 0, 2, 'Attack', 'none' },
+        { ((GROUND * (categories.HOVER + categories.AMPHIBIOUS)) - SPECIAL) + categories.BOMB, 2, 10, 'Artillery', 'none' }, -- platoon move formations: 'None', 'AttackFormation', 'GrowthFormation',
     },
 }
 
@@ -87,7 +70,7 @@ PlatoonTemplate {
     Name = 'LandRocketAttackSCTA',
     Plan = 'HuntSCTAAI',
     GlobalSquads = {
-        { (GROUND * RANGE * categories.TECH1 - categories.AMPHIBIOUS), 2, 10, 'Artillery', 'none' },
+        { (GROUND * RANGE * categories.TECH1) - categories.AMPHIBIOUS, 2, 10, 'Artillery', 'none' },
     },
 }
 
@@ -96,7 +79,8 @@ PlatoonTemplate {
     Name = 'LandAttackSCTAMid',
     Plan = 'AttackSCTAForceAI',
     GlobalSquads = {
-        { (GROUND * RANGE - categories.AMPHIBIOUS) + categories.FIELDENGINEER, 5, 20, 'Artillery', 'none' }
+        { (GROUND * RANGE) - categories.AMPHIBIOUS, 5, 20, 'Artillery', 'none' },
+        { categories.FIELDENGINEER, 0, 2, 'Guard', 'none' },
     },
 }
 
@@ -115,8 +99,9 @@ PlatoonTemplate {
     Plan = 'SCTAStrikeForceAI',
     GlobalSquads = {
         { GROUND - SPECIAL - RANGE, 5, 20, 'Attack', 'none' },
-        { (GROUND * RANGE - categories.ANTIAIR) + categories.FIELDENGINEER, 0, 10, 'Artillery', 'none' },
-        { GROUND * categories.ANTIAIR - categories.ANTISHIELD, 0, 10, 'Scout', 'none' },
+        { (GROUND * RANGE) - categories.ANTIAIR, 0, 10, 'Artillery', 'none' },
+        { (GROUND * categories.ANTIAIR) - categories.ANTISHIELD, 0, 10, 'Scout', 'none' },
+        { categories.FIELDENGINEER, 0, 2, 'Guard', 'none' },
     },
 }
 
@@ -125,18 +110,19 @@ PlatoonTemplate {
     Plan = 'SCTAStrikeForceAIEndgame', -- The platoon function to use.
     GlobalSquads = {
         { GROUND - SPECIAL - RANGE, 5, 30, 'Attack', 'none' },
-        { (GROUND * RANGE - categories.ANTIAIR) + categories.FIELDENGINEER, 0, 15, 'Artillery', 'none' },
-        { GROUND * categories.ANTIAIR - categories.ANTISHIELD, 0, 15, 'Scout', 'none' },
+        { (GROUND * RANGE) - categories.ANTIAIR, 0, 15, 'Artillery', 'none' },
+        { (GROUND * categories.ANTIAIR) - categories.ANTISHIELD, 0, 15, 'Scout', 'none' },
+        { categories.FIELDENGINEER, 0, 2, 'Guard', 'none' },
     },
 }
 
 
 PlatoonTemplate {
     Name = 'T4ExperimentalSCTA',
-    Plan = 'ExperimentalAIHubSorian', 
+    Plan = 'ExperimentalAIHubTA', 
     ---PlatoonType = 'CommandTA',
     GlobalSquads = {
-        { categories.EXPERIMENTAL * categories.MOBILE - categories.SUBCOMMANDER, 1, 1, 'Attack', 'none' }
+        { (categories.EXPERIMENTAL * categories.MOBILE), 1, 1, 'Attack', 'none' }
     },
 }
 
@@ -153,37 +139,15 @@ PlatoonTemplate {
 }
 
 PlatoonTemplate {
-    Name = 'T1LandAntiArtySCTA',
+    Name = 'T1LandScoutSCTA',
     FactionSquads = {
         Arm = {
-            { 'armjeth', 1, 1, 'Attack', 'none' },
+            { 'armck', 1, 1, 'Support', 'None' },
+            { 'armflea', 1, 1, 'Scout', 'none' },
         },
         Core = {
-            { 'corlevlr', 1, 1, 'Attack', 'none' },
-        },
-    }
-}
-
-PlatoonTemplate {
-    Name = 'T2LandAuxTerrain',
-    FactionSquads = {
-        Arm = {
-            { 'armspid', 1, 1, 'Attack', 'none' },
-        },
-        Core = {
-            { 'coramph', 1, 1, 'Attack', 'none' },
-        },
-    }
-}
-
-PlatoonTemplate {
-    Name = 'T3LandDFBotSCTA',
-    FactionSquads = {
-        Arm = {
-            { 'armsnipe', 1, 1, 'Attack', 'none' },
-        },
-        Core = {
-            { 'cormort', 1, 1, 'Attack', 'none' },
+            { 'corcv', 1, 1, 'Support', 'None' },
+            { 'corfav', 1, 1, 'Scout', 'none' },
         },
     }
 }
@@ -213,28 +177,28 @@ PlatoonTemplate {
     }
 }
 
-PlatoonTemplate {
+--[[PlatoonTemplate {
     Name = 'T3HOVERTransportSCTA',
     FactionSquads = {
         Arm = {
-            { 'armthovr', 1, 1, 'support', 'GrowthFormation' }
+            { 'armthovr', 1, 1, 'Support', 'GrowthFormation' }
         },
         Core = {
-            { 'corthovr', 1, 1, 'support', 'GrowthFormation' }
+            { 'corthovr', 1, 1, 'Support', 'GrowthFormation' }
         },
     }
-}
+}]]
 
 PlatoonTemplate {
     Name = 'T3HOVERMISSILESCTA',
     FactionSquads = {
         Arm = {
             { 'armmh', 1, 1, 'Attack', 'none' },
-            { 'armsh', 1, 1, 'Attack', 'none' },
+            --{ 'armsh', 1, 1, 'Attack', 'none' },
         },
         Core = {
             { 'cormh', 1, 1, 'Attack', 'none' },
-            { 'corsh', 1, 1, 'Attack', 'none' },
+            --{ 'corsh', 1, 1, 'Attack', 'none' },
         },
     }
 }

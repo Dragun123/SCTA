@@ -19,6 +19,7 @@ function StartBattleMusic()
     BattleStart = GameTick()
     --LOG('Battle...')
     --LOG(coinFlip)
+    ----This Chooses what Music you get when playing. Its half supreme commander and half TA
     if coinFlip == 1 then
     PlayMusic(BattleCues[BattleCueIndex], 0) -- immediately
     BattleCueIndex = math.mod(BattleCueIndex,table.getn(BattleCues)) + 1
@@ -30,7 +31,8 @@ function StartBattleMusic()
     battleWatch = ForkThread(
         function ()
             while GameTick() - LastBattleNotify < PeaceTimer do
-                WaitSeconds(1)
+                --WaitSeconds(1)
+                coroutine.yield(11)
             end
 
             StartPeaceMusic()

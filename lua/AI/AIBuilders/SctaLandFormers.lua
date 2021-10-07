@@ -1,15 +1,8 @@
-local UCBC = '/lua/editor/UnitCountBuildConditions.lua'
-local EBC = '/lua/editor/EconomyBuildConditions.lua'
-local SAI = '/lua/ScenarioPlatoonAI.lua'
 local TAutils = '/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua'
 local TASlow = '/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua'
 local MIBC = '/lua/editor/MiscBuildConditions.lua'
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
-local RAIDER = (categories.armpw + categories.corak + categories.armflash + categories.corgator)
-local SPECIAL = (RAIDER + categories.EXPERIMENTAL + categories.ENGINEER + categories.SCOUT)
-local GROUND = categories.MOBILE * categories.LAND
-local TACATS = (categories.ANTISHIELD + categories.AMPHIBIOUS)
-local RANGE = (categories.ARTILLERY + categories.SILO + categories.ANTIAIR + categories.SNIPER)
+GROUND = categories.MOBILE * categories.LAND
 
 
 BuilderGroup {
@@ -25,7 +18,7 @@ BuilderGroup {
             LocationType = 'LocationType',
             },
         BuilderConditions = {
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, categories.SCOUT * categories.LAND * categories.MOBILE } },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, categories.SCOUT * GROUND} },
          },
     },
     Builder {
@@ -33,7 +26,7 @@ BuilderGroup {
         PlatoonTemplate = 'AttackForceSCTALaser', -- The platoon template tells the AI what units to include, and how to use them.
         Priority = 200,
         PriorityFunction = TAPrior.UnitProduction,
-        InstanceCount = 25,
+        InstanceCount = 10,
         --DelayEqualBuildPlattons = 5,
         BuilderType = 'LandForm',
         BuilderData = {
@@ -52,7 +45,7 @@ BuilderGroup {
         },        
         BuilderConditions = {
             { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, GROUND * (categories.ANTISHIELD + categories.FIELDENGINEER)} },
-            { TAutils, 'GreaterEnergyStorageMaxTA', { 0.2 } },
+            { TAutils, 'GreaterEnergyStorageMaxTA', { 0.1 } },
         },
     },
 ---Defensive/MidGame Platoons
@@ -61,9 +54,10 @@ BuilderGroup {
         PlatoonTemplate = 'StrikeForceSCTAEarly',
         PriorityFunction = TAPrior.UnitProductionT1, -- The platoon template tells the AI what units to include, and how to use them.
         Priority = 100,
-        InstanceCount = 50,
+        InstanceCount = 10,
         BuilderType = 'LandForm',
         BuilderData = {
+            SearchRadius = 50,
             ThreatSupport = 25,
             NeverGuardBases = true,
             NeverGuardEngineers = true,
@@ -76,7 +70,7 @@ BuilderGroup {
             },
         },        
         BuilderConditions = {
-            --{ UCBC, 'PoolGreaterAtLocation', { 'LocationType', 1, GROUND - SPECIAL - RANGE - TACATS}},
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, categories.DIRECTFIRE * categories.TECH1 * GROUND - categories.ENGINEER} },
         },
     },
     Builder {
@@ -84,9 +78,10 @@ BuilderGroup {
         PlatoonTemplate = 'StrikeForceSCTAMid', -- The platoon template tells the AI what units to include, and how to use them.
         PriorityFunction = TAPrior.UnitProduction,
         Priority = 150,
-        InstanceCount = 100,
+        InstanceCount = 10,
         BuilderType = 'LandForm',
         BuilderData = {
+            SearchRadius = 100,
             ThreatSupport = 50,
             UseMoveOrder = true,
             NeverGuardBases = false,
@@ -95,8 +90,8 @@ BuilderGroup {
             LocationType = 'LocationType',
         },        
         BuilderConditions = {
-        { MIBC, 'GreaterThanGameTime', {600} },
-        --{ UCBC, 'PoolGreaterAtLocation', { 'LocationType', 4,  GROUND - SPECIAL - categories.BOMB}},
+        --{ MIBC, 'GreaterThanGameTime', {600} },
+        { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, categories.DIRECTFIRE * GROUND - categories.ENGINEER} },
         },
     },
     Builder {
@@ -104,9 +99,10 @@ BuilderGroup {
         PlatoonTemplate = 'StrikeForceSCTAEndgame', -- The platoon template tells the AI what units to include, and how to use them.
         PriorityFunction = TAPrior.StructureProductionT2,
         Priority = 250,
-        InstanceCount = 200,
+        InstanceCount = 10,
         BuilderType = 'LandForm',
         BuilderData = {
+            SearchRadius = 100,
             ThreatSupport = 75,
             UseMoveOrder = true,
             NeverGuardBases = false,
@@ -117,8 +113,8 @@ BuilderGroup {
             Sniper = true,
         },        
         BuilderConditions = {
-            { MIBC, 'GreaterThanGameTime', {1200} },
-            --{ UCBC, 'PoolGreaterAtLocation', { 'LocationType', 4,  GROUND - SPECIAL - categories.BOMB}},
+            --{ MIBC, 'GreaterThanGameTime', {1200} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 4, categories.DIRECTFIRE * GROUND - categories.ENGINEER} },
         },
     },
     ----AggressivePlatoons
@@ -127,23 +123,23 @@ BuilderGroup {
         PlatoonTemplate = 'LandRocketAttackSCTA', -- The platoon template tells the AI what units to include, and how to use them.
         --PlatoonAddPlans = { 'HighlightSCTAHuntAI' },
         Priority = 125,
-        InstanceCount = 50,
+        InstanceCount = 10,
         BuilderType = 'LandForm',
         BuilderData = {
+            SearchRadius = 50,
             TAWeaponRange = 30, 
             ThreatSupport = 50,
             NeverGuardBases = true,
             NeverGuardEngineers = true,
             UseFormation = 'AttackFormation',
             LocationType = 'LocationType',
-            AggressiveMove = true,
         ThreatWeights = {
             SecondaryTargetThreatType = 'StructuresNotMex',
             IgnoreStrongerTargetsRatio = 100.0,
             },
         },        
         BuilderConditions = {
-            --{ UCBC, 'PoolGreaterAtLocation', { 'LocationType', 1, GROUND * RANGE} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, (categories.SILO + categories.ARTILLERY + categories.SNIPER) * GROUND - categories.ENGINEER} },
          },
     },
     Builder {
@@ -152,32 +148,32 @@ BuilderGroup {
         PriorityFunction = TAPrior.UnitProductionT1, -- The platoon template tells the AI what units to include, and how to use them.
         --PlatoonAddPlans = { 'HighlightSCTAHuntAI' },
         Priority = 150,
-        InstanceCount = 50,
+        InstanceCount = 10,
         --DelayEqualBuildPlattons = 5,
         BuilderType = 'LandForm',
         BuilderData = {
+            SearchRadius = 50,
             ThreatSupport = 75,
             TAWeaponRange = 30,
             NeverGuardBases = true,
             NeverGuardEngineers = true,
             UseFormation = 'AttackFormation',
             LocationType = 'LocationType',
-            AggressiveMove = true,
         ThreatWeights = {
             SecondaryTargetThreatType = 'StructuresNotMex',
             IgnoreStrongerTargetsRatio = 100.0,
             },
         },        
         BuilderConditions = {
-            --{ UCBC, 'PoolGreaterAtLocation', { 'LocationType', 4, GROUND * RANGE } },
-            { MIBC, 'GreaterThanGameTime', {480} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, (categories.SILO + categories.ARTILLERY + categories.SNIPER) * GROUND - categories.ENGINEER} },
+            --{ MIBC, 'GreaterThanGameTime', {480} },
          },
     },
     Builder {
         BuilderName = 'SCTA Hover Strike Land',
         PlatoonTemplate = 'StrikeForceSCTAHover', -- The platoon template tells the AI what units to include, and how to use them.
         Priority = 200,
-        InstanceCount = 25,
+        InstanceCount = 10,
         BuilderType = 'LandForm',
         BuilderData = {
             TAWeaponRange = 30,
@@ -188,7 +184,7 @@ BuilderGroup {
             UseFormation = 'AttackFormation',
         },        
         BuilderConditions = {
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2,  categories.MOBILE * (categories.HOVER + categories.AMPHIBIOUS) - categories.COMMAND} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2,  GROUND * (categories.HOVER + categories.AMPHIBIOUS) - categories.COMMAND - categories.TRANSPORTFOCUS} },
          },
     },
 }

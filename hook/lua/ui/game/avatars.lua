@@ -1,4 +1,4 @@
----local WEIRD = categories.SUBCOMMANDER + categories.AIR + categories.NAVAL + categories.FIELDENGINEER
+local WEIRD = (categories.SUBCOMMANDER + categories.FIELDENGINEER)
 
 function GetCheck(id)
     if id == 'engineer' and controls.idleEngineers then
@@ -21,8 +21,8 @@ function AvatarUpdate()
     end
     local avatars = GetArmyAvatars()
     local engi = GetIdleEngineers()
-    local engineers = EntityCategoryFilterDown(categories.ENGINEER * categories.LAND - categories.FIELDENGINEER - categories.SUBCOMMANDER, engi)
-    local fieldengineers = EntityCategoryFilterDown(categories.ENGINEER * (categories.FIELDENGINEER + categories.SUBCOMMANDER), engi)
+    local engineers = EntityCategoryFilterDown(categories.ENGINEER * categories.LAND - WEIRD, engi)
+    local fieldengineers = EntityCategoryFilterDown(categories.ENGINEER * WEIRD, engi)
     local terrainengineers = EntityCategoryFilterDown(categories.ENGINEER * (categories.AIR + categories.NAVAL), engi)
     local factories = GetIdleFactories()
     local needsAvatarLayout = false
@@ -189,9 +189,9 @@ function CreateIdleTab(unitData, id, expandFunc)
             local sortedUnits = {}
             sortedUnits[5] = EntityCategoryFilterDown(categories.TECH3, self.allunits)
             sortedUnits[4] = EntityCategoryFilterDown(categories.TECH2 - categories.TANK, self.allunits)
-            sortedUnits[3] = EntityCategoryFilterDown(categories.TANK * categories.TECH2, self.allunits)
+            sortedUnits[3] = EntityCategoryFilterDown(categories.TECH2 * categories.TANK, self.allunits)
             sortedUnits[2] = EntityCategoryFilterDown(categories.TECH1 - categories.TANK, self.allunits)
-            sortedUnits[1] = EntityCategoryFilterDown(categories.TANK * categories.TECH1, self.allunits)
+            sortedUnits[1] = EntityCategoryFilterDown(categories.TECH1 * categories.TANK, self.allunits)
 
             local keyToIcon = {'T1V', 'T1', 'T2V', 'T2', 'T3'}
 
@@ -246,11 +246,11 @@ function CreateIdleTab(unitData, id, expandFunc)
             local sortedUnits = {}
             sortedUnits[5] = EntityCategoryFilterDown(categories.TECH3 * categories.AIR, self.allunits)
             sortedUnits[4] = EntityCategoryFilterDown(categories.TECH2 * categories.AIR, self.allunits)
-            sortedUnits[3] = EntityCategoryFilterDown(categories.TECH1 * categories.AIR, self.allunits)
-            sortedUnits[2] = EntityCategoryFilterDown(categories.NAVAL * categories.TECH2, self.allunits)
-            sortedUnits[1] = EntityCategoryFilterDown(categories.NAVAL * categories.TECH1, self.allunits)
+            sortedUnits[3] = EntityCategoryFilterDown(categories.TECH2 * categories.NAVAL, self.allunits)
+            sortedUnits[2] = EntityCategoryFilterDown(categories.TECH1 * categories.AIR, self.allunits)
+            sortedUnits[1] = EntityCategoryFilterDown(categories.TECH1 * categories.NAVAL, self.allunits)
         
-            local keyToIcon = {'T1O', 'T2O', 'T1A', 'T2A', 'T3A'}
+            local keyToIcon = {'T1O', 'T1A', 'T2O', 'T2A', 'T3A'}
 
             local i = table.getn(sortedUnits)
             local needIcon = true
@@ -542,12 +542,12 @@ function CreateIdleTerrainEngineerList(parent, units)
         local terrainengineers = {}
         terrainengineers[5] = EntityCategoryFilterDown(categories.TECH3 * categories.AIR, unitData)
         terrainengineers[4] = EntityCategoryFilterDown(categories.TECH2 * categories.AIR, unitData)
-        terrainengineers[3] = EntityCategoryFilterDown(categories.TECH1 * categories.AIR, unitData)
-        terrainengineers[2] = EntityCategoryFilterDown(categories.NAVAL * categories.TECH2, unitData)
-        terrainengineers[1] = EntityCategoryFilterDown(categories.NAVAL * categories.TECH1, unitData)
+        terrainengineers[3] = EntityCategoryFilterDown(categories.TECH2 * categories.NAVAL, unitData)
+        terrainengineers[2] = EntityCategoryFilterDown(categories.TECH1 * categories.AIR, unitData)
+        terrainengineers[1] = EntityCategoryFilterDown(categories.TECH1 * categories.NAVAL, unitData)
         
-        local indexToIcon = {'1', '2', '1', '2', '3'}
-        local keyToIcon = {'T1O', 'T2O', 'T1A', 'T2A', 'T3A'}
+        local indexToIcon = {'1', '1', '2', '2', '3'}
+        local keyToIcon = {'T1O', 'T1A', 'T2O', 'T2A', 'T3A'}
         for index, units in terrainengineers do
             local i = index
             if false then
@@ -677,9 +677,9 @@ function CreateIdleEngineerList(parent, units)
         local engineers = {}   
         engineers[5] = EntityCategoryFilterDown(categories.TECH3, unitData)
         engineers[4] = EntityCategoryFilterDown(categories.TECH2 - categories.TANK, unitData)
-        engineers[3] = EntityCategoryFilterDown(categories.TANK * categories.TECH2, unitData)
+        engineers[3] = EntityCategoryFilterDown(categories.TECH2 * categories.TANK, unitData)
         engineers[2] = EntityCategoryFilterDown(categories.TECH1 - categories.TANK, unitData)
-        engineers[1] = EntityCategoryFilterDown(categories.TANK * categories.TECH1, unitData)    
+        engineers[1] = EntityCategoryFilterDown(categories.TECH1 * categories.TANK, unitData)    
 
         local indexToIcon = {'1', '1', '2', '2', '3'}
         local keyToIcon = {'T1V', 'T1', 'T2V', 'T2', 'T3'}

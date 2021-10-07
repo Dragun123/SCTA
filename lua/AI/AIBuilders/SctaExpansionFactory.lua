@@ -1,14 +1,10 @@
 
 local UCBC = '/lua/editor/UnitCountBuildConditions.lua'
-local EBC = '/lua/editor/EconomyBuildConditions.lua'
-local SAI = '/lua/ScenarioPlatoonAI.lua'
 local MIBC = '/lua/editor/MiscBuildConditions.lua'
 local TASlow = '/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua'
 local TAutils = '/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua'
-local PLANT = (categories.FACTORY * categories.TECH1)
-local LAB = (categories.FACTORY * categories.TECH2)
-local PLATFORM = (categories.FACTORY * categories.TECH3)
-local FUSION = (categories.ENERGYPRODUCTION * (categories.TECH2 + categories.TECH3)) * categories.STRUCTURE
+LAB = (categories.FACTORY * categories.TECH2)
+PLATFORM = (categories.FACTORY * categories.TECH3)
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
   
 
@@ -31,7 +27,8 @@ BuilderGroup {
         },
         BuilderType = 'LandTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
+            TAEscort = true,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -57,7 +54,8 @@ BuilderGroup {
         },
         BuilderType = 'LandTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
+            TAEscort = true,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -83,7 +81,7 @@ BuilderGroup {
         },
         BuilderType = 'OmniLand',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -109,7 +107,7 @@ BuilderGroup {
         },
         BuilderType = 'OmniLand',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -137,7 +135,7 @@ BuilderGroup {
         },
         BuilderType = 'AirTA',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -163,7 +161,7 @@ BuilderGroup {
         },
         BuilderType = 'OmniAir',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -188,7 +186,7 @@ BuilderGroup {
         },
         BuilderType = 'NotACU',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -211,7 +209,7 @@ BuilderGroup {
         },
         BuilderType = 'NotACU',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -226,14 +224,15 @@ BuilderGroup {
         PlatoonTemplate = 'EngineerBuilderSCTA23',
         PriorityFunction = TAPrior.ProductionT3,
         Priority = 143,
-        InstanceCount = 2,
+        InstanceCount = 1,
         BuilderConditions = {
-            { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, PLATFORM} },
+            { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, PLATFORM * categories.LAND} },
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 4, PLATFORM * categories.LAND} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
         BuilderType = 'OmniLand',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -249,14 +248,15 @@ BuilderGroup {
         PlatoonTemplate = 'EngineerBuilderSCTAEco23',
         PriorityFunction = TAPrior.ProductionT3Air,
         Priority = 140,
-        InstanceCount = 2,
+        InstanceCount = 1,
         BuilderConditions = {
-            { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, PLATFORM} },
+            { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, PLATFORM * categories.AIR} },
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 4, PLATFORM * categories.AIR} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
         BuilderType = 'OmniAir',
         BuilderData = {
-            NeedGuard = false,
+            ---NeedGuard = false,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {

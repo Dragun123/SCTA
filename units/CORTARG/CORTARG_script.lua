@@ -15,7 +15,6 @@ CORTARG = Class(TACloser) {
 
 	OpeningState = State {
 		Main = function(self)
-			self.IsActive = true
 			self:EnableIntel('Radar')
 		self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationUnpack)
 		self.AnimManip:SetRate(1 * (self:GetBlueprint().Display.AnimationUnpackRate or 0.2))

@@ -10,8 +10,6 @@ ProjectileBlueprint {
         'DIRECTFIRE',
     },
     Display = {
-        MeshBlueprint = '/mods/SCTA-master/meshes/projectiles/Plasma_mesh.bp',
-        UniformScale = 0,
         StrategicIconSize = 1,
     },
     General = {
@@ -24,7 +22,6 @@ ProjectileBlueprint {
         Faction = 'CORE',
         Weapon = 'FLAMETHROWER',
     },
-
     Physics = {
         CollideEntity = false,
         DestroyOnWater = true,

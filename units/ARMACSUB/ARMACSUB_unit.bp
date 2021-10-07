@@ -36,7 +36,7 @@ UnitBlueprint {
             LodCutoff = 'UnitMove_LodCutoff',
 	},
     },
-    BuildIconSortPriority = 1,
+    BuildIconSortPriority = 0,
     Categories = {
         'SELECTABLE',
         'TECH2',
@@ -49,13 +49,11 @@ UnitBlueprint {
         'PATROLHELPER',
         'SHOWQUEUE',
         'MOBILE',
-        'SELECTION',
 	    'CONSTRUCTION',
         'NAVAL',
         'SUBMERSIBLE',
         'T2SUBMARINE',
         'OVERLAYSONAR',
-        'SELECTION',
     },
     Defense = {
         ArmorType = 'Normal',
@@ -158,7 +156,9 @@ UnitBlueprint {
     SizeX = 2.5,
     SizeY = 1.5,
     SizeZ = 4,
-    StrategicIconName = 'icon_structure2_engineer', 
+    StrategicIconName = 'icon_sub2_engineer', 
+    TAStrategicIconName2 = '2/land_engineer',
+    TAStrategicIconName = 'land_engineer',
     StrategicIconSortPriority = 0,
     Weapon = {
         { #SMALL_UNITEX
@@ -169,16 +169,13 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-
     },
         Wreckage = {
-	---UseCustomMesh = true,
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/ARMACSUB/ARMACSUB_dead_prop.bp',
         WreckageLayers = {
             Water = true,
 	    Sub = true,

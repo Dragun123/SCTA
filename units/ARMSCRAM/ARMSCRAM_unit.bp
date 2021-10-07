@@ -50,6 +50,7 @@ UnitBlueprint {
         'COUNTERINTELLIGENCE',  
         'DEFENSIVEBOAT',
         'ARM',
+        'T2SUBMARINE',
         'SUBMERSIBLE',
     },
     Defense = {
@@ -142,8 +143,9 @@ UnitBlueprint {
     SizeX = 2,
     SizeY = 1,
     SizeZ = 2,
-    StrategicIconName = 'icon_sub3_intel',
-    TAStrategicIconName = '3/ship_counterintel',
+    StrategicIconName = 'icon_sub3_counterintel',
+    TAStrategicIconName = 'ship_counterintel',
+    TAStrategicIconName2 = '3/ship_counterintel',
     StrategicIconSortPriority = 20,
     Weapon = {
         { #BIG_UNITEX
@@ -156,13 +158,11 @@ UnitBlueprint {
         }, 
     },
         Wreckage = {
-	---UseCustomMesh = true,
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/ARMSCRAM/ARMSCRAM_dead_prop.bp',
         WreckageLayers = {
             Land = true,
             Seabed = true,

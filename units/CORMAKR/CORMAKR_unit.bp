@@ -104,7 +104,7 @@ UnitBlueprint {
     Physics = {
         BuildOnLayerCaps = {
             LAYER_Land = true,
-            LAYER_Water = true,
+            LAYER_Sub = true,
         },
     },
     SelectionSizeX = 2,
@@ -114,7 +114,7 @@ UnitBlueprint {
     SizeY = 2,
     SizeZ = 2.5,
     StrategicIconName = 'icon_structure2_mass',
-    TAStrategicIconName = '2/structure_massfab',
+    ---TAStrategicIconName = '2/structure_massfab',
     StrategicIconSortPriority = 0,
     Weapon = {
         { #SMALL_BUILDINGEX
@@ -125,17 +125,16 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         },
-         
     },
         Wreckage = {
-Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
-        EnergyMult = 0,
-        HealthMult = 0.9,
-        MassMult = 0.9,
-        ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/CORMAKR/CORMAKR_dead_prop.bp',
+            Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
+            EnergyMult = 0,
+            HealthMult = 0.9,
+            MassMult = 0.9,
+            ReclaimTimeMultiplier = 1,
         WreckageLayers = {
             Land = true,
+            Water = true,
         },
     },
 }

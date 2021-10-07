@@ -147,7 +147,7 @@ UnitBlueprint {
             DisplayName = 'ARMAAS_WEAPON1',
 	        FiringTolerance = 10,
             FireTargetLayerCapsTable = {
-                Water = 'Land|Water|Air',
+                Water = 'Land|Water|Air|Seabed',
             },
 	        RangeCategory = 'UWRC_AntiAir',
             WeaponCategory = 'AntiAir',
@@ -227,7 +227,7 @@ UnitBlueprint {
             DamageType = 'TASpec',
             DisplayName = 'ARMAAS_WEAPON1',
             FireTargetLayerCapsTable = {
-                Water = 'Land|Water|Air',
+                Water = 'Land|Water|Air|Seabed',
             },
 	        RangeCategory = 'UWRC_AntiAir',
             WeaponCategory = 'AntiAir',
@@ -304,7 +304,7 @@ UnitBlueprint {
             CollideFriendly = false,
             DamageFriendly = false,
             Damage = 120,
-            DamageRadius = 1,
+            DamageRadius = 3,
             DamageType = 'Normal',
             DisplayName = 'ARMAAS_WEAPON3',
             FireTargetLayerCapsTable = {
@@ -373,16 +373,13 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-
     },
         Wreckage = {
-	---UseCustomMesh = true,
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/CORARCH/CORARCH_dead_prop.bp',
         WreckageLayers = {
             Water = true,
 	    Sub = true,

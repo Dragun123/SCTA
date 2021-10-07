@@ -32,7 +32,8 @@ CORMIST = Class(TAunit) {
 				self.unit.Sliders.gun:SetSpeed(1)
 
 				--SLEEP <1325>
-				WaitSeconds(1.325)
+				--WaitSeconds(1.325)
+				coroutine.yield(14)
 
 				--SLEEP <22>
 
@@ -49,7 +50,8 @@ CORMIST = Class(TAunit) {
 				self.unit.Sliders.gun:SetSpeed(1)
 
 				--SLEEP <1325>
-				WaitSeconds(1.325)
+				--WaitSeconds(1.325)
+				coroutine.yield(14)
 
 				--SLEEP <22>
 

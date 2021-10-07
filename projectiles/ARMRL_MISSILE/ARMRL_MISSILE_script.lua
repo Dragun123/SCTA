@@ -3,11 +3,9 @@
 #
 #Script created by Raevn
 
-local TARocketProjectile = import('/mods/SCTA-master/lua/TAprojectiles.lua').TARocketProjectile
+local TASAMProjectile = import('/mods/SCTA-master/lua/TAprojectiles.lua').TASAMProjectile
 
-ARMRL_MISSILE = Class(TARocketProjectile) 
-{
-
-}
+ARMRL_MISSILE = Class(TASAMProjectile) 
+{}
 
 TypeClass = ARMRL_MISSILE

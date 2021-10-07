@@ -51,8 +51,8 @@ ProjectileBlueprint {
         Faction = 'ARM',
         Weapon = 'ARMVULC_WEAPON',
     },
-
     Physics = {
+        Lifetime = 1000,
         DestroyOnWater = true,
         InitialSpeed = 50,
         UseGravity = true,

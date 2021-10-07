@@ -49,7 +49,6 @@ UnitBlueprint {
         'RECLAIMABLE',
         'PATROLHELPER',
         'SHOWQUEUE',
-        'SELECTION',
         'MOBILE',
         'CONSTRUCTION',
         'DEFENSIVEBOAT',
@@ -160,7 +159,9 @@ UnitBlueprint {
     SizeX = 2.5,
     SizeY = 2,
     SizeZ = 4,
-    StrategicIconName = 'icon_structure1_engineer', 
+    StrategicIconName = 'icon_ship1_engineer',
+    TAStrategicIconName2 = '1/land_engineer',
+    TAStrategicIconName = 'land_engineer', 
     StrategicIconSortPriority = 0,
     Weapon = {
         { #BIG_UNITEX
@@ -171,16 +172,13 @@ UnitBlueprint {
             DummyWeapon = true,
             Label = 'DeathWeapon',
         }, 
-
     },
         Wreckage = {
-	---UseCustomMesh = true,
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
         EnergyMult = 0,
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        --Blueprint = '/mods/SCTA-master/units/ARMCS/ARMCS_dead_prop.bp',
         WreckageLayers = {
             Water = true,
 	    Sub = true,

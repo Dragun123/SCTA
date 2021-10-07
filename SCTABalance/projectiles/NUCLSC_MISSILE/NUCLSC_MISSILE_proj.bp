@@ -48,7 +48,7 @@ ProjectileBlueprint {
         CameraFollowsProjectile = true,
         MeshBlueprint = '/mods/SCTA-master/meshes/projectiles/ballmiss_mesh.bp',
         StrategicIconSize = 1,
-        UniformScale = 0.25,
+        UniformScale = 0.4,
     },
     Description = 'ARM Nuclear Missile',
     DesiredShooterCap = 1,

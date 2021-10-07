@@ -3,6 +3,7 @@ local TIFArtilleryWeapon = import('/lua/terranweapons.lua').TIFArtilleryWeapon
 local DefaultWeapon = WeaponFile.DefaultProjectileWeapon
 local KamikazeWeapon = WeaponFile.KamikazeWeapon
 local BareBonesWeapon = WeaponFile.BareBonesWeapon
+local TAMInterceptorWeapon = import('/lua/terranweapons.lua').TAMInterceptorWeapon
 local TAutils = import('/mods/SCTA-master/lua/TAutils.lua')
 
 TAweapon = Class(DefaultWeapon) {
@@ -49,9 +50,9 @@ TAweapon = Class(DefaultWeapon) {
 
     IdleState = State(DefaultWeapon.IdleState) {
         OnGotTarget = function(self) 
-            if (self.unit:GetAIBrain().SCTAAI or
+            if (self.unit.SCTAAIBrain or
             TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
-            self:OnGotTargetCheck() == true) then
+            self:OnGotTargetCheck() == true) and not self.unit.Dead then
                 DefaultWeapon.IdleState.OnGotTarget(self)
             end
         end,
@@ -60,17 +61,16 @@ TAweapon = Class(DefaultWeapon) {
     WeaponUnpackingState = State(DefaultWeapon.WeaponUnpackingState) {
         Main = function(self)          
             ---LOG('Resulting Table'..repr(TAutils.targetingFacilityData))
-            if (TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
-            self.unit:GetAIBrain().SCTAAI or
-            self:OnGotTargetCheck() == true) then
+            if (self.unit.SCTAAIBrain or
+            TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
+            self:OnGotTargetCheck() == true) and not self.unit.Dead then
                 DefaultWeapon.WeaponUnpackingState.Main(self)
             end
         end,
 
         OnGotTarget = function(self)
-            if (self.unit:GetAIBrain().SCTAAI or
-            TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
-            self:OnGotTargetCheck() == true) then
+            if (self.unit.SCTAAIBrain or TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
+            self:OnGotTargetCheck() == true) and not self.unit.Dead then
                 DefaultWeapon.WeaponUnpackingState.OnGotTarget(self)
             end
         end,
@@ -78,20 +78,26 @@ TAweapon = Class(DefaultWeapon) {
 
     RackSalvoFireReadyState = State(DefaultWeapon.RackSalvoFireReadyState) {
         OnGotTarget = function(self)      
-            if (self.unit:GetAIBrain().SCTAAI or
+            if (self.unit.SCTAAIBrain or
             TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
-            self:OnGotTargetCheck() == true) then
+            self:OnGotTargetCheck() == true) and not self.unit.Dead then
                 DefaultWeapon.RackSalvoFireReadyState.OnGotTarget(self)
             end
         end,
 
     },
 
-    WeaponPackingState = State(DefaultWeapon.WeaponPackingState) {        
+    WeaponPackingState = State(DefaultWeapon.WeaponPackingState) {
+        Main = function(self)          
+            ---LOG('Resulting Table'..repr(TAutils.targetingFacilityData))
+            if not self.unit.Dead then
+                DefaultWeapon.WeaponPackingState.Main(self)
+            end
+        end,
+
         OnGotTarget = function(self)
-            if (self.unit:GetAIBrain().SCTAAI or
-            TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
-            self:OnGotTargetCheck() == true) then
+            if (self.unit:GetAIBrain().SCTAAI or TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
+            self:OnGotTargetCheck() == true) and not self.unit.Dead then
                 DefaultWeapon.WeaponPackingState.OnGotTarget(self)
             end
         end,
@@ -113,6 +119,7 @@ TAHide = Class(TAweapon) {
     end,
 
     PlayFxWeaponPackSequence = function(self)
+        self.unit.Pack = self.bp.Defense.DamageModifier
         self.unit:EnableUnitIntel('RadarStealth')
         TAweapon.PlayFxWeaponPackSequence(self)
         self.unit:SetCollisionShape( 'Box',  self.bp.CollisionOffsetX or 0, self.bp.CollisionOffsetY or 0, self.bp.CollisionOffsetZ or 0, self.bp.SizeX * self.scale, ((self.bp.SizeY/self.bp.SizeY) * self.scale), self.bp.SizeZ * self.scale)
@@ -127,7 +134,7 @@ TAPopLaser = Class(TAweapon) {
     end,
 
     PlayFxWeaponPackSequence = function(self)
-        self.unit.Pack = 0.5
+        self.unit.Pack = self.unit:GetBlueprint().Defense.DamageModifier
         TAweapon.PlayFxWeaponPackSequence(self)
     end,
 }
@@ -186,7 +193,8 @@ TALightLaser = Class(TAweapon) {
         self.WeaponCanFire = true
 
         -- To prevent weapon getting stuck targeting something out of fire range but withing tracking radius
-        WaitSeconds(2)
+        --WaitSeconds(2)
+        coroutine.yield(21)
         -- Check if there is a better target nearby
         self:ResetTarget()
     end,
@@ -202,10 +210,11 @@ TAKami = Class(KamikazeWeapon){
 
 
     OnFire = function(self)
+        self.unit:SetDeathWeaponEnabled(false)
         for k, v in self.FxDeath do
-            CreateEmitterAtBone(self.unit,-2,self.unit:GetArmy(),v):ScaleEmitter(3)
+            CreateEmitterAtBone(self.unit,-2,self.unit:GetArmy(),v):ScaleEmitter(0.5)
         end 
-		local myBlueprint = self:GetBlueprint()
+        self.unit.attacked = true
 		KamikazeWeapon.OnFire(self)
     end,
 }
@@ -227,7 +236,7 @@ TABomb = Class(BareBonesWeapon) {
     
     Fire = function(self)
         for k, v in self.FxDeath do
-            CreateEmitterAtBone(self.unit,-2, self.unit:GetArmy(), v):ScaleEmitter(3)
+            CreateEmitterAtBone(self.unit,-2, self.unit:GetArmy(), v):ScaleEmitter(1)
         end 
 		local myBlueprint = self:GetBlueprint()
         DamageArea(self.unit, self.unit:GetPosition(), myBlueprint.DamageRadius, myBlueprint.Damage, myBlueprint.DamageType or 'Normal', myBlueprint.DamageFriendly or false)
@@ -277,7 +286,8 @@ end,
         self.WeaponCanFire = true
 
         -- To prevent weapon getting stuck targeting something out of fire range but withing tracking radius
-        WaitSeconds(2)
+        --WaitSeconds(2)
+        coroutine.yield(21)
         -- Check if there is a better target nearby
         self:ResetTarget()
     end,
@@ -285,16 +295,7 @@ end,
     },
 }
 
-
-TACommanderDeathWeapon = Class(BareBonesWeapon) {
-    OnCreate = function(self)
-        BareBonesWeapon.OnCreate(self)
-    end,
-}
-
 TADGun = Class(DefaultWeapon) {
-    AutoMode = false,
-    AutoThread = nil,
     EnergyRequired = nil,
 
     HasEnergy = function(self)
@@ -303,38 +304,47 @@ TADGun = Class(DefaultWeapon) {
 
     -- Can we use the OC weapon?
     CanOvercharge = function(self)
-        return not self.unit:IsOverchargePaused() and self:HasEnergy() and not
-            self:UnitOccupied() 
+        return not self.unit:IsOverchargePaused()
+         and self:HasEnergy() 
+         and not self:UnitOccupied() 
     end,
 
     UnitOccupied = function(self)
-        return self.unit:IsUnitState('Building') or
-            self.unit:IsUnitState('Repairing') or
-            self.unit:IsUnitState('Reclaiming')
+        return self.unit:IsUnitState('Building') 
+        or self.unit:IsUnitState('Repairing')
+        or self.unit:IsUnitState('Reclaiming')
     end,
 
     PauseOvercharge = function(self)
+        self.unit:SetWeaponEnabledByLabel('AutoOverCharge', false)
         if not self.unit:IsOverchargePaused() then
+            --_ALERT('TAIEXISTINGAUTODGUN', self.unit.DGunWeapon.RateOfFire)
+            --_ALERT('TAIEXISTINGAUTODGUN2', self.unit.DGunWeapon:GetBlueprint().RateOfFire)
             self.unit:SetOverchargePaused(true)
-            WaitSeconds(1 / self:GetBlueprint().RateOfFire)
+            WaitSeconds(1/self.unit.DGunWeapon:GetBlueprint().RateOfFire)
             self.unit:SetOverchargePaused(false)
         end
-        if self.AutoMode then
+        if self.unit.Sync.AutoOvercharge then
+            ---_ALERT('TAIEXISTINGAUTODGUN', self.unit.DGunWeapon:CanOvercharge())
             self.AutoThread = self:ForkThread(self.AutoEnable)
         end
     end,
 
         AutoEnable = function(self)
-            while not self:CanOvercharge() do
-                WaitSeconds(1)
+            while not self.unit.DGunWeapon:CanOvercharge() do
+                --WaitSeconds(1)
+                --_ALERT('TAIEXISTINGDGUN', self.unit.DGunWeapon:CanOvercharge())
+                coroutine.yield(11)
             end
-            if self.AutoMode then
+            if self.unit.Sync.AutoOvercharge and self.unit.DGunWeapon:CanOvercharge() then
+                --_ALERT('TAIEXISTFIREDGUN', self.unit.DGunWeapon:CanOvercharge())
+                coroutine.yield(11)
                 self.unit:SetWeaponEnabledByLabel('AutoOverCharge', true)
             end
         end,
     
         
-    SetAutoOvercharge = function(self, auto)
+    --[[SetAutoOvercharge = function(self, auto)
             self.AutoMode = auto
     
             if self.AutoMode then
@@ -345,7 +355,7 @@ TADGun = Class(DefaultWeapon) {
                     self.AutoThread = nil
                 end
             end
-        end,
+        end,]]
 
         StartEconomyDrain = function(self) -- OverchargeWeapon drains energy on impact
         end,
@@ -364,17 +374,17 @@ TADGun = Class(DefaultWeapon) {
         end,
 
         WaitDGUN = function(self)
-            WaitSeconds(1 / self:GetBlueprint().RateOfFire)
+            WaitSeconds(2)
         end,
 
         IdleState = State(DefaultWeapon.IdleState) {
             OnGotTarget = function(self)
-                if self:CanOvercharge() then
+                if self.unit.DGunWeapon:CanOvercharge() then
                     DefaultWeapon.IdleState.OnGotTarget(self)
                 else
                     self:ForkThread(function()
-                        while not self:CanOvercharge() do
-                            WaitSeconds(0.1)
+                        while not self.unit.DGunWeapon:CanOvercharge() do
+                            coroutine.yield(2)
                         end
                         DefaultWeapon.IdleState.OnGotTarget(self)
                     end)
@@ -382,8 +392,8 @@ TADGun = Class(DefaultWeapon) {
             end,
     
             OnFire = function(self)
-                if self:CanOvercharge() then
-                    ChangeState(self, DefaultWeapon.IdleState.RackSalvoFiringState(self))
+                if self.unit.DGunWeapon:CanOvercharge() then
+                    ChangeState(self, self.RackSalvoFiringState)
                 else
                     self:ForkThread(self.WaitDGUN)
                 end
@@ -392,11 +402,47 @@ TADGun = Class(DefaultWeapon) {
     
         RackSalvoFireReadyState = State(DefaultWeapon.RackSalvoFireReadyState) {
             OnFire = function(self)
-                if self:CanOvercharge() then
+                if self.unit.DGunWeapon:CanOvercharge() then
                     DefaultWeapon.RackSalvoFireReadyState.OnFire(self)
                 else
                     self:ForkThread(self.WaitDGUN)
                 end
             end,
         }    
+}
+
+TAAntiNukeWeapon = Class(TAMInterceptorWeapon) {
+    PlayFxWeaponUnpackSequence = function(self)
+        self.unit.Pack = 1
+        TAMInterceptorWeapon.PlayFxWeaponUnpackSequence(self)
+    end,
+
+    PlayFxWeaponPackSequence = function(self)
+        self.unit.Pack = self.unit:GetBlueprint().Defense.DamageModifier
+        TAMInterceptorWeapon.PlayFxWeaponPackSequence(self)
+    end,
+
+    IdleState = State(TAMInterceptorWeapon.IdleState) {
+    OnGotTarget = function(self)
+        local bp = self:GetBlueprint()
+        if (bp.WeaponUnpackLockMotion != true or (bp.WeaponUnpackLocksMotion == true and not self.unit:IsUnitState('Moving'))) then
+            if (bp.CountedProjectile == false) or self:CanFire() then
+                 nukeFiredOnGotTarget = true
+            end
+        end
+        TAMInterceptorWeapon.IdleState.OnGotTarget(self)
+    end,
+    
+    OnFire = function(self)
+        if not nukeFiredOnGotTarget then
+            TAMInterceptorWeapon.IdleState.OnFire(self)
+        end
+        nukeFiredOnGotTarget = false
+        self:ForkThread(function()
+            self.unit:SetBusy(true)
+            WaitSeconds(1/self.unit:GetBlueprint().Weapon[1].RateOfFire + .2)
+            self.unit:SetBusy(false)
+        end)
+    end,
+    },
 }

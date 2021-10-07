@@ -24,7 +24,6 @@ UnitBlueprint {
     BuildIconSortPriority = 200,
     Categories = {
         'SELECTABLE',
-        'CYBRAN',
         'MOBILE',
         'ECONOMIC',
         'COMMAND',
@@ -160,7 +159,6 @@ UnitBlueprint {
         HealthMult = 0.9,
         MassMult = 0.9,
         ReclaimTimeMultiplier = 1,
-        UseCustomMesh = true,
         WreckageLayers = {
             Air = false,
             Land = true,

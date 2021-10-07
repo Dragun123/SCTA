@@ -1,8 +1,8 @@
 UnitBlueprint {
     Merge = true,
     Defense = {
-        Health = 1200,
-        MaxHealth = 1200,
+        Health = 1800,
+        MaxHealth = 1800,
         },
     Economy = {
     BuildCostEnergy = 3800,
@@ -12,12 +12,19 @@ UnitBlueprint {
 	ProductionPerSecondEnergy = 3,
 	ProductionPerSecondMass = 0,
     },
-    
+    Physics = {
+    MotionType = 'RULEUMT_AmphibiousFloating',
+    },
+    Intel = {
+        JamRadius = {
+            Max = 10,
+            Min = 5,
+        },
+        JammerBlips = 3,
+    },
     LifeBarSize = 1,
-    ---SelectionCenterOffsetZ = 0.1,
     SelectionSizeX = 0.6,
     SelectionSizeZ = 0.6,
     SizeX = 1,
-    ---SizeY = 0.75,
     SizeZ = 1,
 }

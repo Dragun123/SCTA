@@ -27,7 +27,7 @@ ProjectileBlueprint {
         },
     },
     Categories = {
-        'ARM',
+        'CORE',
         'PROJECTILE',
         'DIRECTFIRE',
     },
@@ -37,15 +37,12 @@ ProjectileBlueprint {
     General = {
         Category = 'Direct Fire',
         EntityCategory = {
-            'ARM',
+            'CORE',
             'PROJECTILE',
             'DIRECTFIRE',
-	    'KAMIKAZI',
         },
-        Faction = 'ARM',
-        Weapon = 'ARMMINE3',
+        Faction = 'CORE',
     },
-
     Physics = {
         DestroyOnWater = true,
         InitialSpeed = 1,

@@ -37,8 +37,6 @@ ProjectileBlueprint {
         'DIRECTFIRE',
     },
     Display = {
-        MeshBlueprint = '/mods/SCTA-master/meshes/projectiles/dgun_mesh.bp',
-        UniformScale = 0.4,
         StrategicIconSize = 1,
     },
     General = {
@@ -49,7 +47,6 @@ ProjectileBlueprint {
             'DIRECTFIRE',
         },
         Faction = 'ARM',
-        Weapon = 'CORKROG_FIRE',
     },
     Physics = {
         DestroyOnWater = true,

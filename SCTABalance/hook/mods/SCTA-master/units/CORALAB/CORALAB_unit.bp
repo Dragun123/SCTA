@@ -17,7 +17,6 @@ UnitBlueprint {
 	    'CORE',
 	    'SORTCONSTRUCTION',
         'BOT',
-        'SUPPORTFACTORY',
     },
     Defense = {
         Health = 8200,
