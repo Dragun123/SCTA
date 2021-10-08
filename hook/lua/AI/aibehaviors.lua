@@ -18,13 +18,23 @@ function CommanderBehaviorSCTADecoy(platoon)
     end
 end
 
+function InWaterCheckSCTA(platoon)
+    local t4Pos = platoon:GetPlatoonPosition()
+    if GetTerrainHeight(t4Pos[1], t4Pos[3]) < GetSurfaceHeight(t4Pos[1], t4Pos[3]) then
+    return true
+    end
+end
+
 
 function CommanderThreadSCTADecoy(cdr, platoon)
     --LOG('cdr is '..cdr.UnitId)
     local WaitTaunt = 600 + Random(1, 600)
     local aiBrain = cdr:GetAIBrain()
     aiBrain:BuildScoutLocations()
+    if not cdr.Taunt then
     TAReclaim.TAAIRandomizeTaunt(aiBrain)
+    cdr.Taunt = true
+    end
     SetCDRHome(cdr, platoon)
     while not cdr.Dead do
         -- Overcharge
@@ -191,7 +201,7 @@ local cmd
 TAReclaim.TAAIRandomizeTaunt(aiBrain)
 while aiBrain:PlatoonExists(self) do
     self:MergeWithNearbyPlatoonsSorian('ExperimentalAIHubTA', 50, true)
-    useMove = InWaterCheck(self)
+    useMove = InWaterCheckSCTA(self)
     if lastBase then
         targetUnit, lastBase = WreckBaseSorian(self, lastBase)
     end
@@ -217,11 +227,11 @@ while aiBrain:PlatoonExists(self) do
     -- Walk to and kill target loop
     local nearCommander = CommanderOverrideCheckSorian(self)
     local ACUattack = false
-    while aiBrain:PlatoonExists(self) and targetUnit and not targetUnit.Dead and useMove == InWaterCheck(self) and
+    while aiBrain:PlatoonExists(self) and targetUnit and not targetUnit.Dead and
     self:IsCommandsActive(cmd) and (nearCommander or ((farTarget and SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), targetUnit:GetPosition()) >= 40000) or
     (not farTarget and SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), targetUnit:GetPosition()) < 40000))) do
         self:MergeWithNearbyPlatoonsSorian('ExperimentalAIHubTA', 50, true)
-        useMove = InWaterCheck(self)
+        useMove = InWaterCheckSCTA(self)
         nearCommander = CommanderOverrideCheckSorian(self)
 
         if nearCommander and (nearCommander ~= targetUnit or
@@ -256,7 +266,7 @@ while aiBrain:PlatoonExists(self) do
             oldTarget = oldTarget or targetUnit
             targetUnit = false
             self:MergeWithNearbyPlatoonsSorian('ExperimentalAIHubTA', 50, true)
-            useMove = InWaterCheck(self)
+            useMove = InWaterCheckSCTA(self)
             IssueClearCommands(platoonUnits)
             if useMove or SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), closestBlockingShield:GetPosition()) < 40000 then
                 cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', closestBlockingShield:GetPosition(), false)
@@ -273,7 +283,7 @@ while aiBrain:PlatoonExists(self) do
             while not closestBlockingShield.Dead and aiBrain:PlatoonExists(self) and useMove == InWaterCheck(self)
             and self:IsCommandsActive(cmd) do
                 self:MergeWithNearbyPlatoonsSorian('ExperimentalAIHubTA', 50, true)
-                useMove = InWaterCheck(self)
+                useMove = InWaterCheckSCTA(self)
                 local targDistSq = SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), closestBlockingShield:GetPosition())
                 if (farAway and targDistSq < 40000) or (not farAway and targDistSq >= 40000) then
                     break

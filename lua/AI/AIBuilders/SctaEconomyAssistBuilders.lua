@@ -130,7 +130,7 @@ BuilderGroup {
         BuilderConditions = {
             { TAutils, 'HaveGreaterThanUnitsInCategoryBeingBuiltSCTA', { 0, categories.ECONOMIC}},
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER - categories.COMMAND}},
-            --{ TAutils, 'EcoManagementTA', { 0.5, 0.5, } },
+            { TAutils, 'EcoManagementTA', { 0.75, 0.75, } },
         },
         BuilderType = 'NotACU',
         BuilderData = {
@@ -154,7 +154,7 @@ BuilderGroup {
         BuilderConditions = {
             { TAutils, 'HaveGreaterThanUnitsInCategoryBeingBuiltSCTA', { 0, FUSION}},
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 0, categories.FIELDENGINEER}},
-            --{ TAutils, 'EcoManagementTA', { 0.5, 0.5, } },
+            { TAutils, 'EcoManagementTA', { 0.75, 0.75, } },
         },
         BuilderType = 'FieldTA',
         BuilderData = {
@@ -201,6 +201,7 @@ BuilderGroup {
             { TASlow, 'CheckBuildPlatoonDelaySCTA', { 'Unfinished' }},
             { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1,  categories.FIELDENGINEER}},
             { UCBC, 'UnfinishedUnits', { 'LocationType', categories.STRUCTURE}},
+            { TAutils, 'EcoManagementTA', { 0.5, 0.5, } },
         },
         BuilderData = {
             Assist = {
@@ -226,6 +227,7 @@ BuilderGroup {
             { UCBC, 'FactoryGreaterAtLocation', { 'LocationType', 1, categories.FACTORY - categories.TECH1} },
             --{ TASlow, 'TALocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, 'STRUCTURE TECH2, STRUCTURE TECH3, EXPERIMENTAL' }},
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 0, categories.FIELDENGINEER}},
+            { TAutils, 'EcoManagementTA', { 0.75, 0.75, } },
             ---{ TAutils, 'GreaterTAStorageRatio', { 0.5, 0.5}},
         },
         BuilderData = {

@@ -254,7 +254,7 @@ BuilderGroup {
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.LAND - categories.COMMAND}},
             { TAutils, 'HaveGreaterThanUnitsInCategoryBeingBuiltSCTA', { 1, categories.FACTORY}},
             ---{ TASlow, 'TALocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, 'STRUCTURE TECH2, STRUCTURE TECH3, EXPERIMENTAL' }},
-            --{ TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
         BuilderData = {
             Assist = {
@@ -280,7 +280,7 @@ BuilderGroup {
             { UCBC, 'FactoryGreaterAtLocation', { 'LocationType', 2, categories.FACTORY - categories.TECH1} },
             --{ UCBC, 'HaveGreaterThanUnitsInCategoryBeingBuilt', { 0, categories.MOBILE, 'LocationType', }},
             --{ UCBC, 'LocationFactoriesBuildingGreater', { 'LocationType', 0, 'MOBILE' }},
-            --{ TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
         BuilderData = {
             Assist = {

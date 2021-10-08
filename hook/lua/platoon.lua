@@ -1730,10 +1730,10 @@ Platoon = Class(SCTAAIPlatoon) {
         end
         for k,v in self:GetPlatoonUnits() do
             v.PlatoonHandle = nil
-            v.AssistSet = nil
-            v.AssistPlatoon = nil
-            v.UnitBeingAssist = nil
-            v.UnitBeingBuilt = nil
+            --v.AssistSet = nil
+            ---v.AssistPlatoon = nil
+            ---v.UnitBeingAssist = nil
+            --v.UnitBeingBuilt = nil
             v.ReclaimInProgress = nil
             v.CaptureInProgress = nil
             v.Escorting = nil
