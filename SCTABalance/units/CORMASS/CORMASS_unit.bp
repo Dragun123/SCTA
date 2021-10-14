@@ -117,7 +117,7 @@ UnitBlueprint {
     SizeY = 1.4,
     SizeZ = 2,
     StrategicIconName = 'icon_structure2_mass',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 64,
     Weapon = {
         { #SMALL_BUILDINGEX
             Damage = 50,

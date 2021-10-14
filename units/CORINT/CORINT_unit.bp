@@ -97,7 +97,7 @@ TechLevel = 'RULEUTL_Secret',
     SizeY = 3,
     SizeZ = 3,
     StrategicIconName = 'icon_structure3_artillery',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 175,
     Weapon = {
         {
             ArtilleryShieldBlocks = true,

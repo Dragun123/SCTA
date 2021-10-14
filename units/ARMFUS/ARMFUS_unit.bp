@@ -105,7 +105,7 @@ UnitBlueprint {
     SizeY = 3,
     SizeZ = 4,
     StrategicIconName = 'icon_structure2_energy',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 245,
     Weapon = {
         { #ATOMIC_BLAST
             Damage = 2000,

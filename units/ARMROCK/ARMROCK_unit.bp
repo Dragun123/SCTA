@@ -115,7 +115,7 @@ UnitBlueprint {
     StrategicIconName = 'icon_bot1_missile',
     TAStrategicIconName = 'land_missile',
     TAStrategicIconName2 = '1/land_missile',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 125,
     Weapon = {
         {
             Audio = {

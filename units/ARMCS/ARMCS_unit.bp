@@ -162,7 +162,7 @@ UnitBlueprint {
     StrategicIconName = 'icon_ship1_engineer',
     TAStrategicIconName2 = '1/land_engineer',
     TAStrategicIconName = 'land_engineer', 
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 105,
     Weapon = {
         { #BIG_UNITEX
             Damage = 50,

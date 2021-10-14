@@ -103,7 +103,7 @@ UnitBlueprint {
     StrategicIconName = 'icon_structure2_bomb', --'icon_structure2_bomb',
     TAStrategicIconName = 'land_bomb',
     TAStrategicIconName2 = '2/land_bomb', 
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 205,
     Weapon = {
         {
             Audio = {

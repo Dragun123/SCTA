@@ -199,7 +199,7 @@ TechLevel = 'RULEUTL_Experimental',
     SizeY = 4,
     SizeZ = 3,
     StrategicIconName = 'icon_experimental_generic',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 115,
     Transport = {
         TransportClass = 4,
     },

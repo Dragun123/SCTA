@@ -141,7 +141,7 @@ UnitBlueprint {
     SizeY = 1.25,
     SizeZ = 3,
     StrategicIconName = 'icon_bot1_engineer',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 105,
     Weapon = {
         { #BIG_UNITEX
             Damage = 50,

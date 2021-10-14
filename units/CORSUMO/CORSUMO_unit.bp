@@ -113,7 +113,7 @@ TechLevel = 'RULEUTL_Advanced',
     SizeY = 2,
     SizeZ = 2,
     StrategicIconName = 'icon_bot3_armored',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 115,
     Transport = {
         TransportClass = 3,
     },

@@ -118,7 +118,7 @@ UnitBlueprint {
     StrategicIconName = 'icon_bot1_artillery',
     ---TAStrategicIconName = 'land_artillery',
     ---TAStrategicIconName2 = '1/land_artillery',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 135,
     Weapon = {
         {
             ArtilleryShieldBlocks = true,

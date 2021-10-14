@@ -136,7 +136,7 @@ UnitBlueprint {
     SizeY = 2,
     SizeZ = 6.5,
     StrategicIconName = 'icon_ship3_missile',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 145,
     Weapon = {
         {
             Audio = {

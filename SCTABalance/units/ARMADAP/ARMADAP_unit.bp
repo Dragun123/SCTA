@@ -151,7 +151,7 @@ UnitBlueprint {
     SizeY = 1,
     SizeZ = 9,
     StrategicIconName = 'icon_factoryhq3_air',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 205,
     Weapon = {
         { #LARGE_BUILDINGEX
             Damage = 200,

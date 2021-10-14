@@ -101,7 +101,7 @@ UnitBlueprint {
     SizeY = 2,
     SizeZ = 3,
     StrategicIconName = 'icon_structure2_artillery',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 180,
     Weapon = {
         {
             ArtilleryShieldBlocks = true,

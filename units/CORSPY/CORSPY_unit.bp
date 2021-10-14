@@ -122,7 +122,7 @@ TechLevel = 'RULEUTL_Advanced',
     SizeY = 2,
     SizeZ = 2,
     StrategicIconName = 'icon_bot2_intel',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 115,
     Weapon = {
         { #SMALL_UNITEX
             Damage = 50,

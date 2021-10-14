@@ -116,7 +116,7 @@ TechLevel = 'RULEUTL_Basic',
     StrategicIconName = 'icon_bot1_armored',
     TAStrategicIconName = 'bot_armored',
     TAStrategicIconName2 = '1/bot_armored',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 135,
     Weapon = {
         {
             Audio = {

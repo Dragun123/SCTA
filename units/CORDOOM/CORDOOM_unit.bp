@@ -101,7 +101,7 @@ TechLevel = 'RULEUTL_Secret',
     StrategicIconName = 'icon_structure3_sniper',
     TAStrategicIconName = 'bot_sniper',
     TAStrategicIconName2 = '3/bot_sniper',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 195,
     Weapon = {
         {
             AboveWaterTargetsOnly = true,

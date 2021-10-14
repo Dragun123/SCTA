@@ -125,7 +125,7 @@ UnitBlueprint {
     SizeY = 4,
     SizeZ = 4,
     StrategicIconName = 'icon_structure3_intel',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 64,
     Weapon = {
         { #LARGE_BUILDINGEX
         Damage = 750,

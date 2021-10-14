@@ -129,7 +129,7 @@ UnitBlueprint {
     SizeZ = 2,
     SizeY = 1,
     StrategicIconName = 'icon_land3_intel',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 115,
     Weapon = {
         {
             Audio = {

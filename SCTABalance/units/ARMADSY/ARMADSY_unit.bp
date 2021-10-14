@@ -154,7 +154,7 @@ TechLevel = 'RULEUTL_Advanced',
     SizeY = 3,
     SizeZ = 12,
     StrategicIconName = 'icon_factoryhq3_naval',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 205,
     Weapon = {
         { #LARGE_BUILDINGEX
         Damage = 200,

@@ -157,7 +157,7 @@ UnitBlueprint {
     SizeZ = 12,
     SelectionThickness = 0.25,
     StrategicIconName = 'icon_factoryhq2_naval',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 210,
     Weapon = {
         { #LARGE_BUILDINGEX
         Damage = 200,

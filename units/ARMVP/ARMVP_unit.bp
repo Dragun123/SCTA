@@ -156,7 +156,7 @@ TechLevel = 'RULEUTL_Basic',
     SizeY = 2.5,
     SizeZ = 6,
     StrategicIconName = 'icon_factory1_land',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 215,
     Weapon = {
         { #LARGE_sprayEX
             Damage = 200,

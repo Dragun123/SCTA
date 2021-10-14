@@ -131,7 +131,7 @@ SurfaceThreatLevel = 24,
         SizeY = 1.5,
         SizeZ = 3,
         StrategicIconName = 'icon_land2_missile',
-        StrategicIconSortPriority = 0,
+        StrategicIconSortPriority = 125,
     Transport = {
         TransportClass = 2,
     },

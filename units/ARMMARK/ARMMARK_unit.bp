@@ -120,7 +120,7 @@ UnitBlueprint {
     SizeY = 2,
     SizeZ = 2,
     StrategicIconName = 'icon_bot2_intel',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 125,
     Weapon = {
         { #SMALL_UNITEX
             Damage = 50,

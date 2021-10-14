@@ -113,7 +113,7 @@ UnitBlueprint {
     StrategicIconName = 'icon_land2_antimissile',
     TAStrategicIconName = 'structure_antimissile',
     TAStrategicIconName2 = '2/structure_antimissile',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 200,
     Transport = {
         TransportClass = 2,
     },

@@ -101,7 +101,7 @@ TechLevel = 'RULEUTL_Secret',
     SizeY = 2.5,
     SizeZ = 2,
     StrategicIconName = 'icon_structure3_antiair',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 190,
     Weapon = {
         {
             Audio = {

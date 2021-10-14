@@ -115,7 +115,7 @@ UnitBlueprint {
     SizeY = 2,
     SizeZ = 2,
     StrategicIconName = 'icon_bot1_antiair',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 135,
     Weapon = {
         {
             Audio = {

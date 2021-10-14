@@ -181,7 +181,7 @@ UnitBlueprint {
     StrategicIconName = 'icon_fighter1_engineer', --'icon_fighter1_engineer',
     TAStrategicIconName2 = '1/land_engineer',
     TAStrategicIconName = 'land_engineer',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 105,
     Transport = {
         AirClass = true,
         TransportClass = 1,

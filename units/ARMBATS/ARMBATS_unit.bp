@@ -142,7 +142,7 @@ UnitBlueprint {
     SizeY = 3.5,
     SizeZ = 8,
     StrategicIconName = 'icon_ship3_directfire',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 145,
     Weapon = {
         { #ARM_BATS
             Audio = {

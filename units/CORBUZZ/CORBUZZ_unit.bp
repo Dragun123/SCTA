@@ -104,7 +104,7 @@ TechLevel = 'RULEUTL_Secret',
     SizeY = 3,
     SizeZ = 3,
     StrategicIconName = 'icon_experimental_generic',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 175,
     Weapon = {
         {
             AboveWaterTargetsOnly = true,

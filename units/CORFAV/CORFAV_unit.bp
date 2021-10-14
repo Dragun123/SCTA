@@ -136,7 +136,7 @@ TechLevel = 'RULEUTL_Basic',
     SizeY = 1,
     SizeZ = 2,
     StrategicIconName = 'icon_land1_intel',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 135,
     Weapon = {
         {
             Audio = {
