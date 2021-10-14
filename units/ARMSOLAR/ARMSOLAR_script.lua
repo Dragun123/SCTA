@@ -22,6 +22,8 @@ ARMSOLAR = Class(TACloser) {
 	OpeningState = State {
 		Main = function(self)
 			self:SetProductionActive(true)
+			--[[if not self.TAAnimating then
+				self.TAAnimating = true]]
 			self.Spinners.dish1:SetGoal(90)
 			self.Spinners.dish1:SetSpeed(60)
 
@@ -36,7 +38,7 @@ ARMSOLAR = Class(TACloser) {
 			--TURN dish4 to z-axis <90.00> SPEED <60.01>
 			self.Spinners.dish4:SetGoal(-90)
 			self.Spinners.dish4:SetSpeed(60)
-
+			--end
 			TACloser.OpeningState.Main(self)
 		end,
 	},
@@ -45,6 +47,8 @@ ARMSOLAR = Class(TACloser) {
 	ClosingState = State {
 		Main = function(self)
 			self:SetProductionActive(false)
+			--[[if not self.TAAnimating then
+				self.TAAnimating = true]]
 			--TURN dish1 to x-axis <0> SPEED <120.02>
 			self.Spinners.dish1:SetGoal(0)
 			self.Spinners.dish1:SetSpeed(120)
@@ -60,7 +64,7 @@ ARMSOLAR = Class(TACloser) {
 			--TURN dish4 to x-axis <0> SPEED <120.02>
 			self.Spinners.dish4:SetGoal(0)
 			self.Spinners.dish4:SetSpeed(120)
-
+			--end
 			TACloser.ClosingState.Main(self)
 		end,
 

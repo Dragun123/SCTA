@@ -40,6 +40,8 @@ ARMASON = Class(TACloser) {
 		Main = function(self)
 			self:DisableIntel('Sonar')
 			self:EnableIntel('RadarStealth')
+			--[[if not self.TAAnimating then
+				self.TAAnimating = true]]
 			self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationRepack)
 			self.AnimManip:SetRate(self:GetBlueprint().Display.AnimationRepackRate)
 		
@@ -54,6 +56,7 @@ ARMASON = Class(TACloser) {
 					self.GeneratorCollision:Destroy()
 					self.GeneratorCollision = nil
 				end
+			--end
 				TACloser.ClosingState.Main(self)
 			end,
 			},
@@ -70,6 +73,8 @@ ARMASON = Class(TACloser) {
 				self.GeneratorCollision.Parent = self
         	end
 			self:DisableIntel('RadarStealth')
+			--[[if not self.TAAnimating then
+				self.TAAnimating = true]]
 			self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationUnpack)
 			self.AnimManip:SetRate(1 * (self:GetBlueprint().Display.AnimationUnpackRate or 0.2))
 		--MOVE base to y-axis <0> SPEED <5.00>;
@@ -78,6 +83,7 @@ ARMASON = Class(TACloser) {
 
 		--SPIN wheel around y-axis  SPEED <60.01>;
 		self.Spinners.wheel:SetSpeed(60)
+			--end
 		TACloser.OpeningState.Main(self)
 	end,
 	},

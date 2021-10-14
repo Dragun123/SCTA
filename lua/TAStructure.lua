@@ -207,31 +207,26 @@ TATarg = Class(TAStructure) {
 TACloser = Class(TATarg) {
 	OnStopBeingBuilt = function(self,builder,layer)
 		TATarg.OnStopBeingBuilt(self,builder,layer)
-		self.closeDueToDamage = nil,
 		ChangeState(self, self.OpeningState)
 	end,
 
 	IdleClosedState = State {
 		Main = function(self)
-			if self.closeDueToDamage then 
 				while self.DamageSeconds > 0 do
 					--WaitSeconds(1)
 					coroutine.yield(11)
 					self.DamageSeconds = self.DamageSeconds - 1
 				end
 
-				self.closeDueToDamage = nil
-
-				if self.IsActive then 
-					ChangeState(self, self.OpeningState)
-				end
+			if self.IsActive then 
+				--self.TAAnimating = nil
+				ChangeState(self, self.OpeningState)
 			end
 		end,
 
 		OnDamage = function(self, instigator, amount, vector, damageType)
 			TATarg.OnDamage(self, instigator, amount, vector, damageType) 
 			self.DamageSeconds = 8
-			ChangeState(self, self.ClosingState)
 		end,
 
 	},
@@ -243,7 +238,6 @@ TACloser = Class(TATarg) {
 		OnDamage = function(self, instigator, amount, vector, damageType)
 			TATarg.OnDamage(self, instigator, amount, vector, damageType)
 			self.DamageSeconds = 8
-			self.closeDueToDamage = true
 			ChangeState(self, self.ClosingState)
 		end,
 
@@ -253,6 +247,7 @@ TACloser = Class(TATarg) {
 		Main = function(self)
 			TATarg.Unfold(self)
 			self.IsActive = true
+			--self.TAAnimating = nil
 			self:PlayUnitSound('Activate')
 			ChangeState(self, self.IdleOpenState)
 		end,
@@ -271,6 +266,7 @@ TACloser = Class(TATarg) {
 	OnScriptBitSet = function(self, bit)
 		if bit == 3 then
 			self.IsActive = nil
+			--self.TAAnimating = nil
 			ChangeState(self, self.ClosingState)
 		end
 		TATarg.OnScriptBitSet(self, bit)
@@ -280,6 +276,7 @@ TACloser = Class(TATarg) {
 	OnScriptBitClear = function(self, bit)
 		if bit == 3 then
 			self.IsActive = true
+			--self.TAAnimating = nil
 			ChangeState(self, self.OpeningState)
 		end
 		TATarg.OnScriptBitClear(self, bit)
@@ -288,12 +285,14 @@ TACloser = Class(TATarg) {
 	OnProductionUnpaused = function(self)
 		TATarg.OnProductionUnpaused(self)
 		self.IsActive = true
+		--self.TAAnimating = nil
 		ChangeState(self, self.OpeningState)
 	end,
 
 	OnProductionPaused = function(self)
 		TATarg.OnProductionPaused(self)
 		self.IsActive = nil
+		--self.Closing = nil
 		ChangeState(self, self.ClosingState)
 	end,
 }	
