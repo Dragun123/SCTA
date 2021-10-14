@@ -100,7 +100,7 @@ UnitBlueprint {
     StrategicIconName = 'icon_structure2_sniper',
     TAStrategicIconName = 'bot_sniper',
     TAStrategicIconName2 = '2/bot_sniper',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 200,
     Weapon = {
         {
             Audio = {

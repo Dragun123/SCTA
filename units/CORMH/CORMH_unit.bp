@@ -123,7 +123,7 @@ TechLevel = 'RULEUTL_Advanced',
     SizeZ = 2.5,
     SizeY = 3,
     StrategicIconName = 'icon_land3_missile',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 115,
     Transport = {
         TransportClass = 2,
     },

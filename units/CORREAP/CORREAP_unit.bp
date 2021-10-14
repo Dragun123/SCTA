@@ -110,7 +110,7 @@ TechLevel = 'RULEUTL_Advanced',
     StrategicIconName = 'icon_bot2_armored',
     TAStrategicIconName = 'bot_armored',
     TAStrategicIconName2 = '2/bot_armored',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 125,
     Transport = {
         TransportClass = 3,
     },

@@ -167,7 +167,7 @@ UnitBlueprint {
     SizeY = 1,
     SizeZ = 3,
     StrategicIconName = 'icon_gunship1_transport',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 65,
     Transport = {
         AirClass = true,
         Class2AttachSize = 2,

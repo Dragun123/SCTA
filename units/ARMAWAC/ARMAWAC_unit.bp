@@ -163,7 +163,7 @@ UnitBlueprint {
     SizeY = 0.25,
     SizeZ = 1,
     StrategicIconName = 'icon_fighter3_intel',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 55,
     Transport = {
         AirClass = true,
         TransportClass = 1,

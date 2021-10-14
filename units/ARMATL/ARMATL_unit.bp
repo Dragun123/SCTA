@@ -108,7 +108,7 @@ UnitBlueprint {
     SizeY = 2,
     SizeZ = 4,
     StrategicIconName = 'icon_structure2_antinavy',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 200,
     Weapon = {
         {
             Audio = {

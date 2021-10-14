@@ -130,7 +130,7 @@ UnitBlueprint {
     SizeZ = 1,
     SizeY = 1, 
     StrategicIconName = 'icon_land2_bomb', 
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 120,
     Weapon = {
         {
             Audio = {

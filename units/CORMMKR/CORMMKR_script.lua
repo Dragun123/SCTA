@@ -19,6 +19,8 @@ CORMMKR = Class(TACloser) {
 	OpeningState = State {
 		Main = function(self)
 			self:SetProductionActive(true)
+			--[[if not self.TAAnimating then
+				self.TAAnimating = true]]
 			--TURN lid1 to x-axis <35.26> SPEED <45.57>;
 			self.Spinners.lid1:SetGoal(30.40)
 			self.Spinners.lid1:SetSpeed(45.57)
@@ -34,6 +36,7 @@ CORMMKR = Class(TACloser) {
 			--TURN lid3 to x-axis <-74.18> SPEED <61.29>;
 			self.Spinners.lid3:SetGoal(30.40)
 			self.Spinners.lid3:SetSpeed(39.29)
+			--end
 			TACloser.OpeningState.Main(self)
 		end,
 	},
@@ -42,6 +45,8 @@ CORMMKR = Class(TACloser) {
 	ClosingState = State {
 		Main = function(self)
 			self:SetProductionActive(false)
+			--[[if not self.TAAnimating then
+				self.TAAnimating = true]]
 			self.Spinners.lid1:SetGoal(0)
 			self.Spinners.lid1:SetSpeed(51.35)
 
@@ -56,8 +61,8 @@ CORMMKR = Class(TACloser) {
 			--TURN lid3 to x-axis <-26.75> SPEED <69.05>;
 			self.Spinners.lid3:SetGoal(0)
 			self.Spinners.lid3:SetSpeed(69.05)
-			TACloser.ClosingState.Main(self)
-			
+			--end
+			TACloser.ClosingState.Main(self)	
 		end,
 
 	},

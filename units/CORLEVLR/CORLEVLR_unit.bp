@@ -110,7 +110,7 @@ TechLevel = 'RULEUTL_Advanced',
     SizeY = 1,
     SizeZ = 2,
     StrategicIconName = 'icon_land1_artillery',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 135,
     Weapon = {
         {
             ArtilleryShieldBlocks = true,

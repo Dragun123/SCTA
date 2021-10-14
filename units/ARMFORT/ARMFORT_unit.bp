@@ -77,7 +77,7 @@ UnitBlueprint {
     SizeY = 2,
     SizeZ = 2,
     StrategicIconName = 'icon_structure_wall',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 210,
         Wreckage = {
             UseCustomMesh = true,
             EnergyMult = 0,

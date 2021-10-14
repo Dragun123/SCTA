@@ -114,7 +114,7 @@ TechLevel = 'RULEUTL_Advanced',
     TAStrategicIconName = 'bot_sniper',
     TAStrategicIconName2 = '2/bot_sniper',
     ---TAStrategicIconName = '2/bot_sniper',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 195,
     Transport = {
         TransportClass = 3,
     },

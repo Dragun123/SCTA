@@ -111,7 +111,7 @@ UnitBlueprint {
     SizeZ = 4,
     StrategicIconName = 'icon_structure3_mass',
     ---TAStrategicIconName = '3/structure_massfab',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 240,
     Weapon = {
         { #LARGE_BUILDINGEX
             Damage = 1250,

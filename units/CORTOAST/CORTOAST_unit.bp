@@ -102,7 +102,7 @@ UnitBlueprint {
     SizeY = 2,
     SizeZ = 3,
     StrategicIconName = 'icon_structure3_directfire',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 195,
     Weapon = {
         {
             Audio = {

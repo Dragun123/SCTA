@@ -15,18 +15,24 @@ CORASON = Class(TACloser) {
 	OpeningState = State {
 		Main = function(self)
 			self:EnableIntel('Sonar')
+			--[[if not self.TAAnimating then
+				self.TAAnimating = true]]
 			self.Spinners.dish:SetSpeed(60)
+			--end
 			TACloser.OpeningState.Main(self)
 	end,
 	},
 
 
-ClosingState = State {
-Main = function(self)
-	self:DisableIntel('Sonar')
-	self.Spinners.dish:SetSpeed(0)
+	ClosingState = State {
+	Main = function(self)
+		self:DisableIntel('Sonar')
+	--[[if not self.TAAnimating then
+				self.TAAnimating = true]]
+		self.Spinners.dish:SetSpeed(0)
+	--end
 	TACloser.ClosingState.Main(self)
-end,
+	end,
 },
 }
 

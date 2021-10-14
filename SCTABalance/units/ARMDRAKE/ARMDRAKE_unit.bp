@@ -209,7 +209,7 @@ UnitBlueprint {
         TransportClass = 4,
     },
     StrategicIconName = 'icon_experimental_generic',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 115,
     Weapon = {
         {
             Audio = {

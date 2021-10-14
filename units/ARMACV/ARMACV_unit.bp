@@ -153,7 +153,7 @@ TechLevel = 'RULEUTL_Advanced',
     SizeY = 2.5,
     SizeZ = 3,
     StrategicIconName = 'icon_land2_engineer',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 95,
     Transport = {
         TransportClass = 2,
     },

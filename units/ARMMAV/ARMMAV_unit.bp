@@ -110,7 +110,7 @@ TechLevel = 'RULEUTL_Advanced',
     SizeY = 2,
     SizeZ = 1.5,
     StrategicIconName = 'icon_bot3_directfire',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 115,
     Transport = {
         TransportClass = 2,
     },

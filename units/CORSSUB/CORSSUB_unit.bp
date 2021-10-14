@@ -121,7 +121,7 @@ UnitBlueprint {
     SizeY = 2,
     SizeZ = 8,
     StrategicIconName = 'icon_sub3_antinavy',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 145,
     Weapon = {
         {
             Audio = {

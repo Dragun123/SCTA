@@ -129,7 +129,7 @@ UnitBlueprint {
         },
     },
     StrategicIconName = 'icon_structure3_missile',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 170,
     Weapon = {
         {
             AboveWaterTargetsOnly = true,

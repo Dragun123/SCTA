@@ -93,7 +93,7 @@ TechLevel = 'RULEUTL_Basic',
     SizeY = 4,
     SizeZ = 3,
     StrategicIconName = 'icon_structure1_artillery',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 205,
     Weapon = {
         {
             Audio = {

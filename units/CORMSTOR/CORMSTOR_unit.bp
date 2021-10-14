@@ -96,7 +96,7 @@ TechLevel = 'RULEUTL_Basic',
     SizeZ = 4,
     StrategicIconName = 'icon_structure1_mass',
     ---TAStrategicIconName = '1/structure_massstorage',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 250,
     Weapon = {
         { #SMALL_BUILDINGEX
             Damage = 50,

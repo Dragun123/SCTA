@@ -24,7 +24,8 @@ ARMMMKR = Class(TACloser) {
 	OpeningState = State {
 		Main = function(self)
 			self:SetProductionActive(true)
-
+			--[[if not self.TAAnimating then
+				self.TAAnimating = true]]
 			--TURN mmakercore to y-axis <-30.40> SPEED <39.39>;
 			self.Spinners.core:SetGoal(-30.40)
 			self.Spinners.core:SetSpeed(39.39)
@@ -55,7 +56,7 @@ ARMMMKR = Class(TACloser) {
 			--TURN mmakercore to y-axis <-90.00> SPEED <37.67>;
 			self.Spinners.core:SetGoal(-90.00)
 			self.Spinners.core:SetSpeed(37.67)
-
+			--end
 			TACloser.OpeningState.Main(self)
 		end,
 	},
@@ -64,7 +65,8 @@ ARMMMKR = Class(TACloser) {
 	ClosingState = State {
 		Main = function(self)
 			self:SetProductionActive(false)
-
+			--[[if not self.TAAnimating then
+				self.TAAnimating = true]]
 			--TURN mmakercore to y-axis <-60.80> SPEED <42.74>;
 			self.Spinners.core:SetGoal(-60.80)
 			self.Spinners.core:SetSpeed(42.74)
@@ -97,8 +99,8 @@ ARMMMKR = Class(TACloser) {
 			--TURN mmakercore to y-axis <0> SPEED <44.46>;
 			self.Spinners.core:SetGoal(0)
 			self.Spinners.core:SetSpeed(30)
+			--end
 			TACloser.ClosingState.Main(self)
-			
 		end,
 
 	},

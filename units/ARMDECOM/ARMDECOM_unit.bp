@@ -186,7 +186,7 @@ UnitBlueprint {
     SizeY = 2.5,
     SizeZ = 2,
     StrategicIconName = 'icon_commander_generic',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 1,
     Transport = {
         TransportClass = 2,
     },

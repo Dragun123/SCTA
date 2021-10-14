@@ -134,7 +134,7 @@ TechLevel = 'RULEUTL_Advanced',
     SizeZ = 2,
     SizeX = 2,
     StrategicIconName = 'icon_land2_antiair',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 125,
     Transport = {
         TransportClass = 2,
     },

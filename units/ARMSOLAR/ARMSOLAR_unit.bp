@@ -99,7 +99,7 @@ TechLevel = 'RULEUTL_Basic',
     SizeY = 2.5,
     SizeZ = 5,
     StrategicIconName = 'icon_structure1_energy',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 250,
     Weapon = {
         { #SMALL_BUILDINGEX
             Damage = 50,

@@ -155,7 +155,7 @@ TechLevel = 'RULEUTL_Basic',
     SizeY = 2,
     SizeZ = 2,
     StrategicIconName = 'icon_land1_engineer',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 105,
     Weapon = {
         { #BIG_UNITEX
             Damage = 50,

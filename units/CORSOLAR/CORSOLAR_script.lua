@@ -15,8 +15,11 @@ CORSOLAR = Class(TACloser) {
 	OpeningState = State {
 		Main = function(self)
 			self:SetProductionActive(true)
+			--[[if not self.TAAnimating then
+				self.TAAnimating = true]]
 			self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationOpen)
 			self.AnimManip:SetRate(1 * (self:GetBlueprint().Display.AnimationOpenRate or 0.2))
+			--end
 			TACloser.OpeningState.Main(self)
 		end,
 	},
@@ -25,8 +28,11 @@ CORSOLAR = Class(TACloser) {
 	ClosingState = State {
 		Main = function(self)
 			self:SetProductionActive(false)
+			--[[if not self.TAAnimating then
+				self.TAAnimating = true]]
 			self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationOpen)
 			self.AnimManip:SetRate(-1 * (self:GetBlueprint().Display.AnimationOpenRate or 0.2))
+			--end
 			TACloser.ClosingState.Main(self)
 		end,
 

@@ -17,6 +17,8 @@ ARMARAD = Class(TACloser) {
 	OpeningState = State {
 		Main = function(self)
 			self:EnableIntel('Radar')
+			--[[if not self.TAAnimating then
+				self.TAAnimating = true]]
 			--SPIN turret around y-axis  SPEED <20.00>;
 			self.Spinners.post:SetGoal(0,0,0)
 			self.Spinners.post:SetSpeed(16)
@@ -31,6 +33,7 @@ ARMARAD = Class(TACloser) {
 			--SPIN arm2 around x-axis  SPEED <-100.02>;
 			self.Spinners.arm2:SetSpeed(45)
 			self.Spinners.arm2:ClearGoal()
+			--end
 			TACloser.OpeningState.Main(self)
 	end,
 	},
@@ -38,12 +41,15 @@ ARMARAD = Class(TACloser) {
 	ClosingState = State {
 		Main = function(self)
 			self:DisableIntel('Radar')
+		--[[if not self.TAAnimating then
+				self.TAAnimating = true]]
 			self.Spinners.arm1:SetGoal(0)
 			self.Spinners.arm2:SetGoal(0)
 
 			--MOVE post to y-axis <0> SPEED <19.00>;
 			self.Spinners.post:SetGoal(0,-9,0)
 			self.Spinners.post:SetSpeed(19)
+			--end
 			TACloser.ClosingState.Main(self)
 		end,
 	},

@@ -154,7 +154,7 @@ TechLevel = 'RULEUTL_Basic',
     SizeY = 2,
     SizeZ = 2,
     StrategicIconName = 'icon_bot1_directfire',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 135,
     Transport = {
         CanFireFromTransport = true,
     },

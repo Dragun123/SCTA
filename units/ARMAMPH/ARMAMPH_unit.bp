@@ -135,7 +135,7 @@ UnitBlueprint {
     SizeZ = 2,
     SizeY = 2,
     StrategicIconName = 'icon_bot2_antiair',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 125,
     Transport = {
         TransportClass = 2,
     },

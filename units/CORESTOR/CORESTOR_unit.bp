@@ -97,7 +97,7 @@ TechLevel = 'RULEUTL_Basic',
     SizeZ = 4,
     StrategicIconName = 'icon_structure_energy_storage',
     ---TAStrategicIconName = '1/structure_energystorage',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 250,
     Weapon = {
         { #ESTOR_BUILDINGEX
             Damage = 1000,

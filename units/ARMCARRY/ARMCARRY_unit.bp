@@ -173,7 +173,7 @@ UnitBlueprint {
     SizeY = 3,
     SizeZ = 9,
     StrategicIconName = 'icon_ship3_air',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 145,
     Transport = {
         ClassGenericUpTo = 3,
         StorageSlots = 60,

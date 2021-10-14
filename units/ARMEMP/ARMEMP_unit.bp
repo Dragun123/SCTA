@@ -115,7 +115,7 @@ UnitBlueprint {
     SizeY = 3,
     SizeZ = 4,
     StrategicIconName = 'icon_land2_antishield',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 180,
     SpecialAbilities = {
         LaunchNuke = {
             AreaOfEffect = 30,

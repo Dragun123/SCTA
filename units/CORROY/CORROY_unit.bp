@@ -136,7 +136,7 @@ TechLevel = 'RULEUTL_Basic',
     SizeY = 2.75,
     SizeZ = 4.25,
     StrategicIconName = 'icon_ship1_directfire',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 165,
     Weapon = {
         {
             Audio = {

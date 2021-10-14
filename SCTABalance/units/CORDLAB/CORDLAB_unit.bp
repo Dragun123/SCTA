@@ -163,7 +163,7 @@ UnitBlueprint {
     SizeY = 1,
     SizeZ = 9,
     StrategicIconName = 'icon_factoryhq2_land', --'icon_factory1_bot',
-    StrategicIconSortPriority = 0,
+    StrategicIconSortPriority = 210,
     Weapon = {
         { #LARGE_BUILDINGEX
         Damage = 200,

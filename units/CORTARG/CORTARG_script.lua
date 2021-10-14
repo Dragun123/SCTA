@@ -16,8 +16,11 @@ CORTARG = Class(TACloser) {
 	OpeningState = State {
 		Main = function(self)
 			self:EnableIntel('Radar')
+			--[[if not self.TAAnimating then
+				self.TAAnimating = true]]
 		self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationUnpack)
 		self.AnimManip:SetRate(1 * (self:GetBlueprint().Display.AnimationUnpackRate or 0.2))
+			--end
 		TACloser.OpeningState.Main(self)
 	end,
 },
@@ -26,8 +29,11 @@ CORTARG = Class(TACloser) {
 ClosingState = State {
 	Main = function(self)
 		self:DisableIntel('Radar')
+		--[[if not self.TAAnimating then
+				self.TAAnimating = true]]
 		self.AnimManip:PlayAnim(self:GetBlueprint().Display.AnimationUnpack)
 		self.AnimManip:SetRate(-1 * (self:GetBlueprint().Display.AnimationUnpackRate or 0.2))
+		--end
 		TACloser.ClosingState.Main(self)
 	end,
 },
