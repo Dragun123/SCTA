@@ -212,13 +212,12 @@ TACloser = Class(TATarg) {
 
 	IdleClosedState = State {
 		Main = function(self)
+			if self.IsActive then
 				while self.DamageSeconds > 0 do
 					--WaitSeconds(1)
 					coroutine.yield(11)
 					self.DamageSeconds = self.DamageSeconds - 1
-				end
-
-			if self.IsActive then 
+				end 
 				--self.TAAnimating = nil
 				ChangeState(self, self.OpeningState)
 			end
