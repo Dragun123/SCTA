@@ -277,6 +277,8 @@ TACloser = Class(TATarg) {
 		if bit == 3 then
 			self.IsActive = true
 			--self.TAAnimating = nil
+			----I could have it be so don't repeat animations but rather have less memory consumption
+			----A potential graphical error
 			ChangeState(self, self.OpeningState)
 		end
 		TATarg.OnScriptBitClear(self, bit)
