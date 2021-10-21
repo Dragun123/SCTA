@@ -22,8 +22,9 @@ function InWaterCheckSCTA(platoon)
     local t4Pos = platoon:GetPlatoonPosition()
     if GetTerrainHeight(t4Pos[1], t4Pos[3]) < GetSurfaceHeight(t4Pos[1], t4Pos[3]) then
         platoon.inWater = true
-    end 
-    platoon.inWater = nil
+    else 
+        platoon.inWater = nil
+    end
 end
 
 
@@ -192,12 +193,11 @@ function BehemothBehaviorTotal(self)
     local experimental
     local targetUnit = false
     local lastBase = false
-    local airUnit = false
     ---local useMove = true
     local farTarget = false
     local aiBrain = self:GetBrain()
     local platoonUnits = self:GetPlatoonUnits()
-    local t4Pos = self:GetPlatoonPosition()
+    --local t4Pos = self:GetPlatoonPosition()
     local cmd
     while aiBrain:PlatoonExists(self) do
         self:MergeWithNearbyPlatoonsSorian('ExperimentalAIHubTA', 50, true)
@@ -215,11 +215,12 @@ function BehemothBehaviorTotal(self)
         end
     
         if targetUnit then
-            if GetTerrainHeight(t4Pos[1], t4Pos[3]) < GetSurfaceHeight(t4Pos[1], t4Pos[3]) then
+            --[[if GetTerrainHeight(t4Pos[1], t4Pos[3]) < GetSurfaceHeight(t4Pos[1], t4Pos[3]) then
                 self.inWater = true
             else 
                 self.inWater = nil
-            end
+            end]]
+            InWaterCheckSCTA(self)
             IssueClearCommands(platoonUnits)
             if self.inWater or not farTarget then
                 cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', targetUnit:GetPosition(), false)
@@ -241,11 +242,12 @@ function BehemothBehaviorTotal(self)
             if nearCommander and (nearCommander ~= targetUnit or
             (not ACUattack and SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), nearCommander:GetPosition()) < 40000)) then
                 IssueClearCommands(platoonUnits)
-                if GetTerrainHeight(t4Pos[1], t4Pos[3]) < GetSurfaceHeight(t4Pos[1], t4Pos[3]) then
+                InWaterCheckSCTA(self)
+                --[[if GetTerrainHeight(t4Pos[1], t4Pos[3]) < GetSurfaceHeight(t4Pos[1], t4Pos[3]) then
                     self.inWater = true
                 else 
                     self.inWater = nil
-                end
+                end]]
                 if self.inWater then
                     cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', nearCommander:GetPosition(), false)
                 else
@@ -263,10 +265,7 @@ function BehemothBehaviorTotal(self)
                     break
                 end
             end
-    
-            if not airUnit then
-                closestBlockingShield = GetClosestShieldProtectingTargetSorian(experimental, experimental)
-            end
+
             closestBlockingShield = closestBlockingShield or GetClosestShieldProtectingTargetSorian(experimental, targetUnit)
     
             -- Kill shields loop
@@ -275,11 +274,12 @@ function BehemothBehaviorTotal(self)
                 oldTarget = oldTarget or targetUnit
                 targetUnit = false
                 self:MergeWithNearbyPlatoonsSorian('ExperimentalAIHubTA', 50, true)
-                if GetTerrainHeight(t4Pos[1], t4Pos[3]) < GetSurfaceHeight(t4Pos[1], t4Pos[3]) then
+                --[[if GetTerrainHeight(t4Pos[1], t4Pos[3]) < GetSurfaceHeight(t4Pos[1], t4Pos[3]) then
                     self.inWater = true
                 else 
                     self.inWater = nil
-                end
+                end]]
+                InWaterCheckSCTA(self)
                 IssueClearCommands(platoonUnits)
                 if self.inWater or SUtils.XZDistanceTwoVectorsSq(self:GetPlatoonPosition(), closestBlockingShield:GetPosition()) < 40000 then
                     cmd = ExpPathToLocation(aiBrain, self, 'Amphibious', closestBlockingShield:GetPosition(), false)
@@ -312,9 +312,6 @@ function BehemothBehaviorTotal(self)
                     end
                 end
     
-                    if not airUnit then
-                    closestBlockingShield = GetClosestShieldProtectingTargetSorian(experimental, experimental)
-                    end
                 closestBlockingShield = closestBlockingShield or GetClosestShieldProtectingTargetSorian(experimental, oldTarget)
                 --WaitSeconds(1)
                 coroutine.yield(11)
