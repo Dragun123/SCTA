@@ -3343,6 +3343,10 @@ Platoon = Class(SCTAAIPlatoon) {
             if not experimental or experimental.Dead then
                 return
             end
+            if not experimental.Taunt then
+                TAReclaim.TAAIRandomizeTaunt(aiBrain)
+                experimental.Taunt = true 
+            end
             local ID = experimental.UnitId
             self:SetPlatoonFormationOverride('AttackFormation')
             if ID == 'corkrog' or 'armdrake' then
