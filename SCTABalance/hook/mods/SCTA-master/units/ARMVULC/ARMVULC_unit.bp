@@ -27,19 +27,19 @@ UnitBlueprint {
         BuildTime = 3600000,
     },
     Footprint = {
-        SizeX = 6,
-        SizeZ = 6,
+        SizeX = 8,
+        SizeZ = 8,
     },
         Display = {
-        UniformScale = 0.35,
+        UniformScale = 0.5,
     },
     SelectionThickness = 0.3,
-    SelectionSizeX = 6,
-    SelectionCenterOffsetZ = -2,
-    SelectionSizeZ = 6,
-    SizeX = 5,
-    SizeY = 10,
-    SizeZ = 6,
+    SelectionSizeX = 8,
+    SelectionCenterOffsetZ = -3,
+    SelectionSizeZ = 8,
+    SizeX = 8,
+    SizeY = 12,
+    SizeZ = 10,
     LifeBarSize = 6,
     Weapon = {
         [1] = {
