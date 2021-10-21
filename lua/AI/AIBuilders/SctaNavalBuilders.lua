@@ -155,7 +155,7 @@ BuilderGroup {
         PriorityFunction = TAPrior.ProductionT3,
         Priority = 150,
         BuilderConditions = {
-            { TASlow,    'TAAttackNaval', {true}},
+            ---{ TASlow,    'TAAttackNaval', {true}},
             { TASlow, 'TAHaveUnitRatioGreaterThanNavalT3', {categories.BATTLESHIP - categories.SILO} }, -- Stop after 10 facs have been built.
             { TAutils, 'EcoManagementTA', { 0.9, 0.9} },
         },
@@ -167,7 +167,7 @@ BuilderGroup {
         PriorityFunction = TAPrior.ProductionT3,
         Priority = 140,
         BuilderConditions = {
-            { TASlow,    'TAAttackNaval', {true}},
+            --{ TASlow,    'TAAttackNaval', {true}},
             { TASlow, 'TAHaveUnitRatioGreaterThanNavalT3', {categories.BATTLESHIP * categories.SILO} }, -- Stop after 10 facs have been built.
             { TAutils, 'EcoManagementTA', { 0.9, 0.9} },
         },
