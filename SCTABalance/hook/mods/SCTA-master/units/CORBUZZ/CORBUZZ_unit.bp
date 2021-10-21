@@ -31,15 +31,15 @@ UnitBlueprint {
         SizeZ = 8,
     },
         Display = {
-        UniformScale = 0.30,
+        UniformScale = 0.45,
     },
     SelectionThickness = 0.3,
-    SelectionSizeX = 5,
-    SelectionSizeZ = 5,
-    SizeX = 6,
-    SizeY = 10,
-    SizeZ = 6,
-    LifeBarSize = 6,
+    SelectionSizeX = 8,
+    SelectionSizeZ = 8,
+    SizeX = 9,
+    SizeY = 16,
+    SizeZ = 9,
+    LifeBarSize = 9,
     Weapon = {
         [1] = {
             Damage = 1500,

@@ -5,23 +5,19 @@ UnitBlueprint {
         MaxHealth = 9000,
     },
     Display = {
-        UniformScale = 0.5,
+        UniformScale = 0.3,
     },
     Economy = {
         BuildCostEnergy = 800000,
         BuildCostMass = 60000,
         BuildTime = 750000,
     },
-    Physics = {
-        SkirtSizeX = 4, 
-        SkirtSizeZ = 4,  
-    },
     SelectionSizeX = 3,
     SelectionSizeZ = 3,
     LifeBarSize = 4,
-    SizeY = 14,
-    SizeX = 8,
-    SizeZ = 8,
+    SizeY = 9,
+    SizeX = 4,
+    SizeZ = 4,
     Weapon = {
         [1] = {
         BallisticArc = 'RULEUBA_HighArc',        

@@ -71,7 +71,7 @@ UnitBlueprint {
                 },
             },
         },
-        UniformScale = 0.16,
+        UniformScale = 0.2,
     },
     Economy = {
         Seaplane = true,

@@ -44,7 +44,7 @@ UnitBlueprint {
         'AIR',
 	    'SORTCONSTRUCTION',
     },
-    CollisionOffsetY = -0.5,
+    --CollisionOffsetY = -0.25,
     Defense = {
         ArmorType = 'Structure',
         Health = 2100,
@@ -71,7 +71,7 @@ UnitBlueprint {
                 },
             },
         },
-        UniformScale = 0.14,
+        UniformScale = 0.17,
     },
     Economy = {
         BuildCostEnergy = 5396,

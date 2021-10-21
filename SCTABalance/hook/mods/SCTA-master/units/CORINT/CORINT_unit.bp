@@ -10,7 +10,7 @@ UnitBlueprint {
         BuildTime = 750000,
     },
     Display = {
-        UniformScale = 0.5,
+        UniformScale = 0.4,
     },
     Footprint = {
         SizeZ = 5,
@@ -21,9 +21,9 @@ UnitBlueprint {
         SkirtSizeZ = 5,  
     },
     LifeBarSize = 6,
-    SelectionSizeX = 6,
-    SelectionSizeZ = 6,
-    SizeY = 10,
+    SelectionSizeX = 5,
+    SelectionSizeZ = 5,
+    SizeY = 8,
     SizeX = 8,
     SizeZ = 8,
     Weapon = {
