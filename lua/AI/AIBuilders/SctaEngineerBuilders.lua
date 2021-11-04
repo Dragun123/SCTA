@@ -157,7 +157,10 @@ BuilderGroup {
         Priority = 175,
         PriorityFunction = TAPrior.GantryUnitBuilding,
         InstanceCount = 1,
-        BuilderConditions = {},
+        BuilderConditions = {
+            { UCBC, 'HaveGreaterThanUnitsWithCategory', { 0, categories.GATE}},
+            { TAutils, 'EcoManagementTA', { 0.75, 1.05, } },
+        },
         BuilderType = 'Gate',
     },
     Builder {
@@ -166,7 +169,10 @@ BuilderGroup {
         PriorityFunction = TAPrior.GantryUnitBuildingDecoy,
         Priority = 150,
         InstanceCount = 1,
-        BuilderConditions = {},
+        BuilderConditions = {
+            { UCBC, 'HaveGreaterThanUnitsWithCategory', { 0, categories.GATE}},
+            { TAutils, 'EcoManagementTA', { 0.75, 1.05, } },
+        },
         BuilderType = 'Gate',
     },
 }

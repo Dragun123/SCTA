@@ -231,7 +231,7 @@ function TAAttackNaval(aiBrain, bool)
     local navalMarker = AIUtils.AIGetClosestMarkerLocation(aiBrain, 'Naval Area', startX, startZ)
     local path, reason = false
     if enemyX then
-        path, reason = AIAttackUtils.PlatoonGenerateSafePathTo(aiBrain, 'Water', {startX,0,startZ}, {enemyX,0,enemyZ}, 10)
+        path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, 'Water', {startX,0,startZ}, {enemyX,0,enemyZ}, 10)
     end
     if (navalMarker and path) and bool then
         return true
