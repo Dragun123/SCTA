@@ -87,8 +87,6 @@ UnitBlueprint {
             'BOT MOBILE TECH2 CORE',
             'BOT MOBILE TECH1 CORE',
         },
-        InitialRallyX = 0,
-	    InitialRallyZ = 7,
         KBot = true,
         StorageMass = 50,
         StorageEnergy = 50,

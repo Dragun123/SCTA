@@ -449,7 +449,7 @@ TARealCommander = Class(TACommander) {
         self:SetUnSelectable(false)
         self:SetBlockCommandQueue(true)
         --WaitSeconds(1)
-        coroutine.yield(11)
+        coroutine.yield(21)
 		self.PlayCommanderWarpInEffectFlag = true
         self:ForkThread(self.ExplosionInEffectThread)
     end,
@@ -461,7 +461,7 @@ TARealCommander = Class(TACommander) {
 		self:SetMesh(self:GetBlueprint().Display.CloakMeshBlueprint, true)
 		self:ShowBone(0, true)
         self:CreateProjectile( '/mods/SCTA-master/effects/entities/TAEntrance/TAEntrance_proj.bp', 0, 1.35, 0, nil, nil, nil):SetCollision(false)
-		WaitSeconds(4)
+		coroutine.yield(41)
 		self:SetMesh(self:GetBlueprint().Display.MeshBlueprint, true)
         self:SetUnSelectable(false)
 		self:SetBusy(false)

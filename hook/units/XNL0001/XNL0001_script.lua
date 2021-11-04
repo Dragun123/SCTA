@@ -5,6 +5,7 @@ XNL0001 = Class(taXNL0001) {
         self:SetUnSelectable(false)
         self:SetBlockCommandQueue(true)
         self.PlayCommanderWarpInEffectFlag = true
+        coroutine.yield(21)
         self:ForkThread(self.DoMeteorAnim)
     end,
 

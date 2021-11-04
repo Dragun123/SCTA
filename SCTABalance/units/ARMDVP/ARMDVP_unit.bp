@@ -90,8 +90,6 @@ UnitBlueprint {
             'BOT MOBILE ENGINEER TECH2 ARM',
             'armadvp',
         },
-        InitialRallyX = 0,
-        InitialRallyZ = 7,
         StorageMass = 50,
         StorageEnergy = 50,
     },

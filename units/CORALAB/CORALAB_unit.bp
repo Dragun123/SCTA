@@ -77,8 +77,6 @@ UnitBlueprint {
         BuildableCategory = {
             'BOT MOBILE TECH2 CORE',
         },
-	InitialRallyX = 0,
-InitialRallyZ = 7,
         StorageMass = 200,
         StorageEnergy = 200,
     },

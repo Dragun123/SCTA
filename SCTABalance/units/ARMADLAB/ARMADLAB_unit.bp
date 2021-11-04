@@ -85,8 +85,6 @@ UnitBlueprint {
             'BOT MOBILE TECH2 ARM',
             'BOT MOBILE TECH3 ARM',
         },
-	InitialRallyX = 0,
-InitialRallyZ = 7,
     StorageMass = 50,
     StorageEnergy = 50,
     },

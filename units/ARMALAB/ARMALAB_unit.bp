@@ -78,8 +78,6 @@ UnitBlueprint {
             'BOT MOBILE TECH2 ARM',
         },
         KBot = true,
-	InitialRallyX = 0,
-    InitialRallyZ = 7,
         StorageMass = 200,
         StorageEnergy = 200,
     },

@@ -80,8 +80,6 @@ UnitBlueprint {
         BuildableCategory = {
             'HOVER MOBILE TECH3 CORE',
         },
-	InitialRallyX = 0,
-InitialRallyZ = 7,
         StorageMass = 250,
         StorageEnergy = 250,
     },

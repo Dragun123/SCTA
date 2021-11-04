@@ -78,8 +78,6 @@ UnitBlueprint {
         BuildableCategory = {
             'TANK MOBILE TECH2 ARM',
         },
-	InitialRallyX = 0,
-InitialRallyZ = 7,
         StorageMass = 200,
         StorageEnergy = 200,
     },
