@@ -1077,6 +1077,16 @@ Platoon = Class(SCTAAIPlatoon) {
         local cons = self.PlatoonData.Construction
         local buildingTmpl, buildingTmplFile, baseTmpl, baseTmplFile, baseTmplDefault
         local eng = self:GetSquadUnits('Support')[1]
+        --self.myThreat = self:CalculatePlatoonThreat('Surface', categories.MOBILE)
+        --self.ecoThreat = self:CalculatePlatoonThreat('Economy', categories.MOBILE)
+        --self.antiThreat = self:CalculatePlatoonThreat('AntiSurface', categories.MOBILE)
+        --self.airThreat = self:CalculatePlatoonThreat('Air', categories.MOBILE)
+        --self.antiairThreat = self:CalculatePlatoonThreat('AntiAir', categories.MOBILE)
+        --_ALERT('SurTAThreat', self.myThreat)
+        --_ALERT('SurTAThreat2', self.ecoThreat)
+        --_ALERT('SurTAThreat3', self.antiThreat)
+        --_ALERT('SurTAThreat4', self.airThreat)
+        --_ALERT('SurTAThreat5', self.antiairThreat)
         --LOG('*SCTAEXPANSIONTA', self.PlatoonData.LocationType)
         if not eng or eng.Dead then
             coroutine.yield(2)
@@ -2554,6 +2564,7 @@ Platoon = Class(SCTAAIPlatoon) {
         end
 
         while aiBrain:PlatoonExists(self) do
+            --self.LandThreat = self:CalculatePlatoonThreat('Land', categories.MOBILE)
             target = self:FindClosestUnit('Attack', 'Enemy', true, categories.ENGINEER - categories.COMMAND)
             if not target then
                 --WaitSeconds(1)
@@ -2561,11 +2572,11 @@ Platoon = Class(SCTAAIPlatoon) {
                 return self:SCTALabAI()
             end
             if target and target:GetFractionComplete() == 1 then
-                local EcoThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 1, true, 'Economy')
+                ---local EcoThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 10, true, 'Economy')
                 --LOG("Air threat: " .. airThreat)
-                local SurfaceThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 1, true, 'AntiSurface') - EcoThreat
+                local SurfaceThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 10, true, 'Land')
                 --LOG("AntiAir threat: " .. antiAirThreat)
-                if SurfaceThreat < 1.5 then
+                if SurfaceThreat < 5 then
                     blip = target:GetBlip(armyIndex)
                     self:Stop()
                     self:AttackTarget(target)
@@ -2678,6 +2689,9 @@ Platoon = Class(SCTAAIPlatoon) {
         end
 
         while aiBrain:PlatoonExists(self) do
+            --self.myThreat = self:CalculatePlatoonThreat('Surface', categories.MOBILE)
+            --self.ecoThreat = self:CalculatePlatoonThreat('Economy', categories.MOBILE)
+            self.AirThreat = self:CalculatePlatoonThreat('Air', categories.MOBILE)
             target = self:FindClosestUnit('Attack', 'Enemy', true, categories.MOBILE * (categories.AIR + categories.ENGINEER) - categories.COMMAND)
             if not target then
                 --WaitSeconds(1)
@@ -2685,11 +2699,11 @@ Platoon = Class(SCTAAIPlatoon) {
                 return self:SCTALabAI()
             end
             if target and target:GetFractionComplete() == 1 then
-                local airThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 1, true, 'Economy')
+                --local airThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 10, true, 'Economy')
                 --LOG("Air threat: " .. airThreat)
-                local antiAirThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 1, true, 'AntiAir') - airThreat
+                local antiAirThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 10, true, 'Air')
                 --LOG("AntiAir threat: " .. antiAirThreat)
-                if antiAirThreat < 1.5 then
+                if antiAirThreat < self.AirThreat then
                     blip = target:GetBlip(armyIndex)
                     self:Stop()
                     self:AttackTarget(target)
@@ -2789,11 +2803,12 @@ Platoon = Class(SCTAAIPlatoon) {
                 target = self:FindClosestUnit('Attack', 'Enemy', true, SCTAAIR)
             end
             if target and target:GetFractionComplete() == 1 then
-                local airThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 1, true, 'Air')
+                self.myThreat = self:CalculatePlatoonThreat('Air', categories.MOBILE)
+                local airThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 10, true, 'Air')
                 --LOG("Air threat: " .. airThreat)
-                local antiAirThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 1, true, 'AntiAir') - airThreat
+                --local antiAirThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 1, true, 'AntiAir') - airThreat
                 --LOG("AntiAir threat: " .. antiAirThreat)
-                if antiAirThreat < 1.5 and not target.Dead then
+                if airThreat < self.myThreat and not target.Dead then
                     blip = target:GetBlip(armyIndex)
                     self:Stop()
                     self:AttackTarget(target)
@@ -2847,11 +2862,12 @@ Platoon = Class(SCTAAIPlatoon) {
                 target = self:FindClosestUnit('Attack', 'Enemy', true, SCTAAIR)
             end
             if target and target:GetFractionComplete() == 1 then
-                local airThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 1, true, 'Air')
+                self.myThreat = self:CalculatePlatoonThreat('Air', categories.MOBILE)
+                local AirThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 10, true, 'Air')
                 --LOG("Air threat: " .. airThreat)
-                local antiAirThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 1, true, 'AntiAir') - airThreat
+                --local antiAirThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 1, true, 'AntiAir') - airThreat
                 --LOG("AntiAir threat: " .. antiAirThreat)
-                if antiAirThreat < 1.5 then
+                if AirThreat < self.myThreat and not target.Dead then
                     blip = target:GetBlip(armyIndex)
                     self:Stop()
                     self:AttackTarget(target)
@@ -2932,11 +2948,11 @@ Platoon = Class(SCTAAIPlatoon) {
                 return self:SCTALabAI()
             end
             if structure and structure:GetFractionComplete() == 1 then
-                local SurfaceThreat = aiBrain:GetThreatAtPosition(table.copy(structure:GetPosition()), 1, true, 'AntiSurface')
+                ---local SurfaceThreat = aiBrain:GetThreatAtPosition(table.copy(structure:GetPosition()), 1, true, 'AntiSurface')
                 --LOG("Air threat: " .. airThreat)
-                local SurfaceAntiThreat = aiBrain:GetThreatAtPosition(table.copy(structure:GetPosition()), 1, true, 'AntiSurface') - SurfaceThreat
+                local SurfaceAntiThreat = aiBrain:GetThreatAtPosition(table.copy(structure:GetPosition()), 10, true, 'Economy')
                 --LOG("AntiAir threat: " .. antiAirThreat)
-                if SurfaceAntiThreat < 1.5 then
+                if SurfaceAntiThreat > 0 then
                     blip = structure:GetBlip(armyIndex)
                     self:Stop()
                     self:AttackTarget(structure)

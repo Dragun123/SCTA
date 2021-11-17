@@ -59,10 +59,7 @@ UnitBlueprint {
         ArmorType = 'Normal',
         Health = 360,
         MaxHealth = 360,
-        AirThreatLevel = 0,
-        EconomyThreatLevel = 0,
-        SubThreatLevel = 0,
-        SurfaceThreatLevel = 0,
+        EconomyThreatLevel = 2,
     },
     Description = 'Tech Level 2',
     Display = {

@@ -274,6 +274,7 @@ UnitBlueprint {
                 'ALLUNITS',
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
+            AboveWaterTargetsOnly = true,
             TurretBoneMuzzle = 'muzzle1B',
             TurretBonePitch = 'pitch1',
             TurretBoneYaw = 'turret1',

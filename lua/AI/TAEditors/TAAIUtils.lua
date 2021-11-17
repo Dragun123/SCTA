@@ -1,6 +1,18 @@
 local AIUtils = import('/lua/ai/AIUtilities.lua')
 local AIAttackUtils = import('/lua/AI/aiattackutilities.lua')
+local LessThanCats = import('/lua/editor/UnitCountBuildConditions.lua').HaveLessThanUnitsWithCategory
 
+function HaveLessThanUnitsWithCategoryTA(aiBrain, numReq, category, idleReq)
+    local Numbers
+    if aiBrain.Level3 then 
+        Numbers = 3
+    elseif aiBrain.Level2 then
+        Numbers = 2
+    else 
+        Numbers = 1
+    end
+    LessThanCats(aiBrain,  numReq * Numbers, category, idleReq)
+end
 ------AIUTILITIES FUNCTIONS (RNG, NUTCTACKER, and RECLAIM MY OW
 function CheckBuildPlatoonDelaySCTA(aiBrain, PlatoonName)
     if aiBrain.DelayEqualBuildPlattons[PlatoonName] then
