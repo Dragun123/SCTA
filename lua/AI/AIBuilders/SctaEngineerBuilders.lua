@@ -3,6 +3,10 @@ local MIBC = '/lua/editor/MiscBuildConditions.lua'
 local TAutils = '/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua'
 local TASlow = '/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua'
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
+SCOUTING = (categories.SCOUT * categories.MOBILE)
+ENGINEER1 = (categories.ENGINEER * categories.TECH1)
+ENGINEER2 = (categories.ENGINEER * categories.TECH2)
+ENGINEER3 = (categories.ENGINEER * categories.TECH3)
 
 
 BuilderGroup {
@@ -17,7 +21,7 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'Scout', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Scout' }},
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 2, categories.SCOUT * categories.LAND * categories.MOBILE} },
+            { TASlow, 'HaveLessThanUnitsWithCategoryTA', { 2, SCOUTING * categories.LAND} },
             { TAutils, 'EcoManagementTA', { 0.9, 0.5, } },
         },
         BuilderType = 'Land',
@@ -31,7 +35,7 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'Scout', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Scout' }},
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 2, categories.MOBILE * categories.AIR * categories.SCOUT } },
+            { TASlow, 'HaveLessThanUnitsWithCategoryTA', { 2, SCOUTING *  categories.AIR} },
             { TAutils, 'EcoManagementTA', { 0.75, 1.05, } },
         },
         BuilderType = 'Air',
@@ -45,7 +49,7 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'Scout', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Scout' }},
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 1, categories.MOBILE * categories.AIR * categories.SCOUT } },
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 1, categories.TECH3 * categories.AIR * SCOUTING } },
             { TAutils, 'EcoManagementTA', { 0.75, 1.05, } },
         },
         BuilderType = 'Air',
@@ -58,7 +62,7 @@ BuilderGroup {
         InstanceCount = 1,
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Field' }},
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 2, categories.FIELDENGINEER * categories.TECH2} }, -- Build engies until we have 4 of them.
+            { TASlow, 'HaveLessThanUnitsWithCategoryTA', { 2, categories.FIELDENGINEER * categories.TECH2} }, -- Build engies until we have 4 of them.
         },
         BuilderType =  'Field',
     },
@@ -71,7 +75,7 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'Field', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Field' }},
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 2, categories.ENGINEER * categories.LAND * categories.TECH1 - categories.COMMAND } }, -- Don't make tanks if we have lots of them.
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 2, categories.LAND * ENGINEER1} }, -- Don't make tanks if we have lots of them.
         },
         BuilderType =  'Field',
     },
@@ -94,7 +98,7 @@ BuilderGroup {
         InstanceCount = 2,
         BuilderConditions = {
             --{ UCBC, 'CheckBuildPlattonDelay', { 'T2Engineer' }},
-            { TASlow, 'HaveLessThanUnitsWithCategoryTA', { 2, categories.ENGINEER * categories.TECH2 * categories.LAND - categories.FIELDENGINEER } }, -- Build engies until we have 4 of them.
+            { TASlow, 'HaveLessThanUnitsWithCategoryTA', { 2, ENGINEER2 * categories.LAND - categories.FIELDENGINEER } }, -- Build engies until we have 4 of them.
         },
         BuilderType =  'Land',
     },
@@ -107,7 +111,7 @@ BuilderGroup {
         InstanceCount = 1,
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'AirEngineer' }},
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 4, categories.ENGINEER * categories.AIR * categories.TECH1} }, -- Build engies until we have 4 of them.
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 4, categories.AIR * ENGINEER1} }, -- Build engies until we have 4 of them.
         },
         BuilderType = 'Air',
     },
@@ -120,7 +124,7 @@ BuilderGroup {
         InstanceCount = 2,
         BuilderConditions = {
             --{ UCBC, 'CheckBuildPlattonDelay', { 'T2AirEngineer' }},
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 2, categories.ENGINEER * categories.AIR * categories.TECH2} }, -- Build engies until we have 4 of them.
+            { TASlow, 'HaveLessThanUnitsWithCategoryTA', { 1, categories.AIR * ENGINEER2} }, -- Build engies until we have 4 of them.
         },
         BuilderType = 'Air',
     }, 
@@ -134,7 +138,7 @@ BuilderGroup {
         InstanceCount = 1,
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'T3Engineer' }},
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 1, categories.ENGINEER * categories.TECH3 * categories.HOVER} }, -- Build engies until we have 4 of them.
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 1, ENGINEER3 * categories.HOVER} }, -- Build engies until we have 4 of them.
         },
         BuilderType = 'SpecHover',
     },
@@ -147,7 +151,7 @@ BuilderGroup {
         InstanceCount = 1,
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'T3Engineer' }},
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 1, categories.ENGINEER * categories.TECH3 * categories.AIR} }, -- Build engies until we have 4 of them.
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 1, ENGINEER3 * categories.AIR} }, -- Build engies until we have 4 of them.
         },
         BuilderType = 'SpecAir',
     },

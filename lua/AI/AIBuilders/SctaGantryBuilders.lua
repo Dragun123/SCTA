@@ -17,6 +17,7 @@ BuilderGroup {
         Priority = 200,
         InstanceCount = 2,
         BuilderConditions = {
+            { TASlow, 'TAFindAssistUnits', { 'LocationType', categories.ENGINEER * categories.LAND * (categories.TECH2 + categories.TECH3)}},
             --{ UCBC, 'LocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, categories.GATE }},
             { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.FIELDENGINEER} },
             ---{ TAutils, 'EcoManagementTA', { 0.75, 0.75} },
@@ -41,6 +42,7 @@ BuilderGroup {
         Priority = 200,
         InstanceCount = 10,
         BuilderConditions = {
+            { TASlow, 'TAFindAssistUnits', { 'LocationType', categories.ENGINEER * categories.LAND * (categories.TECH2 + categories.TECH3)}},
             ---{ UCBC, 'LocationFactoriesBuildingGreater', { 'LocationType', 0, categories.BUILTBYQUANTUMGATE}},
             { UCBC, 'HaveGreaterThanUnitsWithCategory', { 0,  categories.GATE} },
             --{ TAutils, 'EcoManagementTA', { 0.75, 0.75} },

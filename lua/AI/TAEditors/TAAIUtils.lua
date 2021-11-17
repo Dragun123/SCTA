@@ -399,22 +399,25 @@ function TACanBuildOnMassLessThanDistanceLand(aiBrain, locationType, distance, t
     return false
 end
 
-function TAFindAssistUnits(aiBrain, eng, buildCat)
-    LOG('Assist', eng:GetBlueprint().Display.UniformScale)
-    local Assisting = aiBrain:GetUnitsAroundPoint(buildCat, eng:GetPosition(), 20, 'Ally')
-    --[[elseif type == 'Factory' then
-        --local factoryManager = aiBrain.BuilderManagers[locationType].factoryManager
-        Assisting = aiBrain:GetUnitsAroundPoint(buildCat, eng:GetPosition(), factoryManager.Radius, 'Ally')
-    end]]
-    local retAssisting = false
-    for num, unit in Assisting do
-        --donePercent = unit:GetFractionComplete()
-        if unit.DesiresAssist and unit:GetGuards() < (unit.NumAssistees or 2) and not unit:IsUnitState('Upgrading') then
-            retAssisting = unit
-            break
+function TAFindAssistUnits(aiBrain, locationType, category)
+    --LOG('IEXISTTABRAIN')
+    local engineerManager = aiBrain.BuilderManagers[locationType].EngineerManager
+    if not engineerManager then
+        return false
+    end
+    local Assist = aiBrain:GetUnitsAroundPoint(category, engineerManager:GetLocationCoords(), 100, 'Ally')
+    for _, Escort in Assist do
+        if Escort and Escort.DesiresAssist and 
+        Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < Escort.NumAssistees and 
+        not Escort.Escorting then
+            LOG('IEXISTTABRAIN2')     
+        return true
+        else
+        return false
+    --WaitSeconds(3)
+    --Escort.Escorting = nil
         end
     end
-    return retAssisting
 end
 
 --[[function TACanBuildOnMassLessThanDistanceNaval(aiBrain, locationType, distance, threatMin, threatMax, threatRings, threatType, maxNum )

@@ -27,6 +27,9 @@ EngineerManager = Class(SCTAEngineerManager) {
         for k,v in builderTypes do
             self:AddBuilderType(v)
         end
+        --[[if not self.TALocationAssist then
+            self.TALocationAssist = ForkThread(self.TAAssistManagement, self)
+        end]]
         ---LOG(self.ConsumptionUnits)
 
     end,
@@ -157,6 +160,19 @@ EngineerManager = Class(SCTAEngineerManager) {
         return retUnits
     end,
 
+
+    --[[TAAssistManagement = function(self, category)
+        local HelpWanted = self.Brain:GetUnitsAroundPoint(category, self.Location, self.Radius, 'Ally')
+        for _, Escort in HelpWanted do
+            if Escort and Escort.DesiresAssist and 
+            Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < Escort.NumAssistees and 
+            (EntityCategoryContains(category, Escort.UnitBeingBuilt) or Escort:IsUnitState('Upgrading')) and 
+            not Escort.Escorting then
+            return Escort
+            end
+        end
+    end,]]
+
     ForkEngineerTask = function(manager, unit)
         if not manager.Brain.SCTAAI then
             --LOG('*TABrain', manager.Brain.SCTAAI)
@@ -217,6 +233,8 @@ EngineerManager = Class(SCTAEngineerManager) {
         if not self.Brain.SCTAAI then
             return SCTAEngineerManager.AssignEngineerTask(self, unit)
         end
+        --self.BuilderUnit = unit
+        --LOG('*BrainTA2', self.BuilderUnit)
         if unit.bType then
             ---in case it loops back shomehow
             return self:TAAssignEngineerTask(unit, unit.bType)
@@ -251,7 +269,7 @@ EngineerManager = Class(SCTAEngineerManager) {
         ---LOG('*Brain', self.Brain.SCTAAI)   
         --unit.bType = bType
         ---meh eitherway this is such a pointless commenting. Oh yeah, modifying the assign via hooking has interesting and had to seperate it until two different types
-        if unit.DesiresAssist then
+        if unit.DesiresAssist and not EntityCategoryContains(categories.COMMAND, unit) then
         unit.DesiresAssist = nil
         unit.NumAssistees = nil
         end
@@ -261,6 +279,8 @@ EngineerManager = Class(SCTAEngineerManager) {
             return
         end
         local builder = self:GetHighestBuilder(bType, {unit})
+        --self.BuilderUnit = builder
+        --LOG('*BrainTA', self.BuilderUnit) 
         if builder and not unit.AssigningTask then
             unit.AssigningTask = true
             -- Fork off the platoon here

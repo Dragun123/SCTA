@@ -8,6 +8,7 @@ local MABC = '/lua/editor/MarkerBuildConditions.lua'
 PLANT = (categories.FACTORY * categories.TECH1)
 LAB = (categories.FACTORY * categories.TECH2)
 PLATFORM = (categories.FACTORY * categories.TECH3)
+ENGINEERLAND = (categories.ENGINEER * categories.LAND - categories.COMMAND)
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
 
 
@@ -70,6 +71,7 @@ BuilderGroup {
         InstanceCount = 1, -- The max number concurrent instances of this builder.
         --PriorityFunction = TAPrior.EarlyBO,
         BuilderConditions = {
+            --{ TASlow, 'TAFindAssistUnits', { 'LocationType', categories.COMMAND}},
             { MIBC, 'LessThanGameTime', {300} }, -- Don't make tanks if we have lots of them.
             { MIBC, 'GreaterThanGameTime', {90} },
             { UCBC, 'HaveLessThanUnitsWithCategory', { 2, PLANT * ((categories.CORE * categories.TANK) + (categories.ARM * categories.BOT))} },
@@ -230,7 +232,7 @@ BuilderGroup {
         InstanceCount = 2,
         BuilderConditions = {
             { MIBC, 'GreaterThanGameTime', { 120 } }, 
-            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.LAND - categories.COMMAND}},
+            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, ENGINEERLAND}},
             { TASlow, 'TAReclaimablesInArea', { 'LocationType', 0.2}},
             --{ TAutils, 'LessMassStorageMaxTA',  { 0.2}},   
         },
@@ -251,7 +253,8 @@ BuilderGroup {
         Priority = 50,
         InstanceCount = 4,
         BuilderConditions = {
-            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.LAND - categories.COMMAND}},
+            { TASlow, 'TAFindAssistUnits', { 'LocationType', ENGINEERLAND}},
+            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, ENGINEERLAND}},
             { TAutils, 'HaveGreaterThanUnitsInCategoryBeingBuiltSCTA', { 1, categories.FACTORY}},
             ---{ TASlow, 'TALocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, 'STRUCTURE TECH2, STRUCTURE TECH3, EXPERIMENTAL' }},
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
@@ -276,6 +279,7 @@ BuilderGroup {
         Priority = 50,
         InstanceCount = 4,
         BuilderConditions = {
+            { TASlow, 'TAFindAssistUnits', { 'LocationType', ENGINEERLAND}},
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.LAND - categories.COMMAND}},
             { UCBC, 'FactoryGreaterAtLocation', { 'LocationType', 2, categories.FACTORY - categories.TECH1} },
             --{ UCBC, 'HaveGreaterThanUnitsInCategoryBeingBuilt', { 0, categories.MOBILE, 'LocationType', }},
