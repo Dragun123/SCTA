@@ -56,10 +56,7 @@ UnitBlueprint {
         ArmorType = 'Normal',
         Health = 1200,
         MaxHealth = 1200,
-        AirThreatLevel = 0,
-        EconomyThreatLevel = 0,
-        SubThreatLevel = 0,
-        SurfaceThreatLevel = 4,
+        SurfaceThreatLevel = 1,
     },
     Description = 'Mine Layer Vehicle',
     Display = {

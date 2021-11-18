@@ -166,7 +166,7 @@ BuilderGroup {
         InstanceCount = 1,
         BuilderConditions = {
             { TASlow,   'TAAttackNaval', {true}},		
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 4, categories.ANTINAVY - categories.MOBILE} },
+            { TASlow, 'HaveLessThanUnitsWithCategoryTA', { 2, categories.ANTINAVY - categories.MOBILE} },
             { TAutils, 'GreaterTAStorageRatio', { 0.33, 0.5}},
         },
         BuilderType = 'SeaTA',
@@ -219,7 +219,7 @@ BuilderGroup {
         BuilderConditions = {
             --{ TASlow, 'TAEnemyUnitsGreaterAtLocationRadius', { BaseEnemyArea, 'LocationType', 0, categories.FACTORY * categories.NAVAL}},	
             { TASlow,   'TAAttackNaval', {true}},	
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 8, categories.ANTISUB * categories.TECH2 - categories.MOBILE} }, 
+            { TASlow, 'HaveLessThanUnitsWithCategoryTA',  { 4, categories.ANTISUB * categories.TECH2 - categories.MOBILE} }, 
             { TAutils, 'GreaterTAStorageRatio', { 0.33, 0.75}}, 
         },
         BuilderType = 'SeaTA',

@@ -250,7 +250,7 @@ end
 
 
 GantryUnitBuilding = function(self, aiBrain)
-    if LessProduct(aiBrain,  1, categories.EXPERIMENTAL * categories.MOBILE) and Factory(aiBrain,  0, categories.GATE) then 
+    if LessProduct(aiBrain,  2, categories.EXPERIMENTAL * categories.MOBILE) then 
         return 200
     else
         return 0

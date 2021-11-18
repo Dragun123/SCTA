@@ -43,12 +43,123 @@ UnitBlueprint {
 UnitBlueprint {
     Merge = true,
     BlueprintId = "xel0209", ---sparky
+    Defense = {
+        EconomyThreatLevel = 2,
+    },
     StrategicIconName = 'icon_bot2_engineer',
 }
 UnitBlueprint {
     Merge = true,
     BlueprintId = "xnl0209", ---scarab
+    Defense = {
+        EconomyThreatLevel = 2,
+    },
     StrategicIconName = 'icon_bot2_engineer',
+}
+UnitBlueprint {
+    Merge = true,
+    BlueprintId = "ual0105", ---aeon t1 engi
+    Defense = {
+        EconomyThreatLevel = 1,
+    },
+}
+UnitBlueprint {
+    Merge = true,
+    BlueprintId = "ual0208", ---aeon t2 engi
+    Defense = {
+        EconomyThreatLevel = 2,
+    },
+}
+UnitBlueprint {
+    Merge = true,
+    BlueprintId = "ual0309", ---aeon t3 engi
+    Defense = {
+        EconomyThreatLevel = 3,
+    },
+}
+UnitBlueprint {
+    Merge = true,
+    BlueprintId = "uel0105", ---uef t1 engi
+    Defense = {
+        EconomyThreatLevel = 1,
+    },
+}
+UnitBlueprint {
+    Merge = true,
+    BlueprintId = "uel0208", ---uef t2 engi
+    Defense = {
+        EconomyThreatLevel = 2,
+    },
+}
+UnitBlueprint {
+    Merge = true,
+    BlueprintId = "uel0309", ---uef t3 engi
+    Defense = {
+        EconomyThreatLevel = 3,
+    },
+}
+UnitBlueprint {
+    Merge = true,
+    BlueprintId = "url0105", ---cybran t1 engi
+    Defense = {
+        EconomyThreatLevel = 1,
+    },
+}
+UnitBlueprint {
+    Merge = true,
+    BlueprintId = "url0208", ---cybra t2 engi
+    Defense = {
+        EconomyThreatLevel = 2,
+    },
+}
+UnitBlueprint {
+    Merge = true,
+    BlueprintId = "url0309", ---cybran t3 engi
+    Defense = {
+        EconomyThreatLevel = 3,
+    },
+}
+UnitBlueprint {
+    Merge = true,
+    BlueprintId = "xsl0105", ---sera t1 engi
+    Defense = {
+        EconomyThreatLevel = 1,
+    },
+}
+UnitBlueprint {
+    Merge = true,
+    BlueprintId = "xsl0208", ---sera t2 engi
+    Defense = {
+        EconomyThreatLevel = 2,
+    },
+}
+UnitBlueprint {
+    Merge = true,
+    BlueprintId = "xsl0309", ---sera t3 engi
+    Defense = {
+        EconomyThreatLevel = 3,
+    },
+}
+UnitBlueprint {
+    Merge = true,
+    BlueprintId = "xnl0105", ---nomad t1 engi
+    Defense = {
+        EconomyThreatLevel = 1,
+    },
+}
+UnitBlueprint {
+    Merge = true,
+    BlueprintId = "xnl0208", ---nomad t2 engi
+    Defense = {
+        EconomyThreatLevel = 2,
+    },
+}
+UnitBlueprint {
+    Merge = true,
+    BlueprintId = "xnl0309", ---nomad t3 engi
+    Defense = {
+        EconomyThreatLevel = 3,
+    },
 }
 
 ----CustomTA Icons

@@ -17,8 +17,10 @@ BuilderGroup {
         Priority = 200,
         InstanceCount = 2,
         BuilderConditions = {
+            { TASlow, 'TAFindAssistUnits', { 'LocationType', categories.ENGINEER * categories.LAND * (categories.TECH2 + categories.TECH3), 90}},
             --{ UCBC, 'LocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, categories.GATE }},
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.FIELDENGINEER} },
+            { UCBC, 'LocationEngineersBuildingGreater', { 'LocationType', 0, categories.GATE}},
+            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 0, categories.FIELDENGINEER}},
             ---{ TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
         BuilderData = {
@@ -26,7 +28,7 @@ BuilderGroup {
                 AssistLocation = 'LocationType',
                 AssisteeType = 'Engineer',
                 Time = 240,
-                AssistRange = 120,
+                AssistRange = 75,
                 BeingBuiltCategories = categories.GATE,                                                  
                 AssistUntilFinished = true,
             },
@@ -41,8 +43,9 @@ BuilderGroup {
         Priority = 200,
         InstanceCount = 10,
         BuilderConditions = {
-            ---{ UCBC, 'LocationFactoriesBuildingGreater', { 'LocationType', 0, categories.BUILTBYQUANTUMGATE}},
-            { UCBC, 'HaveGreaterThanUnitsWithCategory', { 0,  categories.GATE} },
+            { TASlow, 'TAFindAssistUnits', { 'LocationType', categories.GATE, 140}},
+            { UCBC, 'LocationFactoriesBuildingGreater', { 'LocationType', 0, categories.EXPERIMENTAL}},
+            --{ UCBC, 'HaveGreaterThanUnitsWithCategory', { 0,  categories.GATE} },
             --{ TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
         BuilderData = {
@@ -66,8 +69,12 @@ BuilderGroup {
         Priority = 130,
         InstanceCount = 2,
         BuilderConditions = {
+            { TASlow, 'TAFindAssistUnits', { 'LocationType', categories.ENGINEER * categories.LAND * (categories.TECH2 + categories.TECH3), 140}},
             --{ UCBC, 'LocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, categories.GATE }},
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.COMMAND + categories.SUBCOMMANDER} },
+            { UCBC, 'LocationEngineersBuildingGreater', { 'LocationType', 0, categories.GATE}},
+            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 0, categories.COMMAND + categories.SUBCOMMANDER}},
+            --{ UCBC, 'LocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, categories.GATE }},
+            --{ TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.COMMAND + categories.SUBCOMMANDER} },
             ---{ TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
         BuilderData = {
@@ -90,9 +97,11 @@ BuilderGroup {
         Priority = 85,
         InstanceCount = 2,
         BuilderConditions = {
-            { TAutils, 'HaveGreaterThanUnitsInCategoryBeingBuiltSCTA', { 0, categories.ECONOMIC}},
+            { TASlow, 'TAFindAssistUnits', { 'LocationType', categories.ECONOMIC, 60}},
+            { UCBC, 'BuildingGreaterAtLocation', { 'LocationType', 0, categories.ECONOMIC}},
+            ---{ TAutils, 'HaveGreaterThanUnitsInCategoryBeingBuiltSCTA', { 0, categories.ECONOMIC}},
             --{ UCBC, 'LocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, categories.STRUCTURE }},
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {0, categories.COMMAND + categories.SUBCOMMANDER} },
+            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 0, categories.COMMAND + categories.SUBCOMMANDER}},
             --{ TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
         BuilderType = 'Command',

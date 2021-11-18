@@ -26,7 +26,7 @@ CreateTAAirBuildingEffects = function(builder, unitBeingBuilt, BuildEffectBones,
 
 CreateTAFactBuildingEffects = function(builder, unitBeingBuilt, BuildEffectBones, BuildEffectsBag)
     --WaitSeconds(0.5)
-    coroutine.yield(6)
+    coroutine.yield(11)
     for _, vBone in BuildEffectBones do
         BuildEffectsBag:Add(CreateAttachedEmitter(builder, vBone, builder.Army, '/mods/SCTA-master/effects/emitters/nanolathe.bp' ):ScaleEmitter(0.05))
         end
@@ -129,7 +129,7 @@ TABuildRestrictions = function(self)
                 aiBrain.Level3 = true
                     if aiBrain.SCTAAI then
                     aiBrain.TARally = 15
-                    aiBrain.TAEcoCycle = 120
+                    aiBrain.TAEcoCycle = 60
                     end
                 aiBrain:TECHTAchieve()
                 end
@@ -142,7 +142,7 @@ TABuildRestrictions = function(self)
                 aiBrain.Level2 = true
                     if aiBrain.SCTAAI then
                         aiBrain.TARally = 10
-                        aiBrain.TAEcoCycle = 60
+                        aiBrain.TAEcoCycle = 30
                     end
                 aiBrain:TECHTAchieve()
                 end

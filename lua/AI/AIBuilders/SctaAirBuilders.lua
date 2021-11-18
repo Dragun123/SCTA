@@ -69,7 +69,7 @@ BuilderGroup {
         InstanceCount = 2,
         BuilderConditions = {
             { MIBC, 'ArmyNeedsTransports', {} },
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 6, categories.TRANSPORTFOCUS} },
+            { TASlow, 'HaveLessThanUnitsWithCategoryTA', { 2, categories.TRANSPORTFOCUS} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.9} },
         },
         BuilderType = 'Air',

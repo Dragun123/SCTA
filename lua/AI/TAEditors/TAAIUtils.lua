@@ -1,6 +1,18 @@
 local AIUtils = import('/lua/ai/AIUtilities.lua')
 local AIAttackUtils = import('/lua/AI/aiattackutilities.lua')
+local LessThanCats = import('/lua/editor/UnitCountBuildConditions.lua').HaveLessThanUnitsWithCategory
 
+function HaveLessThanUnitsWithCategoryTA(aiBrain, numReq, category, idleReq)
+    local Numbers
+    if aiBrain.Level3 then 
+        Numbers = 3
+    elseif aiBrain.Level2 then
+        Numbers = 2
+    else 
+        Numbers = 1
+    end
+    LessThanCats(aiBrain,  numReq * Numbers, category, idleReq)
+end
 ------AIUTILITIES FUNCTIONS (RNG, NUTCTACKER, and RECLAIM MY OW
 function CheckBuildPlatoonDelaySCTA(aiBrain, PlatoonName)
     if aiBrain.DelayEqualBuildPlattons[PlatoonName] then
@@ -387,22 +399,24 @@ function TACanBuildOnMassLessThanDistanceLand(aiBrain, locationType, distance, t
     return false
 end
 
-function TAFindAssistUnits(aiBrain, eng, buildCat)
-    LOG('Assist', eng:GetBlueprint().Display.UniformScale)
-    local Assisting = aiBrain:GetUnitsAroundPoint(buildCat, eng:GetPosition(), 20, 'Ally')
-    --[[elseif type == 'Factory' then
-        --local factoryManager = aiBrain.BuilderManagers[locationType].factoryManager
-        Assisting = aiBrain:GetUnitsAroundPoint(buildCat, eng:GetPosition(), factoryManager.Radius, 'Ally')
-    end]]
-    local retAssisting = false
-    for num, unit in Assisting do
-        --donePercent = unit:GetFractionComplete()
-        if unit.DesiresAssist and unit:GetGuards() < (unit.NumAssistees or 2) and not unit:IsUnitState('Upgrading') then
-            retAssisting = unit
-            break
+function TAFindAssistUnits(aiBrain, locationType, category, range)
+    --LOG('IEXISTTABRAIN')
+    local engineerManager = aiBrain.BuilderManagers[locationType].EngineerManager
+    if aiBrain.TAFactoryAssistance and engineerManager then
+    local Engineering = aiBrain:GetUnitsAroundPoint(categories.ENGINEER * (categories.ARM + categories.CORE) - categories.COMMAND, engineerManager:GetLocationCoords(), range, 'Ally')
+        if Engineering > 2 then 
+        local Assist = aiBrain:GetUnitsAroundPoint(category, engineerManager:GetLocationCoords(), range, 'Ally')
+            for _, Escort in Assist do
+                    if Escort and Escort.DesiresAssist and 
+                    Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < Escort.NumAssistees then
+                        return true, LOG('IEXISTTABRAIN2')
+    --WaitSeconds(3)
+    --Escort.Escorting = nil
+                    end
+            end
         end
     end
-    return retAssisting
+    return false
 end
 
 --[[function TACanBuildOnMassLessThanDistanceNaval(aiBrain, locationType, distance, threatMin, threatMax, threatRings, threatType, maxNum )

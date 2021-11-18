@@ -2,6 +2,10 @@ local UCBC = '/lua/editor/UnitCountBuildConditions.lua'
 local TAutils = '/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua'
 local MIBC = '/lua/editor/MiscBuildConditions.lua'
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
+local TASlow = '/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua'
+STRUCTURE1 = (categories.STRUCTURE * categories.TECH1)
+STRUCTURE2 = (categories.STRUCTURE * categories.TECH2)
+STRUCTURE3 = (categories.STRUCTURE * categories.TECH3)
 
 BuilderGroup {
     BuilderGroupName = 'SCTAAIEngineerMiscBuilder',
@@ -13,7 +17,7 @@ BuilderGroup {
         Priority = 75,
         InstanceCount = 2,
         BuilderConditions = {
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 10, categories.ANTIAIR - categories.MOBILE} }, 
+            { TASlow, 'HaveLessThanUnitsWithCategoryTA', { 10, categories.ANTIAIR * STRUCTURE1} }, 
             { TAutils, 'GreaterTAStorageRatio', { 0.2, 0.5}}, 
             --{ TAutils, 'EcoManagementTA', { 0.8, 0.8, } },
         },
@@ -34,7 +38,7 @@ BuilderGroup {
         Priority = 75,
         InstanceCount = 1,
         BuilderConditions = {
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 2, categories.ANTIMISSILE * categories.TECH2} },
+            { TASlow, 'HaveLessThanUnitsWithCategoryTA', { 1, categories.ANTIMISSILE * STRUCTURE2} },
             { TAutils, 'GreaterThanEconEnergyTAEfficiency', {1.05 }},
         },
         BuilderType = 'LandTA',
@@ -56,7 +60,7 @@ BuilderGroup {
         InstanceCount = 1,
         BuilderConditions = {
             { MIBC, 'GreaterThanGameTime', {1500} },
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 1, categories.ANTIMISSILE * categories.TECH3 * categories.STRUCTURE} },
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 1, categories.ANTIMISSILE * STRUCTURE3} },
             { TAutils, 'GreaterThanEconEnergyTAEfficiency', {1.05 }},
         },
         BuilderType = 'T3TA',
@@ -78,7 +82,7 @@ BuilderGroup {
         Priority = 81,
         InstanceCount = 1,
         BuilderConditions = {
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 4, categories.DIRECTFIRE * categories.TECH3 - categories.MOBILE} }, 
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 4, categories.DIRECTFIRE * STRUCTURE3} }, 
             { TAutils, 'GreaterTAStorageRatio', { 0.2, 0.5}}, 
             --{ TAutils, 'EcoManagementTA', { 0.8, 0.8, } },
         },
@@ -102,7 +106,7 @@ BuilderGroup {
         Priority = 84,
         InstanceCount = 1,
         BuilderConditions = {
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 6, categories.ANTIAIR * categories.TECH3 - categories.MOBILE} }, 
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 6, categories.ANTIAIR * STRUCTURE3} }, 
             { TAutils, 'GreaterTAStorageRatio', { 0.2, 0.5}}, 
             --{ TAutils, 'EcoManagementTA', { 0.8, 0.8, } },
         },
@@ -145,7 +149,7 @@ BuilderGroup {
         Priority = 50,
         InstanceCount = 1,
         BuilderConditions = {
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 4, categories.ANTISHIELD * categories.TECH1 - categories.MOBILE } }, 
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 4, categories.ANTISHIELD * STRUCTURE1} }, 
             { MIBC, 'GreaterThanGameTime', {240} },
             { TAutils, 'EcoManagementTA', { 0.8, 0.8, } },
         },
@@ -178,7 +182,7 @@ BuilderGroup {
         InstanceCount = 2,
         PriorityFunction = TAPrior.TechEnergyExist,
         BuilderConditions = {
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 8, categories.ANTISHIELD * categories.TECH2 - categories.MOBILE} }, 
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 8, categories.ANTISHIELD * STRUCTURE2} }, 
             { TAutils, 'EcoManagementTA', { 0.8, 0.8, } }, 
         },
         BuilderType = 'NotACU',
@@ -211,7 +215,7 @@ BuilderGroup {
         InstanceCount = 2,
         PriorityFunction = TAPrior.GantryProduction,
         BuilderConditions = {
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 8, categories.ANTISHIELD * categories.TECH3 - categories.MOBILE} }, 
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 8, categories.ANTISHIELD * STRUCTURE3} }, 
             { TAutils, 'EcoManagementTA', { 0.9, 0.9, } },
         },
         BuilderType = 'T3TA',

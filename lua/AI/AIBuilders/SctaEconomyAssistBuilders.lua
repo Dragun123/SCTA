@@ -8,6 +8,7 @@ LAB = (categories.FACTORY * categories.TECH2)
 FUSION = (categories.ENERGYPRODUCTION - categories.TECH1)
 WIND = (categories.armwin + categories.corwin)
 SOLAR = (categories.armsolar + categories.corsolar)
+ENGINEERLAND = (categories.ENGINEER * categories.LAND - categories.COMMAND)
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
 
 BuilderGroup {
@@ -64,8 +65,8 @@ BuilderGroup {
         InstanceCount = 5,
         BuilderConditions = {
             { MIBC, 'GreaterThanGameTime', { 240 } },
-            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.LAND - categories.COMMAND}},
-            { TASlow, 'TAReclaimablesInArea', { 'LocationType', 0.05}},  
+            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, ENGINEERLAND}},
+            { TASlow, 'TAReclaimablesInArea', { 'LocationType', 0.1}},  
             --{ TAutils, 'LessMassStorageMaxTA',  { 0.2}},
         },
         BuilderData = {
@@ -105,7 +106,7 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'Unfinished', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Unfinished' }},
-            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER * categories.LAND - categories.COMMAND}},
+            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, ENGINEERLAND}},
             { UCBC, 'UnfinishedUnits', { 'LocationType', categories.STRUCTURE}},
         },
         BuilderData = {
@@ -128,9 +129,10 @@ BuilderGroup {
         Priority = 75,
         InstanceCount = 5,
         BuilderConditions = {
-            { TAutils, 'HaveGreaterThanUnitsInCategoryBeingBuiltSCTA', { 0, categories.ECONOMIC}},
-            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER - categories.COMMAND}},
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75, } },
+            { TASlow, 'TAFindAssistUnits', { 'LocationType', categories.ECONOMIC, 40}},
+            --{ TAutils, 'HaveGreaterThanUnitsInCategoryBeingBuiltSCTA', { 0, categories.ECONOMIC}},
+            { UCBC, 'BuildingGreaterAtLocation', { 'LocationType', 0, categories.ECONOMIC}},
+            --{ TAutils, 'EcoManagementTA', { 0.75, 0.75, } },
         },
         BuilderType = 'NotACU',
         BuilderData = {
@@ -152,9 +154,11 @@ BuilderGroup {
         Priority = 100,
         InstanceCount = 2,
         BuilderConditions = {
-            { TAutils, 'HaveGreaterThanUnitsInCategoryBeingBuiltSCTA', { 0, FUSION}},
+            { TASlow, 'TAFindAssistUnits', { 'LocationType', ENGINEERLAND, 40}},
+            { UCBC, 'LocationEngineersBuildingGreater', { 'LocationType', 0, FUSION}},
+            --{ TAutils, 'HaveGreaterThanUnitsInCategoryBeingBuiltSCTA', { 0, FUSION}},
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 0, categories.FIELDENGINEER}},
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75, } },
+            --{ TAutils, 'EcoManagementTA', { 0.75, 0.75, } },
         },
         BuilderType = 'FieldTA',
         BuilderData = {
@@ -224,10 +228,12 @@ BuilderGroup {
         Priority = 100,
         InstanceCount = 5,
         BuilderConditions = {
-            { UCBC, 'FactoryGreaterAtLocation', { 'LocationType', 1, categories.FACTORY - categories.TECH1} },
+            { TASlow, 'TAFindAssistUnits', { 'LocationType', categories.FACTORY - categories.TECH1, 80}},
+            { UCBC, 'LocationFactoriesBuildingGreater', { 'LocationType', 1, categories.MOBILE - categories.TECH1} },
+            --{ UCBC, 'FactoryGreaterAtLocation', { 'LocationType', 1, categories.FACTORY - categories.TECH1} },
             --{ TASlow, 'TALocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, 'STRUCTURE TECH2, STRUCTURE TECH3, EXPERIMENTAL' }},
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 0, categories.FIELDENGINEER}},
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75, } },
+            --{ TAutils, 'EcoManagementTA', { 0.75, 0.75, } },
             ---{ TAutils, 'GreaterTAStorageRatio', { 0.5, 0.5}},
         },
         BuilderData = {

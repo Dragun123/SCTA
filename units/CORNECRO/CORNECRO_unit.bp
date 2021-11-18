@@ -58,10 +58,7 @@ UnitBlueprint {
         ArmorType = 'Normal',
         Health = 830,
         MaxHealth = 830,
-        AirThreatLevel = 0,
-        EconomyThreatLevel = 0,
-        SubThreatLevel = 0,
-        SurfaceThreatLevel = 0,
+        EconomyThreatLevel = 2,
     },
     Description = 'Resurrection Kbot',
     Display = {
