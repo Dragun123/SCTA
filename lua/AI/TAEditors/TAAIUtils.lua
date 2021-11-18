@@ -409,7 +409,8 @@ function TAFindAssistUnits(aiBrain, locationType, category, range)
             for _, Escort in Assist do
                     if Escort and Escort.DesiresAssist and 
                     Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < Escort.NumAssistees then
-                        return true, LOG('IEXISTTABRAIN2')
+                        return true 
+        --LOG('IEXISTTABRAIN2')
     --WaitSeconds(3)
     --Escort.Escorting = nil
                     end

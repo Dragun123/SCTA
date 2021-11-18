@@ -1982,7 +1982,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 local mult = { 1, 5, 10 }
                 for _,i in mult do
                     target = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Attack', maxRadius * i, atkPri, aiBrain:GetCurrentEnemy() )
-                    if target then
+                    if target and not target.Dead then
                         break
                     end
                     --WaitSeconds(3)
@@ -2001,7 +2001,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 self:Stop()
                 --WaitSeconds(1)
                 coroutine.yield(11)
-                if target and not target.Dead then
+                if target and not target.Dead and not self.Move then
                         if numberOfUnitsInPlatoon < 20 then
                             self:SetPlatoonFormationOverride('AttackFormation')
                         end
@@ -2026,15 +2026,19 @@ Platoon = Class(SCTAAIPlatoon) {
                                 if Support > 0 then
                                     self:AggressiveMoveToLocation(table.copy(threat), 'Guard')
                                 end 
-                else
-                    for k,v in AIUtils.AIGetSortedMassLocations(aiBrain, 10, nil, nil, nil, nil, self:GetPlatoonPosition()) do
-                        if v[1] < 0 or v[3] < 0 or v[1] > ScenarioInfo.size[1] or v[3] > ScenarioInfo.size[2] then
-                        end
-                        --WaitSeconds(1)
-                        coroutine.yield(11)
-                        self:Stop()
-                        self:MoveToLocation( (v), false )
-                    end
+                                --WaitSeconds(10)
+                                --self:Stop()
+                                if target.Dead or not target then
+                                self.Move = true
+                                end
+                            else
+                                ---self.Center = self:GetPlatoonPosition()
+                                coroutine.yield(2)
+                                self:Stop()
+                                local position = AIUtils.RandomLocation(self:GetPlatoonPosition()[1],self:GetPlatoonPosition()[3])
+                                self:MoveToLocation(position, false)
+                                WaitSeconds(10)
+                                self.Move = nil
                 end
             end
             --self:SetPlatoonFormationOverride('Attack')
@@ -2108,7 +2112,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 local mult = { 1,10,20 }
                 for _,i in mult do
                     target = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Attack', maxRadius * i, atkPri, aiBrain:GetCurrentEnemy() )
-                    if target then
+                    if target and not target.Dead then
                         break
                     end
                     --WaitSeconds(3)
@@ -2131,7 +2135,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 self:Stop()
                 --WaitSeconds(1)
                 coroutine.yield(11)
-                if target and not target.Dead then
+                if target and not target.Dead and not self.Move then
                     local threat = target:GetPosition()
                     self:MoveToLocation( table.copy(threat), false, 'Attack')
                     if AntiAir > 0 then
@@ -2153,14 +2157,26 @@ Platoon = Class(SCTAAIPlatoon) {
                     if Support > 0 then
                         self:AggressiveMoveToLocation(table.copy(threat), 'Guard')
                     end 
+                    --WaitSeconds(10)
+                    --self:Stop()
+                    if target.Dead or not target then
+                        self.Move = true
+                    end
                 else
-                    for k,v in AIUtils.AIGetSortedMassLocations(aiBrain, 10, nil, nil, nil, nil, self:GetPlatoonPosition()) do
+                    ---self.Center = self:GetPlatoonPosition()
+                    coroutine.yield(2)
+                    self:Stop()
+                    local position = AIUtils.RandomLocation(self:GetPlatoonPosition()[1],self:GetPlatoonPosition()[3])
+                    self:MoveToLocation(position, false)
+                    WaitSeconds(10)
+                    self.Move = nil
+                    --[[for k,v in AIUtils.AIGetSortedMassLocations(aiBrain, 10, nil, nil, nil, nil, self:GetPlatoonPosition()) do
                         if v[1] < 0 or v[3] < 0 or v[1] > ScenarioInfo.size[1] or v[3] > ScenarioInfo.size[2] then
                         end
                         ---coroutine.yield(30)
                         self:Stop()
                         self:MoveToLocation( (v), false )
-                    end
+                    end]]
                 end
             end
             self.EcoCheck = nil
