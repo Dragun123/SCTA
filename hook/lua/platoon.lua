@@ -2033,11 +2033,11 @@ Platoon = Class(SCTAAIPlatoon) {
                                 end
                             else
                                 ---self.Center = self:GetPlatoonPosition()
-                                coroutine.yield(2)
+                                coroutine.yield(31)
                                 self:Stop()
                                 local position = AIUtils.RandomLocation(self:GetPlatoonPosition()[1],self:GetPlatoonPosition()[3])
                                 self:MoveToLocation(position, false)
-                                WaitSeconds(10)
+                                WaitSeconds(7)
                                 self.Move = nil
                 end
             end
@@ -2164,11 +2164,11 @@ Platoon = Class(SCTAAIPlatoon) {
                     end
                 else
                     ---self.Center = self:GetPlatoonPosition()
-                    coroutine.yield(2)
+                    coroutine.yield(31)
                     self:Stop()
                     local position = AIUtils.RandomLocation(self:GetPlatoonPosition()[1],self:GetPlatoonPosition()[3])
                     self:MoveToLocation(position, false)
-                    WaitSeconds(10)
+                    WaitSeconds(7)
                     self.Move = nil
                     --[[for k,v in AIUtils.AIGetSortedMassLocations(aiBrain, 10, nil, nil, nil, nil, self:GetPlatoonPosition()) do
                         if v[1] < 0 or v[3] < 0 or v[1] > ScenarioInfo.size[1] or v[3] > ScenarioInfo.size[2] then
@@ -2594,6 +2594,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 --LOG("AntiAir threat: " .. antiAirThreat)
                 if SurfaceThreat < 5 then
                     blip = target:GetBlip(armyIndex)
+                    coroutine.yield(2)
                     self:Stop()
                     self:AttackTarget(target)
                     hadtarget = true
@@ -2601,6 +2602,7 @@ Platoon = Class(SCTAAIPlatoon) {
            elseif not target and hadtarget then
                 --DUNCAN - move back to base
                 local position = AIUtils.RandomLocation(basePosition[1],basePosition[3])
+                coroutine.yield(2)
                 self:Stop()
                 self:MoveToLocation(position, false)
                 hadtarget = false
@@ -2721,6 +2723,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 --LOG("AntiAir threat: " .. antiAirThreat)
                 if antiAirThreat < self.AirThreat then
                     blip = target:GetBlip(armyIndex)
+                    --coroutine.yield(2)
                     self:Stop()
                     self:AttackTarget(target)
                     hadtarget = true
@@ -2728,6 +2731,7 @@ Platoon = Class(SCTAAIPlatoon) {
            elseif not target and hadtarget then
                 --DUNCAN - move back to base
                 local position = AIUtils.RandomLocation(basePosition[1],basePosition[3])
+                --coroutine.yield(2)
                 self:Stop()
                 self:MoveToLocation(position, false)
                 hadtarget = false
