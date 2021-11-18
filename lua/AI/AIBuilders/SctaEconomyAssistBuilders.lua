@@ -129,7 +129,7 @@ BuilderGroup {
         Priority = 75,
         InstanceCount = 5,
         BuilderConditions = {
-            { TASlow, 'TAFindAssistUnits', { 'LocationType', categories.ECONOMIC}},
+            ---{ TASlow, 'TAFindAssistUnits', { 'LocationType', categories.ECONOMIC}},
             { TAutils, 'HaveGreaterThanUnitsInCategoryBeingBuiltSCTA', { 0, categories.ECONOMIC}},
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER - categories.COMMAND}},
             { TAutils, 'EcoManagementTA', { 0.75, 0.75, } },
@@ -154,7 +154,7 @@ BuilderGroup {
         Priority = 100,
         InstanceCount = 2,
         BuilderConditions = {
-            { TASlow, 'TAFindAssistUnits', { 'LocationType', ENGINEERLAND}},
+            ---{ TASlow, 'TAFindAssistUnits', { 'LocationType', categories.ENGINEER * categories.LAND - categories.COMMAND}},
             { TAutils, 'HaveGreaterThanUnitsInCategoryBeingBuiltSCTA', { 0, FUSION}},
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 0, categories.FIELDENGINEER}},
             { TAutils, 'EcoManagementTA', { 0.75, 0.75, } },
@@ -227,7 +227,7 @@ BuilderGroup {
         Priority = 100,
         InstanceCount = 5,
         BuilderConditions = {
-            { TASlow, 'TAFindAssistUnits', { 'LocationType', categories.FACTORY - categories.TECH1}},
+            ---{ TASlow, 'TAFindAssistUnits', { 'LocationType', categories.FACTORY - categories.TECH1}},
             { UCBC, 'FactoryGreaterAtLocation', { 'LocationType', 1, categories.FACTORY - categories.TECH1} },
             --{ TASlow, 'TALocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, 'STRUCTURE TECH2, STRUCTURE TECH3, EXPERIMENTAL' }},
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 0, categories.FIELDENGINEER}},
