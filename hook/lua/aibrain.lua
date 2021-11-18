@@ -181,7 +181,7 @@ AIBrain = Class(SCTAAIBrainClass) {
             self.SCTAAI = true
             --self.ForkThread(TAReclaim.MassFabManagerThreadSCTAI, self)
             self.TARally = 5
-            self.TAEcoCycle = 45
+            self.TAEcoCycle = 15
             if not self.SCTAFormCounter then
             self.SCTAFormCounter = ForkThread(self.FormManagerSCTA, self)
             end
@@ -194,7 +194,7 @@ AIBrain = Class(SCTAAIBrainClass) {
     TAFactoryAssistThread = function(aiBrain)
         while (aiBrain.Result ~= 'defeat') do
             WaitSeconds(aiBrain.TAEcoCycle)
-            if ((aiBrain.Level2 or aiBrain.Level3) and TANomic(aiBrain, 0.8, 0.8)) or TAEco(aiBrain, 0.75, 0.75) then
+            if ((aiBrain.Level2 or aiBrain.Level3) and TANomic(aiBrain, 0.75, 0.75)) or TAEco(aiBrain, 0.5, 0.5) then
                 aiBrain.TAFactoryAssistance = true
             else
             coroutine.yield(2)

@@ -129,7 +129,7 @@ TABuildRestrictions = function(self)
                 aiBrain.Level3 = true
                     if aiBrain.SCTAAI then
                     aiBrain.TARally = 15
-                    aiBrain.TAEcoCycle = 120
+                    aiBrain.TAEcoCycle = 60
                     end
                 aiBrain:TECHTAchieve()
                 end
@@ -142,7 +142,7 @@ TABuildRestrictions = function(self)
                 aiBrain.Level2 = true
                     if aiBrain.SCTAAI then
                         aiBrain.TARally = 10
-                        aiBrain.TAEcoCycle = 60
+                        aiBrain.TAEcoCycle = 30
                     end
                 aiBrain:TECHTAchieve()
                 end

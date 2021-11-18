@@ -403,13 +403,16 @@ function TAFindAssistUnits(aiBrain, locationType, category, range)
     --LOG('IEXISTTABRAIN')
     local engineerManager = aiBrain.BuilderManagers[locationType].EngineerManager
     if aiBrain.TAFactoryAssistance and engineerManager then
-    local Assist = aiBrain:GetUnitsAroundPoint(category, engineerManager:GetLocationCoords(), range, 'Ally')
-    for _, Escort in Assist do
-            if Escort and Escort.DesiresAssist and 
-            Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < Escort.NumAssistees then
-            return true, LOG('IEXISTTABRAIN2')
+    local Engineering = aiBrain:GetUnitsAroundPoint(categories.ENGINEER * (categories.ARM + categories.CORE) - categories.COMMAND, engineerManager:GetLocationCoords(), range, 'Ally')
+        if Engineering > 2 then 
+        local Assist = aiBrain:GetUnitsAroundPoint(category, engineerManager:GetLocationCoords(), range, 'Ally')
+            for _, Escort in Assist do
+                    if Escort and Escort.DesiresAssist and 
+                    Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < Escort.NumAssistees then
+                        return true, LOG('IEXISTTABRAIN2')
     --WaitSeconds(3)
     --Escort.Escorting = nil
+                    end
             end
         end
     end

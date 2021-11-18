@@ -66,7 +66,7 @@ BuilderGroup {
         BuilderConditions = {
             { MIBC, 'GreaterThanGameTime', { 240 } },
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, ENGINEERLAND}},
-            { TASlow, 'TAReclaimablesInArea', { 'LocationType', 0.05}},  
+            { TASlow, 'TAReclaimablesInArea', { 'LocationType', 0.1}},  
             --{ TAutils, 'LessMassStorageMaxTA',  { 0.2}},
         },
         BuilderData = {
@@ -130,9 +130,9 @@ BuilderGroup {
         InstanceCount = 5,
         BuilderConditions = {
             { TASlow, 'TAFindAssistUnits', { 'LocationType', categories.ECONOMIC, 40}},
-            { TAutils, 'HaveGreaterThanUnitsInCategoryBeingBuiltSCTA', { 0, categories.ECONOMIC}},
-            { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 2, categories.ENGINEER - categories.COMMAND}},
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75, } },
+            --{ TAutils, 'HaveGreaterThanUnitsInCategoryBeingBuiltSCTA', { 0, categories.ECONOMIC}},
+            { UCBC, 'BuildingGreaterAtLocation', { 'LocationType', 0, categories.ECONOMIC}},
+            --{ TAutils, 'EcoManagementTA', { 0.75, 0.75, } },
         },
         BuilderType = 'NotACU',
         BuilderData = {
@@ -155,9 +155,10 @@ BuilderGroup {
         InstanceCount = 2,
         BuilderConditions = {
             { TASlow, 'TAFindAssistUnits', { 'LocationType', ENGINEERLAND, 40}},
-            { TAutils, 'HaveGreaterThanUnitsInCategoryBeingBuiltSCTA', { 0, FUSION}},
+            { UCBC, 'LocationEngineersBuildingGreater', { 'LocationType', 0, FUSION}},
+            --{ TAutils, 'HaveGreaterThanUnitsInCategoryBeingBuiltSCTA', { 0, FUSION}},
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 0, categories.FIELDENGINEER}},
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75, } },
+            --{ TAutils, 'EcoManagementTA', { 0.75, 0.75, } },
         },
         BuilderType = 'FieldTA',
         BuilderData = {
@@ -228,10 +229,11 @@ BuilderGroup {
         InstanceCount = 5,
         BuilderConditions = {
             { TASlow, 'TAFindAssistUnits', { 'LocationType', categories.FACTORY - categories.TECH1, 80}},
-            { UCBC, 'FactoryGreaterAtLocation', { 'LocationType', 1, categories.FACTORY - categories.TECH1} },
+            { UCBC, 'LocationFactoriesBuildingGreater', { 'LocationType', 1, categories.MOBILE - categories.TECH1} },
+            --{ UCBC, 'FactoryGreaterAtLocation', { 'LocationType', 1, categories.FACTORY - categories.TECH1} },
             --{ TASlow, 'TALocationEngineersBuildingAssistanceGreater', { 'LocationType', 0, 'STRUCTURE TECH2, STRUCTURE TECH3, EXPERIMENTAL' }},
             { UCBC, 'EngineerGreaterAtLocation', { 'LocationType', 0, categories.FIELDENGINEER}},
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75, } },
+            --{ TAutils, 'EcoManagementTA', { 0.75, 0.75, } },
             ---{ TAutils, 'GreaterTAStorageRatio', { 0.5, 0.5}},
         },
         BuilderData = {
