@@ -269,7 +269,7 @@ EngineerManager = Class(SCTAEngineerManager) {
         ---LOG('*Brain', self.Brain.SCTAAI)   
         --unit.bType = bType
         ---meh eitherway this is such a pointless commenting. Oh yeah, modifying the assign via hooking has interesting and had to seperate it until two different types
-        if unit.DesiresAssist and not EntityCategoryContains(categories.COMMAND, unit) then
+        if unit.DesiresAssist then
         unit.DesiresAssist = nil
         unit.NumAssistees = nil
         end

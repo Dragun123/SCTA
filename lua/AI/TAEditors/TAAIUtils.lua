@@ -399,23 +399,21 @@ function TACanBuildOnMassLessThanDistanceLand(aiBrain, locationType, distance, t
     return false
 end
 
-function TAFindAssistUnits(aiBrain, locationType, category)
+function TAFindAssistUnits(aiBrain, locationType, category, range)
     --LOG('IEXISTTABRAIN')
     local engineerManager = aiBrain.BuilderManagers[locationType].EngineerManager
     if aiBrain.TAFactoryAssistance and engineerManager then
-    local Assist = aiBrain:GetUnitsAroundPoint(category, engineerManager:GetLocationCoords(), 50, 'Ally')
+    local Assist = aiBrain:GetUnitsAroundPoint(category, engineerManager:GetLocationCoords(), range, 'Ally')
     for _, Escort in Assist do
-        if Escort and Escort.DesiresAssist and 
-        Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < Escort.NumAssistees and 
-        not Escort.Escorting then
-        return true, LOG('IEXISTTABRAIN2')
+            if Escort and Escort.DesiresAssist and 
+            Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < Escort.NumAssistees then
+            return true, LOG('IEXISTTABRAIN2')
     --WaitSeconds(3)
     --Escort.Escorting = nil
+            end
         end
     end
-    else
-        return false
-    end
+    return false
 end
 
 --[[function TACanBuildOnMassLessThanDistanceNaval(aiBrain, locationType, distance, threatMin, threatMax, threatRings, threatType, maxNum )
