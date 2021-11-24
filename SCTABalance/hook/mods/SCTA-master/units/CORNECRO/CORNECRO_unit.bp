@@ -18,6 +18,6 @@ UnitBlueprint {
     LifeBarSize = 1,
     SelectionSizeX = 0.6,
     SelectionSizeZ = 0.6,
-    SizeX = 1,
-    SizeZ = 1,
+    SizeX = 1.2,
+    SizeZ = 1.2,
 }

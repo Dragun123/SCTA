@@ -25,7 +25,7 @@ UnitBlueprint {
           RadarRadius = 30,
           RadarStealth = true,
     },
-    SizeX = 1.2,
-    SizeY = 1.2,
-    SizeZ = 1.2,
+    SizeX = 1.4,
+    SizeY = 1.4,
+    SizeZ = 1.4,
 }
