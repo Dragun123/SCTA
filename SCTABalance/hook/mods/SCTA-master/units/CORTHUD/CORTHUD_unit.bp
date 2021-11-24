@@ -4,13 +4,12 @@ UnitBlueprint {
         UniformScale = 0.10,
     },
     Economy = {
-        BuildTime = 1100,
         BuildCostEnergy = 660,
         BuildCostMass = 90,
     },
-    SizeX = 1,
-    SizeY = 1,
-    SizeZ = 1,
+    SizeX = 1.4,
+    SizeY = 1.4,
+    SizeZ = 1.4,
     LifeBarSize = 1,
     Weapon = {
         [1] = {

@@ -15,9 +15,9 @@ UnitBlueprint {
     LifeBarSize = 1,
     SelectionSizeX = 0.6,
     SelectionSizeZ = 0.6,
-    SizeX = 1.2,
-    SizeY = 1.2,
-    SizeZ = 1.2,
+    SizeX = 1.4,
+    SizeY = 1.4,
+    SizeZ = 1.4,
     Weapon = {
         [1] = {
             Damage = 4,

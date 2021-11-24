@@ -1812,6 +1812,8 @@ Platoon = Class(SCTAAIPlatoon) {
                         IssueMove(v, smartPos)
                     end
                 end]]
+                WaitSeconds(5)
+                self:Stop()
             end
             --self:Stop()
             ---WaitSeconds(2)
@@ -2011,6 +2013,8 @@ Platoon = Class(SCTAAIPlatoon) {
                                     if targetAir and not targetAir.Dead then
                                     self:AttackTarget(targetAir, 'Scout')
                                     else
+                                    self.Move = true
+                                    coroutine.yield(2)
                                     self:AggressiveMoveToLocation(table.copy(threat), 'Scout')
                                     end
                                 end
@@ -2019,6 +2023,8 @@ Platoon = Class(SCTAAIPlatoon) {
                                     self:AggressiveMoveToLocation(table.copy(targetArt:GetPosition()), 'Artillery')
                                     --self:MoveToLocation( table.copy(threat), false, 'Attack')    
                                     else
+                                    self.Move = true
+                                    coroutine.yield(2)
                                     --self:MoveToLocation( table.copy(threat), false, 'Attack')
                                     self:AggressiveMoveToLocation(table.copy(threat), 'Artillery')
                                     end
@@ -2142,6 +2148,8 @@ Platoon = Class(SCTAAIPlatoon) {
                         if targetAir and not targetAir.Dead then
                         self:AttackTarget(targetAir, 'Scout')
                         else
+                            self.Move = true
+                            coroutine.yield(2)
                         self:AggressiveMoveToLocation(table.copy(threat), 'Scout')
                         end
                     end
@@ -2150,6 +2158,8 @@ Platoon = Class(SCTAAIPlatoon) {
                         self:AggressiveMoveToLocation(table.copy(targetArt:GetPosition()), 'Artillery')
                         --self:MoveToLocation( table.copy(threat), false, 'Attack')    
                         else
+                            self.Move = true
+                            coroutine.yield(2)
                         --self:MoveToLocation( table.copy(threat), false, 'Attack')
                         self:AggressiveMoveToLocation(table.copy(threat), 'Artillery')
                         end
