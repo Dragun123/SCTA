@@ -61,7 +61,7 @@ BuilderGroup {
         },
         BuilderType = 'NotACU',
     },
-    Builder {
+    --[[Builder {
         BuilderName = 'SCTA Commander Assist Gantry Construction',
         PlatoonTemplate = 'CommanderBuilderSCTA',
         PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
@@ -88,8 +88,8 @@ BuilderGroup {
             },
         },
         BuilderType = 'Command',
-    },
-    Builder {
+    },]]
+    --[[Builder {
         BuilderName = 'SCTA CDR Assist Structure',
         PlatoonTemplate = 'CommanderBuilderSCTA',
         PlatoonAIPlan = 'ManagerEngineerAssistAISCTA',
@@ -115,7 +115,7 @@ BuilderGroup {
                 AssistUntilFinished = true,
             },
         },
-    },
+    },]]
     Builder {
         BuilderName = 'SCTAAI Gantry Factory',
         PlatoonTemplate = 'EngineerBuilderSCTA23',

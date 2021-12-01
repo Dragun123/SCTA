@@ -8,7 +8,7 @@ local Mass = import('/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lu
 local RAIDER = (categories.armpw + categories.corak + categories.armflash + categories.corgator)
 local LAB = (categories.FACTORY * categories.TECH2)
 local PLATFORM = (categories.FACTORY * categories.TECH3)
-local FUSION = (categories.ENERGYPRODUCTION * categories.STRUCTURE * (categories.TECH2 + categories.TECH3))
+local FUSION = ((categories.ENERGYPRODUCTION * categories.STRUCTURE) - categories.TECH1)
 local CLOAKREACT = (categories.ENERGYPRODUCTION * categories.TECH3 * categories.STRUCTURE)
 local NAVALFACTORY = (categories.NAVAL * (categories.FACTORY + categories.MOBILE))
 local T2STRUCTURE = (categories.STRUCTURE * categories.TECH2)
@@ -43,12 +43,14 @@ StructureProductionT2 = function(self, aiBrain)
 end
 
 StructureProductionT2Energy = function(self, aiBrain)
-    if aiBrain.Labs >= 2 and PowerGeneration(aiBrain,  2, CLOAKREACT) then 
+    if aiBrain.Level3 and PowerGeneration(aiBrain,  1, CLOAKREACT) then
+        return 0
+    elseif aiBrain.Labs >= 1 and PowerGeneration(aiBrain,  4, FUSION) then 
         return 150
-    elseif aiBrain.Level2 and PowerGeneration(aiBrain,  2, CLOAKREACT) then
+    elseif aiBrain.Level2 and PowerGeneration(aiBrain,  4, FUSION) then
         return 100
     else
-        return 0
+        return 10
     end
 end
 
@@ -179,8 +181,10 @@ end
 HighTechEnergyProduction = function(self, aiBrain)
     if Factory(aiBrain,  2, FUSION) then 
         return 0
-    else
+    elseif not aiBrain.Level3 then
         return 80
+    else
+        return 10
     end
 end
 

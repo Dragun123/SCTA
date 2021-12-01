@@ -176,7 +176,7 @@ BuilderGroup {
         Priority = 500,
         InstanceCount = 2,
         BuilderConditions = {
-            { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, FUSION} },
+            { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, FUSION} },
             { TAutils , 'LessThanEconEnergyTAEfficiency', {1.05}},
         },
         BuilderType = 'NotACU',
