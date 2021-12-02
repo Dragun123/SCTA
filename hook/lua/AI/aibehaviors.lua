@@ -211,8 +211,10 @@ function CommanderThreadSCTA(cdr, platoon)
         -- Go back to base 
         if not cdr.Dead and cdr:IsIdleState() then
             if aiBrain.TAFactoryAssistance then
-                if aiBrain.Level3 then
-                    cdr:OnScriptBitSet('ToggleBit8', 'Cloak')
+                if aiBrain.Level3 and not cdr.CLOAKAITA then
+                    ---LOG('IEXISTTA')
+                    cdr:OnScriptBitClear(8)
+                    cdr.CLOAKAITA = true
                 end
                 if aiBrain.Level2 then
                     local Escort = platoon.EngineerTAAssist(cdr, aiBrain, categories.STRUCTURE, 20)
@@ -220,7 +222,11 @@ function CommanderThreadSCTA(cdr, platoon)
                         Escort = platoon.FactoryTAAssist(cdr, aiBrain, categories.FACTORY, 20)
                     end
                     if Escort and not Escort.Dead then
-                        IssueClearCommands(cdr)
+                        if cdr.CLOAKAITA then
+                            cdr.CLOAKAITA = nil
+                            cdr:OnScriptBitSet(8)
+                        end
+                        --IssueClearCommands(cdr)
                         IssueGuard({cdr}, Escort)
                         cdr.Escorting = true 
                         WaitSeconds(30)
@@ -231,6 +237,7 @@ function CommanderThreadSCTA(cdr, platoon)
             end
             if not cdr.Escorting and not cdr.EngineerBuildQueue or table.getn(cdr.EngineerBuildQueue) == 0 then
                 local pool = aiBrain:GetPlatoonUniquelyNamed('ArmyPool')
+                ---cdr:OnScriptBitClear(8)
                 aiBrain:AssignUnitsToPlatoon( pool, {cdr}, 'Unassigned', 'None' )
             elseif cdr.EngineerBuildQueue and table.getn(cdr.EngineerBuildQueue) != 0 then
                 if not cdr.NotBuildingThread then
@@ -243,7 +250,7 @@ function CommanderThreadSCTA(cdr, platoon)
         coroutine.yield(2)
         if not cdr.Dead and GetGameTimeSeconds() > WaitTaunt and (not aiBrain.LastVocTaunt or GetGameTimeSeconds() - aiBrain.LastVocTaunt > WaitTaunt) then
             SUtils.AIRandomizeTaunt(aiBrain)
-            cdr:OnScriptBitSet('ToggleBit8', 'Cloak')
+            ---cdr:OnScriptBitSet('ToggleBit8', 'Cloak')
             WaitTaunt = 600 + Random(1, 900)
         end
     end

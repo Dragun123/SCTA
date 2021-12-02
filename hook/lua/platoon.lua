@@ -1104,7 +1104,8 @@ Platoon = Class(SCTAAIPlatoon) {
         --if eng:TestToggleCaps('RULEUTC_CloakToggle') then
             --eng:EnableUnitIntel('ToggleBit8', 'Cloak')
         --end
-
+        ---eng:SetScriptBit('RULEUTC_CloakToggle', true)
+        ---WaitSeconds(10)
         --DUNCAN - added
         if eng:IsUnitState('Building') then
            return
@@ -1354,6 +1355,9 @@ Platoon = Class(SCTAAIPlatoon) {
                                 buildFunction(aiBrain, eng, v, closeToBuilder, relative, buildingTmpl, baseListData, reference, cons.NearMarkerType)
                             end
                         else
+                            --eng:SetScriptBit('RULEUTC_CloakToggle', true)
+                            --WaitSeconds(4)
+                            ---eng:OnScriptBitSet(8)
                             buildFunction(aiBrain, eng, v, closeToBuilder, relative, buildingTmpl, baseListData, reference, cons.NearMarkerType)
                         end
                     else
@@ -1968,9 +1972,12 @@ Platoon = Class(SCTAAIPlatoon) {
         local targetArt
         local blip = false
         local maxRadius = self.PlatoonData.SearchRadius or 100
+        local oldThreat
         while aiBrain:PlatoonExists(self) do
             local numberOfUnitsInPlatoon = table.getn(platoonUnits)
-            --self:SetPlatoonFormationOverride('Attack')
+            if numberOfUnitsInPlatoon < 20 then
+                self:SetPlatoonFormationOverride('AttackFormation')
+            end
             if not target or target.Dead then
                 if aiBrain:GetCurrentEnemy() and aiBrain:GetCurrentEnemy():IsDefeated() then
                     aiBrain:PickEnemyLogic()
@@ -2003,15 +2010,12 @@ Platoon = Class(SCTAAIPlatoon) {
                 end
                 if Artillery > 0 then
                 targetArt = self:FindPrioritizedUnit('Artillery', 'Enemy', true, self:GetSquadPosition('Artillery'), 50)
-                end]]
-                self:Stop()
-                --WaitSeconds(1)
+                end]]            
                 coroutine.yield(11)
                 if target and not target.Dead and not self.Move then
-                        if numberOfUnitsInPlatoon < 20 then
-                            self:SetPlatoonFormationOverride('AttackFormation')
-                        end
-                            local threat = target:GetPosition()
+                --WaitSeconds(1)
+                self:Stop()      
+                local threat = target:GetPosition()
                             ---self:MoveToLocation( table.copy(threat), false, 'Attack')
                                 if AntiAir > 0 then
                                     if targetAir and not targetAir.Dead then
@@ -2039,9 +2043,10 @@ Platoon = Class(SCTAAIPlatoon) {
                                 --WaitSeconds(10)
                                 --self:Stop()
                                 self:MoveToLocation( table.copy(threat), false, 'Attack')
-                                if self:GetPlatoonPosition() == threat then
+                                if oldThreat == threat then
                                     self.Move = true
                                 end
+                                oldThreat = threat
                             else
                                 ---self.Center = self:GetPlatoonPosition()
                                 coroutine.yield(31)
@@ -2095,6 +2100,7 @@ Platoon = Class(SCTAAIPlatoon) {
         local target
         local targetAir
         local targetArt
+        local oldThreat
         local blip = false
         local maxRadius = self.PlatoonData.SearchRadius or 100
         if self.PlatoonData.Energy and EntityCategoryContains(categories.ANTISHIELD, Artillery) then
@@ -2174,9 +2180,10 @@ Platoon = Class(SCTAAIPlatoon) {
                     --WaitSeconds(10)
                     --self:Stop()
                     self:MoveToLocation( table.copy(threat), false, 'Attack')
-                    if self:GetPlatoonPosition() == threat then
+                    if oldThreat == threat then
                         self.Move = true
                     end
+                    oldThreat = threat
                 else
                     ---self.Center = self:GetPlatoonPosition()
                     coroutine.yield(31)
@@ -2949,7 +2956,6 @@ Platoon = Class(SCTAAIPlatoon) {
                 self:Stop()
                 coroutine.yield(21)
                 self:MoveToLocation(position, false)
-                self.Move = nil
             end
             WaitSeconds(5)
         end
@@ -3240,14 +3246,19 @@ Platoon = Class(SCTAAIPlatoon) {
             if self:GetBrain():GetEconomyStoredRatio('ENERGY').EnergyStorageRatio < 0.1 then
                 WaitSeconds(4)
                 self.EcoCheck = nil
+                self:Stop()
             end
                 if self.PlatoonData.Interceptor then 
+                    coroutine.yield(2)
                     return self:InterceptorAISCTAEnd()
                 elseif self.PlatoonData.Stealth then
+                    coroutine.yield(2)
                     return self:InterceptorAISCTAStealth()
                 elseif self.PlatoonData.Sniper then 
+                    coroutine.yield(2)
                     return self:SCTAStrikeForceAIEndgame()
                 else
+                    coroutine.yield(2)
                     return self:TAHunt()
                 end
         end,

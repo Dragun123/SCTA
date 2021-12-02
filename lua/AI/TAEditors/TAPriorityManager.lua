@@ -133,6 +133,7 @@ end
 
 UnitProductionT1 = function(self, aiBrain)
     if Factory(aiBrain,  0, categories.GATE) then
+        ---LOG('IEXISTTATEST')
           return 0
     elseif aiBrain.Labs >= 2 then
               return 5
@@ -253,8 +254,8 @@ end
 --ENERGYMIDTECH
 
 
-GantryUnitBuilding = function(self, aiBrain)
-    if LessProduct(aiBrain,  2, categories.EXPERIMENTAL * categories.MOBILE) then 
+--[[GantryUnitBuilding = function(self, aiBrain)
+    if LessProduct(aiBrain,  4, categories.EXPERIMENTAL * categories.MOBILE) then 
         return 200
     else
         return 0
@@ -267,7 +268,7 @@ GantryUnitBuildingDecoy = function(self, aiBrain)
     else
         return 0
     end
-end
+end]]
 
 TALowEco = function(self, aiBrain)
     if Mass(aiBrain,  0.2) then 

@@ -277,27 +277,4 @@ BuilderGroup {
             }
         }
     },
-    Builder {
-        BuilderName = 'SCTAAI T2Engineer Home Pgen',
-        PlatoonTemplate = 'EngineerBuilderSCTA23All',
-        PriorityFunction = TAPrior.UnitProduction,
-        Priority = 500,
-        InstanceCount = 1,
-        BuilderConditions = {
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 1, FUSION} },
-            { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, FUSION} },
-        },
-        BuilderType = 'NotACU',
-        BuilderData = {
-            DesiresAssist = true,
-            NumAssistees = 6,
-            ---NeedGuard = false,
-            Construction = {
-                BuildClose = true,
-                BuildStructures = {
-                    'T2EnergyProduction',
-                }
-            }
-        }
-    },
 }
