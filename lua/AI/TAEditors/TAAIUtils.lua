@@ -11,7 +11,12 @@ function HaveLessThanUnitsWithCategoryTA(aiBrain, numReq, category, idleReq)
     else 
         Numbers = 1
     end
-    LessThanCats(aiBrain,  numReq * Numbers, category, idleReq)
+    ---local NumbersVal = numReq * Numbers
+    if LessThanCats(aiBrain,  numReq * Numbers, category, idleReq) then
+        return true
+    else
+        return false
+    end
 end
 ------AIUTILITIES FUNCTIONS (RNG, NUTCTACKER, and RECLAIM MY OW
 function CheckBuildPlatoonDelaySCTA(aiBrain, PlatoonName)
