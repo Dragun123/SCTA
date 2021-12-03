@@ -30,17 +30,14 @@ end
 
 function CommanderThreadSCTADecoy(cdr, platoon)
     --LOG('cdr is '..cdr.UnitId)
-    local WaitTaunt = 600 + Random(1, 600)
     local aiBrain = cdr:GetAIBrain()
-    aiBrain:BuildScoutLocations()
-    SetCDRHome(cdr, platoon)
+    if not cdr.Taunt then
+        TAReclaim.TAAIRandomizeTaunt(aiBrain)
+        cdr.Taunt = true
+        cdr:SetAutoOvercharge()
+        cdr:OnScriptBitClear(8)
+    end
     while not cdr.Dead do
-        if not cdr.Taunt then
-            TAReclaim.TAAIRandomizeTaunt(aiBrain)
-            cdr.Taunt = true
-            cdr:SetAutoOvercharge()
-            cdr:EnableUnitIntel('Toggle', 'Cloak')
-        end
         -- Overcharge
         --cdr:SetAutoOvercharge()
         -- Go back to base
@@ -55,7 +52,6 @@ function CommanderThreadSCTADecoy(cdr, platoon)
             end
         end
         coroutine.yield(2)
-        if not cdr.Dead then SCTACDRReturnHome(aiBrain, cdr) end
     end
 end
 
