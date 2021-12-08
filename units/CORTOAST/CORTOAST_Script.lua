@@ -10,10 +10,6 @@ CORTOAST = Class(TAPop) {
 
 	Weapons = {
 		ARMAMB_GUN = Class(TAHide) {
-			OnWeaponFired = function(self)
-				TAHide.OnWeaponFired(self)	
-			end,
-
 			PlayFxWeaponUnpackSequence = function(self)
 				TAHide.PlayFxWeaponUnpackSequence(self)
 			end,	
