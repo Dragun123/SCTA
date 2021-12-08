@@ -13,7 +13,6 @@ UnitBlueprint {
     FreeIntel = true,
     RadarStealth = true,
     },
-    SelectionCenterOffsetZ = -0.3,
     SizeX = 2,
     SizeY = 2,
     SizeZ = 2,

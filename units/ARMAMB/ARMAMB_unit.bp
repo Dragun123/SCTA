@@ -48,13 +48,14 @@ UnitBlueprint {
     },
     Description = 'Pop-up Heavy Cannon',
     Display = {
+        --[[AnimationUnpack = '/mods/SCTA-master/units/ARMAMB/ARMAMB_Aunpack.sca',
+        AnimationUnpackRate = 1, ]]
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
                 {
                     LODCutoff = 230,
-                    ShaderName = 'AeonCZAR', 
-		    NormalsName = '/mods/SCTA-master/textures/common/normalsTS.dds'
+                    ShaderName = 'AeonCZAR',
                 },
             },
         },
@@ -97,7 +98,6 @@ TechLevel = 'RULEUTL_Secret',
     LifeBarOffset = 0.5,
     LifeBarSize = 2,
     SelectionSizeX = 2,
-    SelectionCenterOffsetZ = -0.75,
     SelectionSizeZ = 2,
     SelectionThickness = 0.25,
     SizeX = 3,
@@ -117,6 +117,8 @@ TechLevel = 'RULEUTL_Secret',
             BallisticArc = 'RULEUBA_LowArc',
             CollideFriendly = false,
             DamageFriendly = false,
+            WeaponUnpackAnimation = '/mods/SCTA-master/units/ARMAMB/ARMAMB_Aunpack.sca',
+			WeaponUnpackAnimationRate = 1, 
             Damage = 400,
             DamageType = 'Normal',
             DisplayName = 'ARMAMB_GUN',
