@@ -185,7 +185,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                     position = import('/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua').TARandomLocation(position[1],position[3])
                     rally = position
                 end           
-                --IssueClearFactoryCommands( {factory} )
+                IssueClearFactoryCommands( {factory} )
                 IssueFactoryRallyPoint({factory}, rally)         
                 factory:ForkThread(self.TrafficControlTAThread, position, rally)
             end
@@ -282,6 +282,9 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                 return
             elseif factory:IsIdleState() then
                 factory.TABuildingUnit = nil
+                if not factory:IsUnitState('Building') then
+                factory.TAAIFactoryBuilding = nil
+                end
             end
             self:TAAssignBuildOrder(factory,bType)
         end,
@@ -322,8 +325,13 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             elseif EntityCategoryContains(categories.FACTORY, finishedUnit) then
                 self:AddFactory(finishedUnit)
             end
+            if factory:IsUnitState('Building') then
+                --coroutine.yield(2)
+                self:ForkThread(self.TADelayBuildOrder, factory, factory.BuilderManagerData.BuilderType, true)
+            else
             factory.TAAIFactoryBuilding = nil
             self:TAAssignBuildOrder(factory, factory.BuilderManagerData.BuilderType)
+            end
         end,
 
         TAAssignBuildOrder = function(self,factory,bType)
@@ -331,12 +339,12 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             if factory.Dead then
                 return
             end
-            if table.getn(factory:GetCommandQueue()) <= 1 and (factory.TAAIFactoryBuilding or factory.TABuildingUnit) then
+            if table.getn(factory:GetCommandQueue()) >= 1 and (factory.TAAIFactoryBuilding or factory.TABuildingUnit or factory:IsUnitState('Building')) then
                 return self:ForkThread(self.TADelayBuildOrder, factory, bType, true)
             end
             local builder = self:GetHighestBuilder(bType,{factory})
             --LOG('*TAIEXIST2', factory)
-                if builder and not (factory.TAAIFactoryBuilding or factory.TABuildingUnit) then
+                if builder and factory:IsIdleState() and not (factory.TAAIFactoryBuilding or factory.TABuildingUnit or factory:IsUnitState('Building')) then
                 ---LOG('*TAIEXIST3', factory)
                 --factory.PlatoonHandle = hndl
                 factory.TAAIFactoryBuilding = true

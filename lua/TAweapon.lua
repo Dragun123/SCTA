@@ -178,9 +178,11 @@ TALightLaser = Class(TAweapon) {
     StartEconomyDrain = function(self)
         if self.EconDrain then
         self.LLT = self:GetWeaponEnergyRequired()
-        self.Eco = CreateEconomyEvent(self.unit, self.LLT, 0, 1)
+        self.Eco = CreateEconomyEvent(self.unit, self.LLT, 0, 0.1)
+        ---WaitTicks(1)
         WaitTicks(1)
         RemoveEconomyEvent(self.unit, self.Eco)
+        self.Eco = nil
         end
     end,
 
@@ -259,9 +261,10 @@ TAEndGameWeapon = Class(TIFArtilleryWeapon) {
 
     StartEconomyDrain = function(self)
         if self.EconDrain then
-        self.Eco = CreateEconomyEvent(self.unit, 2000, 0, 1)
+        self.Eco = CreateEconomyEvent(self.unit, 2000, 0, 0.1)
         WaitTicks(1)
         RemoveEconomyEvent(self.unit, self.Eco)
+        self.Eco = nil
         end
     end,
 

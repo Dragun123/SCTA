@@ -54,7 +54,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 self:Stop('Support')
             end
             --self:Stop('Support')
-            IssueClearCommands({eng})
+            ---IssueClearCommands({eng})
             coroutine.yield(2)
             self:PlatoonDisbandTA()
             --self:Stop('Support')
@@ -102,7 +102,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 WaitSeconds(assistData.Time + 30)
                 --self:Stop('Support')
               end
-                IssueClearCommands({eng})
+                --IssueClearCommands({eng})
                 coroutine.yield(2)
                 self:PlatoonDisbandTA()
             end
@@ -1824,11 +1824,17 @@ Platoon = Class(SCTAAIPlatoon) {
                 self:Stop()
             end
             --self:Stop()
-            ---WaitSeconds(2)
-            coroutine.yield(21)
             self.EcoCheck = nil
-            local position = AIUtils.RandomLocation(self.Center[1],self.Center[3])
-            self:MoveToLocation(position, false)
+            coroutine.yield(31)
+            for k,v in AIUtils.AIGetSortedMassLocations(aiBrain, 10, nil, nil, nil, nil, self:GetPlatoonPosition()) do
+                if v[1] < 0 or v[3] < 0 or v[1] > ScenarioInfo.size[1] or v[3] > ScenarioInfo.size[2] then
+            end
+            --WaitSeconds(1)
+            coroutine.yield(11)
+            self:Stop()
+            self:MoveToLocation( (v), false )
+            WaitSeconds(7)
+            end
             --WaitSeconds(2)
             coroutine.yield(21)
         end
@@ -2049,12 +2055,15 @@ Platoon = Class(SCTAAIPlatoon) {
                                 oldThreat = threat
                             else
                                 ---self.Center = self:GetPlatoonPosition()
-                                coroutine.yield(31)
+                                for k,v in AIUtils.AIGetSortedMassLocations(aiBrain, 10, nil, nil, nil, nil, self:GetPlatoonPosition()) do
+                                    if v[1] < 0 or v[3] < 0 or v[1] > ScenarioInfo.size[1] or v[3] > ScenarioInfo.size[2] then
+                                end
+                                coroutine.yield(11)
                                 self:Stop()
-                                local position = AIUtils.RandomLocation(self:GetPlatoonPosition()[1],self:GetPlatoonPosition()[3])
-                                self:MoveToLocation(position, false)
-                                WaitSeconds(7)
+                                self:MoveToLocation( (v), false )
                                 self.Move = nil
+                                WaitSeconds(7)
+                            end
                 end
             end
             --self:SetPlatoonFormationOverride('Attack')
@@ -2068,7 +2077,11 @@ Platoon = Class(SCTAAIPlatoon) {
     end,
 
     SCTAStrikeForceAIEndgame = function(self)
+        self:Stop()
         local aiBrain = self:GetBrain()
+        if not self:GatherUnitsSCTA() then
+            return
+        end
         local armyIndex = aiBrain:GetArmyIndex()
         local categoryListA = {}
         local categoryListArt = {}
@@ -2107,6 +2120,10 @@ Platoon = Class(SCTAAIPlatoon) {
             self.EDrain = true
         end
         while aiBrain:PlatoonExists(self) do
+            --[[local numberOfUnitsInPlatoon = table.getn(platoonUnits)
+            if numberOfUnitsInPlatoon < 30 then
+                self:SetPlatoonFormationOverride('AttackFormation')
+            end]]
                 if self.EDrain and not self.EcoCheck then
                     --WaitSeconds(1)
                     coroutine.yield(11)
@@ -2187,18 +2204,15 @@ Platoon = Class(SCTAAIPlatoon) {
                 else
                     ---self.Center = self:GetPlatoonPosition()
                     coroutine.yield(31)
-                    self:Stop()
-                    local position = AIUtils.RandomLocation(self:GetPlatoonPosition()[1],self:GetPlatoonPosition()[3])
-                    self:MoveToLocation(position, false)
-                    WaitSeconds(7)
-                    self.Move = nil
-                    --[[for k,v in AIUtils.AIGetSortedMassLocations(aiBrain, 10, nil, nil, nil, nil, self:GetPlatoonPosition()) do
+                    for k,v in AIUtils.AIGetSortedMassLocations(aiBrain, 10, nil, nil, nil, nil, self:GetPlatoonPosition()) do
                         if v[1] < 0 or v[3] < 0 or v[1] > ScenarioInfo.size[1] or v[3] > ScenarioInfo.size[2] then
-                        end
-                        ---coroutine.yield(30)
-                        self:Stop()
-                        self:MoveToLocation( (v), false )
-                    end]]
+                    end
+                    coroutine.yield(11)
+                    self:Stop()
+                    self:MoveToLocation( (v), false )
+                    self.Move = nil
+                    WaitSeconds(7)
+                end
                 end
             end
             self.EcoCheck = nil
@@ -2585,7 +2599,7 @@ Platoon = Class(SCTAAIPlatoon) {
         local armyIndex = aiBrain:GetArmyIndex()
         local target
         local blip
-        ---local hadtarget = false
+        local hadtarget = false
         local basePosition = false
 
         if self.PlatoonData.LocationType and self.PlatoonData.LocationType != 'NOTMAIN' then
@@ -2602,34 +2616,29 @@ Platoon = Class(SCTAAIPlatoon) {
         end
 
         while aiBrain:PlatoonExists(self) do
-            --self.LandThreat = self:CalculatePlatoonThreat('Land', categories.MOBILE)
             target = self:FindClosestUnit('Attack', 'Enemy', true, categories.ENGINEER - categories.COMMAND)
             if not target then
                 --WaitSeconds(1)
                 coroutine.yield(11)
                 return self:SCTALabAI()
             end
-            if target and target:GetFractionComplete() == 1 and not self.Move then
-                ---local EcoThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 10, true, 'Economy')
+            if target and target:GetFractionComplete() == 1 then
+                local EcoThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 1, true, 'Economy')
                 --LOG("Air threat: " .. airThreat)
-                local SurfaceThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 10, true, 'Land')
+                local SurfaceThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 1, true, 'AntiSurface') - EcoThreat
                 --LOG("AntiAir threat: " .. antiAirThreat)
-                if SurfaceThreat < 5 then
+                if SurfaceThreat < 1.5 then
                     blip = target:GetBlip(armyIndex)
-                    coroutine.yield(2)
                     self:Stop()
                     self:AttackTarget(target)
-                else
-                    self.Move = true
+                    hadtarget = true
                 end
-           else
+           elseif not target and hadtarget then
                 --DUNCAN - move back to base
                 local position = AIUtils.RandomLocation(basePosition[1],basePosition[3])
-                coroutine.yield(2)
                 self:Stop()
-
                 self:MoveToLocation(position, false)
-                self.Move = nil
+                hadtarget = false
             end
             WaitSeconds(5) --DUNCAN - was 5
         end
@@ -2990,7 +2999,7 @@ Platoon = Class(SCTAAIPlatoon) {
         local armyIndex = aiBrain:GetArmyIndex()
         local structure
         local blip
-        --local hadtarget = false
+        local hadtarget = false
         local basePosition = false
 
         if self.PlatoonData.LocationType and self.PlatoonData.LocationType != 'NOTMAIN' then
@@ -2998,7 +3007,7 @@ Platoon = Class(SCTAAIPlatoon) {
         else
             local platoonPosition = self:GetPlatoonPosition()
             if platoonPosition then
-                basePosition = aiBrain:FindClosestBuilderManagerPosition(platoonPosition)
+                basePosition = aiBrain:FindClosestBuilderManagerPosition(self:GetPlatoonPosition())
             end
         end
 
@@ -3013,25 +3022,23 @@ Platoon = Class(SCTAAIPlatoon) {
                 coroutine.yield(11)
                 return self:SCTALabAI()
             end
-            if structure and structure:GetFractionComplete() == 1 and not self.Move then
-                ---local SurfaceThreat = aiBrain:GetThreatAtPosition(table.copy(structure:GetPosition()), 1, true, 'AntiSurface')
+            if structure and structure:GetFractionComplete() == 1 then
+                local SurfaceThreat = aiBrain:GetThreatAtPosition(table.copy(structure:GetPosition()), 1, true, 'AntiSurface')
                 --LOG("Air threat: " .. airThreat)
-                local SurfaceAntiThreat = aiBrain:GetThreatAtPosition(table.copy(structure:GetPosition()), 10, true, 'Economy')
+                local SurfaceAntiThreat = aiBrain:GetThreatAtPosition(table.copy(structure:GetPosition()), 1, true, 'AntiSurface') - SurfaceThreat
                 --LOG("AntiAir threat: " .. antiAirThreat)
-                if SurfaceAntiThreat > 0 then
+                if SurfaceAntiThreat < 1.5 then
                     blip = structure:GetBlip(armyIndex)
                     self:Stop()
                     self:AttackTarget(structure)
-                    --hadtarget = true
-                else
-                    self.Move = true
+                    hadtarget = true
                 end
-           else
+           elseif not structure and hadtarget then
                 --DUNCAN - move back to base
                 local position = AIUtils.RandomLocation(basePosition[1],basePosition[3])
                 self:Stop()
                 self:MoveToLocation(position, false)
-                self.Move = nil
+                hadtarget = false
             end
             WaitSeconds(5) --DUNCAN - was 5
         end

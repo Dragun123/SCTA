@@ -204,13 +204,18 @@ function CommanderThreadSCTA(cdr, platoon)
     cdr:SetAutoOvercharge()
     SetCDRHome(cdr, platoon)
     while not cdr.Dead do
-        -- Go back to base 
+        if (cdr:GetHealthPercent() < 0.6 or aiBrain.Level2) and not cdr.Dead then
+            coroutine.yield(2)      
+            SCTACDRReturnHome(aiBrain, cdr, platoon)
+        end
         if not cdr.Dead and cdr:IsIdleState() then
             if aiBrain.TAFactoryAssistance then
                 if aiBrain.Level3 and not cdr.CLOAKAITA then
                     ---LOG('IEXISTTA')
                     cdr:OnScriptBitClear(8)
                     cdr.CLOAKAITA = true
+                    coroutine.yield(2)      
+                    SCTACDRReturnHome(aiBrain, cdr, platoon)
                 end
                 if aiBrain.Level2 then
                     local Escort = platoon.EngineerTAAssist(cdr, aiBrain, categories.STRUCTURE, 20)
@@ -227,7 +232,7 @@ function CommanderThreadSCTA(cdr, platoon)
                         cdr.Escorting = true 
                         WaitSeconds(30)
                     end
-                IssueClearCommands(cdr)
+                ---IssueClearCommands(cdr)
                 cdr.Escorting = nil
                 end
             end
@@ -242,7 +247,7 @@ function CommanderThreadSCTA(cdr, platoon)
             end
         end
         coroutine.yield(2)      
-        if not cdr.Dead then SCTACDRReturnHome(aiBrain, cdr) end
+        if not cdr.Dead then SCTACDRReturnHome(aiBrain, cdr, platoon) end
         coroutine.yield(2)
         if not cdr.Dead and GetGameTimeSeconds() > WaitTaunt and (not aiBrain.LastVocTaunt or GetGameTimeSeconds() - aiBrain.LastVocTaunt > WaitTaunt) then
             SUtils.AIRandomizeTaunt(aiBrain)
@@ -253,18 +258,15 @@ function CommanderThreadSCTA(cdr, platoon)
 end
 
 
-function SCTACDRReturnHome(aiBrain, cdr)
+function SCTACDRReturnHome(aiBrain, cdr, platoon)
     -- This is a reference... so it will autoupdate
     local cdrPos = cdr:GetPosition()
     local distSqAway = 150
     local loc = cdr.CDRHome
-    if not cdr.Dead and VDist2Sq(cdrPos[1], cdrPos[3], loc[1], loc[3]) > distSqAway then
-        local plat = aiBrain:MakePlatoon('', '')
-        aiBrain:AssignUnitsToPlatoon(plat, {cdr}, 'Support', 'None')
-        --cdr:SetScriptBit('RULEUTC_CloakToggle', false)
+    if not cdr.Dead and (VDist2Sq(cdrPos[1], cdrPos[3], loc[1], loc[3]) > distSqAway or cdr:GetHealthPercent() < 0.6 or aiBrain.Level2) then
         repeat
             CDRRevertPriorityChange(aiBrain, cdr)
-            if not aiBrain:PlatoonExists(plat) then
+            if not aiBrain:PlatoonExists(platoon) then
                 return
             end
             IssueStop({cdr})
