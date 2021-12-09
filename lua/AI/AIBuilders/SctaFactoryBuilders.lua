@@ -26,12 +26,10 @@ BuilderGroup {
             { MIBC, 'GreaterThanGameTime', { 90 } },
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, categories.FACTORY} },
             { TASlow, 'TAFactoryCapCheckT1', {}},
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8} },
         },
         BuilderType = 'LandTA',
         BuilderData = {
-            ---NeedGuard = false,
-            TAEscort = true,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -54,12 +52,10 @@ BuilderGroup {
             { MIBC, 'GreaterThanGameTime', { 120 } },
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, categories.FACTORY } },
             { TASlow, 'TAFactoryCapCheckT1', {}},
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8} },
         },
         BuilderType = 'LandTA',
         BuilderData = {
-            ---NeedGuard = false,
-            TAEscort = true,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -82,7 +78,7 @@ BuilderGroup {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory2' }},
             { TASlow, 'TAFactoryCapCheckT2', {}},
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, LAB} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8} },
         },
         BuilderType = 'OmniLand',
         BuilderData = {
@@ -108,7 +104,7 @@ BuilderGroup {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory2' }},
             { TASlow, 'TAFactoryCapCheckT2', {} },
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, LAB} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8} },
         },
         BuilderType = 'OmniLand',
         BuilderData = {
@@ -138,7 +134,7 @@ BuilderGroup {
             { TASlow, 'TAFactoryCapCheckT2', {} },
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, categories.FACTORY} },
             { UCBC, 'HaveLessThanUnitsWithCategory', { 4,  categories.FACTORY * categories.AIR} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8} },
         },
         BuilderType = 'LandTA',
         BuilderData = {
@@ -165,7 +161,7 @@ BuilderGroup {
             { UCBC, 'HaveGreaterThanUnitsWithCategory', { 1,  LAB } },
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, LAB * categories.AIR} },
             { UCBC, 'HaveLessThanUnitsWithCategory', { 4, LAB * categories.AIR } }, -- Stop after 10 facs have been built.
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8} },
         },
         BuilderType = 'OmniAir',
         BuilderData = {
@@ -191,7 +187,7 @@ BuilderGroup {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory3' }},
             { UCBC, 'HaveLessThanUnitsWithCategory', { 4, PLATFORM * categories.LAND } },
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, categories.LAND * PLATFORM} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8} },
         },
         BuilderType = 'OmniLand',
         BuilderData = {
@@ -217,7 +213,7 @@ BuilderGroup {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory3' }},
             { UCBC, 'HaveLessThanUnitsWithCategory', { 4, PLATFORM * categories.AIR} },
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, categories.AIR * PLATFORM} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8} },
         },
         BuilderType = 'OmniAir',
         BuilderData = {
@@ -241,7 +237,7 @@ BuilderGroup {
         InstanceCount = 1,
         BuilderConditions = {
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, categories.ARTILLERY * categories.STRUCTURE} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8} },
         },
         BuilderType = 'T3TA',
         BuilderData = {

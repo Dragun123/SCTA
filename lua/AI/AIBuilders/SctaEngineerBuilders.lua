@@ -27,7 +27,7 @@ BuilderGroup {
         BuilderType = 'Land',
     },
     Builder {
-        BuilderName = 'SCTAAI T1 Scouts',
+        BuilderName = 'SCTAAI T1 Air Scouts',
         PlatoonTemplate = 'T1AirScoutSCTA',
         PriorityFunction = TAPrior.UnitProductionT1,
         Priority = 110,
@@ -41,7 +41,7 @@ BuilderGroup {
         BuilderType = 'Air',
     }, 
     Builder {
-        BuilderName = 'SCTAAI T2 Scouts',
+        BuilderName = 'SCTAAI T2 Air Scouts',
         PlatoonTemplate = 'T2AirScoutSCTA',
         Priority = 110,
         InstanceCount = 1,
@@ -98,7 +98,7 @@ BuilderGroup {
         InstanceCount = 2,
         BuilderConditions = {
             --{ UCBC, 'CheckBuildPlattonDelay', { 'T2Engineer' }},
-            { TASlow, 'HaveLessThanUnitsWithCategoryTA', { 2, ENGINEER2 * categories.LAND - categories.FIELDENGINEER } }, -- Build engies until we have 4 of them.
+            { TASlow, 'HaveLessThanUnitsWithCategoryTA', { 1, ENGINEER2 * categories.LAND - categories.FIELDENGINEER } }, -- Build engies until we have 4 of them.
         },
         BuilderType =  'Land',
     },

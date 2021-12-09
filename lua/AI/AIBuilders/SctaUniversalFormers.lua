@@ -78,6 +78,7 @@ BuilderGroup {
                 TargetThreatType = 'Commander',
             },
             UseMoveOrder = true,
+            Experimental = true,
             PrioritizedCategories = { 'COMMAND', 'FACTORY -NAVAL', 'EXPERIMENTAL', 'MASSPRODUCTION', 'STRUCTURE -NAVAL' },
         },
     },

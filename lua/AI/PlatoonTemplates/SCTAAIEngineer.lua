@@ -29,6 +29,7 @@ PlatoonTemplate {
     GlobalSquads = {
         { (categories.ENGINEER * TA) - WEIRD, 1, 1, 'Support', 'None' },
         { categories.LAND * categories.MOBILE * categories.SILO - categories.ENGINEER, 0, 1, 'Guard', 'none' },
+        { (categories.ENGINEER * TA), 0, 1, 'Scout', 'None' },
     },
 }
 
@@ -49,6 +50,7 @@ PlatoonTemplate {
     GlobalSquads = {
         { (categories.ENGINEER * TA) * (categories.TECH3 + (categories.TECH2 - WEIRD)), 1, 1, 'Support', 'None' },
         { categories.LAND * categories.MOBILE * categories.SILO - categories.ENGINEER, 0, 1, 'Guard', 'none' },
+        { (categories.ENGINEER * TA), 0, 1, 'Scout', 'None' },
     },
 }
 
@@ -60,6 +62,7 @@ PlatoonTemplate {
     GlobalSquads = {
         { (categories.ENGINEER * categories.TECH1 * TA) - WEIRD, 1, 1, 'Support', 'None' },
         { categories.LAND * categories.MOBILE * categories.SILO - categories.ENGINEER, 0, 1, 'Guard', 'none' },
+        { (categories.ENGINEER * TA), 0, 1, 'Scout', 'None' },
     },
 }
 

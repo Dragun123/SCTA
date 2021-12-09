@@ -23,14 +23,12 @@ BuilderGroup {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory' }},
             { TASlow, 'TAFactoryCapCheckT1', {}},
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, categories.FACTORY} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8} },
         },
         BuilderType = 'LandTA',
         BuilderData = {
             ---NeedGuard = false,
             TAEscort = true,
-            DesiresAssist = true,
-            NumAssistees = 2,
             Construction = {
                 BuildClose = true,
                 BuildStructures = {
@@ -50,14 +48,12 @@ BuilderGroup {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory' }},
             { TASlow, 'TAFactoryCapCheckT1', {}},
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, categories.FACTORY} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8} },
         },
         BuilderType = 'LandTA',
         BuilderData = {
             ---NeedGuard = false,
             TAEscort = true,
-            DesiresAssist = true,
-            NumAssistees = 2,
             Construction = {
                 BuildClose = true,
                 BuildStructures = {
@@ -77,7 +73,7 @@ BuilderGroup {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory2' }},
             { TASlow, 'TAFactoryCapCheckT2', {}},
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, LAB} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8} },
         },
         BuilderType = 'OmniLand',
         BuilderData = {
@@ -103,7 +99,7 @@ BuilderGroup {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory2' }},
             { TASlow, 'TAFactoryCapCheckT2', {}},
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, LAB} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8} },
         },
         BuilderType = 'OmniLand',
         BuilderData = {
@@ -131,13 +127,11 @@ BuilderGroup {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory' }},
             { UCBC, 'FactoryCapCheck', { 'LocationType', 'Air' } },
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, categories.FACTORY} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8} },
         },
         BuilderType = 'AirTA',
         BuilderData = {
             ---NeedGuard = false,
-            DesiresAssist = true,
-            NumAssistees = 2,
             Construction = {
                 BuildClose = true,
                 BuildStructures = {
@@ -157,7 +151,7 @@ BuilderGroup {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory2' }},
             { UCBC, 'FactoryCapCheck', { 'LocationType', 'Air' } },
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, LAB * categories.AIR} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8} },
         },
         BuilderType = 'OmniAir',
         BuilderData = {
@@ -182,7 +176,7 @@ BuilderGroup {
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Artillery' }},
             { UCBC, 'HaveLessThanUnitsWithCategory', { 2, categories.ARTILLERY * categories.STRUCTURE * categories.TECH2} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8} },
         },
         BuilderType = 'NotACU',
         BuilderData = {
@@ -205,7 +199,7 @@ BuilderGroup {
         InstanceCount = 1,
         BuilderConditions = {
             { UCBC, 'HaveLessThanUnitsWithCategory', { 1, categories.TACTICALMISSILEPLATFORM} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8} },
         },
         BuilderType = 'NotACU',
         BuilderData = {
@@ -228,7 +222,7 @@ BuilderGroup {
         BuilderConditions = {
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, PLATFORM * categories.LAND} },
             { UCBC, 'HaveLessThanUnitsWithCategory', { 4, PLATFORM * categories.LAND} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8} },
         },
         BuilderType = 'OmniLand',
         BuilderData = {
@@ -252,7 +246,7 @@ BuilderGroup {
         BuilderConditions = {
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, PLATFORM * categories.AIR} },
             { UCBC, 'HaveLessThanUnitsWithCategory', { 4, PLATFORM * categories.AIR} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8} },
         },
         BuilderType = 'OmniAir',
         BuilderData = {

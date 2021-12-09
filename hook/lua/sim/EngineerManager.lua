@@ -269,10 +269,10 @@ EngineerManager = Class(SCTAEngineerManager) {
         ---LOG('*Brain', self.Brain.SCTAAI)   
         --unit.bType = bType
         ---meh eitherway this is such a pointless commenting. Oh yeah, modifying the assign via hooking has interesting and had to seperate it until two different types
-        if unit.DesiresAssist then
+        --[[if unit.DesiresAssist then
         unit.DesiresAssist = nil
         unit.NumAssistees = nil
-        end
+        end]]
         ----RealizingProper Assignment In DisbandPlatoon
         if unit.AssigningTask and not unit:IsIdleState() then
             self:TADelayAssign(unit, 48)
@@ -353,14 +353,29 @@ EngineerManager = Class(SCTAEngineerManager) {
                 end
             end
 
-            if hndl.PlatoonData.DesiresAssist then
-                unit.DesiresAssist = true
-                unit.NumAssistees = hndl.PlatoonData.NumAssistees
-            end
-            --[[if hndl.PlatoonData.Reclaimer then
-                unit.TAReclaimer = true
-                --LOG('*TABrain', unit.TAReclaimer)
+        if hndl.PlatoonData.DesiresAssist then
+            unit.DesiresAssist = true
+            unit.NumAssistees = hndl.PlatoonData.NumAssistees
+            --[[if self.Brain.Level2 then
+            ENGINEERINGTA = ENGINEERINGSCTA
             end]]
+            if not self.Brain.Level2 then
+            --_ALERT('SCTAIEXIST')
+                local Assists = self.Brain:GetUnitsAroundPoint(categories.ENGINEER - categories.COMMAND, self.Location, 50, 'Ally') 
+                for _, Assist in Assists do
+                    if Assist and Assist.SCTAAIBrain and (Assist:IsIdleState() or Assist.TAReclaimer) and not (Assist.Escorting or Assist.DesiresAssist) then 
+                        Assist.Escorting = true
+                    self.Brain:AssignUnitsToPlatoon(hndl, {Assist}, 'Scout', 'none')
+                    break
+                ---break here to ensure only first LEGAL option is the one grabbed 
+                    end
+                end
+            end
+        end
+            if hndl.PlatoonData.Reclaimer then
+                unit.TAReclaimer = true
+                --LOG('SCTAIEXIST', unit.TAReclaimer)
+            end
             --[[if hndl.PlatoonData.DesiresTAAssist and (self.Brain.Level2 or hndl.PlatoonData.Hydro) then
                 ---LOG('*TABrain', self.Brain.Plants)
                 --local Escort = self.Brain:GetUnitsAroundPoint((categories.LAND * categories.MOBILE * (categories.SILO + categories.DIRECTFIRE)) - categories.SCOUT - categories.corak - categories.armpw - categories.armflash - categories.corgator - categories.ENGINEER, unit:GetPosition(), 20, 'Ally')[1]

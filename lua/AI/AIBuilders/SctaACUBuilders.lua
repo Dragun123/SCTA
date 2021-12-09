@@ -169,7 +169,7 @@ BuilderGroup {
             ---NeedGuard = false,
             ---DesiresAssist = false,
             Construction = {
-                BuildClose = true,
+                --BuildClose = true,
                 BuildStructures = {
                     'T1EnergyProduction2',
                 }
