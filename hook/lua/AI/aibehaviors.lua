@@ -215,9 +215,12 @@ function CommanderThreadSCTA(cdr, platoon)
                     cdr:OnScriptBitClear(8)
                     cdr.CLOAKAITA = true
                     coroutine.yield(2)      
-                    SCTACDRReturnHome(aiBrain, cdr, platoon)
+                    ---SCTACDRReturnHome(aiBrain, cdr, platoon)
                 end
                 if aiBrain.Level2 then
+                    if not cdr.GoingHome then
+                    SCTACDRReturnHome(aiBrain, cdr, platoon)
+                    end
                     local Escort = platoon.EngineerTAAssist(cdr, aiBrain, categories.STRUCTURE, 20)
                     if not Escort then
                         Escort = platoon.FactoryTAAssist(cdr, aiBrain, categories.FACTORY, 20)
@@ -236,7 +239,7 @@ function CommanderThreadSCTA(cdr, platoon)
                 cdr.Escorting = nil
                 end
             end
-            if not cdr.Escorting and not cdr.EngineerBuildQueue or table.getn(cdr.EngineerBuildQueue) == 0 then
+            if not (cdr.Escorting or cdr.GoingHome) and not cdr.EngineerBuildQueue or table.getn(cdr.EngineerBuildQueue) == 0 then
                 local pool = aiBrain:GetPlatoonUniquelyNamed('ArmyPool')
                 ---cdr:OnScriptBitClear(8)
                 aiBrain:AssignUnitsToPlatoon( pool, {cdr}, 'Unassigned', 'None' )
@@ -261,9 +264,11 @@ end
 function SCTACDRReturnHome(aiBrain, cdr, platoon)
     -- This is a reference... so it will autoupdate
     local cdrPos = cdr:GetPosition()
-    local distSqAway = 150
+    local distSqAway = 25
     local loc = cdr.CDRHome
     if not cdr.Dead and (VDist2Sq(cdrPos[1], cdrPos[3], loc[1], loc[3]) > distSqAway or cdr:GetHealthPercent() < 0.6 or aiBrain.Level2) then
+        local plat = aiBrain:MakePlatoon('', '')
+        aiBrain:AssignUnitsToPlatoon(plat, {cdr}, 'Support', 'None')
         repeat
             CDRRevertPriorityChange(aiBrain, cdr)
             if not aiBrain:PlatoonExists(platoon) then
@@ -274,7 +279,7 @@ function SCTACDRReturnHome(aiBrain, cdr, platoon)
             cdr.GoingHome = true
             WaitSeconds(7)
         until cdr.Dead or VDist2Sq(cdrPos[1], cdrPos[3], loc[1], loc[3]) <= distSqAway
-        cdr.GoingHome = false
+        cdr.GoingHome = nil
         IssueClearCommands({cdr})
     end
 end

@@ -1981,9 +1981,6 @@ Platoon = Class(SCTAAIPlatoon) {
         local oldThreat
         while aiBrain:PlatoonExists(self) do
             local numberOfUnitsInPlatoon = table.getn(platoonUnits)
-            if numberOfUnitsInPlatoon < 20 then
-                self:SetPlatoonFormationOverride('AttackFormation')
-            end
             if not target or target.Dead then
                 if aiBrain:GetCurrentEnemy() and aiBrain:GetCurrentEnemy():IsDefeated() then
                     aiBrain:PickEnemyLogic()
@@ -2019,6 +2016,9 @@ Platoon = Class(SCTAAIPlatoon) {
                 end]]            
                 coroutine.yield(11)
                 if target and not target.Dead and not self.Move then
+                    if numberOfUnitsInPlatoon < 20 then
+                        self:SetPlatoonFormationOverride('AttackFormation')
+                    end
                 --WaitSeconds(1)
                 self:Stop()      
                 local threat = target:GetPosition()
@@ -2201,6 +2201,14 @@ Platoon = Class(SCTAAIPlatoon) {
                         self.Move = true
                     end
                     oldThreat = threat
+                elseif aiBrain.Level3 and self.Move then
+                self.Center = self:GetPlatoonPosition()
+                local position = AIUtils.RandomLocation(self.Center[1],self.Center[3])
+                --coroutine.yield(2)
+                self:Stop()
+                coroutine.yield(11)
+                self:MoveToLocation(position, false)
+                self.Move = nil
                 else
                     ---self.Center = self:GetPlatoonPosition()
                     coroutine.yield(31)
