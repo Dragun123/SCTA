@@ -51,7 +51,6 @@ Platoon = Class(SCTAAIPlatoon) {
                     coroutine.yield(2)
                     return self:PlatoonDisbandTA()
                 end
-                self:Stop('Support')
             end
             --self:Stop('Support')
             ---IssueClearCommands({eng})
@@ -2662,6 +2661,64 @@ Platoon = Class(SCTAAIPlatoon) {
         end
     end,
 
+    SCTAExperimental = function(self)
+        self:Stop()
+        local aiBrain = self:GetBrain()
+        local armyIndex = aiBrain:GetArmyIndex()
+        local target
+        local blip
+        local hadtarget = false
+        local experimental = self:GetSquadUnits('Attack')[1]
+        local basePosition = false
+        if not experimental.Taunt then
+            TAReclaim.TAAIRandomizeTaunt(aiBrain)
+            experimental.Taunt = true 
+        end
+
+        if self.PlatoonData.LocationType and self.PlatoonData.LocationType != 'NOTMAIN' then
+            basePosition = aiBrain.BuilderManagers[self.PlatoonData.LocationType].Position
+        else
+            local platoonPosition = self:GetPlatoonPosition()
+            if platoonPosition then
+                basePosition = aiBrain:FindClosestBuilderManagerPosition(self:GetPlatoonPosition())
+            end
+        end
+
+        if not basePosition then
+            return
+        end
+
+        while aiBrain:PlatoonExists(self) do
+            target = self:FindClosestUnit('Attack', 'Enemy', true, categories.COMMAND + categoeries.EXPERIMENTAL)
+                if not target then
+                target = self:FindClosestUnit('Attack', 'Enemy', true, categories.STRUCTURE)
+                else
+                --WaitSeconds(1)
+                coroutine.yield(11)
+                return self:SCTALabAI()
+            end
+            if target and target:GetFractionComplete() == 1 then
+                local EcoThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 1, true, 'Economy')
+                --LOG("Air threat: " .. airThreat)
+                local SurfaceThreat = aiBrain:GetThreatAtPosition(table.copy(target:GetPosition()), 1, true, 'AntiSurface') - EcoThreat
+                --LOG("AntiAir threat: " .. antiAirThreat)
+                if SurfaceThreat < 1.5 then
+                    blip = target:GetBlip(armyIndex)
+                    self:Stop()
+                    self:AttackTarget(target)
+                    hadtarget = true
+                end
+           elseif not target and hadtarget then
+                --DUNCAN - move back to base
+                local position = AIUtils.RandomLocation(basePosition[1],basePosition[3])
+                self:Stop()
+                self:MoveToLocation(position, false)
+                hadtarget = false
+            end
+            WaitSeconds(5) --DUNCAN - was 5
+        end
+    end,
+
     SCTALabAI = function(self)
         AIAttackUtils.GetMostRestrictiveLayer(self)
         local aiBrain = self:GetBrain()
@@ -2725,6 +2782,9 @@ Platoon = Class(SCTAAIPlatoon) {
                     elseif structure and self.PlatoonData.Layer then
                         coroutine.yield(2)
                         return self:SCTAArtyHuntAI()
+                    elseif self.PlatoonData.Experimental then
+                        coroutine.yield(2)
+                        return self:SCTAExperimental()
                     else
                         coroutine.yield(2)
                     end
@@ -3459,16 +3519,12 @@ Platoon = Class(SCTAAIPlatoon) {
             if not experimental or experimental.Dead then
                 return
             end
-            if not experimental.Taunt then
-                TAReclaim.TAAIRandomizeTaunt(aiBrain)
-                experimental.Taunt = true 
-            end
-            local ID = experimental.UnitId
-            self:SetPlatoonFormationOverride('AttackFormation')
-            if ID == 'corkrog' or 'armdrake' then
-                return behaviors.BehemothBehaviorTotal(self)
-            else
+            if EntityCategoryContains(categories.ENGINEER, experimental) then
+                coroutine.yield(2)
                 return behaviors.CommanderBehaviorSCTADecoy(self)
+            else
+                coroutine.yield(2)
+                return self:SCTAExperimental()
             end
         end,
 
