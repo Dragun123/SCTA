@@ -29,8 +29,6 @@ BuilderGroup {
         BuilderData = {
             ---NeedGuard = false,
             TAEscort = true,
-            DesiresAssist = true,
-            NumAssistees = 2,
             Construction = {
                 BuildClose = true,
                 BuildStructures = {
@@ -56,8 +54,6 @@ BuilderGroup {
         BuilderData = {
             ---NeedGuard = false,
             TAEscort = true,
-            DesiresAssist = true,
-            NumAssistees = 2,
             Construction = {
                 BuildClose = true,
                 BuildStructures = {
@@ -136,8 +132,6 @@ BuilderGroup {
         BuilderType = 'AirTA',
         BuilderData = {
             ---NeedGuard = false,
-            DesiresAssist = true,
-            NumAssistees = 2,
             Construction = {
                 BuildClose = true,
                 BuildStructures = {

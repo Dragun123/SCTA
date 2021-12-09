@@ -25,9 +25,7 @@ BuilderGroup {
         },
         BuilderType = 'LandTA',
         BuilderData = {
-            ---NeedGuard = false,
             TAEscort = true,
-            ---DesiresAssist = false,
             Construction = {
                 Location = 'LocationType',
                 BuildStructures = {

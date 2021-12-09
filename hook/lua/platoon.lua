@@ -244,6 +244,7 @@ Platoon = Class(SCTAAIPlatoon) {
     EngineerBuildAISCTA = function(self)
         local aiBrain = self:GetBrain()
         local EscortUnits = self:GetSquadUnits('Guard')[1]
+        local Assisters = self:GetSquadUnits('Scout')[1]
         local armyIndex = aiBrain:GetArmyIndex()
         local x,z = aiBrain:GetArmyStartPos()
         local cons = self.PlatoonData.Construction
@@ -254,10 +255,16 @@ Platoon = Class(SCTAAIPlatoon) {
             coroutine.yield(2)
             self:PlatoonDisbandTA()
             return
-        elseif EscortUnits and not EscortUnits.Dead then
+        end
+        if EscortUnits and not EscortUnits.Dead then
             self:Stop('Guard')
             ---EscortUnits.Escorting = true
             IssueGuard({EscortUnits}, eng)
+        end
+        if Assisters and not Assisters.Dead then
+            self:Stop('Scout')
+             ---EscortUnits.Escorting = true
+            IssueGuard({Assisters}, eng)
         end
 
         --DUNCAN - added
@@ -1755,6 +1762,9 @@ Platoon = Class(SCTAAIPlatoon) {
             v.ReclaimInProgress = nil
             v.CaptureInProgress = nil
             v.Escorting = nil
+            v.TAReclaimer = nil
+            v.DesiresAssist = nil
+            v.NumAssistees = nil
             v.AssigningTask = nil
             if v:IsPaused() then
                 v:SetPaused( false )

@@ -30,8 +30,6 @@ BuilderGroup {
         },
         BuilderType = 'LandTA',
         BuilderData = {
-            ---NeedGuard = false,
-            TAEscort = true,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {
@@ -58,8 +56,6 @@ BuilderGroup {
         },
         BuilderType = 'LandTA',
         BuilderData = {
-            ---NeedGuard = false,
-            TAEscort = true,
             DesiresAssist = true,
             NumAssistees = 2,
             Construction = {

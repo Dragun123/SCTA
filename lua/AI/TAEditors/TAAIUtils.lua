@@ -413,7 +413,7 @@ function TAFindAssistUnits(aiBrain, locationType, category, range)
         local Assist = aiBrain:GetUnitsAroundPoint(category, engineerManager:GetLocationCoords(), range, 'Ally')
             for _, Escort in Assist do
                     if Escort and Escort.DesiresAssist and Escort.SCTAAIBrain
-                     and table.getn(Escort:GetGuards()) < Escort.NumAssistees and not Escort.Escorting then
+                     and table.getn(Escort:GetGuards()) <= Escort.NumAssistees and not Escort.Escorting then
                         return true 
         --LOG('IEXISTTABRAIN2')
     --WaitSeconds(3)
