@@ -1946,112 +1946,71 @@ Platoon = Class(SCTAAIPlatoon) {
             return
         end
         local armyIndex = aiBrain:GetArmyIndex()
-        local categoryListA = {}
-        local categoryListArt = {}
         local categoryList = {}
         local atkPri = {}
-        local atkPriA = {}
-        local atkPriArt = {}
         local platoonUnits = self:GetPlatoonUnits()
         --[[for _,v in platoonUnits do
             if v.Dead then continue end
             v:SetCustomName('AttackHuntSCTA')
-        end]] 
+        end]]
         local Artillery = self:GetSquadUnits('Artillery')
         local AntiAir = self:GetSquadUnits('Scout')
-        local Support = self:GetSquadUnits('Guard')
-        if AntiAir > 0 then
-            table.insert( atkPriA, 'AIR' )
-            table.insert( categoryListA, SCTAAIR)
-            self:SetPrioritizedTargetList( 'Scout', categoryListA)
-        end
-        if Artillery > 0 then
-            table.insert( atkPriArt, 'LAND' )
-            table.insert( categoryListArt, (categories.STRUCTURE - categories.WALL - categories.NAVAL) + (SCTALAND))
-            self:SetPrioritizedTargetList( 'Artillery', categoryListArt)
-        end
         table.insert( atkPri, 'LAND' )
         table.insert( categoryList, SCTALAND)
         self:SetPrioritizedTargetList( 'Attack', categoryList )
         local target
-        local targetAir
-        local targetArt
+        local oldThreat
+        local threat
         local blip = false
         local maxRadius = self.PlatoonData.SearchRadius or 100
-        local oldThreat
         while aiBrain:PlatoonExists(self) do
             local numberOfUnitsInPlatoon = table.getn(platoonUnits)
             if not target or target.Dead then
                 if aiBrain:GetCurrentEnemy() and aiBrain:GetCurrentEnemy():IsDefeated() then
                     aiBrain:PickEnemyLogic()
                 end
-                if Artillery > 0 then
-                    --WaitSeconds(0.25)
-                    coroutine.yield(3)
-                    targetArt = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Artillery', maxRadius, atkPriArt, aiBrain:GetCurrentEnemy())
-                end
-                if AntiAir > 0 then
-                    --WaitSeconds(0.25)
-                    coroutine.yield(3)
-                    targetAir = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Scout', maxRadius, atkPriA, aiBrain:GetCurrentEnemy())
-                end
-                local mult = { 1, 5, 10 }
+                local mult = { 1,5,10 }
                 for _,i in mult do
                     target = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Attack', maxRadius * i, atkPri, aiBrain:GetCurrentEnemy() )
                     if target and not target.Dead then
                         break
                     end
                     --WaitSeconds(3)
-                    coroutine.yield(31)
+                    coroutine.yield(30)
                     if not aiBrain:PlatoonExists(self) then
                         return
                     end
                 end
-                --[[target = self:FindPrioritizedUnit('Attack', 'Enemy', true, self:GetPlatoonPosition(), maxRadius)
-                if AntiAir > 0 then
-                targetAir = self:FindPrioritizedUnit('Scout', 'Enemy', true, self:GetSquadPosition('Scout'), 25)
+                if target then
+                    threat = target:GetPosition()
+                    else
+                    threat = AIUtils.RandomLocation(self:GetPlatoonPosition()[1],self:GetPlatoonPosition()[3])
                 end
                 if Artillery > 0 then
-                targetArt = self:FindPrioritizedUnit('Artillery', 'Enemy', true, self:GetSquadPosition('Artillery'), 50)
-                end]]            
+                    --WaitSeconds(0.25)
+                    if not self.ArtilleryThread then
+                    self.ArtilleryThread = self:ForkThread(self.PlatoonHandle.SCTAStrikeForceArtillery, threat, Artillery)
+                    end
+                end
+                if AntiAir > 0 then
+                    if not self.AntiAirThread then
+                        self.AntiAirThread = self:ForkThread(self.PlatoonHandle.SCTAStrikeForceAntiAir, threat)
+                    end
+                    --WaitSeconds(0.25)
+                end
+                if numberOfUnitsInPlatoon < 20 then
+                    self:SetPlatoonFormationOverride('AttackFormation')
+                end
+                self:Stop('Attack')
+                --WaitSeconds(1)
                 coroutine.yield(11)
                 if target and not target.Dead and not self.Move then
-                    if numberOfUnitsInPlatoon < 20 then
-                        self:SetPlatoonFormationOverride('AttackFormation')
+                    WaitSeconds(10)
+                    --self:Stop()
+                    self:MoveToLocation( table.copy(threat), false, 'Attack')
+                    if oldThreat == threat then
+                        self.Move = true
                     end
-                --WaitSeconds(1)
-                self:Stop()      
-                local threat = target:GetPosition()
-                            ---self:MoveToLocation( table.copy(threat), false, 'Attack')
-                                if AntiAir > 0 then
-                                    if targetAir and not targetAir.Dead then
-                                    self:AttackTarget(targetAir, 'Scout')
-                                    else
-                                    self.Move = true
-                                    coroutine.yield(2)
-                                    self:AggressiveMoveToLocation(table.copy(threat), 'Scout')
-                                    end
-                                end
-                                if Artillery > 0 then
-                                    if targetArt and not targetArt.Dead then
-                                    self:AggressiveMoveToLocation(table.copy(targetArt:GetPosition()), 'Artillery')
-                                    --self:MoveToLocation( table.copy(threat), false, 'Attack')    
-                                    else
-                                    self.Move = true
-                                    coroutine.yield(2)
-                                    --self:MoveToLocation( table.copy(threat), false, 'Attack')
-                                    self:AggressiveMoveToLocation(table.copy(threat), 'Artillery')
-                                    end
-                                end
-                                if Support > 0 then
-                                    self:AggressiveMoveToLocation(table.copy(threat), 'Guard')
-                                end 
-                                --WaitSeconds(10)
-                                --self:Stop()
-                                self:MoveToLocation( table.copy(threat), false, 'Attack')
-                                if oldThreat == threat then
-                                    self.Move = true
-                                end
                                 oldThreat = threat
                             else
                                 ---self.Center = self:GetPlatoonPosition()
@@ -2060,6 +2019,14 @@ Platoon = Class(SCTAAIPlatoon) {
                                 end
                                 coroutine.yield(11)
                                 self:Stop()
+                                if self.ArtilleryThread then
+                                    KillThread(self.ArtilleryThread)
+                                    self.ArtilleryThread = nil
+                                end
+                                if self.AntiAirThread then
+                                    KillThread(self.AntiAirThread)
+                                    self.AntiAirThread = nil
+                                end
                                 self:MoveToLocation( (v), false )
                                 self.Move = nil
                                 WaitSeconds(7)
@@ -2076,50 +2043,21 @@ Platoon = Class(SCTAAIPlatoon) {
         end
     end,
 
-    SCTAStrikeForceAIEndgame = function(self)
-        self:Stop()
-        local aiBrain = self:GetBrain()
-        if not self:GatherUnitsSCTA() then
-            return
-        end
+    SCTAStrikeForceArtillery = function(self, threat, squad)
+        local aiBrain = self.PlatoonHandle:GetBrain()
         local armyIndex = aiBrain:GetArmyIndex()
-        local categoryListA = {}
         local categoryListArt = {}
-        local categoryList = {}
-        local atkPri = {}
-        local atkPriA = {}
         local atkPriArt = {}
-        local platoonUnits = self:GetPlatoonUnits()
-        --[[for _,v in platoonUnits do
-            if v.Dead then continue end
-            v:SetCustomName('AttackHuntSCTA')
-        end]]
-        local Support = self:GetSquadUnits('Guard')
-        local Artillery = self:GetSquadUnits('Artillery')
-        local AntiAir = self:GetSquadUnits('Scout')
-        if AntiAir > 0 then
-            table.insert( atkPriA, 'AIR' )
-            table.insert( categoryListA, SCTAAIR)
-            self:SetPrioritizedTargetList( 'Scout', categoryListA)
-        end
-        if Artillery > 0 then
-            table.insert( atkPriArt, 'LAND' )
-            table.insert( categoryListArt, (categories.STRUCTURE - categories.WALL - categories.NAVAL))
-            self:SetPrioritizedTargetList( 'Artillery', categoryListArt)
-        end
-        table.insert( atkPri, 'LAND' )
-        table.insert( categoryList, SCTALAND)
-        self:SetPrioritizedTargetList( 'Attack', categoryList )
-        local target
-        local targetAir
+        local position
+        table.insert( atkPriArt, 'LAND' )
+        table.insert( categoryListArt, (categories.STRUCTURE - categories.WALL - categories.NAVAL))
+        self:SetPrioritizedTargetList( 'Artillery', categoryListArt)
         local targetArt
-        local oldThreat
-        local blip = false
-        local maxRadius = self.PlatoonData.SearchRadius or 100
         if self.PlatoonData.Energy and EntityCategoryContains(categories.ANTISHIELD, Artillery) then
             self.EDrain = true
         end
         while aiBrain:PlatoonExists(self) do
+            WaitSecond(5)
             --[[local numberOfUnitsInPlatoon = table.getn(platoonUnits)
             if numberOfUnitsInPlatoon < 30 then
                 self:SetPlatoonFormationOverride('AttackFormation')
@@ -2129,19 +2067,76 @@ Platoon = Class(SCTAAIPlatoon) {
                     coroutine.yield(11)
                     self:CheckEnergySCTAEco()
                 end
+        targetArt = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Artillery', 25, atkPriArt, aiBrain:GetCurrentEnemy())
+        WaitSecond(5)
+        if targetArt and not targetArt.Dead then
+            self:AggressiveMoveToLocation(table.copy(targetArt:GetPosition()), 'Artillery')
+            --self:MoveToLocation( table.copy(threat), false, 'Attack')    
+            else
+                self.Move = true
+                coroutine.yield(2)
+            --self:MoveToLocation( table.copy(threat), false, 'Attack')
+            self:AggressiveMoveToLocation( table.copy(threat), 'Artillery')
+        end
+        WaitSeconds(20)
+        end
+    end,
+
+    SCTAStrikeForceAntiAir = function(self, threat)
+        local aiBrain = self.PlatoonHandle:GetBrain()
+        local armyIndex = aiBrain:GetArmyIndex()
+        local categoryListA = {}
+        local atkPriA = {}
+        local position
+        table.insert( atkPriA, 'AIR' )
+        table.insert( categoryListA, SCTAAIR)
+        self:SetPrioritizedTargetList( 'Scout', categoryListA)
+        local targetAir
+        while aiBrain:PlatoonExists(self) do
+                WaitSecond(5)
+                targetAir = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Scout', 30, atkPriA, aiBrain:GetCurrentEnemy())
+                WaitSecond(5)
+                if targetAir and not targetAir.Dead then
+                self:AttackTarget(targetAir, 'Scout')
+                else
+                self.Move = true
+                coroutine.yield(2)
+                self:AggressiveMoveToLocation( table.copy(threat), 'Scout')
+            end
+            WaitSeconds(20)
+        end
+    end,
+
+
+    SCTAStrikeForceAIEndgame = function(self)
+        self:Stop()
+        local aiBrain = self:GetBrain()
+        if not self:GatherUnitsSCTA() then
+            return
+        end
+        local armyIndex = aiBrain:GetArmyIndex()
+        local categoryList = {}
+        local atkPri = {}
+        local platoonUnits = self:GetPlatoonUnits()
+        --[[for _,v in platoonUnits do
+            if v.Dead then continue end
+            v:SetCustomName('AttackHuntSCTA')
+        end]]
+        local Support = self:GetSquadUnits('Guard')
+        local Artillery = self:GetSquadUnits('Artillery')
+        local AntiAir = self:GetSquadUnits('Scout')
+        table.insert( atkPri, 'LAND' )
+        table.insert( categoryList, SCTALAND)
+        self:SetPrioritizedTargetList( 'Attack', categoryList )
+        local target
+        local threat 
+        local oldThreat
+        local blip = false
+        local maxRadius = self.PlatoonData.SearchRadius or 100
+        while aiBrain:PlatoonExists(self) do
             if not target or target.Dead then
                 if aiBrain:GetCurrentEnemy() and aiBrain:GetCurrentEnemy():IsDefeated() then
                     aiBrain:PickEnemyLogic()
-                end
-                if Artillery > 0 then
-                    --WaitSeconds(0.25)
-                    coroutine.yield(3)
-                    targetArt = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Artillery', maxRadius, atkPriArt, aiBrain:GetCurrentEnemy())
-                end
-                if AntiAir > 0 then
-                    --WaitSeconds(0.25)
-                    coroutine.yield(3)
-                    targetAir = AIUtils.AIFindBrainTargetInRange( aiBrain, self, 'Scout', maxRadius, atkPriA, aiBrain:GetCurrentEnemy())
                 end
                 local mult = { 1,10,20 }
                 for _,i in mult do
@@ -2155,6 +2150,23 @@ Platoon = Class(SCTAAIPlatoon) {
                         return
                     end
                 end
+                if target then
+                threat = target:GetPosition()
+                else
+                threat = AIUtils.RandomLocation(self:GetPlatoonPosition()[1],self:GetPlatoonPosition()[3])
+                end
+                if Artillery > 0 then
+                    --WaitSeconds(0.25)
+                    if not self.ArtilleryThread then
+                    self.ArtilleryThread = self:ForkThread(self.PlatoonHandle.SCTAStrikeForceArtillery, threat, Artillery)
+                    end
+                end
+                if AntiAir > 0 then
+                    if not self.AntiAirThread then
+                        self.AntiAirThread = self:ForkThread(self.PlatoonHandle.SCTAStrikeForceAntiAir, threat)
+                    end
+                    --WaitSeconds(0.25)
+                end
                 --[[target = self:FindPrioritizedUnit('Attack', 'Enemy', true, self:GetPlatoonPosition(), maxRadius)
                 if self:GetSquadUnits('Scout') > 0 then
                 targetAir = self:FindPrioritizedUnit('Scout', 'Enemy', true, self:GetSquadPosition('Scout'), 25)
@@ -2166,31 +2178,10 @@ Platoon = Class(SCTAAIPlatoon) {
                 if numberOfUnitsInPlatoon < 20 then
                     self:SetPlatoonFormationOverride('AttackFormation')
                 end
-                self:Stop()
+                self:Stop('Attack')
                 --WaitSeconds(1)
                 coroutine.yield(11)
                 if target and not target.Dead and not self.Move then
-                    local threat = target:GetPosition()
-                    if AntiAir > 0 then
-                        if targetAir and not targetAir.Dead then
-                        self:AttackTarget(targetAir, 'Scout')
-                        else
-                            self.Move = true
-                            coroutine.yield(2)
-                        self:AggressiveMoveToLocation(table.copy(threat), 'Scout')
-                        end
-                    end
-                    if Artillery > 0 then
-                        if targetArt and not targetArt.Dead then
-                        self:AggressiveMoveToLocation(table.copy(targetArt:GetPosition()), 'Artillery')
-                        --self:MoveToLocation( table.copy(threat), false, 'Attack')    
-                        else
-                            self.Move = true
-                            coroutine.yield(2)
-                        --self:MoveToLocation( table.copy(threat), false, 'Attack')
-                        self:AggressiveMoveToLocation(table.copy(threat), 'Artillery')
-                        end
-                    end
                     if Support > 0 then
                         self:AggressiveMoveToLocation(table.copy(threat), 'Guard')
                     end 
@@ -2201,25 +2192,34 @@ Platoon = Class(SCTAAIPlatoon) {
                         self.Move = true
                     end
                     oldThreat = threat
-                elseif aiBrain.Level3 and self.Move then
-                self.Center = self:GetPlatoonPosition()
-                local position = AIUtils.RandomLocation(self.Center[1],self.Center[3])
-                --coroutine.yield(2)
-                self:Stop()
-                coroutine.yield(11)
-                self:MoveToLocation(position, false)
-                self.Move = nil
                 else
-                    ---self.Center = self:GetPlatoonPosition()
-                    coroutine.yield(31)
-                    for k,v in AIUtils.AIGetSortedMassLocations(aiBrain, 10, nil, nil, nil, nil, self:GetPlatoonPosition()) do
-                        if v[1] < 0 or v[3] < 0 or v[1] > ScenarioInfo.size[1] or v[3] > ScenarioInfo.size[2] then
-                    end
-                    coroutine.yield(11)
-                    self:Stop()
-                    self:MoveToLocation( (v), false )
                     self.Move = nil
-                    WaitSeconds(7)
+                    if self.ArtilleryThread then
+                        KillThread(self.ArtilleryThread)
+                        self.ArtilleryThread = nil
+                    end
+                    if self.AntiAirThread then
+                        KillThread(self.AntiAirThread)
+                        self.AntiAirThread = nil
+                    end
+                    if aiBrain.Level3 then
+                        self.Center = self:GetPlatoonPosition()
+                        local position = AIUtils.RandomLocation(self.Center[1],self.Center[3])
+                --coroutine.yield(2)
+                        self:Stop()
+                        coroutine.yield(11)
+                        self:MoveToLocation(position, false)
+                    else
+                    ---self.Center = self:GetPlatoonPosition()
+                        coroutine.yield(31)
+                        for k,v in AIUtils.AIGetSortedMassLocations(aiBrain, 10, nil, nil, nil, nil, self:GetPlatoonPosition()) do
+                            if v[1] < 0 or v[3] < 0 or v[1] > ScenarioInfo.size[1] or v[3] > ScenarioInfo.size[2] then
+                        end
+                        coroutine.yield(11)
+                        self:Stop()
+                        self:MoveToLocation( (v), false )
+                        WaitSeconds(7)
+                    end
                 end
                 end
             end
@@ -3109,6 +3109,7 @@ Platoon = Class(SCTAAIPlatoon) {
         while brain:PlatoonExists(self) do
             local ents = TAReclaim.TAAIReclaimablesAroundEngineer(brain, eng)
             local pos = eng:GetPosition()
+            local SCTAReclaim = ents[1]:GetPosition()
             if not ents or not pos then
                 --WaitTicks(1)
                 coroutine.yield(2)
@@ -3151,10 +3152,11 @@ Platoon = Class(SCTAAIPlatoon) {
             --WaitSeconds(1)
                 coroutine.yield(11)
                 return self:PlatoonDisbandTA()
-            elseif self.PlatoonData.Layer and AIAttackUtils.CanGraphAreaToSCTA(pos, ents[1]:GetPosition(), self.PlatoonData.Layer) then
+            elseif self.PlatoonData.Layer and AIAttackUtils.CanGraphAreaToSCTA(pos, SCTAReclaim, self.PlatoonData.Layer) then
             ---IssueAggressiveMove({eng}, ents:GetPosition())
             ---self:MoveToLocation(ents:GetPosition(), false)
-                self:AggressiveMoveToLocation(ents[1]:GetPosition(), 'Support')
+                local reclaimtarget = AIUtils.RandomLocation(SCTAReclaim[1], SCTAReclaim[3])
+                self:AggressiveMoveToLocation(reclaimtarget, 'Support')
                 coroutine.yield(51)
                 local basePosition = brain.BuilderManagers[self.PlatoonData.LocationType].Position
                 self:MoveToLocation(AIUtils.RandomLocation(basePosition[1],basePosition[3]), false)
