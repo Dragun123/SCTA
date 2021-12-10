@@ -138,7 +138,7 @@ Platoon = Class(SCTAAIPlatoon) {
                   local Escort = self.EngineerTAUnfinished(eng, aiBrain, assistData.AssistRange)
                   --_ALERT('TAEscort2', Escort:GetBlueprint().Display.UniformScale)
                   ---self:Stop('Support')
-                  while Escort and Escort:GetFractionComplete() < 1 and not (Escort.Dead or eng.Dead) do
+               while Escort and Escort:GetFractionComplete() < 1 and not (Escort.Dead or eng.Dead) do
                     self:Stop('Support')
                     --_ALERT('TAEscort', Escort:GetBlueprint().Display.UniformScale)
                     --IssueClearCommands({eng})  
@@ -2689,7 +2689,7 @@ Platoon = Class(SCTAAIPlatoon) {
         end
 
         while aiBrain:PlatoonExists(self) do
-            target = self:FindClosestUnit('Attack', 'Enemy', true, categories.COMMAND + categoeries.EXPERIMENTAL)
+            target = self:FindClosestUnit('Attack', 'Enemy', true, categories.COMMAND + categories.EXPERIMENTAL)
                 if not target then
                 target = self:FindClosestUnit('Attack', 'Enemy', true, categories.STRUCTURE)
                 else
