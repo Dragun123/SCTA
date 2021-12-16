@@ -150,6 +150,7 @@ function LessMassStorageMaxTA(aiBrain, mStorageRatio)
     else
         return false
     end
+    return false
 end
 
 function GreaterEnergyStorageMaxTA(aiBrain, eStorageRatio)
@@ -158,6 +159,7 @@ function GreaterEnergyStorageMaxTA(aiBrain, eStorageRatio)
     else
     return false
     end
+    return false
 end
 
 
@@ -172,6 +174,7 @@ function GreaterTAStorageRatio(aiBrain, mStorageRatio, eStorageRatio)
     else
         return false
     end
+    return false
 end
 
 function LessThanEconEnergyTAEfficiency(aiBrain, EnergyEfficiency)

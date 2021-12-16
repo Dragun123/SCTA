@@ -7,9 +7,9 @@ UnitBlueprint {
         BuildCostEnergy = 660,
         BuildCostMass = 90,
     },
-    SizeX = 1.4,
+    SizeX = 1.2,
     SizeY = 1.4,
-    SizeZ = 1.4,
+    SizeZ = 1.2,
     LifeBarSize = 1,
     Weapon = {
         [1] = {
