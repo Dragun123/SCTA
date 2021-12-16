@@ -55,7 +55,7 @@ end,
 
 
         DoStopBuild = function(self, unitBeingBuilt, order)
-            LOG('SCTAIEXIST', self.TABuildingUnit)
+            ---LOG('SCTAIEXIST', self.TABuildingUnit)
             StructureUnit.OnStopBuild(self, unitBeingBuilt, order)
             if not self.FactoryBuildFailed and not self.Dead then
                     if not EntityCategoryContains(categories.AIR, unitBeingBuilt) then
