@@ -173,8 +173,7 @@ AIBrain = Class(SCTAAIBrainClass) {
          --self:InitializePlatoonBuildManager()
      end,
 
-    OnCreateAI = function(self, planName)
-        SCTAAIBrainClass.OnCreateAI(self, planName) 
+    OnCreateAI = function(self, planName) 
         --LOG('Oncreate')
         if string.find(ScenarioInfo.ArmySetup[self.Name].AIPersonality, 'scta') then
             --LOG('* AI-SCTA: This is SCTA')
@@ -189,6 +188,7 @@ AIBrain = Class(SCTAAIBrainClass) {
             self.TAAssistThread = ForkThread(self.TAFactoryAssistThread, self)
             end
         end
+        SCTAAIBrainClass.OnCreateAI(self, planName)
     end,
 
     TAFactoryAssistThread = function(aiBrain)
@@ -236,24 +236,28 @@ AIBrain = Class(SCTAAIBrainClass) {
     end,
 
     UnderEnergyThreshold = function(self)
+        --LOG('SCTAIEXIST1', self.SCTAAI)
         if not self.SCTAAI then
             return SCTAAIBrainClass.UnderEnergyThreshold(self)
         end
     end,
 
     OverEnergyThreshold = function(self)
+        --LOG('SCTAIEXIST2', self.SCTAAI)
         if not self.SCTAAI then
             return SCTAAIBrainClass.OverEnergyThreshold(self)
         end
     end,
 
     UnderMassThreshold = function(self)
+        --LOG('SCTAIEXIST3', self.SCTAAI)
         if not self.SCTAAI then
             return SCTAAIBrainClass.UnderMassThreshold(self)
         end
     end,
 
     OverMassThreshold = function(self)
+        --LOG('SCTAIEXIST4', self.SCTAAI)
         if not self.SCTAAI then
             return SCTAAIBrainClass.OverMassThreshold(self)
         end
@@ -262,7 +266,9 @@ AIBrain = Class(SCTAAIBrainClass) {
 
     InitializeEconomyState = function(self)
         -- Only use this with AI-SCTAAI
+        --LOG('SCTAIEXIST', self.SCTAAI)
         if not self.SCTAAI then
+            --LOG('SCTAIEXIST', self.SCTAAI)
             return SCTAAIBrainClass.InitializeEconomyState(self)
         end
     end,

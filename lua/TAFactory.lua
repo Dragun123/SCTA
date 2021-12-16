@@ -1,4 +1,5 @@
 local FactoryUnit = import('/lua/defaultunits.lua').FactoryUnit
+local StructureUnit = import('/lua/defaultunits.lua').StructureUnit
 local Unit = import('/lua/sim/Unit.lua').Unit
 local AircraftCarrier = import('/lua/defaultunits.lua').AircraftCarrier
 local TAutils = import('/mods/SCTA-master/lua/TAutils.lua')
@@ -53,17 +54,22 @@ end,
         end,
 
 
-        --[[OnStopBuild = function(self, unitBuilding)
-            FactoryUnit.OnStopBuild(self, unitBuilding)
-            FactoryUnit.StopBuildingEffects(self, unitBuilding)
-            if table.getn(self:GetCommandQueue()) <= 1 then
-                ForkThread(function()
-                WaitTicks(30)
+        DoStopBuild = function(self, unitBeingBuilt, order)
+            LOG('SCTAIEXIST', self.TABuildingUnit)
+            StructureUnit.OnStopBuild(self, unitBeingBuilt, order)
+            if not self.FactoryBuildFailed and not self.Dead then
+                    if not EntityCategoryContains(categories.AIR, unitBeingBuilt) then
+                        self:RollOffUnit()
+                    end
+                self:StopBuildFx()
+                self:ForkThread(self.FinishBuildThread, unitBeingBuilt, order)
+            else
                 self:Close()
+                    ---TABuildingUnit is used by AI to see if it is building or not. 
                 self.TABuildingUnit = nil
-                end)
+                self.BuildingUnit = false
             end
-		end,]]
+        end,
 
         FinishBuildThread = function(self, unitBeingBuilt, order)
             self:SetBusy(true)
@@ -84,9 +90,10 @@ end,
                 ----ThisCode is used to make sure it open and closes correctly
                 WaitTicks(20)
                 self:Close()
-                ---TABuildingUnit is used by AI to see if it is building or not. 
+                    ---TABuildingUnit is used by AI to see if it is building or not. 
                 self.TABuildingUnit = nil
             end
+            self.BuildingUnit = false
         end,
         
 
@@ -263,6 +270,7 @@ TACarrier = Class(AircraftCarrier) {
         OnStopBuild = function(self, unitBeingBuilt)
             AircraftCarrier.OnStopBuild(self, unitBeingBuilt)
             ChangeState(self, self.FinishedBuildingState)
+            self.BuildingUnit = false
         end,
 	
     },

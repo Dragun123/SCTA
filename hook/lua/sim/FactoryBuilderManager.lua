@@ -277,14 +277,12 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             WaitTicks(math.random(9,29))
             end
             coroutine.yield(2)
-            factory.DelayThread = false
             if factory.Dead then
                 return
-            elseif factory:IsIdleState() then
-                factory.TABuildingUnit = nil
-                if not factory:IsUnitState('Building') then
-                factory.TAAIFactoryBuilding = nil
-                end
+            end
+            if not factory.TABuildingUnit then
+                --LOG('SCTAIEXIST5', factory.TAAIFactoryBuilding)
+            factory.TAAIFactoryBuilding = nil
             end
             self:TAAssignBuildOrder(factory,bType)
         end,
@@ -325,12 +323,13 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             elseif EntityCategoryContains(categories.FACTORY, finishedUnit) then
                 self:AddFactory(finishedUnit)
             end
-            if factory:IsUnitState('Building') then
-                --coroutine.yield(2)
-                self:ForkThread(self.TADelayBuildOrder, factory, factory.BuilderManagerData.BuilderType, true)
+            if not factory.TABuildingUnit then
+                --LOG('SCTAIEXIST5', factory.TAAIFactoryBuilding)
+                factory.TAAIFactoryBuilding = nil
+                self:TAAssignBuildOrder(factory, factory.BuilderManagerData.BuilderType)
             else
-            factory.TAAIFactoryBuilding = nil
-            self:TAAssignBuildOrder(factory, factory.BuilderManagerData.BuilderType)
+            --LOG('SCTAIEXIST6', factory.TAAIFactoryBuilding)
+            self:ForkThread(self.TADelayBuildOrder, factory, factory.BuilderManagerData.BuilderType, true)
             end
         end,
 
@@ -338,16 +337,22 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             --LOG('*TAIEXIST3', factory.TABuildingUnit)
             if factory.Dead then
                 return
+            --[[elseif factory:IsIdleState() then
+                factory.TABuildingUnit = nil]]
             end
-            if table.getn(factory:GetCommandQueue()) >= 1 and (factory.TAAIFactoryBuilding or factory.TABuildingUnit or factory:IsUnitState('Building')) then
+            if factory.DelayThread then
+                factory.DelayThread = nil
+            end
+            if table.getn(factory:GetCommandQueue()) >= 1 and factory.TAAIFactoryBuilding then
                 return self:ForkThread(self.TADelayBuildOrder, factory, bType, true)
             end
             local builder = self:GetHighestBuilder(bType,{factory})
             --LOG('*TAIEXIST2', factory)
-                if builder and factory:IsIdleState() and not (factory.TAAIFactoryBuilding or factory.TABuildingUnit or factory:IsUnitState('Building')) then
+                if builder and (factory:IsIdleState() or not factory.TABuildingUnit) then
                 ---LOG('*TAIEXIST3', factory)
                 --factory.PlatoonHandle = hndl
                 factory.TAAIFactoryBuilding = true
+                --factory.TABuildingUnit = nil
                 --LOG('TAIEXIST', factory.DesiresAssist)
                 local template = self:GetFactoryTemplate(builder:GetPlatoonTemplate(), factory)
                 --LOG('*TAAI DEBUG: ARMY ', repr(self.Brain:GetArmyIndex()),': Factory Builder Manager Building - ',repr(builder.BuilderName))
@@ -364,7 +369,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                 self.Brain:BuildPlatoon(template, {factory}, 1)
                 --LOG('*TACanceling2', template)
                 else
-                    --LOG('*TAIEXIST4', factory.TABuildingUnit)
+                --LOG('*TAIEXIST4', factory.TABuildingUnit)
                 -- rename factory
                 if self.Brain[ScenarioInfo.Options.AIPLatoonNameDebug] or ScenarioInfo.Options.AIPLatoonNameDebug == 'all' then
                     if factory.PlatoonHandle.BuilderName then
