@@ -81,7 +81,6 @@ UnitBlueprint {
             'COMMAND MOBILE',
         },
     },
-
     General = {
         Category = 'Command',
         Classification = 'RULEUC_Commander',
