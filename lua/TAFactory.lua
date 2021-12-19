@@ -57,16 +57,18 @@ end,
         DoStopBuild = function(self, unitBeingBuilt, order)
             ---LOG('SCTAIEXIST', self.TABuildingUnit)
             StructureUnit.OnStopBuild(self, unitBeingBuilt, order)
-            if not self.FactoryBuildFailed and not self.Dead then
-                    if not EntityCategoryContains(categories.AIR, unitBeingBuilt) then
-                        self:RollOffUnit()
-                    end
+            if not self.Dead then
                 self:StopBuildFx()
-                self:ForkThread(self.FinishBuildThread, unitBeingBuilt, order)
-            else
-                self:Close()
+                if not self.FactoryBuildFailed then
+                        if not EntityCategoryContains(categories.AIR, unitBeingBuilt) then
+                            self:RollOffUnit()
+                        end
+                        self:ForkThread(self.FinishBuildThread, unitBeingBuilt, order)
+                    else
+                    self:Close()
                     ---TABuildingUnit is used by AI to see if it is building or not. 
-                self.TABuildingUnit = nil
+                    self.TABuildingUnit = nil
+                end
                 self.BuildingUnit = false
             end
         end,
@@ -93,7 +95,6 @@ end,
                     ---TABuildingUnit is used by AI to see if it is building or not. 
                 self.TABuildingUnit = nil
             end
-            self.BuildingUnit = false
         end,
         
 

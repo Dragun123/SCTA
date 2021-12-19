@@ -26,7 +26,7 @@ CreateTAAirBuildingEffects = function(builder, unitBeingBuilt, BuildEffectBones,
 
 CreateTAFactBuildingEffects = function(builder, unitBeingBuilt, BuildEffectBones, BuildEffectsBag)
     --WaitSeconds(0.5)
-    coroutine.yield(11)
+    coroutine.yield(15)
     for _, vBone in BuildEffectBones do
         BuildEffectsBag:Add(CreateAttachedEmitter(builder, vBone, builder.Army, '/mods/SCTA-master/effects/emitters/nanolathe.bp' ):ScaleEmitter(0.05))
         end
