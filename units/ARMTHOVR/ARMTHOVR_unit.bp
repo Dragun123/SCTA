@@ -99,7 +99,7 @@ UnitBlueprint {
         },
         SelectionPriority = 2,
         FactionName = 'ARM',
-        Icon = 'land',
+        Icon = 'amph',
         TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Bear',
     },

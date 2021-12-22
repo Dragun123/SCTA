@@ -110,9 +110,9 @@ UnitBlueprint {
         SelectionPriority = 5,
         ConstructionBar = true,
         FactionName = 'CORE',
-        Icon = 'land',
-TechLevel = 'RULEUTL_Basic',
-	UnitName = 'Shipyard',
+        Icon = 'sea',
+        TechLevel = 'RULEUTL_Basic',
+	    UnitName = 'Shipyard',
     },
     Intel = {
         VisionRadius = 14,

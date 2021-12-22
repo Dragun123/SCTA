@@ -109,7 +109,7 @@ UnitBlueprint {
         SelectionPriority = 5,
         ConstructionBar = true,
         FactionName = 'ARM',
-        Icon = 'land',
+        Icon = 'amph',
         TechLevel = 'RULEUTL_Advanced',
 	UnitName = 'Hovercraft Platform',
     },

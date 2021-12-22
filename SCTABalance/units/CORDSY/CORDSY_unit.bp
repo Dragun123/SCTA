@@ -120,9 +120,9 @@ UnitBlueprint {
         FactionName = 'CORE',
         UpgradesFrom = 'corsy', 
         UpgradesTo = 'coradsy',
-        Icon = 'land',
+        Icon = 'sea',
         TechLevel = 'RULEUTL_Advanced',
-	UnitName = 'Development Shipyard',
+	    UnitName = 'Development Shipyard',
     },
     Intel = {
         VisionRadius = 14,

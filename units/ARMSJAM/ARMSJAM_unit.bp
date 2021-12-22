@@ -115,7 +115,7 @@ UnitBlueprint {
         RULEUTC_StealthToggle = true,
         },
         FactionName = 'ARM',
-        Icon = 'land',
+        Icon = 'sea',
         TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Escort',
         UnitWeight = 1,

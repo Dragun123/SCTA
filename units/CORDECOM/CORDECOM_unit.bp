@@ -156,7 +156,7 @@ UnitBlueprint {
         SelectionPriority = 3,
         FactionName = 'CORE',
         UnitName = 'Commander',
-        Icon = 'land',
+        Icon = 'amph',
         TechLevel = 'RULEUTL_Advanced',
     },
     Intel = {

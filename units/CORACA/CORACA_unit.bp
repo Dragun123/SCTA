@@ -149,7 +149,7 @@ UnitBlueprint {
         ConstructionBar = true,
         SelectionPriority = 3,
         FactionName = 'CORE',
-        Icon = 'land',
+        Icon = 'air',
 TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Adv. Construction Aircraft',
     },

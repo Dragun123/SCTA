@@ -117,9 +117,9 @@ UnitBlueprint {
         ConstructionBar = true,
         FactionName = 'CORE',
         UpgradesFrom = 'cordsy', 
-        Icon = 'land',
-TechLevel = 'RULEUTL_Advanced',
-	UnitName = 'Advanced Development Shipyard',
+        Icon = 'sea',
+        TechLevel = 'RULEUTL_Advanced',
+	    UnitName = 'Advanced Development Shipyard',
     },
     Intel = {
         VisionRadius = 14,

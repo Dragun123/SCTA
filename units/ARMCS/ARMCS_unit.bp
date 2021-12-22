@@ -122,7 +122,7 @@ UnitBlueprint {
         ConstructionBar = true,
         SelectionPriority = 3,
         FactionName = 'ARM',
-        Icon = 'land',
+        Icon = 'sea',
         TechLevel = 'RULEUTL_Basic',
         UnitName = 'Construction Ship',
     },

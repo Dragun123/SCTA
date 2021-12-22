@@ -91,8 +91,8 @@ UnitBlueprint {
             RULEUCC_Stop = true,
         },
         FactionName = 'CORE',
-        Icon = 'land',
-TechLevel = 'RULEUTL_Advanced',
+        Icon = 'amph',
+        TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Morty',
     },
     Intel = {

@@ -74,8 +74,8 @@ UnitBlueprint {
         Classification = 'RULEUC_Resource',
         SelectionPriority = 5,
         FactionName = 'CORE',
-        Icon = 'land',
-TechLevel = 'RULEUTL_Basic',
+        Icon = 'sea',
+        TechLevel = 'RULEUTL_Basic',
         UnitName = 'Tidal Generator',
     },
     Intel = {

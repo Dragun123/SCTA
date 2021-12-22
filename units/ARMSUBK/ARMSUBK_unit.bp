@@ -95,7 +95,7 @@ UnitBlueprint {
             RULEUCC_Dive = true,
         },
         FactionName = 'ARM',
-        Icon = 'land',
+        Icon = 'sea',
         TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Pirahna',
     },

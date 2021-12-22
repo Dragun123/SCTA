@@ -137,7 +137,7 @@ UnitBlueprint {
         },
         ConstructionBar = true,
         FactionName = 'ARM',
-        Icon = 'land',
+        Icon = 'sea',
         TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Colossus',
     },

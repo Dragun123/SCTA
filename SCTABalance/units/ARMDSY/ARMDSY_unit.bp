@@ -120,9 +120,9 @@ UnitBlueprint {
         FactionName = 'ARM',
         UpgradesFrom = 'armsy',
         UpgradesTo = 'armadsy',
-        Icon = 'land',
-    TechLevel = 'RULEUTL_Advanced',
-	UnitName = 'Development Shipyard',
+        Icon = 'sea',
+        TechLevel = 'RULEUTL_Advanced',
+	    UnitName = 'Development Shipyard',
     },
     Intel = {
         VisionRadius = 14,

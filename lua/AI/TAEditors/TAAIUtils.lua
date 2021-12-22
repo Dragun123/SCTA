@@ -264,6 +264,7 @@ function TAHaveUnitRatioGreaterThanLand(aiBrain, Land)
     else
         return false
     end
+    return false
 end
 
 function TAHaveUnitRatioGreaterThanNavalT1(aiBrain, Naval)
@@ -274,6 +275,7 @@ function TAHaveUnitRatioGreaterThanNavalT1(aiBrain, Naval)
     else
         return false
     end
+    return false
 end
 
 function TAHaveUnitRatioGreaterThanNaval(aiBrain, Naval)
@@ -294,6 +296,7 @@ function TAHaveUnitRatioGreaterThanNavalT3(aiBrain, Naval)
     else
         return false
     end
+    return false
 end
 
 --[[function TAFactoryCapCheckExpansion(aiBrain, TECH)
@@ -320,6 +323,7 @@ function TAReclaimablesInArea(aiBrain, locType, Mass)
     else
         return false
     end
+    return false
 end
 
 
@@ -424,6 +428,27 @@ function TAFindAssistUnits(aiBrain, locationType, category, range)
     end
     return false
 end
+
+--[[function TAFindAssistUnits(aiBrain, locationType, category, range)
+    --LOG('IEXISTTABRAIN')
+    local engineerManager = aiBrain.BuilderManagers[locationType].EngineerManager
+    if aiBrain.TAFactoryAssistance and engineerManager then
+    local Unfinished = aiBrain:GetUnitsAroundPoint(categories.STRUCTURE, engineerManager:GetLocationCoords(), range, 'Ally')
+        if Engineering > 2 then 
+        local Assist = aiBrain:GetUnitsAroundPoint(category, engineerManager:GetLocationCoords(), range, 'Ally')
+            for _, Escort in Assist do
+                    if Escort and Escort.DesiresAssist and Escort.SCTAAIBrain
+                     and table.getn(Escort:GetGuards()) <= Escort.NumAssistees and not Escort.Escorting then
+                        return true 
+        --LOG('IEXISTTABRAIN2')
+    --WaitSeconds(3)
+    --Escort.Escorting = nil
+                    end
+            end
+        end
+    end
+    return false
+end]]
 
 --[[function TACanBuildOnMassLessThanDistanceNaval(aiBrain, locationType, distance, threatMin, threatMax, threatRings, threatType, maxNum )
     local engineerManager = aiBrain.BuilderManagers[locationType].EngineerManager

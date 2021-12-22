@@ -3,13 +3,19 @@ local FireState = import('/lua/game.lua').FireState
 local TADeath = import('/mods/SCTA-master/lua/TADeath.lua')
 Unit = Class(taUnitClass) {
 
+    OnCreate = function(self)
+        taUnitClass.OnCreate(self)
+        if self:GetAIBrain().SCTAAI then
+            self.SCTAAIBrain = true
+        end
+    end,
+
     OnStopBeingBuilt = function(self,builder,layer)
         --self._UnitName = bp.General.UnitName
         ---self:LOGDBG('TAUnit.OnCreate')
         taUnitClass.OnStopBeingBuilt(self,builder,layer)
-			if self:GetAIBrain().SCTAAI then
+			if self.SCTAAIBrain then
 				self:SetFireState(FireState.RETURN_FIRE)
-				self.SCTAAIBrain = true
 				----SCTAAIBrain is used for carious functions to check criteria including but not limited:
 				--Radar Targeting, Capturing Self Destruct, and otherwise 
 			else

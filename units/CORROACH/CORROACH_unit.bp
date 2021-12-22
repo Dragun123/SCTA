@@ -92,7 +92,7 @@ UnitBlueprint {
             RULEUCC_Stop = true,
         },
         FactionName = 'CORE',
-        Icon = 'land',
+        Icon = 'amph',
         OrderOverrides = {
             RULEUTC_SpecialToggle = {
                 --  more options in textures.scd\textures\ui\common\game\orders
