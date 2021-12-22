@@ -128,7 +128,7 @@ UnitBlueprint {
             RULEUCC_Stop = true,
         },
         FactionName = 'ARM',
-        Icon = 'land',
+        Icon = 'air',
         TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Lancet',
     },

@@ -106,7 +106,7 @@ UnitBlueprint {
             RULEUCC_Transport = false,
         },
         FactionName = 'ARM',
-        Icon = 'land',
+        Icon = 'sea',
         TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Millennium',
     },

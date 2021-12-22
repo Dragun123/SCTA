@@ -89,7 +89,7 @@ UnitBlueprint {
         },
         SelectionPriority = 5,
         FactionName = 'CORE',
-        Icon = 'land',
+        Icon = 'amph',
         TechLevel = 'RULEUTL_Basic',
         UnitName = 'Metal Maker',
     },

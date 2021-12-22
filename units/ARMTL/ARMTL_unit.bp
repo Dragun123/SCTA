@@ -83,7 +83,7 @@ UnitBlueprint {
         },
         SelectionPriority = 5,
         FactionName = 'ARM',
-        Icon = 'land',
+        Icon = 'sea',
         TechLevel = 'RULEUTL_Basic',
         UnitName = 'Torpedo Launcher',
     },

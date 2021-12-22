@@ -110,7 +110,7 @@ UnitBlueprint {
             RULEUTC_IntelToggle = true,
         },
         FactionName = 'ARM',
-        Icon = 'land',
+        Icon = 'sea',
         TechLevel = 'RULEUTL_Basic',
         UnitName = 'Sonar Station',
     },

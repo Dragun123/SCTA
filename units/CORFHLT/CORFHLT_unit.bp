@@ -85,8 +85,8 @@ UnitBlueprint {
         },
         SelectionPriority = 5,
         FactionName = 'CORE',
-        Icon = 'land',
-TechLevel = 'RULEUTL_Advanced',
+        Icon = 'amph',
+        TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Thunderbolt',
     },
     Intel = {

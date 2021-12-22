@@ -106,7 +106,7 @@ UnitBlueprint {
         SelectionPriority = 5,
         ConstructionBar = true,
         FactionName = 'CORE',
-        Icon = 'land',
+        Icon = 'amph',
 TechLevel = 'RULEUTL_Advanced',
 	UnitName = 'Hovercraft Platform',
     },

@@ -100,7 +100,7 @@ UnitBlueprint {
             RULEUCC_Stop = true,
         },
         FactionName = 'CORE',
-        Icon = 'land',
+        Icon = 'sea',
 TechLevel = 'RULEUTL_Basic',
         UnitName = 'Enforcer',
     },

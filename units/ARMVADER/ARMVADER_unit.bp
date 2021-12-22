@@ -92,7 +92,7 @@ UnitBlueprint {
             RULEUCC_Stop = true,
         },
         FactionName = 'ARM',
-        Icon = 'land',
+        Icon = 'amph',
         InstantDeathOnSelfDestruct = true,
         OrderOverrides = {
             RULEUTC_SpecialToggle = {

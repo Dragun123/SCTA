@@ -211,6 +211,20 @@ BuilderGroup {
     BuilderType = 'KBot',
     },
     Builder {
+        BuilderName = 'SCTAAi FactoryT3 Assault KBot',
+        PlatoonTemplate = 'T3LandDFAssaultSCTA',
+        Priority = 125,
+        PriorityFunction = TAPrior.ProductionT3,
+        InstanceCount = 1,
+        DelayEqualBuildPlattons = {'FactoryProductionSCTA', 1},
+        BuilderConditions = {
+        { UCBC, 'CheckBuildPlattonDelay', { 'FactoryProductionSCTA' }},
+        { TASlow, 'TAHaveUnitRatioGreaterThanLand', {categories.armmav + categories.corpyro} },
+        { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
+        },
+        BuilderType = 'KBot',
+        },
+    Builder {
         BuilderName = 'SCTAAi FactoryT3 Bot Sniper',
         PlatoonTemplate = 'T3LandDFBotSCTA',
         Priority = 145,

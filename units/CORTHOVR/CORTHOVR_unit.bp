@@ -99,7 +99,7 @@ UnitBlueprint {
         },
         SelectionPriority = 2,
         FactionName = 'CORE',
-        Icon = 'land',
+        Icon = 'amph',
         TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Turtle',
     },

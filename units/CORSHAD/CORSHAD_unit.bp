@@ -124,7 +124,7 @@ UnitBlueprint {
             RULEUCC_Stop = true,
         },
         FactionName = 'CORE',
-        Icon = 'land',
+        Icon = 'air',
 TechLevel = 'RULEUTL_Basic',
         UnitName = 'Shadow',
     },

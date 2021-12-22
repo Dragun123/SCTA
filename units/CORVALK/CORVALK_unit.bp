@@ -139,8 +139,8 @@ UnitBlueprint {
         },
         SelectionPriority = 2,
         FactionName = 'CORE',
-        Icon = 'land',
-TechLevel = 'RULEUTL_Basic',
+        Icon = 'air',
+        TechLevel = 'RULEUTL_Basic',
         UnitName = 'Valkyrie',
     },
     Intel = {

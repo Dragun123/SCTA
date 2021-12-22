@@ -123,8 +123,8 @@ UnitBlueprint {
             RULEUCC_Stop = true,
         },
         FactionName = 'CORE',
-        Icon = 'land',
-TechLevel = 'RULEUTL_Advanced',
+        Icon = 'air',
+        TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Rapier',
     },
     Intel = {

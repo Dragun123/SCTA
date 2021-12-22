@@ -91,7 +91,7 @@ UnitBlueprint {
             RULEUCC_Dive = true,
         },
         FactionName = 'CORE',
-        Icon = 'land',
+        Icon = 'sea',
         TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Leviathen',
     },

@@ -154,7 +154,7 @@ UnitBlueprint {
         ConstructionBar = true,
         SelectionPriority = 3,
         FactionName = 'ARM',
-        Icon = 'land',
+        Icon = 'air',
         TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Construction Seaplane',
     },

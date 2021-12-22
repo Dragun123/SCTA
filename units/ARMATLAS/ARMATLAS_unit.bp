@@ -140,7 +140,7 @@ UnitBlueprint {
         },
         SelectionPriority = 2,
         FactionName = 'ARM',
-        Icon = 'land',
+        Icon = 'air',
         TechLevel = 'RULEUTL_Basic',
         UnitName = 'Atlas',
     },

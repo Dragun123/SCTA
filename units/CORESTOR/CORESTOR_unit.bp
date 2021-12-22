@@ -72,8 +72,8 @@ UnitBlueprint {
         Classification = 'RULEUC_Resource',
         SelectionPriority = 5,
         FactionName = 'CORE',
-        Icon = 'land',
-TechLevel = 'RULEUTL_Basic',
+        Icon = 'amph',
+        TechLevel = 'RULEUTL_Basic',
         UnitName = 'Energy Storage',
     },
     Intel = {
