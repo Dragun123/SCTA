@@ -8,7 +8,7 @@ UnitBlueprint {
         UniformScale = 0.12,
     },
 Economy = {
-    BuildCostEnergy = 750,
+    BuildCostEnergy = 950,
     BuildCostMass = 120,
     BuildTime = 2200,
 },
@@ -26,11 +26,11 @@ Physics = {
     },
     Weapon = {
         [1] = {
-            Damage = 4,
+            Damage = 3,
         },
         [2] = {
             RateOfFire = 1,
-            Damage = 20,
+            Damage = 25,
         },
         [3] = {
         },

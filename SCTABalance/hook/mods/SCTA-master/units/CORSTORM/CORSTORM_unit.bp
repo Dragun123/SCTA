@@ -6,6 +6,7 @@
      },
      Economy = {
         BuildCostMass = 120,
+        BuildCostEnergy = 900,
          },
          SelectionSizeX = 0.8,
          SelectionSizeZ = 0.8,
@@ -13,4 +14,12 @@
          SizeX = 1.5,
          SizeY = 1.7,
          SizeZ = 1.7,
+         Weapon = {
+            [1] = {
+                Damage = 80,
+                RateOfFire = 0.5,
+            },
+            [2] = {
+            },
+         },
 }
