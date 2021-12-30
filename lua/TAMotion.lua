@@ -17,29 +17,35 @@ TAWalking = Class(TAunit)
 {
     WalkingAnim = nil,
     WalkingAnimRate = 1,
-    IdleAnim = false,
-    IdleAnimRate = 1,
     DeathAnim = nil,
     DisabledBones = {},
+
+	OnCreate = function(self)
+        TAunit.OnCreate(self)
+		local bpDisplay = self:GetBlueprint().Display
+		if bpDisplay.AnimationWalk then
+        self.AnimationWalk = bpDisplay.AnimationWalk
+        self.AnimationWalkRate = bpDisplay.AnimationWalkRate
+		end
+    end,
 
     OnMotionHorzEventChange = function( self, new, old )
         ---self:LOGDBG('TAWalking.OnMotionHorzEventChange')
         TAunit.OnMotionHorzEventChange(self, new, old)
-        if ( old == 'Stopped' ) then
-            if (not self.Animator) then
+        if old == 'Stopped' then
+            if not self.Animator then
                 self.Animator = CreateAnimator(self, true)
             end
-            local bpDisplay = self:GetBlueprint().Display
-            if bpDisplay.AnimationWalk then
-                self.Animator:PlayAnim(bpDisplay.AnimationWalk, true)
-                self.Animator:SetRate(bpDisplay.AnimationWalkRate or 1)
+            if self.AnimationWalk then
+                self.Animator:PlayAnim(self.AnimationWalk, true)
+                self.Animator:SetRate(self.AnimationWalkRate or 1)
             end
-        elseif ( new == 'Stopped' ) then
-            if(self.IdleAnim and not self.Dead) then
-                self.Animator:PlayAnim(self.IdleAnim, true)
-            elseif(not self.DeathAnim or not self.Dead) then
+        elseif new == 'Stopped' then
+            -- Only keep the animator around if we are dying and playing a death anim
+            -- Or if we have an idle anim
+            if self.Animator and (not self.DeathAnim or not self.Dead) then
                 self.Animator:Destroy()
-                self.Animator = false
+                self.Animator = nil
             end
         end
     end,
@@ -81,18 +87,6 @@ TACounter = Class(TAWalking)
 	end,
 }
 
-TASeaWalking = Class(TAWalking) 
-{
-    OnMotionHorzEventChange = function( self, new, old )
-        TAWalking.OnMotionHorzEventChange(self, new, old)
-        if ( new == 'Cruise' and old == 'Stopped') then
-            self:ForkThread(self.StartMoveFxTA)
-         end
-        if ( new == 'Stopped' ) or ( new == 'Stopped' and old == 'Stopping' ) then
-            self:ForkThread(self.MoveFxStopTA)
-        end
-    end,
-}
 
 TAKamiCounter = Class(TACounter) { 
 	OnScriptBitSet = function(self, bit)
