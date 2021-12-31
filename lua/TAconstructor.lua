@@ -1,4 +1,5 @@
 local TAWalking = import('/mods/SCTA-master/lua/TAMotion.lua').TAWalking
+local TAunit = import('/mods/SCTA-master/lua/TAunit.lua').TAunit
 local TAutils = import('/mods/SCTA-master/lua/TAutils.lua')
 local oldPosition={1,1,1}
 local Util = import('/lua/utilities.lua')
@@ -145,7 +146,7 @@ TAconstructor = Class(TAWalking) {
 TASeaConstructor = Class(TAconstructor) 
 {
     OnMotionHorzEventChange = function( self, new, old )
-        TAconstructor.OnMotionHorzEventChange(self, new, old)
+        TAunit.OnMotionHorzEventChange(self, new, old)
         if ( new == 'Cruise' and old == 'Stopped') then
             self:ForkThread(self.StartMoveFxTA)
          end

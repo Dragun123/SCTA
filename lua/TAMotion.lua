@@ -32,6 +32,7 @@ TAWalking = Class(TAunit)
     OnMotionHorzEventChange = function( self, new, old )
         ---self:LOGDBG('TAWalking.OnMotionHorzEventChange')
         TAunit.OnMotionHorzEventChange(self, new, old)
+		---_ALERT('PELICASCTA22', self:GetVelocity())
         if old == 'Stopped' then
             if not self.Animator then
                 self.Animator = CreateAnimator(self, true)
@@ -40,6 +41,7 @@ TAWalking = Class(TAunit)
                 self.Animator:PlayAnim(self.AnimationWalk, true)
                 self.Animator:SetRate(self.AnimationWalkRate or 1)
             end
+			---_ALERT('PELICASCTA23', self:GetVelocity())
         elseif new == 'Stopped' then
             -- Only keep the animator around if we are dying and playing a death anim
             -- Or if we have an idle anim

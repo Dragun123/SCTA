@@ -22,6 +22,7 @@ ARMAMPH = Class(TAWalking) {
         TAWalking.OnMotionHorzEventChange(self, new, old)
         else
             TAunit.OnMotionHorzEventChange(self, new, old)
+            ---_ALERT('PELICASCTA3', self:GetVelocity())
             if ( new == 'Cruise' and old == 'Stopped') then
                 self:ForkThread(self.StartMoveFxTA)
             end
@@ -39,10 +40,13 @@ ARMAMPH = Class(TAWalking) {
                 self.AT1 = nil
             end
             local myBlueprint = self:GetBlueprint()
-            if( new == 'Water' ) then
+            --_ALERT('PELICASCTA2', self:GetVelocity())
+            if not self.Waiting then
+                if( new == 'Water' ) then
 				self.AT1 = self:ForkThread(self.TransformThread, true)
-			elseif( new == 'Land' ) then
+			    elseif( new == 'Land' ) then
 				self.AT1 = self:ForkThread(self.TransformThread)
+                end
             end
         end
     end,
@@ -55,25 +59,28 @@ ARMAMPH = Class(TAWalking) {
         local scale = 0.5
         self:SetImmobile(true)
         self.IsWaiting = true
+        ---_ALERT('SCTAIEXIST', water)
         if( water ) then
-            # Change movement speed to the multiplier in blueprint
-            ---self:SetSpeedMult(bp.Physics.WaterSpeedMultiplier)
+            self.Walking = nil
+            ---Change movement speed to the multiplier in blueprint
+            --self:SetSpeedMult(bp.Physics.WaterSpeedMultiplier * 1)
             self.Transform:PlayAnim(self:GetBlueprint().Display.AnimationTransform)
             self.Transform:SetRate(0.5)
             WaitFor(self.Transform)
-            self:SetCollisionShape( 'Box', bp.CollisionOffsetX or 0,(bp.CollisionOffsetY + (bp.SizeY * 0.25)) or 0,bp.CollisionOffsetZ or 0, bp.SizeX * scale, bp.SizeY * scale, bp.SizeZ * scale )
-			self.Walking = nil
+            self:SetCollisionShape( 'Box', bp.CollisionOffsetX or 0,(bp.CollisionOffsetY + (bp.SizeY * 0.75)) or 0,bp.CollisionOffsetZ or 0, bp.SizeX * scale, bp.SizeY * scale, bp.SizeZ * scale )
+            --_ALERT('PELICASCTA', self:GetVelocity())
 		else	
-            ---self:SetSpeedMult(1)
+            self.Walking = true
+            --self:SetSpeedMult(1 * 1)
 			self.Transform:PlayAnim(self:GetBlueprint().Display.AnimationTransform)
             self.Transform:SetAnimationFraction(1)
             self.Transform:SetRate(-2)
 			WaitFor(self.Transform)
             self:RevertCollisionShape()
+            --_ALERT('PELICASCTA', self:GetVelocity())
 			--self:SetCollisionShape( 'Box', bp.CollisionOffsetX or 0,(bp.CollisionOffsetY + (bp.SizeY*0.5)) or 0,bp.CollisionOffsetZ or 0, bp.SizeX * scale, bp.SizeY * scale, bp.SizeZ * scale )
             self.Transform:Destroy()
             self.Transform = nil
-			self.Walking = true
             end
         self.IsWaiting = nil
         self:SetImmobile(false)

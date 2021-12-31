@@ -24,7 +24,7 @@ PlatoonTemplate {
     Plan = 'SCTAArtyHuntAI', -- The platoon function to use.
     ---PlatoonType = 'Scout',
     GlobalSquads = {
-        { ((categories.AMPHIBIOUS * GROUND) - SPECIAL) + categories.BOMB, 1, 5,  'Attack', 'none' },
+        { ((categories.AMPHIBIOUS * GROUND) - SPECIAL - categories.coramph) + categories.BOMB, 1, 5,  'Attack', 'none' },
     },
 }
 
@@ -33,7 +33,7 @@ PlatoonTemplate {
     Plan = 'TAHunt', -- The platoon function to use.
     ---PlatoonType = 'Scout',
     GlobalSquads = {
-        { ((GROUND * categories.ANTISHIELD) - categories.AMPHIBIOUS) - SPECIAL, 2, 10, 'Artillery', 'none' }, 
+        { ((GROUND * categories.ANTISHIELD) - categories.AMPHIBIOUS) - SPECIAL + categories.coramph, 2, 10, 'Artillery', 'none' }, 
         { categories.FIELDENGINEER, 0, 2, 'Guard', 'none' },
     },
 }

@@ -24,7 +24,7 @@ BuilderGroup {
         },        
         BuilderConditions = {          
         { TASlow, 'TAEnemyUnitsLessAtLocationRadius', { BaseEnemyArea, 'LocationType', 1, categories.COMMAND }},	
-        { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.AMPHIBIOUS - categories.SCOUT - categories.ENGINEER} }, },
+        { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, categories.AMPHIBIOUS - categories.SCOUT - categories.ENGINEER - categories.coramph} }, },
     },
     Builder {
         BuilderName = 'SCTAAI LAB',
@@ -40,7 +40,7 @@ BuilderGroup {
             UseFormation = 'AttackFormation',
         },        
         BuilderConditions = { 
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, RAIDER + (categories.AMPHIBIOUS - categories.COMMAND)} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', {1, RAIDER + (categories.AMPHIBIOUS - categories.COMMAND - categories.coramph)} },
             { TASlow, 'TAEnemyUnitsLessAtLocationRadius', { BaseEnemyArea, 'LocationType', 1, categories.COMMAND }},	
         },
     },
