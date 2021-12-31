@@ -57,18 +57,17 @@ ARMAMPH = Class(TAWalking) {
         self.IsWaiting = true
         if( water ) then
             # Change movement speed to the multiplier in blueprint
-            self:SetSpeedMult(bp.Physics.WaterSpeedMultiplier)
+            ---self:SetSpeedMult(bp.Physics.WaterSpeedMultiplier)
             self.Transform:PlayAnim(self:GetBlueprint().Display.AnimationTransform)
             self.Transform:SetRate(0.5)
             WaitFor(self.Transform)
             self:SetCollisionShape( 'Box', bp.CollisionOffsetX or 0,(bp.CollisionOffsetY + (bp.SizeY * 0.25)) or 0,bp.CollisionOffsetZ or 0, bp.SizeX * scale, bp.SizeY * scale, bp.SizeZ * scale )
 			self.Walking = nil
 		else	
-            self:SetSpeedMult(1)
+            ---self:SetSpeedMult(1)
 			self.Transform:PlayAnim(self:GetBlueprint().Display.AnimationTransform)
             self.Transform:SetAnimationFraction(1)
             self.Transform:SetRate(-2)
-     
 			WaitFor(self.Transform)
             self:RevertCollisionShape()
 			--self:SetCollisionShape( 'Box', bp.CollisionOffsetX or 0,(bp.CollisionOffsetY + (bp.SizeY*0.5)) or 0,bp.CollisionOffsetZ or 0, bp.SizeX * scale, bp.SizeY * scale, bp.SizeZ * scale )
