@@ -7,10 +7,10 @@ local TAMInterceptorWeapon = import('/lua/terranweapons.lua').TAMInterceptorWeap
 local TAutils = import('/mods/SCTA-master/lua/TAutils.lua')
 
 TAweapon = Class(DefaultWeapon) {
-    OnCreate = function(self)
+    --[[OnCreate = function(self)
         DefaultWeapon.OnCreate(self)
-        self.TAArmy = self.unit:GetArmy()
-    end,
+        self.Army = self.unit:GetArmy()
+    end,]]
     
         OnGotTargetCheck = function(self)
         if (self.unit:IsUnitState('Patrolling') or self.unit:IsUnitState('MakingAttackRun')) then
@@ -21,8 +21,8 @@ TAweapon = Class(DefaultWeapon) {
             local target = self:GetCurrentTarget()
         if (target) then
             if (IsUnit(target)) then
-                if target:GetBlip(self.TAArmy) ~= nil and target:GetBlip(self.TAArmy):IsSeenNow(self.TAArmy) then 
-                canSee = target:GetBlip(self.TAArmy):IsSeenNow(self.TAArmy)
+                if target:GetBlip(self.Army) ~= nil and target:GetBlip(self.Army):IsSeenNow(self.Army) then 
+                canSee = target:GetBlip(self.Army):IsSeenNow(self.Army)
                 else 
                 canSee = false
                 end
@@ -51,7 +51,7 @@ TAweapon = Class(DefaultWeapon) {
     IdleState = State(DefaultWeapon.IdleState) {
         OnGotTarget = function(self) 
             if (self.unit.SCTAAIBrain or
-            TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
+            TAutils.ArmyHasTargetingFacility(self.Army) or 
             self:OnGotTargetCheck() == true) and not self.unit.Dead then
                 DefaultWeapon.IdleState.OnGotTarget(self)
             end
@@ -62,14 +62,14 @@ TAweapon = Class(DefaultWeapon) {
         Main = function(self)          
             ---LOG('Resulting Table'..repr(TAutils.targetingFacilityData))
             if (self.unit.SCTAAIBrain or
-            TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
+            TAutils.ArmyHasTargetingFacility(self.Army) or 
             self:OnGotTargetCheck() == true) and not self.unit.Dead then
                 DefaultWeapon.WeaponUnpackingState.Main(self)
             end
         end,
 
         OnGotTarget = function(self)
-            if (self.unit.SCTAAIBrain or TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
+            if (self.unit.SCTAAIBrain or TAutils.ArmyHasTargetingFacility(self.Army) or 
             self:OnGotTargetCheck() == true) and not self.unit.Dead then
                 DefaultWeapon.WeaponUnpackingState.OnGotTarget(self)
             end
@@ -79,7 +79,7 @@ TAweapon = Class(DefaultWeapon) {
     RackSalvoFireReadyState = State(DefaultWeapon.RackSalvoFireReadyState) {
         OnGotTarget = function(self)      
             if (self.unit.SCTAAIBrain or
-            TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
+            TAutils.ArmyHasTargetingFacility(self.Army) or 
             self:OnGotTargetCheck() == true) and not self.unit.Dead then
                 DefaultWeapon.RackSalvoFireReadyState.OnGotTarget(self)
             end
@@ -96,7 +96,7 @@ TAweapon = Class(DefaultWeapon) {
         end,
 
         OnGotTarget = function(self)
-            if (self.unit:GetAIBrain().SCTAAI or TAutils.ArmyHasTargetingFacility(self.TAArmy) or 
+            if (self.unit:GetAIBrain().SCTAAI or TAutils.ArmyHasTargetingFacility(self.Army) or 
             self:OnGotTargetCheck() == true) and not self.unit.Dead then
                 DefaultWeapon.WeaponPackingState.OnGotTarget(self)
             end
@@ -115,14 +115,15 @@ TAHide = Class(TAweapon) {
         self.unit.Pack = 1
         self.unit:DisableUnitIntel('RadarStealth')
         TAweapon.PlayFxWeaponUnpackSequence(self)
-        self.unit:SetCollisionShape( 'Box', self.bp.CollisionOffsetX or 0, self.bp.CollisionOffsetY + 0.5, self.bp.CollisionOffsetZ or 0, self.bp.SizeX * self.scale, self.bp.SizeY * self.scale, self.bp.SizeZ * self.scale)
+        --self.unit:SetCollisionShape( 'Box', self.bp.CollisionOffsetX or 0, self.bp.CollisionOffsetY + 0.5, self.bp.CollisionOffsetZ or 0, self.bp.SizeX * self.scale, self.bp.SizeY * self.scale, self.bp.SizeZ * self.scale)
+        self.unit:RevertCollisionShape()
     end,
 
     PlayFxWeaponPackSequence = function(self)
         self.unit.Pack = self.bp.Defense.DamageModifier
         self.unit:EnableUnitIntel('RadarStealth')
         TAweapon.PlayFxWeaponPackSequence(self)
-        self.unit:SetCollisionShape( 'Box',  self.bp.CollisionOffsetX or 0, self.bp.CollisionOffsetY or 0, self.bp.CollisionOffsetZ or 0, self.bp.SizeX * self.scale, ((self.bp.SizeY/self.bp.SizeY) * self.scale), self.bp.SizeZ * self.scale)
+        self.unit:SetCollisionShape( 'Box',  self.bp.CollisionOffsetX or 0, self.bp.CollisionOffsetY or 0, self.bp.CollisionOffsetZ or 0, self.bp.SizeX * self.scale, self.scale, self.bp.SizeZ * self.scale)
     end,
 }
 
@@ -214,7 +215,7 @@ TAKami = Class(KamikazeWeapon){
     OnFire = function(self)
         self.unit:SetDeathWeaponEnabled(false)
         for k, v in self.FxDeath do
-            CreateEmitterAtBone(self.unit,-2,self.unit:GetArmy(),v):ScaleEmitter(0.5)
+            CreateEmitterAtBone(self.unit,-2,self.Army,v):ScaleEmitter(0.5)
         end 
         self.unit.attacked = true
 		KamikazeWeapon.OnFire(self)
@@ -238,7 +239,7 @@ TABomb = Class(BareBonesWeapon) {
     
     Fire = function(self)
         for k, v in self.FxDeath do
-            CreateEmitterAtBone(self.unit,-2, self.unit:GetArmy(), v):ScaleEmitter(1)
+            CreateEmitterAtBone(self.unit,-2, self.Army, v):ScaleEmitter(1)
         end 
 		local myBlueprint = self:GetBlueprint()
         DamageArea(self.unit, self.unit:GetPosition(), myBlueprint.DamageRadius, myBlueprint.Damage, myBlueprint.DamageType or 'Normal', myBlueprint.DamageFriendly or false)

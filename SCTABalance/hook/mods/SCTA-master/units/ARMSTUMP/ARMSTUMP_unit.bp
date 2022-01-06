@@ -9,7 +9,7 @@ UnitBlueprint {
         UniformScale = 0.26,
     },
    Economy = {
-    BuildCostEnergy = 800,   
+    BuildCostEnergy = 900,   
     BuildCostMass = 120,
     },
     LifeBarSize = 1.4,

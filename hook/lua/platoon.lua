@@ -3353,7 +3353,7 @@ Platoon = Class(SCTAAIPlatoon) {
 
         ScoutingAISCTA = function(self)
             AIAttackUtils.GetMostRestrictiveLayer(self)
-            if self.MovementLayer == 'Air' or EntityCategoryContains(categories.AMPHIBIOUS, self:GetSquadUnits('Scout')[1]) then
+            if self.MovementLayer == 'Air' or EntityCategoryContains(categories.AMPHIBIOUS - categories.coramph, self:GetSquadUnits('Scout')[1]) then
             return self:AirScoutingAISCTA()
             else
             return self:LandScoutingAISCTA()

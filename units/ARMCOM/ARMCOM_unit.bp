@@ -114,7 +114,6 @@ UnitBlueprint {
                 },
             },
         },
-	---SmokeBone = 'Torso',
         UniformScale = 0.032,
     },
     Economy = {
