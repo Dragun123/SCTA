@@ -2577,7 +2577,7 @@ Platoon = Class(SCTAAIPlatoon) {
             end
         end
 
-        if bestBase then
+        if bestBase and aiBrain:PlatoonExists(self) then
             AIAttackUtils.GetMostRestrictiveLayer(self)
             local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, self.PlatoonData.Layer or self.MovementLayer, self:GetPlatoonPosition(), bestBase.Position, 200)
             IssueClearCommands(self)
