@@ -28,6 +28,12 @@ UAL0001 = Class(taUAL0001) {
             coroutine.yield(21)
 		    cdrUnit:ForkThread(cdrUnit.PlayCommanderWarpInEffect)
     end,
+
+    --[[OnMotionHorzEventChange = function( self, new, old )
+        ---self:LOGDBG('TAWalking.OnMotionHorzEventChange')
+        taUAL0001.OnMotionHorzEventChange(self, new, old)
+		_ALERT('PELICASCTA32', self:GetVelocity())
+    end,]]
 }
 
 TypeClass = UAL0001

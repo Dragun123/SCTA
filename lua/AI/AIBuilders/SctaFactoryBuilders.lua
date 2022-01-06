@@ -131,7 +131,7 @@ BuilderGroup {
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory' }},
             { UCBC, 'HaveGreaterThanUnitsWithCategory', { 2,  categories.FACTORY } }, -- Don't build air fac immediately.
-            { TASlow, 'TAFactoryCapCheckT2', {} },
+            { TASlow, 'TAFactoryCapCheckT1', {}},
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, categories.FACTORY} },
             { UCBC, 'HaveLessThanUnitsWithCategory', { 4,  categories.FACTORY * categories.AIR} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
