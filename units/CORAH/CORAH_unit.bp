@@ -142,7 +142,6 @@ UnitBlueprint {
             DamageFriendly = false,
             Damage = 150,
             DamageRadius = 2,
-            FiringRandomness = 0,
             DamageType = 'TASpec',
             DisplayName = 'CORAH_WEAPON',
             FireTargetLayerCapsTable = {
