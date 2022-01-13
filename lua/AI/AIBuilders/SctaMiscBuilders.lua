@@ -18,8 +18,8 @@ BuilderGroup {
         InstanceCount = 2,
         BuilderConditions = {
             { TASlow, 'HaveLessThanUnitsWithCategoryTA', { 10, categories.ANTIAIR * STRUCTURE1} }, 
-            { TAutils, 'GreaterTAStorageRatio', { 0.2, 0.5}}, 
-            --{ TAutils, 'EcoManagementTA', { 0.8, 0.8, } },
+            --{ TAutils, 'GreaterTAStorageRatio', { 0.2, 0.5}}, 
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8, } },
         },
         BuilderType = 'LandTA',
         BuilderData = {
@@ -83,8 +83,8 @@ BuilderGroup {
         InstanceCount = 1,
         BuilderConditions = {
             { UCBC, 'HaveLessThanUnitsWithCategory', { 4, categories.DIRECTFIRE * STRUCTURE3} }, 
-            { TAutils, 'GreaterTAStorageRatio', { 0.2, 0.5}}, 
-            --{ TAutils, 'EcoManagementTA', { 0.8, 0.8, } },
+            --{ TAutils, 'GreaterTAStorageRatio', { 0.2, 0.5}}, 
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8, } },
         },
         BuilderType = 'NotACU',
         BuilderData = {
@@ -107,8 +107,8 @@ BuilderGroup {
         InstanceCount = 1,
         BuilderConditions = {
             { UCBC, 'HaveLessThanUnitsWithCategory', { 6, categories.ANTIAIR * STRUCTURE3} }, 
-            { TAutils, 'GreaterTAStorageRatio', { 0.2, 0.5}}, 
-            --{ TAutils, 'EcoManagementTA', { 0.8, 0.8, } },
+            --{ TAutils, 'GreaterTAStorageRatio', { 0.2, 0.5}}, 
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8, } },
         },
         BuilderType = 'NotACU',
         BuilderData = {

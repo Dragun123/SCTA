@@ -182,9 +182,9 @@ BuilderGroup {
        PriorityFunction = TAPrior.UnitProductionT1Fac,
         Priority = 60,
         InstanceCount = 1,
-        DelayEqualBuildPlattons = {'Factory', 1},
+        ---DelayEqualBuildPlattons = {'Factory', 1},
         BuilderConditions = {
-            { UCBC, 'CheckBuildPlattonDelay', { 'Factory' }},
+            ------{ UCBC, 'CheckBuildPlattonDelay', { 'Factory' }},
             { UCBC, 'HaveLessThanUnitsWithCategory', { 6, categories.FACTORY} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75, } },
         },

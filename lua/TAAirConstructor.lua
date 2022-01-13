@@ -70,10 +70,11 @@ TAAirConstructor = Class(TAair) {
         self.UnitBeingBuilt = unitBeingBuilt
         self.UnitBuildOrder = order
         self.BuildingUnit = true
-        TAair.OnStartBuild(self,unitBeingBuilt, order)
+        TAair.OnStartBuild(self, unitBeingBuilt, order)
         if not self:GetGuardedUnit() and unitBeingBuilt:GetFractionComplete() == 0 and not self:CanBuild(unitBeingBuilt:GetBlueprint().BlueprintId) then
             IssueStop({self})
             IssueClearCommands({self})
+            ---_ALERT('SCTAEXIST', unitBeingBuilt)
             unitBeingBuilt:Destroy()
         end
     end,

@@ -191,6 +191,11 @@ AIBrain = Class(SCTAAIBrainClass) {
         SCTAAIBrainClass.OnCreateAI(self, planName)
     end,
 
+    --[[InitializePlatoonBuildManager = function(self)
+        SCTAAIBrainClass.InitializePlatoonBuildManager(self)
+        ALERT('SCTAPBMEXIST')
+    end,]]
+
     TAFactoryAssistThread = function(aiBrain)
         while (aiBrain.Result ~= 'defeat') do
             WaitSeconds(aiBrain.TAEcoCycle)
