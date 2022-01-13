@@ -127,9 +127,9 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTAAI T1Engineer Pgen',
         PlatoonTemplate = 'EngineerBuilderSCTA',
-        Priority = 50,
+        Priority = 75,
         PriorityFunction = TAPrior.HighTechEnergyProduction,
-        InstanceCount = 1,
+        InstanceCount = 2,
         BuilderConditions = {
             { UCBC, 'HaveLessThanUnitsWithCategory', { 10, SOLAR} },
             { TAutils , 'LessThanEconEnergyTAEfficiency', {1.05}},
@@ -149,9 +149,9 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTAAI T1Engineer Pgen2',
         PlatoonTemplate = 'EngineerBuilderSCTA',
-        Priority = 50,
+        Priority = 100,
         PriorityFunction = TAPrior.HighTechEnergyProduction,
-        InstanceCount = 1,
+        InstanceCount = 2,
         BuilderConditions = {
             { TAutils , 'LessThanEconEnergyTAEfficiency', {1.05}},
         },

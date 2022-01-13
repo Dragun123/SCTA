@@ -164,6 +164,7 @@ BuilderGroup {
         InstanceCount = 2,
         BuilderConditions = {
             { UCBC, 'HaveGreaterThanUnitsWithCategory', { 0, categories.GATE}},
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 2, categories.EXPERIMENTAL * categories.MOBILE} },
             { TAutils, 'EcoManagementTA', { 0.9, 0.75} },
         },
         BuilderType = 'Gate',

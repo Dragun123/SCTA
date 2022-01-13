@@ -59,6 +59,7 @@ TAconstructor = Class(TAWalking) {
         if not self:GetGuardedUnit() and unitBeingBuilt:GetFractionComplete() == 0 and not self:CanBuild(unitBeingBuilt:GetBlueprint().BlueprintId) then
             IssueStop({self})
             IssueClearCommands({self})
+           ---_ALERT('SCTAEXIST', unitBeingBuilt)
             unitBeingBuilt:Destroy()
         end
     end,
