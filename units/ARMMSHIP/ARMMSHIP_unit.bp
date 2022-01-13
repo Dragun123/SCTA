@@ -150,7 +150,6 @@ UnitBlueprint {
             CollideFriendly = false,
             Damage = 30,
             DamageType = 'Normal',
-            FiringRandomness = 0,
             DisplayName = 'SCABGUN',
             FireTargetLayerCapsTable = {
                 Land = 'Air',
