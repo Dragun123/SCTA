@@ -43,7 +43,7 @@ UnitBlueprint {
         Health = 1329,
         MaxHealth = 1329,
     },
-    Description = 'Increases Metal Storage',
+    Description = 'Metal Storage',
     Display = {
         AnimationWater = '/mods/SCTA-master/units/ARMMSTOR/ARMMSTOR_WaterTransform.sca',
         AnimationWaterRate = 1, 

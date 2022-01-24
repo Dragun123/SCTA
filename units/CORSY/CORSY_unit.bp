@@ -59,7 +59,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = 'Produces Ships',
+    Description = 'Naval Factory',
     Display = {
         AnimationUnpack = '/mods/SCTA-master/units/CORSY/CORSY_lod0_unpack.sca',
         AnimationUnpackRate = 2, 

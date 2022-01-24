@@ -55,7 +55,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = 'Extracts Metal',
+    Description = 'Metal Extractor',
     Display = {
         Mesh = {
             IconFadeInZoom = 130,

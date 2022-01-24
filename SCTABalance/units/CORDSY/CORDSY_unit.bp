@@ -54,7 +54,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = 'Produces Ships',
+    Description = 'Vehicle Factory',
     Display = {
         BuildAttachBone = 'BuildBone',
         AnimationUnpack = '/mods/SCTA-master/units/CORSY/CORSY_lod0_unpack.sca',

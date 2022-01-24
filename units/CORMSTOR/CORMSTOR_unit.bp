@@ -43,7 +43,7 @@ UnitBlueprint {
         Health = 1306,
         MaxHealth = 1306,
     },
-    Description = 'Increases Metal Storage',
+    Description = 'Metal Storage',
     Display = {
         Mesh = {
             IconFadeInZoom = 130,

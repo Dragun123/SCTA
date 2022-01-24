@@ -55,7 +55,7 @@ UnitBlueprint {
         Health = 400,
         MaxHealth = 400,
     },
-    Description = 'Converts Energy into Metal',
+    Description = 'Metal Fabricator',
     Display = {
         Mesh = {
             IconFadeInZoom = 130,

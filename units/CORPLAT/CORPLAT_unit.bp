@@ -54,7 +54,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = 'Builds Seaplanes',
+    Description = 'Seaplane Factory',
     Display = {
         AnimationUnpack = '/mods/SCTA-master/units/CORPLAT/CORPLAT_lod0_uNPack.sca',
         AnimationUnpackRate = 1, 

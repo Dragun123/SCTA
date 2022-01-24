@@ -58,7 +58,7 @@ UnitBlueprint {
         Health = 144,
         MaxHealth = 144,
     },
-    Description = 'Converts Energy into Metal',
+    Description = 'Metal Fabricator',
     Display = {
         Abilities = {
             '<LOC ability_aquatic>Aquatic',
