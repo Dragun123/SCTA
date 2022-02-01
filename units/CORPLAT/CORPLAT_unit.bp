@@ -110,7 +110,7 @@ UnitBlueprint {
         },
         ConstructionBar = true,
         SelectionPriority = 5,
-        FactionName = 'ARM',
+        FactionName = 'CORE',
         Icon = 'amph',
     TechLevel = 'RULEUTL_Advanced',
 	UnitName = 'Seaplane Platform',
