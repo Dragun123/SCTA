@@ -5,11 +5,11 @@ do
     local TATooltips = {
     lob_arm = { 
         title = "ARM", 
-	description = "Faction devoted Human Conscious free of Machine"
+	description = "A group of rebels from another era who refuse to transfer their mind into the machine"
     }, 
     lob_core = { 
         title = "CORE", 
-	description = "Faction goal of achieving immortality for mankind via transferring mind to machine"
+	description = "A rulers of the universe from prior era who sought immortality for mankind via transferring the mind to machine"
     }, 
     mfd_idle_fieldengineer = {
         title = "Idle Field Engineers",
