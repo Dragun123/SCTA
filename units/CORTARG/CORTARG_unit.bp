@@ -51,7 +51,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = 'Automatic Radar Targeting',
+    Description = 'Targeting Facility',
     Display = {
         AnimationUnpack = '/mods/SCTA-master/units/CORTARG/CORTARG_lod0_aopen.sca',
         AnimationUnpackRate = 0.2, 
