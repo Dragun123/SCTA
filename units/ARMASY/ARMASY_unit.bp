@@ -54,7 +54,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = 'Produces Ships',
+    Description = 'Naval Factory',
     Display = {
         BuildAttachBone = 'slip',
         AnimationUnpack = '/mods/SCTA-master/units/ARMASY/ARMASY_lod0_unpack.sca',

@@ -60,7 +60,7 @@ UnitBlueprint {
         Health = 690,
         MaxHealth = 690,
     },
-    Description = 'Automatically repairs aircraft',
+    Description = 'Air Staging',
     Display = {
         Abilities = {
             '<LOC ability_airstaging>Air Staging',

@@ -55,7 +55,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = 'Builds Hovercraft',
+    Description = 'Hovercraft Factory',
     Display = {
         Abilities = {
             '<LOC ability_aquatic>Aquatic',

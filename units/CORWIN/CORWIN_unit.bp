@@ -42,7 +42,7 @@ UnitBlueprint {
         Health = 179,
         MaxHealth = 179,
     },
-    Description = 'Produces Energy',
+    Description = 'Power Generator',
     Display = {
             Mesh = {
                 IconFadeInZoom = 130,

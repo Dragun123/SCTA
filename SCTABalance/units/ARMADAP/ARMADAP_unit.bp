@@ -53,7 +53,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = 'Produces Aircraft',
+    Description = 'Air Factory',
     Display = {
         AnimationUnpack = '/mods/SCTA-master/units/ARMAP/ARMAP_lod0_unpack.sca',
         AnimationUnpackRate = 1,   

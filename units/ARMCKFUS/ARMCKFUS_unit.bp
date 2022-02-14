@@ -40,7 +40,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = 'Produces Energy',
+    Description = 'Power Generator',
     Display = {
         Abilities = {
             '<LOC ability_cloak>Cloaking',

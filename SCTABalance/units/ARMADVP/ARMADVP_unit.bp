@@ -53,7 +53,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = 'Produces Vehicles',
+    Description = 'Vehicle Factory',
     Display = {
         AnimationUnpack = '/mods/SCTA-master/units/ARMVP/ARMVP_lod0_unpack.sca',
         AnimationUnpackRate = 2,

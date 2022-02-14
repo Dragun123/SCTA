@@ -53,7 +53,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = 'Produces Vehicles',
+    Description = 'Vehicle Factory',
     Display = {
         AnimationUnpack = '/mods/SCTA-master/units/CORVP/CORVP_lod0_aopen.sca',
         AnimationUnpackRate = 1.5, 

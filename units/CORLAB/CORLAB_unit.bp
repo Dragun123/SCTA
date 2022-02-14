@@ -57,7 +57,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = 'Produces Kbots',
+    Description = 'KBot Factory',
     Display = {
     AnimationUnpack = '/mods/SCTA-master/units/CORLAB/CORLAB_lod0_unpack.sca',
     AnimationUnpackRate = 1,
@@ -77,8 +77,8 @@ UnitBlueprint {
         BuildCostEnergy = 1250,
         BuildCostMass = 680, 
         BuildTime = 7000,
-	BuildRate = 100,
-    KBot = true,
+	    BuildRate = 100,
+        KBot = true,
         BuildableCategory = {
             'BOT MOBILE TECH1 CORE',
         },
@@ -86,7 +86,7 @@ UnitBlueprint {
         StorageEnergy = 50,
     },
     Footprint = {
-	MaxSlope = 0.625,
+	    MaxSlope = 0.625,
         SizeX = 6,
         SizeZ = 6,
     },
@@ -94,7 +94,6 @@ UnitBlueprint {
         BuildBones = {
             BuildEffectBones = {'muzzle1', 'muzzle2','muzzle3','muzzle4'},
         },          
-                ---RolloffDelay = 1,
         Category = 'Factory',
         Classification = 'RULEUC_Factory',
         CommandCaps = {
@@ -109,8 +108,8 @@ UnitBlueprint {
         ConstructionBar = true,
         FactionName = 'CORE',
         Icon = 'land',
-TechLevel = 'RULEUTL_Basic',
-	UnitName = 'Kbot Lab',
+        TechLevel = 'RULEUTL_Basic',
+	    UnitName = 'Kbot Lab',
     },
     Intel = {
         VisionRadius = 10,
@@ -119,8 +118,6 @@ TechLevel = 'RULEUTL_Basic',
     LifeBarOffset = 0.5,
     LifeBarSize = 2,
     Physics = {        
-        ---SkirtSizeX = 7,
-        ---SkirtSizeZ = 7,
         OccupyRects = {
             -2.5,
             0,

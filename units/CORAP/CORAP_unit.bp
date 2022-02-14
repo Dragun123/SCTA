@@ -58,7 +58,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = 'Produces Aircraft',
+    Description = 'Air Factory',
     Display = {
         AnimationUnpack = '/mods/SCTA-master/units/CORAP/CORAP_lod0Action.sca',
         AnimationUnpackRate = 1,    

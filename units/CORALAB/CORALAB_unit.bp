@@ -52,7 +52,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = 'Produces Kbots',
+    Description = 'KBot Factory',
     Display = {
         AnimationUnpack = '/mods/SCTA-master/units/CORALAB/CORALAB_lod0_unpack.sca',
         AnimationUnpackRate = 1,    

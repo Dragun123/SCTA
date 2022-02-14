@@ -42,7 +42,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = 'Produces Energy',
+    Description = 'Power Generator',
     Display = {
         Mesh = {
             IconFadeInZoom = 130,

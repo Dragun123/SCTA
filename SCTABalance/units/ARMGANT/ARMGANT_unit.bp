@@ -59,7 +59,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = 'Builds Drake',
+    Description = 'Experimental Factory',
     Display = {
         BuildAttachBone = 'buildpad',
         AnimationPack = '/mods/SCTA-master/SCTABalance/units/ARMGANT/ARMGANT_lod0_repack.sca',

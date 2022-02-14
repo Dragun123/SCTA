@@ -60,7 +60,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = 'Automatically repairs aircraft',
+    Description = 'Air Staging',
     Display = {
         Abilities = {
             '<LOC ability_airstaging>Air Staging',

@@ -40,7 +40,7 @@ UnitBlueprint {
         Health = 200,
         MaxHealth = 200,
     },
-    Description = 'Low Damage, Med. Range Mine',
+    Description = 'Mine',
     Display = {
         Abilities = {
             '<LOC ability_cloak>Cloaking',

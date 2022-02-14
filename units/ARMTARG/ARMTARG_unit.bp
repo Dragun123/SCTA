@@ -51,7 +51,7 @@ UnitBlueprint {
         Health = 1900,
         MaxHealth = 1900,
     },
-    Description = 'Automatic Radar Targeting',
+    Description = 'Targeting Facility',
     Display = {
         AnimationUnpack = '/mods/SCTA-master/units/ARMTARG/ARMTARG_Aopen.sca',
         AnimationUnpackRate = 1, 

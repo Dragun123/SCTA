@@ -19,7 +19,6 @@ UnitBlueprint {
         'TECH2',
         'DIRECTFIRE',
         'OVERLAYDIRECTFIRE',
-        'ARM',
         'MOBILE',
         'LAND',
         'ARM',
