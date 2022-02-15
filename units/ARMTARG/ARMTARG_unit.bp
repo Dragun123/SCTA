@@ -105,7 +105,7 @@ UnitBlueprint {
         OrderOverrides = {
             RULEUTC_IntelToggle = {
                 bitmapId = 'Sacrifice',
-                helpText = 'Radar Targeting. Enables shooting of blips',
+                helpText = 'Radar_Targeting',
             },
         },
         SelectionPriority = 5,
