@@ -163,7 +163,7 @@ UnitBlueprint {
         OrderOverrides = {
             RULEUCC_Overcharge = {
                 bitmapId = 'activate-weapon',
-                helpText = 'DGun. Requires 500 Energy to Fire. Right-click turn on auto',
+                helpText = 'DGun',
             },
         },
         ToggleCaps = {

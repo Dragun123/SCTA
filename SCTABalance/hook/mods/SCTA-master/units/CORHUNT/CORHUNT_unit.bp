@@ -19,8 +19,8 @@ UnitBlueprint {
 General = {
     OrderOverrides = {
         RULEUTC_CloakToggle = {
-            bitmapId = 'stealth-field',
-            helpText = 'toggle_cloak_field',
+            bitmapId = 'shield',
+            helpText = 'toggle_Cloakfieldta',
         },
     },
     ToggleCaps = {

@@ -44,7 +44,7 @@ UnitBlueprint {
         Health = 1070,
         MaxHealth = 1070,
     },
-    Description = 'Increases Energy Storage',
+    Description = 'Energy Storage',
     Display = {
         Mesh = {
             IconFadeInZoom = 130,
