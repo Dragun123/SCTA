@@ -250,6 +250,7 @@ Disintegrator = Class(TALightCannonProjectile) {
 
 
 	OnImpact = function(self, targetType, targetEntity)
+		--self.DamageData.DamageAmount = 0
 		--targetCats = targetEntity:GetBlueprint().CategoriesHash
 		--_ALERT('TADGUNThread', self.DGunThread)
 	end,
