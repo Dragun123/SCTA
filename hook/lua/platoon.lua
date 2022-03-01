@@ -138,7 +138,7 @@ Platoon = Class(SCTAAIPlatoon) {
                   local Escort = self.EngineerTAUnfinished(eng, aiBrain, assistData.AssistRange)
                   --_ALERT('TAEscort2', Escort:GetBlueprint().Display.UniformScale)
                   ---self:Stop('Support')
-               while Escort and Escort:GetFractionComplete() < 1 and not (Escort.Dead or eng.Dead) do
+               while Escort and not (Escort.Dead or eng.Dead) and Escort:GetFractionComplete() < 1 do
                     self:Stop('Support')
                     --_ALERT('TAEscort', Escort:GetBlueprint().Display.UniformScale)
                     --IssueClearCommands({eng})  
@@ -154,7 +154,7 @@ Platoon = Class(SCTAAIPlatoon) {
             EngineerTAUnfinished = function(eng, aiBrain, data)
                 local Unfinished = aiBrain:GetUnitsAroundPoint(categories.STRUCTURE, eng:GetPosition(), data, 'Ally')
                     for _, Escort in Unfinished do
-                        if Escort and Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < 3 and 
+                        if Escort and not (Escort.Dead or eng.Dead) and Escort.SCTAAIBrain and table.getn(Escort:GetGuards()) < 3 and 
                             Escort:GetFractionComplete() < 1 and not Escort.Escorting then 
                         return Escort
                     --WaitSeconds(3)

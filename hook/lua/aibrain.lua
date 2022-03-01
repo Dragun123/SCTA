@@ -192,9 +192,9 @@ AIBrain = Class(SCTAAIBrainClass) {
     end,
 
     --[[InitializePlatoonBuildManager = function(self)
-        SCTAAIBrainClass.InitializePlatoonBuildManager(self)
-        ALERT('SCTAPBMEXIST')
-    end,]]
+            SCTAAIBrainClass.InitializePlatoonBuildManager(self)
+            ALERT('SCTAPBMEXIST')
+        end,]]
 
     TAFactoryAssistThread = function(aiBrain)
         while (aiBrain.Result ~= 'defeat') do
