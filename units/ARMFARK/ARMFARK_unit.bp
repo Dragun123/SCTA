@@ -41,6 +41,7 @@ UnitBlueprint {
         'SELECTABLE',
         'BOT',
         'TECH2',
+        'BUILTBYLANDTIER2FACTORY',
         'ENGINEER',
         'REPAIR',
         'RECLAIM',

@@ -34,10 +34,11 @@ UnitBlueprint {
         'VISIBLETORECON',
         'RECLAIMABLE',
         'MOBILE',
-	'LAND',
-	'DIRECTFIRE',
+	    'LAND',
+	    'DIRECTFIRE',
         'OVERLAYDIRECTFIRE',
         'CORE',
+        'BUILTBYLANDTIER1FACTORY',
     },
     Defense = {
         ArmorType = 'Normal',

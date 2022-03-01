@@ -41,6 +41,7 @@ UnitBlueprint {
         'OVERLAYDIRECTFIRE',
         'OVERLAYRADAR',
         'ARM',
+        'BUILTBYLANDTIER1FACTORY',
     },
     Defense = {
         ArmorType = 'Normal',

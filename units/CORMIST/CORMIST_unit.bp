@@ -39,6 +39,7 @@ UnitBlueprint {
 	    'OVERLAYANTIAIR',
         'CORE',
         'SILO',
+        'BUILTBYLANDTIER1FACTORY',
     },
     Defense = {
         ArmorType = 'Normal',

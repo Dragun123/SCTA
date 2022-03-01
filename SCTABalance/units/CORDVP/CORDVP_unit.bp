@@ -85,8 +85,8 @@ UnitBlueprint {
         DifferentialUpgradeCostCalculation = true,
     BuildableCategory = {
         'coradvp',
-        'TANK MOBILE TECH1 CORE', 
-        'TANK MOBILE TECH2 CORE',
+        'BUILTBYLANDTIER1FACTORY TANK CORE',
+        'BUILTBYLANDTIER2FACTORY TECH2 CORE',
         'BOT MOBILE ENGINEER TECH1 CORE',
         'BOT MOBILE ENGINEER TECH2 CORE',
     },

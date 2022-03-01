@@ -81,9 +81,8 @@ UnitBlueprint {
         DifferentialUpgradeCostCalculation = true,
 	BuildRate = 300,
         BuildableCategory = {
-            'BOT MOBILE TECH3 CORE',
-            'BOT MOBILE TECH2 CORE',
-            'BOT MOBILE TECH1 CORE',
+            'BUILTBYLANDTIER1FACTORY BOT CORE',
+            'BUILTBYLANDTIER2FACTORY BOT CORE',
         },
         StorageMass = 50,
         StorageEnergy = 50,

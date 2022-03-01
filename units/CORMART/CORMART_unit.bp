@@ -40,6 +40,7 @@ UnitBlueprint {
         'CORE',
         'TANK',	
      'SNIPEMODE',
+     'BUILTBYLANDTIER2FACTORY',
     },
     Defense = {
         ArmorType = 'Normal',

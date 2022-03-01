@@ -21,7 +21,8 @@ UnitBlueprint {
         BuildTime = 7600,
         BuildableCategory = {
             'armdlab', 
-            'BOT MOBILE TECH1 ARM',
+            'BOT MOBILE ENGINEER TECH1 ARM',
+            'BUILTBYLANDTIER1FACTORY BOT ARM',
         },
     },
     LifeBarHeight = 0.22,

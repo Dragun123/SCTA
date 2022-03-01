@@ -31,6 +31,7 @@ UnitBlueprint {
         'SELECTABLE',
         'TECH2',
         'BOT',
+        'BUILTBYLANDTIER2FACTORY',
         'VISIBLETORECON',
         'RECLAIMABLE',
         'MOBILE',

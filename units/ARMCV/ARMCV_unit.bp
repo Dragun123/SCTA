@@ -49,6 +49,7 @@ UnitBlueprint {
         'PATROLHELPER',
         'SHOWQUEUE',
         'MOBILE',
+        'BUILTBYLANDTIER1FACTORY',
 	    'CONSTRUCTION',
 	    'LAND',
         'ARM',

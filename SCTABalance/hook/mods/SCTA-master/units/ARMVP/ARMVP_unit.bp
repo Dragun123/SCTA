@@ -17,8 +17,8 @@ UnitBlueprint {
         BuildTime = 8400,
         BuildableCategory = {
             'armdvp',
-            'TANK MOBILE TECH1 ARM',
-            'BOT MOBILE ENGINEER TECH1 ARM',
+            'BUILTBYLANDTIER1FACTORY TANK ARM',
+            'BOT BUILTBYLANDTIER1FACTORY ENGINEER TECH1 ARM',
         },
     },
     Footprint = {

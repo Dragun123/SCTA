@@ -41,6 +41,7 @@ UnitBlueprint {
         'SELECTABLE',
         'TANK',
         'TECH1',
+        'BUILTBYLANDTIER1FACTORY',
         'ENGINEER',
         'VISIBLETORECON',
         'RECLAIMABLE',

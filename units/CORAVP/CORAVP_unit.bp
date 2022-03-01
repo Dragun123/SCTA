@@ -76,7 +76,7 @@ UnitBlueprint {
 	    BuildRate = 200,
         Vehicle = true,
         BuildableCategory = {
-            'TANK MOBILE TECH2 CORE',
+            'TANK BUILTBYLANDTIER2FACTORY CORE',
         },
         StorageMass = 200,
         StorageEnergy = 200,

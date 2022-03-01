@@ -81,9 +81,8 @@ UnitBlueprint {
         DifferentialUpgradeCostCalculation = true,
 	BuildRate = 300,
         BuildableCategory = {
-            'TANK MOBILE TECH1 ARM',
-            'TANK MOBILE TECH2 ARM',
-            'TANK MOBILE TECH3 ARM',
+            'BUILTBYLANDTIER1FACTORY TANK ARM',
+            'BUILTBYLANDTIER2FACTORY TANK ARM',
             'BOT MOBILE ENGINEER ARM',
         },
         StorageMass = 50,

@@ -12,6 +12,7 @@ UnitBlueprint {
         'ARTILLERY',
         'CORE',
         'TANK',	
+        'BUILTBYLANDTIER2FACTORY',
         'SNIPEMODE',
     },
     Defense = {

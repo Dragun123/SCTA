@@ -74,9 +74,9 @@ UnitBlueprint {
         BuildCostEnergy = 3200,
         BuildCostMass = 1984, 
         BuildTime = 14950,
-	BuildRate = 200,
+	    BuildRate = 200,
         BuildableCategory = {
-            'TANK MOBILE TECH2 ARM',
+            'BUILTBYLANDTIER2FACTORY ARM',
         },
         StorageMass = 200,
         StorageEnergy = 200,

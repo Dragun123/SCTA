@@ -81,7 +81,7 @@ UnitBlueprint {
         Vehicle = true,
 	    BuildRate = 100,
         BuildableCategory = {
-            'TANK MOBILE TECH1 ARM',
+            'TANK BUILTBYLANDTIER1FACTORY ARM',
         },
         StorageMass = 50,
         StorageEnergy = 50,

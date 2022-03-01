@@ -13,6 +13,7 @@ UnitBlueprint {
         'ARM',
         'TANK',	
         'SNIPEMODE',
+        'BUILTBYLANDTIER2FACTORY',
     },
     Defense = {
         Health = 1400,

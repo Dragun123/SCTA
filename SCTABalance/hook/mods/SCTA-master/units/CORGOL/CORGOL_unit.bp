@@ -9,6 +9,7 @@ UnitBlueprint {
     'LAND',
     'DIRECTFIRE',
     'OVERLAYDIRECTFIRE',
+    'BUILTBYLANDTIER2FACTORY',
     'CORE',
     'TANK',
     },

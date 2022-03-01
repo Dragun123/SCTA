@@ -42,6 +42,7 @@ UnitBlueprint {
         'CORE',
         'INTELLIGENCE',
         'OVERLAYRADAR',
+        'BUILTBYLANDTIER1FACTORY',
     },
     Defense = {
         ArmorType = 'Normal',

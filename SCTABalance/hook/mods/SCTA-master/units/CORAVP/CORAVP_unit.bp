@@ -32,9 +32,8 @@ UnitBlueprint {
         BuildRate = 180,
         BuildTime = 15000,
         BuildableCategory = {
-            'TANK MOBILE TECH1 CORE', 
-            'TANK MOBILE TECH2 CORE',
-            'TANK MOBILE TECH3 CORE',
+            'BUILTBYLANDTIER1FACTORY TANK CORE',
+            'BUILTBYLANDTIER2FACTORY TANK CORE',
             'BOT MOBILE ENGINEER CORE',
         },
     },

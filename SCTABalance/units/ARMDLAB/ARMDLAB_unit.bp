@@ -85,8 +85,8 @@ UnitBlueprint {
         DifferentialUpgradeCostCalculation = true,
         BuildableCategory = {
             'armadlab',
-            'BOT MOBILE TECH1 ARM',
-            'BOT MOBILE TECH2 ARM',
+            'BUILTBYLANDTIER1FACTORY BOT ARM',
+            'BUILTBYLANDTIER2FACTORY BOT TECH2 ARM',
         },
     StorageMass = 50,
     StorageEnergy = 50,

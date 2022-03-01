@@ -35,6 +35,7 @@ UnitBlueprint {
         'VISIBLETORECON',
         'RECLAIMABLE',
         'MOBILE',
+        'BUILTBYLANDTIER2FACTORY',
 	    'LAND',
 	    'INTELLIGENCE',
         'OVERLAYRADAR',

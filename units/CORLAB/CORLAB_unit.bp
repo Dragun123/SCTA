@@ -80,7 +80,9 @@ UnitBlueprint {
 	    BuildRate = 100,
         KBot = true,
         BuildableCategory = {
-            'BOT MOBILE TECH1 CORE',
+            'BUILTBYLANDTIER1FACTORY CORE',
+            'BOT MOBILE ENGINEER TECH1 CORE',
+            --'BOT MOBILE TECH1 CORE',
         },
         StorageMass = 50,
         StorageEnergy = 50,

@@ -39,6 +39,7 @@ UnitBlueprint {
 	    'PRODUCTFA',
         'OVERLAYDIRECTFIRE',
         'ARM',
+        'BUILTBYLANDTIER1FACTORY',
     },
     Defense = {
         ArmorType = 'Normal',

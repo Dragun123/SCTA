@@ -24,6 +24,7 @@ UnitBlueprint {
         'ARM',
         'AMPHIBIOUS',
         'SCOUT',
+        'BUILTBYLANDTIER2FACTORY',
     },
     Defense = {
         ArmorType = 'Normal',
