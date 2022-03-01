@@ -14,7 +14,7 @@ UnitBlueprint {
     },
         Economy = {
             BuildCostEnergy = 4500,
-            BuildCostMass = 600,
+            BuildCostMass = 550,
     },
     SelectionSizeX = 1.25,
     SelectionSizeZ = 1.25,

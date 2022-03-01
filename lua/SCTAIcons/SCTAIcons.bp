@@ -43,12 +43,20 @@ UnitBlueprint {
 UnitBlueprint {
     Merge = true,
     BlueprintId = "xel0209", ---sparky
-    Defense = {
+    --[[[Defense = {
         EconomyThreatLevel = 2,
-    },
+    },]]
     StrategicIconName = 'icon_bot2_engineer',
 }
 UnitBlueprint {
+    Merge = true,
+    BlueprintId = "xnl0209", ---scarab
+    --[[Defense = {
+        EconomyThreatLevel = 2,
+    },]]
+    StrategicIconName = 'icon_bot2_engineer',
+}
+--[[UnitBlueprint {
     Merge = true,
     BlueprintId = "ual0105", ---aeon t1 engi
     Defense = {
@@ -134,14 +142,6 @@ UnitBlueprint {
 }
 UnitBlueprint {
     Merge = true,
-    BlueprintId = "xnl0209", ---scarab
-    Defense = {
-        EconomyThreatLevel = 2,
-    },
-    StrategicIconName = 'icon_bot2_engineer',
-}
-UnitBlueprint {
-    Merge = true,
     BlueprintId = "xnl0105", ---nomad t1 engi
     Defense = {
         EconomyThreatLevel = 1,
@@ -160,7 +160,9 @@ UnitBlueprint {
     Defense = {
         EconomyThreatLevel = 3,
     },
-}
+}]]
+
+
 
 ----CustomTA Icons
 ---Bot 1-2 Armored

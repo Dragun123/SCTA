@@ -346,9 +346,10 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             if table.getn(factory:GetCommandQueue()) >= 1 and factory.TAAIFactoryBuilding then
                 return self:ForkThread(self.TADelayBuildOrder, factory, bType, true)
             end
+            if not factory:IsUnitState('Building') and (factory:IsIdleState() or not factory.TABuildingUnit) then
             local builder = self:GetHighestBuilder(bType,{factory})
             --LOG('*TAIEXIST2', factory)
-                if builder and (factory:IsIdleState() or not factory.TABuildingUnit) and not factory:IsUnitState('Building') then
+                if builder then
                 ---LOG('*TAIEXIST3', factory)
                 --factory.PlatoonHandle = hndl
                 factory.TAAIFactoryBuilding = true
@@ -379,8 +380,11 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                     end
                 end
                 -- No builder found setup way to check again
-                self:ForkThread(self.TADelayBuildOrder, factory, bType, true)
+                    return self:ForkThread(self.TADelayBuildOrder, factory, bType, true)
                 --LOG('*TACanceling1', factory)
+                end
+            else
+                self:ForkThread(self.TADelayBuildOrder, factory, bType, true)
             end
         end,
     }

@@ -5,7 +5,7 @@
      MaxHealth = 320,
      },
      Economy = {
-        BuildCostMass = 120,
+        BuildCostMass = 110,
         BuildCostEnergy = 900,
          },
          SelectionSizeX = 0.8,
