@@ -79,7 +79,7 @@ UnitBlueprint {
         BuildTime = 17232,
 	BuildRate = 200,
         BuildableCategory = {
-            'AIR MOBILE TECH2 CORE',
+            'BUILTBYAIRTIER2FACTORY MOBILE AIR CORE',
         },
         StorageMass = 200,
         StorageEnergy = 200,

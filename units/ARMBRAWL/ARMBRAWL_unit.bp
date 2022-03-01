@@ -76,6 +76,7 @@ UnitBlueprint {
         'OVERLAYDIRECTFIRE',	
         'ARM',
         'SNIPEMODE',
+        'BUILTBYAIRTIER2FACTORY',
     },
     Defense = {
         ArmorType = 'Light',

@@ -98,7 +98,7 @@ UnitBlueprint {
         BuildRate = 200,
         BuildableCategory = {
             'armcsa',
-            'AIR MOBILE TRANSPORTATION TECH3 ARM',
+            'BUILTBYAIRTIER3FACTORY AIR ARM',
             },
         },
         Footprint = {

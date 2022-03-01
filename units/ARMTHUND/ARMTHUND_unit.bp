@@ -79,6 +79,7 @@ UnitBlueprint {
         'HIGHALTAIR',
         'OVERLAYRADAR',
         'SNIPEMODE',
+        'BUILTBYAIRTIER1FACTORY',
     },
     Defense = {
         ArmorType = 'Light',

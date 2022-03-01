@@ -80,6 +80,7 @@ UnitBlueprint {
 	    'OVERLAYANTIAIR',
         'CORE',
         'SNIPEMODE',
+        'BUILTBYAIRTIER2FACTORY',
     },
     Defense = {
         ArmorType = 'Light',

@@ -9,6 +9,7 @@ UnitBlueprint {
         'MOBILE',
 	    'BOMBER',
         'AIR',
+        'BUILTBYAIRTIER2FACTORY',
         'DIRECTFIRE',
         'ANTIAIR',
         'OVERLAYDIRECTFIRE',

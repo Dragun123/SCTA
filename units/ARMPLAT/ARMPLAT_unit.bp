@@ -83,7 +83,7 @@ UnitBlueprint {
         'armfig',
         'armlance',
         'armcsa',
-        'AIR MOBILE TRANSPORTATION TECH3 ARM',
+        'MOBILE BUILTBYAIRTIER3FACTORY ARM',
     },
 	StorageEnergy = 250,
 	StorageMass = 250,

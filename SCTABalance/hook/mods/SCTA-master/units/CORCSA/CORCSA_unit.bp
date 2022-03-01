@@ -1,5 +1,23 @@
 UnitBlueprint {
    Merge = true,
+   Categories = {
+    'SELECTABLE',
+    'AIR',
+    'CORE',
+    'TECH3',
+    'ENGINEER',
+    'REPAIR',
+    'RECLAIM',
+    'VISIBLETORECON',
+    'RECLAIMABLE',
+    'PATROLHELPER',
+    'SHOWQUEUE',
+    'MOBILE',
+    'CONSTRUCTION',
+    'ASF',
+    'BUILTBYAIRTIER3FACTORY',
+    'BUILTBYAIRTIER2FACTORY',
+    },
    Air = {
     MaxAirspeed = 10,
     MinAirspeed = 3,

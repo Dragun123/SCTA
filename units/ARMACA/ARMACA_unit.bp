@@ -72,6 +72,7 @@ UnitBlueprint {
         'SELECTABLE',
         'TECH2',
         'AIR',
+        'BUILTBYAIRTIER2FACTORY',
         'ARM',
         'ENGINEER',
         'REPAIR',

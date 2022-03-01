@@ -66,6 +66,7 @@ UnitBlueprint {
         'VISIBLETORECON',
         'RECLAIMABLE',
         'MOBILE',
+        'BUILTBYAIRTIER2FACTORY',
 	    'AIR',
         'HIGHALTAIR',
         'INTELLIGENCE',

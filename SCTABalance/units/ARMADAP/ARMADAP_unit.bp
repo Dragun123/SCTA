@@ -84,11 +84,10 @@ UnitBlueprint {
         BuildRate = 360,
         AirFactory = true,
         BuildableCategory = {
-        'ASF ARM',
         'TECH1 BOT ENGINEER ARM',
         'TECH2 FIELDENGINEER ARM',
-        'AIR MOBILE TECH2 ARM',
-        'AIR MOBILE TECH1 ARM', 
+        'BUILTBYAIRTIER1FACTORY MOBILE AIR ARM',
+        'BUILTBYAIRTIER2FACTORY MOBILE AIR ARM',
         },
         StorageMass = 50,
         StorageEnergy = 50,
