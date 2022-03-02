@@ -39,6 +39,7 @@ UnitBlueprint {
         'CORE',
         'HOVER',
         'SILO',
+        'BUILTBYLANDTIER3FACTORY',
     },
     Defense = {
         ArmorType = 'Normal',

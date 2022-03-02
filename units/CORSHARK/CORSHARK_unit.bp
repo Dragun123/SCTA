@@ -40,6 +40,7 @@ UnitBlueprint {
         'OVERLAYANTINAVY',
         'CORE',
         'SNIPEMODE',
+        'BUILTBYNAVALTIER2FACTORY',
     },
     Defense = {
         ArmorType = 'Normal',

@@ -38,6 +38,7 @@ UnitBlueprint {
 	    'CRUISER',
         'OVERLAYANTIAIR',
         'CORE',
+        'BUILTBYNAVALTIER2FACTORY',
     },
     CollisionOffsetY = -0.5,
     Defense = {

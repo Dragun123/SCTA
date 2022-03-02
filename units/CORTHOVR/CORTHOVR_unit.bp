@@ -40,6 +40,7 @@ UnitBlueprint {
         'CANNOTUSEAIRSTAGING',
         'LAND',
         'CORE',
+        'BUILTBYLANDTIER3FACTORY',
     },
     CollisionOffsetY = 0.8,
     Defense = {

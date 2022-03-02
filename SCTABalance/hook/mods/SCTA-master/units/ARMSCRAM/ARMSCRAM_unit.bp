@@ -16,6 +16,7 @@ UnitBlueprint {
         'DEFENSIVEBOAT',
         'ARM',
         'SUBMERSIBLE',
+        'BUILTBYNAVALTIER2FACTORY',
     },
     Economy = {
         BuildCostEnergy = 10000,

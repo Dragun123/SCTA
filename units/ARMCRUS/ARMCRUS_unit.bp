@@ -43,6 +43,7 @@ UnitBlueprint {
         'ARM',
     'ANTISUB',
     'SNIPEMODE',
+    'BUILTBYNAVALTIER2FACTORY',
     },
     CollisionOffsetY = -0.5,
     Defense = {

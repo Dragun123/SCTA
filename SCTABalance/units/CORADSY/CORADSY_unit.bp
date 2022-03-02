@@ -82,9 +82,8 @@ UnitBlueprint {
     NavalFactory = true,
     DifferentialUpgradeCostCalculation = true,
     BuildableCategory = {
-        'NAVAL MOBILE TECH1 CORE',
-        'NAVAL MOBILE TECH2 CORE',
-        'NAVAL MOBILE TECH3 CORE',
+        'NAVAL BUILTBYNAVALTIER1FACTORY CORE',
+        'NAVAL BUILTBYNAVALTIER2FACTORY CORE',
         'corch',
         'cornecro',
     },

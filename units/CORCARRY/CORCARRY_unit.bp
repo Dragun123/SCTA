@@ -55,6 +55,7 @@ UnitBlueprint {
         'OVERLAYSONAR',
         'OVERLAYMISC',
         'CORE',
+        'BUILTBYNAVALTIER2FACTORY',
     },
     CollisionOffsetY = -0.5,
     Defense = {

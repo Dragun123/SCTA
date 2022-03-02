@@ -78,7 +78,7 @@ UnitBlueprint {
         BuildTime = 18520,
 	BuildRate = 200,
         BuildableCategory = {
-            'HOVER MOBILE TECH3 CORE',
+            'BUILTBYLANDTIER3FACTORY CORE',
         },
         StorageMass = 250,
         StorageEnergy = 250,

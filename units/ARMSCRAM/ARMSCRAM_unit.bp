@@ -52,6 +52,7 @@ UnitBlueprint {
         'ARM',
         'T2SUBMARINE',
         'SUBMERSIBLE',
+        'BUILTBYNAVALTIER2FACTORY',
     },
     Defense = {
         ArmorType = 'Normal',

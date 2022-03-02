@@ -40,6 +40,7 @@ UnitBlueprint {
         'OVERLAYANTINAVY',
         'CORE',
         'SNIPEMODE',
+        'BUILTBYNAVALTIER1FACTORY',
     },
     CollisionOffsetY = -0.1,
     Defense = {

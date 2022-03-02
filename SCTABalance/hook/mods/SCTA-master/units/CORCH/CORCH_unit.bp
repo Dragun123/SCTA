@@ -16,6 +16,7 @@ UnitBlueprint {
         'CORE',
         'HOVER',
         'BOT',
+        'BUILTBYLANDTIER3FACTORY',
     },
     Defense = {
         Health = 1500,
