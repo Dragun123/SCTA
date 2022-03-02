@@ -17,7 +17,7 @@ UnitBlueprint {
         'ARM',
         'SNIPER',
         'ANTISHIELD',
-        'BUILTBYTIER1FACTORY',
+        'BUILTBYTIER1FIELD',
         'BUILTBYTIER2COMMANDER',
         'BUILTBYTIER1ENGINEER',
         'BUILTBYTIER3ENGINEER',

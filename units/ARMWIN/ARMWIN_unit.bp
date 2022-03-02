@@ -17,7 +17,7 @@ UnitBlueprint {
     },
     BuildIconSortPriority = 9,
     Categories = {
-        'BUILTBYTIER1FACTORY',
+        'BUILTBYTIER1FIELD',
         'BUILTBYTIER1ENGINEER',
         'BUILTBYTIER3ENGINEER',
         'BUILTBYCOMMANDER',

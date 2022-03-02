@@ -18,7 +18,7 @@ UnitBlueprint {
     },
     BuildIconSortPriority = 27,
     Categories = {
-        'BUILTBYTIER2FACTORY',
+        'BUILTBYTIER2FIELD',
         'BUILTBYTIER2ENGINEER',
         'SELECTABLE',
         'DRAGBUILD',

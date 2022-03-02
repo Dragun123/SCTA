@@ -30,6 +30,7 @@ UnitBlueprint {
         'DRAGBUILD',
         'BOMB',
         'STRUCTURE',
+        'BUILTBYTIER3FIELD',
     },
     Defense = {
         ArmorType = 'Structure',

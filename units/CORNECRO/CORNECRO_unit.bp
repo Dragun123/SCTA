@@ -93,7 +93,7 @@ UnitBlueprint {
 	    ProductionPerSecondEnergy = 17,
         ProductionPerSecondMass = 1,
         BuildableCategory = {
-        'BOMB STRUCTURE CORE',
+        'BUILTBYTIER3FIELD CORE',
     },
     },
     General = {

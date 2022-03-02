@@ -2,7 +2,7 @@ UnitBlueprint {
     Merge = true,
     BuildIconSortPriority = 10,
     Categories = {
-        'BUILTBYTIER2FACTORY',
+        'BUILTBYTIER2FIELD',
         'BUILTBYTIER2ENGINEER',
         'SELECTABLE',
         'DRAGBUILD',

@@ -41,7 +41,7 @@ UnitBlueprint {
             BuildableCategory = {
                 'BUILTBYTIER3ENGINEER ARM',
                 'BUILTBYTIER2ENGINEER ARM',
-                'BUILTBYTIER2FACTORY ARM',
+                'BUILTBYTIER2FIELD ARM',
             },
         },
         LifeBarSize = 1.6,

@@ -36,7 +36,7 @@ UnitBlueprint {
         BuildCostMass = 400,  
         BuildableCategory = {
             'BUILTBYTIER3ENGINEER CORE',
-            'BUILTBYTIER2FACTORY CORE',
+            'BUILTBYTIER2FIELD CORE',
             'BUILTBYTIER2ENGINEER CORE',
         },
         ProductionPerSecondEnergy = 5,

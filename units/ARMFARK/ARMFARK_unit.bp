@@ -88,7 +88,7 @@ UnitBlueprint {
         MaxBuildDistance = 3.75,
     NaturalProducer = true,
     BuildableCategory = {
-        'BOMB STRUCTURE ARM',
+        'BUILTBYTIER3FIELD ARM',
     },
 	ProductionPerSecondEnergy = 17,
 	ProductionPerSecondMass = 1,
