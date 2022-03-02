@@ -98,7 +98,7 @@ BuilderGroup {
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory2' }},
             { TASlow, 'TAFactoryCapCheckT2', {}},
-            { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, LAB} },
+            { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, LAB} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
         BuilderType = 'OmniLand',
@@ -213,7 +213,7 @@ BuilderGroup {
             }
         }
     },
-    Builder {
+    --[[Builder {
         BuilderName = 'SCTAAI T3LAND Hover Factory T2 Expansion',
         PlatoonTemplate = 'EngineerBuilderSCTA23',
         PriorityFunction = TAPrior.ProductionT3,
@@ -260,5 +260,5 @@ BuilderGroup {
                 }
             }
         }
-    },
+    },]]
 }

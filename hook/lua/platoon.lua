@@ -1962,8 +1962,6 @@ Platoon = Class(SCTAAIPlatoon) {
             if v.Dead then continue end
             v:SetCustomName('AttackHuntSCTA')
         end]]
-        local Artillery = self:GetSquadUnits('Artillery')
-        local AntiAir = self:GetSquadUnits('Scout')
         table.insert( atkPri, 'LAND' )
         table.insert( categoryList, SCTALAND)
         self:SetPrioritizedTargetList( 'Attack', categoryList )
@@ -1974,6 +1972,8 @@ Platoon = Class(SCTAAIPlatoon) {
         local maxRadius = self.PlatoonData.SearchRadius or 100
         while aiBrain:PlatoonExists(self) do
             local numberOfUnitsInPlatoon = table.getn(platoonUnits)
+            local Artillery = self:GetSquadUnits('Artillery')
+            local AntiAir = self:GetSquadUnits('Scout')
             if not target or target.Dead then
                 if aiBrain:GetCurrentEnemy() and aiBrain:GetCurrentEnemy():IsDefeated() then
                     aiBrain:PickEnemyLogic()
@@ -2131,9 +2131,6 @@ Platoon = Class(SCTAAIPlatoon) {
             if v.Dead then continue end
             v:SetCustomName('AttackHuntSCTA')
         end]]
-        local Support = self:GetSquadUnits('Guard')
-        local Artillery = self:GetSquadUnits('Artillery')
-        local AntiAir = self:GetSquadUnits('Scout')
         table.insert( atkPri, 'LAND' )
         table.insert( categoryList, SCTALAND)
         self:SetPrioritizedTargetList( 'Attack', categoryList )
@@ -2143,6 +2140,9 @@ Platoon = Class(SCTAAIPlatoon) {
         local blip = false
         local maxRadius = self.PlatoonData.SearchRadius or 100
         while aiBrain:PlatoonExists(self) do
+            local Support = self:GetSquadUnits('Guard')
+            local Artillery = self:GetSquadUnits('Artillery')
+            local AntiAir = self:GetSquadUnits('Scout')
             if not target or target.Dead then
                 if aiBrain:GetCurrentEnemy() and aiBrain:GetCurrentEnemy():IsDefeated() then
                     aiBrain:PickEnemyLogic()
@@ -2225,6 +2225,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         end
                         coroutine.yield(41)
                         self:MoveToLocation( (v), false )
+                        self:AggressiveMoveToLocation((v), 'Guard')
                         WaitSeconds(7)
                     end
                     self:Stop()
@@ -2349,6 +2350,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         local smartPos = TAReclaim.TAKite({self.Center[1] + math.random(-2,2), self.Center[2], self.Center[3] + math.random(-2,2)}, threat, {targetDist, targetDist - self.PlatoonData.TAWeaponRange})
                         smartPos = {smartPos[1] + math.random(-1,1), smartPos[2], smartPos[3] + math.random(-1,1)}
                         IssueClearCommands(v)
+                        coroutine.yield(22)
                         IssueMove(v, smartPos)
                     end
                 end

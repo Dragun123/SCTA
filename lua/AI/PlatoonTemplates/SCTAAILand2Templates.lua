@@ -57,6 +57,7 @@ PlatoonTemplate {
         },
         Core = {
             { 'corraid', 1, 1, 'Attack', 'none' },
+            { 'corlevlr', 1, 1, 'Attack', 'none' },
         },
     }
 }

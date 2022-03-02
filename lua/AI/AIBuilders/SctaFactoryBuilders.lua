@@ -103,7 +103,7 @@ BuilderGroup {
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory2' }},
             { TASlow, 'TAFactoryCapCheckT2', {} },
-            { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, LAB} },
+            { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, LAB} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
         BuilderType = 'OmniLand',
@@ -185,7 +185,8 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'Factory3', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory3' }},
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 4, PLATFORM * categories.LAND } },
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 3, PLATFORM * categories.LAND } },
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 5, PLATFORM} },
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, categories.LAND * PLATFORM} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
@@ -211,7 +212,8 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'Factory3', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory3' }},
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 4, PLATFORM * categories.AIR} },
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 3, PLATFORM * categories.AIR } },
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 5, PLATFORM} },
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, categories.AIR * PLATFORM} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
