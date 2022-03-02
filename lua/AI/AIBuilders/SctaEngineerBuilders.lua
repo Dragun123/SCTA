@@ -64,7 +64,7 @@ BuilderGroup {
             { UCBC, 'CheckBuildPlattonDelay', { 'Field' }},
             { TASlow, 'HaveLessThanUnitsWithCategoryTA', { 2, categories.FIELDENGINEER * categories.TECH2} }, -- Build engies until we have 4 of them.
         },
-        BuilderType =  'Field',
+        BuilderType =  'KBot',
     },
     Builder {
         BuilderName = 'SCTAAi Factory Engineer',

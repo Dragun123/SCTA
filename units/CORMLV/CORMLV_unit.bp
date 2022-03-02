@@ -109,7 +109,7 @@ UnitBlueprint {
         BuildRate = 100,
         BuildTime = 1519,
         BuildableCategory = {
-            'BOMB STRUCTURE CORE',
+            'BUILTBYTIER3FIELD CORE',
         },
         MaxBuildDistance = 4.375,
     },

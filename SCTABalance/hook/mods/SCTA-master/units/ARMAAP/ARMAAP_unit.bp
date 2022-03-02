@@ -1,9 +1,9 @@
 UnitBlueprint {
     Merge = true,
     Categories = {
-        'BUILTBYTIER1FACTORY',
+        'BUILTBYTIER1FIELD',
         'BUILTBYTIER2COMMANDER',
-        'BUILTBYTIER2FACTORY',
+        'BUILTBYTIER2FIELD',
         'SELECTABLE',
         'DRAGBUILD',
         'VISIBLETORECON',

@@ -85,7 +85,7 @@ UnitBlueprint {
         BuildRate = 100,
         BuildTime = 1519,
         BuildableCategory = {
-            'BOMB STRUCTURE ARM',
+            'BUILTBYTIER3FIELD ARM',
         },
         MaxBuildDistance = 4.375,
     },

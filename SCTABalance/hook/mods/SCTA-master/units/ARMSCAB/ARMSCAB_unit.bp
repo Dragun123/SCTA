@@ -10,7 +10,7 @@ UnitBlueprint {
         'ARM',
         'ANTIMISSILE',
         'BUILTBYTIER1ENGINEER',
-        'BUILTBYTIER1FACTORY',
+        'BUILTBYTIER1FIELD',
         'BUILTBYTIER3ENGINEER',
         'OVERLAYDEFENSE',
         'SORTDEFENSE',

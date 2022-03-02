@@ -255,9 +255,11 @@ PlatoonTemplate {
     FactionSquads = {
         Arm = {
             { 'armfark', 1, 1, 'Support', 'None' },
+            { 'armfast', 1, 1, 'Attack', 'none' },
         },
         Core = {
             { 'cornecro', 1, 1, 'Support', 'None' },
+            { 'corfast', 1, 1, 'Attack', 'none' },
         },
     }
 }

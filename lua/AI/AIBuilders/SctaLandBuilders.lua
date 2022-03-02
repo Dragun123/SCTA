@@ -84,7 +84,7 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTAAi FactoryT2 Kbot',
         PlatoonTemplate = 'T2LandDFTankSCTA',
-        Priority = 121,
+        Priority = 135,
         DelayEqualBuildPlattons = {'FactoryProductionSCTA', 1},
         BuilderConditions = {
         { UCBC, 'CheckBuildPlattonDelay', { 'FactoryProductionSCTA' }},

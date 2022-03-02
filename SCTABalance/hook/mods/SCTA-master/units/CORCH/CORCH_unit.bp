@@ -41,7 +41,7 @@ UnitBlueprint {
         BuildableCategory = {
             'BUILTBYTIER3ENGINEER CORE',
             'BUILTBYTIER2ENGINEER CORE',
-            'BUILTBYTIER2FACTORY CORE',
+            'BUILTBYTIER2FIELD CORE',
         },
     },
     LifeBarSize = 1,

@@ -30,6 +30,7 @@ UnitBlueprint {
         'CORE',
         'BOMB',
         'STRUCTURE',
+        'BUILTBYTIER3FIELD',
     },
     Defense = {
         ArmorType = 'Structure',

@@ -118,7 +118,7 @@ UnitBlueprint {
         BuildTime = 10000,        
 	    BuildRate = 75,
         BuildableCategory = {
-            'BUILTBYTIER1FACTORY CORE',
+            'BUILTBYTIER1FIELD CORE',
         },
         MaxBuildDistance = 6,
         StorageEnergy = 5,

@@ -13,8 +13,8 @@ UnitBlueprint {
         BuildRate = 225,
         BuildTime = 4000,    
         BuildableCategory = {
-            'BUILTBYTIER1FACTORY ARM',
-            'BUILTBYTIER2FACTORY ARM',
+            'BUILTBYTIER1FIELD ARM',
+            'BUILTBYTIER2FIELD ARM',
         },
         ProductionPerSecondEnergy = 3,
         ProductionPerSecondMass = 0,
