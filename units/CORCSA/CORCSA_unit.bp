@@ -83,6 +83,7 @@ UnitBlueprint {
         'MOBILE',
         'CONSTRUCTION',
         'ASF',
+        'BUILTBYAIRTIER3FACTORY',
     },
     Defense = {
         ArmorType = 'Light',

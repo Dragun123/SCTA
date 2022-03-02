@@ -40,6 +40,7 @@ UnitBlueprint {
         'TANK',	
         'SNIPER',
         'ANTISHIELD',
+        'BUILTBYLANDTIER2FACTORY',
     },
     Defense = {
         ArmorType = 'Normal',

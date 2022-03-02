@@ -82,9 +82,8 @@ UnitBlueprint {
     BuildRate = 360,
     DifferentialUpgradeCostCalculation = true,
     BuildableCategory = {
-        'NAVAL MOBILE TECH1 ARM',
-        'NAVAL MOBILE TECH2 ARM',
-        'NAVAL MOBILE TECH3 ARM',
+        'NAVAL BUILTBYNAVALTIER1FACTORY ARM',
+        'NAVAL BUILTBYNAVALTIER2FACTORY ARM',
         'armfark',
         'armch',
     },

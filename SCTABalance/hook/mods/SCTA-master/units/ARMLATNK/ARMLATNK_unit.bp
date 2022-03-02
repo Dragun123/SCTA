@@ -15,6 +15,7 @@ UnitBlueprint {
     'TANK',
     'ANTISHIELD',
     'SILO',
+    'BUILTBYLANDTIER2FACTORY',
     },
     Display = {
         UniformScale = 0.24,

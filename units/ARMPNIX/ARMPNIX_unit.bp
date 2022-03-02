@@ -81,6 +81,7 @@ UnitBlueprint {
         'ARM',
         'STRATEGICBOMBER',
         'SNIPEMODE',
+        'BUILTBYAIRTIER2FACTORY',
     },
     Defense = {
         ArmorType = 'Light',

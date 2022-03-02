@@ -48,6 +48,7 @@ UnitBlueprint {
         'OVERLAYINDIRECTFIRE',
         'ARM',
         'SNIPEMODE',
+        'BUILTBYNAVALTIER2FACTORY',
     },
     CollisionOffsetY = -0.5,
     Defense = {

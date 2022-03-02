@@ -15,6 +15,7 @@ UnitBlueprint {
 	    'LAND',
         'CORE',
         'BOT',
+        'BUILTBYLANDTIER2FACTORY',
         'TANK',
     },
     Defense = {

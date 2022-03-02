@@ -85,8 +85,8 @@ UnitBlueprint {
     BuildRate = 180,
     DifferentialUpgradeCostCalculation = true,
     BuildableCategory = {
-        'AIR MOBILE TECH1 CORE', 
-        'AIR MOBILE TECH2 CORE',
+        'BUILTBYAIRTIER1FACTORY MOBILE AIR CORE',
+        'BUILTBYAIRTIER2FACTORY TECH2 MOBILE AIR CORE',
         'TECH1 BOT ENGINEER CORE',
         'TECH2 FIELDENGINEER CORE',
         'coradap', 

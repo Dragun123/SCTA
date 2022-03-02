@@ -78,7 +78,7 @@ UnitBlueprint {
         BuildTime = 13310,
 	    BuildRate = 200,
         BuildableCategory = {
-            'NAVAL MOBILE TECH2 ARM',
+            'NAVAL BUILTBYNAVALTIER2FACTORY ARM',
         },
         StorageMass = 200,
         StorageEnergy = 200,

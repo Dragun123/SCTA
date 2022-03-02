@@ -72,6 +72,7 @@ UnitBlueprint {
         'CORE',
         'HIGHALTAIR',
         'INTELLIGENCE',
+        'BUILTBYAIRTIER1FACTORY',
     },
     Defense = {
         ArmorType = 'Light',

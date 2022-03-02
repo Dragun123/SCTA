@@ -14,6 +14,7 @@ UnitBlueprint {
         'OVERLAYINDIRECTFIRE',
         'OVERLAYDIRECTFIRE',
         'ARM',
+        'BUILTBYNAVALTIER2FACTORY',
     'SNIPEMODE',
     },
     Defense = {

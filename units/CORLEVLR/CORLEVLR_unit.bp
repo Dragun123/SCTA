@@ -40,6 +40,7 @@ UnitBlueprint {
         'OVERLAYINDIRECTFIRE',
         'CORE',
         'SNIPEMODE',
+        'BUILTBYLANDTIER1FACTORY',
     },
     Defense = {
         ArmorType = 'Normal',

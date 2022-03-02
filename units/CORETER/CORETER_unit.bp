@@ -50,6 +50,7 @@ UnitBlueprint {
         'INTELLIGENCE',        
         'OVERLAYCOUNTERINTEL',
         'CORE',
+        'BUILTBYLANDTIER2FACTORY',
     },
     Defense = {
         ArmorType = 'Normal',

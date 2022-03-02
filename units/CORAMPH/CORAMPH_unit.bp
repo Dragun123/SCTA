@@ -30,6 +30,7 @@ UnitBlueprint {
     Categories = {
         'SELECTABLE',
         'TECH2',
+        'BUILTBYLANDTIER2FACTORY',
         'ANTISHIELD',
         'VISIBLETORECON',
         'RECLAIMABLE',

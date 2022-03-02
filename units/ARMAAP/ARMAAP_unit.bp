@@ -80,7 +80,7 @@ UnitBlueprint {
 	BuildRate = 200,
     AirFactory = true,
         BuildableCategory = {
-            'AIR MOBILE TECH2 ARM',
+            'BUILTBYAIRTIER2FACTORY MOBILE AIR ARM',
         },
         StorageMass = 200,
         StorageEnergy = 200,

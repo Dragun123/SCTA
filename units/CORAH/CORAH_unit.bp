@@ -38,6 +38,7 @@ UnitBlueprint {
         'SILO',
         'OVERLAYANTIAIR',
         'LAND',
+        'BUILTBYLANDTIER3FACTORY',
         'CORE',
     },
     Defense = {

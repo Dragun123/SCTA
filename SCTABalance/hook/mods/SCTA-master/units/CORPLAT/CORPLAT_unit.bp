@@ -37,8 +37,7 @@ UnitBlueprint {
         BuildTime = 64000,
         BuildRate = 240,
         BuildableCategory = {
-            'corcsa',
-            'AIR MOBILE TRANSPORTATION TECH3 CORE',     
+            'AIR MOBILE BUILTBYAIRTIER3FACTORY CORE',     
         },
     },
     Physics = {

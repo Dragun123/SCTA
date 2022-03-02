@@ -24,6 +24,7 @@ UnitBlueprint {
         'OVERLAYMISC',
         'CORE',
         'AIR',
+        'BUILTBYNAVALTIER2FACTORY',
     },
     Defense = {
         Health = 17000,

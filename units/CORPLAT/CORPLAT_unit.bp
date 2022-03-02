@@ -82,8 +82,7 @@ UnitBlueprint {
     BuildableCategory = {
         'corveng',
         'cortitan',
-        'corcsa',
-        'AIR MOBILE TRANSPORTATION TECH3 CORE',
+        'AIR MOBILE BUILTBYAIRTIER3FACTORY CORE',
     },
 	StorageEnergy = 250,
 	StorageMass = 250,

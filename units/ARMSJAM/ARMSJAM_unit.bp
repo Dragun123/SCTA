@@ -50,6 +50,7 @@ UnitBlueprint {
         'ARM',
         'COUNTERINTELLIGENCE',
         'STEALTHFIELD',
+        'BUILTBYNAVALTIER2FACTORY',
     },
     CollisionOffsetY = -0.25,
     Defense = {

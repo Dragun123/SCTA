@@ -15,6 +15,7 @@ UnitBlueprint {
     'DIRECTFIRE',
     'OVERLAYDIRECTFIRE',
     'BOT',
+    'BUILTBYLANDTIER2FACTORY',
     'LAND',
     'ARM',
     'ANTISHIELD',

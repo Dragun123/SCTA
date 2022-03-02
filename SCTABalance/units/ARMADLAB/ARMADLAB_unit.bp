@@ -81,9 +81,8 @@ UnitBlueprint {
         KBot = true,
         DifferentialUpgradeCostCalculation = true,
         BuildableCategory = {
-            'BOT MOBILE TECH1 ARM',
-            'BOT MOBILE TECH2 ARM',
-            'BOT MOBILE TECH3 ARM',
+            'BUILTBYLANDTIER1FACTORY BOT ARM',
+            'BUILTBYLANDTIER2FACTORY BOT ARM',
         },
     StorageMass = 50,
     StorageEnergy = 50,

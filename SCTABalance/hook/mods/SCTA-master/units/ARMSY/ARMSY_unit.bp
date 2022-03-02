@@ -22,7 +22,7 @@ UnitBlueprint {
         BuildCostEnergy = 3600,
         BuildRate = 100,
         BuildableCategory = {
-            'NAVAL MOBILE TECH1 ARM',
+            'BUILTBYNAVALTIER1FACTORY NAVAL ARM',
             'armdsy',
         },
     },

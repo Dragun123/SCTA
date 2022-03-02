@@ -76,6 +76,7 @@ UnitBlueprint {
         'CORE',
         'HIGHALTAIR',
         'SNIPEMODE',
+        'BUILTBYAIRTIER1FACTORY',
         'OVERLAYRADAR',
     },
     Defense = {

@@ -35,11 +35,10 @@ UnitBlueprint {
         BuildCostMass = 900,
         BuildTime = 16000,
         BuildableCategory = {
-            'AIR MOBILE TECH1 CORE', 
-            'AIR MOBILE TECH2 CORE',
+            'BUILTBYAIRTIER1FACTORY MOBILE AIR CORE',
+            'BUILTBYAIRTIER2FACTORY MOBILE AIR CORE',
             'TECH1 BOT ENGINEER CORE',
             'TECH2 FIELDENGINEER CORE',
-            'ASF CORE',
         },
     },
     LifeBarHeight = 0.22,

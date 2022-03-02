@@ -39,6 +39,7 @@ UnitBlueprint {
         'LAND',
         'SILO',
         'ARM',
+        'BUILTBYLANDTIER3FACTORY',
     },
     Defense = {
         ArmorType = 'Normal',

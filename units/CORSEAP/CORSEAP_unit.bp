@@ -78,6 +78,7 @@ UnitBlueprint {
         'CORE',
         'TRANSPORTATION',
         'BOMBER',
+        'BUILTBYAIRTIER3FACTORY',
     },
     Defense = {
         ArmorType = 'Light',

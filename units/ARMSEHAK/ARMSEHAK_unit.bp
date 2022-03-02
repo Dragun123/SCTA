@@ -75,6 +75,7 @@ UnitBlueprint {
         'SCOUT',
         'OVERLAYOMNI',
         'TRANSPORTATION',
+        'BUILTBYAIRTIER3FACTORY',
     },
     Defense = {
         ArmorType = 'Light',

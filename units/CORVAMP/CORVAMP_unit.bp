@@ -77,6 +77,7 @@ UnitBlueprint {
         'AIR',        
         'OVERLAYANTIAIR',
         'CORE', 
+        'BUILTBYAIRTIER2FACTORY',
         'STEALTH',
     },
     Defense = {

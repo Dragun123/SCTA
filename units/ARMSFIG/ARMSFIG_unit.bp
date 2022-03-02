@@ -76,6 +76,7 @@ UnitBlueprint {
         'MOBILE',
 	    'ANTIAIR',
         'AIR',
+        'BUILTBYAIRTIER3FACTORY',
         'OVERLAYANTIAIR',
         'ARM',
         'TRANSPORTATION',

@@ -20,6 +20,7 @@ UnitBlueprint {
 	    'OVERLAYANTIAIR',
 	    'OVERLAYRADAR',
         'CORE',
+        'BUILTBYNAVALTIER2FACTORY',
     },
     Display = {
         Abilities = {

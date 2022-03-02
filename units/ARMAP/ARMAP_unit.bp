@@ -85,7 +85,7 @@ UnitBlueprint {
 	    BuildRate = 100,
         AirFactory = true,
         BuildableCategory = {
-            'AIR MOBILE TECH1 ARM',
+            'BUILTBYAIRTIER1FACTORY MOBILE AIR ARM',
         },
         StorageMass = 50,
         StorageEnergy = 50,

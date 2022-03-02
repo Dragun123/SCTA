@@ -55,6 +55,7 @@ UnitBlueprint {
         'OVERLAYSONAR',
         'OVERLAYMISC',
         'ARM',
+        'BUILTBYNAVALTIER2FACTORY',
     },
     CollisionOffsetY = -0.5,
     Defense = {
@@ -98,7 +99,7 @@ UnitBlueprint {
         BuildRate = 200,
         BuildableCategory = {
             'armcsa',
-            'AIR MOBILE TRANSPORTATION TECH3 ARM',
+            'BUILTBYAIRTIER3FACTORY AIR ARM',
             },
         },
         Footprint = {

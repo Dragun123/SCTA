@@ -39,6 +39,7 @@ StopMove = Sound {
         'SILO',
         'OVERLAYINDIRECTFIRE',
         'CORE',
+        'BUILTBYLANDTIER2FACTORY',
     },
     Defense = {
 ArmorType = 'Normal',

@@ -19,7 +19,8 @@ UnitBlueprint {
         'OVERLAYOMNI',
         'STEALTHFIELD',
         'OVERLAYCOUNTERINTEL', 
-        'RADAR',      
+        'RADAR',     
+        'BUILTBYLANDTIER2FACTORY', 
     },
     Display = {
     Abilities = {

@@ -35,9 +35,8 @@ UnitBlueprint {
         BuildRate = 150,
         BuildTime = 18000,
         BuildableCategory = {
-            'BOT MOBILE TECH1 CORE', 
-            'BOT MOBILE TECH2 CORE',
-            'BOT MOBILE TECH3 CORE',
+            'BUILTBYLANDTIER1FACTORY BOT CORE',
+            'BUILTBYLANDTIER2FACTORY BOT CORE',
         },
     },
     LifeBarHeight = 0.22,

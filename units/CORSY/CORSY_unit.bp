@@ -82,7 +82,7 @@ UnitBlueprint {
 	    BuildRate = 100,
         NavalFactory = true,
         BuildableCategory = {
-            'NAVAL MOBILE TECH1 CORE',
+            'NAVAL BUILTBYNAVALTIER1FACTORY CORE',
         },
         StorageMass = 50,
         StorageEnergy = 50,

@@ -78,6 +78,7 @@ UnitBlueprint {
         'OVERLAYANTIAIR',
         'CORE',
         'TRANSPORTATION',
+        'BUILTBYAIRTIER3FACTORY',
     },
     Defense = {
         ArmorType = 'ASF',

@@ -50,6 +50,7 @@ UnitBlueprint {
         'OVERLAYCOUNTERINTEL',
         'DEFENSIVEBOAT',
         'CORE',
+        'BUILTBYNAVALTIER2FACTORY',
     },
     CollisionOffsetY = -0.25,
     Defense = {

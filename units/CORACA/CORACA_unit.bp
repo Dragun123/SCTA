@@ -82,6 +82,7 @@ UnitBlueprint {
         'SHOWQUEUE',
         'MOBILE',
         'CONSTRUCTION',
+        'BUILTBYAIRTIER2FACTORY',
         },
     Defense = {
         ArmorType = 'Light',

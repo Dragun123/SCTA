@@ -81,6 +81,7 @@ UnitBlueprint {
         'MOBILE',
 	    'CONSTRUCTION',
         'AIR',
+        'BUILTBYAIRTIER1FACTORY',
         'ARM',
     },
     Defense = {

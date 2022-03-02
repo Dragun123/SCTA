@@ -42,6 +42,7 @@ UnitBlueprint {
         'TANK',
         'ANTISHIELD',
         'SILO',
+        'BUILTBYLANDTIER2FACTORY',
     },
     Defense = {
         ArmorType = 'Normal',

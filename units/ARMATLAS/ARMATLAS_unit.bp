@@ -74,6 +74,7 @@ UnitBlueprint {
         'TRANSPORTATION',
         'TRANSPORTFOCUS',
         'CANNOTUSEAIRSTAGING',
+        'BUILTBYAIRTIER1FACTORY',
         'CANTRANSPORTCOMMANDER',
         'ARM',
     },

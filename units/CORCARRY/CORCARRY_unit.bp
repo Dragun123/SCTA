@@ -55,6 +55,7 @@ UnitBlueprint {
         'OVERLAYSONAR',
         'OVERLAYMISC',
         'CORE',
+        'BUILTBYNAVALTIER2FACTORY',
     },
     CollisionOffsetY = -0.5,
     Defense = {
@@ -98,7 +99,7 @@ UnitBlueprint {
         MaintenanceConsumptionPerSecondEnergy = 35,
         BuildableCategory = {
             'corcsa',
-            'AIR MOBILE TRANSPORTATION TECH3 CORE',
+            'BUILTBYAIRTIER3FACTORY CORE AIR',
         },
     },
     Footprint = {

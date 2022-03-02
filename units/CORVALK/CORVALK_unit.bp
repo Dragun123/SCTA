@@ -76,6 +76,7 @@ UnitBlueprint {
         'CANTRANSPORTCOMMANDER',
         'CANNOTUSEAIRSTAGING',
         'CORE',
+        'BUILTBYAIRTIER1FACTORY',
     },
     Defense = {
         ArmorType = 'Light',

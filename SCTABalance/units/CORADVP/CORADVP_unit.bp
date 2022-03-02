@@ -80,12 +80,11 @@ UnitBlueprint {
         BuildTime = 200000,
         BuildRate = 360,
         DifferentialUpgradeCostCalculation = true,
-    BuildableCategory = {
-        'TANK MOBILE TECH1 CORE', 
-        'TANK MOBILE TECH2 CORE',
-        'TANK MOBILE TECH3 CORE',
-        'BOT MOBILE ENGINEER CORE',
-    },
+        BuildableCategory = {
+            'BUILTBYLANDTIER1FACTORY TANK CORE',
+            'BUILTBYLANDTIER2FACTORY TANK CORE',
+            'BOT MOBILE ENGINEER CORE',
+        },
         StorageMass = 50,
         StorageEnergy = 50,
     },

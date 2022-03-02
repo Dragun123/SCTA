@@ -81,7 +81,8 @@ UnitBlueprint {
         'PATROLHELPER',
         'SHOWQUEUE',
         'MOBILE',
-	    'CONSTRUCTION',    	
+	    'CONSTRUCTION', 
+        'BUILTBYAIRTIER1FACTORY',   	
     },
     Defense = {
         ArmorType = 'Light',

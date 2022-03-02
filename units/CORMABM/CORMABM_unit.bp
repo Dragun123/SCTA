@@ -38,6 +38,7 @@ UnitBlueprint {
 	    'LAND',
         'CORE',
 	    'OVERLAYDEFENSE',
+        'BUILTBYLANDTIER2FACTORY',
     },
     Defense = {
         ArmorType = 'TMD',

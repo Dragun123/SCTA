@@ -16,6 +16,7 @@ UnitBlueprint {
             'ARM',
             'HOVER',
             'BOT',
+            'BUILTBYLANDTIER3FACTORY',
         },
         Display = {
         UniformScale = 0.1,

@@ -41,6 +41,7 @@ UnitBlueprint {
         'SELECTABLE',
         'ARM',
         'TANK',
+        'BUILTBYLANDTIER2FACTORY',
         'TECH2',
         'ENGINEER',
         'REPAIR',

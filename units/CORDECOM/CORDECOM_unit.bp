@@ -60,6 +60,7 @@ UnitBlueprint {
         'LAND',
         'DIRECTFIRE',
         'BOT',
+        'BUILTBYLANDTIER2FACTORY',
         'OVERLAYDIRECTFIRE',
         'CORE',
         'CONSTRUCTION',

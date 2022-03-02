@@ -72,6 +72,7 @@ UnitBlueprint {
         'ANTINAVY',
         'SNIPEMODE',
         'AIR',
+        'BUILTBYAIRTIER2FACTORY',
         'HIGHALTAIR',
         'OVERLAYANTINAVY',
         'ARM',
