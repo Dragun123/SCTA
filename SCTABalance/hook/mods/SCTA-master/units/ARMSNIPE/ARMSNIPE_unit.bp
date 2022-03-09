@@ -38,7 +38,5 @@ UnitBlueprint {
             EnergyDrainPerSecond = 250,
             EnergyRequired = 500,
         },
-        [2] = {
-        },
     },
 }

@@ -27,6 +27,5 @@ UnitBlueprint {
         [1] = {
             Damage = 105,  
         },
-        [2] = {}, 
     },
 }

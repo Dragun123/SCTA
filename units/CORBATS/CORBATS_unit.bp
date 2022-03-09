@@ -273,14 +273,6 @@ UnitBlueprint {
             TurretYawSpeed = 200,
             Turreted = true,
         },
-        { #BIG_UNITEX
-            Damage = 500,
-            DamageFriendly = true,
-            DamageRadius = 5,
-            DamageType = 'Normal',
-            DummyWeapon = true,
-            Label = 'DeathWeapon',
-        }, 
     },
         Wreckage = {
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',

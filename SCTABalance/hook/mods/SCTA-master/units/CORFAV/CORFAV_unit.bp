@@ -23,11 +23,10 @@ UnitBlueprint {
     SizeY = 1.6,
     SizeZ = 1.6,
     Weapon = {
-    [1] = {
+        [1] = {
         Damage = 3,
-    SlavedToBody = true,
-    SlavedToBodyArcRange = 45,
-    },
-    [2] = {},
+        SlavedToBody = true,
+        SlavedToBodyArcRange = 45,
+        },
     },
 }

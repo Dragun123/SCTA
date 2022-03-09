@@ -52,6 +52,5 @@ UnitBlueprint {
         Damage = 1000,
         ProjectileId = '/mods/SCTA-master/SCTABalance/projectiles/ARMBSHIP_ROCKET/ARMBSHIP_ROCKET_proj.bp',
     },
-    [3] = {},
   },    
 }

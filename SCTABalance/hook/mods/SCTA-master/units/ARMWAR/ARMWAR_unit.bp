@@ -32,7 +32,5 @@ Physics = {
             RateOfFire = 1,
             Damage = 25,
         },
-        [3] = {
-        },
     },
 }

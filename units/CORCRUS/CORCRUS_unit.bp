@@ -312,14 +312,6 @@ UnitBlueprint {
             EffectiveRadius = 30,
             TrackingRadius = 1.5,
         },
-        { #BIG_UNITEX //Was SMALL_UNITEX, but not appropriate
-            Damage = 250,
-            DamageFriendly = true,
-            DamageRadius = 3,
-            DamageType = 'Normal',
-            DummyWeapon = true,
-            Label = 'DeathWeapon',
-        },
     },
         Wreckage = {
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',

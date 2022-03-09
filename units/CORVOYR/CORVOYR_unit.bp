@@ -114,16 +114,6 @@ UnitBlueprint {
     SizeZ = 2,
     StrategicIconName = 'icon_bot2_intel',
     StrategicIconSortPriority = 125,
-    Weapon = {
-        { #SMALL_UNITEX
-        Damage = 50,
-        DamageFriendly = true,
-        DamageRadius = 3,
-        DamageType = 'Normal',
-        DummyWeapon = true,
-        Label = 'DeathWeapon',
-        },
-    },
     Wreckage = {
         Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
         EnergyMult = 0,

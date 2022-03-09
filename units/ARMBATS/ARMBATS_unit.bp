@@ -285,14 +285,6 @@ UnitBlueprint {
             TurretYawSpeed = 55,
             Turreted = true,
         },
-        { #BIG_UNITEX
-            Damage = 500,
-            DamageFriendly = true,
-            DamageRadius = 3,
-            DamageType = 'Normal',
-            DummyWeapon = true,
-            Label = 'DeathWeapon',
-        }, 
     },
         Wreckage = {
 	---UseCustomMesh = true,

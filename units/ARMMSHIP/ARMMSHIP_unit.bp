@@ -256,14 +256,6 @@ UnitBlueprint {
             WeaponUnpackTimeout = 1,
             WeaponRepackTimeout = 2,
         },
-        { #BIG_UNITEX
-            Damage = 100,
-            DamageFriendly = true,
-            DamageRadius = 5,
-            DamageType = 'Normal',
-            DummyWeapon = true,
-            Label = 'DeathWeapon',
-        }, 
     },
         Wreckage = {
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',

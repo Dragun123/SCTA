@@ -148,16 +148,6 @@ UnitBlueprint {
     TAStrategicIconName = 'ship_counterintel',
     TAStrategicIconName2 = '3/ship_counterintel',
     StrategicIconSortPriority = 20,
-    Weapon = {
-        { #BIG_UNITEX
-            Damage = 50,
-            DamageFriendly = true,
-            DamageRadius = 3,
-            DamageType = 'Normal',
-            DummyWeapon = true,
-            Label = 'DeathWeapon',
-        }, 
-    },
         Wreckage = {
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
         EnergyMult = 0,

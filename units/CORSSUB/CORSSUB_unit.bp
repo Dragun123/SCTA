@@ -179,14 +179,6 @@ UnitBlueprint {
             },
             TargetRestrictDisallow = 'UNTARGETABLE, HOVER',
         },
-        { #SMALL_UNITEX
-            Damage = 100,
-            DamageFriendly = true,
-            DamageRadius = 3,
-            DamageType = 'Normal',
-            DummyWeapon = true,
-            Label = 'DeathWeapon',
-        },
     },
         Wreckage = {
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',

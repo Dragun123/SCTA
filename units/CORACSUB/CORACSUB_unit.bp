@@ -163,16 +163,6 @@ UnitBlueprint {
     TAStrategicIconName2 = '2/land_engineer',
     TAStrategicIconName = 'land_engineer',
     StrategicIconSortPriority = 95,
-    Weapon = {
-        { #SMALL_UNITEX
-            Damage = 50,
-            DamageFriendly = true,
-            DamageRadius = 3,
-            DamageType = 'Normal',
-            DummyWeapon = true,
-            Label = 'DeathWeapon',
-        },
-    },
         Wreckage = {
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
         EnergyMult = 0,

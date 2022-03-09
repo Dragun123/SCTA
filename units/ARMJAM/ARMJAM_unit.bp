@@ -161,16 +161,6 @@ UnitBlueprint {
     SizeZ = 2,
     StrategicIconName = 'icon_land2_counterintel',
     StrategicIconSortPriority = 20,
-    Weapon = {
-        { #BIG_UNITEX
-            Damage = 50,
-            DamageFriendly = true,
-            DamageRadius = 3,
-            DamageType = 'Normal',
-            DummyWeapon = true,
-            Label = 'DeathWeapon',
-        }, 
-    },
         Wreckage = {
             Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',
         EnergyMult = 0,

@@ -28,6 +28,5 @@ UnitBlueprint {
         [1] = {
         ProjectileId = '/mods/SCTA-master/SCTABalance/projectiles/BTRUCK_ROCKET/BTRUCK_ROCKET_proj.bp',
         },
-        [2] = {},
     },
 }
