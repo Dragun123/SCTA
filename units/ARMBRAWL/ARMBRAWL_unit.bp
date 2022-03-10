@@ -211,7 +211,9 @@ UnitBlueprint {
             RateOfFire = 2,
             TargetCheckInterval = 1,
             TargetPriorities = {
-                'ALLUNITS',
+                'ANTIAIR',
+                'GROUNDATTACK',
+                '(ALLUNITS - SPECIALLOWPRI)',
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
             AboveWaterTargetsOnly = true,
