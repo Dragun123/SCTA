@@ -190,7 +190,8 @@ UnitBlueprint {
             RateOfFire = 0.3448275862,
             TargetCheckInterval = 1,
             TargetPriorities = {
-                'ALLUNITS',
+                'NAVAL MOBILE',
+                '(ALLUNITS - SPECIALLOWPRI)',
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
             AboveWaterTargetsOnly = true,
@@ -252,7 +253,13 @@ UnitBlueprint {
             RateOfFire = 0.3571428571,
             TargetCheckInterval = 1,
             TargetPriorities = {
-                'ALLUNITS',
+                'SUBMERSIBLE',
+                'TECH2 LIGHTBOAT',
+                '(STRUCTURE * DEFENSE - ANTIAIR)',
+                '(TECH2 * MOBILE * NAVAL - CRUISER)',
+                'ANTINAVY',
+                'MOBILE',
+                '(ALLUNITS - SPECIALLOWPRI)',
             },
             TargetRestrictDisallow = 'UNTARGETABLE, HOVER',
             TurretBoneMuzzle = 'flare3',
@@ -314,15 +321,6 @@ UnitBlueprint {
             EffectiveRadius = 30,
             TrackingRadius = 1.5,
         },
-        { #BIG_UNITEX
-            Damage = 500,
-            DamageFriendly = true,
-            DamageRadius = 5,
-            DamageType = 'Normal',
-            DummyWeapon = true,
-            Label = 'DeathWeapon',
-        }, 
-
     },
         Wreckage = {
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',

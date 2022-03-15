@@ -25,6 +25,5 @@ UnitBlueprint {
             ProjectileId = '/mods/SCTA-master/SCTABalance/projectiles/CTRUCK_ROCKET/CTRUCK_ROCKET_proj.bp',
             Damage = 450,  
         },
-        [2] = {}, 
     },
 }

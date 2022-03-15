@@ -176,7 +176,11 @@ UnitBlueprint {
             RateOfFire = 0.1111111111,
             TargetCheckInterval = 1,
             TargetPriorities = {
-                'ALLUNITS',
+                'STRUCTURE DEFENSE',
+                'TECH3 MOBILE',
+                'TECH2 MOBILE',
+                'TECH1 MOBILE',
+                '(ALLUNITS - SPECIALLOWPRI)',
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
             AboveWaterTargetsOnly = true,
@@ -185,14 +189,6 @@ UnitBlueprint {
             RenderFireClock = true,
             WeaponCategory = 'MISSILE',
         },
-        { #BIG_UNITEX
-            Damage = 100,
-            DamageFriendly = true,
-            DamageRadius = 3,
-            DamageType = 'Normal',
-            DummyWeapon = true,
-            Label = 'DeathWeapon',
-        }, 
     },
         Wreckage = {
         Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',

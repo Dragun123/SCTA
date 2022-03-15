@@ -168,7 +168,9 @@ UnitBlueprint {
             RateOfFire = 0.7142857143,
             TargetCheckInterval = 1,
             TargetPriorities = {
-                'ALLUNITS',
+                'MOBILE',
+                '(STRUCTURE * DEFENSE - ANTIMISSILE)',
+                '(ALLUNITS - SPECIALLOWPRI)',
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
             TurretBoneMuzzle = 'flare1',
@@ -184,15 +186,7 @@ UnitBlueprint {
             TurretYawRange = 360,
             TurretYawSpeed = 50,
             Turreted = true,
-        },
-        { #BIG_UNITEX
-            Damage = 100,
-            DamageFriendly = true,
-            DamageRadius = 3,
-            DamageType = 'Normal',
-            DummyWeapon = true,
-            Label = 'DeathWeapon',
-        },       
+        },      
     },
         Wreckage = {
         Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',

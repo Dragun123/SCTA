@@ -210,14 +210,6 @@ UnitBlueprint {
 			WeaponUnpackAnimation = '/mods/SCTA-master/units/CORAH/CORAH_lod0_Bunpack.sca',
             WeaponUnpackAnimationRate = 2,
         },
-        { #BIG_UNITEX
-            Damage = 50,
-            DamageFriendly = true,
-            DamageRadius = 3,
-            DamageType = 'Normal',
-            DummyWeapon = true,
-            Label = 'DeathWeapon',
-        }, 
     },
         Wreckage = {
         Blueprint = '/mods/SCTA-master/meshes/TAWreckage/TAWreckage_prop.bp',

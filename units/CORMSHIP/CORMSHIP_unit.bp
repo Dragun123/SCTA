@@ -206,7 +206,11 @@ UnitBlueprint {
             RateOfFire = 1,
             TargetCheckInterval = 1,
             TargetPriorities = {
-                'ALLUNITS',
+                'NAVAL MOBILE',
+                'TECH3 STRUCTURE',
+                'TECH2 STRUCTURE',
+                'TECH1 STRUCTURE',
+                '(ALLUNITS - SPECIALLOWPRI)',
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
             AboveWaterTargetsOnly = true,
@@ -269,14 +273,6 @@ UnitBlueprint {
             WeaponUnpackAnimation = '/mods/SCTA-master/units/CORMSHIP/CORMSHIP_lod0_aunpack.sca',
             WeaponUnpackAnimationRate = 2,
         },
-        { #BIG_UNITEX
-            Damage = 50,
-            DamageFriendly = true,
-            DamageRadius = 3,
-            DamageType = 'Normal',
-            DummyWeapon = true,
-            Label = 'DeathWeapon',
-        }, 
     },
         Wreckage = {
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',

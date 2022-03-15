@@ -21,6 +21,5 @@ UnitBlueprint {
             EnergyRequired = 20,
             Damage = 115,
         },
-        [2] = {},
     },
 }

@@ -22,6 +22,5 @@ UnitBlueprint {
             ProjectileId = '/mods/SCTA-master/SCTABalance/projectiles/AH_WEAPON/AH_WEAPON_proj.bp',
             RateOfFire = 1,
         },
-        [2] = {}, 
     },
 }

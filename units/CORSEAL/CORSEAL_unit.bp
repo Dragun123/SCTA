@@ -194,7 +194,9 @@ UnitBlueprint {
             RateOfFire = 0.5263157895,
             TargetCheckInterval = 1,
             TargetPriorities = {
-                'ALLUNITS',
+                'MOBILE',
+                '(STRUCTURE * DEFENSE - ANTIMISSILE)',
+                '(ALLUNITS - SPECIALLOWPRI)',
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
             AboveWaterTargetsOnly = true,
@@ -209,14 +211,6 @@ UnitBlueprint {
             TurretYawRange = 360,
             TurretYawSpeed = 35,
             Turreted = true,
-        },
-        { #BIG_UNITEX
-            Damage = 50,
-            DamageFriendly = true,
-            DamageRadius = 3,
-            DamageType = 'Normal',
-            DummyWeapon = true,
-            Label = 'DeathWeapon',
         },
     },
         Wreckage = {

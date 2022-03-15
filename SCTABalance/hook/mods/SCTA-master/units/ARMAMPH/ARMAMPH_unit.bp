@@ -20,7 +20,5 @@ UnitBlueprint {
             Damage = 90,
             MaxRadius = 24, 
         },
-        [3] = {
-        }, 
     },
 }

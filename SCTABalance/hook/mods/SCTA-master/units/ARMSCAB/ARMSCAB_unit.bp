@@ -43,7 +43,5 @@ UnitBlueprint {
             EffectiveRadius = 30,
             TrackingRadius = 20,
         },
-        [2] = {
-        },
     },
 }

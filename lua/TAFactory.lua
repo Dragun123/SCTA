@@ -88,7 +88,7 @@ end,
                 self:SetBusy(false)
                 self:SetBlockCommandQueue(false)
             end
-            if table.getn(self:GetCommandQueue()) <= 1 then
+            if (table.getn(self:GetCommandQueue()) <= 1 or self:IsIdleState()) then
                 ----ThisCode is used to make sure it open and closes correctly
                 WaitTicks(20)
                 self:Close()

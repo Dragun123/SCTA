@@ -16,6 +16,5 @@ UnitBlueprint {
             Damage = 200,
             RateOfFire = 0.33,
         },
-        [2] = {}, 
     },
 }

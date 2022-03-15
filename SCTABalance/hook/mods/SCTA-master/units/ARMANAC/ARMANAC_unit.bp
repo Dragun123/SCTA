@@ -20,6 +20,5 @@ UnitBlueprint {
             MaxRadius = 30,
             RateOfFire = 1,
         },
-        [2] = {}, 
     },
 }
