@@ -280,10 +280,10 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             if factory.Dead then
                 return
             end
-            if not factory.TABuildingUnit then
+            --[[if not factory.TABuildingUnit and table.getn(factory:GetCommandQueue()) < 1 then
                 --LOG('SCTAIEXIST5', factory.TAAIFactoryBuilding)
             factory.TAAIFactoryBuilding = nil
-            end
+            end]]
             self:TAAssignBuildOrder(factory,bType)
         end,
 
@@ -323,7 +323,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             elseif EntityCategoryContains(categories.FACTORY, finishedUnit) then
                 self:AddFactory(finishedUnit)
             end
-            if not factory.TABuildingUnit then
+            if factory:IsIdleState() then
                 --LOG('SCTAIEXIST5', factory.TAAIFactoryBuilding)
                 factory.TAAIFactoryBuilding = nil
                 self:TAAssignBuildOrder(factory, factory.BuilderManagerData.BuilderType)
@@ -343,10 +343,10 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             if factory.DelayThread then
                 factory.DelayThread = nil
             end
-            if table.getn(factory:GetCommandQueue()) >= 1 and factory.TAAIFactoryBuilding then
+            if table.getn(factory:GetCommandQueue()) >= 1 and (factory.TAAIFactoryBuilding or factory.TABuildingUnit) then
                 return self:ForkThread(self.TADelayBuildOrder, factory, bType, true)
             end
-            if not factory:IsUnitState('Building') and (factory:IsIdleState() or not factory.TABuildingUnit) then
+            if not factory:IsUnitState('Building') and factory:IsIdleState() then
             local builder = self:GetHighestBuilder(bType,{factory})
             --LOG('*TAIEXIST2', factory)
                 if builder then
@@ -367,7 +367,9 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                 --if factory.DesiresAssist and TAEco(self.Brain, 0.5, 0.5) then
                 --local gaurds = factory:GetGuards()
                 --LOG('TAIEXISTAssignGaurds', gaurds > 0)
+                if not factory.TABuildingUnit then
                 self.Brain:BuildPlatoon(template, {factory}, 1)
+                end
                 --LOG('*TACanceling2', template)
                 else
                 --LOG('*TAIEXIST4', factory.TABuildingUnit)
