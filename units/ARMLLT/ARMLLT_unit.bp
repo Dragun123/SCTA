@@ -150,7 +150,13 @@ UnitBlueprint {
             TargetCheckInterval = 1,
             DamageRadius = 1, 
             TargetPriorities = {
-                'ALLUNITS'
+                'MOBILE EXPERIMENTAL',
+                'MOBILE TECH3',
+                'MOBILE TECH1 ARTILLERY',
+                'MOBILE TECH2',
+                '(STRUCTURE * DEFENSE - ANTIMISSILE)',
+                'MOBILE TECH1',
+                '(ALLUNITS - SPECIALLOWPRI)',
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
             AboveWaterTargetsOnly = true,

@@ -179,7 +179,11 @@ UnitBlueprint {
             RateOfFire = 0.5,
             TargetCheckInterval = 1,
             TargetPriorities = {
-                'ALLUNITS',
+                'TECH1 MOBILE',
+                'TECH2 MOBILE',
+                'TECH3 MOBILE',
+                '(STRUCTURE * DEFENSE - ANTIMISSILE)',
+                '(ALLUNITS - SPECIALLOWPRI)',
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
             AboveWaterTargetsOnly = true,

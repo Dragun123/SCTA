@@ -172,7 +172,9 @@ UnitBlueprint {
             RateOfFire = 99999,
             TargetCheckInterval = 1,
             TargetPriorities = {
-                'ALLUNITS',
+                'MOBILE',
+                '(STRUCTURE * DEFENSE - ANTIMISSILE)',
+                '(ALLUNITS - SPECIALLOWPRI)',
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
         },  

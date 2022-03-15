@@ -164,7 +164,9 @@ UnitBlueprint {
             RateOfFire = 0.6666666667,
             TargetCheckInterval = 1,
             TargetPriorities = {
-                'ALLUNITS',
+                'MOBILE',
+                '(STRUCTURE * DEFENSE - ANTIMISSILE)',
+                '(ALLUNITS - SPECIALLOWPRI)',
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
             AboveWaterTargetsOnly = true,
