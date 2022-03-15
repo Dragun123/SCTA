@@ -234,7 +234,10 @@ UnitBlueprint {
             RateOfFire = 2,
             TargetCheckInterval = 1,
             TargetPriorities = {
-                'ALLUNITS',
+                'MOBILE',
+                'COMMAND',
+                '(STRUCTURE * DEFENSE - ANTIMISSILE)',
+                '(ALLUNITS - SPECIALLOWPRI)',
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
             AboveWaterTargetsOnly = true,
@@ -311,8 +314,17 @@ UnitBlueprint {
             TurretYawRange = 360,
             TurretYawSpeed = 150,
             Turreted = true,
-        OverChargeWeapon = true,
-        ManualFire = true,
+            TargetPriorities = {
+                'MOBILE EXPERIMENTAL',
+                'MOBILE TECH3',
+                'MOBILE TECH2',
+                '(STRUCTURE * DEFENSE - ANTIMISSILE)',
+                'MOBILE TECH1',
+                'COMMAND',
+                '(ALLUNITS - SPECIALLOWPRI)',
+            },
+            OverChargeWeapon = true,
+            ManualFire = true,
         },
         {
             Audio = {
@@ -376,7 +388,13 @@ UnitBlueprint {
             TurretYawSpeed = 150,
             Turreted = true,
             TargetPriorities = {
-                'ALLUNITS',
+                'MOBILE EXPERIMENTAL',
+                'MOBILE TECH3',
+                'MOBILE TECH2',
+                '(STRUCTURE * DEFENSE - ANTIMISSILE)',
+                'MOBILE TECH1',
+                'COMMAND',
+                '(ALLUNITS - SPECIALLOWPRI)',
             },
         },
         {
