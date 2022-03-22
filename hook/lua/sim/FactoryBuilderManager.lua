@@ -259,31 +259,33 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
         end,
 
         TADelayBuildOrder = function(self,factory,bType, delay)
-            --[[local guards = factory:GetGuards()
-            for k,v in guards do
-                if not v.Dead and v.AssistPlatoon then
-                    if self.Brain:PlatoonExists(v.AssistPlatoon) then
-                        v.AssistPlatoon:ForkThread(v.AssistPlatoon.TAEconAssistBody)
-                    else
-                        v.AssistPlatoon = nil
-                    end
-                end
-            end]]
+
+            -- only allow one delayed thread
+            --LOG('SCTA', factory)
+            LOG('SCTA2', factory:GetFractionComplete())
+            WaitSeconds(0.1)
             if factory.DelayThread then
                 return
             end
             factory.DelayThread = true
-            if delay then
-            WaitTicks(math.random(9,29))
+        
+            -- wait for the factory to finish its queue
+            while factory:IsUnitState('Building') or factory.TABuildingUnit do
+                LOG('SCTA', factory.entityId)
+                WaitSeconds(1)
             end
-            coroutine.yield(2)
-            if factory.Dead then
+        
+            -- always check if the factory still exists after waiting
+            if factory:BeenDestroyed() then
                 return
             end
-            --[[if not factory.TABuildingUnit and table.getn(factory:GetCommandQueue()) < 1 then
-                --LOG('SCTAIEXIST5', factory.TAAIFactoryBuilding)
-            factory.TAAIFactoryBuilding = nil
-            end]]
+        
+            -- assign the build order
+            if delay then
+                LOG('SCTA3Loop')
+                WaitTicks(math.random(9,29))
+            end
+            LOG('SCTA5Exist', repr(debug.traceback()))
             self:TAAssignBuildOrder(factory,bType)
         end,
 
@@ -323,7 +325,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             elseif EntityCategoryContains(categories.FACTORY, finishedUnit) then
                 self:AddFactory(finishedUnit)
             end
-            if factory:IsIdleState() then
+            if not factory.TABuildingUnit then
                 --LOG('SCTAIEXIST5', factory.TAAIFactoryBuilding)
                 factory.TAAIFactoryBuilding = nil
                 self:TAAssignBuildOrder(factory, factory.BuilderManagerData.BuilderType)
@@ -343,10 +345,11 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             if factory.DelayThread then
                 factory.DelayThread = nil
             end
-            if table.getn(factory:GetCommandQueue()) >= 1 and (factory.TAAIFactoryBuilding or factory.TABuildingUnit) then
+            --[[if table.getn(factory:GetCommandQueue()) >= 1 and factory.TAAIFactoryBuilding then
                 return self:ForkThread(self.TADelayBuildOrder, factory, bType, true)
-            end
-            if not factory:IsUnitState('Building') and factory:IsIdleState() then
+            end]]
+            --if  then
+            if not factory:IsUnitState('Building') or not factory.TABuildingUnit then
             local builder = self:GetHighestBuilder(bType,{factory})
             --LOG('*TAIEXIST2', factory)
                 if builder then
@@ -367,9 +370,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                 --if factory.DesiresAssist and TAEco(self.Brain, 0.5, 0.5) then
                 --local gaurds = factory:GetGuards()
                 --LOG('TAIEXISTAssignGaurds', gaurds > 0)
-                if not factory.TABuildingUnit then
                 self.Brain:BuildPlatoon(template, {factory}, 1)
-                end
                 --LOG('*TACanceling2', template)
                 else
                 --LOG('*TAIEXIST4', factory.TABuildingUnit)
@@ -382,7 +383,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                     end
                 end
                 -- No builder found setup way to check again
-                    return self:ForkThread(self.TADelayBuildOrder, factory, bType, true)
+                return self:ForkThread(self.TADelayBuildOrder, factory, bType, true)
                 --LOG('*TACanceling1', factory)
                 end
             else

@@ -155,17 +155,6 @@ AIBrain = Class(SCTAAIBrainClass) {
             end
         end,
 
-        EconomyMonitor = function(self)
-            -- Only use this with AI-Uveso
-            if not self.SCTAAI then
-                return SCTAAIBrainClass.EconomyMonitor(self)
-            end
-            coroutine.yield(10)
-            -- We are leaving this forked thread here because we don't need it.
-            KillThread(self.EconomyMonitorThread)
-            self.EconomyMonitorThread = nil
-        end,
-
     AddBuilderManagers = function(self, position, radius, baseName, useCenter)
         -- Only use this with AI-SCTAAI
          if not self.SCTAAI then
