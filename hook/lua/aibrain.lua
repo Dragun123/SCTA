@@ -187,6 +187,11 @@ AIBrain = Class(SCTAAIBrainClass) {
             if not self.TAAssistThread then
             self.TAAssistThread = ForkThread(self.TAFactoryAssistThread, self)
             end
+            if ScenarioInfo.size[1] <= 512 or ScenarioInfo.size[2] <= 512 then
+                self.MapSizeSCTA = 2
+            else
+                self.MapSizeSCTA = 4
+            end
         end
         SCTAAIBrainClass.OnCreateAI(self, planName)
     end,

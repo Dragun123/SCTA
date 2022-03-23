@@ -140,7 +140,7 @@ end
 
 function TAExpansionBaseCheck(aiBrain)
     -- Removed automatic setting of Land-Expasions-allowed. We have a Game-Option for this.
-    local checkNum = tonumber(ScenarioInfo.Options.LandExpansionsAllowed)/5 or 1 
+    local checkNum = tonumber(aiBrain.MapSizeSCTA/2)
     --LOG('*SCTAEXPANSIONTA', checkNum)
     return TAExpansionBaseCount(aiBrain, '<', checkNum)
 end
@@ -154,8 +154,8 @@ function TAExpansionBaseCount(aiBrain, compareType, checkNum)
 end
 
 function TAStartBaseCheck(aiBrain)
-    -- Removed automatic setting of Land-Expasions-allowed. We have a Game-Option for this.
-    local checkNum2 = tonumber(ScenarioInfo.Options.LandExpansionsAllowed)/3 or 2 
+    -- Removed automatic setting of Land-(ScenarioInfo.Options.LandExpansionsAllowed)/3 or 2Expasions-allowed. We have a Game-Option for this.
+    local checkNum2 = tonumber(aiBrain.MapSizeSCTA)
     --LOG('*SCTAEXPANSIONTA2', checkNum2)
     return TAStartBaseCount(aiBrain, '<', checkNum2)
 end
@@ -210,7 +210,7 @@ end
 
 function TAFactoryCapCheckT2Expansion(aiBrain)
     --LOG('*SCTALABs', aiBrain.Plants)
-    if (aiBrain.Labs + (aiBrain:GetCurrentUnits(categories.TECH2 * categories.FACTORY) - aiBrain.Labs)) < 7 and not aiBrain.CapCheckT2 then
+    if (aiBrain.Labs + (aiBrain:GetCurrentUnits(categories.TECH2 * categories.FACTORY) - aiBrain.Labs)) < (6 + aiBrain.MapSizeSCTA) and not aiBrain.CapCheckT2 then
         return true
     end
     aiBrain.CapCheckT2 = true
@@ -270,7 +270,7 @@ end
 function TAHaveUnitRatioGreaterThanNavalT1(aiBrain, Naval)
     local numOne = aiBrain:GetCurrentUnits(Naval)
     local numTwo = aiBrain:GetCurrentUnits(categories.LIGHTBOAT)
-    if (numOne < (numTwo + 1) * 2) then
+    if (numOne < ((numTwo + 1) * aiBrain.MapSizeSCTA)) then
         return true
     else
         return false
@@ -281,7 +281,7 @@ end
 function TAHaveUnitRatioGreaterThanNaval(aiBrain, Naval)
     local numOne = aiBrain:GetCurrentUnits(Naval)
     local numTwo = aiBrain:GetCurrentUnits(categories.FACTORY * categories.NAVAL * categories.TECH2)
-    if (numOne < (numTwo + 1) * 2) then
+    if (numOne < (numTwo + 1) * aiBrain.MapSizeSCTA) then
         return true
     else
         return false
@@ -291,7 +291,7 @@ end
 function TAHaveUnitRatioGreaterThanNavalT3(aiBrain, Naval)
     local numOne = aiBrain:GetCurrentUnits(Naval)
     local numTwo = aiBrain:GetCurrentUnits(categories.FACTORY * categories.NAVAL * categories.TECH2)
-    if (numOne < numTwo) then
+    if (numOne < (numTwo + aiBrain.MapSizeSCTA)) then
         return true
     else
         return false
@@ -325,6 +325,7 @@ function TAReclaimablesInArea(aiBrain, locType, Mass)
     end
     return false
 end
+
 
 
 function TAAIGetReclaimablesAroundLocation(aiBrain, locationType)
