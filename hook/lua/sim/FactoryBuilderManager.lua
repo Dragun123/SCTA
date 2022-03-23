@@ -130,7 +130,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
 
         SetupTANewFactory = function(self,unit,bType)
             self:SetupFactoryCallbacks({unit}, bType)
-            --self:ForkThread(self.DelayTARallyPoint, unit)
+            self:ForkThread(self.DelayTARallyPoint, unit)
         end,
 
         GetNumCategoryBeingBuilt = function(self, category, facCategory)
@@ -185,7 +185,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                     position = import('/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua').TARandomLocation(position[1],position[3])
                     rally = position
                 end           
-                ---IssueClearFactoryCommands( {factory} )
+                IssueClearFactoryCommands( {factory} )
                 IssueFactoryRallyPoint({factory}, rally)         
                 factory:ForkThread(self.TrafficControlTAThread, position, rally)
             end
@@ -228,7 +228,7 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                     end   
                     if table.getn(unitlist) > aiBrain.TARally then  
                         --LOG("*AI DEBUG "..aiBrain.Nickname.." TraffMgt of "..table.getn(unitlist).." at "..repr(rallypoint))
-                        ---IssueClearCommands( unitlist )
+                        IssueClearCommands( unitlist )
                         IssueFormMove( unitlist, rallypoint, 'GrowthFormation', Direction )
                     end
                 end

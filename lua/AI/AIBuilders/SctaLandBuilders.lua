@@ -124,17 +124,18 @@ BuilderGroup {
         BuilderName = 'SCTAAi FactoryT2 Tank',
         PlatoonTemplate = 'T2LandDFTank2SCTA',
         Priority = 135,
+        InstanceCount = 2,
         DelayEqualBuildPlattons = {'FactoryProductionSCTA', 1},
         BuilderConditions = {
         { UCBC, 'CheckBuildPlattonDelay', { 'FactoryProductionSCTA' }},
-        { TAutils, 'EcoManagementTA', { 0.8, 0.5} },
+        { TAutils, 'EcoManagementTA', { 0.9, 0.5} },
         },
         BuilderType = 'Vehicle',
     },
     Builder {
         BuilderName = 'SCTAAi Factory Counter Tank',
         PlatoonTemplate = 'T2LandAuxFact2',
-        Priority = 140,
+        Priority = 130,
         InstanceCount = 1,
         DelayEqualBuildPlattons = {'AuxSCTA', 1},
         BuilderConditions = {
@@ -147,12 +148,12 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTAAi Factory All Tank Terrain T2',
         PlatoonTemplate = 'T2LandAuxTerrain2',
-        Priority = 140,
+        Priority = 130,
         InstanceCount = 1,
         DelayEqualBuildPlattons = {'AuxSCTA', 1},
         BuilderConditions = {
         { UCBC, 'CheckBuildPlattonDelay', { 'AuxSCTA' }}, 
-            { TASlow, 'TAHaveUnitRatioGreaterThanLand', {categories.TANK * categories.AMPHIBIOUS - categories.SCOUT} },
+            { TASlow, 'TAHaveUnitRatioGreaterThanLand', {categories.TANK * categories.AMPHIBIOUS} },
             { TAutils, 'EcoManagementTA', { 0.9, 0.5} },
         }, 
         BuilderType = 'Vehicle',

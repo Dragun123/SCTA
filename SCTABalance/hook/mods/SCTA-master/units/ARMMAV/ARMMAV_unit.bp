@@ -23,6 +23,9 @@ UnitBlueprint {
         Health = 6000,
         MaxHealth = 6000,
     },
+    Physics = {
+        MaxSpeed = 3.4,
+    },
     SizeX = 1.8,
     SizeY = 2.5,
     SizeZ = 1.8,

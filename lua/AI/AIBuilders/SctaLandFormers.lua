@@ -50,8 +50,8 @@ BuilderGroup {
     },
 ---Defensive/MidGame Platoons
     Builder {
-        BuilderName = 'SCTAAI Strike Force Early',
-        PlatoonTemplate = 'StrikeForceSCTAEarly',
+        BuilderName = 'SCTAAI Strike Force',
+        PlatoonTemplate = 'StrikeForceSCTA',
         PriorityFunction = TAPrior.UnitProductionT1, -- The platoon template tells the AI what units to include, and how to use them.
         Priority = 100,
         InstanceCount = 10,
@@ -62,7 +62,7 @@ BuilderGroup {
             NeverGuardBases = true,
             NeverGuardEngineers = true,
             UseMoveOrder = true,
-            UseFormation = 'AttackFormation',
+            UseFormation = 'GrowthFormation',
             LocationType = 'LocationType',
             ThreatWeights = {
             SecondaryTargetThreatType = 'StructuresNotMex',
@@ -71,50 +71,6 @@ BuilderGroup {
         },        
         BuilderConditions = {
             { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, categories.DIRECTFIRE * categories.TECH1 * GROUND - categories.ENGINEER} },
-        },
-    },
-    Builder {
-        BuilderName = 'SCTAAI Strike Mid',
-        PlatoonTemplate = 'StrikeForceSCTAMid', -- The platoon template tells the AI what units to include, and how to use them.
-        PriorityFunction = TAPrior.UnitProduction,
-        Priority = 150,
-        InstanceCount = 10,
-        BuilderType = 'LandForm',
-        BuilderData = {
-            SearchRadius = 100,
-            ThreatSupport = 50,
-            UseMoveOrder = true,
-            NeverGuardBases = false,
-            NeverGuardEngineers = false,
-            UseFormation = 'AttackFormation',
-            LocationType = 'LocationType',
-        },        
-        BuilderConditions = {
-        --{ MIBC, 'GreaterThanGameTime', {600} },
-        { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, categories.DIRECTFIRE * GROUND - categories.ENGINEER} },
-        },
-    },
-    Builder {
-        BuilderName = 'SCTAAI Strike Endgame',
-        PlatoonTemplate = 'StrikeForceSCTAEndgame', -- The platoon template tells the AI what units to include, and how to use them.
-        PriorityFunction = TAPrior.StructureProductionT2,
-        Priority = 250,
-        InstanceCount = 10,
-        BuilderType = 'LandForm',
-        BuilderData = {
-            SearchRadius = 100,
-            ThreatSupport = 75,
-            UseMoveOrder = true,
-            NeverGuardBases = false,
-            NeverGuardEngineers = false,
-            UseFormation = 'AttackFormation',
-            LocationType = 'LocationType',
-            Energy = true,
-            Sniper = true,
-        },        
-        BuilderConditions = {
-            --{ MIBC, 'GreaterThanGameTime', {1200} },
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 4, categories.DIRECTFIRE * GROUND - categories.ENGINEER} },
         },
     },
     ----AggressivePlatoons
@@ -140,33 +96,6 @@ BuilderGroup {
         },        
         BuilderConditions = {
             { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 1, (categories.SILO + categories.ARTILLERY + categories.SNIPER) * GROUND - categories.ENGINEER} },
-         },
-    },
-    Builder {
-        BuilderName = 'SCTAAI Land Attack Mid',
-        PlatoonTemplate = 'LandAttackSCTAMid', -- The platoon template tells the AI what units to include, and how to use them.
-        PriorityFunction = TAPrior.UnitProductionT1, -- The platoon template tells the AI what units to include, and how to use them.
-        --PlatoonAddPlans = { 'HighlightSCTAHuntAI' },
-        Priority = 150,
-        InstanceCount = 10,
-        --DelayEqualBuildPlattons = 5,
-        BuilderType = 'LandForm',
-        BuilderData = {
-            SearchRadius = 50,
-            ThreatSupport = 75,
-            TAWeaponRange = 30,
-            NeverGuardBases = true,
-            NeverGuardEngineers = true,
-            UseFormation = 'AttackFormation',
-            LocationType = 'LocationType',
-        ThreatWeights = {
-            SecondaryTargetThreatType = 'StructuresNotMex',
-            IgnoreStrongerTargetsRatio = 100.0,
-            },
-        },        
-        BuilderConditions = {
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, (categories.SILO + categories.ARTILLERY + categories.SNIPER) * GROUND - categories.ENGINEER} },
-            --{ MIBC, 'GreaterThanGameTime', {480} },
          },
     },
     Builder {
