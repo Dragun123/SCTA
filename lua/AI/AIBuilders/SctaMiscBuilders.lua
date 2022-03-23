@@ -143,6 +143,25 @@ BuilderGroup {
             }
         }
     },
+    --[[Builder {
+        BuilderName = 'SCTARadar',
+        PlatoonTemplate = 'EngineerBuilderSCTA',
+        Priority = 300,
+        PriorityFunction = TAPrior.UnitProduction,
+        InstanceCount = 1,
+        BuilderConditions = {
+            { TASlow, 'TAAIRadarAroundLocation', {'LocationType'} },
+            { TAutils, 'GreaterTAStorageRatio', { 0.2, 0.5}}, 
+        },
+        BuilderType = 'LandTA',
+        BuilderData = {
+            Construction = {
+                BuildStructures = {
+                    'T1Radar',
+                }
+            }
+        }
+    },]]
     Builder {
         BuilderName = 'SCTA Defense Point 1',
         PlatoonTemplate = 'EngineerBuilderSCTAALL',

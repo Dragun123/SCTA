@@ -13,7 +13,7 @@ BuilderGroup {
         Priority = 130,
         BuilderConditions = {
             { MIBC, 'LessThanGameTime', {300} }, -- Don't make tanks if we have lots of them.
-            { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.5} },
         },
         BuilderType = 'KBot',
     },
@@ -26,7 +26,7 @@ BuilderGroup {
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'FactoryProductionSCTA' }},
             { MIBC, 'GreaterThanGameTime', {300} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.5} },
         },
         BuilderType = 'KBot',
     },
@@ -38,7 +38,7 @@ BuilderGroup {
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'ArtillerySCTA' }},
             { TASlow, 'TAHaveUnitRatioGreaterThanLand', {categories.ARTILLERY} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.5} },
          },
         BuilderType = 'KBot',
     },
@@ -49,7 +49,7 @@ BuilderGroup {
         Priority = 130,
         BuilderConditions = {
             { MIBC, 'LessThanGameTime', {300} }, -- Don't make tanks if we have lots of them.
-            { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.5} },
         },
         BuilderType = 'Vehicle',
     },
@@ -62,7 +62,7 @@ BuilderGroup {
         BuilderConditions = {
         { UCBC, 'CheckBuildPlattonDelay', { 'FactoryProductionSCTA' }},
         { MIBC, 'GreaterThanGameTime', {300} },
-        { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
+        { TAutils, 'EcoManagementTA', { 0.9, 0.5} },
         },
         BuilderType = 'Vehicle',
     },
@@ -76,7 +76,7 @@ BuilderGroup {
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'AntiAirSCTA' }},
             { TASlow, 'TAHaveUnitRatioGreaterThanLand', {categories.ANTIAIR} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.5} },
         },
         BuilderType = 'Vehicle',
     },
@@ -88,7 +88,7 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'FactoryProductionSCTA', 1},
         BuilderConditions = {
         { UCBC, 'CheckBuildPlattonDelay', { 'FactoryProductionSCTA' }},
-        { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
+        { TAutils, 'EcoManagementTA', { 0.8, 0.5} },
         },
         BuilderType = 'KBot',
     },
@@ -101,7 +101,7 @@ BuilderGroup {
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'ArtillerySCTA' }},
             { TASlow, 'TAHaveUnitRatioGreaterThanLand', {categories.SILO - categories.ANTIAIR} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.5} },
         },
         BuilderType = 'KBot',
     },
@@ -115,7 +115,7 @@ BuilderGroup {
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'AntiAirSCTA' }},
             { TASlow, 'TAHaveUnitRatioGreaterThanLand', {categories.ANTIAIR} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.5} },
         },
         BuilderType = 'KBot',
     },
@@ -127,33 +127,33 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'FactoryProductionSCTA', 1},
         BuilderConditions = {
         { UCBC, 'CheckBuildPlattonDelay', { 'FactoryProductionSCTA' }},
-            { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
+        { TAutils, 'EcoManagementTA', { 0.8, 0.5} },
         },
         BuilderType = 'Vehicle',
     },
     Builder {
         BuilderName = 'SCTAAi Factory Counter Tank',
         PlatoonTemplate = 'T2LandAuxFact2',
-        Priority = 124,
+        Priority = 140,
         InstanceCount = 1,
         DelayEqualBuildPlattons = {'AuxSCTA', 1},
         BuilderConditions = {
         { UCBC, 'CheckBuildPlattonDelay', { 'AuxSCTA' }},   
             { UCBC, 'HaveLessThanUnitsWithCategory', { 4, categories.STEALTHFIELD * categories.LAND * categories.TECH2} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.5} },
         }, 
         BuilderType = 'Vehicle',
     },
     Builder {
         BuilderName = 'SCTAAi Factory All Tank Terrain T2',
         PlatoonTemplate = 'T2LandAuxTerrain2',
-        Priority = 129,
+        Priority = 140,
         InstanceCount = 1,
         DelayEqualBuildPlattons = {'AuxSCTA', 1},
         BuilderConditions = {
         { UCBC, 'CheckBuildPlattonDelay', { 'AuxSCTA' }}, 
             { TASlow, 'TAHaveUnitRatioGreaterThanLand', {categories.TANK * categories.AMPHIBIOUS - categories.SCOUT} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.5} },
         }, 
         BuilderType = 'Vehicle',
     },
@@ -166,7 +166,7 @@ BuilderGroup {
         BuilderConditions = {
         { UCBC, 'CheckBuildPlattonDelay', { 'AntiAirSCTA' }},
             { TASlow, 'TAHaveUnitRatioGreaterThanLand', {categories.ANTIAIR} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.5} },
         },
         BuilderType = 'Vehicle',
     },
@@ -179,7 +179,7 @@ BuilderGroup {
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'ArtillerySCTA' }},
             { TASlow, 'TAHaveUnitRatioGreaterThanLand', {categories.SILO - categories.ANTIAIR} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.5} },
         },
         BuilderType = 'Vehicle',
     },
@@ -192,7 +192,7 @@ BuilderGroup {
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'ArtillerySCTA' }},
             { TASlow, 'TAHaveUnitRatioGreaterThanLand', {categories.ARTILLERY + categories.ANTIAIR} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.5} },
          },
         BuilderType = 'KBot',
     },
@@ -206,7 +206,7 @@ BuilderGroup {
     DelayEqualBuildPlattons = {'FactoryProductionSCTA', 1},
     BuilderConditions = {
     { UCBC, 'CheckBuildPlattonDelay', { 'FactoryProductionSCTA' }},
-        { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
+        { TAutils, 'EcoManagementTA', { 0.9, 0.5} },
     },
     BuilderType = 'KBot',
     },
@@ -220,7 +220,7 @@ BuilderGroup {
         BuilderConditions = {
         { UCBC, 'CheckBuildPlattonDelay', { 'FactoryProductionSCTA' }},
         { TASlow, 'TAHaveUnitRatioGreaterThanLand', {categories.armmav + categories.corpyro} },
-        { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
+        { TAutils, 'EcoManagementTA', { 0.9, 0.5} },
         },
         BuilderType = 'KBot',
         },
@@ -234,7 +234,7 @@ BuilderGroup {
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'ArtillerySCTA' }},
             { TASlow, 'TAHaveUnitRatioGreaterThanLand', {categories.SNIPER + categories.ARTILLERY} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.5} },
         },
         BuilderType = 'KBot',
     },
@@ -248,7 +248,7 @@ BuilderGroup {
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'ArtillerySCTA' }},
             { TASlow, 'TAHaveUnitRatioGreaterThanLand', {categories.SNIPER + categories.ARTILLERY} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.5} },
         },
         BuilderType = 'Vehicle',
     },
@@ -261,7 +261,7 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'FactoryProductionSCTA', 1},
         BuilderConditions = {
         { UCBC, 'CheckBuildPlattonDelay', { 'FactoryProductionSCTA' }},
-            { TAutils, 'EcoManagementTA', { 0.75, 0.5} },
+            { TAutils, 'EcoManagementTA', { 0.8, 0.5} },
         },
         BuilderType = 'Vehicle',
     },

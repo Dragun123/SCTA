@@ -71,7 +71,7 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'Factory2', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory2' }},
-            { TASlow, 'TAFactoryCapCheckT2', {}},
+            { TASlow, 'TAFactoryCapCheckT2Early', {}},
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, LAB} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
@@ -84,6 +84,7 @@ BuilderGroup {
                 BuildClose = true,
                 BuildStructures = {
                     'T2LandFactory',
+                    'T1Radar',
                 }
             }
         }

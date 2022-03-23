@@ -33,7 +33,7 @@ BuilderGroup {
         PriorityFunction = TAPrior.AirCarrierExist,
         BuilderConditions = {
             { TASlow, 'TAHaveUnitsWithCategoryAndAllianceFalse', {0, categories.MOBILE * categories.AIR - categories.SCOUT - categories.BOMBER, 'Enemy'}},
-            { TAutils, 'EcoManagementTA', { 0.75, 0.9} },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.9} },
         },
         BuilderType = 'Air',
     },
@@ -44,7 +44,7 @@ BuilderGroup {
         InstanceCount = 1,
         PriorityFunction = TAPrior.AirCarrierExist,
         BuilderConditions = {
-            { TAutils, 'EcoManagementTA', { 0.75, 0.9} },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.9} },
         },
         BuilderType = 'Air',
     },]]

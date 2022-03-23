@@ -317,18 +317,21 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
             local waited = false
 
             -- inform us of our status
-            if isUncomplete then 
+            --[[if isUncomplete then 
                 --factory:SetCustomName("isUncomplete")
             elseif factory.TABuildingUnit then 
                 --factory:SetCustomName("isBuilding")
-            --[[elseif isUpgrading then 
-                factory:SetCustomName("isUpgrading")]]
-            end
+            elseif isUpgrading then 
+                factory:SetCustomName("isUpgrading")
+            end]]
 
             -- wait until we can do the order
             while isUncomplete or factory.TABuildingUnit do 
 
                 WaitSeconds(1.0)
+                if delay then
+                    WaitSeconds(math.random(1,4))
+                end
 
                 -- can't do an job if we're a gooner
                 if factory:BeenDestroyed() then 
@@ -342,19 +345,18 @@ FactoryBuilderManager = Class(SCTAFactoryBuilderManager) {
                 --isUpgrading = factory:IsUnitState('Upgrading')
 
                 -- inform us of our status
-                if isUncomplete then 
+                --[[if isUncomplete then 
                     --factory:SetCustomName("isUncomplete")
                 elseif factory.TABuildingUnit then 
                     --factory:SetCustomName("isBuilding")
-                --[[elseif isUpgrading then 
-                    factory:SetCustomName("isUpgrading")]]
-                end
+                elseif isUpgrading then 
+                    factory:SetCustomName("isUpgrading")
+                end]]
             end
 
             -- if we are supposed to wait but we didn't yet, then just wait
             if delay and not waited then 
-                WaitSeconds(1.0)
-                --factory:SetCustomName("default delay")
+                WaitSeconds(1)
             end
 
 

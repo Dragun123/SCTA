@@ -18,6 +18,19 @@ function HaveLessThanUnitsWithCategoryTA(aiBrain, numReq, category, idleReq)
         return false
     end
 end
+
+function HaveLessThanUnitsWithCategoryTAMapSize(aiBrain, numReq, category, idleReq)
+    local Numbers
+    if aiBrain.MapSizeSCTA then 
+        Numbers = aiBrain.MapSizeSCTA/2
+    end
+    ---local NumbersVal = numReq * Numbers
+    if LessThanCats(aiBrain,  numReq + Numbers, category, idleReq) then
+        return true
+    else
+        return false
+    end
+end
 ------AIUTILITIES FUNCTIONS (RNG, NUTCTACKER, and RECLAIM MY OW
 function CheckBuildPlatoonDelaySCTA(aiBrain, PlatoonName)
     if aiBrain.DelayEqualBuildPlattons[PlatoonName] then
@@ -200,9 +213,17 @@ function TAFactoryCapCheckT1(aiBrain)
     return false
 end
 
-function TAFactoryCapCheckT2(aiBrain)
+function TAFactoryCapCheckT2Early(aiBrain)
     --LOG('*SCTALABs', aiBrain.Plants)
     if not aiBrain.Level3 then
+        return true
+    end
+    return false
+end
+
+function TAFactoryCapCheckT2(aiBrain)
+    --LOG('*SCTALABs', aiBrain.Plants)
+    if aiBrain.Labs > 2 then
         return true
     end
     return false
@@ -326,7 +347,32 @@ function TAReclaimablesInArea(aiBrain, locType, Mass)
     return false
 end
 
+--[[function TAAIRadarAroundLocation(aiBrain, locationType)
+    local position, radius
+    if aiBrain.HasPlatoonList then
+        for _, v in aiBrain.PBM.Locations do
+            if v.LocationType == locationType then
+                position = v.Location
+                radius = v.Radius
+                break
+            end
+        end
+    elseif aiBrain.BuilderManagers[locationType] then
+        radius = aiBrain.BuilderManagers[locationType].FactoryManager.Radius
+        position = aiBrain.BuilderManagers[locationType].FactoryManager:GetLocationCoords()
+    end
 
+    if not position then
+        return false
+    end
+
+    local Radar = aiBrain:GetUnitsAroundPoint((categories.STRUCTURE + categories.RADAR) - categories.FACTORY, position, 50, 'Ally')
+    if Radar < 3 then
+        return true
+    else 
+        return false
+    end
+end]]
 
 function TAAIGetReclaimablesAroundLocation(aiBrain, locationType)
     local position, radius
