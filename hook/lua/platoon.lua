@@ -1877,27 +1877,81 @@ Platoon = Class(SCTAAIPlatoon) {
         coroutine.yield(2)
         self:PlatoonDisbandTA()
     end,
-
-    SCTAStrikeForceAIEarly = function(self)
+    
+        SCTAStrikeForceAIEarly = function(self)
             self:Stop()
             local aiBrain = self:GetBrain()
             local armyIndex = aiBrain:GetArmyIndex()
-            local target
-            local blip
+            self.myThreat = self:CalculatePlatoonThreat('Surface', categories.MOBILE)
+            local platoonUnits = self:GetPlatoonUnits()
+            --[[for _,v in platoonUnits do
+                if v.Dead then continue end
+                v:SetCustomName('AttackHuntSCTA')
+            end]]
             while aiBrain:PlatoonExists(self) do
-                target = self:FindClosestUnit('Attack', 'Enemy', true, categories.ALLUNITS - categories.WALL)
+              local target = self:FindClosestUnit('Attack', 'Enemy', true, categories.ALLUNITS - categories.AIR - categories.COMMAND - categories.STRUCTURE)
                 if target then
-                    blip = target:GetBlip(armyIndex)
-                    self:Stop()
-                    self:AggressiveMoveToLocation(table.copy(target:GetPosition()))
-                    --DUNCAN - added to try and stop AI getting stuck.
-                    local position = AIUtils.RandomLocation(target:GetPosition()[1],target:GetPosition()[3])
-                    self:MoveToLocation(position, false)
+                    local platLoc = self:GetPlatoonPosition()
+                    local markerType = self.PlatoonData.MarkerType or 'Expansion Area'
+                    local markerLocations = AIUtils.AIGetMarkerLocations(aiBrain, markerType)
+                    local avoidClosestRadius = self.PlatoonData.AvoidClosestRadius or 5
+                    local bAvoidBases = self.PlatoonData.AvoidBases or false
+                    -- Radius around which to avoid the main base
+                    local avoidBasesRadius = self.PlatoonData.AvoidBasesRadius or 10
+                    local bestMarker = false
+                        --Head towards the the area that has not had a scout sent to it in a while
+                    if not self.LastMarker then
+                        self.LastMarker = {nil,nil}
+                    end
+                        -- if we didn't want random or threat, assume closest (but avoid ping-ponging)
+                        if table.getn(markerLocations) <= 2 then
+                            self.LastMarker[1] = nil
+                            self.LastMarker[2] = nil
+                        end
+                        for _,marker in RandomIter(markerLocations) do
+                            local distSq = VDist2Sq(marker.Position[1], marker.Position[3], platLoc[1], platLoc[3])
+                            if table.getn(markerLocations) <= 2 then
+                                self.LastMarker[1] = nil
+                                self.LastMarker[2] = nil
+                            end
+                            if self:AvoidsBases(marker.Position, bAvoidBases, avoidBasesRadius) and distSq > (avoidClosestRadius * avoidClosestRadius) then
+                                if self.LastMarker[1] and marker.Position[1] == self.LastMarker[1][1] and marker.Position[3] == self.LastMarker[1][3] then
+                                    continue
+                                end
+                                if self.LastMarker[2] and marker.Position[1] == self.LastMarker[2][1] and marker.Position[3] == self.LastMarker[2][3] then
+                                    continue
+                                end
+                                bestMarker = marker
+                                break
+                            end
+                        end
+                        if bestMarker then
+                        self.LastMarker[2] = self.LastMarker[1]
+                        self.LastMarker[1] = bestMarker.Position
+                        --LOG("GuardMarker: Attacking " .. bestMarker.Name)
+                        local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, self.MovementLayer, self:GetPlatoonPosition(), bestMarker.Position, 200)
+                        local success, bestGoalPos = AIAttackUtils.CheckPlatoonPathingEx(self, bestMarker.Position)
+                        if path then
+                        local pathLength = table.getn(path)
+                        for i=1, pathLength-1 do
+                            self:Stop()
+                            self:MoveToLocation(path[i], false)
+                            --self:SetPlatoonFormationOverride('GrowthFormation')
+                        end
+                    end
+                    end
                 end
-                WaitSeconds(17)
+                self:SetPlatoonFormationOverride('AttackFormation')
+                --WaitSeconds(5)
+                coroutine.yield(25)
+                if aiBrain.Level2 then
+                    self:MergeWithNearbyPlatoonsSCTA('SCTAStrikeForceAIEarly', 'SCTAStrikeForceAI', 'SCTAAI Strike Mid', 5)
+                ---The third variable allows for proper platoon handle tracking
+                elseif table.getn(platoonUnits) < 2 and not target then
+                    return self:SCTAReturnToBaseAI()
+                end
             end
         end,
-
         SCTAStrikeForceAI = function(self)
             self:Stop()
             local aiBrain = self:GetBrain()
@@ -1966,7 +2020,8 @@ Platoon = Class(SCTAAIPlatoon) {
                     if target and not target.Dead and not self.Move then
                         WaitSeconds(10)
                         --self:Stop()
-                        self:MoveToLocation( table.copy(threat), false, 'Attack')
+                        local direction = TAutils.TAGetDirectionInDegrees(self:GetPlatoonPosition(), threat)
+                        IssueFormMove( 'Attack', threat, 'AttackFormation', direction )
                         if oldThreat == threat then
                             self.Move = true
                         end
@@ -1987,9 +2042,8 @@ Platoon = Class(SCTAAIPlatoon) {
                                         self.AntiAirThread = nil
                                     end
                                     local direction = TAutils.TAGetDirectionInDegrees(self:GetPlatoonPosition(), (v))
-                                self:Stop()
+                                ---self:Stop()
                                 IssueFormMove( self:GetPlatoonUnits(), (v), 'GrowthFormation', direction )
-                                self:AggressiveMoveToLocation((v), 'Guard')
                                 WaitSeconds(7)
                             end
                     end
@@ -2148,7 +2202,8 @@ Platoon = Class(SCTAAIPlatoon) {
                     end 
                     --WaitSeconds(10)
                     --self:Stop()
-                    self:MoveToLocation( table.copy(threat), false, 'Attack')
+                    local direction = TAutils.TAGetDirectionInDegrees(self:GetPlatoonPosition(), threat)
+                    IssueFormMove( 'Attack', threat, 'AttackFormation', direction )
                     if oldThreat == threat then
                         self.Move = true
                     end

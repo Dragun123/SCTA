@@ -22,7 +22,7 @@ end
 function HaveLessThanUnitsWithCategoryTAMapSize(aiBrain, numReq, category, idleReq)
     local Numbers
     if aiBrain.MapSizeSCTA then 
-        Numbers = aiBrain.MapSizeSCTA/2
+        Numbers = (aiBrain.MapSizeSCTA)/2
     end
     ---local NumbersVal = numReq * Numbers
     if LessThanCats(aiBrain,  numReq + Numbers, category, idleReq) then
@@ -205,9 +205,17 @@ end
 
 ---TAUnit Building
 
-function TAFactoryCapCheckT1(aiBrain)
+function TAFactoryCapCheckT1Early(aiBrain)
     --LOG('*SCTALABs', aiBrain.Plants)
     if not aiBrain.Level2 then
+        return true
+    end
+    return false
+end
+
+function TAFactoryCapCheckT1(aiBrain)
+    --LOG('*SCTALABs', aiBrain.Plants)
+    if aiBrain.Plants > 5 and not aiBrain.Level2 then
         return true
     end
     return false
@@ -223,7 +231,7 @@ end
 
 function TAFactoryCapCheckT2(aiBrain)
     --LOG('*SCTALABs', aiBrain.Plants)
-    if aiBrain.Labs > 2 then
+    if aiBrain.Labs > 2 and not aiBrain.Level3 then
         return true
     end
     return false
