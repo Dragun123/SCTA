@@ -1782,8 +1782,13 @@ Platoon = Class(SCTAAIPlatoon) {
                 end
             end
             if not v.Dead then
+                --[[if EntityCategoryContains(categories.FACTORY, v) then 
+                    LOG("Disbanding platoon with a factory!")
+                end]]
+                if not EntityCategoryContains(categories.FACTORY, v) then
                 IssueStop({v})
                 IssueClearCommands({v})
+                end
             end
         end
         if self.AIThread then

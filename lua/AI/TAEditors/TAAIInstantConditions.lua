@@ -133,8 +133,8 @@ end
 function EcoManagementTA(aiBrain, MassEfficiency, EnergyEfficiency)
     local econEff = TAAIEcoConditionEfficiency(aiBrain)
     if ((aiBrain:GetEconomyStored('MASS') >= 125) and (aiBrain:GetEconomyStored('ENERGY') >= 350)) then
-        if ((econEff.MassEfficiencyOverTime >= MassEfficiency) and (econEff.EnergyEfficiencyOverTime >= EnergyEfficiency)) --[[or
-        ((aiBrain:GetEconomyStoredRatio('Mass').MassStorageRatio >= 0.5) and (aiBrain:GetEconomyStoredRatio('ENERGY').EnergyStorageRatio >= 0.5))]] then
+        if ((econEff.MassEfficiencyOverTime >= MassEfficiency) and (econEff.EnergyEfficiencyOverTime >= EnergyEfficiency)) or
+        ((aiBrain:GetEconomyStoredRatio('Mass').MassStorageRatio >= 0.5) and (aiBrain:GetEconomyStoredRatio('ENERGY').EnergyStorageRatio >= 0.5)) then
             return true
         else
             return false
