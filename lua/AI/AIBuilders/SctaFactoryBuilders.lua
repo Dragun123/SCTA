@@ -184,7 +184,7 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'Factory3', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory3' }},
-            { TASlow, 'HaveLessThanUnitsWithCategoryTA', { 0, PLATFORM * categories.LAND } },
+            { TASlow, 'HaveLessThanUnitsWithCategoryTA', { 1, PLATFORM * categories.LAND } },
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, categories.LAND * PLATFORM} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
