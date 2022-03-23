@@ -42,7 +42,7 @@ PlatoonTemplate {
             { 'armstump', 1, 1, 'Attack', 'none' },
         },
         Core = {
-            { 'corraid', 1, 2, 'Attack', 'none' },
+            { 'corraid', 1, 3, 'Attack', 'none' },
             { 'corcv', 1, 1, 'Support', 'None' },
         },
     }
@@ -52,11 +52,11 @@ PlatoonTemplate {
     Name = 'T1LandDFTankSCTA2',
     FactionSquads = {
         Arm = {
-            { 'armstump', 1, 2, 'Attack', 'none' },
+            { 'armstump', 1, 3, 'Attack', 'none' },
             { 'armck', 1, 1, 'Support', 'None' },
         },
         Core = {
-            { 'corraid', 1, 1, 'Attack', 'none' },
+            { 'corraid', 1, 2, 'Attack', 'none' },
             { 'corlevlr', 1, 1, 'Attack', 'none' },
         },
     }

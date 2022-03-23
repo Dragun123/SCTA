@@ -77,7 +77,7 @@ PlatoonTemplate {
 
 PlatoonTemplate {
     Name = 'LandAttackSCTAMid',
-    Plan = 'AttackSCTAForceAI',
+    Plan = 'HuntSCTAAI',
     GlobalSquads = {
         { (GROUND * RANGE) - categories.AMPHIBIOUS, 5, 20, 'Artillery', 'none' },
         { categories.FIELDENGINEER, 0, 2, 'Guard', 'none' },
