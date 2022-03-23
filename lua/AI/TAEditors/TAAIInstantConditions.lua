@@ -120,22 +120,21 @@ function TAAIEcoConditionEfficiency(aiBrain)
     econEff.EnergyRequested = aiBrain:GetEconomyRequested('ENERGY')
     econEff.MassRequested = aiBrain:GetEconomyRequested('MASS')
 
+    if aiBrain.EconomyMonitorThread then
+        local econTime = aiBrain:GetEconomyOverTime()
+
+        econEff.EnergyEfficiencyOverTime = math.min(econTime.EnergyIncome / econTime.EnergyRequested, 40)
+        econEff.MassEfficiencyOverTime = math.min(econTime.MassIncome / econTime.MassRequested, 10)
+    end
+
     return econEff
 end
 
 function EcoManagementTA(aiBrain, MassEfficiency, EnergyEfficiency)
-    --_ALERT('SCTAECO1', aiBrain:GetEconomyStored('MASS'))
-    _ALERT('SCTAEFF1', (aiBrain:GetEconomyIncome('MASS')/aiBrain:GetEconomyUsage('MASS')))
-    _ALERT('SCTAEFF2', (aiBrain:GetEconomyIncome('ENERGY')/aiBrain:GetEconomyUsage('ENERGY')))
-    --_ALERT('SCTAECO3', aiBrain:GetEconomyStored('ENERGY'))
-    --_ALERT('SCTAECO4', aiBrain:GetEconomyTrend('ENERGY'))
-    --_ALERT('SCTAECO5', aiBrain:GetEconomyStoredRatio('ENERGY'))
-    --_ALERT('SCTAECO6', aiBrain:GetEconomyStoredRatio('MASS'))
-    --_ALERT('SCTAECO7', aiBrain:GetEconomyUsage('MASS'))
-    --_ALERT('SCTAECO8', aiBrain:GetEconomyIncome('MASS'))
+    local econEff = TAAIEcoConditionEfficiency(aiBrain)
     if ((aiBrain:GetEconomyStored('MASS') >= 125) and (aiBrain:GetEconomyStored('ENERGY') >= 350)) then
-        if (aiBrain:GetEconomyIncome('MASS')/aiBrain:GetEconomyRequested('MASS') >= MassEfficiency and aiBrain:GetEconomyIncome('ENERGY')/aiBrain:GetEconomyRequested('ENERGY') >= EnergyEfficiency) or
-        (aiBrain:GetEconomyStoredRatio('MASS').MassStorageRatio >= 0.5 and aiBrain:GetEconomyStoredRatio('ENERGY').EnergyStorageRatio >= 0.5) then
+        if ((econEff.MassEfficiencyOverTime >= MassEfficiency) and (econEff.EnergyEfficiencyOverTime >= EnergyEfficiency)) or
+        ((aiBrain:GetEconomyStoredRatio('Mass').MassStorageRatio >= 0.5) and (aiBrain:GetEconomyStoredRatio('ENERGY').EnergyStorageRatio >= 0.5)) then
             return true
         else
             return false
@@ -165,7 +164,8 @@ end
 
 
 function GreaterTAStorageRatio(aiBrain, mStorageRatio, eStorageRatio)
-    if (aiBrain:GetEconomyIncome('ENERGY')/aiBrain:GetEconomyRequested('ENERGY') >= 0.9 and aiBrain:GetEconomyIncome('MASS')/aiBrain:GetEconomyRequested('MASS') >= 0.5) then
+    local econ = TAAIEcoConditionEfficiency(aiBrain)
+    if ((econ.EnergyEfficiencyOverTime >= 0.9) and (econ.MassEfficiencyOverTime >= 0.5)) then
         if ((aiBrain:GetEconomyStoredRatio('ENERGY').EnergyStorageRatio >= eStorageRatio) and (aiBrain:GetEconomyStoredRatio('MASS').MassStorageRatio >= mStorageRatio)) then
             return true
         else
@@ -178,7 +178,8 @@ function GreaterTAStorageRatio(aiBrain, mStorageRatio, eStorageRatio)
 end
 
 function LessThanEconEnergyTAEfficiency(aiBrain, EnergyEfficiency)
-    if (aiBrain:GetEconomyIncome('ENERGY')/aiBrain:GetEconomyRequested('ENERGY') <= EnergyEfficiency and aiBrain:GetEconomyIncome('MASS')/aiBrain:GetEconomyRequested('MASS') >= 0.5) then
+    local econ = TAAIEcoConditionEfficiency(aiBrain)
+    if (econ.EnergyEfficiencyOverTime <= EnergyEfficiency) and (econ.MassEfficiencyOverTime >= 0.5) then
         return true
     else
     return false
@@ -186,7 +187,8 @@ function LessThanEconEnergyTAEfficiency(aiBrain, EnergyEfficiency)
 end
 
 function GreaterThanEconEnergyTAEfficiency(aiBrain, EnergyEfficiency)
-    if (aiBrain:GetEconomyIncome('ENERGY')/aiBrain:GetEconomyRequested('ENERGY') >= EnergyEfficiency and aiBrain:GetEconomyIncome('MASS')/aiBrain:GetEconomyRequested('MASS') >= 0.5) then
+    local econ = TAAIEcoConditionEfficiency(aiBrain)
+    if (econ.EnergyEfficiencyOverTime >= EnergyEfficiency) and (econ.MassEfficiencyOverTime >= 0.5) then
         return true
     else
     return false

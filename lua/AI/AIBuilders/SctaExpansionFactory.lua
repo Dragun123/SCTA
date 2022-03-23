@@ -13,7 +13,7 @@ BuilderGroup {
     BuildersType = 'EngineerBuilder',
     ----BotsFacts
     Builder {
-        BuilderName = 'SCTAAI Expansion LandFac',
+        BuilderName = 'SCTAAI Expansion Kbot T1 LandFac',
         PlatoonTemplate = 'EngineerBuilderSCTA',
         Priority = 110,
         PriorityFunction = TAPrior.UnitProductionT1Fac,
@@ -21,7 +21,7 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'Factory', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory' }},
-            { TASlow, 'TAFactoryCapCheckT1', {}},
+            { TASlow, 'TAFactoryCapCheckT1Early', {}},
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, categories.FACTORY} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
@@ -38,7 +38,7 @@ BuilderGroup {
         }
     },
     Builder {
-        BuilderName = 'SCTAAI Expansion Vehicle LandFac',
+        BuilderName = 'SCTAAI Expansion T1 Vehicle LandFac',
         PlatoonTemplate = 'EngineerBuilderSCTA',
         Priority = 100,
         PriorityFunction = TAPrior.UnitProductionT1Fac,
@@ -63,7 +63,7 @@ BuilderGroup {
         }
     },
     Builder {
-        BuilderName = 'SCTAAI T2LAND Expansion',
+        BuilderName = 'SCTAAI T2LAND Kbot Expansion',
         PlatoonTemplate = 'EngineerBuilderSCTA123',
         PriorityFunction = TAPrior.UnitProduction,
         Priority = 120,
@@ -71,7 +71,7 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'Factory2', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory2' }},
-            { TASlow, 'TAFactoryCapCheckT2', {}},
+            { TASlow, 'TAFactoryCapCheckT2Early', {}},
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, LAB} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
@@ -84,6 +84,7 @@ BuilderGroup {
                 BuildClose = true,
                 BuildStructures = {
                     'T2LandFactory',
+                    'T1Radar',
                 }
             }
         }
@@ -109,7 +110,7 @@ BuilderGroup {
             Construction = {
                 BuildClose = true,
                 BuildStructures = {
-                    'T2LandFactory',
+                    'T2LandFactory2',
                 }
             }
         }

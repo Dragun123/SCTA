@@ -15,7 +15,7 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'FactoryProductionSCTA', 1},
         BuilderConditions = {
         { UCBC, 'CheckBuildPlattonDelay', { 'FactoryProductionSCTA' }},
-            { TAutils, 'EcoManagementTA', { 0.75, 0.5, } },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.5, } },
         },
         BuilderType = 'Hover',
     },
@@ -30,7 +30,7 @@ BuilderGroup {
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'ArtillerySCTA' }},
             { TASlow, 'TAHaveUnitRatioGreaterThanLand', {categories.SILO - categories.ANTIAIR} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.5} },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.5} },
     },
         BuilderType = 'Hover',
     },
@@ -44,7 +44,7 @@ BuilderGroup {
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'AntiAirSCTA' }},
             { TASlow, 'TAHaveUnitRatioGreaterThanLand', {categories.ANTIAIR} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.5} },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.5} },
         },
         BuilderType = 'Hover',
     },
@@ -56,7 +56,7 @@ BuilderGroup {
         BuilderConditions = {
             { MIBC, 'ArmyNeedsTransports', {} },
             { UCBC, 'HaveLessThanUnitsWithCategory', { 6, categories.TRANSPORTFOCUS} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.5} },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.5} },
         },
         BuilderType = 'Hover',
     },]]
@@ -66,7 +66,7 @@ BuilderGroup {
         PriorityFunction = TAPrior.ProductionT3Air,
         Priority = 140,
         BuilderConditions = { -- Only make inties if the enemy air is strong.
-        { TAutils, 'EcoManagementTA', { 0.75, 0.9} },
+        { TAutils, 'EcoManagementTA', { 0.9, 0.9} },
         },
         BuilderType = 'Seaplane',
     },
@@ -76,7 +76,7 @@ BuilderGroup {
         PriorityFunction = TAPrior.NavalProductionT2,
         Priority = 140,
         BuilderConditions = { -- Only make inties if the enemy air is strong.
-        { TAutils, 'EcoManagementTA', { 0.75, 0.9} },
+        { TAutils, 'EcoManagementTA', { 0.9, 0.9} },
         },
         BuilderType = 'Seaplane',
     },

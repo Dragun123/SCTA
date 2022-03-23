@@ -15,7 +15,7 @@ BuilderGroup {
     BuildersType = 'EngineerBuilder',
     ----BotsFacts
     Builder {
-        BuilderName = 'SCTAAI T1Engineer LandFac',
+        BuilderName = 'SCTAAI T1Engineer Kbot LandFac',
         PlatoonTemplate = 'EngineerBuilderSCTA',
         PriorityFunction = TAPrior.UnitProductionT1Fac,
         Priority = 110,
@@ -23,7 +23,6 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'Factory', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory' }},
-            { MIBC, 'GreaterThanGameTime', { 90 } },
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, categories.FACTORY} },
             { TASlow, 'TAFactoryCapCheckT1', {}},
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
@@ -41,7 +40,7 @@ BuilderGroup {
         }
     },
     Builder {
-        BuilderName = 'SCTAAI T1Engineer LandFac2',
+        BuilderName = 'SCTAAI T1Engineer Vehicle LandFac2',
         PlatoonTemplate = 'EngineerBuilderSCTA',
         PriorityFunction = TAPrior.UnitProductionT1Fac,
         Priority = 90,
@@ -51,7 +50,7 @@ BuilderGroup {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory' }},
             { MIBC, 'GreaterThanGameTime', { 120 } },
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, categories.FACTORY } },
-            { TASlow, 'TAFactoryCapCheckT1', {}},
+            { TASlow, 'TAFactoryCapCheckT1Early', {}},
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
         BuilderType = 'LandTA',
@@ -76,7 +75,7 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'Factory2', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory2' }},
-            { TASlow, 'TAFactoryCapCheckT2', {}},
+            { TASlow, 'TAFactoryCapCheckT2Early', {}},
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 2, LAB} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
@@ -185,8 +184,7 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'Factory3', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory3' }},
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 3, PLATFORM * categories.LAND } },
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 5, PLATFORM} },
+            { TASlow, 'HaveLessThanUnitsWithCategoryTA', { 0, PLATFORM * categories.LAND } },
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, categories.LAND * PLATFORM} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },
@@ -212,8 +210,7 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'Factory3', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'Factory3' }},
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 3, PLATFORM * categories.AIR } },
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 5, PLATFORM} },
+            { TASlow, 'HaveLessThanUnitsWithCategoryTA', { 2, PLATFORM * categories.AIR } },
             { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, categories.AIR * PLATFORM} },
             { TAutils, 'EcoManagementTA', { 0.75, 0.75} },
         },

@@ -17,7 +17,7 @@ BuilderGroup {
         BuilderName = 'SCTAAI T1Engineer 450 Mex',
         PlatoonTemplate = 'EngineerBuilderSCTA',
         Priority = 125,
-        InstanceCount = 3,
+        InstanceCount = 2,
         DelayEqualBuildPlattons = {'MexLand2', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'MexLand2' }},
@@ -237,9 +237,9 @@ BuilderGroup {
     Builder {
         BuilderName = 'SCTAAI T1Engineer Air 850 Mex',
         PlatoonTemplate = 'EngineerBuilderSCTAEco',
-        Priority = 125,
-        PriorityFunction = TAPrior.UnitProductionT1,
-        InstanceCount = 3,
+        Priority = 110,
+        ---PriorityFunction = TAPrior.UnitProductionT1,
+        InstanceCount = 2,
         DelayEqualBuildPlattons = {'MexAir', 1},
         BuilderConditions = {
                 { UCBC, 'CheckBuildPlattonDelay', { 'MexAir' }},

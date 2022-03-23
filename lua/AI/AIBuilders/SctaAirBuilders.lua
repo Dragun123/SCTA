@@ -14,7 +14,7 @@ BuilderGroup {
         Priority = 115,
         PriorityFunction = TAPrior.TechEnergyExist,
         BuilderConditions = { -- Only make inties if the enemy air is strong.
-        { TAutils, 'EcoManagementTA', { 0.75, 0.9} },
+        { TAutils, 'EcoManagementTA', { 0.9, 0.9} },
         },
         BuilderType = 'Air',
     },
@@ -25,7 +25,7 @@ BuilderGroup {
         PriorityFunction = TAPrior.TechEnergyExist,
         BuilderConditions = {
             { TASlow, 'TAHaveUnitsWithCategoryAndAllianceFalse', {0, BOMBER, 'Enemy'}},
-            { TAutils, 'EcoManagementTA', { 0.75, 0.9} },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.9} },
         },
         BuilderType = 'Air',
     },
@@ -35,7 +35,7 @@ BuilderGroup {
         PriorityFunction = TAPrior.AirProduction,
         Priority = 90,
         BuilderConditions = { -- Only make inties if the enemy air is strong
-        { TAutils, 'EcoManagementTA', { 0.75, 0.9} },
+        { TAutils, 'EcoManagementTA', { 0.9, 0.9} },
         },
         BuilderType = 'Air',
     },  
@@ -47,7 +47,7 @@ BuilderGroup {
         PriorityFunction = TAPrior.ProductionT3Air,
         BuilderConditions = {
             { TASlow, 'TAHaveUnitsWithCategoryAndAllianceFalse', {0, BOMBER, 'Enemy'}},
-            { TAutils, 'EcoManagementTA', { 0.75, 0.9} },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.9} },
         },
         BuilderType = 'Air',
     },
@@ -58,7 +58,7 @@ BuilderGroup {
         PriorityFunction = TAPrior.AirProduction,
         BuilderConditions = {
             { TASlow, 'TAHaveUnitsWithCategoryAndAllianceFalse', {0, BOMBER, 'Enemy'}},
-            { TAutils, 'EcoManagementTA', { 0.75, 0.9} },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.9} },
         },
         BuilderType = 'Air',
     },
@@ -70,7 +70,7 @@ BuilderGroup {
         BuilderConditions = {
             { MIBC, 'ArmyNeedsTransports', {} },
             { TASlow, 'HaveLessThanUnitsWithCategoryTA', { 2, categories.TRANSPORTFOCUS} },
-            { TAutils, 'EcoManagementTA', { 0.75, 0.9} },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.9} },
         },
         BuilderType = 'Air',
     },     
@@ -81,7 +81,7 @@ BuilderGroup {
         Priority = 50,
         InstanceCount = 2,
         BuilderConditions = {
-            { TAutils, 'EcoManagementTA', { 0.75, 0.9} },
+            { TAutils, 'EcoManagementTA', { 0.9, 0.9} },
         },
         BuilderType = 'Air',
     },     

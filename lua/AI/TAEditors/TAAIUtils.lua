@@ -18,6 +18,19 @@ function HaveLessThanUnitsWithCategoryTA(aiBrain, numReq, category, idleReq)
         return false
     end
 end
+
+function HaveLessThanUnitsWithCategoryTAMapSize(aiBrain, numReq, category, idleReq)
+    local Numbers
+    if aiBrain.MapSizeSCTA then 
+        Numbers = (aiBrain.MapSizeSCTA)/2
+    end
+    ---local NumbersVal = numReq * Numbers
+    if LessThanCats(aiBrain,  numReq + Numbers, category, idleReq) then
+        return true
+    else
+        return false
+    end
+end
 ------AIUTILITIES FUNCTIONS (RNG, NUTCTACKER, and RECLAIM MY OW
 function CheckBuildPlatoonDelaySCTA(aiBrain, PlatoonName)
     if aiBrain.DelayEqualBuildPlattons[PlatoonName] then
@@ -140,7 +153,7 @@ end
 
 function TAExpansionBaseCheck(aiBrain)
     -- Removed automatic setting of Land-Expasions-allowed. We have a Game-Option for this.
-    local checkNum = tonumber(ScenarioInfo.Options.LandExpansionsAllowed)/5 or 1 
+    local checkNum = tonumber(aiBrain.MapSizeSCTA/2)
     --LOG('*SCTAEXPANSIONTA', checkNum)
     return TAExpansionBaseCount(aiBrain, '<', checkNum)
 end
@@ -154,8 +167,8 @@ function TAExpansionBaseCount(aiBrain, compareType, checkNum)
 end
 
 function TAStartBaseCheck(aiBrain)
-    -- Removed automatic setting of Land-Expasions-allowed. We have a Game-Option for this.
-    local checkNum2 = tonumber(ScenarioInfo.Options.LandExpansionsAllowed)/3 or 2 
+    -- Removed automatic setting of Land-(ScenarioInfo.Options.LandExpansionsAllowed)/3 or 2Expasions-allowed. We have a Game-Option for this.
+    local checkNum2 = tonumber(aiBrain.MapSizeSCTA)
     --LOG('*SCTAEXPANSIONTA2', checkNum2)
     return TAStartBaseCount(aiBrain, '<', checkNum2)
 end
@@ -192,7 +205,7 @@ end
 
 ---TAUnit Building
 
-function TAFactoryCapCheckT1(aiBrain)
+function TAFactoryCapCheckT1Early(aiBrain)
     --LOG('*SCTALABs', aiBrain.Plants)
     if not aiBrain.Level2 then
         return true
@@ -200,7 +213,15 @@ function TAFactoryCapCheckT1(aiBrain)
     return false
 end
 
-function TAFactoryCapCheckT2(aiBrain)
+function TAFactoryCapCheckT1(aiBrain)
+    --LOG('*SCTALABs', aiBrain.Plants)
+    if aiBrain.Plants > 5 and not aiBrain.Level2 then
+        return true
+    end
+    return false
+end
+
+function TAFactoryCapCheckT2Early(aiBrain)
     --LOG('*SCTALABs', aiBrain.Plants)
     if not aiBrain.Level3 then
         return true
@@ -208,9 +229,17 @@ function TAFactoryCapCheckT2(aiBrain)
     return false
 end
 
+function TAFactoryCapCheckT2(aiBrain)
+    --LOG('*SCTALABs', aiBrain.Plants)
+    if aiBrain.Labs > 2 and not aiBrain.Level3 then
+        return true
+    end
+    return false
+end
+
 function TAFactoryCapCheckT2Expansion(aiBrain)
     --LOG('*SCTALABs', aiBrain.Plants)
-    if (aiBrain.Labs + (aiBrain:GetCurrentUnits(categories.TECH2 * categories.FACTORY) - aiBrain.Labs)) < 7 and not aiBrain.CapCheckT2 then
+    if (aiBrain.Labs + (aiBrain:GetCurrentUnits(categories.TECH2 * categories.FACTORY) - aiBrain.Labs)) < (6 + aiBrain.MapSizeSCTA) and not aiBrain.CapCheckT2 then
         return true
     end
     aiBrain.CapCheckT2 = true
@@ -270,7 +299,7 @@ end
 function TAHaveUnitRatioGreaterThanNavalT1(aiBrain, Naval)
     local numOne = aiBrain:GetCurrentUnits(Naval)
     local numTwo = aiBrain:GetCurrentUnits(categories.LIGHTBOAT)
-    if (numOne < (numTwo + 1) * 2) then
+    if (numOne < ((numTwo + 1) * aiBrain.MapSizeSCTA)) then
         return true
     else
         return false
@@ -281,7 +310,7 @@ end
 function TAHaveUnitRatioGreaterThanNaval(aiBrain, Naval)
     local numOne = aiBrain:GetCurrentUnits(Naval)
     local numTwo = aiBrain:GetCurrentUnits(categories.FACTORY * categories.NAVAL * categories.TECH2)
-    if (numOne < (numTwo + 1) * 2) then
+    if (numOne < (numTwo + 1) * aiBrain.MapSizeSCTA) then
         return true
     else
         return false
@@ -291,7 +320,7 @@ end
 function TAHaveUnitRatioGreaterThanNavalT3(aiBrain, Naval)
     local numOne = aiBrain:GetCurrentUnits(Naval)
     local numTwo = aiBrain:GetCurrentUnits(categories.FACTORY * categories.NAVAL * categories.TECH2)
-    if (numOne < numTwo) then
+    if (numOne < (numTwo + aiBrain.MapSizeSCTA)) then
         return true
     else
         return false
@@ -326,6 +355,32 @@ function TAReclaimablesInArea(aiBrain, locType, Mass)
     return false
 end
 
+--[[function TAAIRadarAroundLocation(aiBrain, locationType)
+    local position, radius
+    if aiBrain.HasPlatoonList then
+        for _, v in aiBrain.PBM.Locations do
+            if v.LocationType == locationType then
+                position = v.Location
+                radius = v.Radius
+                break
+            end
+        end
+    elseif aiBrain.BuilderManagers[locationType] then
+        radius = aiBrain.BuilderManagers[locationType].FactoryManager.Radius
+        position = aiBrain.BuilderManagers[locationType].FactoryManager:GetLocationCoords()
+    end
+
+    if not position then
+        return false
+    end
+
+    local Radar = aiBrain:GetUnitsAroundPoint((categories.STRUCTURE + categories.RADAR) - categories.FACTORY, position, 50, 'Ally')
+    if Radar < 3 then
+        return true
+    else 
+        return false
+    end
+end]]
 
 function TAAIGetReclaimablesAroundLocation(aiBrain, locationType)
     local position, radius
