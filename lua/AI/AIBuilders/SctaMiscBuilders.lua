@@ -76,30 +76,6 @@ BuilderGroup {
         }
     },
     Builder {
-        BuilderName = 'SCTALaser3Tower',
-        PlatoonTemplate = 'EngineerBuilderSCTA23All',
-        PriorityFunction = TAPrior.ProductionT3,
-        Priority = 81,
-        InstanceCount = 1,
-        BuilderConditions = {
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 4, categories.DIRECTFIRE * STRUCTURE3} }, 
-            --{ TAutils, 'GreaterTAStorageRatio', { 0.2, 0.5}}, 
-            { TAutils, 'EcoManagementTA', { 0.8, 0.8, } },
-        },
-        BuilderType = 'NotACU',
-        BuilderData = {
-            ---NeedGuard = false,
-            DesiresAssist = true,
-            NumAssistees = 2,
-            Construction = {
-                BuildClose = true,
-                BuildStructures = {
-                    'T3GroundDefense',
-                }
-            }
-        }
-    },
-    Builder {
         BuilderName = 'SCTAANTIAIR3Tower',
         PlatoonTemplate = 'EngineerBuilderSCTA23All',
         PriorityFunction = TAPrior.ProductionT3,

@@ -5,6 +5,7 @@ local TASlow = '/mods/SCTA-master/lua/AI/TAEditors/TAAIUtils.lua'
 local TAutils = '/mods/SCTA-master/lua/AI/TAEditors/TAAIInstantConditions.lua'
 LAB = (categories.FACTORY * categories.TECH2)
 PLATFORM = (categories.FACTORY * categories.TECH3)
+STRUCTURE3 = (categories.STRUCTURE * categories.TECH3)
 local TAPrior = import('/mods/SCTA-master/lua/AI/TAEditors/TAPriorityManager.lua')
   
 
@@ -188,6 +189,30 @@ BuilderGroup {
                 BuildClose = true,
                 BuildStructures = {
                     'T2Artillery',
+                }
+            }
+        }
+    },
+    Builder {
+        BuilderName = 'SCTALaser3Tower',
+        PlatoonTemplate = 'EngineerBuilderSCTA23All',
+        PriorityFunction = TAPrior.ProductionT3,
+        Priority = 81,
+        InstanceCount = 1,
+        BuilderConditions = {
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 4, categories.DIRECTFIRE * STRUCTURE3} }, 
+            --{ TAutils, 'GreaterTAStorageRatio', { 0.2, 0.5}}, 
+            { TAutils, 'EcoManagementTA', { 0.8, 0.8, } },
+        },
+        BuilderType = 'NotACU',
+        BuilderData = {
+            ---NeedGuard = false,
+            DesiresAssist = true,
+            NumAssistees = 2,
+            Construction = {
+                BuildClose = true,
+                BuildStructures = {
+                    'T3GroundDefense',
                 }
             }
         }

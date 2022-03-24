@@ -208,8 +208,8 @@ BuilderGroup {
         DelayEqualBuildPlattons = {'MexLand2', 1},
         BuilderConditions = {
             { UCBC, 'CheckBuildPlattonDelay', { 'MexLand2' }},
-            { MIBC, 'LessThanGameTime', {600} }, -- Don't make tanks if we have lots of them.
-            { MABC, 'CanBuildOnMassLessThanDistance', { 'LocationType', 125, -500, 100, 0, 'StructuresNotMex', 1 }},
+            { MIBC, 'LessThanGameTime', {900} }, -- Don't make tanks if we have lots of them.
+            { MABC, 'CanBuildOnMassLessThanDistance', { 'LocationType', 250, -500, 100, 0, 'StructuresNotMex', 1 }},
         },
         BuilderType = 'Command',
         BuilderData = {
