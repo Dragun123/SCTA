@@ -29,10 +29,11 @@ end,
 function CreateWreckage(bp, position, orientation, mass, energy, time, deathHitBox)
     local wreck = bp.Wreckage
     local bpWreck = bp.Wreckage.Blueprint
+
     local prop = CreateProp(position, bpWreck)
-    prop:SetOrientation(orientation, true)
-    prop:SetScale(bp.Display.UniformScale)
-    --LOG('*ScaleWreck', bp.Display.UniformScale)
+    EntitySetOrientation(prop, orientation, true)
+    EntitySetScale(prop, bp.Display.UniformScale)
+
     -- take the default center (cx, cy, cz) and size (sx, sy, sz)
     local cx, cy, cz, sx, sy, sz;
     cx = bp.CollisionOffsetX
@@ -43,13 +44,13 @@ function CreateWreckage(bp, position, orientation, mass, energy, time, deathHitB
     sz = bp.SizeZ
 
     -- if a death animation is played the wreck hitbox may need some changes
-    if deathHitBox then 
-        cx = deathHitBox.CollisionOffsetX or cx 
-        cy = deathHitBox.CollisionOffsetY or cy 
-        cz = deathHitBox.CollisionOffsetZ or cz 
-        sx = deathHitBox.SizeX or sx 
-        sy = deathHitBox.SizeY or sy 
-        sz = deathHitBox.SizeZ or sz 
+    if deathHitBox then
+        cx = deathHitBox.CollisionOffsetX or cx
+        cy = deathHitBox.CollisionOffsetY or cy
+        cz = deathHitBox.CollisionOffsetZ or cz
+        sx = deathHitBox.SizeX or sx
+        sy = deathHitBox.SizeY or sy
+        sz = deathHitBox.SizeZ or sz
     end
 
     -- adjust the size, these dimensions are in both directions based on the center
@@ -58,18 +59,20 @@ function CreateWreckage(bp, position, orientation, mass, energy, time, deathHitB
     sz = sz * 0.5
 
     -- create the collision box
-    prop:SetPropCollision('Box', cx, cy, cz, sx, sy, sz)
+    prop.SetPropCollision(prop, 'Box', cx, cy, cz, sx, sy, sz)
+    prop.SetMaxReclaimValues(prop, time, mass, energy)
+    EntitySetMaxHealth(prop, bp.Defense.Health)
+    EntitySetHealth(prop, nil, bp.Defense.Health * (bp.Wreckage.HealthMult or 1))
 
-    prop:SetMaxHealth(bp.Defense.Health)
-    prop:SetHealth(nil, bp.Defense.Health * (bp.Wreckage.HealthMult or 1))
-    prop:SetMaxReclaimValues(time, mass, energy)
 
     --FIXME: SetVizToNeurals('Intel') is correct here, so you can't see enemy wreckage appearing
     -- under the fog. However the engine has a bug with prop intel that makes the wreckage
     -- never appear at all, even when you drive up to it, so this is disabled for now.
-    --prop:SetVizToNeutrals('Intel')
+    -- tested 2022-03-23: this work :)), but clashes with the reclaim labels that expects wrecks to be always visible
+    -- prop:SetVizToNeutrals('Intel')
+
     if not bp.Wreckage.UseCustomMesh then
-        prop:SetMesh(bp.Display.MeshBlueprintWrecked)
+        EntitySetMesh(prop, bp.Display.MeshBlueprintWrecked)
     end
 
     -- This field cannot be renamed or the magical native code that detects rebuild bonuses breaks.

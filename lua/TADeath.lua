@@ -8,8 +8,8 @@ SCTAWreckage = Class(Wreckage) {
     end,
 
     OnReclaimed = function(self, entity)
-        self:DoPropCallbacks('OnReclaimed', entity)
-        self.CreateReclaimEndEffects(entity, self)
+        self.DoPropCallbacks(self, 'OnReclaimed', entity)
+        self:CreateReclaimEndEffects(entity)
         Wreckage.Destroy(self)
     end,
         ---Is the Same as Basic code the only addition is the creation of HeapProps. The Heap Prop code is below
