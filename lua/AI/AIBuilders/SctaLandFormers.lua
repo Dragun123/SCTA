@@ -70,7 +70,55 @@ BuilderGroup {
             },
         },        
         BuilderConditions = {
-            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, categories.DIRECTFIRE * categories.TECH1 * GROUND - categories.ENGINEER} },
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 2, categories.DIRECTFIRE * GROUND - categories.ENGINEER} },
+        },
+    },
+    Builder {
+        BuilderName = 'SCTAAI Strike Force Mid',
+        PlatoonTemplate = 'StrikeForceSCTA',
+        PriorityFunction = TAPrior.UnitProduction, -- The platoon template tells the AI what units to include, and how to use them.
+        Priority = 100,
+        InstanceCount = 10,
+        BuilderType = 'LandForm',
+        BuilderData = {
+            SearchRadius = 50,
+            ThreatSupport = 25,
+            NeverGuardBases = true,
+            NeverGuardEngineers = true,
+            UseMoveOrder = true,
+            UseFormation = 'GrowthFormation',
+            LocationType = 'LocationType',
+            ThreatWeights = {
+            SecondaryTargetThreatType = 'StructuresNotMex',
+            IgnoreStrongerTargetsRatio = 100.0,
+            },
+        },        
+        BuilderConditions = {
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 4, categories.DIRECTFIRE * GROUND - categories.ENGINEER} },
+        },
+    },
+    Builder {
+        BuilderName = 'SCTAAI Strike Force EndGame',
+        PlatoonTemplate = 'StrikeForceSCTA',
+        PriorityFunction = TAPrior.ProductionT3, -- The platoon template tells the AI what units to include, and how to use them.
+        Priority = 100,
+        InstanceCount = 10,
+        BuilderType = 'LandForm',
+        BuilderData = {
+            SearchRadius = 50,
+            ThreatSupport = 25,
+            NeverGuardBases = true,
+            NeverGuardEngineers = true,
+            UseMoveOrder = true,
+            UseFormation = 'GrowthFormation',
+            LocationType = 'LocationType',
+            ThreatWeights = {
+            SecondaryTargetThreatType = 'StructuresNotMex',
+            IgnoreStrongerTargetsRatio = 100.0,
+            },
+        },        
+        BuilderConditions = {
+            { TASlow, 'TAHaveGreaterThanArmyPoolWithCategory', { 8, categories.DIRECTFIRE * GROUND - categories.ENGINEER} },
         },
     },
     ----AggressivePlatoons
