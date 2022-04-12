@@ -1874,7 +1874,7 @@ Platoon = Class(SCTAAIPlatoon) {
         --self:SetPlatoonFormationOverride(PlatoonFormation)
         --self:SCTAInitializePlatoon()
         while aiBrain:PlatoonExists(self) do
-            self.PlatoonThreat = self:CalculatePlatoonThreat('Surface', categories.ALLUNITS - categories.ENGINEER)
+            self.PlatoonThreat = self:CalculatePlatoonThreat('Land', categories.ALLUNITS - categories.ENGINEER)
             local MainSquad = self:GetSquadUnits('Attack')
             if aiBrain.Level3 then
                 maxRadius = 250
@@ -1898,7 +1898,8 @@ Platoon = Class(SCTAAIPlatoon) {
                     self:AggressiveMoveToLocation(target:GetPosition(), 'Support')
                 end
                 if next(AntiAirSquad) then
-                    IssueGuard(AntiAirSquad, MainSquad[1]) 
+                    for k,v in AntiAirSquad do
+                    IssueGuard(v, MainSquad[1]) 
                 end
                 position = AIUtils.RandomLocation(target:GetPosition()[1],target:GetPosition()[3])
                 self:MoveToLocation(position, false, 'Attack')
@@ -1906,7 +1907,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 --LOG('SCTASQUADSize2', self:GetSquadUnits('Attack'))
                 while aiBrain:PlatoonExists(self) and next(MainSquad) do
                     --local EnemyUnits = aiBrain:GetUnitsAroundPoint(categories.ALLUNITS - categories.ENGINEER - categories.WALLS, self:GetPlatoonPosition(), self.EnemyRadius, 'Enemy')
-                    if not target or target.Dead or aiBrain:GetThreatAtPosition(position, 10, true, 'Surface') > self.PlatoonThreat then
+                    if not target or target.Dead or aiBrain:GetThreatAtPosition(position, 10, true, 'Land') > self.PlatoonThreat then
                         movingToScout = false
                         flee = true
                         --self:Stop()
