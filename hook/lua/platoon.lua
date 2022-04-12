@@ -417,7 +417,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 --aiBrain:ExpansionHelp(eng, reference)
             end
             table.insert(baseTmplList, AIBuildStructures.AIBuildBaseTemplateFromLocation(baseTmpl, reference))
-            -- Must use BuildBaseOrdered to start at the marker; otherwise it builds closest to the eng
+            -- Must use to start at the marker; otherwise it builds closest to the eng
             --buildFunction = AIBuildStructures.AIBuildBaseTemplateOrderedSCTAAI
             buildFunction = AIBuildStructures.AIBuildBaseTemplate
         elseif cons.NearMarkerType and cons.NearMarkerType == 'Defensive Point' then
@@ -1870,6 +1870,7 @@ Platoon = Class(SCTAAIPlatoon) {
         local blip = false
         local maxRadius = data.SearchRadius or 50
         local movingToScout = false
+        local threat
         --self:SetPlatoonFormationOverride(PlatoonFormation)
         --self:SCTAInitializePlatoon()
         while aiBrain:PlatoonExists(self) do
@@ -1899,37 +1900,40 @@ Platoon = Class(SCTAAIPlatoon) {
                 if next(AntiAirSquad) then
                     IssueGuard(AntiAirSquad, MainSquad[1]) 
                 end
-                    self:MoveToLocation(table.copy(target:GetPosition()), false, 'Attack')
+                position = AIUtils.RandomLocation(target:GetPosition()[1],target:GetPosition()[3])
+                self:MoveToLocation(position, false, 'Attack')
                 --LOG('SCTASQUADSize', self:GetSquadPosition('Attack'))
                 --LOG('SCTASQUADSize2', self:GetSquadUnits('Attack'))
                 while aiBrain:PlatoonExists(self) and next(MainSquad) do
                     --local EnemyUnits = aiBrain:GetUnitsAroundPoint(categories.ALLUNITS - categories.ENGINEER - categories.WALLS, self:GetPlatoonPosition(), self.EnemyRadius, 'Enemy')
-                    if not target or target.Dead or aiBrain:GetThreatAtPosition(target:GetPosition(), 10, true, 'AntiSurface') > self.PlatoonThreat then
+                    if not target or target.Dead or aiBrain:GetThreatAtPosition(position, 10, true, 'Surface') > self.PlatoonThreat then
+                        movingToScout = false
                         flee = true
                         --self:Stop()
                         break
                     end
                     WaitSeconds(1)
                 end
-                movingToScout = false
             elseif not movingToScout then
                 movingToScout = true
                 flee = false
                 self:Stop()
-            if not aiBrain.Level2 then
-                for k,v in AIUtils.AIGetSortedMassLocations(aiBrain, 10, nil, nil, nil, nil, self:GetPlatoonPosition()) do
-                    if v[1] < 0 or v[3] < 0 or v[1] > ScenarioInfo.size[1] or v[3] > ScenarioInfo.size[2] then
+                if not aiBrain.Level2 then
+                    for k,v in AIUtils.AIGetSortedMassLocations(aiBrain, 10, nil, nil, nil, nil, self:GetPlatoonPosition()) do
+                        if v[1] < 0 or v[3] < 0 or v[1] > ScenarioInfo.size[1] or v[3] > ScenarioInfo.size[2] then
                         --LOG('*AI DEBUG: STRIKE FORCE SENDING UNITS TO WRONG LOCATION - ' .. v[1] .. ', ' .. v[3])
-                    end
+                        end
                 self:MoveToLocation((v), false)
-                WaitSeconds(5)
-                end
-            else
-                position = AIUtils.RandomLocation(self:GetPlatoonPosition()[1],self:GetPlatoonPosition()[3])
+                WaitSeconds(1)
+                    end
+                else
+                threat = self:FindClosestUnit('Attack', 'Enemy', true, categories.STRUCTURE - categories.WALL)
+                position = AIUtils.RandomLocation(threat:GetPosition()[1],threat:GetPosition()[3])
                 self:MoveToLocation(position, false)
-                WaitSeconds(10)
-            end
-            WaitSeconds(5)
+                WaitSeconds(6)
+                movingToScout = false
+                end
+            WaitSeconds(4)
         end
             else 
             WaitSeconds(1)
