@@ -1843,12 +1843,6 @@ Platoon = Class(SCTAAIPlatoon) {
         end
     end,
 
---[[SCTAInitializePlatoon = function(self)
-        AIAttackUtils.GetMostRestrictiveLayer(self)
-        self.PlatoonThreat = self:CalculatePlatoonThreat('Surface', categories.ALLUNITS - categories.ENGINEER)
-        self.EnemyRadius = 40 
-    end,]]
-
     AttackForceSCTAAI = function(self)
         local aiBrain = self:GetBrain()
         local armyIndex = aiBrain:GetArmyIndex()
