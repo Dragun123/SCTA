@@ -1893,7 +1893,8 @@ Platoon = Class(SCTAAIPlatoon) {
                 end
                 if next(AntiAirSquad) then
                     for k,v in AntiAirSquad do
-                    IssueGuard(v, MainSquad[1]) 
+                    IssueGuard(v, MainSquad[1])
+                    end 
                 end
                 position = AIUtils.RandomLocation(target:GetPosition()[1],target:GetPosition()[3])
                 self:MoveToLocation(position, false, 'Attack')
@@ -1934,7 +1935,7 @@ Platoon = Class(SCTAAIPlatoon) {
             WaitSeconds(1)
             self:PlatoonDisbandTA()
             --self:SCTAReturnToBaseAI()
-            end
+        end
         end
     end,
 
