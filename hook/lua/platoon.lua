@@ -1881,12 +1881,12 @@ Platoon = Class(SCTAAIPlatoon) {
                 self:MergeWithNearbyPlatoonsSCTA('AttackForceSCTAAI', 'SCTAAI Strike Force', 'SCTAAI Strike Force Mid', 10)
                 end
             end
-        if next(MainSquad) then
+        if next(MainSquad) aiBrain:PlatoonExists(self) then
             local AntiAirSquad = self:GetSquadUnits('Guard')
             local FieldSquad = self:GetSquadUnits('Support')
             target = AIUtils.AIFindBrainTargetInRange(aiBrain, self, 'Attack', maxRadius, {'LAND MOBILE'}, aiBrain:GetCurrentEnemy())
             WaitSeconds(1)
-            if target and AIAttackUtils.CanGraphAreaToSCTA(self:GetPlatoonPosition(), target:GetPosition(), 'Land') and not flee then
+            if target and aiBrain:PlatoonExists(self) and AIAttackUtils.CanGraphAreaToSCTA(self:GetPlatoonPosition(), target:GetPosition(), 'Land') and not flee then
                 self:StopAttack()
                 if next(FieldSquad) then
                     self:AggressiveMoveToLocation(target:GetPosition(), 'Support')
@@ -1914,7 +1914,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 movingToScout = true
                 flee = false
                 self:Stop()
-                if not aiBrain.Level2 then
+                if not aiBrain.Level2 and aiBrain:PlatoonExists(self) then
                     for k,v in AIUtils.AIGetSortedMassLocations(aiBrain, 10, nil, nil, nil, nil, self:GetPlatoonPosition()) do
                         if v[1] < 0 or v[3] < 0 or v[1] > ScenarioInfo.size[1] or v[3] > ScenarioInfo.size[2] then
                         --LOG('*AI DEBUG: STRIKE FORCE SENDING UNITS TO WRONG LOCATION - ' .. v[1] .. ', ' .. v[3])
