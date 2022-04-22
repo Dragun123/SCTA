@@ -1881,7 +1881,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 self:MergeWithNearbyPlatoonsSCTA('AttackForceSCTAAI', 'SCTAAI Strike Force', 'SCTAAI Strike Force Mid', 10)
                 end
             end
-        if next(MainSquad) aiBrain:PlatoonExists(self) then
+        if next(MainSquad) and aiBrain:PlatoonExists(self) then
             local AntiAirSquad = self:GetSquadUnits('Guard')
             local FieldSquad = self:GetSquadUnits('Support')
             target = AIUtils.AIFindBrainTargetInRange(aiBrain, self, 'Attack', maxRadius, {'LAND MOBILE'}, aiBrain:GetCurrentEnemy())
@@ -1924,7 +1924,11 @@ Platoon = Class(SCTAAIPlatoon) {
                     end
                 else
                 threat = self:FindClosestUnit('Attack', 'Enemy', true, categories.STRUCTURE - categories.WALL)
+                if threat then
                 position = AIUtils.RandomLocation(threat:GetPosition()[1],threat:GetPosition()[3])
+                else
+                position = AIUtils.RandomLocation(self:GetPlatoonPosition()[1],self:GetPlatoonPosition()[3])
+                end
                 self:MoveToLocation(position, false)
                 WaitSeconds(6)
                 movingToScout = false

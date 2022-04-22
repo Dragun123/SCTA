@@ -187,7 +187,7 @@ AIBrain = Class(SCTAAIBrainClass) {
             if not self.TAAssistThread then
             self.TAAssistThread = ForkThread(self.TAFactoryAssistThread, self)
             end
-            --[[if ScenarioInfo.size[1] <= 512 or ScenarioInfo.size[2] <= 512 then
+            if ScenarioInfo.size[1] <= 512 or ScenarioInfo.size[2] <= 512 then
                 self.MapSizeSCTA = 2
             else
                 self.MapSizeSCTA = 4
@@ -199,26 +199,26 @@ AIBrain = Class(SCTAAIBrainClass) {
                 ThresholdMult = 0,
                 Rings = 0,
             }
-            self:IMAPConfigurationSCTA()]]
+            self:IMAPConfigurationSCTA()
         end
         SCTAAIBrainClass.OnCreateAI(self, planName)
     end,
 
-    --[[IMAPConfigurationSCTA = function(self)
+    IMAPConfigurationSCTA = function(self)
         -- Used to configure imap values, used for setting threat ring sizes depending on map size to try and get a somewhat decent radius
         local maxmapdimension = math.max(ScenarioInfo.size[1],ScenarioInfo.size[2])
-        LOG('SCTAIEXIST3')
+        --LOG('SCTAIEXIST3')
         if maxmapdimension == 256 then
-            LOG('SCTAIEXIST')
+           ---LOG('SCTAIEXIST')
             self.IMAPConfig.OgridRadius = 22.5
             self.IMAPConfig.IMAPSize = 32
             self.IMAPConfig.Rings = 2
         elseif maxmapdimension == 512 then
-            LOG('SCTAIEXIST2')
+            --LOG('SCTAIEXIST2')
             self.IMAPConfig.OgridRadius = 22.5
             self.IMAPConfig.IMAPSize = 32
             self.IMAPConfig.Rings = 2
-            LOG('SCTAIEXIST4', self.IMAPConfig.Rings)
+            --LOG('SCTAIEXIST4', self.IMAPConfig.Rings)
         elseif maxmapdimension == 1024 then
             self.IMAPConfig.OgridRadius = 45.0
             self.IMAPConfig.IMAPSize = 64
@@ -232,7 +232,7 @@ AIBrain = Class(SCTAAIBrainClass) {
             self.IMAPConfig.IMAPSize = 256
             self.IMAPConfig.Rings = 0
         end
-    end,]]
+    end,
     --[[InitializePlatoonBuildManager = function(self)
             SCTAAIBrainClass.InitializePlatoonBuildManager(self)
             ALERT('SCTAPBMEXIST')
