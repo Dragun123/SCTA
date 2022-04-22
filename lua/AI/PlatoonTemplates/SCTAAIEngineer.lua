@@ -160,9 +160,11 @@ PlatoonTemplate {
             { 'armck', 1, 1, 'Support', 'None' },
             { 'armpw', 1, 1, 'Attack', 'None' },          
             { 'armck', 1, 1, 'Support', 'None' },
+            { 'armflea', 1, 1, 'Attack', 'None' },
             { 'armjeth', 1, 1, 'Guard', 'none' },
             { 'armck', 1, 2, 'Support', 'None'},
             { 'armjeth', 1, 1, 'guard', 'none' },
+            { 'armflea', 1, 1, 'Attack', 'None' },
             { 'armck', 1, 3, 'Support', 'None' },
         },
         Core = {
@@ -171,9 +173,11 @@ PlatoonTemplate {
             { 'corcv', 1, 1, 'Support', 'None' },
             { 'corgator', 1, 1, 'Attack', 'None' },
             { 'corcv', 1, 1, 'Support', 'None' },
+            { 'corfav', 1, 1, 'Attack', 'None' },
             { 'cormist', 1, 1, 'Guard', 'none' },
             { 'corcv', 1, 2, 'Support', 'None' },
             { 'cormist', 1, 1, 'Guard', 'none' },
+            { 'corfav', 1, 1, 'Attack', 'None' },
             { 'corcv', 1, 3, 'Support', 'None' },
         },
     }

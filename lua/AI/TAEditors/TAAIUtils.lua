@@ -1,6 +1,23 @@
 local AIUtils = import('/lua/ai/AIUtilities.lua')
 local AIAttackUtils = import('/lua/AI/aiattackutilities.lua')
 local LessThanCats = import('/lua/editor/UnitCountBuildConditions.lua').HaveLessThanUnitsWithCategory
+--[[local GetDistanceBetweenTwoPoints = import('/lua/utilities.lua').GetDistanceBetweenTwoPoints
+
+function TAAIGetSortedMassLocations(aiBrain, maxNum, tMin, tMax, tRings, tType, position)
+    local markerList = AIGetMarkerLocations(aiBrain, 'Mass')
+    local newList = {}
+    for _, v in markerList do
+        -- check distance to map border. (game engine can't build mass closer then 8 mapunits to the map border.)
+        if GetDistanceBetweenTwoPoints(v.GetPosition()[1], v.GetPosition()[3]) then
+            -- mass marker is too close to border, skip it.
+            continue
+        end
+        if aiBrain:CanBuildStructureAt('ueb1103', v.Position) then
+            table.insert(newList, v)
+        end
+    end
+    return AISortMarkersFromLastPos(aiBrain, newList, maxNum, tMin, tMax, tRings, tType, position)
+end]]
 
 function HaveLessThanUnitsWithCategoryTA(aiBrain, numReq, category, idleReq)
     local Numbers
