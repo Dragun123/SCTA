@@ -117,24 +117,6 @@ TAPop = Class(TAStructure) {
 }
 
 TAMass = Class(TAStructure) {
-    OnCreate = function(self)
-        TAStructure.OnCreate(self)
-        local markers = import('/lua/sim/ScenarioUtilities.lua').GetMarkers()
-        local unitPosition = self:GetPosition()
-
-        for k, v in pairs(markers) do
-            if(v.type == 'MASS') then
-                local massPosition = v.position
-                if( (massPosition[1] < unitPosition[1] + 1) and (massPosition[1] > unitPosition[1] - 1) and
-                    (massPosition[2] < unitPosition[2] + 1) and (massPosition[2] > unitPosition[2] - 1) and
-                    (massPosition[3] < unitPosition[3] + 1) and (massPosition[3] > unitPosition[3] - 1)) then
-                    self:SetProductionPerSecondMass(self:GetProductionPerSecondMass() * (v.amount / 100))
-                    break
-                end
-            end
-        end
-    end,
-
 	CreateWreckage = function( self, overkillRatio )
 		if not self.onMetalSpot then
 			TAStructure.CreateWreckageProp(self, overkillRatio)
