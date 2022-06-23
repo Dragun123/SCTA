@@ -228,6 +228,8 @@ TACloser = Class(TATarg) {
 		Main = function(self)
 			TATarg.Unfold(self)
 			self.IsActive = true
+			--self:RequestRefreshUI()
+			---self:SetPaused(false)
 			--self.TAAnimating = nil
 			self:PlayUnitSound('Activate')
 			ChangeState(self, self.IdleOpenState)
@@ -238,6 +240,8 @@ TACloser = Class(TATarg) {
 	ClosingState = State {
 		Main = function(self)
 			TATarg.Fold(self)
+			--self:RequestRefreshUI()
+			--self:SetPaused(true)
 			self:PlayUnitSound('Deactivate')
 			ChangeState(self, self.IdleClosedState)
 		end,

@@ -139,7 +139,7 @@ UnitBlueprint {
             RackBones = {
                 {
                     MuzzleBones = {
-                        'flare',
+                        'muzzle',
                     },
                     RackBone = 'barrel',
                 },
@@ -172,8 +172,8 @@ UnitBlueprint {
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
             AboveWaterTargetsOnly = true,
-            TurretBoneMuzzle = 'flare',
-            TurretBonePitch = 'gun',
+            TurretBoneMuzzle = 'muzzle',
+            TurretBonePitch = 'pitch',
             TurretBoneYaw = 'turret',
             TurretDualManipulators = false,
             TurretPitch = 0,
@@ -183,6 +183,8 @@ UnitBlueprint {
             TurretYawRange = 360,
             TurretYawSpeed = 60,
             Turreted = true,
+            WeaponUnpackAnimation = '/mods/SCTA-master/units/ARMANNI/ARMANNI_unpack.sca',
+			WeaponUnpackAnimationRate = 1, 
 	        WeaponUnpacks = true,
             WeaponRepackTimeout = 1,
         },

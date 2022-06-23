@@ -1830,7 +1830,7 @@ Platoon = Class(SCTAAIPlatoon) {
         local target
         local blip
         while aiBrain:PlatoonExists(self) do
-            target = self:FindClosestUnit('Artillery', 'Enemy', true, categories.ALLUNITS - categories.WALL)
+            target = self:FindClosestUnit('Artillery', 'Enemy', true, categories.ALLUNITS - categories.WALL - categories.COMMAND)
             if target then
                 blip = target:GetBlip(armyIndex)
                 self:Stop()
@@ -1884,7 +1884,7 @@ Platoon = Class(SCTAAIPlatoon) {
         if next(MainSquad) and aiBrain:PlatoonExists(self) then
             local AntiAirSquad = self:GetSquadUnits('Guard')
             local FieldSquad = self:GetSquadUnits('Support')
-            target = AIUtils.AIFindBrainTargetInRange(aiBrain, self, 'Attack', maxRadius, {'LAND MOBILE'}, aiBrain:GetCurrentEnemy())
+            target = AIUtils.AIFindBrainTargetInRange(aiBrain, self, 'Attack', maxRadius, {'LAND MOBILE - COMMAND'}, aiBrain:GetCurrentEnemy())
             WaitSeconds(1)
             if target and aiBrain:PlatoonExists(self) and AIAttackUtils.CanGraphAreaToSCTA(self:GetPlatoonPosition(), target:GetPosition(), 'Land') and not flee then
                 self:StopAttack()
