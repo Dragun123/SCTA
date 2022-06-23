@@ -39,6 +39,7 @@ ARMSOLAR = Class(TACloser) {
 			self.Spinners.dish4:SetGoal(-90)
 			self.Spinners.dish4:SetSpeed(60)
 			--end
+			--self:RequestRefreshUI()
 			TACloser.OpeningState.Main(self)
 		end,
 	},
@@ -65,6 +66,7 @@ ARMSOLAR = Class(TACloser) {
 			self.Spinners.dish4:SetGoal(0)
 			self.Spinners.dish4:SetSpeed(120)
 			--end
+			--self:RequestRefreshUI()
 			TACloser.ClosingState.Main(self)
 		end,
 
