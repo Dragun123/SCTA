@@ -5,7 +5,7 @@ UnitBlueprint {
         MaxHealth = 1200,
     },
     Display = {
-        UniformScale = 0.12,
+        UniformScale = 0.14,
     },
     Footprint = {
         SizeZ = 2,
