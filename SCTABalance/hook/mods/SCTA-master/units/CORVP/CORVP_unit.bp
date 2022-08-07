@@ -16,7 +16,7 @@ UnitBlueprint {
         SizeZ = 7,
     },
     Economy = {
-        BuildCostEnergy = 4500,
+        BuildCostEnergy = 6000,
         BuildCostMass = 500, 
         BuildTime = 7600,
         BuildableCategory = {
