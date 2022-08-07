@@ -83,6 +83,7 @@ UnitBlueprint {
         BuildableCategory = {
             'BUILTBYLANDTIER1FACTORY BOT ARM',
             'BUILTBYLANDTIER2FACTORY BOT ARM',
+            'BOT MOBILE ENGINEER ARM',
         },
     StorageMass = 50,
     StorageEnergy = 50,

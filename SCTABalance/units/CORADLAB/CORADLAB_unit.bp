@@ -83,6 +83,7 @@ UnitBlueprint {
         BuildableCategory = {
             'BUILTBYLANDTIER1FACTORY BOT CORE',
             'BUILTBYLANDTIER2FACTORY BOT CORE',
+            'BOT MOBILE ENGINEER CORE',
         },
         StorageMass = 50,
         StorageEnergy = 50,
