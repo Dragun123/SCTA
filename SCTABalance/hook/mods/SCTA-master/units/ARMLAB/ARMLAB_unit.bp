@@ -17,7 +17,7 @@ UnitBlueprint {
     },
     Economy = {
         BuildCostMass = 500, 
-        BuildCostEnergy = 4500,
+        BuildCostEnergy = 6000,
         BuildTime = 7600,
         BuildableCategory = {
             'armdlab', 

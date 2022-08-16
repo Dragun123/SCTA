@@ -83,6 +83,7 @@ UnitBlueprint {
         BuildableCategory = {
             'BUILTBYLANDTIER1FACTORY BOT CORE',
             'BUILTBYLANDTIER2FACTORY BOT CORE',
+            'BOT MOBILE ENGINEER CORE',
         },
         StorageMass = 50,
         StorageEnergy = 50,
@@ -96,7 +97,6 @@ UnitBlueprint {
         BuildBones = {
             BuildEffectBones = {'muzzle1', 'muzzle2','muzzle3','muzzle4'},
         },           
-                ---RolloffDelay = 1,
         Category = 'Factory',
         Classification = 'RULEUC_Factory',
         CommandCaps = {

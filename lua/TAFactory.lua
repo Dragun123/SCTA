@@ -9,7 +9,7 @@ TAFactory = Class(FactoryUnit) {
     FactoryUnit.OnCreate(self)
     self.AnimManip = CreateAnimator(self)
     self.Trash:Add(self.AnimManip)
-    if __blueprints['armgant'] and not (EntityCategoryContains(categories.TECH3 + categories.GATE, self) or self:GetAIBrain().Level3) then
+    if __blueprints['armgant'] and not (EntityCategoryContains((categories.TECH3 + categories.GATE) * (categories.CORE + categories.ARM), self) or self:GetAIBrain().Level3) then
         TAutils.SCTAupdateBuildRestrictions(self)
     end
 end,
@@ -19,7 +19,7 @@ end,
         local aiBrain = GetArmyBrain(self.Army)
         ----If We are Level 3 stop checking now
             if __blueprints['armgant'] and not aiBrain.Level3 then
-                    local buildRestrictionVictims = aiBrain:GetListOfUnits(categories.FACTORY + categories.ENGINEER, false)
+                    local buildRestrictionVictims = aiBrain:GetListOfUnits((categories.FACTORY + categories.ENGINEER) * (categories.CORE + categories.ARM), false)
                 for id, unit in buildRestrictionVictims do    
                     TAutils.TABuildRestrictions(unit)
                 end
