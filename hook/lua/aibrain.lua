@@ -78,7 +78,7 @@ AIBrain = Class(SCTAAIBrainClass) {
                 Scout = 0,
             }
             local GetCurrentUnits = moho.aibrain_methods.GetCurrentUnits 
-            while (aiBrain.Result ~= 'defeat') do
+            while (aiBrain.Status ~= "Defeat") do
                 if aiBrain.LandForm < 1 and checks.LandForm < 1 then
                     aiBrain.LandForm = GetCurrentUnits(aiBrain, (categories.LAND * categories.MOBILE) - categories.ENGINEER - categories.SCOUT)
                     --WaitTicks(1)

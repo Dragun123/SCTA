@@ -76,22 +76,31 @@ end,
         FinishBuildThread = function(self, unitBeingBuilt, order)
             self:SetBusy(true)
             self:SetBlockCommandQueue(true)
+            --LOG('SCTAIEXIST1')
             local bp = self:GetBlueprint()
             if unitBeingBuilt and not unitBeingBuilt.Dead then
                 unitBeingBuilt:DetachFrom(true)
+                --LOG('SCTAIEXIST2')
             end
             self:DetachAll(bp.Display.BuildAttachBone or 0)
+            --LOG('SCTAIEXIST3')
+            --if not self.Water then
+                --LOG('SCTAIEXIST4')
             self:DestroyBuildRotator()
+            --end
             if order ~= 'Upgrade' then
                 ChangeState(self, self.RollingOffState)
             else
                 self:SetBusy(false)
                 self:SetBlockCommandQueue(false)
+                --LOG('SCTAIEXIST5')
             end
-            if (table.getn(self:GetCommandQueue()) <= 1) then
+            --LOG('SCTACommand', table.getn(self:GetCommandQueue()))
+            if (table.getn(self:GetCommandQueue()) <= 1) or self.Water then
                 ----ThisCode is used to make sure it open and closes correctly
                 WaitTicks(20)
                 self:Close()
+                --LOG('SCTAIEXIST6')
                     ---TABuildingUnit is used by AI to see if it is building or not. 
                 self.TABuildingUnit = nil
             end
@@ -148,7 +157,7 @@ end,
     end,
 
     Close = function(self)
-		TAFactory.Close(self)
+        TAFactory.Close(self)
         if self.Water then
 		self:WaterFall()
         end
