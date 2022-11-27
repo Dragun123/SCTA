@@ -1920,7 +1920,7 @@ Platoon = Class(SCTAAIPlatoon) {
                         --LOG('*AI DEBUG: STRIKE FORCE SENDING UNITS TO WRONG LOCATION - ' .. v[1] .. ', ' .. v[3])
                         end
                 self:MoveToLocation((v), false)
-                WaitSeconds(1)
+                WaitSeconds(5)
                     end
                 else
                 threat = self:FindClosestUnit('Attack', 'Enemy', true, categories.STRUCTURE - categories.WALL)
@@ -1930,7 +1930,7 @@ Platoon = Class(SCTAAIPlatoon) {
                 position = AIUtils.RandomLocation(self:GetPlatoonPosition()[1],self:GetPlatoonPosition()[3])
                 end
                 self:MoveToLocation(position, false)
-                WaitSeconds(6)
+                WaitSeconds(10)
                 movingToScout = nil
         end
             else 
