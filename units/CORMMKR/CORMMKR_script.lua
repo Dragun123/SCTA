@@ -1,5 +1,3 @@
-
-
 local TACloser = import('/mods/SCTA-master/lua/TAStructure.lua').TACloser
 
 CORMMKR = Class(TACloser) {
@@ -15,6 +13,23 @@ CORMMKR = Class(TACloser) {
 			self.Trash:Add(v)
 		end
 	end,
+
+	OnStopBeingBuilt = function(self,builder,layer)
+        TACloser.OnStopBeingBuilt(self,builder,layer)
+        -- for auto fabricator behavior
+        self.Brain:AddEnabledEnergyExcessUnit(self)
+    end,
+
+    -- for auto fabricator behavior
+    OnExcessEnergy = function(self)
+        self:OnProductionUnpaused()
+    end,
+
+    -- for auto fabricator behavior
+    OnNoExcessEnergy = function(self)
+        self:OnProductionPaused()
+    end,
+
 
 	OpeningState = State {
 		Main = function(self)

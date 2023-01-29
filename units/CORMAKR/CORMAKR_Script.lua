@@ -20,8 +20,19 @@ CORMAKR = Class(TAStructure) {
 	OnStopBeingBuilt = function(self,builder,layer)
 		TAStructure.OnStopBeingBuilt(self,builder,layer)
 		self:DisableIntel('RadarStealth')
-	end,
-
+		self.Brain:AddEnabledEnergyExcessUnit(self)
+		end,
+	
+		-- for auto fabricator behavior
+		OnExcessEnergy = function(self)
+			self:OnProductionUnpaused()
+		end,
+	
+		-- for auto fabricator behavior
+		OnNoExcessEnergy = function(self)
+			self:OnProductionPaused()
+		end,
+	
 	OnLayerChange = function(self, new, old)
 		TAStructure.OnLayerChange(self, new, old)
 			if new == 'Sub' then

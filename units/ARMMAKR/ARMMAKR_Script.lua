@@ -23,7 +23,19 @@ ARMMAKR = Class(TAStructure) {
 	OnStopBeingBuilt = function(self,builder,layer)
         TAStructure.OnStopBeingBuilt(self,builder,layer)
 		self:PlayUnitSound('Activate')
-	end,
+		self.Brain:AddEnabledEnergyExcessUnit(self)
+		end,
+	
+		-- for auto fabricator behavior
+		OnExcessEnergy = function(self)
+			self:OnProductionUnpaused()
+		end,
+	
+		-- for auto fabricator behavior
+		OnNoExcessEnergy = function(self)
+			self:OnProductionPaused()
+		end,
+	
 
 
 	OnProductionUnpaused = function(self)
