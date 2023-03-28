@@ -183,50 +183,7 @@ AIBrain = Class(SCTAAIBrainClass) {
 
     OnCreateAI = function(self, planName) 
         StandardBrain.OnCreateAI(self, planName)
-
-        local civilian = false
-        for name, data in ScenarioInfo.ArmySetup do
-            if name == self.Name then
-                civilian = data.Civilian
-                break
-            end
-        end
-
-        if not civilian then
-            local per = ScenarioInfo.ArmySetup[self.Name].AIPersonality
-
-            -- Flag this brain as a possible brain to have skirmish systems enabled on
-            self.SkirmishSystems = true
-
-            local cheatPos = string.find(per, 'cheat')
-            if cheatPos then
-                AIUtils.SetupCheat(self, true)
-                ScenarioInfo.ArmySetup[self.Name].AIPersonality = string.sub(per, 1, cheatPos - 1)
-            end
-
-            LOG('* OnCreateAI: AIPersonality SCTA: ('..per..')')
-
-            self.CurrentPlan = self.AIPlansList[self:GetFactionIndex()][1]
-            self:ForkThread(self.InitialAIThread)
-
-            self.PlatoonNameCounter = {}
-            self.PlatoonNameCounter['AttackForce'] = 0
-            self.BaseTemplates = {}
-            self.RepeatExecution = true
-            self.IntelData = {
-                ScoutCounter = 0,
-            }
-
-            -- Flag enemy starting locations with threat?
-            if ScenarioInfo.type == 'skirmish' then
-                self:AddInitialEnemyThreat(200, 0.005)
-            end
-        end
-
-        self.UnitBuiltTriggerList = {}
-        self.FactoryAssistList = {}
-        self.DelayEqualBuildPlattons = {}
-        --LOG('* AI-SCTA: This is SCTA')
+        LOG('* AI-SCTA: This is SCTA')
         self.SCTAAI = true
         --self.ForkThread(TAReclaim.MassFabManagerThreadSCTAI, self)
         self.TARally = 5
