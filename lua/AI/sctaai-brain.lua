@@ -19,25 +19,6 @@ SCTAAIBrainClass = import("/lua/aibrains/base-ai.lua").AIBrain
 ---@param planName string
 AIBrain = Class(SCTAAIBrainClass) {
 
-    VOSounds = {
-        -- {timeout delay, default cue, observers}
-        NuclearLaunchDetected =        {timeout = 1, bank = nil, obs = true},
-        OnTransportFull =              {timeout = 1, bank = nil},
-        OnFailedUnitTransfer =         {timeout = 10, bank = 'Computer_Computer_CommandCap_01298'},
-        OnPlayNoStagingPlatformsVO =   {timeout = 5, bank = 'XGG_Computer_CV01_04756'},
-        OnPlayBusyStagingPlatformsVO = {timeout = 5, bank = 'XGG_Computer_CV01_04755'},
-        OnPlayCommanderUnderAttackVO = {timeout = 15, bank = 'Computer_Computer_Commanders_01314'},
-        TECHAchievedTA = {timeout = 15,  bank = 'Computer_Computer_UnitRevalation_01370'},
-    },
-
-    ---base game unlock
-    ---Computer_Computer_UnitRevalation_01370
-    ---Computer_Computer_UnitRevalation_01372
-    TECHTAchieve = function(self)
-        self:PlayVOSound('TECHAchievedTA')
-    --self:PlayVOSound('TECH3TAchieve', Sound {Bank = 'TA_Sound', Cue = 'VICTORY4'})
-    end,
-
     OnSpawnPreBuiltUnits = function(self)
         local per = ScenarioInfo.ArmySetup[self.Name].AIPersonality
         local resourceStructures = nil
