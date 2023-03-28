@@ -1,6 +1,7 @@
 local AIUtils = import('/lua/ai/AIUtilities.lua')
 local AIAttackUtils = import('/lua/AI/aiattackutilities.lua')
 local LessThanCats = import('/lua/editor/UnitCountBuildConditions.lua').HaveLessThanUnitsWithCategory
+local SyncAIChat = import('/lua/simsyncutils.lua').SyncAIChat
 --[[local GetDistanceBetweenTwoPoints = import('/lua/utilities.lua').GetDistanceBetweenTwoPoints
 
 function TAAIGetSortedMassLocations(aiBrain, maxNum, tMin, tMax, tRings, tType, position)
@@ -460,9 +461,13 @@ function TAAISendChat(aigroup, ainickname, aiaction, targetnickname, extrachat)
             else
                 chattext = AIChatText[aiaction][ranchat]
             end
-            table.insert(Sync.AIChat, {group=aigroup, text=chattext, sender=ainickname})
+            LOG('Send Ai chat aiaction present')
+            SyncAIChat({group=aigroup, text=chattext, sender=ainickname})
+            --table.insert(Sync.AIChat, {group=aigroup, text=chattext, sender=ainickname})
         else
-            table.insert(Sync.AIChat, {group=aigroup, text=aiaction, sender=ainickname})
+            LOG('Send Ai chat')
+            SyncAIChat({group=aigroup, text=aiaction, sender=ainickname})
+            --table.insert(Sync.AIChat, {group=aigroup, text=aiaction, sender=ainickname})
         end
 end
 
