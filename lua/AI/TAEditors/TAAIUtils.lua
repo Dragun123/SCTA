@@ -461,11 +461,9 @@ function TAAISendChat(aigroup, ainickname, aiaction, targetnickname, extrachat)
             else
                 chattext = AIChatText[aiaction][ranchat]
             end
-            LOG('Send Ai chat aiaction present')
             SyncAIChat({group=aigroup, text=chattext, sender=ainickname})
             --table.insert(Sync.AIChat, {group=aigroup, text=chattext, sender=ainickname})
         else
-            LOG('Send Ai chat')
             SyncAIChat({group=aigroup, text=aiaction, sender=ainickname})
             --table.insert(Sync.AIChat, {group=aigroup, text=aiaction, sender=ainickname})
         end

@@ -70,7 +70,7 @@ AIBrain = Class(SCTAAIBrainClass) {
     end,
        
 
-    FormManagerSCTA = function(self)
+    FormManagerSCTA = function(aiBrain)
         ---local aiBrain = self
         --LOG('BEGINNING SCTA FORMMANAGER')
         --_ALERT('TABrain', aiBrain.SCTAAI)
@@ -152,14 +152,14 @@ AIBrain = Class(SCTAAIBrainClass) {
         end
     end,
 
-    KillTAFormer = function(self)
+    KillTAFormer = function(aiBrain)
         if aiBrain.SCTAFormCounter then
             KillThread(aiBrain.SCTAFormCounter)
             aiBrain.SCTAFormCounter = nil
         end
     end,
 
-    KillTAAssist = function(self)
+    KillTAAssist = function(aiBrain)
         if aiBrain.TAAssistThread then
             KillThread(aiBrain.TAAssistThread)
             aiBrain.TAAssistThread = nil
@@ -173,7 +173,7 @@ AIBrain = Class(SCTAAIBrainClass) {
              FactoryManager = FactoryManager.CreateFactoryBuilderManager(self, baseName, position, radius, useCenter),
              PlatoonFormManager = PlatoonFormManager.CreatePlatoonFormManager(self, baseName, position, radius, useCenter),
              EngineerManager = EngineerManager.CreateEngineerManager(self, baseName, position, radius),
-            BuilderHandles = {},
+             BuilderHandles = {},
              Position = position,
              BaseType = Scenario.MasterChain._MASTERCHAIN_.Markers[baseName].type or 'MAIN',
          }
@@ -183,7 +183,48 @@ AIBrain = Class(SCTAAIBrainClass) {
 
     OnCreateAI = function(self, planName) 
         StandardBrain.OnCreateAI(self, planName)
-        LOG('* AI-SCTA: This is SCTA')
+        local civilian = false
+        for name, data in ScenarioInfo.ArmySetup do
+            if name == self.Name then
+                civilian = data.Civilian
+                break
+            end
+        end
+
+        if not civilian then
+            local per = ScenarioInfo.ArmySetup[self.Name].AIPersonality
+
+            -- Flag this brain as a possible brain to have skirmish systems enabled on
+            self.SkirmishSystems = true
+
+            local cheatPos = string.find(per, 'cheat')
+            if cheatPos then
+                AIUtils.SetupCheat(self, true)
+                ScenarioInfo.ArmySetup[self.Name].AIPersonality = string.sub(per, 1, cheatPos - 1)
+            end
+
+            LOG('* OnCreateAI: AIPersonality: ('..per..')')
+
+            self.CurrentPlan = self.AIPlansList[self:GetFactionIndex()][1]
+            self:ForkThread(self.InitialAIThread)
+
+            self.PlatoonNameCounter = {}
+            self.PlatoonNameCounter['AttackForce'] = 0
+            self.BaseTemplates = {}
+            self.RepeatExecution = true
+            self.IntelData = {
+                ScoutCounter = 0,
+            }
+
+            -- Flag enemy starting locations with threat?
+            if ScenarioInfo.type == 'skirmish' then
+                self:AddInitialEnemyThreat(200, 0.005)
+            end
+        end
+
+        self.UnitBuiltTriggerList = {}
+        self.FactoryAssistList = {}
+        self.DelayEqualBuildPlattons = {}
         self.SCTAAI = true
         --self.ForkThread(TAReclaim.MassFabManagerThreadSCTAI, self)
         self.TARally = 5
