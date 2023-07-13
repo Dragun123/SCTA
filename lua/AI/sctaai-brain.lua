@@ -19,6 +19,19 @@ SCTAAIBrainClass = import("/lua/aibrains/base-ai.lua").AIBrain
 ---@param planName string
 AIBrain = Class(SCTAAIBrainClass) {
 
+    --- Called after `BeginSession`, at this point all props, resources and initial units exist in the map
+    ---@param self AIBrainAdaptive
+    OnBeginSession = function(self)
+        StandardBrain.OnBeginSession(self)
+
+        -- requires navigational mesh
+        import("/lua/sim/NavUtils.lua").Generate()
+
+        -- requires these markers to exist
+        import("/lua/sim/MarkerUtilities.lua").GenerateExpansionMarkers()
+
+    end,
+
     OnSpawnPreBuiltUnits = function(self)
         local per = ScenarioInfo.ArmySetup[self.Name].AIPersonality
         local resourceStructures = nil

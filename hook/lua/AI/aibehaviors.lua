@@ -102,7 +102,7 @@ function CommanderThreadSCTA(cdr, platoon)
         if not cdr.Dead then SCTACDRReturnHome(aiBrain, cdr, platoon) end
         coroutine.yield(2)
         if not cdr.Dead and GetGameTimeSeconds() > WaitTaunt and (not aiBrain.LastVocTaunt or GetGameTimeSeconds() - aiBrain.LastVocTaunt > WaitTaunt) then
-            SUtils.AIRandomizeTaunt(aiBrain)
+            import("/lua/ai/sorianutilities.lua").AIRandomizeTaunt(aiBrain)
             ---cdr:OnScriptBitSet('ToggleBit8', 'Cloak')
             WaitTaunt = 600 + Random(1, 900)
         end
