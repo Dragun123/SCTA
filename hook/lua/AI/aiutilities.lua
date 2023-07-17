@@ -116,18 +116,24 @@ function SCTAEngineerMoveWithSafePath(aiBrain, unit, destination)
     if not destination then
         return false
     end
-    --_ALERT('TAMove', unit:GetBlueprint().Physics.Climber)
-    local result, bestPos = false
-    result, bestPos = AIAttackUtils.CanGraphAreaToSCTA(unit:GetPosition(), destination, 'Land')
-    if not result then
-            result, bestPos = AIAttackUtils.CanGraphAreaToSCTA(unit:GetPosition(), destination, 'Amphibious')
-            if not result and not SUtils.CheckForMapMarkers(aiBrain) then
-                result, bestPos = unit:CanPathTo(destination)
-            end
+    if not unit.PlatoonHandle.MovementLayer then
+        if unit.PlatoonHandle then
+            import('/lua/AI/aiattackutilities.lua').GetMostRestrictiveLayer(unit.PlatoonHandle)
+        else
+            WARN('Unit has no PlatoonHandle : unable to set movement layer, did we create this platoon normally')
         end
+    end
+    local NavUtils = import('/lua/sim/NavUtils.lua')
+    local result, reason = false
+    local unitPos = unit:GetPosition()
+    local movementLayer = unit.PlatoonHandle.MovementLayer
+    result, reason = NavUtils.CanPathTo(movementLayer, unitPos, destination)
+    if not result and reason == 'NotGenerated' then
+        result, _ = unit:CanPathTo(destination)
+    end
     -- If we're here, we haven't used transports and we can path to the destination
     if result then
-        local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, unit:GetBlueprint().Physics.Climber or 'Amphibious', unit:GetPosition(), destination, 10)
+        local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, unit.Blueprint.Physics.Climber or movementLayer, unit:GetPosition(), destination, 10)
         if path then
             local pathSize = table.getn(path)
             -- Move to way points (but not to destination... leave that for the final command)
@@ -148,10 +154,13 @@ function SCTAEngineerMoveWithSafePathAir(aiBrain, unit, destination)
     if not destination then
         return false
     end
-    --local PlanName = unit.PlatoonHandle.PlanName
-    --LOG('*PlatoonName3', PlanName)
-    local result, bestPos = false
-    result, bestPos = AIAttackUtils.CanGraphAreaToSCTA(unit:GetPosition(), destination, 'Air')
+    local NavUtils = import('/lua/sim/NavUtils.lua')
+    local result, reason = false
+    local unitPos = unit:GetPosition()
+    result, reason = NavUtils.CanPathTo('Air', unitPos, destination)
+    if not result and reason == 'NotGenerated' then
+        result, _ = unit:CanPathTo(destination)
+    end
     -- If we're here, we haven't used transports and we can path to the destination
     if result then
         local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, 'Air', unit:GetPosition(), destination, 10)
@@ -176,14 +185,16 @@ function SCTAEngineerMoveWithSafePathNaval(aiBrain, unit, destination)
     if not destination then
         return false
     end
-    local result, bestPos = false
-    result, bestPos = AIAttackUtils.CanGraphAreaToSCTA(unit:GetPosition(), destination, 'Water')
-    if not result and not SUtils.CheckForMapMarkers(aiBrain) then
-        result, bestPos = unit:CanPathTo(destination)
+    local NavUtils = import('/lua/sim/NavUtils.lua')
+    local result, reason = false
+    local unitPos = unit:GetPosition()
+    result, reason = NavUtils.CanPathTo('Water', unitPos, destination)
+    if not result and reason == 'NotGenerated' then
+        result, _ = unit:CanPathTo(destination)
     end
     -- If we're here, we haven't used transports and we can path to the destination
     if result then
-        local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, 'Water', unit:GetPosition(), destination, 10)
+        local path, reason = AIAttackUtils.PlatoonGenerateSafePathToSCTAAI(aiBrain, 'Water', unitPos, destination, 10)
         if path then
             local pathSize = table.getn(path)
             -- Move to way points (but not to destination... leave that for the final command)
@@ -204,12 +215,12 @@ function SCTAEngineerMoveWithSafePathLand(aiBrain, unit, destination)
     if not destination then
         return false
     end
-    --local PlanName = unit.PlatoonHandle.PlanName
-    --LOG('*PlatoonName2', PlanName)
-    local result, bestPos = false
-    result, bestPos = AIAttackUtils.CanGraphAreaToSCTA(unit:GetPosition(), destination, 'Land')
-    if not result and not SUtils.CheckForMapMarkers(aiBrain) then
-        result, bestPos = unit:CanPathTo(destination)
+    local NavUtils = import('/lua/sim/NavUtils.lua')
+    local result, reason = false
+    local unitPos = unit:GetPosition()
+    result, reason = NavUtils.CanPathTo('Land', unitPos, destination)
+    if not result and reason == 'NotGenerated' then
+        result, _ = unit:CanPathTo(destination)
     end
 
     -- If we're here, we haven't used transports and we can path to the destination

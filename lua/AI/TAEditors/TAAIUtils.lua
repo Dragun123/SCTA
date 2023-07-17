@@ -1,6 +1,7 @@
 local AIUtils = import('/lua/ai/AIUtilities.lua')
 local AIAttackUtils = import('/lua/AI/aiattackutilities.lua')
 local LessThanCats = import('/lua/editor/UnitCountBuildConditions.lua').HaveLessThanUnitsWithCategory
+local SyncAIChat = import('/lua/simsyncutils.lua').SyncAIChat
 --[[local GetDistanceBetweenTwoPoints = import('/lua/utilities.lua').GetDistanceBetweenTwoPoints
 
 function TAAIGetSortedMassLocations(aiBrain, maxNum, tMin, tMax, tRings, tType, position)
@@ -125,7 +126,7 @@ function TAFindUnfinishedUnits(aiBrain, locationType, buildCat)
     local unfinished = aiBrain:GetUnitsAroundPoint(buildCat, engineerManager:GetLocationCoords(), engineerManager.Radius, 'Ally')
     local retUnfinished = false
     for num, unit in unfinished do
-        donePercent = unit:GetFractionComplete()
+        local donePercent = unit:GetFractionComplete()
         if donePercent < 1 and GetGuards(aiBrain, unit) < 1 and not unit:IsUnitState('Upgrading') then
             retUnfinished = unit
             break
@@ -445,7 +446,7 @@ local TAAITaunts = {
 local AIChatText = import('/lua/AI/sorianlang.lua').AIChatText
 
 function TAAIRandomizeTaunt(aiBrain)
-    tauntid = Random(1,table.getn(TAAITaunts[1]))
+    local tauntid = Random(1,table.getn(TAAITaunts[1]))
     TAAISendChat('all', aiBrain.Nickname, '/'..TAAITaunts[1][tauntid])
 end
 
@@ -460,9 +461,11 @@ function TAAISendChat(aigroup, ainickname, aiaction, targetnickname, extrachat)
             else
                 chattext = AIChatText[aiaction][ranchat]
             end
-            table.insert(Sync.AIChat, {group=aigroup, text=chattext, sender=ainickname})
+            SyncAIChat({group=aigroup, text=chattext, sender=ainickname})
+            --table.insert(Sync.AIChat, {group=aigroup, text=chattext, sender=ainickname})
         else
-            table.insert(Sync.AIChat, {group=aigroup, text=aiaction, sender=ainickname})
+            SyncAIChat({group=aigroup, text=aiaction, sender=ainickname})
+            --table.insert(Sync.AIChat, {group=aigroup, text=aiaction, sender=ainickname})
         end
 end
 
@@ -540,10 +543,10 @@ function TAKite(vec1, vec2, distance)
     -- Courtesy of chp2001
     -- note the distance param is {distance, distance - weapon range}
     -- vec1 is friendly unit, vec2 is enemy unit
-    distanceFrac = distance[2] / distance[1]
-    x = vec1[1] * (1 - distanceFrac) + vec2[1] * distanceFrac
-    y = vec1[2] * (1 - distanceFrac) + vec2[2] * distanceFrac
-    z = vec1[3] * (1 - distanceFrac) + vec2[3] * distanceFrac
+    local distanceFrac = distance[2] / distance[1]
+    local x = vec1[1] * (1 - distanceFrac) + vec2[1] * distanceFrac
+    local y = vec1[2] * (1 - distanceFrac) + vec2[2] * distanceFrac
+    local z = vec1[3] * (1 - distanceFrac) + vec2[3] * distanceFrac
     return {x,y,z}
 end
 

@@ -289,6 +289,7 @@ Platoon = Class(SCTAAIPlatoon) {
         local buildFunction
         local closeToBuilder
         local relative
+        local relativeTo
         local baseTmplList = {}
 
         -- if we have nothing to build, disband!
@@ -575,6 +576,7 @@ Platoon = Class(SCTAAIPlatoon) {
         local buildFunction
         local closeToBuilder
         local relative
+        local relativeTo
         local baseTmplList = {}
 
         -- if we have nothing to build, disband!
@@ -814,6 +816,7 @@ Platoon = Class(SCTAAIPlatoon) {
         local buildFunction
         local closeToBuilder
         local relative
+        local relativeTo
         local baseTmplList = {}
 
         -- if we have nothing to build, disband!
@@ -1134,6 +1137,7 @@ Platoon = Class(SCTAAIPlatoon) {
         local buildFunction
         local closeToBuilder
         local relative
+        local relativeTo
         local baseTmplList = {}
 
         if not cons.BuildStructures then
@@ -2871,7 +2875,6 @@ Platoon = Class(SCTAAIPlatoon) {
             while aiBrain:PlatoonExists(self) do
                 target = self:FindClosestUnit('Attack', 'Enemy', true, categories.SUBMERSIBLE)
                 if target then
-                    blip = target:GetBlip(armyIndex)
                     self:Stop()
                     self:AttackTarget(target)
                     --DUNCAN - added to try and stop AI getting stuck.
@@ -2890,7 +2893,6 @@ Platoon = Class(SCTAAIPlatoon) {
             while aiBrain:PlatoonExists(self) do
                 target = self:FindClosestUnit('Attack', 'Enemy', true, categories.STRUCTURE - categories.WALL)
                 if target then
-                    blip = target:GetBlip(armyIndex)
                     self:Stop()
                     self:AttackTarget(target)
                     --DUNCAN - added to try and stop AI getting stuck.
@@ -2939,6 +2941,7 @@ Platoon = Class(SCTAAIPlatoon) {
             end
     
             local aiBrain = self:GetBrain()
+            local targetData
     
             -- build scoutlocations if not already done.
             if not aiBrain.InterestList then

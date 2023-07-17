@@ -70,48 +70,20 @@ end
 
 
 function PlatoonGenerateSafePathToSCTAAI(aiBrain, platoonLayer, start, destination, optThreatWeight, optMaxMarkerDist, testPathDist)
+    local NavUtils = import('/lua/sim/NavUtils.lua')
     -- if we don't have markers for the platoonLayer, then we can't build a path.
-    if not GetPathGraphs()[platoonLayer] then
-        return false, 'NoGraph'
-    end
+    
     local location = start
     optMaxMarkerDist = optMaxMarkerDist or 250
     optThreatWeight = optThreatWeight or 1
     local finalPath = {}
 
-    --If we are within 100 units of the destination, don't bother pathing. (Sorian and Duncan AI)
-    if VDist2(start[1], start[3], destination[1], destination[3]) <= 100 then
-        table.insert(finalPath, destination)
-        return finalPath
-    end
-
-    --Get the closest path node at the platoon's position
-    local startNode
-    startNode = GetClosestPathNodeInRadiusByLayer(location, optMaxMarkerDist, platoonLayer)
-    if not startNode then return false, 'NoStartNode' end
-
-    --Get the matching path node at the destiantion
-    local endNode
-    endNode = GetClosestPathNodeInRadiusByGraph(destination, optMaxMarkerDist, startNode.graphName)
-    if not endNode then return false, 'NoEndNode' end
-
-    --Generate the safest path between the start and destination
-    local path
-
-        -- The original AI is using the vanilla version of GeneratePath. No cache, ugly (AStarLoopBody) code, but reacts faster on new situations.
-    path = GeneratePathTA(aiBrain, startNode, endNode, ThreatTable[platoonLayer], optThreatWeight, destination, location)
+    -- Requires NavMesh, note the threat max is a static value. 
+    -- This should ideally be changed to something dynamic but we will keep it high as we don't have logic to handle failures.
+    local path, msg, distance = NavUtils.PathToWithThreatThreshold(platoonLayer, start, destination, aiBrain, NavUtils.ThreatFunctions.AntiSurface, 5000, aiBrain.IMAPConfig.Rings)
     if not path then return false, 'NoPath' end
 
-    -- Insert the path nodes (minus the start node and end nodes, which are close enough to our start and destination) into our command queue.
-    for i,node in path.path do
-        if i > 1 and i < table.getn(path.path) then
-            table.insert(finalPath, node.position)
-        end
-    end
-
-    table.insert(finalPath, destination)
-
-    return finalPath
+    return path
 end
 
 
@@ -277,107 +249,6 @@ function SendPlatoonWithTransportsNoCheckTA(aiBrain, platoon, destination, bRequ
     end
 
     return true
-end
-
-function GeneratePathTA(aiBrain, startNode, endNode, threatType, threatWeight, destination, location)
-    if not aiBrain.PathCache then
-        aiBrain.PathCache = {}
-    end
-    -- create a new path
-    aiBrain.PathCache[startNode.name] = aiBrain.PathCache[startNode.name] or {}
-    aiBrain.PathCache[startNode.name][endNode.name] = aiBrain.PathCache[startNode.name][endNode.name] or {}
-    aiBrain.PathCache[startNode.name][endNode.name].settime = aiBrain.PathCache[startNode.name][endNode.name].settime or GetGameTimeSeconds()
-
-    if aiBrain.PathCache[startNode.name][endNode.name].path and aiBrain.PathCache[startNode.name][endNode.name].path != 'bad'
-    and aiBrain.PathCache[startNode.name][endNode.name].settime + 60 > GetGameTimeSeconds() then
-        return aiBrain.PathCache[startNode.name][endNode.name].path
-    end
-
-    -- Uveso - Clean path cache. Loop over all paths's and remove old ones
-    if aiBrain.PathCache then
-        local GameTime = GetGameTimeSeconds()
-        for StartNode, EndNodeCache in aiBrain.PathCache do
-            for EndNode, Path in EndNodeCache do
-                if Path.settime and Path.settime + 60 < GameTime then
-                    aiBrain.PathCache[StartNode][EndNode] = nil
-                end
-            end
-        end
-    end
-
-    threatWeight = threatWeight or 1
-
-    local graph = GetPathGraphs()[startNode.layer][startNode.graphName]
-
-    local closed = {}
-
-    local queue = {
-            path = {startNode, },
-    }
-
-    if VDist2Sq(location[1], location[3], startNode.position[1], startNode.position[3]) > 10000 and
-    SUtils.DestinationBetweenPoints(destination, location, startNode.position) then
-        local newPath = {
-                path = {newNode = {position = destination}, },
-        }
-        return newPath
-    end
-
-    local lastNode = startNode
-
-    repeat
-        if closed[lastNode] then
-            --aiBrain.PathCache[startNode.name][endNode.name] = { settime = 36000 , path = 'bad' }
-            return false
-        end
-
-        closed[lastNode] = true
-
-        local mapSizeX = ScenarioInfo.size[1]
-        local mapSizeZ = ScenarioInfo.size[2]
-
-        local lowCost = false
-        local bestNode = false
-
-        for i, adjacentNode in lastNode.adjacent do
-
-            local newNode = graph[adjacentNode]
-
-            if not newNode or closed[newNode] then
-                continue
-            end
-
-            if SUtils.DestinationBetweenPoints(destination, lastNode.position, newNode.position) then
-                aiBrain.PathCache[startNode.name][endNode.name] = { settime = GetGameTimeSeconds(), path = queue }
-                return queue
-            end
-
-            local dist = VDist2Sq(newNode.position[1], newNode.position[3], endNode.position[1], endNode.position[3])
-
-            dist = 100 * dist / (mapSizeX + mapSizeZ)
-
-            --get threat from current node to adjacent node
-            local threat = aiBrain:GetThreatBetweenPositions(newNode.position, lastNode.position, nil, threatType)
-
-            --update path stuff
-            local cost = dist + threat*threatWeight
-
-            if lowCost and cost >= lowCost then
-                continue
-            end
-
-            bestNode = newNode
-            lowCost = cost
-        end
-        if bestNode then
-            table.insert(queue.path,bestNode)
-            lastNode = bestNode
-        end
-    until lastNode == endNode
-
-    aiBrain.PathCache[startNode.name][endNode.name] = { settime = GetGameTimeSeconds(), path = queue }
-
-    return queue
 end
 
 function CanGraphAreaToSCTA(unit, destPos, layer)
