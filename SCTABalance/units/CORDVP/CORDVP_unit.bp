@@ -124,7 +124,7 @@ UnitBlueprint {
         UpgradesTo = 'coradvp', 
     },
     Intel = {
-        VisionRadius = 14,
+        VisionRadius = 12,
     },    
     LifeBarHeight = 0.22,
     LifeBarOffset = 3,

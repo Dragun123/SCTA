@@ -29,6 +29,9 @@ UnitBlueprint {
         MaxAcceleration = 1.6,
         MaxSpeed = 2.2,
     },
+    Intel = {
+        VisionRadius = 20,
+    },
     Weapon = {
         [1] = {
             Damage = 600,

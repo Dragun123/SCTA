@@ -15,6 +15,9 @@ UnitBlueprint {
         BuildTime = 24000,
     },
     SizeY = 1.4,
+    Intel = {
+        VisionRadius = 20,
+    },
     Weapon = {
         [1] = {
             Damage = 200,

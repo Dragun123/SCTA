@@ -32,7 +32,9 @@ UnitBlueprint {
     General = {
         UpgradesTo = 'cordap', 
     },
-    
+    Intel = {
+        VisionRadius = 12,
+    },
     SelectionSizeX = 7,
     SelectionSizeZ = 5,
     SelectionThickness = 0.25,

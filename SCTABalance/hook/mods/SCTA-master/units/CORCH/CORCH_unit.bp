@@ -50,4 +50,8 @@ UnitBlueprint {
     SizeX = 1.3,
     SizeY = 1.2,
     SizeZ = 2,
+    Intel = {
+        VisionRadius = 12,
+        WaterVisionRadius = 8,
+    },
 }

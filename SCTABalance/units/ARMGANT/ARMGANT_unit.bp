@@ -121,7 +121,7 @@ TechLevel = 'RULEUTL_Advanced',
 	UnitName = 'Drake Gantry',
     },
     Intel = {
-        VisionRadius = 14,
+        VisionRadius = 12,
     },
     LifeBarHeight = 0.3,
     LifeBarOffset = 7,
