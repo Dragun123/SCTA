@@ -38,4 +38,7 @@ UnitBlueprint {
     SizeX = 14,
     SizeY = 16,
     SizeZ = 14,
+    Intel = {
+        VisionRadius = 12,
+    },
 }

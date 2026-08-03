@@ -40,11 +40,13 @@ UnitBlueprint {
     LifeBarHeight = 0.22,
     LifeBarOffset = 3,
     LifeBarSize = 7,
-    
     SelectionSizeX = 7,
     SelectionSizeZ = 5,
     SelectionThickness = 0.25,
     SizeX = 9,
     SizeY = 1,
     SizeZ = 9,
+    Intel = {
+        VisionRadius = 12,
+    },
 }
