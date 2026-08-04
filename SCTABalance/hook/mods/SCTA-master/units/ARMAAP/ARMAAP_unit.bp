@@ -50,7 +50,4 @@ UnitBlueprint {
         SizeX = 9,
         SizeY = 1,
         SizeZ = 9,
-    Intel = {
-        VisionRadius = 12,
-    },
 }

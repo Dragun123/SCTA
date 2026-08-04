@@ -83,7 +83,7 @@ TechLevel = 'RULEUTL_Secret',
         UnitName = 'Cobra',
     },
     Intel = {
-        VisionRadius = 22,
+        VisionRadius = 24,
     },
     Physics = {
         BuildOnLayerCaps = {

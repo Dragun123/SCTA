@@ -50,7 +50,7 @@ Display = {
         RadarStealth = true,
         TAIntel = true,
         SonarRadius = 60,
-        VisionRadius = 15,
+        VisionRadius = 16,
     },
     Weapon = {
         [1] = {

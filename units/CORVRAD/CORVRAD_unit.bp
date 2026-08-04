@@ -115,7 +115,7 @@ UnitBlueprint {
         UnitName = 'Informer',
     },
     Intel = {
-        VisionRadius = 14,
+        VisionRadius = 12,
 	    RadarRadius = 100,
     },
     LifeBarHeight = 0.25,

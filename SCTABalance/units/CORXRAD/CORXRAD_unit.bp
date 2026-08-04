@@ -112,7 +112,7 @@ UnitBlueprint {
 	    UnitName = 'Development Radar Tower',
     },
     Intel = {
-        VisionRadius = 18, 
+        VisionRadius = 20, 
         RadarRadius = 360,
         OmniRadius = 120,
     },

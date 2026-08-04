@@ -146,8 +146,8 @@ UnitBlueprint {
         UnitName = 'Atlas',
     },
     Intel = {
-        VisionRadius = 14,
-        WaterVisionRadius = 6,
+        VisionRadius = 12,
+        WaterVisionRadius = 8,
     },
     LifeBarHeight = 0.25,
     LifeBarOffset = 0.5,

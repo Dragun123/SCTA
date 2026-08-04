@@ -109,7 +109,7 @@ UnitBlueprint {
         UnitName = 'Invader',
     },
     Intel = {
-        VisionRadius = 6,
+        VisionRadius = 4,
     },
     LifeBarHeight = 0.25,
     LifeBarOffset = 0.5,

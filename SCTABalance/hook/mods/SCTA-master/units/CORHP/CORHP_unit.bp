@@ -36,7 +36,4 @@ UnitBlueprint {
     },
     SelectionSizeX = 7,
     SelectionSizeZ = 5,
-    Intel = {
-        VisionRadius = 12,
-    },
  }

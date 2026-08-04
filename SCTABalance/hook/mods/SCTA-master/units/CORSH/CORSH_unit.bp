@@ -11,8 +11,8 @@ UnitBlueprint {
 },
  Intel = {
      RadarRadius = 80,
-     VisionRadius = 14,
-     OmniRadius = 25,
+     VisionRadius = 12,
+     OmniRadius = 24,
     },
     Physics = {
         MaxAcceleration = 2,

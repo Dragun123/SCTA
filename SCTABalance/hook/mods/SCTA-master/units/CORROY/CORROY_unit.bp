@@ -5,7 +5,7 @@ UnitBlueprint {
         MaxHealth = 2500,
     },
      Intel = {
-        VisionRadius = 15, 
+        VisionRadius = 16, 
         WaterVisionRadius = 8, 
         SonarRadius = 24,
         RadarRadius = 24,

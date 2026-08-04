@@ -78,7 +78,7 @@ TechLevel = 'RULEUTL_Advanced',
 	UnitName = 'Geothermal Powerplant',
     },
     Intel = {
-        VisionRadius = 6,
+        VisionRadius = 4,
         WaterVisionRadius = 4,
     },
     LifeBarHeight = 0.25,

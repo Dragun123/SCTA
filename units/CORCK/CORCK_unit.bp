@@ -129,7 +129,7 @@ TechLevel = 'RULEUTL_Basic',
         UnitName = 'Construction Kbot',
     },
     Intel = {
-        VisionRadius = 14,
+        VisionRadius = 12,
     },
     LifeBarHeight = 0.25,
     LifeBarOffset = 0.5,

@@ -15,8 +15,8 @@ UnitBlueprint {
     LifeBarOffset = 0.25,
     LifeBarSize = 1,
     Intel = {
-        SonarRadius = 50,
-        VisionRadius = 15,
+        SonarRadius = 48,
+        VisionRadius = 16,
     },
     SelectionSizeX = 1,
     SelectionSizeZ = 1,

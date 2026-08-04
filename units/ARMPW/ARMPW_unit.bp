@@ -132,7 +132,7 @@ TechLevel = 'RULEUTL_Basic',
         UnitName = 'Peewee',
     },
     Intel = {
-        VisionRadius = 18,
+        VisionRadius = 20,
     },
     LifeBarHeight = 0.25,
     LifeBarSize = 2,

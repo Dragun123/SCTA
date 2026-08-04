@@ -100,9 +100,9 @@ UnitBlueprint {
         UnitName = 'Shark',
     },
     Intel = {
-        SonarRadius = 30,
-        VisionRadius = 10,
-        WaterVisionRadius = 10,
+        SonarRadius = 32,
+        VisionRadius = 12,
+        WaterVisionRadius = 12,
     },
     LifeBarHeight = 0.25,
     LifeBarOffset = 0.5,

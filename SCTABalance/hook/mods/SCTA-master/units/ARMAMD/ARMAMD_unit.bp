@@ -9,6 +9,9 @@ UnitBlueprint {
             BuildCostMass = 12000,
             BuildRate = 400000,
         },
+    Intel = {
+        VisionRadius = 8,
+    },
         Weapon = {
             [1] = {
                 ProjectileId =   '/mods/SCTA-master/SCTABalance/projectiles/ARD_ROCKET/ARD_ROCKET_proj.bp',

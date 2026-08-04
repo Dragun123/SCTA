@@ -136,9 +136,9 @@ UnitBlueprint {
         UnitName = 'Typhoon',
     },
     Intel = {
-        VisionRadius = 22,
-        SonarRadius = 30, 
-        WaterVisionRadius = 14,
+        VisionRadius = 24,
+        SonarRadius = 32, 
+        WaterVisionRadius = 12,
         RadarStealth = true,
     },
     LifeBarHeight = 0.25,

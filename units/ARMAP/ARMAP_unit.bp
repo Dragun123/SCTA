@@ -118,7 +118,7 @@ UnitBlueprint {
 	UnitName = 'Aircraft Plant',
     },
     Intel = {
-        VisionRadius = 14,
+        VisionRadius = 12,
 	RadarRadius = 32,
     },
     LifeBarHeight = 0.25,

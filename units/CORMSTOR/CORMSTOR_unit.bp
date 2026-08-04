@@ -75,7 +75,7 @@ TechLevel = 'RULEUTL_Basic',
         UnitName = 'Metal Storage',
     },
     Intel = {
-        VisionRadius = 6,
+        VisionRadius = 4,
         WaterVisionRadius = 4,
     },
     LifeBarHeight = 0.25,

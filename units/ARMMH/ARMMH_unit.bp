@@ -98,7 +98,7 @@ UnitBlueprint {
         UnitName = 'Wombat',
     },
     Intel = {
-        VisionRadius = 18,
+        VisionRadius = 20,
         WaterVisionRadius = 4, 
     },
     LifeBarHeight = 0.25,

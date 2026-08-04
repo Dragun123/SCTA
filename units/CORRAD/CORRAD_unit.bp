@@ -112,8 +112,8 @@ UnitBlueprint {
 	    UnitName = 'Radar Tower',
     },
     Intel = {
-    VisionRadius = 22, 
-	RadarRadius = 90,
+    VisionRadius = 24, 
+	RadarRadius = 88,
     },
     LifeBarHeight = 0.25,
     LifeBarOffset = 0.5,

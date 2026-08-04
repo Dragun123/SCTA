@@ -30,6 +30,10 @@ UnitBlueprint {
             MaxSteerForce = 100,
             TurnFacingRate = 120,
         },
+        Intel = {
+        VisionRadius = 12,
+        WaterVisionRadius = 8,
+        },
         Economy = {
             BuildCostEnergy = 4800,
             BuildCostMass = 700,

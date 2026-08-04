@@ -98,7 +98,7 @@ UnitBlueprint {
         UnitName = 'Shooter',
     },
     Intel = {
-        VisionRadius = 18,
+        VisionRadius = 20,
         Cloak = true,
     },
     LifeBarHeight = 0.25,

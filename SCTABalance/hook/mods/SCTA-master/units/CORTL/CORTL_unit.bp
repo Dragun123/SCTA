@@ -26,9 +26,9 @@ UnitBlueprint {
         MaxHealth = 900,
     },
     Intel = {
-        SonarRadius = 30,
+        SonarRadius = 32,
         VisionRadius = 8,
-        WaterVisionRadius = 15,
+        WaterVisionRadius = 16,
     },
     SelectionSizeX = 1.5,
     SelectionSizeZ = 1.5,

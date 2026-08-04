@@ -14,7 +14,7 @@ UnitBlueprint {
     },
     Intel = {
         VisionRadius = 32,
-        RadarRadius = 38,
+        RadarRadius = 40,
     },
     Weapon = {
         [1] = {

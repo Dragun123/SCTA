@@ -106,7 +106,7 @@ UnitBlueprint {
         UnitWeight = 1,
     },
     Intel = {
-        VisionRadius = 6,
+        VisionRadius = 4,
     },
     LifeBarHeight = 0.075,
     LifeBarOffset = 0.5,

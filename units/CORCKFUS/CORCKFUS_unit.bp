@@ -83,7 +83,7 @@ TechLevel = 'RULEUTL_Secret',
 	UnitName = 'Cloakable Fusion Reactor',
     },
     Intel = {
-        VisionRadius = 14,
+        VisionRadius = 12,
 	    Cloak = true,
     },
     LifeBarHeight = 0.25,

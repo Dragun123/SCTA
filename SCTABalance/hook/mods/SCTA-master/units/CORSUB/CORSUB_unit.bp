@@ -20,8 +20,8 @@ UnitBlueprint {
     SizeY = 1,
     SizeZ = 1.5,
     Intel = {
-        SonarRadius = 50,
-        VisionRadius = 15,
+        SonarRadius = 48,
+        VisionRadius = 16,
     },
     Weapon = {
         [1] = {

@@ -21,9 +21,9 @@ UnitBlueprint {
             Max = 20,
             Min = 10,
           },
-          VisionRadius = 10,
+          VisionRadius = 12,
           JammerBlips = 5,
-          RadarRadius = 30,
+          RadarRadius = 32,
           RadarStealth = true,
     },
 }

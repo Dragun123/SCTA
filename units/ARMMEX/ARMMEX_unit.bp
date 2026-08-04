@@ -107,7 +107,7 @@ UnitBlueprint {
         UnitName = 'Metal Extractor',
     },
     Intel = {
-        VisionRadius = 14,
+        VisionRadius = 12,
         WaterVisionRadius = 4, 
     },
     LifeBarHeight = 0.25,
