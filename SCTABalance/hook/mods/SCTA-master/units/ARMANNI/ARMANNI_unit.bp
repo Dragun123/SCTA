@@ -42,6 +42,9 @@ UnitBlueprint {
     SizeX = 4,
     SizeY = 4.4,
     SizeZ = 4,
+    Intel = {
+	    RadarRadius = 32,
+    },
     Weapon = {
         [1] = {
             Damage = 4000,

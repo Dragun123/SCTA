@@ -107,7 +107,7 @@ TechLevel = 'RULEUTL_Basic',
     },
     Intel = {
         VisionRadius = 20, 
-        WaterVisionRadius = 18, 
+        WaterVisionRadius = 20, 
 	SonarRadius = 20,
     },
     LifeBarHeight = 0.25,

@@ -32,7 +32,6 @@ UnitBlueprint {
     General = {
         UpgradesTo = 'cordap', 
     },
-    
     SelectionSizeX = 7,
     SelectionSizeZ = 5,
     SelectionThickness = 0.25,

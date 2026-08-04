@@ -158,8 +158,8 @@ UnitBlueprint {
         UnitName = 'Construction Aircraft',
     },
     Intel = {
-        VisionRadius = 18,
-        WaterVisionRadius = 6,
+        VisionRadius = 20,
+        WaterVisionRadius = 8,
     },
     LifeBarHeight = 0.25,
     LifeBarOffset = 0.25,

@@ -97,8 +97,8 @@ UnitBlueprint {
         UnitName = 'Slinger',
     },
     Intel = {
-        VisionRadius = 18,
-        WaterVisionRadius = 4, 
+        VisionRadius = 20,
+        WaterVisionRadius = 8, 
     },
     LifeBarHeight = 0.25,
     LifeBarOffset = 0.5,

@@ -6,7 +6,7 @@ UnitBlueprint {
         BuildTime = 30000,
     },
     Intel = {
-        VisionRadius = 18,
+        VisionRadius = 20,
     },
     Weapon = {
         [1] = {

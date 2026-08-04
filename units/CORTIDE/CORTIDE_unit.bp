@@ -79,7 +79,7 @@ UnitBlueprint {
         UnitName = 'Tidal Generator',
     },
     Intel = {
-        VisionRadius = 6,
+        VisionRadius = 4,
         WaterVisionRadius = 4,
     },
     LifeBarHeight = 0.25,

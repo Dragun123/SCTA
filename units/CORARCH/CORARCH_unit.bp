@@ -99,7 +99,7 @@ UnitBlueprint {
         UnitName = 'Shredder',
     },
     Intel = {
-        VisionRadius = 22,
+        VisionRadius = 24,
         WaterVisionRadius = 12,
     },
     LifeBarHeight = 0.25,

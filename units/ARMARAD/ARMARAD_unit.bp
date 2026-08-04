@@ -110,7 +110,7 @@ UnitBlueprint {
 	UnitName = 'Advanced Radar Tower',
     },
     Intel = {
-    VisionRadius = 22, 
+    VisionRadius = 24, 
 	RadarRadius = 180,
     },
     LifeBarHeight = 0.25,

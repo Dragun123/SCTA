@@ -17,11 +17,11 @@ UnitBlueprint {
     SelectionSizeX = 1,
     SelectionSizeZ = 1,
     SizeX = 1.5,
-    SizeY = 0.8,
+    SizeY = 1,
     SizeZ = 1.5,
     Intel = {
-        SonarRadius = 50,
-        VisionRadius = 15,
+        SonarRadius = 48,
+        VisionRadius = 16,
     },
     Weapon = {
         [1] = {

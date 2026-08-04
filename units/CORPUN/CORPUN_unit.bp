@@ -84,7 +84,7 @@ UnitBlueprint {
         UnitName = 'Punisher',
     },
     Intel = {
-        VisionRadius = 22,
+        VisionRadius = 24,
     },
     LifeBarHeight = 0.25,
     LifeBarOffset = 0.5,

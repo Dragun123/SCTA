@@ -121,7 +121,7 @@ TechLevel = 'RULEUTL_Advanced',
 	UnitName = 'Aircraft Advanced Development Plant',
     },
     Intel = {
-        VisionRadius = 10,
+        VisionRadius = 12,
 	RadarRadius = 32,
     },
     LifeBarHeight = 0.22,

@@ -97,7 +97,7 @@ TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Parasite',
     },
     Intel = {
-        RadarRadius = 50,
+        RadarRadius = 52,
         VisionRadius = 20,
         Cloak = true,
     },

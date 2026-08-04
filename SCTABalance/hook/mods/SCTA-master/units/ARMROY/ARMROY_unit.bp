@@ -8,7 +8,7 @@ UnitBlueprint {
             UniformScale = 0.21,    
         },
     Intel = {
-    VisionRadius = 15, 
+    VisionRadius = 16, 
     WaterVisionRadius = 8, 
 	SonarRadius = 24,
     RadarRadius = 24,

@@ -112,8 +112,8 @@ UnitBlueprint {
 	    UnitName = 'Targeting Facility',
     },
     Intel = {
-        RadarRadius = 10,
-        VisionRadius = 14,
+        RadarRadius = 12,
+        VisionRadius = 12,
     },
     LifeBarHeight = 0.25,
     LifeBarOffset = 0.5,

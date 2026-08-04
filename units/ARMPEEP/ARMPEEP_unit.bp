@@ -133,7 +133,7 @@ TechLevel = 'RULEUTL_Basic',
         UnitName = 'Peeper',
     },
     Intel = {
-    VisionRadius = 22,
+    VisionRadius = 24,
     WaterVisionRadius = 4, 
     RadarRadius = 44, 
     SonarRadius = 44, 

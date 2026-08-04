@@ -10,7 +10,7 @@ UnitBlueprint {
         BuildTime = 2100,
     },
     Intel = {
-    RadarRadius = 50,
+    RadarRadius = 52,
     SonarRadius = 80,
     },
     SizeX = 2,

@@ -104,9 +104,9 @@ UnitBlueprint {
         UnitName = 'Executioner',
     },
     Intel = {
-        VisionRadius = 15,
-        WaterVisionRadius = 15,
-	    SonarRadius = 30, 
+        VisionRadius = 16,
+        WaterVisionRadius = 16,
+	    SonarRadius = 32, 
     },
     LifeBarHeight = 0.25,
     LifeBarOffset = 0.5,

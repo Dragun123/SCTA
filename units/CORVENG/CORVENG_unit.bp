@@ -135,7 +135,7 @@ UnitBlueprint {
         UnitName = 'Avenger',
     },
     Intel = {
-        VisionRadius = 22,
+        VisionRadius = 24,
         WaterVisionRadius = 4, 
     },
     LifeBarHeight = 0.25,

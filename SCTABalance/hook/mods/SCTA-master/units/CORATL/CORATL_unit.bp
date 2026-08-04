@@ -32,8 +32,8 @@ UnitBlueprint {
     },
     Intel = {
         SonarRadius = 40,
-        VisionRadius = 14,
-        WaterVisionRadius = 15,
+        VisionRadius = 12,
+        WaterVisionRadius = 16,
     },
     SelectionSizeX = 2,
     SelectionSizeZ = 2,

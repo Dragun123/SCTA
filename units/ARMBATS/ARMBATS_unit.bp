@@ -112,7 +112,7 @@ UnitBlueprint {
         UnitName = 'Millennium',
     },
     Intel = {
-        VisionRadius = 22, 
+        VisionRadius = 24, 
         WaterVisionRadius = 12,
         SonarRadius = 20,
     },

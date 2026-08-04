@@ -96,8 +96,8 @@ UnitBlueprint {
         UnitName = 'Infiltrator',
     },
     Intel = {
-        RadarRadius = 50,
-        VisionRadius = 18,
+        RadarRadius = 52,
+        VisionRadius = 20,
         Cloak = true,
     },
     LifeBarHeight = 0.25,

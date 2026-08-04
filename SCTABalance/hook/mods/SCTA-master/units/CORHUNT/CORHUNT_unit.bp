@@ -30,9 +30,9 @@ General = {
     },
     },
     Intel = {
-        VisionRadius = 50,
+        VisionRadius = 52,
         CloakField = true,
         Cloak = true,
-        CloakFieldRadius = 15,
+        CloakFieldRadius = 16,
     },
 }

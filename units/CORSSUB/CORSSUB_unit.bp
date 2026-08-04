@@ -97,8 +97,8 @@ UnitBlueprint {
         UnitName = 'Leviathen',
     },
     Intel = {
-        SonarRadius = 30,
-        VisionRadius = 10,
+        SonarRadius = 32,
+        VisionRadius = 8,
         WaterVisionRadius = 20,
     },
     LifeBarHeight = 0.25,

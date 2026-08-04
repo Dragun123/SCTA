@@ -9,8 +9,8 @@ UnitBlueprint {
         BuildCostMass = 3000,
         },
     Intel = {
-        SonarRadius = 55,
-        VisionRadius = 15,
+        SonarRadius = 56,
+        VisionRadius = 16,
     },
     Weapon = {
         [1] = {

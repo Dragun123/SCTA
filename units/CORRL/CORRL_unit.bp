@@ -83,7 +83,7 @@ TechLevel = 'RULEUTL_Advanced',
         UnitName = 'Pulverizer',
     },
     Intel = {
-        VisionRadius = 22,
+        VisionRadius = 24,
         WaterVisionRadius = 8, 
     },
     LifeBarHeight = 0.25,

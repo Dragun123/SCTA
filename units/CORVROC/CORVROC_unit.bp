@@ -109,7 +109,7 @@ SurfaceThreatLevel = 24,
         UnitName = 'Diplomat',
     },
     Intel = {
-        VisionRadius = 14,
+        VisionRadius = 12,
     },
         LifeBarHeight = 0.25,
         LifeBarOffset = 0.5,

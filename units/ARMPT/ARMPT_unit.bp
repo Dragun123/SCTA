@@ -108,7 +108,7 @@ TechLevel = 'RULEUTL_Basic',
         UnitName = 'Skeeter',
     },
     Intel = {
-        VisionRadius = 18,
+        VisionRadius = 20,
         WaterVisionRadius = 4, 
     },
     LifeBarHeight = 0.25,

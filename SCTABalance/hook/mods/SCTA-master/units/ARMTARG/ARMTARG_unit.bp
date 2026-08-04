@@ -36,7 +36,7 @@ UnitBlueprint {
         MaintenanceConsumptionPerSecondEnergy = 1500,
     },
     Intel = {
-            VisionRadius = 18, 
+            VisionRadius = 20, 
             RadarRadius = 360,
             OmniRadius = 120,
     },

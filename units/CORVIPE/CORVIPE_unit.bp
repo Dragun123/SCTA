@@ -79,7 +79,7 @@ UnitBlueprint {
         UnitName = 'Viper',
     },
     Intel = {
-        VisionRadius = 14,
+        VisionRadius = 12,
     },
     Physics = {
         BuildOnLayerCaps = {

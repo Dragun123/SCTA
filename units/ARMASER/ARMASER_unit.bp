@@ -115,7 +115,7 @@ UnitBlueprint {
     RadarStealth = true,
     RadarStealthField = true,
     VisionRadius = 12,
-	RadarStealthFieldRadius = 30,
+	RadarStealthFieldRadius = 32,
     },
     LifeBarHeight = 0.25,
     LifeBarOffset = 0.5,

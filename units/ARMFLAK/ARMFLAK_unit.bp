@@ -84,7 +84,7 @@ UnitBlueprint {
         UnitName = 'Flakker',
     },
     Intel = {
-        VisionRadius = 22,
+        VisionRadius = 24,
     },
     Physics = {
         BuildOnLayerCaps = {

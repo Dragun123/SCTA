@@ -116,7 +116,7 @@ TechLevel = 'RULEUTL_Basic',
         UpgradesFrom = 'cordlab', 
     },
     Intel = {
-        VisionRadius = 14,
+        VisionRadius = 12,
     },    
     LifeBarHeight = 0.22,
     LifeBarOffset = 3,

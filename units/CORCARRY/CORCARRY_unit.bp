@@ -143,8 +143,8 @@ UnitBlueprint {
         UnitName = 'Hive',
     },
     Intel = {
-        VisionRadius = 22,
-        WaterVisionRadius = 6,
+        VisionRadius = 24,
+        WaterVisionRadius = 8,
 	    RadarRadius = 100,
     },
     LifeBarHeight = 0.25,

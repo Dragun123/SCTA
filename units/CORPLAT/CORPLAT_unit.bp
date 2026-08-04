@@ -115,7 +115,7 @@ UnitBlueprint {
 	UnitName = 'Seaplane Platform',
     },
     Intel = {
-    VisionRadius = 14,
+    VisionRadius = 12,
 	SonarRadius = 32,
     WaterVisionRadius = 8,
     RadarStealth = true,

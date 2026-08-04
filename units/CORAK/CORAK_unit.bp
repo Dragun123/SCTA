@@ -89,7 +89,7 @@ TechLevel = 'RULEUTL_Basic',
         UnitName = 'A.K.',
     },
     Intel = {
-        VisionRadius = 18,
+        VisionRadius = 20,
     },
     LifeBarHeight = 0.25,
     LifeBarOffset = 0.25,
