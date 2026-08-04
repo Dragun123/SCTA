@@ -10,6 +10,7 @@ Acknowledgements and Permissions by individuals they have granted for improving 
 9) Uveso, who has made the Necro Code used by the CORE Necro
 10) Exotic, Nomads manager, for letting usage of Nomad Code as basis or examples for TA Unit Code
 11) NoHome, for writing various scripts and fixing other code issues
+12) Thank you to Nine for the TA Faction Logo Image
 
 Additionally to following players, who provided there services at one point or another to help test gameplay and balance
 1) Odin of GB
