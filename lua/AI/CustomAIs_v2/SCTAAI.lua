@@ -22,19 +22,43 @@ AI = {
 			key = 'sctaairandom',
 			name = '<LOC SctaAI_0003>AI: SCTA Random',
 		},
+	{
+            key = 'm28taarmai',
+            name = '<LOC SctaAI_0004>AI: M28 SCTA ARM',
+        },
+        {
+            key = 'm28tacoreai',
+            name = '<LOC SctaAI_0005>AI: M28 SCTA CORE',
+        },
+        {
+            key = 'm28tarandomai',
+            name = '<LOC SctaAI_0006>AI: M28 SCTA Random',
+        },
 	},
 	CheatAIList = {
 		{
 			key = 'sctaaiarmcheat',
-			name = '<LOC SctaAI_0004>AIx: SCTA ARM',
+			name = '<LOC SctaAI_0007>AIx: SCTA ARM',
 		},
 		{
 			key = 'sctaaicorecheat',
-			name = '<LOC SctaAI_0005>AIx: SCTA CORE',
+			name = '<LOC SctaAI_0008>AIx: SCTA CORE',
 		},
 		{
 			key = 'sctaairandomcheat',
-			name = '<LOC SctaAI_0006>AIx: SCTA Random',
+			name = '<LOC SctaAI_0009>AIx: SCTA Random',
 		},
+        {
+            key = 'm28taarmaicheat',
+            name = '<LOC SctaAI_0010>AIx: M28 SCTA ARM',
+        },
+        {
+            key = 'm28tacoreaicheat',
+            name = '<LOC SctaAI_0011>AIx: M28 SCTA CORE',
+        },
+        {
+            key = 'm28tarandomaicheat',
+            name = '<LOC SctaAI_0012>AIx: M28 SCTA Random',
+        },
 	},
 }
