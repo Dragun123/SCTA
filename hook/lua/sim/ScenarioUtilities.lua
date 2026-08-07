@@ -27,13 +27,13 @@ function CreateInitialArmyGroup(strArmy, createCommander)
 		
 			if createCommander and ( tblGroup == nil or 0 == table.getn(tblGroup) ) then
 				local per = ScenarioInfo.ArmySetup[ABrain.Name].AIPersonality
-				if per == 'sctaaiarm' or per == 'm28taarmai' then
+				if string.find(per, 'sctaaiarm') or string.find(per, 'm28taarmai') then
 					initialUnitName = 'armcom'
                     ABrain.TA = 'ARM'
-				elseif per == 'sctaaicore' or per == 'm28tacoreai' then
+				elseif string.find(per, 'sctaaicore') or string.find(per, 'm28tacoreai') then
 					initialUnitName = 'corcom'
                     ABrain.TA = 'CORE'
-                elseif per == 'sctaairandom' or per == 'm28tarandomai' then
+                elseif string.find(per, 'sctaairandom') or string.find(per, 'm28tarandomai') then
                     local coinFlip = math.random(2)
                     if coinFlip == 1 then
                         initialUnitName = 'armcom'

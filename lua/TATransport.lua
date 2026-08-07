@@ -56,9 +56,11 @@ TATransport = Class(AirTransport)
             --LOG('  yes self destruct:' .. self:GetBlueprint().General.UnitName)
             local cargo = self:GetCargo()
             --pcall(function() cargo = self:GetCargo() end)
-            for _,unit in cargo or { } do
+            if cargo then
+            for _, unit in cargo or { } do
                 --LOG('  firing cargo self-d weapons:' .. unit:GetBlueprint().General.UnitName)
                 FireSelfdestructWeapons(unit)
+            end
             end
         end
 
