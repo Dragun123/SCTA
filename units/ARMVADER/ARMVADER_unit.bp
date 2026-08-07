@@ -149,22 +149,14 @@ UnitBlueprint {
 	        DamageRadius = 6,
             FireOnSelfDestruct = true,
             DamageType = 'Normal',
-            RackBones = {
-                {
-                    MuzzleBones = {
-                        0,
-                    },
-                    RackBone = 0,
-                },
-            },
             DisplayName = 'Suicide',
             FireTargetLayerCapsTable = {
                 Land = 'Land|Water|Seabed',
                 Seabed = 'Land|Water|Seabed',
             },
             AboveWaterTargetsOnly = true,
-	    RangeCategory = 'UWRC_DirectFire',
-     WeaponCategory = 'DirectFire',
+	    --RangeCategory = 'UWRC_DirectFire',
+        WeaponCategory = 'Kamikaze',
             FiringTolerance = 999999,
             Label = 'Suicide',
             MaxRadius = 6,
@@ -179,7 +171,7 @@ UnitBlueprint {
             TargetRestrictDisallow = 'UNTARGETABLE',
         },  
     { #ARMMINE1
-        Damage = 100,
+        Damage = 2000,
         DamageFriendly = true,
         DamageRadius = 6,
         DamageType = 'Normal',

@@ -9,8 +9,8 @@ local TAKami = import('/mods/SCTA-master/lua/TAweapon.lua').TAKami
 
 ARMVADER = Class(TAKamiCounter) {
 	Weapons = {
-		DeathWeapon = Class(TABomb) {},
 		Suicide = Class(TAKami) {},
+		DeathWeapon = Class(TABomb) {},
 	},
 }
 TypeClass = ARMVADER

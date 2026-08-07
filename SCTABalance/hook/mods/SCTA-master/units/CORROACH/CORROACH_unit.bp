@@ -29,10 +29,10 @@ UnitBlueprint {
     LifeBarSize = 1, 
     Weapon = {
         [1] = {
-            Damage = 1500,
-	        DamageRadius = 6,
+	    Damage = 1500,
         },
         [2] = {
+        Damage = 1500,
         },
     },
 }
