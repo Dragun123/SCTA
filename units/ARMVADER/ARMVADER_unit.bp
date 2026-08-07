@@ -171,7 +171,7 @@ UnitBlueprint {
             TargetRestrictDisallow = 'UNTARGETABLE',
         },  
     { #ARMMINE1
-        Damage = 2000,
+        Damage = 100,
         DamageFriendly = true,
         DamageRadius = 6,
         DamageType = 'Normal',

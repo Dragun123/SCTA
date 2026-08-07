@@ -1,6 +1,6 @@
 #Generic TA Air unit
 local AirTransport = import('/lua/defaultunits.lua').AirTransport
-
+local TAutils = import('/mods/SCTA-master/lua/TAutils.lua')
 
 TATransport = Class(AirTransport)
 {
@@ -55,37 +55,21 @@ TATransport = Class(AirTransport)
         --LOG('AirTransport.Kill ' .. self:GetBlueprint().General.UnitName)
 
         -- allow cargo to fire self destruct weapons (SelfDestructed flag is set in selfdestruct.lua)
-        if self.SelfDestructed then
+        if self.SelfDestructThread ~= false then
             --LOG('  yes self destruct:' .. self:GetBlueprint().General.UnitName)
             local cargo = self:GetCargo()
-            --LOG('IEXIST1')
+            LOG('IEXIST1')
             --pcall(function() cargo = self:GetCargo() end)
-            --if cargo then
+            if cargo then
             for _, unit in cargo or { } do
                 --LOG('  firing cargo self-d weapons:' .. unit:GetBlueprint().General.UnitName)
-                unit:TAFireSelfdestructWeapons()
+                TAutils.TAFireSelfdestructWeapons(unit)
             end
-            --end
+            end
         end
 
         AirTransport.Kill(self)
 
-    end,
-
-       TAFireSelfdestructWeapons = function(self)
-        --LOG('IEXIST2')
-        local wepCount = self:GetWeaponCount()
-        for i = 1, wepCount do
-        local wep = self:GetWeapon(i)
-        local wepBP = self:GetBlueprint()
-        if wepBP.FireOnSelfDestruct then
-            if wep.Fire then
-                wep.Fire()
-            else
-                wep.OnFire(wep)
-                end
-            end
-        end
     end,
 
     StartMoveFxTA = function(self)
