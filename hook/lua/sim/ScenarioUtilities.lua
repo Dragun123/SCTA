@@ -27,20 +27,25 @@ function CreateInitialArmyGroup(strArmy, createCommander)
 		
 			if createCommander and ( tblGroup == nil or 0 == table.getn(tblGroup) ) then
 				local per = ScenarioInfo.ArmySetup[ABrain.Name].AIPersonality
-				if string.find(per, 'sctaaiarm') or string.find(per, 'm28taarmai') then
+				if string.find(per, 'scta') or string.find(per, 'm28ta') then
+                    if string.find(per, 'arm') then
 					initialUnitName = 'armcom'
                     ABrain.TA = 'ARM'
-				elseif string.find(per, 'sctaaicore') or string.find(per, 'm28tacoreai') then
+				    elseif string.find(per, 'core') then
 					initialUnitName = 'corcom'
                     ABrain.TA = 'CORE'
-                elseif string.find(per, 'sctaairandom') or string.find(per, 'm28tarandomai') then
-                    local coinFlip = math.random(2)
-                    if coinFlip == 1 then
-                        initialUnitName = 'armcom'
-                        ABrain.TA = 'ARM'
                     else
-                        initialUnitName = 'corcom'
-                        ABrain.TA = 'CORE'
+                    local coinFlip = math.random(2)
+                        if coinFlip == 1 then
+                            initialUnitName = 'armcom'
+                            ABrain.TA = 'ARM'
+                            else
+                            initialUnitName = 'corcom'
+                            ABrain.TA = 'CORE'
+                        end
+                    end
+                    if string.find(per, 'm28ta') and not __blueprints['mai2806'] then
+                        ForkThread(M28Warning)
                     end
 				else
 					local factionIndex = GetArmyBrain(strArmy):GetFactionIndex()
@@ -81,6 +86,15 @@ function WindTAThread()
 		WaitTicks(30 + 1)
 		--Wait ticks waits 1 less tick than it should. #timingissues
 	end
+end
+
+function M28Warning()
+    if not ScenarioInfo.M28Warning then
+    ScenarioInfo.M28Warning = true
+    WaitTicks(50)
+    PrintText('M28 Mod not enabled, M28 TA AI will not work', 20, 'ff0000', 5, 'center')
+    --LOG('IEXIST')
+    end
 end
 
 --[[function BuildGraphAreasTA()
