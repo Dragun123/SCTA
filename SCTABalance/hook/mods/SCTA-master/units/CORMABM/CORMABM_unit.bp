@@ -39,18 +39,23 @@ UnitBlueprint {
     Weapon = {
         [1] = {
             FiringTolerance = 360,
-            Flare = {
+            Damage = 30,
+            --[[Flare = {
                 Category = 'MISSILE TACTICAL',
                 Radius = 15,
                 Stack = true,   -- Special flag to trigger multi-sphere collision
                 OffsetMult = 1.33,
-            },
-            RackReloadTimeout = 2,
-            MuzzleVelocity = 10,
+            },]]--
+            RackReloadTimeout = 1,
+            WeaponRepackTimeout = 0,
+            MuzzleVelocity = 20,
+            RateOfFire = 10/18,
             ProjectileId = '/mods/SCTA-master/projectiles/CORMABM_WEAPON/CORMABM_WEAPON_proj.bp',
             TargetRestrictOnlyAllow = 'TACTICAL MISSILE',
+            MaxRadius = 45,
             EffectiveRadius = 30,
             TrackingRadius = 20,
+            MuzzleSalvoSize = 2,
         },
     },
 }
