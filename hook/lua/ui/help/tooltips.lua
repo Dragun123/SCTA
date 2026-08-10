@@ -30,3 +30,8 @@
         title = "Cloak Field",
         description = "Turns the selected unit cloak field on/off",
     }
+
+    Tooltips.Detonate = {
+        title = "Self Destruct",
+        description = "Destroys the Selected Unit",
+    }

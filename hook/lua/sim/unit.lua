@@ -5,7 +5,10 @@ Unit = Class(taUnitClass) {
 
     OnCreate = function(self)
         taUnitClass.OnCreate(self)
-        if self:GetAIBrain().SCTAAI then
+         --LOG(self:GetAIBrain(), 'IEXIST1')
+         local aiBrain = self:GetAIBrain()
+        if aiBrain.SCTAAI or aiBrain.M28AI then
+            --AIBrain for M28 is for insuring don't suffer due to radar targeting
             self.SCTAAIBrain = true
         end
     end,

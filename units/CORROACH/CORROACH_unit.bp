@@ -94,6 +94,7 @@ UnitBlueprint {
         },
         FactionName = 'CORE',
         Icon = 'amph',
+        InstantDeathOnSelfDestruct = true,
         OrderOverrides = {
             RULEUTC_SpecialToggle = {
                 --  more options in textures.scd\textures\ui\common\game\orders
@@ -143,31 +144,24 @@ UnitBlueprint {
             },
             BallisticArc = 'RULEUBA_None',
             CollideFriendly = false,
-	    DamageFriendly = true,
+	        DamageFriendly = true,
             Damage = 2000, #Doubles up with death, so death damage subtracted
-	    DamageRadius = 6,
+	         DamageRadius = 6,
             FireOnSelfDestruct = true,
             DamageType = 'Normal',
             DisplayName = 'Suicide',
-            RackBones = {
-                {
-                    MuzzleBones = {
-                        0,
-                    },
-                    RackBone = 0,
-                },
-            },
             FireTargetLayerCapsTable = {
                 Land = 'Land|Water|Seabed',
                 Seabed = 'Land|Water|Seabed',
             },
             AboveWaterTargetsOnly = true,
-	    RangeCategory = 'UWRC_DirectFire',
-     WeaponCategory = 'DirectFire',
+	        --RangeCategory = 'UWRC_DirectFire',
+            WeaponCategory = 'Kamikaze',
+            Turreted = false,
             FiringTolerance = 999999,
             Label = 'Suicide',
             MaxRadius = 6,
-	    ProjectileId = '/mods/SCTA-master/projectiles/CRAWL_BLAST/CRAWL_BLAST_proj.bp',
+	        ProjectileId = '/mods/SCTA-master/projectiles/CRAWL_BLAST/CRAWL_BLAST_proj.bp',
             RateOfFire = 99999,
             TargetCheckInterval = 1,
             TargetPriorities = {

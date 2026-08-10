@@ -192,6 +192,23 @@ TAHQType = function(aiBrain, category)
     return false
 end
 
+function TAFireSelfdestructWeapons(unit)
+    --LOG('IEXIST2')
+    local wepCount = unit:GetWeaponCount()
+    for i = 1, wepCount do
+        local wep = unit:GetWeapon(i)
+        local wepBP = wep:GetBlueprint()
+        if wepBP.FireOnSelfDestruct then
+            if wep.Fire then
+                wep.Fire()
+            else
+                wep.OnFire(wep)
+            end
+        end
+    end
+end
+
+
 targetingFacilityData = {}
 
 function registerTargetingFacility(army)
